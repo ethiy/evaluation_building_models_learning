@@ -1,0 +1,51 @@
+\documentclass[12pt, twoside]{book}
+
+\usepackage[paper=a4paper, top=1.5cm, bottom=2cm, left=2.5cm, right=2.5cm, headheight=15pt]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}		
+\usepackage[english, francais]{babel}
+
+\usepackage{graphicx}
+
+% \usepackage{lmodern}
+% \usepackage{ae,aecompl}
+% \usepackage{eso-pic}
+% \usepackage{array}
+
+\usepackage{minitoc}
+
+\usepackage[useregional]{datetime2}
+
+\usepackage{glossaries}
+\makeglossaries
+
+\usepackage{imakeidx}
+\makeindex
+
+\usepackage{style/environements}
+\usepackage{style/hacks}
+
+
+\begin{document}
+    \frontmatter
+
+    \pagestyle{plain}
+    \input{frontmatter/cover_page}
+    \input{frontmatter/dedication}
+    \input{frontmatter/acknowledgments}
+    \dominitoc
+    \tableofcontents
+
+    \mainmatter
+
+    \chapter{bla}
+    \minitoc
+    \section{blubb}
+    
+    \section{foo}
+
+    \printglossary[type=\acronymtype]
+    \printglossary
+    \printindex
+\end{document}
