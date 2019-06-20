@@ -7,6 +7,7 @@
 \usepackage[english, francais]{babel}
 
 \usepackage{graphicx}
+\usepackage{standalone}
 
 % \usepackage{lmodern}
 % \usepackage{ae,aecompl}
@@ -17,18 +18,22 @@
 
 \usepackage[useregional]{datetime2}
 
-\usepackage{glossaries}
-\makeglossaries
+\usepackage[acronym]{glossaries}
+
 
 \usepackage{imakeidx}
 \makeindex
 
+\usepackage{natbib}
+
 \usepackage{style/environements}
 \usepackage{style/hacks}
+\usepackage{style/glossaries}
 
 
 \begin{document}
     \frontmatter
+    \selectlanguage{english}
 
     \pagestyle{plain}
     \input{frontmatter/cover_page}
@@ -38,14 +43,10 @@
     \tableofcontents
 
     \mainmatter
-
-    \chapter{bla}
-    \minitoc
-    \section{blubb}
-    
-    \section{foo}
+    \input{chapters/introduction}
 
     \printglossary[type=\acronymtype]
     \printglossary
     \printindex
+    \bibliography{references}
 \end{document}
