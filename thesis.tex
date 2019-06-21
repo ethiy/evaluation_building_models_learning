@@ -9,10 +9,7 @@
 \usepackage{graphicx}
 \usepackage{standalone}
 
-% \usepackage{lmodern}
-% \usepackage{ae,aecompl}
-% \usepackage{eso-pic}
-% \usepackage{array}
+\usepackage{palatino}
 
 \usepackage{minitoc}
 
@@ -24,29 +21,41 @@
 \usepackage{imakeidx}
 \makeindex
 
-\usepackage{natbib}
-
 \usepackage{style/environements}
 \usepackage{style/hacks}
 \usepackage{style/glossaries}
 
 
 \begin{document}
-    \frontmatter
+    \dominitoc
     \selectlanguage{english}
-
+    \frontmatter
     \pagestyle{plain}
+    
     \input{frontmatter/cover_page}
     \input{frontmatter/dedication}
+    \chapter{Abstract}
+        \input{frontmatter/abstract}
+    \selectlanguage{french}
+    % \rightchapter
+    \chapter{Résumé}
+        \input{frontmatter/resume}
+    \chapter{Résumé étendu}
+        \input{frontmatter/resume_long}
+    \selectlanguage{english}
     \input{frontmatter/acknowledgments}
-    \dominitoc
+
     \tableofcontents
-
-    \mainmatter
-    \input{chapters/introduction}
-
     \printglossary[type=\acronymtype]
     \printglossary
+
+    \mainmatter
+    \chapter{Introduction}
+        \input{chapters/introduction}
+
+    \chapter{Conclusion}
+        \input{chapters/conclusion}
+        
     \printindex
-    \bibliography{references}
+    % \bibliography{references}
 \end{document}

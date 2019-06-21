@@ -1,0 +1,18 @@
+% Continuous numbering
+\makeatletter
+\renewcommand\mainmatter{
+    \@mainmattertrue\cleardoublepage\renewcommand\thepage{\arabic{page}}}
+\makeatother
+
+% Left/Right chapter
+
+\newcommand{\leftchapter}{
+    \makeatletter
+    \@openrightfalse
+    \makeatother
+}
+\newcommand{\rightchapter}{
+    \makeatletter
+    \@openleftfalse
+    \makeatother
+}
