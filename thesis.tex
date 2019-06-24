@@ -12,6 +12,8 @@
 \usepackage{palatino}
 
 \usepackage{minitoc}
+\setcounter{tocdepth}{2}
+\setcounter{minitocdepth}{1}
 
 \usepackage[useregional]{datetime2}
 
@@ -52,10 +54,25 @@
     \mainmatter
     \chapter{Introduction}
         \input{chapters/introduction}
+    
+    \chapter{State-of-the-art}
+        \input{chapters/state_of_the_art}
+
+    \chapter{Semantic evaluation of 3D models}
+        \input{chapters/error_definitions}
+
+    \chapter{Quality evaluation pipeline}
+        \input{chapters/methodology}
+
+    \chapter{Pipeline evaluation setup}
+        \input{chapters/experiments}
+
+    \chapter{Scalability analysis}
+        \input{chapters/scalability}
 
     \chapter{Conclusion}
         \input{chapters/conclusion}
-        
+
     \printindex
     % \bibliography{references}
 \end{document}
