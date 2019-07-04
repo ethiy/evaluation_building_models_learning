@@ -1,0 +1,87 @@
+\minitoc
+\section{Urban 3D reconstruction}
+    \subsection{Applications of urban 3D models}
+        Many application cases:
+        \paragraph{Urban challenges}
+        \begin{itemize}
+            \item Cadastral data management: 3ddelft
+            \item Urban planning simulation from cadastral data: brassebin, simplu
+            \item Vehicule flow description: VarCity
+            \item Wave propagation simulation : telecomunication companies
+            \item traffic noise simulation
+            \item Public concertation and decision making
+            \item flood simulation for insurers owners decision makers
+            \item fire hazards and propogation
+        \end{itemize}
+        \paragraph{Sustainable developpement}
+        \begin{itemize}
+            \item Energy consumption simulation
+            \item solar exposure
+            \item microclimate simulation (jakarto quebec city, sylvie daniel)
+        \end{itemize}
+        \paragraph{Autonomous navigation}
+        \begin{itemize}
+            \item Outdoor Localisation (Le Petit: osm + extrusion)
+            \item civilian space inteligent navigation (alahi)
+            \item industrial assistance
+        \end{itemize}
+        \paragraph{Entertainement industry}
+        \begin{itemize}
+            \item realistic games (Call of duty: Paris)
+            \item Tourism (VarCity), virtual reality
+            \item Marketing -> Amine
+        \end{itemize}
+        \paragraph{Security challenges}
+        \begin{itemize}
+            \item Emergency planning
+            \item (Para)Military intervention simulation
+            \item Marketing: Grand Paris
+        \end{itemize}
+    \subsection{Building 3D modeling}
+        Scale of reconstruction:
+        \begin{itemize}
+            \item Small scale: BIM/CAD models. Manually constructed. Very detailed but very expensive. Problems:
+            \begin{itemize}
+                \item Historical landmarks, old buildings: not always well documented: ex: Notre Dame de Paris.
+                \item New construction project: reality is not always what is planified.
+                \item Bim -> Geo: geometry is bad: self-intersection IFC2cityGML (Jantien stoter, hugo ledoux).
+            \end{itemize}
+            \item Large scale: GIS. Acquire urban scene geometry from sensor data. or Crowdsourcing: sketchup + building plans.
+        \end{itemize}
+        Objects highly dynamic:
+        \begin{itemize}
+            \item frequntly: city furniture, transportation vehicules, grass \& trees, water bodies (artificial lakes ...), pedestrians.
+            \item not so much: ground, roads, bridges and buildings. Roads and ground are easier and Buildings are generally not. + sizable land cover. => important to model.\\
+        \end{itemize}
+        Importance of semantics. Not only geometric accuracy. Need to know building part architectural function. 3D model vs 3D mesh.
+        semantics => discrete lod. cityGML LODS.\\
+    \subsection{Obstacles in Building 3D modeling}
+        Widely studied in more than 20 years.\\
+        \begin{itemize}
+            \item Automatizing modeling. Needs manual corrections in high lods. Indoor open + facade parsing still active.
+            \item trade-off fidelity vs compactness/semantics.
+            \item Change detection in models.
+            \item Crowdsourcing.
+            \item Scale-space exploration: F Lafarge(JURSE) G Toya\& Marion dumont.
+            \item Robustness to input noise.
+        \end{itemize}
+\section{Evaluating building models}
+    \subsection{Geometric consistancy inspection}
+        Hugo ledoux, Gisquière. LoD detection.
+    \subsection{Manual inspection}
+        Once valid geometry. How good is the model? how close to reality?
+        IGN case.
+        expensive in man power. Not scalable.
+    \subsection{Automatic evalutation}
+        No one does. Only global error metrics. No semantics. No error localisation.
+\section{Contributions}
+    \subsection{Positioning}
+        Structure properties => fidelity metrics insufficient
+        No geometric issues studied here.
+        Semantic evaluation: categorization of errors.
+        Errors independent from: LoD, modeling method and urban scene.
+    \subsection{Potential use}
+        Paper.
+    \subsection{Main contributions}
+        Paper.
+\section{Structure of the Thesis}
