@@ -1,20 +1,26 @@
 \minitoc
 
+\phantom{M}
+
 The goal of this introduction is to acquaint the reader with concepts that are manipulated in this study.
-In fact, in section~\ref{sec::introduction::urban_3d_reconstruction}, we discuss what is meant by urban \index{model!\gls{acr::3d}}\gls{acr::3d} models, specifically, \index{model!building} building \gls{acr::3d} models.
-The role of this chapter is also to motivate the need for a semantic \index{model!building!evaluation}evaluation of such models.
-Indeed, in section~\ref{sec::introduction::building_model_evaluation}, we address different aspects of building model inspection and how difficult it can be.
+In section~\ref{sec::introduction::urban_3d_reconstruction}, we illustrate what is meant by urban \index{urban!\gls{acr::3d}!model}\gls{acr::3d} models, specifically, \index{building!model} building \gls{acr::3d} models.
+The role of this chapter is to also motivate the need for a semantic \index{building!model!evaluation}evaluation of such models.
+Indeed, in section~\ref{sec::introduction::building_model_evaluation}, we address different aspects of building \index{urban!\gls{acr::3d}!model}\gls{acr::3d} model inspection and the issues it raises.
 We conclude by stating our contributions (cf. section~\ref{sec::introduction::contributions}) and the structure of the thesis (cf. section~\ref{sec::introduction::structure_of_thesis}).
 
 \section{Urban 3D reconstruction}
     \label{sec::introduction::urban_3d_reconstruction}
-    \index{reconstruction!\gls{acr::3d}}\gls{acr::3d} reconstruction is a wide research subject in Photogrammetry, Computer Vision and Compute Graphics communities.
-    \begin{itemize}
-        \item Idea: take sensor data (LiDAR point cloud or stereo images) procude 3d surface of objects.
-        \item In GIS, interested mainly in urban object modeling. => more constraints on nature of objects.
-        \item Start by Applications, then building modeling and finally challenges.
-    \end{itemize} 
+    \index{\gls{acr::3d}!reconstruction}\gls{acr::3d} reconstruction is a wide research field that interests \index{photogrammetry}Photogrammetry, \index{computer vision}Computer Vision and \index{computer graphics}Computer Graphics communities.
+    In summary, the main idea is, using some input sensor data (\gls{acr::lidar} point clouds or stereo images), to acquire the \gls{acr::3d} surface that bounds a studied object.
+    In \index{\gls{acr::gis}}\gls{acr::gis}, \gls{acr::3d} data is instrumental to model the Earth surface at different scales.
+    In particular, the field takes a special interest in \index{urban!area}urban areas.
+    Objects present in such scenes obey usually some specific rules that constrain their shape.
+    In this section, we dicuss applications of \index{urban!\gls{acr::3d}!model}urban \gls{acr::3d} models (cf. subsection~\ref{subsec::introduction::urban_3d_reconstruction::applications}).
+    We tackle, afterwards, the \index{building!\gls{acr::3d}!model} building \gls{acr::3d} modeling subject (cf. subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}).
+    This section ends, in subsection ~\ref{subsec::introduction::urban_3d_reconstruction::challenges}, with a listing of some important challenges that are still to be overcome.
+    
     \subsection{Applications of urban 3D models}
+        \label{subsec::introduction::urban_3d_reconstruction::applications}
         Many application cases:
         \paragraph{Urban challenges}
         \begin{itemize}
@@ -52,6 +58,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             \item Marketing: Grand Paris
         \end{itemize}
     \subsection{Building 3D modeling}
+        \label{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}
         Scale of reconstruction:
         \begin{itemize}
             \item Small scale: BIM/CAD models. Manually constructed. Very detailed but very expensive. Problems:
@@ -70,6 +77,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
         Importance of semantics. Not only geometric accuracy. Need to know building part architectural function. 3D model vs 3D mesh.
         semantics => discrete lod. cityGML LODS.\\
     \subsection{Obstacles in Building 3D modeling}
+        \label{subsec::introduction::urban_3d_reconstruction::challenges}
         Widely studied in more than 20 years.\\
         \begin{itemize}
             \item Automatizing modeling. Needs manual corrections in high lods. Indoor open + facade parsing still active.
