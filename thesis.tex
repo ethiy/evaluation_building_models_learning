@@ -6,27 +6,44 @@
 \usepackage[T1]{fontenc}		
 \usepackage[english, francais]{babel}
 
+\usepackage[dvipsnames]{xcolor}
+
 \usepackage{graphicx}
 \usepackage{standalone}
+\usepackage{multirow}
+\usepackage{tikz}
+
 
 \usepackage{palatino}
-
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks,
-    citecolor=black,
-    filecolor=black,
-    linkcolor=black,
-    urlcolor=blue
-}
 
 \usepackage{minitoc}
 \setcounter{tocdepth}{2}
 \setcounter{minitocdepth}{1}
 
-\usepackage[acronym]{glossaries}
+\usepackage[acronym, automake=true]{glossaries}
 \usepackage{imakeidx}
 \makeindex
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=Blue,
+    urlcolor=blue
+}
+
+\hypersetup{
+    pdftitle={Quality evaluation of 3D polyhedral building models},
+    pdfauthor={Oussama Ennafii},
+    % pdfsubject={},
+    pdfkeywords={minitoc, greek, english, babel, unicode, LaTeX},
+    % linkcolor=blue,
+    anchorcolor=red,
+    pdfstartview={FitH}, 
+    hyperfootnotes=false,
+    unicode=true
+}
 
 \usepackage[useregional]{datetime2}
 
@@ -42,7 +59,7 @@
     \frontmatter
     \pagestyle{plain}
     
-    \input{frontmatter/cover_page}
+    \input{frontmatter/0-cover_page}
     \input{frontmatter/dedication}
     \chapter{Abstract}
         \input{frontmatter/abstract}
@@ -53,14 +70,19 @@
     \chapter{Résumé étendu}
         \input{frontmatter/resume_long}
     \selectlanguage{english}
-    \input{frontmatter/acknowledgments}
+    \chapter{Acknowlegements}
+        \input{frontmatter/acknowledgments}
 
-    \tableofcontents
     \printglossary[type=\acronymtype]
     \printglossary
 
+    \tableofcontents
+    \listoffigures
+    \listoftables
+
     \mainmatter
     \chapter{Introduction}
+        \label{chap::introduction}
         \input{chapters/1-introduction}
     
     \chapter{State-of-the-art}
@@ -80,7 +102,7 @@
 
     \chapter{Conclusion}
         \input{chapters/7-conclusion}
-
+    
     \printindex
     % \bibliography{references}
 \end{document}
