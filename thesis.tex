@@ -16,16 +16,18 @@
 \usepackage{array}
 \newcolumntype{x}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
+\usepackage[explicit]{titlesec}
+
 
 \usepackage{palatino}
 
 \usepackage{minitoc}
 \setcounter{tocdepth}{2}
-\setcounter{minitocdepth}{1}
+\setcounter{minitocdepth}{2}
 
-\usepackage[acronym, automake=true]{glossaries}
+\usepackage[acronym, toc, automake=true]{glossaries}
 \usepackage{imakeidx}
-\makeindex
+\makeindex[intoc]
 
 \usepackage{hyperref}
 \hypersetup{
@@ -82,6 +84,7 @@
     \tableofcontents
     \listoffigures
     \listoftables
+    \mtcaddchapter
 
     \mainmatter
     \chapter{Introduction}
