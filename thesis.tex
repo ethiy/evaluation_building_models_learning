@@ -16,8 +16,6 @@
 \usepackage{array}
 \newcolumntype{x}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
-\usepackage[explicit]{titlesec}
-
 
 \usepackage{palatino}
 
@@ -26,6 +24,21 @@
 \setcounter{minitocdepth}{2}
 % \mtcsetfeature{minitoc}{open}{\vspace{1em}}
 % \nomtcrule
+\usepackage[explicit]{titlesec}
+
+\usepackage[
+    style=authoryear,
+    sorting=nty,
+    maxbibnames=5,
+    minbibnames=3,
+    hyperref=true,
+    backref=true,
+    backrefstyle=all+,
+    isbn=true,
+    url=true,
+    doi=true
+]{biblatex}
+\addbibresource{references.bib}
 
 \usepackage[acronym, toc, automake=true]{glossaries}
 \usepackage{imakeidx}
@@ -111,5 +124,6 @@
         \input{chapters/7-conclusion}
     
     \printindex
-    % \bibliography{references}
+
+    \printbibliography[heading=bibintoc]
 \end{document}
