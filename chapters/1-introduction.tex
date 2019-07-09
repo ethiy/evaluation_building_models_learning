@@ -1,5 +1,19 @@
 \minitoc
+
+The goal of this introduction is to acquaint the reader with concepts that are manipulated in this study.
+In fact, in section~\ref{sec::introduction::urban_3d_reconstruction}, we discuss what is meant by urban \index{model!\gls{acr::3d}}\gls{acr::3d} models, specifically, \index{model!building} building \gls{acr::3d} models.
+The role of this chapter is also to motivate the need for a semantic \index{model!building!evaluation}evaluation of such models.
+Indeed, in section~\ref{sec::introduction::building_model_evaluation}, we address different aspects of building model inspection and how difficult it can be.
+We conclude by stating our contributions (cf. section~\ref{sec::introduction::contributions}) and the structure of the thesis (cf. section~\ref{sec::introduction::structure_of_thesis}).
+
 \section{Urban 3D reconstruction}
+    \label{sec::introduction::urban_3d_reconstruction}
+    \index{reconstruction!\gls{acr::3d}}\gls{acr::3d} reconstruction is a wide research subject in Photogrammetry, Computer Vision and Compute Graphics communities.
+    \begin{itemize}
+        \item Idea: take sensor data (LiDAR point cloud or stereo images) procude 3d surface of objects.
+        \item In GIS, interested mainly in urban object modeling. => more constraints on nature of objects.
+        \item Start by Applications, then building modeling and finally challenges.
+    \end{itemize} 
     \subsection{Applications of urban 3D models}
         Many application cases:
         \paragraph{Urban challenges}
@@ -66,6 +80,7 @@
             \item Robustness to input noise.
         \end{itemize}
 \section{Evaluating building models}
+    \label{sec::introduction::building_model_evaluation}
     \subsection{Geometric consistancy inspection}
         Hugo ledoux, Gisquière. LoD detection.
     \subsection{Manual inspection}
@@ -75,6 +90,7 @@
     \subsection{Automatic evalutation}
         No one does. Only global error metrics. No semantics. No error localisation.
 \section{Contributions}
+    \label{sec::introduction::contributions}
     \subsection{Positioning}
         Structure properties => fidelity metrics insufficient
         No geometric issues studied here.
@@ -85,3 +101,4 @@
     \subsection{Main contributions}
         Paper.
 \section{Structure of the Thesis}
+    \label{sec::introduction::structure_of_thesis}
