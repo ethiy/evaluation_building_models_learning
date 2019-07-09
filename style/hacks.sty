@@ -16,3 +16,10 @@
     \@openleftfalse
     \makeatother
 }
+
+
+% Solves titlepage numbering bug
+\makeatletter
+\patchcmd{\ttlh@hang}{\parindent\z@}{\parindent\z@\leavevmode}{}{}
+\patchcmd{\ttlh@hang}{\noindent}{}{}{}
+\makeatother
