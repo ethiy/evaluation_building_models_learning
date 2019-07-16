@@ -8,7 +8,7 @@ The role of this chapter is to also motivate the need for a semantic \index{buil
 Indeed, in section~\ref{sec::introduction::building_model_evaluation}, we address different aspects of building \index{urban!\gls{acr::3d}!model}\gls{acr::3d} model inspection and the issues it raises.
 We conclude by stating our contributions (cf. section~\ref{sec::introduction::contributions}) and the structure of the thesis (cf. section~\ref{sec::introduction::structure_of_thesis}).
 
-\section{Urban 3D reconstruction}
+\section{Urban \gls{acr::3d} reconstruction}
     \label{sec::introduction::urban_3d_reconstruction}
     \index{\gls{acr::3d}!reconstruction}\gls{acr::3d} reconstruction is a wide research field that interests \index{photogrammetry}Photogrammetry, \index{computer vision}Computer Vision and \index{computer graphics}Computer Graphics communities.
     In summary, the main idea is, using some input sensor data (\gls{acr::lidar} point clouds or stereo images), to acquire the \gls{acr::3d} surface that bounds a studied object.
@@ -31,8 +31,12 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
 
         Cadastral data, since conception, came in the form of \index{\gls{acr::2d}!maps}\gls{acr::2d} maps\addref.
         Although many urban planning norms were always formulated taking into account height information \addref, the need for a \index{\gls{acr::3d}!cadastre}\gls{acr::3d} cadastral management was made relevant with the advent of complex architectural features~\cite{ijgi4042842}.
-        To illustrate this case, we show in figure~\ref{fig::3d_cadastre_need_example}.
-        \missingfigure[figwidth=6cm]{\label{fig::3d_cadastre_need_example}Testing a long text string}
+        To illustrate this case, we show, in figure~\ref{fig::3d_cadastre_need_example}, how \gls{acr::2d} cadastral maps are insufficient when it comes to modeling overhangs.
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=\textwidth]{example-image}             
+            \caption{\label{fig::3d_cadastre_need_example} Example of a problematic situation where \gls{acr::3d} cadastre would be of help. Overhangs are hard to model in \gls{acr::2d}.}
+        \end{figure}
         \begin{itemize}
             \item Cadastral data management: 3ddelft
             \item Urban planning simulation from cadastral data: brassebin, simplu
@@ -67,7 +71,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             \item (Para)Military intervention simulation
             \item Marketing: Grand Paris
         \end{itemize}
-    \subsection{Building 3D modeling}
+    \subsection{Building \gls{acr::3d} modeling}
         \label{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}
         Scale of reconstruction:
         \begin{itemize}
@@ -84,9 +88,9 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             \item frequntly: city furniture, transportation vehicules, grass \& trees, water bodies (artificial lakes ...), pedestrians.
             \item not so much: ground, roads, bridges and buildings. Roads and ground are easier and Buildings are generally not. + sizable land cover. => important to model.\\
         \end{itemize}
-        Importance of semantics. Not only geometric accuracy. Need to know building part architectural function. 3D model vs 3D mesh.
+        Importance of semantics. Not only geometric accuracy. Need to know building part architectural function. \gls{acr::3d} model vs \gls{acr::3d} mesh.
         semantics => discrete lod. cityGML LODS.\\
-    \subsection{Obstacles in Building 3D modeling}
+    \subsection{Obstacles in Building \gls{acr::3d} modeling}
         \label{subsec::introduction::urban_3d_reconstruction::challenges}
         Widely studied in more than 20 years.\\
         \begin{itemize}

@@ -5,21 +5,21 @@
 \makeatother
 
 % Left/Right chapter
-
+\makeatletter
 \newcommand{\leftchapter}{
-    \makeatletter
     \@openrightfalse
-    \makeatother
 }
 \newcommand{\rightchapter}{
-    \makeatletter
-    \@openleftfalse
-    \makeatother
+    \@openrighttrue
 }
-
+\makeatother
 
 % Solves titlepage numbering bug
 \makeatletter
 \patchcmd{\ttlh@hang}{\parindent\z@}{\parindent\z@\leavevmode}{}{}
 \patchcmd{\ttlh@hang}{\noindent}{}{}{}
 \makeatother
+
+% Minitoc no hrule
+% \mtcsetfeature{parttoc}{open}{\vspace{1em}}
+% \nomtcrule
