@@ -19,11 +19,9 @@
 
 \usepackage{palatino}
 
-\usepackage{minitoc}
 \setcounter{tocdepth}{2}
+\usepackage{minitoc}
 \setcounter{minitocdepth}{2}
-% \mtcsetfeature{minitoc}{open}{\vspace{1em}}
-% \nomtcrule
 \usepackage[explicit]{titlesec}
 
 \usepackage[
@@ -57,7 +55,7 @@
     pdftitle={Quality evaluation of 3D polyhedral building models},
     pdfauthor={Oussama Ennafii},
     % pdfsubject={},
-    pdfkeywords={minitoc, greek, english, babel, unicode, LaTeX},
+    pdfkeywords={},
     anchorcolor=red,
     pdfstartview={FitH}, 
     hyperfootnotes=false,
@@ -78,16 +76,17 @@
 
 \begin{document}
     \dominitoc
+    \doparttoc
     \selectlanguage{english}
     \frontmatter
     \pagestyle{plain}
     
     \input{frontmatter/0-cover_page}
     \input{frontmatter/dedication}
+    \leftchapter
     \chapter{Abstract}
         \input{frontmatter/abstract}
     \selectlanguage{french}
-    % \rightchapter
     \chapter{Résumé}
         \input{frontmatter/resume}
     \chapter{Résumé étendu}
@@ -105,6 +104,11 @@
     \mtcaddchapter
 
     \mainmatter
+    \rightchapter
+
+    \part{Urban \gls{acr::3d} reconstruction}
+    \parttoc
+
     \chapter{Introduction}
         \label{chap::introduction}
         \input{chapters/1-introduction}
@@ -112,13 +116,14 @@
     \chapter{State-of-the-art}
         \input{chapters/2-state_of_the_art}
 
-    \chapter{Semantic evaluation of 3D models}
+    \part{Evaluation of building \gls{acr::3d} models}
+    \chapter{Semantic evaluation of \gls{acr::3d} models}
         \input{chapters/3-semantic_evaluation}
 
     \chapter{Quality evaluation pipeline}
         \input{chapters/4-methodology}
 
-    \chapter{Pipeline evaluation setup}
+    \chapter{The evaluation setup}
         \input{chapters/5-experiments}
 
     \chapter{Scalability analysis}
