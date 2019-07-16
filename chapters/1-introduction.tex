@@ -26,6 +26,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
         In what follows, we present a brief survey of \index{urban!model!application} urban \gls{acr::3d} models applications.
         A more comprehensive study was presented in~\textcite{ijgi4042842}.
         The goal is to persuade the reader of the relevance of urban \index{urban!\gls{acr::3d}!model}\gls{acr::3d} modeling and how much concerned can everybody be, in a way or another.
+
         \subsubsection{Urban planning related challenges}
         Urbanization raises some serious issues that need to be adressed.
         Consequently, decision makers, and all stakeholders in general, need to have at their disposal adequate tools.
@@ -48,7 +49,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
         In reality, the \gls{acr::2d} city footprint is not sufficient to assess its capacity to contain people.
         One has to compute the number of habitable units, which depends on the height of buildings.
         This motivates the need of \gls{acr::3d} data as shown in Figure~\ref{fig::3d_simulation}.
-        The simulation and simulation of urban zones can be equally helpfull for public consultation~\parencite{WU2010291}.\\
+        The \index{vizualation} vizualation and \index{simulation}simulation of urban zones can be equally helpfull for \index{public consultation}public consultation~\parencite{WU2010291}.\\
         \begin{figure}[h]
             \centering
             \includegraphics[width=\textwidth]{example-image}             
@@ -72,18 +73,33 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
         Predicting the height of overflowing water requires inherently a \gls{acr::3d} information.
         This is the usecase of~\textcite{varduhn2015multi}, where \gls{acr::3d} models are used to assess the flood risk.
         Such information could be instrumental for evacuation planning or for insurance managers.
-        In the same direction, one can simulate fire propogation~\parencite{dimitropoulos2010fire} or estimating noise propogation in urban scenes~\parencite{stoter20083d}.
+        In the same direction, one can simulate fire propagation~\parencite{dimitropoulos2010fire} or estimating noise propagation in urban scenes~\parencite{stoter20083d} (\textit{cf.} Figure~\ref{fig::noise_propogation}).
         \begin{figure}[h]
             \centering
             \includegraphics[width=\textwidth]{example-image}             
             \caption{
-                \label{fig::public_consultation} Example of noise propogation simulation using \gls{acr::3d} city models.
+                \label{fig::noise_propogation} Example of noise propagation simulation using \gls{acr::3d} city models.
             }
         \end{figure}
-        \subsubsection{Sustainable developpement related challenges}
+        All these simulation derived informations could be fed to decision makers in order to better plan the cities of tomorrow.
+
+        \subsubsection{Environemental challenges}
+        Environement preservation is a all the more important in the coming years.
+        Urban settlement are one of the most biggest energy consumers.
+        A more efficient energy utilization is necessary to sustain the frantic growth of urban areas.
+        This motivates the need to quantify the energy consumption of urban settlements~\parencite{WATE20153372} or retrofitting costs~\parencite{previtali2014automatic}.
+        ~\textcite{biljecki2015propagation} uses also \gls{acr::3d} models of buildings in order to predict solar irradiation.
+        In fact, solar potential estimation can be useful for assessing the benefits of expensive solar panels projects.\\
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=\textwidth]{example-image}             
+            \caption{
+                \label{fig::solar_potential} Solar potential estimation using building \gls{acr::3d} models.
+                The slope, oriantation and dimensions of roofs are determinant factors in computing solar irradiation.
+            }
+        \end{figure}
+        Another big environemental issue that affects cities is pollution.
         \begin{itemize}
-            \item Energy consumption simulation
-            \item solar exposure
             \item microclimate simulation (jakarto quebec city, sylvie daniel)
         \end{itemize}
         \subsubsection{Autonomous navigation related challenges}
