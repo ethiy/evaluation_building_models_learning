@@ -23,12 +23,13 @@
 \usepackage{minitoc}
 \setcounter{minitocdepth}{2}
 \usepackage[explicit]{titlesec}
+\usepackage{bookmark}
+
 
 \usepackage[
     style=authoryear,
     sorting=nty,
     maxbibnames=5,
-    minbibnames=3,
     hyperref=true,
     backref=true,
     backrefstyle=all+,
@@ -106,9 +107,6 @@
     \mainmatter
     \rightchapter
 
-    \part{Urban \gls{acr::3d} reconstruction}
-    \parttoc
-
     \chapter{Introduction}
         \label{chap::introduction}
         \input{chapters/1-introduction}
@@ -116,7 +114,6 @@
     \chapter{State-of-the-art}
         \input{chapters/2-state_of_the_art}
 
-    \part{Evaluation of building \gls{acr::3d} models}
     \chapter{Semantic evaluation of \gls{acr::3d} models}
         \input{chapters/3-semantic_evaluation}
 
