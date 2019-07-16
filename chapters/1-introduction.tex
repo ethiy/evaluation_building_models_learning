@@ -3,50 +3,83 @@
 \phantom{M}
 
 The goal of this introduction is to acquaint the reader with concepts that are manipulated in this study.
-In section~\ref{sec::introduction::urban_3d_reconstruction}, we illustrate what is meant by urban \index{urban!\gls{acr::3d}!model}\gls{acr::3d} models, specifically, \index{building!model} building \gls{acr::3d} models.
+In section~\ref{sec::introduction::urban_3d_reconstruction}, we illustrate what is meant by urban \index{urban!\gls{acr::3d}!model}\gls{acr::3d} models, and specifically, \index{building!model} building \gls{acr::3d} models.
 The role of this chapter is to also motivate the need for a semantic \index{building!model!evaluation}evaluation of such models.
 Indeed, in section~\ref{sec::introduction::building_model_evaluation}, we address different aspects of building \index{urban!\gls{acr::3d}!model}\gls{acr::3d} model inspection and the issues it raises.
 We conclude by stating our contributions (cf. section~\ref{sec::introduction::contributions}) and the structure of the thesis (cf. section~\ref{sec::introduction::structure_of_thesis}).
 
+\clearpage
+
 \section{Urban \gls{acr::3d} reconstruction}
     \label{sec::introduction::urban_3d_reconstruction}
     \index{\gls{acr::3d}!reconstruction}\gls{acr::3d} reconstruction is a wide research field that interests \index{photogrammetry}Photogrammetry, \index{computer vision}Computer Vision and \index{computer graphics}Computer Graphics communities.
-    In summary, the main idea is, using some input sensor data (\gls{acr::lidar} point clouds or stereo images), to acquire the \gls{acr::3d} surface that bounds a studied object.
+    In summary, the main idea is, using some input sensor data (\gls{acr::lidar} point clouds or stereo images), to acquire the \gls{acr::3d} surface that bounds an object fo interest.
     In \index{\gls{acr::gis}}\gls{acr::gis}, \gls{acr::3d} data is instrumental to model the Earth surface at different scales.
-    In particular, the field takes a special interest in \index{urban!area}urban areas.
+    In particular, the field takes a special focus in \index{urban!area}urban areas.
     Objects present in such scenes obey usually some specific rules that constrain their shape.
     In this section, we dicuss applications of \index{urban!\gls{acr::3d}!model}urban \gls{acr::3d} models (cf. subsection~\ref{subsec::introduction::urban_3d_reconstruction::applications}).
-    We tackle, afterwards, the \index{building!\gls{acr::3d}!model} building \gls{acr::3d} modeling subject (cf. subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}).
-    This section ends, in subsection ~\ref{subsec::introduction::urban_3d_reconstruction::challenges}, with a listing of some important challenges that are still to be overcome.
+    We tackle, afterwards, the field \index{building!\gls{acr::3d}!model} building \gls{acr::3d} modeling and the issues it raises(cf. subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}).
+    This section ends, in subsection ~\ref{subsec::introduction::urban_3d_reconstruction::challenges}, with a listing of some important technical challenges that are still to be overcome in this domain.
 
     \subsection{Applications of urban \acrshort{acr::3d} models}
         \label{subsec::introduction::urban_3d_reconstruction::applications}
         In what follows, we present a brief survey of \index{urban!model!application} urban \gls{acr::3d} models applications.
-        A more comprehensive study was presented in~\cite{ijgi4042842}.
-        The goal is to persuade the reader of the relevance of urban \index{urban!\gls{acr::3d}!model}\gls{acr::3d} modeling and how much concerned is everybody, in a way or another, by this subject.
-        \subsubsection{Urban planing related challenges}
-        Urbanization raises serious issues that need to be adressed.
+        A more comprehensive study was presented in~\textcite{ijgi4042842}.
+        The goal is to persuade the reader of the relevance of urban \index{urban!\gls{acr::3d}!model}\gls{acr::3d} modeling and how much concerned can everybody be, in a way or another.
+        \subsubsection{Urban planning related challenges}
+        Urbanization raises some serious issues that need to be adressed.
         Consequently, decision makers, and all stakeholders in general, need to have at their disposal adequate tools.
         \index{\gls{acr::3d}!model}\gls{acr::3d} models are, in this sense, suitable as shown hereafter.\\
 
-        Cadastral data, since conception, came in the form of \index{\gls{acr::2d}!maps}\gls{acr::2d} maps\addref.
-        Although many urban planning norms were always formulated taking into account height information \addref, the need for a \index{\gls{acr::3d}!cadastre}\gls{acr::3d} cadastral management was made relevant with the advent of complex architectural features~\cite{ijgi4042842}.
+        Cadastral data, since conception, was presented in the form of \index{\gls{acr::2d}!maps}\gls{acr::2d} maps\addref.
+        Although many urban planning norms were always formulated taking into account height, or depth, information \addref, the need for a \index{\gls{acr::3d}!cadastre}\gls{acr::3d} cadastral management was made relevant with the advent of complex architectural features~\textcite{ijgi4042842}.
         To illustrate this case, we show, in figure~\ref{fig::3d_cadastre_need_example}, how \gls{acr::2d} cadastral maps are insufficient when it comes to modeling overhangs.
+        \todo{comment figure.}\\
         \begin{figure}[h]
             \centering
             \includegraphics[width=\textwidth]{example-image}             
             \caption{\label{fig::3d_cadastre_need_example} Example of a problematic situation where \gls{acr::3d} cadastre would be of help. Overhangs are hard to model in \gls{acr::2d}.}
         \end{figure}
-        \begin{itemize}
-            \item Cadastral data management: 3ddelft
-            \item Urban planning simulation from cadastral data: brassebin, simplu
-            \item Vehicule flow description: VarCity
-            \item Wave propagation simulation : telecomunication companies
-            \item traffic noise simulation
-            \item Public concertation and decision making
-            \item flood simulation for insurers owners decision makers
-            \item fire hazards and propogation
-        \end{itemize}
+        While \index{\gls{acr::3d}!cadastre}\gls{acr::3d} cadastre describes an urban scene at a certain time for fiscal purposes, urban plannars need the access to the same kind of information but in the future also.
+        In fact, they need to know in advance the impact of urban norms they write on the evolution of their zone of interest.  
+        One of the issues they study is \index{urban sprawl}urban sprawl~\parencite{ludlow2006urban}.
+        The goal is to limit, as far as possible, \index{land occupation}land occupation~\parencite{TANNIER2012128} and predict the shape of the urban scene~\parencite{brasebin20183d} by tuning local urban plans.
+        This can be acheived, for instance, through simulation, at different scales, based on a formal description of urban planning norms as shown by the work of~\textcite{Colomb17a}.
+        In reality, the \gls{acr::2d} city footprint is not sufficient to assess its capacity to contain people.
+        One has to compute the number of habitable units, which depends on the height of buildings.
+        This motivates the need of \gls{acr::3d} data as shown in Figure~\ref{fig::3d_simulation}.
+        The simulation and simulation of urban zones can be equally helpfull for public consultation~\parencite{WU2010291}.\\
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=\textwidth]{example-image}             
+            \caption{
+                \label{fig::3d_simulation} Example of \gls{acr::3d} urban scene simulated from known urban norms.
+                Urban planners can assess the projected urban density of future districts for better decision making.
+            }
+        \end{figure}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=\textwidth]{example-image}             
+            \caption{
+                \label{fig::public_consultation} Example of public consultation tools using urban \gls{acr::3d} models.
+            }
+        \end{figure}
+        Related to urban planning, \gls{acr::3d} models could be used as a reference for other planners.
+        It could be used to describe the flow of vehicles and pedestrians in an urban environement as illustrated in~\textcite{Vanhoey:2017:VVS:3084363.3085085}.
+        In addition, it could be used in physical simulations for urban applications.
+        For instance, Communication companies need to have a \gls{acr::3d} model of urban scenes to predict signal propagation in the goal of optimal network planning~\parencite{yun2007radio}.
+        It can be useful also for flood simulation.
+        Predicting the height of overflowing water requires inherently a \gls{acr::3d} information.
+        This is the usecase of~\textcite{varduhn2015multi}, where \gls{acr::3d} models are used to assess the flood risk.
+        Such information could be instrumental for evacuation planning or for insurance managers.
+        In the same direction, one can simulate fire propogation~\parencite{dimitropoulos2010fire} or estimating noise propogation in urban scenes~\parencite{stoter20083d}.
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=\textwidth]{example-image}             
+            \caption{
+                \label{fig::public_consultation} Example of noise propogation simulation using \gls{acr::3d} city models.
+            }
+        \end{figure}
         \subsubsection{Sustainable developpement related challenges}
         \begin{itemize}
             \item Energy consumption simulation
