@@ -123,7 +123,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
        
         \subsubsection{Entertainement related challenges}
             \gls{acr::3d} models appeals also to various agents in the entertainement industry.
-            One of the first examples that comes to mind is the video games community.
+            One of the first examples that comes to mind is the video games community~\parencite{watson2008procedural}.
             In their seek of reality, in order to engage the most customers as possible, studios reproduce entire cities as a virtual playing ground for the game story.
             We can cite the "Spider-Man" virtual New-York city\footnote{
                 \href{https://www.polygon.com/2013/9/25/4702318/under-the-hood-of-infamous-second-son-hyper-real-seattle}{Under the hood of Infamous: Second Son's hyper-real Seattle}
@@ -214,21 +214,44 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             One can, thus, understand why building modeling can be seen as the most important feature to model in an urban scene.
 
         \subsubsection{Building model acquisition}
-            Scale of reconstruction:
-            \begin{itemize}
-                \item Small scale: BIM/CAD models. Manually constructed. Very detailed but very expensive. Problems:
-                \begin{itemize}
-                    \item Historical landmarks, old buildings: not always well documented: ex: Notre Dame de Paris.
-                    \item New construction project: reality is not always what is planified.
-                    \item Bim -> Geo: geometry is bad: self-intersection IFC2cityGML (Jantien stoter, hugo ledoux).
-                \end{itemize}
-                \item Large scale: GIS. Acquire urban scene geometry from sensor data. or Crowdsourcing: sketchup + building plans.
-            \end{itemize}
+            Building modeling could be divided in two classes depending on the reconstruction scale (\textit{cf.} Figure~\ref{fig::bim_vs_gis}).
+            At a small scale, \gls{acr::bim} or \gls{acr::cad} models could be used.
+            On the contrary, \gls{acr::gis} models are more suitable at a large scale.\\
+
+            \gls{acr::bim} models are volumetric in nature.
+            Each element is represented by a volumetric primitive.
+            These models are bottom-up.
+            They are manually constructed as blueprints of a building before its construction.
+            These models are supposed to follow the buildings evolution in time until its destruction.
+            It is the most detailed possible virtual representation of a building.\\
+            However, it does not come without its own issues.
+            First, we can see that it rules out all buildings that preceded technology, especially, historical buildings.
+            Secondly, since this type of models require a high interaction with users, in order to follow the state of the real buildings, it would be almost impossible that the model does not diverge from the reality\addref.
+            Last but not least, are the geometrical issues, like self-intersetions, that these models display as most \gls{acr::bim} tools do not perform geometric sanity checks.\\
+
+            \begin{figure}[htpb]
+                \centering
+                \includegraphics[width=.7\textwidth]{example-image}            
+                \caption{
+                    \label{fig::bim_vs_gis} BIM vs GIS.
+                }
+            \end{figure}
+
+            On an other note, \gls{acr::gis} models, in contrast, represent rather the surface of buildings.
+            The goal is to describe building geometry, as well as all urban itmes, at a large scale.
+            Furthermore, this model type carries semantics related to the urban objects present in the scene and their relations.
+            These models could be acquired manually, as with \gls{acr::bim}, like the example of~\textcite{ref3dnat}.
+            Another way to proceed consists in acquiring the geometry automatically or interactively using sensor data~\parencite{musialski2013survey}.
+            Crowdsourcing could be used also as a large scale building modeling tool as depicted in~\textcite{uden2013open}.\\
+
+            Some works tackled the issue of bridging the two model acquisition types~\parencite{deng2016mapping}.
+            This field is far from being fully mature as proved in~\textcite{stoter2018geo}.
+            There are, in addition to the geometric inconsistancies that emanate from \gls{acr::bim} and \gls{acr::gis} models mapping,~\textcite{stoter2018geo} shows that ambiguities thwart automatic conversion from one format to an other.
 
         \subsubsection{Building models meets semantics}
-            Importance of semantics. Not only geometric accuracy. Need to know building part architectural function. \gls{acr::3d} model vs \gls{acr::3d} mesh.*
+            Importance of semantics. Not only geometric accuracy. Need to know building part architectural function. \gls{acr::3d} model vs \gls{acr::3d} mesh.
 
-            Different strategies.\\
+            Different strategies=>different model types.(recyclage fig clement)\\
             semantics => discrete lod. cityGML LODS.\\
     \subsection{Obstacles in Building \gls{acr::3d} modeling}
         \label{subsec::introduction::urban_3d_reconstruction::challenges}
