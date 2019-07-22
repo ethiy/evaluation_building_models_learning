@@ -253,7 +253,10 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
 
             Some works tackled the issue of bridging the two model types~\parencite{deng2016mapping}.
             This field is far from being fully mature as proved in~\textcite{stoter2018geo}.
-            There are, in addition to the geometric inconsistancies that emanate from \gls{acr::bim} and \gls{acr::gis} model mapping,~\textcite{stoter2018geo} show how semantic ambiguities thwart the automatic conversion from one format to the other.
+            There are, in addition to the geometric inconsistancies that emanate from \gls{acr::bim} and \gls{acr::gis} model mapping,~\textcite{stoter2018geo} show how semantic ambiguities thwart the automatic conversion from one format to the other.\\
+
+            In this work, the scalability of \gls{acr::3d} modeling is a main concern.
+            As a consequence, hereafter, a special focus is given to automatic and, in a minor degree, interactive building \gls{acr::3d} modeling techniques.
 
         \subsubsection{Building \gls*{acr::3d} models meets semantics}
             The geometric accuracy of building models is not sufficient~\parencite{biljecki2016improved}.
@@ -276,14 +279,14 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
                 }
             \end{figure}
 
-            Different strategies are used in building \gls{acr::3d} modeling.
-            Each method, balancing between compacity and geometric accuracy, targets a specific model resolution.
+            Different strategies are used in building automatic \gls{acr::3d} modeling.
+            Each method, balancing between compacity and geometric accuracy, targets a specific resolution.
             Ordered from the most to the less compact, these strategies are listed herein.
             In a Manhattan-world setting, one assumes that buildings are collections of boxes~\parencite{vanegas2010building, li2016manhattan}.
             ~\textcite{lafarge_ijcv12, nan2017polyfit} relied on the hypothesis that building are made of piecewise planar primitives.
             Richer grammars results in less compact but more accurate models, as is the case of~\textcite{demir2015procedural} or~\textcite{zeng2018neural}.
             Mesh simplification strategies comes last in terms of compacity~\parencite{verdie2015lod, zhou20102}.
-            Figure~\ref{fig::modeling_strategies} summarises this comparison.
+            Figure~\ref{fig::modeling_strategies} summarises this comparison.\\
 
             \begin{figure}[htpb]
                 \centering
@@ -314,9 +317,21 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
                     \label{fig::lods} \gls{acr::lod} categorization used in this work.
                 }
             \end{figure}
-    \subsection{Obstacles in Building \gls*{acr::3d} modeling}
+    \subsection{Obstacles in building \gls*{acr::3d} modeling}
         \label{subsec::introduction::urban_3d_reconstruction::challenges}
-        Widely studied in more than 20 years.\\
+        The subject of building \gls{acr::3d} has been widely studied in more than twenty years~\parencite{musialski2013survey}.
+        It is, however, not a completly solved issue.
+        A complete analysis of the challenges in the field is provided in~\textcite{musialski2013survey} and~\textcite{lafarge2015some}.
+        Presented here is a summary of the obstacles in building \gls{acr::3d} modeling.\\
+
+        First are the sensor data acquisition problems.
+        In fact, noise is an integral part of physical measurement processes.
+        One should take good care in avoiding error propagation through their pipeline.
+        For instance, outliers in point-of-interest detection can render a photogrammetrically constructed mesh accumulate sizable geometric errors.
+        Besides robustness to noise, data heterogenuity can hinder the modeling process.
+        In fact, with more accessible data acquired using different sensors (stereoimages, \gls{acr::radar} and \gls{acr::lidar}, for instance), in various settings (aerial, sattelite or terrestrial) and circumstances (rainy, sunny, foggy\dots and night-time, day-time\dots), more issues are to be solved.
+        Actually, the data must be coregistered in the same referential.
+        One sould also take into account the variablilty in 
         \begin{itemize}
             \item Automatizing modeling. Needs manual corrections in high lods. Indoor open + facade parsing still active.
             \item trade-off fidelity vs compactness/semantics.
