@@ -319,27 +319,41 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             \end{figure}
     \subsection{Obstacles in building \gls*{acr::3d} modeling}
         \label{subsec::introduction::urban_3d_reconstruction::challenges}
-        The subject of building \gls{acr::3d} has been widely studied in more than twenty years~\parencite{musialski2013survey}.
-        It is, however, not a completly solved issue.
-        A complete analysis of the challenges in the field is provided in~\textcite{musialski2013survey} and~\textcite{lafarge2015some}.
-        Presented here is a summary of the obstacles in building \gls{acr::3d} modeling.\\
+        The subject of building \gls{acr::3d} modeling has been widely studied in more than twenty years.
+        Still, there are some unsolved issues in the field~\parencite{musialski2013survey, lafarge2015some}.
+        Presented here is the same challenge classification as in~\textcite{lafarge2015some}.
 
-        First are the sensor data acquisition problems.
-        In fact, noise is an integral part of physical measurement processes.
-        One should take good care in avoiding error propagation through their pipeline.
-        For instance, outliers in point-of-interest detection can render a photogrammetrically constructed mesh accumulate sizable geometric errors.
-        Besides robustness to noise, data heterogenuity can hinder the modeling process.
-        In fact, with more accessible data acquired using different sensors (stereoimages, \gls{acr::radar} and \gls{acr::lidar}, for instance), in various settings (aerial, sattelite or terrestrial) and circumstances (rainy, sunny, foggy\dots and night-time, day-time\dots), more issues are to be solved.
-        Actually, the data must be coregistered in the same referential.
-        One sould also take into account the variablilty in radiometry and signal properties, in general.
-        \begin{itemize}
-            \item Automatizing modeling. Needs manual corrections in high lods. Indoor open + facade parsing still active.
-            \item trade-off fidelity vs compactness/semantics.
-            \item Change detection in models.
-            \item Crowdsourcing.
-            \item Scale-space exploration: F Lafarge(JURSE) G Toya\& Marion dumont.
-            \item Robustness to input noise.
-        \end{itemize}
+        \subsubsection{Data acquisition}
+            Sensor data acquisition can raise some serious issues, in signal processing in general, as in \gls{acr::3d} modeling in particular.
+            In fact, noise is an integral part of physical measurement processes.
+            One should take good care in avoiding error propagation through their processing pipelines.
+            For instance, outliers in point-of-interest detection can render a photogrammetrically constructed mesh accumulate sizable geometric errors.\\
+            Missing data is also a real issue in \gls{acr::3d}, as some background objects in the scene could be easily occluded by objects in the foreground.
+            One way of dealing with this type of obstacles, is to multiply the data acquisition settings.
+            This can, actually, help mitigate not only occlusion problems but also noise interference.\\
+            However, too much data heterogenuity can also hinder the \gls{acr::3d} modeling process.
+            In fact, with more accessible data acquired using different sensors (stereoimages, \gls{acr::radar} and \gls{acr::lidar}, for instance), in various settings (aerial, sattelite or terrestrial) and circumstances (rainy, sunny, foggy\dots and night-time, day-time\dots), other hurdles need to be overcome.
+            For one, more data does not always mean more knowledge, as demonstrated in~\textcite{brachmann2018learning}.
+            In fact, one should take good care in choosing how to fuse their input data.
+            For instance, it needs be coregistered in the same referential~\parencite{mezian2016uncertainty}.
+            There will be also some variability in radiometry, and all signal properties in general, that needs to be taken into account.
+            \begin{figure}[htpb]
+                \centering
+                \includegraphics[width=.7\textwidth]{example-image}            
+                \caption{
+                    \label{fig::3d_aerial_terrestrial_fusion} Example of a fusion of aerial and terrestrial \gls{acr::lidar} point clouds for building modeling~\parencite{kedzierski2014terrestrial}.
+                }
+            \end{figure}
+
+        \subsubsection{Modeling automatization}
+            For a semantically aware and geometrically accurate representation of a building, it is better to choose an interactive process~\parencite{musialski2013survey}.\\
+            In fact, automatic reconstruction algorithms rely on some \textit{a prioiri} properties that are not always true.
+            Such hypotheses can come in grammar regularization & grammar of shapes & finite set of primitives.
+            This does noit hold at large scales.
+            In same city , country or continent, architectural styles change depend on location but also the history of th building and function\\
+            As a result, some choose to alterne automatic and interactive.
+            
+
 \section{Evaluating building models}
     \label{sec::introduction::building_model_evaluation}
     \subsection{Geometric consistancy inspection}
