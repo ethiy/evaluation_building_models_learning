@@ -386,28 +386,40 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
 
 \section{Evaluating building models}
     \label{sec::introduction::building_model_evaluation}
-    We have just seen how building model quality evaluation can is one the main challenges in the field.
+    We have just seen how building model quality evaluation is one the main challenges in the field.
     In this section, are presented the different types of evaluation that a building model can undergo.
-    First, in section~\ref{sec::introduction::building_model_evaluation::consistancy}, is described how models could be checked for their geometric consistancy.
-    Second, manual inspection is discussed, in section~\ref{sec::introduction::building_model_evaluation::manual}.
-    Third and last, is considered automatic evaluation and its challenges.
-    \subsection{Geometric consistancy inspection}
+    First, in susection~\ref{sec::introduction::building_model_evaluation::consistancy}, is described how models could be checked for their geometric consistancy.
+    Second, manual inspection is discussed, in subsection~\ref{sec::introduction::building_model_evaluation::manual}.
+    Third and last, subsection~\ref{sec::introduction::building_model_evaluation::automatic} considers automatic evaluation and its challenges.
+    \subsection{Topological consistancy inspection}
         \label{sec::introduction::building_model_evaluation::consistancy}
+        Extensive work has been accomplished, in the past, in order to achieve a standardized representation of city \gls{acr::3d} models.
+        This has resulted in the \gls{acr::ogc} CityGML standard\footnote{\href{https://www.opengeospatial.org/standards/citygml}{CityGML}}.
+        However, this standard is not always respected, as shown in~\textcite{biljecki2016most}, where up to 89\% of models are invalid.\\
+
+        For the purpose of automatically checking the topological consistancy of city models, a sizable number of approaches have been proposed.
+        It has been a steady progress over a long period of time.
+        The common principle in these methods was the 2-manifoldness of objects~\parencite{ledoux2013validation}.
+        However, the first ones did not explore all topological possiblities provided by the standard~\parencite{biljecki2016most, ledoux2013validation}.
+        In fact, 
         Hugo ledoux, Gisquière. LoD detection.
     \subsection{Manual inspection}
         \label{sec::introduction::building_model_evaluation::manual}
         Once valid geometry. How good is the model? how close to reality?
         IGN case.
         expensive in man power. Not scalable.
+        produces non manifold models.
     \subsection{Automatic evalutation}
+        \label{sec::introduction::building_model_evaluation::automatic}
         No one does. Only global error metrics. No semantics. No error localisation.
 \section{Contributions}
     \label{sec::introduction::contributions}
     \subsection{Positioning}
+        outdoor \& large scale \& automatic.
         Structure properties => fidelity metrics insufficient
         No geometric issues studied here.
         Semantic evaluation: categorization of errors.
-        Errors independent from: LoD, modeling method and urban scene.
+        Errors def \& detec independent from: LoD, modeling method and urban scene.
     \subsection{Potential use}
         Paper.
     \subsection{Main contributions}
