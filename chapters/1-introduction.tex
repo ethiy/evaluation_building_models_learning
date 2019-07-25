@@ -371,7 +371,18 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             \end{figure}
         
         \subsubsection{Quality evaluation}
-            bjbnd.
+            As discussed profusely, semantics play a prominent role in building \gls{acr::3d} models.
+            Naturally, it should also be taken into account in the evaluation process.
+            It is easier said than done.
+            Usually, it is indirectly checked using the compacity criterium~\parencite{lafarge_ijcv12}.\\
+            In most cases, only geometric metrics are used: usually the \gls{acr::rmse}.
+            These metrics require, in general, reference models to compare the recontructed models to.
+            In a large scale setting, this becomes prohibitive.
+            In fact, it means that one should reconstruct, at least, a whole disctict to be able to judge a city model.
+            This is expensive in ressources and time.
+            Alternatively, many works favor visual inspection of models.
+            This requires, in average, \SI[per-mode=repeated-symbol]{2}{\hour\per\km\squared\per\expert}, and in worst case scenarios, as time-consuming  as stereoplotting the building in the first place.\\
+            In the next section, we will discuss, in details, the various ways of evaluating a building model.
 
 \section{Evaluating building models}
     \label{sec::introduction::building_model_evaluation}
