@@ -176,12 +176,12 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
         We have seen, previously, how city \gls{acr::3d} models can be instrumental.
         They have a large range of applications in entertainement, industry, security, urbanization and sustainable developpement.
         In this work, th focus is on outdoor, rather than indoor, modeling.\\
-        We will raise, herein, the issue of outdoor city modeling.
+        Precisely, we will raise, herein, the issue of large scale outdoor city modeling.
         We will see how building reconstruction has a prominent role in the field.
         Afterwhat, we will discuss different building model acquisition techniques and how it influences their quality.
-        We end with an examination of semantics in building models and the various used modeling strategies.
+        We end with an examination of semantics in building models.
 
-        \subsubsection{Outdoor city modeling}
+        \subsubsection{Large scale outdoor city modeling}
             Urban environements are temporally dynamic in nature~\parencite{Vanhoey:2017:VVS:3084363.3085085}.
             However, constituent items do not evolve with uniform speed.
             We can distinguish, in fact, urban objects depending on their change rate.
@@ -260,13 +260,15 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
 
         \subsubsection{Building \gls*{acr::3d} models meets semantics}
             The geometric accuracy of building models is not sufficient~\parencite{biljecki2016improved}.
-            Semantics are needed, for instance, to identify the function of each architectural feature.
-            In fact, the latter are usually composed of simple geometric shapes, mostly planar and usually single.
-            Hence, a dense \gls{acr::3d} mesh is not necessarily the most geometrically accurate.
-            Semantics imply, therefore, a need for compacity in the geometric representation of buildings.
-            That is why it was used, for example, in addition to the \gls{acr::rmse}, as an evaluation metric in~\textcite{lafarge_ijcv12}.
-            As a consequence, we distinguish, from now on, between building \gls{acr::3d} models and building \gls{acr::3d} meshes.
-            While the latter accounts for the geometric precision, the other conveys semantic properties of the model.
+            Semantics are needed, for instance, to identify the function of each architectural feature.\\
+            In fact, architectural elements correspond usually to a single and simple geometric shape, that is mostly planar.
+            As a consequence, a dense geometric information (\textit{i.e.} a dense \gls{acr::3d} mesh) is not necessarily the most accurate representation.
+            Semantics can help describe the geometry of a building feature using less quantity of information than a \gls{acr::3d} mesh.
+            For instance, the sentence "cylindrical pilar with radius $r$ and height $h$" is more accurate than a \gls{acr::3d} mesh of the same object at a given resolution while using much less information.
+            Hence, semantics implies compacity in the geometric representation of buildings.
+            That is why the last criterea was used, for example\gls{acr::3d} mesh, in addition to the \gls{acr::rmse}, as an evaluation metric in~\textcite{lafarge_ijcv12}.\\
+            As a consequence, we distinguish, from now on, between a \gls{acr::3d} model and a \gls{acr::3d} mesh of a building.
+            While the latter accounts for the geometric precision, the other conveys, in addition, semantic properties.
             This is illustrated in Figure~\ref{fig::3dmodel_vs_3dmesh}.\\
 
             \begin{figure}[htpb]
@@ -278,36 +280,18 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
                     For each architectural feature corresponds a single geometric primitive.
                 }
             \end{figure}
-
-            Different strategies are used in building automatic \gls{acr::3d} modeling.
-            Each method, balancing between compacity and geometric accuracy, targets a specific resolution.
-            Ordered from the most to the less compact, these strategies are listed herein.
-            In a Manhattan-world setting, one assumes that buildings are collections of boxes~\parencite{vanegas2010building, li2016manhattan}.
-            ~\textcite{lafarge_ijcv12, nan2017polyfit} relied on the hypothesis that building are made of piecewise planar primitives.
-            Richer grammars results in less compact but more accurate models, as is the case of~\textcite{demir2015procedural} or~\textcite{zeng2018neural}.
-            Mesh simplification strategies comes last in terms of compacity~\parencite{verdie2015lod, zhou20102}.
-            Figure~\ref{fig::modeling_strategies} summarises this comparison.\\
-
-            \begin{figure}[htpb]
-                \centering
-                \includegraphics[width=.7\textwidth]{example-image}            
-                \caption{
-                    \label{fig::modeling_strategies} Modeling strategies and the targeted compacity and geometric accuracy.
-                    Depending on the final use of the model, a compromise is chosen between the model compacity and its geometric accuracy.
-                }
-            \end{figure}
-
-            Compacity, in building \gls{acr::3d} models, results from semantics.
-            Consequently, it implies a discretization in resolution.
-            Indeed,~\textcite{groger2012citygml} uses this semantic property to formalize a discrete intuitive \gls{acr::lod} scale.
-            Even though the original \gls{acr::lod} specification were far from being mature it is widely used in the \gls{acr::gis} and Computer Vision communities~\parencite{biljecki2014formalisation, rau2006lod}.
+            
+            As argued previously, compacity, which results from semantics, is a primordial characteristic of building \gls{acr::3d} models.
+            It implies a discretization in resolution.
+            Indeed,~\textcite{groger2012citygml} uses this property to formalize a discrete and intuitive \gls{acr::lod} scale.
+            Even though the original \gls{acr::lod} specification was far from being mature it is widely used in the \gls{acr::gis} and Computer Vision communities~\parencite{biljecki2014formalisation, rau2006lod}.
             A detailed study of the issue was conducted in~\textcite{biljecki2014formalisation} and ~\textcite{biljecki2016improved}.
             All the same, this work will content itself with the simple intuitive definition of \glspl{acr::lod}.\\
             A \gls*{acr::lod}-0 model corresponds to the 2.5D footprint of the building.
-            Next, the \gls*{acr::lod}-1 consists of the extrusion from the \gls*{acr::lod}-0 footprint up to a uniform height.
+            Next, the \gls*{acr::lod}-1 consists of the \gls*{acr::lod}-0 footprint extruded up to a uniform height.
             \gls*{acr::lod}-2 enhances the previous model scale with more geometrically accurate roof structures.
-            The \gls*{acr::lod}-3 reveals more details as it models small superstructures, as weel as openings.
-            Last comes \gls*{acr::lod}-4 which holds indoor details that are ignored in this work.
+            The \gls*{acr::lod}-3 reveals even more details, as it models small superstructures, as well as openings.
+            Last comes \gls*{acr::lod}-4 which conveys indoor details that are ignored in this work.
             Figure~\ref{fig::lods} depicts these definitions.\\
 
             \begin{figure}[htpb]
@@ -321,10 +305,10 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
         \label{subsec::introduction::urban_3d_reconstruction::challenges}
         The subject of building \gls{acr::3d} modeling has been widely studied in more than twenty years.
         Still, there are some unsolved issues in the field~\parencite{musialski2013survey, lafarge2015some}.
-        Presented here is the same challenge classification as in~\textcite{lafarge2015some}.
+        Presented here is the same classification as in~\textcite{lafarge2015some}.
 
         \subsubsection{Data acquisition}
-            Sensor data acquisition can raise some serious issues, in signal processing in general, as in \gls{acr::3d} modeling in particular.
+            Related to sensor data acquisition are some serious issues, in signal processing in general, just as in \gls{acr::3d} modeling in particular.
             In fact, noise is an integral part of physical measurement processes.
             One should take good care in avoiding error propagation through their processing pipelines.
             For instance, outliers in point-of-interest detection can render a photogrammetrically constructed mesh accumulate sizable geometric errors.\\
@@ -332,11 +316,11 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             One way of dealing with this type of obstacles, is to multiply the data acquisition settings.
             This can, actually, help mitigate not only occlusion problems but also noise interference.\\
             However, too much data heterogenuity can also hinder the \gls{acr::3d} modeling process.
-            In fact, with more accessible data acquired using different sensors (stereoimages, \gls{acr::radar} and \gls{acr::lidar}, for instance), in various settings (aerial, sattelite or terrestrial) and circumstances (rainy, sunny, foggy\dots and night-time, day-time\dots), other hurdles need to be overcome.
+            In fact, with more accessible data acquired using different sensors (cameras, \gls{acr::radar} and \gls{acr::lidar}, for instance), in various settings (aerial, sattelite or terrestrial) and circumstances (rainy, sunny, foggy\dots and night-time, day-time\dots), other hurdles need to be overcome.
             For one, more data does not always mean more knowledge, as demonstrated in~\textcite{brachmann2018learning}.
-            In fact, one should take good care in choosing how to fuse their input data.
+            In fact, one should take good care in choosing how to fuse their input data.\addref
             For instance, it needs be coregistered in the same referential~\parencite{mezian2016uncertainty}.
-            There will be also some variability in radiometry, and all signal properties in general, that needs to be taken into account.
+            There can also be variabilities in radiometry that needs to be taken into account.\addref
             \begin{figure}[htpb]
                 \centering
                 \includegraphics[width=.7\textwidth]{example-image}            
@@ -346,12 +330,45 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             \end{figure}
 
         \subsubsection{Modeling automatization}
-            For a semantically aware and geometrically accurate representation of a building, it is better to choose an interactive process~\parencite{musialski2013survey}.\\
-            In fact, automatic reconstruction algorithms rely on some \textit{a prioiri} properties that are not always true.
-            Such hypotheses can come in grammar regularization & grammar of shapes & finite set of primitives.
-            This does noit hold at large scales.
-            In same city , country or continent, architectural styles change depend on location but also the history of th building and function\\
-            As a result, some choose to alterne automatic and interactive.
+            In order to obtain a semantically aware and geometrically accurate representation of a building, it is better to choose an interactive process~\parencite{musialski2013survey}.\\
+            Different strategies are used in automatic \gls{acr::3d} modeling of buildings.
+            Each method type targets a specific resolution, balancing between compacity and geometric accuracy.
+            Ordered from the most to the less compact, these strategies are listed herein.
+            In a Manhattan-world setting, one assumes that buildings are collections of boxes~\parencite{vanegas2010building, li2016manhattan}.~\textcite{lafarge_ijcv12, nan2017polyfit}
+            relied on the hypothesis that building are made of piecewise planar primitives.
+            Rich grammars can give rise to less compact but more accurate models, as is the case of~\textcite{demir2015procedural} or~\textcite{zeng2018neural}.
+            Mesh simplification strategies comes last in terms of compacity~\parencite{verdie2015lod, zhou20102}.
+            A sketch of this comparison is presented in Figure~\ref{fig::modeling_strategies}.\\
+            \begin{figure}[htpb]
+                \centering
+                \includegraphics[width=.7\textwidth]{example-image}            
+                \caption{
+                    \label{fig::modeling_strategies} Modeling strategies and the targeted compacity and geometric accuracy.
+                    Depending on the final use of the model, a compromise is chosen between the model compacity and its geometric accuracy.
+                }
+            \end{figure}
+            The compromise, between compacity and geometric precision, relies on an \textit{a prioiri} knowledge of the modeled urban scene.
+            Such hypotheses does not naturally hold at large scales.
+            Multiple factors play a role in architectural styles of buildings that do not always go hand in hand:
+            a geographic proximity does not imply always a temporal closeness for buildings as depicted in Figure~\ref{fig::xiiith_paris_haussmann_tower}.
+            From one region to another, the differences become even more overt: \textit{c.f.} Figure~\ref{fig::different_regions}.
+            As a result, some choose to alternate automatic and interactive methods~\parencite{musialski2013survey}: an automatic reconstruction followed by a interactive correction step.
+            \begin{figure}[htpb]
+                \centering
+                \includegraphics[width=.7\textwidth]{example-image}            
+                \caption{
+                    \label{fig::xiiith_paris_haussmann_tower} Example of two nearly located buildings, in the XIIIth disctict of Paris, with different architectural styles:
+                    a Haussmann style building, dating from the begining of the XXth century, next to very tall tower, built \textit{circa} 1970s.
+                }
+            \end{figure}
+            \begin{figure}[htpb]
+                \centering
+                \includegraphics[width=.7\textwidth]{example-image}            
+                \caption{
+                    \label{fig::different_regions} Example of two buildings from two different locations in the world:
+                    Blalallala.
+                }
+            \end{figure}
         
         \subsubsection{Quality evaluation}
             bjbnd.
