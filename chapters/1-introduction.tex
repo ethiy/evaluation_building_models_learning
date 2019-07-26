@@ -261,7 +261,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
         \subsubsection{Building \gls*{acr::3d} models meets semantics}
             The geometric accuracy of building models is not sufficient~\parencite{biljecki2016improved}.
             Semantics are needed, for instance, to identify the function of each architectural feature.\\
-            In fact, architectural elements correspond usually to a single and simple geometric shape, that is mostly planar.
+            In fact, architectural elements correspond usually to one or a composite of simple geometric shapes, that are mostly planar~\parencite{kolbe2005citygml}.
             As a consequence, a dense geometric information (\textit{i.e.} a dense \gls{acr::3d} mesh) is not necessarily the most accurate representation.
             Semantics can help describe the geometry of a building feature using less quantity of information than a \gls{acr::3d} mesh.
             For instance, the sentence "cylindrical pilar with radius $r$ and height $h$" is more accurate than a \gls{acr::3d} mesh of the same object at a given resolution while using much less information.
@@ -395,13 +395,14 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
         \label{sec::introduction::building_model_evaluation::consistancy}
         Extensive work has been accomplished, in the past, in order to achieve a standardized representation of city \gls{acr::3d} models.
         This has resulted in the \gls{acr::ogc} CityGML standard\footnote{\href{https://www.opengeospatial.org/standards/citygml}{CityGML}}.
-        However, this standard is not always respected, as shown in~\textcite{biljecki2016most}, where up to 89\% of models are invalid.\\
-
-        For the purpose of automatically checking the topological consistancy of city models, a sizable number of approaches have been proposed.
-        It has been a steady progress over a long period of time.
-        The common principle in these methods was the 2-manifoldness of objects~\parencite{ledoux2013validation}.
-        However, the first ones did not explore all topological possiblities provided by the standard~\parencite{biljecki2016most, ledoux2013validation}.
-        In fact, 
+        However, in practice, it is not always respected, as shown in~\textcite{biljecki2016most}, where up to 89\% of models are invalid.\\
+        In consequence, the subject of automatically checking the topological consistancy of city models has drawn a sizable amount of attention in the \gls{acr::gis} community.
+        The basic common principle is the two-manifoldness of surface representations, as shown in~\textcite{groger2011achieve}, with the aim of excluding self-intersections.
+        It is however not sufficient to correctly model complex buildings.
+        The latter can be, in reality, represented as an agregation of two-manifold surfaces, as shown in~\textcite{groger2011achieve, ledoux2013validation}.\\
+        However, not all efforts did explore the topological possiblities that are provided by the standard~\parencite{biljecki2016most, ledoux2013validation}.
+        In fact, most assume that polygons and solids in the representation are not allowed to have holes, like the work of~\textcite{groger2011achieve, alam2014towards}.
+        This was 
         Hugo ledoux, Gisquière. LoD detection.
     \subsection{Manual inspection}
         \label{sec::introduction::building_model_evaluation::manual}
