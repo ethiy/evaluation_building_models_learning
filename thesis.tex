@@ -30,6 +30,8 @@
 \setcounter{tocdepth}{2}
 \usepackage{minitoc}
 \setcounter{minitocdepth}{2}
+\usepackage{tocbibind}
+
 \usepackage[explicit]{titlesec}
 \usepackage{bookmark}
 
@@ -105,12 +107,12 @@
     \printglossary[type=\acronymtype]
     \printglossary
 
+    \mtcaddchapter
     \tableofcontents
-    \addcontentsline{toc}{chapter}{Contents}
+    \mtcaddchapter
     \listoffigures
-    \addcontentsline{toc}{chapter}{List of Figures}
+    \mtcaddchapter
     \listoftables
-    \addcontentsline{toc}{chapter}{List of Tables}
     \mtcaddchapter
 
     \mainmatter
