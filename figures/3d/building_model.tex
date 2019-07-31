@@ -1,0 +1,35 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\usepackage{tikz}
+\usepackage{fourier}
+
+\usetikzlibrary{calc, 3d}
+
+\begin{document}
+	\tikzset{face/.style={fill=lightgray,draw=black,very thin,line join=round}}
+    \begin{tikzpicture}[x  = {(-0.5cm,-0.5cm)},
+                        y  = {(0.9659cm,-0.25882cm)},
+                        z  = {(0cm,1cm)},
+                        scale = 1,
+                        color = {lightgray}]
+        \begin{scope}[canvas is zy plane at x=0]
+          	\path[face,shade] (0,0) -- (2,0) -- (2.5,1.75) -- (2,4) -- (0,4) -- cycle;
+        \end{scope}
+        \begin{scope}[canvas is zx plane at y=0]
+  			\path[face,shade] (0,0) rectangle (2,3);
+		\end{scope}
+        \begin{scope}[canvas is zy plane at x=3]
+            \path[face] (0,0) -- (2,0) -- (2.75,2.5) -- (2,4) -- (0,4) -- cycle;
+		\end{scope}
+        \begin{scope}[canvas is zx plane at y=4]
+          	\path[face] (0,0) rectangle (2,3);
+        \end{scope}
+        \path[face] (0,0,2) -- (0,1.75,2.5) -- (3,0,2) -- cycle;
+        \path[face] (3,0,2) -- (0,1.75,2.5) -- (3,2.5,2.75) -- cycle;
+        \path[face] (0,4,2) -- (3,2.5,2.75) -- (0,1.75,2.5) -- cycle;
+        \path[face] (0,4,2) -- (3,2.5,2.75) -- (3,4,2) -- cycle;
+    \end{tikzpicture}
+\end{document}
