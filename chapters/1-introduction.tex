@@ -485,18 +485,105 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
     \label{sec::introduction::contributions}
     Based on all the previous discussions, we adopted a direction of research that was rarely taken.
     Herein is explained the path that led to this subject.
-    To do so, the context of the this work is explained in detail in subsection~\ref{}.
-    Further on, promising and conceivable utilizations are stated in subsection~\ref{}.
-    This is before ending with a summary of the principal contributions that this work presents (\textit{c.f.} subsection~\ref{}).
+    To do so, the context of the this work is explained in detail in subsection~\ref{sec::introduction::contributions::positioning}.
+    Further on, promising and conceivable utilizations are stated in subsection~\ref{sec::introduction::contributions::use}.
+    This is before ending with a summary of the principal contributions that this work presents (\textit{c.f.} subsection~\ref{sec::introduction::contributions::contributions}).
+    
     \subsection{Positioning}
-        outdoor \& large scale \& automatic.
-        Structure properties => fidelity metrics insufficient
-        No geometric issues studied here.
-        Semantic evaluation: categorization of errors.
-        Errors def \& detec independent from: LoD, modeling method and urban scene.
+        \label{sec::introduction::contributions::positioning}
+        As seen in the previous section (\textit{ie.} section~\ref{sec::introduction::building_model_evaluation}), geometry evaluation of building \gls{acr::3d} models remains a field open for invetigation.
+        Topology consistency inspection, in contrast, as discussed in subsection~\ref{sec::introduction::building_model_evaluation::topological}, has received ample attention from the \gls{acr::gis} community.
+        In consequence, it will not of interest in this work.\\
+
+        Building model evaluation is, herein, studied under two constraints: large scale and automatization.
+        Each one will have an impact on what settings are to be considered.
+        Below, explained are the consequences of each constraint.\\
+
+        Building modeling has been shown, earlier (\textit{cf.} subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}), to be a bottleneck for urban outdoor modeling in large scales.
+        As consequence, evaluating building \gls{acr::3d} models is essential for entire scene model inspection.
+        The difference between buildings and most urban items is the significance of semantics (\textit{cf.} subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}).
+        The latter translates into structural geometric properties that are not faithfully captured by geometric fidelity metrics.
+        As a consequence, the proposed approach should also factor semantics in the evaluation.
+        As a result, like with \glspl{acr::lod}, errors are exptected to be discretized owing to the semantic evaluation.
+        Due to the large scale of the study, the proposed categorization must be stable no matter how the treated urban scene change.\\
+
+        Semantically aware inspection is natural for human operators.
+        It is, however, difficult to automatize.
+        First, models could result from different pipelines.
+        Consequently, the automatic evaluation approach has to be independent from the used building modeling method.
+        It has also to take into consideration the \gls{acr::lod} of input models.
+
     \subsection{Potential use}
-        Paper.
+        \label{sec::introduction::contributions::use}
+        Ahead was discussed the context of the proposed work.
+        Hereafter is discussed the potential use of a semantically aware automatic geometry evaluation of building \gls{acr::3d} models.
+        \subsubsection{Change detection}
+            This possible in two ways.
+            First, one can consider the same approach that is used for error detection as a method for change detection in building \gls{acr::3d} models.
+            This equivalent to considering change as an semantic error that impacts the geometry of the building.
+            Second is the fact that change can be implicitly detected from geometric errors.
+            In fact, the change that can be observed from sensor data, will render the outdated model invalid geometrically.
+
+        \subsubsection{Building model correction}
+            This is the most obvious usecase for this work.
+            In practice, errors are detected by operators in order to correct them.
+            The first task, if automatized, can be time saving in the correction post-processing step.
+            It is even possible to automatize the whole correction process using the advances achieved in interactive reconstruction~\parencite{kowdle2011active}.
+
+        \subsubsection{Reconstruction method selection}
+            Evaluation of the building models can help select the most adapted reconstruction methods for a certain urban scene.
+            Indeed, depending on the needs of the potential final user, some errors are to be watched more than others.
+            As an example, an insurance agent, who is only interested in flood simulations, will not be bothered by the geometric accuracy of \gls{acr::lod}-2 features and will focus principally at the \gls{acr::lod}-1 representation errors.
+            Modeling algorithms are naturally biased towards a certain setting that depends on the hypotheses chosen by their creators.
+            They will produce less errors when those conjectures are met and fail otherwise.
+            These assumptions are fixed, for instance, in terms of building types (Haussmann style, Manhattan-world \dots), geometric criterea (planar surfaces, symmetry \dots).
+            Hence, choosing a modeling approach can determine how good are the models and vice versa.
+
+        \subsubsection{Crowdsourcing evaluating}
+            Crowdsourcing~\parencite{kovashka2016crowdsourcing} can be seen as a reconstruction method.
+            It has become easier with the help of some online tools like SketchUp\footnote{
+                \href{https://www.sketchup.com}{SketchUp}
+            }, where anyone can model, for instance, their home and share it publically.
+            The quality of the models depend on their author.
+            An automatic evaluation method can help check that the uploaded models respect the specifications.
+            Another issue is the presence of vandalism in open data~\parencite{neis2012towards}.
+            The presented approach can be used to help understandin user behaviors and detect vandaliser.
+
     \subsection{Main contributions}
-        Paper.
+        \label{sec::introduction::contributions::contributions}
+        Based on the detailed discussion hereinabove, we present our contributions in the field of geometric evaluation of building \gls{acr::3d} models.
+        They are three-fold.
+        A graphical abstract is presented in Figure~\ref{fig::graphical_abstract} giving an overview of our contributions.
+        \begin{figure}[htpb]
+            \centering
+            \includegraphics[width=.7\textwidth]{example-image}            
+            \caption{
+                \label{fig::graphical_abstract} 
+            }
+        \end{figure}
+        \subsubsection{Error taxonomy}
+            A hierarchical and adaptive taxonomy of errors is proposed.
+            It is designed to be independent from the urban scene or the modeling approach.
+            In order to achieve this, errors are chosen meticulously as a compromise between generalization and expressivity.
+            The first ensures that errors from the taxonomy can fit any scene, while the second implies that errors are not equivocal.
+            It is also an adaptive categorization, since, depending on the final user needs, a set of errors can be extracted after specifying some parameters.
+            
+        \subsubsection{\gls*{acr::3d} reference free evaluation}
+            Acquiring \gls{acr::3d} reference models is very expensive in ressources.
+            As a consequence, the problem is formulated as a supervized learning one.
+            Based on the errors, that are extracted from the taxonomy, a classifier is trained in order to predict defects for unseen models.
+
+        \subsubsection{Feature baseline}
+            Since the formulated problem has not been massively studied, there was no feature extraction baseline to compare to.
+            Hence, a baseline of features is presented in this work.
+            They are computed based on the geometric attributes of the building model and the comparison to external data: optical images and height maps.
+        
+        \subsubsection{Scalability}
+            One of the goals of this work is to acheive scalability in large scale.
+            This implies the transferability of the learned predictors to unseen urban settings or untested modeling techniques.
+            It involves also a representativeness and generalization study of the training sets.
+            An analysis is conducted accordingly.
+            We experimentaly prove the stability of classifiers, under some conditions.
+
 \section{Structure of the Thesis}
     \label{sec::introduction::structure_of_thesis}
