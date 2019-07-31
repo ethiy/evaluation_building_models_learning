@@ -556,9 +556,16 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
         A graphical abstract is presented in Figure~\ref{fig::graphical_abstract} giving an overview of our contributions.
         \begin{figure}[htpb]
             \centering
-            \includegraphics[width=.7\textwidth]{example-image}            
+            \includestandalone[mode=buildnew, width=\textwidth]{figures/3d/graphical_abstract}            
             \caption{
-                \label{fig::graphical_abstract} 
+                \label{fig::graphical_abstract} Our semantic evaluation framework for 3D building models (a).
+                Semantic errors affecting the building are predicted using a supervised classifier and handcrafted features.
+                In addition to the input model topological structure (b), features are extracted from Very High resolution overhead data.
+                It can be based on a comparison with the \gls*{acr::dsm} (c).
+                Optical images can also be used through, for instance, local gradient extraction (d).
+                Several errors can be detected at the same time, in a hierarchical manner (e).
+                Fidelity errors correspond to geometrical imprecision as shown in red.
+                On the other hand, modeling errors denote morphological inconsistancies with the real object.
             }
         \end{figure}
         \subsubsection{Error taxonomy}
