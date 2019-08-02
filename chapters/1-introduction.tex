@@ -270,14 +270,27 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             While the latter accounts for the geometric precision, the other conveys, in addition, semantic properties.
             This is illustrated in Figure~\ref{fig::3dmodel_vs_3dmesh}.\\
 
-            \begin{figure}[htpb]
-                \centering
-                \includegraphics[width=.7\textwidth]{example-image}            
-                \caption{
-                    \label{fig::3dmodel_vs_3dmesh} Example of the difference between a \gls{acr::3d} mesh compared to a \gls{acr::3d} model.
-                    The first describes only the geometry, while the second is rich in semantics:
-                    For each architectural feature corresponds a single geometric primitive.
-                }
+            \begin{figure}
+                \begin{center}
+                    \begin{subfigure}{\textwidth}
+                        \begin{center}
+                            \includestandalone[mode=buildnew, width=.7\textwidth]{figures/model_vs_mesh/mesh_model}
+                            \caption{3D mesh of a building surface ($\approx$ \num[output-exponent-marker = \text{e}]{1e5} triangles).}
+                        \end{center}
+                    \end{subfigure}
+                    \\
+                    \begin{subfigure}{\textwidth}
+                        \begin{center}
+                            \includestandalone[mode=buildnew, width=.7\textwidth]{figures/model_vs_mesh/ground_truth_model}
+                            \caption{Building 3D polyhedral model ($\approx$ 800 facets).}
+                        \end{center}
+                    \end{subfigure}
+                    \caption{
+                        \label{fig::3dmodel_vs_3dmesh} Example of the difference between a \gls{acr::3d} mesh compared to a \gls{acr::3d} model.
+                        The first describes only the geometry, while the second is rich in semantics:
+                        For each architectural feature corresponds a single geometric primitive.
+                    }
+                \end{center}
             \end{figure}
             
             As argued previously, compacity, which results from semantics, is a primordial characteristic of building \gls{acr::3d} models.
