@@ -1,15 +1,58 @@
 \minitoc
-\section{Building \gls{acr::3d} modelling}
-    \subsection{\gls{acr::3d} representation of buildings}
-    \subsection{Bottom-up (greedy) approaches}
-    \subsection{Top-down (global) approaches}
-\section{Quality evaluation of \gls{acr::3d} building models}
+
+\vfill
+
+\clearpage
+
+\section{Automatic building \gls*{acr::3d} modelling}
+    \label{sec::state_of_the_art::building_modeling}
+
+    \subsection{Input data classification}
+        \label{subsec::state_of_the_art::building_modeling::input}
+
+    \subsection{Strategy classification}
+        \label{subsec::state_of_the_art::building_modeling::strategy}
+
+    \subsection{Scale classification}
+        \label{subsec::state_of_the_art::building_modeling::scale}
+
+\section{Quality evaluation of \gls*{acr::3d} building models}
+    \label{sec::state_of_the_art::quality}
+    We have seen previously the various methods used to automatically model building.
+    The goal of this section is to describe the available approaches that evaluate the quality of such models.
+    These could be distinguished based on two criterea.
+    In subsection~\ref{subsec::state_of_the_art::quality::output} are presented the quality evaluation methods based on their output.
+    An alternative prespective is possible to interpret quality evaluation methods, as it can be relied upon the type of needed reference data to categorize them (\textit{cf.} subsection~\ref{subsec::state_of_the_art::quality::reference}).
+
     \subsection{Output types}
-        \subsubsection{Metric based methods}
-        \subsubsection{Semantic methods}
+        \label{subsec::state_of_the_art::quality::output}
+        We distinguishe here quality evaluation methods based on the output they produce.
+        The first type is denoted fidelity metrics.
+        The second one is semantic labels.
+        Both are explained, hereafter, in details.
+
+        \subsubsection{Fidelity metrics based methods}
+            One way to charecterize the geometric quality of a building model is to compute indices or metrics describing its precision.\\
+
+            Most metrics usually inform on the geometric precision of the model.
+            They are computed at different dimensions.\\
+            The quality of points correspond to zero dimensional objects that could evaluated.
+            It is easy to do so based on their coordinates.
+            Conversly, the choice of points to be inspected is not evident.
+            One choice is to is \\
+
+            There is only one sementic aware indices in the literatture that is used for evaluation.
+            In fact, the compacity of \gls{acr::3d} models is a byproduct of their semantic nature.
+
+        \subsubsection{Semantic labels based methods}
+
     \subsection{Reference data types}
+        \label{subsec::state_of_the_art::quality::reference}
+
         \subsubsection{High resolution ground truth}
+
         \subsubsection{Raw remote sensing data}
+
     \subsection{Objective statement}
 \section{Supervised learning and pattern recognition}
     \subsection{Classifiers}
