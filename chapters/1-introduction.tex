@@ -4,9 +4,9 @@
 
 The goal of this introduction is to acquaint the reader with concepts that are manipulated in this study.
 In section~\ref{sec::introduction::urban_3d_reconstruction}, we illustrate what is meant by urban \index{urban!\gls{acr::3d}!model}\gls{acr::3d} models, and specifically, \index{building!model} building \gls{acr::3d} models.
-The role of this chapter is to also motivate the need for a semantic \index{building!model!evaluation}evaluation of such models.
+The role of this chapter is also to motivate the need for a semantic \index{building!model!evaluation}evaluation of such models.
 Indeed, in section~\ref{sec::introduction::building_model_evaluation}, we address different aspects of building \index{urban!\gls{acr::3d}!model}\gls{acr::3d} model inspection and the issues it raises.
-We conclude by stating our contributions (cf. section~\ref{sec::introduction::contributions}) and the structure of the thesis (cf. section~\ref{sec::introduction::structure_of_thesis}).
+We conclude by stating our contributions (cf. section~\ref{sec::introduction::contributions}) and announcing the structure of the thesis (cf. section~\ref{sec::introduction::structure_of_thesis}).
 
 \clearpage
 
@@ -29,23 +29,22 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
         Indeed, urban \gls{acr::3d} models answer various needs: scientific, societal, environemental and adminidtrative.
 
         \subsubsection{Administration related challenges}
-            Administratives bodies need to document land usage in an effort to efficiently manage territories.
-            One such tool is the cadastre.
-            Indeed, cadastral records are produced and maintained so as to answer to fiscal needs.
-            Cadastral data, since conception, was presented in the form of \index{\gls{acr::2d}!maps}\gls{acr::2d} maps\parencite{billen20033d}.
+            Administrative bodies need to document land usage in an effort to efficiently manage territories.
+            Cadastre is a tool that helps track ownership and usage of a each land parcel.
+            Cadastral records are produced and maintained to define fiscal policies.
+            Cadastral data, since conception, was presented in the form of \index{\gls{acr::2d}!maps}\gls{acr::2d} maps~\parencite{billen20033d}.
             Although many urban planning norms were always formulated taking into account height, or depth, information \addref, the need for a \index{\gls{acr::3d}!cadastre}\gls{acr::3d} cadastral management was made relevant with the advent of complex architectural features~\textcite{ijgi4042842}.
             To illustrate this case, we show, in figure~\ref{fig::3d_cadastre_need_example}, how \gls{acr::2d} cadastral maps are insufficient when it comes to modeling overhangs.\\
-            \begin{figure}[htpb]
+            \begin{figure}
                 \centering
-                \includegraphics[width=\textwidth]{images/3d_model_applications/3d_cadastre}            
+                \includegraphics[width=\textwidth]{images/3d_model_applications/3d_cadastre}
                 \caption{\label{fig::3d_cadastre_need_example} Example of a problematic situation where \gls{acr::3d} cadastre would be of help and \gls{acr::2d} maps fail~\parencite{ijgi4042842}.}
             \end{figure}
         \subsubsection{Urban planning related challenges}
             Urbanization raises some serious issues that need to be adressed.
             Consequently, decision makers, and all stakeholders in general, need to have at their disposal adequate tools.
             \index{\gls{acr::3d}!model}\gls{acr::3d} models are, in this sense, suitable as shown hereafter.\\
-
-            While \index{\gls{acr::3d}!cadastre}\gls{acr::3d} cadastre describes an urban scene at a certain time for fiscal purposes, urban plannars need the access to the same kind of information but in the future also.
+            While the previously presented \index{\gls{acr::3d}!cadastre}\gls{acr::3d} cadastre describes an urban scene at a certain time, urban plannars need the access to the same kind of information but in the future also.
             In fact, they need to know in advance the impact of urban norms they write on the evolution of their zone of interest. 
             One of the issues they study is \index{urban sprawl}urban sprawl~\parencite{ludlow2006urban}.
             The goal is to limit, as far as possible, \index{land occupation}land occupation~\parencite{TANNIER2012128} and predict the shape of the urban scene~\parencite{brasebin20183d} by tuning local urban plans.
@@ -56,9 +55,9 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             The \index{vizualization} vizualization and \index{simulation}simulation of urban zones can be equally helpfull for \index{public consultation}public consultation~\parencite{WU2010291}.\\
             \begin{figure}[htpb]
                 \centering
-                \includegraphics[width=.7\textwidth]{example-image}            
+                \includegraphics[width=\textwidth]{images/3d_model_applications/simplu}
                 \caption{
-                    \label{fig::3d_simulation} Example of \gls{acr::3d} urban scene simulated from known urban norms.
+                    \label{fig::3d_simulation} Example of \gls{acr::3d} urban scene simulated from known urban norms~\parencite{brasebin2017stochastic}.
                     Urban planners can assess the projected urban density of future districts for better decision making.
                 }
             \end{figure}
@@ -72,30 +71,31 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
                 }
             \end{figure}
             Related to urban planning, \gls{acr::3d} models could be used as a reference for other planners.
-            It could be used to describe the flow of vehicles and pedestrians in an urban environement as illustrated in~\textcite{Vanhoey:2017:VVS:3084363.3085085}.
+            It could be used to describe the flow of vehicles and pedestrians in an urban environement as illustrated in~\textcite{vanhoey2017varcity}.
             In addition, it could be used in physical simulations for urban applications.
-            For instance, Communication companies need to have a \gls{acr::3d} model of urban scenes to predict signal propagation in the goal of optimal network planning~\parencite{yun2007radio}.
-            It can be useful also for flood simulation.
+            For instance, Communication companies need to have a \gls{acr::3d} model of urban scenes to predict \textbf{signal propagation} in the goal of \textbf{optimal network planning}~\parencite{yun2007radio}.
+            It can be useful also for \textbf{flood simulation}.
             Predicting the height of overflowing water requires inherently a \gls{acr::3d} information.
             This is the usecase of~\textcite{varduhn2015multi}, where \gls{acr::3d} models are used to assess the flood risk.
             Such information could be instrumental for evacuation planning or for insurance managers.
-            In the same direction, one can simulate fire propagation~\parencite{dimitropoulos2010fire} or estimating noise propagation in urban scenes~\parencite{stoter20083d} (\textit{cf.} Figure~\ref{fig::noise_propogation}).
+            In the same direction, one can simulate \textbf{fire propagation}~\parencite{dimitropoulos2010fire} or estimating noise propagation in urban scenes~\parencite{stoter20083d} (\textit{cf.} Figure~\ref{fig::noise_propogation}).
             \begin{figure}[htpb]
                 \centering
                 \includegraphics[width=\textwidth]{images/3d_model_applications/noise_simulation}
                 \caption{
-                    \label{fig::noise_propogation} Example of noise propagation simulation using \gls{acr::3d} city models~\parencite{kurakula2007gis}.
+                    \label{fig::noise_propogation} Example of \textbf{noise propagation} simulation using \gls{acr::3d} city models~\parencite{kurakula2007gis}.
                 }
             \end{figure}
             All these simulation derived informations could be fed to decision makers in order to better plan the cities of tomorrow.
 
-        \subsubsection{Environemental challenges}
-            Environement preservation is a all the more important in the coming years.
+        \subsubsection{Environmental challenges}
+            Environement preservation is a all the more important in the forecoming years.
             Urban settlement are one of the most biggest energy consumers.
             A more efficient energy utilization is necessary to sustain the frantic growth of urban areas.
             This motivates the need to quantify the energy consumption of urban settlements~\parencite{WATE20153372} or retrofitting costs~\parencite{previtali2014automatic}.
             ~\textcite{biljecki2015propagation} use also \gls{acr::3d} models of buildings in order to predict solar irradiation.
-            In fact, solar potential estimation can be useful for assessing the benefits of expensive solar panels projects.\\
+            In fact, solar potential estimation can be useful for assessing the benefits of expensive solar panels projects.
+            This kind of studies can also be applied in urban planning as the simulations could be undergone for future urban developpements.\\
             \begin{figure}[htpb]
                 \centering
                 \includegraphics[width=.7\textwidth]{images/3d_model_applications/solar_potential}
@@ -114,7 +114,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             Autonomous navigation has seen a great technological leap in recent years.
             Localization is an important step in visual navigation~\parencite{bonin2008visual}.
             \Gls{acr::3d} models play an important role in visual localization~\parencite{piasco2018survey, ijgi4042842}.\\
-            The basic idea is to match an image with a (textured or not) with a known \gls{acr::3d} model of the city~\parencite{arth2015instant, ardeshir2014gis, cham2010estimating, christie2016semantics} as shown in Figure~\ref{fig::navigation}.
+            The basic idea is to match an image with a (textured or not) known \gls{acr::3d} model of the city~\parencite{arth2015instant, ardeshir2014gis, cham2010estimating, christie2016semantics} as shown in Figure~\ref{fig::navigation}.
             \begin{figure}[htpb]
                 \begin{subfigure}{.18\textwidth}
                     \begin{center}
@@ -160,7 +160,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             \end{figure}
             Once the image matched, one can retrieve an absolute 6-\gls{acr::dog} pose estimation.
             This is especially helpfull in urban canyons as shown in~\textcite{piasco2018survey}.\\
-            This can be applied also for indoor environements, such as social cues aware robots navigating alongside humans~\parencite{gupta2018social} or industrial grade robots\addref.
+            This can be applied also for indoor environments, such as social cues aware robots navigating alongside humans~\parencite{gupta2018social} or industrial grade robots\addref.
        
         \subsubsection{Entertainement related challenges}
             \gls{acr::3d} models appeals also to various agents in the entertainement industry.
@@ -203,7 +203,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
                 \centering
                 \includegraphics[width=\textwidth]{images/3d_model_applications/explosion_simulation}            
                 \caption{
-                    \label{fig::explosion_simulation} Explosion simulation in urban environements.
+                    \label{fig::explosion_simulation} Explosion simulation in urban environments.
                 }
             \end{figure}
             Security forces can equally benefit from the same models.
@@ -216,20 +216,27 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
         \label{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}
         We have seen, previously, how city \gls{acr::3d} models can be instrumental.
         They have a large range of applications in entertainement, industry, security, urbanization and sustainable developpement.
-        In this work, th focus is on outdoor, rather than indoor, modeling.\\
+        In this work, the focus is put on outdoor, rather than indoor, modeling.\\
         Precisely, we will raise, herein, the issue of large scale outdoor city modeling.
         We will see how building reconstruction has a prominent role in the field.
         Afterwhat, we will discuss different building model acquisition techniques and how it influences their quality.
         We end with an examination of semantics in building models.
 
         \subsubsection{Large scale outdoor city modeling}
-            Urban environements are temporally dynamic in nature~\parencite{Vanhoey:2017:VVS:3084363.3085085}.
+            Not all urban items enjoy the same importance.
+            This is particularly true when modeling city scapes.
+            For this purpose, all different urban elements are analysed based on temporal and spatial dimensions.
+            First, urban element are grouped into different groups depending on how fast they undergo change.
+            Producing \gls{acr::3d} models  is discussed along this mentionned categorization.
+            Afterwhat, the spatial differentiation would be used to explain how buildings concentrate the most interest in urban \gls{acr::3d} modeling.\\
+
+            Urban environments are temporally dynamic in nature~\parencite{vanhoey2017varcity}.
             However, constituent items do not evolve with uniform speed.
-            We can distinguish, in fact, urban objects depending on their change rate.
+            Therefore, urban objects are distinguished depending on their change rate.
             Pedestrians --- as well as all living animals in general --- and transportation vehicles are in perpetual movement.
             Water bodies and vegetation, in urban scenes, evolve with an annual or seasonal period.
             Last comes city furniture, roads, bridges, buildings and terrain which have a much lower change frequency.
-            We will study, herein, how each of the three groups is modeled in \gls{acr::3d}.\\
+            We proceed, herein, to study how each of these three groups are modeled in \gls{acr::3d}.\\
 
             Besides technical difficulties, there are ethical and legal issues when reconstructing \gls{acr::3d} models of humans and vehicles.
             Indeed, accurate reconstruction involves person indentification.
@@ -244,16 +251,16 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             Vegetation can be modeled in details using \gls{acr::lidar} acquisition~\parencite{omasa20063d}.
             It is, however, too demanding in ressources and pointless in a large scale context.
             Trees are usually modeled by template matching, such as the ellipsoidal form model in~\textcite{lafarge_ijcv12}, or by generic, species dependent, \gls{acr::cad} models like in~\textcite{iovan2008detection}.\\
-
-            In conclusion, regarding the first and second groups, was proven, the lack of motivation for precise \gls{acr::3d} reconstruction, in a large scale setting.
-            Being less volatile through time, precisely modeling items from the third group seems to be easier.
+            Regarding the first and second groups, was proven, the lack of motivation for precise \gls{acr::3d} reconstruction, in a large scale setting.
+            Exhibiting less temporal volatility, precise modeling of items from the third group seems to be easier.
             In fact, terrain relief can be modeled simply from a \gls{acr::dsm} or a \gls{acr::dtm}.
             Although not being so easy to detect~\parencite{mnih2010learning}, roads could be naturally modeled using simple planar structures.
             On the other hand, city furniture, bridges and buildings are more complex.
             While detailed accurate models are needed for buildings and bridges, they are not necessary for city furniture.
             Indeed, it is, for instance, pointless to model each single traffic signal.
-            One would only need to detect its class and reconstruct it, accordingly, using a \gls{acr::cad} model of that same class.\\
-            Out of the the last group only buildings and bridges pose problems.
+            One would only need to detect its class and reconstruct it, accordingly, using a generic \gls{acr::cad} model portaying the same meaning.\\
+
+            Based on the previous temporal frequency differentiation analysis, we narrowed down the urban elements that need care in modeling to two: buildings and bridges. 
             Actually, we can rule out the latter owing to, this time, a spatial frequency categorization.
             In terms of land cover, the most occuring objects in an urban environement are roads, vegetation and buildings \addref.
             Hence, modeling these three objects becomes vital in order to obtain a viable urban \gls{acr::3d} model.
@@ -261,9 +268,19 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             This is, however, not the case of buildings.
             That is why, out of all urban features, buildings seem to attract the most attention in urban \gls{acr::3d} modeling.
 
-        \subsubsection{Building \gls*{acr::3d} model types}
-            Building modeling could be divided in two classes depending on the reconstruction scale (\textit{cf.} Figure~\ref{fig::bim_vs_gis}).
-            At a small scale, \gls{acr::bim} or \gls{acr::cad} models could be used.
+        \subsubsection{Building \gls*{acr::3d} modeling}
+            Before discussing further on the different types of building models, a definition is provided.
+            A building \gls{acr::3d} model is a cartographic product which represents the surface of the building in question.
+            The latter is a generalization of the reality.
+            The goal is not to represent all the details meticulously.
+            However, the model should not part from the real geometry of the building of interest.
+            Thus, geometric fidelity is weighted against generalization.
+            The right compromise is chosen based the final user needs.
+            This issue will later intervene often in this work.
+
+            Discussed herein are types of building models.
+            Scale of reconstruction is a main factor in dividing the latter into two classes (\textit{cf.} Figure~\ref{fig::bim_vs_gis}).
+            At a small scale, \gls{acr::bim} or \gls{acr::cad} models are easy to use.
             On the contrary, \gls{acr::gis} models are more suitable at a large scale.\\
 
             \gls{acr::bim} models are volumetric in nature:
@@ -275,7 +292,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             However, it does not come without its own issues.
             First, we can see that it rules out all buildings that preceded the technology, especially, historical buildings.
             Secondly, since this type of models require a high interaction with experts, in order to follow the state of the real buildings, it would be almost impossible the fact that the model does not diverge from the reality\addref.
-            Last but not least, are the geometric issues, like self-intersetions and non 2-manifoldness, that these models display as most \gls{acr::bim} tools do not perform geometric sanity checks.\\
+            Last but not least, are the geometric issues, like self-intersections and non 2-manifoldness, that these models display as most \gls{acr::bim} tools do not perform geometric sanity checks.\\
 
             \begin{figure}[htpb]
                 \centering
@@ -286,7 +303,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             \end{figure}
 
             In contrast, \gls{acr::gis} models represent rather the surface of buildings.
-            The goal is to describe the building geometry, as well as all urban itmes, at a large scale.
+            The goal is to describe the building geometry, as well as all urban items, at a large scale.
             Furthermore, this model type carries semantics related to all urban objects in the scene as well as their relations.
             These models could be acquired manually, as with \gls{acr::bim}, like the example of~\textcite{ref3dnat}.
             Another way to proceed consists in acquiring the geometry, automatically or interactively, using sensor data~\parencite{musialski2013survey}.
@@ -300,15 +317,20 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             As a consequence, hereafter, a special focus is given to automatic and, in a minor degree, interactive building \gls{acr::3d} modeling techniques.
 
         \subsubsection{Building \gls*{acr::3d} models meets semantics}
-            The geometric accuracy of building models is not sufficient~\parencite{biljecki2016improved}.
-            Semantics are needed, for instance, to identify the function of each architectural feature.\\
+            The geometric accuracy of the reconstituted surface is not sufficient~\parencite{biljecki2016improved} to model urban objects, and buildings in particular.
+            Semantics are integral part of these models.
+            They record, for instance, the function of each architectural feature.
+            Other informations can be attached to each architectural feature depending on the use.\\
+            The last concept is what is referred to in this manuscript as \textit{explicit} semantics.
+            It has a sizable effect on the geometry of the model.
+            It is denoted herein as \textit{implicit} semantics.
             In fact, architectural elements correspond usually to one or a composite of simple geometric shapes, that are mostly planar~\parencite{kolbe2005citygml}.
             As a consequence, a dense geometric information (\textit{i.e.} a dense \gls{acr::3d} mesh) is not necessarily the most accurate representation.
             Semantics can help describe the geometry of a building feature using less quantity of information than a \gls{acr::3d} mesh.
             For instance, the sentence "cylindrical pilar with radius $r$ and height $h$" is more accurate than a \gls{acr::3d} mesh of the same object at a given resolution while using much less information.
             Hence, semantics implies compacity in the geometric representation of buildings.
-            That is why the last criterea was used, for example\gls{acr::3d} mesh, in addition to the \gls{acr::rmse}, as an evaluation metric in~\textcite{lafarge_ijcv12}.\\
-            As a consequence, we distinguish, from now on, between a \gls{acr::3d} model and a \gls{acr::3d} mesh of a building.
+            That is why the last criterea was used, for example \gls{acr::3d} mesh, in addition to the \gls{acr::rmse}, as an evaluation metric in~\textcite{lafarge_ijcv12}.\\
+            As a consequence, we distinguish, from now on, between a \textit{\gls{acr::3d} model} and a \textit{\gls{acr::3d} mesh} of a building.
             While the latter accounts for the geometric precision, the other conveys, in addition, semantic properties.
             This is illustrated in Figure~\ref{fig::3dmodel_vs_3dmesh}.\\
 
