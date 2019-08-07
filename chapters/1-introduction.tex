@@ -10,7 +10,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
 
 \clearpage
 
-\section{Urban \acrshort*{acr::3d} reconstruction}
+\section{Urban \gls*{acr::3d} reconstruction}
     \label{sec::introduction::urban_3d_reconstruction}
     \index{\gls{acr::3d}!reconstruction}\gls{acr::3d} reconstruction is a wide research field that interests \index{photogrammetry}Photogrammetry, \index{computer vision}Computer Vision and \index{computer graphics}Computer Graphics communities.
     In summary, the main idea is, using some input sensor data (\gls{acr::lidar} point clouds or stereo images), to acquire the \gls{acr::3d} surface that bounds an object fo interest.
@@ -226,8 +226,8 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             Not all urban items enjoy the same importance.
             This is particularly true when modeling city scapes.
             For this purpose, all different urban elements are analysed based on temporal and spatial dimensions.
-            First, urban element are grouped into different groups depending on how fast they undergo change.
-            Producing \gls{acr::3d} models  is discussed along this mentionned categorization.
+            First, urban elements are grouped into different groups depending on how fast they undergo change.
+            \gls{acr::3d} modeling is discussed depending on this mentionned categorization.
             Afterwhat, the spatial differentiation would be used to explain how buildings concentrate the most interest in urban \gls{acr::3d} modeling.\\
 
             Urban environments are temporally dynamic in nature~\parencite{vanhoey2017varcity}.
@@ -260,7 +260,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             Indeed, it is, for instance, pointless to model each single traffic signal.
             One would only need to detect its class and reconstruct it, accordingly, using a generic \gls{acr::cad} model portaying the same meaning.\\
 
-            Based on the previous temporal frequency differentiation analysis, we narrowed down the urban elements that need care in modeling to two: buildings and bridges. 
+            Based on the previous temporal frequency differentiation analysis, we narrowed down the urban elements that need special consideration in modeling to two: buildings and bridges. 
             Actually, we can rule out the latter owing to, this time, a spatial frequency categorization.
             In terms of land cover, the most occuring objects in an urban environement are roads, vegetation and buildings \addref.
             Hence, modeling these three objects becomes vital in order to obtain a viable urban \gls{acr::3d} model.
@@ -328,7 +328,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             As a consequence, a dense geometric information (\textit{i.e.} a dense \gls{acr::3d} mesh) is not necessarily the most accurate representation.
             Semantics can help describe the geometry of a building feature using less quantity of information than a \gls{acr::3d} mesh.
             For instance, the sentence "cylindrical pilar with radius $r$ and height $h$" is more accurate than a \gls{acr::3d} mesh of the same object at a given resolution while using much less information.
-            Hence, semantics implies compacity in the geometric representation of buildings.
+            Hence, semantics implies compaction in the geometric representation of buildings.
             That is why the last criterea was used, for example \gls{acr::3d} mesh, in addition to the \gls{acr::rmse}, as an evaluation metric in~\textcite{lafarge_ijcv12}.\\
             As a consequence, we distinguish, from now on, between a \textit{\gls{acr::3d} model} and a \textit{\gls{acr::3d} mesh} of a building.
             While the latter accounts for the geometric precision, the other conveys, in addition, semantic properties.
@@ -357,7 +357,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
                 \end{center}
             \end{figure}
             
-            As argued previously, compacity, which results from semantics, is a primordial characteristic of building \gls{acr::3d} models.
+            As argued previously, compaction, which results from semantics, is a primordial characteristic of building \gls{acr::3d} models.
             It implies a discretization in resolution.
             Indeed,~\textcite{groger2012citygml} uses this property to formalize a discrete and intuitive \gls{acr::lod} scale.
             Even though the original \gls{acr::lod} specification was far from being mature it is widely used in the \gls{acr::gis} and Computer Vision communities~\parencite{biljecki2014formalisation, rau2006lod}.
@@ -406,29 +406,40 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
                 }
             \end{figure}
 
-        \subsubsection{Modeling automatization}
-            In order to obtain a semantically aware and geometrically accurate representation of a building, it is better to choose an interactive process~\parencite{musialski2013survey}.\\
-            Different strategies are used in automatic \gls{acr::3d} modeling of buildings.
-            Each method type targets a specific resolution, balancing between compacity and geometric accuracy.
+        \subsubsection{Modeling automation}
+            The most accurate approach to produce semantically aware and geometrically accurate representations of a building is a manual one.
+            It can be either based on high accuracy \textit{in situ} geodetic measurements (errors are of the order of \SI{5}{\cm}~\parencite{kaartinen2005accuracy}).
+            Although, it is the most accurate representation possible, it is an arduous and expensive process.
+            Stereo-plotting consists on using couples of overlapping images in order to manually determine the \gls{acr::3d} geometry of lines.
+            It can be used in building modeling to manually plot building edges in \gls{acr::3d} and hence extract its surface.
+            This reduces the complexity of the manual modeling process.
+            It produces however lower precision models as errors are of the order of \SI{50}{\cm}~\parencite{jamet1995building}.
+            This is still a slow process that is highly demanding in terms of operator expertise~\parencite{ruther2002application}.\\
+            The manual labour can be alleviated, partially, by automating some parts of the \gls{acr::3d} surface aquisition pipeline~\parencite{musialski2013survey}.
+            Some interactive approaches have been proposed to model building.
+            The operator is still needed for highly complex semantic tasks~\parencite{mayunga2005semi, castellazzi2015laser}.
+            Such methods suffer from imprecision compared to the fully manual ones: for instance,~\textcite{mayunga2005semi} produces models with geometric error standard deviation in the order of \SI{1}{\m}.\\
+            Full automation, although not requiring a lot of ressources, is far from being perfect, especially when it comes to semantics.
+            Different strategies are used, where each targets a specific resolution, balancing between compaction and geometric accuracy.
             Ordered from the most to the less compact, these strategies are listed herein.
             In a Manhattan-world setting, one assumes that buildings are collections of boxes~\parencite{vanegas2010building, li2016manhattan}.~\textcite{lafarge_ijcv12, nan2017polyfit}
             relied on the hypothesis that building are made of piecewise planar primitives.
             Rich grammars can give rise to less compact but more accurate models, as is the case of~\textcite{demir2015procedural} or~\textcite{zeng2018neural}.
-            Mesh simplification strategies comes last in terms of compacity~\parencite{verdie2015lod, zhou20102}.
+            Mesh simplification strategies comes last in terms of compaction~\parencite{verdie2015lod, zhou20102}.
             A sketch of this comparison is presented in Figure~\ref{fig::modeling_strategies}.\\
             \begin{figure}[htpb]
                 \centering
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/modeling_approaches}            
                 \caption{
-                    \label{fig::modeling_strategies} Modeling strategies and the targeted compacity and geometric accuracy.
-                    Depending on the final use of the model, a compromise is chosen between the model compacity and its geometric accuracy.
+                    \label{fig::modeling_strategies} Modeling strategies and the targeted compaction and geometric accuracy.
+                    Depending on the final use of the model, a compromise is chosen between the model compaction and its geometric accuracy.
                 }
             \end{figure}
-            The compromise, between compacity and geometric precision, relies on an \textit{a prioiri} knowledge of the modeled urban scene.
+            The compromise, between compaction and geometric precision, relies on an \textit{a prioiri} knowledge of the modeled urban scene.
             Such hypotheses does not naturally hold at large scales.
             Multiple factors play a role in architectural styles of buildings that do not always go hand in hand:
             a geographic proximity does not imply always a temporal closeness for buildings as depicted in Figure~\ref{fig::xiiith_paris_haussmann_tower}.
-            From one region to another, the differences become even more overt: \textit{c.f.} Figure~\ref{fig::different_regions}.
+            At a regional or continental scale, the differences become even more overt: \textit{c.f.} Figure~\ref{fig::different_regions}.
             As a result, some choose to alternate automatic and interactive methods~\parencite{musialski2013survey}: an automatic reconstruction followed by a interactive correction step.
             \begin{figure}[htpb]
                 \centering
@@ -451,14 +462,14 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             As discussed profusely, semantics play a prominent role in building \gls{acr::3d} models.
             Naturally, it should also be taken into account in the evaluation process.
             It is easier said than done.
-            Usually, it is indirectly checked using the compacity criterion~\parencite{lafarge_ijcv12}.\\
+            Usually, it is indirectly checked using the compaction criterion~\parencite{lafarge_ijcv12}.\\
             In most cases, only geometric metrics are used: usually the \gls{acr::rmse}.
             These metrics require, in general, reference models to compare the recontructed models to.
             In a large scale setting, this becomes prohibitive.
             In fact, it means that one should reconstruct, at least, a whole disctict to be able to judge a city model.
             This is expensive in ressources and time.
             Alternatively, many works favor visual inspection of models.
-            This requires, in average, \SI[per-mode=repeated-symbol]{2}{\hour\per\km\squared\per\expert}, and in worst case scenarios, as time-consuming  as stereoplotting the building in the first place.\\
+            This requires, in average, \SI[per-mode=repeated-symbol]{2}{\hour\per\km\squared\per\expert}, and in worst case scenarios, as time-consuming  as stereo-plotting the building in the first place.\\
             In the next section, we will discuss, in details, the various ways of evaluating a building model.
 
 \section{Evaluating building models}
@@ -544,7 +555,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             Human involvement in the reconstruction effort is, actually, one of the reasons behind topological inconsistancies in \gls{acr::3d} models.
 
         \subsubsection{Automatic evalutation}
-            In order to achieve scalability, the get-go solution is automatization.
+            In order to achieve scalability, the get-go solution is automation.
             As usual, it is easier said than done.\\
 
             Methods have been proposed to automatically assess building model geometry.
@@ -572,7 +583,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
         Topology consistency inspection, in contrast, as discussed in subsection~\ref{subsec::introduction::building_model_evaluation::topological}, has received ample attention from the \gls{acr::gis} community.
         In consequence, it will not of interest in this work.\\
 
-        Building model evaluation is, herein, studied under two constraints: large scale and automatization.
+        Building model evaluation is, herein, studied under two constraints: large scale and automation.
         Each one will have an impact on what settings are to be considered.
         Below, explained are the consequences of each constraint.\\
 
