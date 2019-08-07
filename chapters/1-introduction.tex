@@ -456,7 +456,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             The compromise, between compaction and geometric precision, relies on an \textit{a prioiri} knowledge of the modeled urban scene.
             Such hypotheses does not naturally hold at large scales.
             Multiple factors play a role in architectural styles of buildings that do not always go hand in hand:
-            a geographic proximity does not imply always a temporal closeness for buildings as depicted in Figure~\ref{subfig::xiiith_paris_haussmann_tower}.
+            a geographic proximity does not imply always a temporal or architectural closeness for buildings as depicted in Figure~\ref{subfig::xiiith_paris_haussmann_tower}.
             At a regional or continental scale, the differences become even more overt: \textit{c.f.} Figure~\ref{subfig::different_regions}.
             As a result, some choose to alternate automatic and interactive methods~\parencite{musialski2013survey}: an automatic reconstruction followed by a interactive correction step.
             \begin{figure}[htpb]
@@ -489,8 +489,8 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             Naturally, it should also be taken into account in the evaluation process.
             It is easier said than done.
             Usually, it is indirectly checked using the compaction criterion~\parencite{lafarge_ijcv12}.\\
-            In most cases, only geometric metrics are used: usually the \gls{acr::rmse}.
-            These metrics require, in general, reference models to compare the recontructed models to.
+            Up to now most studies try to evaluate the quality of modeling algorithms by assessing the accuracy of the geometry of a handfull of buildings.
+            These evaluation approaches rely on purely geometric metrics (usually the \gls{acr::rmse}) to compare the reconstructed building to a reference models.
             In a large scale setting, this becomes prohibitive.
             In fact, it means that one should reconstruct, at least, a whole disctict to be able to judge a city model.
             This is expensive in ressources and time.
@@ -504,44 +504,47 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
     In this section, are presented the different types of quality assessement a building model can undergo.
     First, in subsection~\ref{subsec::introduction::building_model_evaluation::topological}, is described how models could be checked for their topological consistency.
     On the other hand, the \gls{acr::3d} model geometry has also to be checked against the real building geometry.
-    This isssue is visited in subsection~\ref{subsec::introduction::building_model_evaluation::geometric}.
+    This issue is visited in subsection~\ref{subsec::introduction::building_model_evaluation::geometric}.
     Manual geometric inspection is discussed before considering automatic evaluation and its challenges.
 
     \subsection{Topological consistency inspection}
         \label{subsec::introduction::building_model_evaluation::topological}
         Extensive work has been accomplished, in the past, in order to achieve a standardized representation of city \gls{acr::3d} models.
         This has resulted in the \gls{acr::ogc} CityGML standard\footnote{\href{https://www.opengeospatial.org/standards/citygml}{CityGML}}.
-        However, in practice, it is not always respected, as shown in~\textcite{biljecki2016most}, where up to 89\% of models are topologically invalid.\\
+        However, in practice, it is not always respected, as shown in~\textcite{biljecki2016most}, where up to 89\% of models were found to be topologically invalid.\\
 
-        In consequence, the subject of automatical inspection of the topological consistency of city models has drawn a sizable amount of attention in the \gls{acr::gis} community.
+        In consequence, the subject of automatic inspection of the topological consistency of city models has drawn a strong attention in the \gls{acr::gis} community.
         The basic common principle is the two-manifoldness of surface representations~\parencite{groger2011achieve}, which aims at excluding self-intersections.
         It is however not sufficient for the complex building cases.
-        An urban object, in the international standards are, in reality, represented as an agregation of two-manifold surfaces, as shown in~\textcite{groger2011achieve, ledoux2013validation}.
-        This kind of structures can be simply modelled as a \gls{acr::3d} \gls{acr::lcc}\parencite{damiand2014combinatorial}\footnote{
+        An urban object, in the international standards is, in reality, represented as an agregation of two-manifold surfaces, as shown in~\textcite{groger2011achieve, ledoux2013validation}.
+        This kind of structures can be simply modeled as a \gls{acr::3d} \gls{acr::lcc}\parencite{damiand2014combinatorial}\footnote{
             An nD \gls{acr::lcc} is an embedding of combinatorial maps in \(\mathbb{R}^n\).
         }, as demonstrated in \textcite{diakite2014topological}.
         This leads to the use of \gls{acr::3d} \glspl{acr::lcc} to check the sanity of city models~\parencite{gorszczyk2016automatic}.
         The idea relies, however, on the presence of reference data to compare to.
-        While being very useful for format conversion consistency checks, as intended in the original paper, it is pointless when inspecting \gls{acr::3d} models in the wild.\\
-        Not all efforts did explore, in full, the topological possiblities that are provided by the standard~\parencite{biljecki2016most, ledoux2013validation}.
+        While being very useful for format conversion, consistency checks, as intended in the original paper, are pointless when inspecting \gls{acr::3d} models in the wild.\\
+        Not all efforts did fully explore the topological possiblities that are provided by the standard~\parencite{biljecki2016most, ledoux2013validation}.
         In fact, most assume that polygons and solids in the representation are not allowed to have holes, like the work of~\textcite{groger2011achieve, alam2014towards}.
         This was, however, the case of~\textcite{ledoux2013validation}.
-        Their work builds on the axioms of~\textcite{groger2011achieve}: it does not only deal with polygons and surfaces, but also takes care of solids and allows holes of different dimensions (polygon with holes, surfaces with boundaries\footnote{
+        Their work built on the axioms of~\textcite{groger2011achieve}: it does not only deal with polygons and surfaces, but also takes care of solids and allows holes of different dimensions (polygons with holes, surfaces with boundaries\footnote{
             This is actually taken into account by the 2.8D models in~\textcite{groger2011achieve}.
         } and volumes with cavity).
-        Once an error is detected at a dimension, all higher dimensional ones are ignored.
-        An open source library and a web-application are publically available~\parencite{ledoux2018val3dity}, in the order to further the sanity of exchanged \gls{acr::3d} models of urban scenes.\\
+        The errors are organized in increasing order of the geometric dimension of the object they affect.
+        The process stops at the dimension of the first detected inconsistancies and ignores the higher ones. 
+        An open source library and a web-application are publically available~\parencite{ledoux2018val3dity}, in order to further the sanity of exchanged \gls{acr::3d} models of urban scenes.\\
 
         We should also mention the efforts made to fix the invalid models. 
         These methods could be divided into local and global ones.
-        Local approaches rely on local topological operators to solve detected issues with the model.
-        One such method is CityDoctor~\parencite{alam2014towards}.
-        On the downside, these methods have the tendency to introduce more errors in the hopes of solving present ones.
-        In fact, the problem is often ill-posed, and multiple solutions can be suggested to alleviate the same problem.\\
-        On the other hand, the idea of global approaches is to represent models as volumes constrained by the defectuous surfaces.
-        The goal here, as in urban reconstruction, is to infere topological information from the observed geometric properties, taking into account the unreliability of the data as well as \textit{a priori} information on the model.
-        This is the case of~\textcite{zhao2013automatic}, which relies on a tetrahydralization of the input model volume and a heuristic carving of unnecessary 3-simplices.
-        This approach, in fact, resembles the surface reconstruction procedures from unstructured point clouds using Delaunay triangulation~\parencite{cazals2006delaunay, berger2014state}.
+        \begin{itemize}
+            \item \textbf{Local approaches}: they rely on local topological operators to solve detected issues in the model.
+                One such method is CityDoctor~\parencite{alam2014towards}.
+                On the downside, these methods have the tendency to introduce more errors in the hope of solving present ones.
+                In fact, the problem is often ill-posed, and multiple solutions can be suggested to alleviate the same problem.
+            \item \textbf{Global approaches}: the idea is to represent models as volumes constrained by the defectuous surfaces.
+            The goal here, as in urban reconstruction, is to infere topological information from the observed geometric properties, taking into account the unreliability of the data as well as \textit{a priori} information on the model.
+            This is the case of~\textcite{zhao2013automatic}, which relies on a tetrahydralization of the input model volume and a heuristic carving of unnecessary 3-simplices.
+            This approach, in fact, resembles the surface reconstruction procedures from unstructured point clouds using Delaunay triangulation~\parencite{cazals2006delaunay, berger2014state}.
+        \end{itemize}
 
     \subsection{Geometric inspection}
         \label{subsec::introduction::building_model_evaluation::geometric}
@@ -549,8 +552,9 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
         It is, however, not sufficient.
         One would want to assess how close is the building geometry to the reality.
         This is what we denote by geometric quality evaluation.\\
-        This issue has attracted a lot attention in \gls{acr::2d}~\parencite{mooney2010towards}, but are as popular in \gls{acr::3d}.
-        This is maybe due to the lesser consideration given to the latter.
+        This issue has attracted a lot of attention in \gls{acr::2d}~\parencite{mooney2010towards}, but is not as popular in \gls{acr::3d}.
+        This is maybe due to the lesser consideration that is given to the latter.
+        This can be explained by the different levels of difficulty when producing these data.
         It is indeed a more difficult to reconstruct a \gls{acr::3d} model of a building than detecting their footprint.
         For example, one can take a look in the number of submission for each task of the proposed \gls{acr::isprs} benchmark~\textcite{rottensteiner2012isprs, rottensteiner2014results}.
         The \gls{acr::3d} reconstruction task received less submissions than the other one.\\
@@ -561,19 +565,21 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
 
         \subsubsection{Manual evalutation}
             Manual inspection involves a human operator checking the validity of the reconstructed geometry compared to a reference data.
-            In order to do so, there are three types of reference data to compare to.\\
-
-            The first kind are geodetically acquired \gls{acr::3d} models.
-            However, one has to travel to the building location and undertake a geodetic survey to get such a representation.
-            This is a very expensive approach.\\
-            Another alternative is to use stereoplotted models using oriented images.
-            This is a more affordable and scalable but a less accurate solution.\\
-            The inverse procedure is also possible, where operators can compare building geometry to sensor data like oriented images, \gls{acr::dsm} or point clouds so as to detect geometric imprecisions.
-            This is the most simple setting with the same or less positional accuracy as the previous case.\\
+            The lastter could be classified into two types:
+            \begin{itemize}
+                \item Reference building \gls{acr::3d} models: these are high quality models that were manually produced.
+                    One approach is to acquire these on the field by topographic survey.
+                    This is, nevertheless, very expensive.
+                    Another alternative is to use stereoplotted models using oriented images.
+                    This is a more affordable and scalable but a less accurate solution.
+                \item Reference sensor data: they are used by operators in constrast with what is examined the geometry of a building model.
+                    Oriented images, \gls{acr::dsm} and point clouds are instances of such data.
+                    This setting is, with the same or less positional accuracy as the previous case, the easiest to adopt in a large scale.
+            \end{itemize}
 
             Manual inspection is, actually, ideal in the sense that humans are naturally most suited to detect semantic flaws in building representation.
             The latter are, however, not so adapted for quantitative comparisons.
-            One way to alleviate such difficulties is to provide software tools to help measure inaccuracies in geometry\addref.\\
+            One way to alleviate such difficulties is to provide software tools to help measuring inaccuracies in geometry\addref.\\
 
             In contrast, the most persistant issue is scalability.
             Manual inspection is indeed a laborious task that requires some kind of expertise in the field, for a reasonable efficiency.
@@ -581,7 +587,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             Human involvement in the reconstruction effort is, actually, one of the reasons behind topological inconsistancies in \gls{acr::3d} models.
 
         \subsubsection{Automatic evalutation}
-            In order to achieve scalability, the get-go solution is automation.
+            In order to achieve scalability, the get-go solution is automation, failing that a semi-automation.
             As usual, it is easier said than done.\\
 
             Methods have been proposed to automatically assess building model geometry.
@@ -589,43 +595,44 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             The flaws are twofold in this case.
             First, global ratios do not capture the finer details in the building.
             Second, reference \gls{acr::3d} models are not cheap to acquire, as discussed earlier.
-            While the first is a manageable issue, as proven in~\textcite{rottensteiner2012isprs}, the second is not so easy to mitigate.\\
+            While the first issue is a manageable issue, as proven in~\textcite{rottensteiner2012isprs}, the second is not so easy to mitigate.\\
 
             The most crucial problem is, in constrast, the semantic aspect of the quality assessement.
             As discussed, the models in question possess high semantic properties that have a sizable effect on their geometry.
             Assessing one without the other is fundamentally unsound.
-            While this is easy to achieve manually, it is yet to be incorporated in automatic settings.
+            While this is easy to achieve manually, it has yet to be incorporated in automatic settings.
 \section{Contributions}
     \label{sec::introduction::contributions}
-    Based on all the previous discussions, we adopted a direction of research that was rarely taken.
+    Based on all the previous discussions, we adopted a research direction that was rarely taken up to now, as far as we know.
     Herein is explained the path that led to this subject.
-    To do so, the context of the this work is explained in detail in subsection~\ref{subsec::introduction::contributions::positioning}.
+    To do so, the context of this work is explained in detail in subsection~\ref{subsec::introduction::contributions::positioning}.
     Further on, promising and conceivable utilizations are stated in subsection~\ref{subsec::introduction::contributions::use}.
-    This is before ending with a summary of the principal contributions that this work presents (\textit{c.f.} subsection~\ref{sec::introduction::contributions::contributions}).
+    This is before ending with a summary of the main contributions of this work (\textit{c.f.} subsection~\ref{sec::introduction::contributions::contributions}).
     
     \subsection{Positioning}
         \label{subsec::introduction::contributions::positioning}
         As seen in the previous section (\textit{ie.} section~\ref{sec::introduction::building_model_evaluation}), geometry evaluation of building \gls{acr::3d} models remains a field open for invetigation.
         Topology consistency inspection, in contrast, as discussed in subsection~\ref{subsec::introduction::building_model_evaluation::topological}, has received ample attention from the \gls{acr::gis} community.
-        In consequence, it will not of interest in this work.\\
+        In consequence, it will not be of interest in this work.\\
 
-        Building model evaluation is, herein, studied under two constraints: large scale and automation.
+        Building model evaluation is, herein, studied under two constraints: \textbf{large scale} and \textbf{automation}.
         Each one will have an impact on what settings are to be considered.
         Below, explained are the consequences of each constraint.\\
 
-        Building modeling has been shown, earlier (\textit{cf.} subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}), to be a bottleneck for urban outdoor modeling in large scales.
-        As consequence, evaluating building \gls{acr::3d} models is essential for entire scene model inspection.
-        The difference between buildings and most urban items is the significance of semantics (\textit{cf.} subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}).
+        Building modeling has been shown, earlier (\textit{cf.} subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}), to be a bottleneck for urban outdoor modeling at large scales.
+        As a consequence, evaluating building \gls{acr::3d} models is essential for entire scene model inspection.
+        The difference between buildings and most urban elments is the significance of semantics (\textit{cf.} subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}).
         The latter translates into structural geometric properties that are not faithfully captured by geometric fidelity metrics.
-        As a consequence, the proposed approach should also factor semantics in the evaluation.
-        As a result, like with \glspl{acr::lod}, errors are exptected to be discretized owing to the semantic evaluation.
+        As a consequence, the proposed approach should factor semantics in the evaluation.
+        As a result, like with \glspl{acr::lod}, errors are exptected to be discretized owing to the semantic character of the evaluation.
         Due to the large scale of the study, the proposed categorization must be stable no matter how the treated urban scene change.\\
 
         Semantically aware inspection is natural for human operators.
-        It is, however, difficult to automatize.
-        First, models could result from different pipelines.
+        It is, however, difficult to automate.
+        First, models could result from different pipelines and heterogenuous sensors.
         Consequently, the automatic evaluation approach has to be independent from the used building modeling method.
         It has also to take into consideration the \gls{acr::lod} of input models.
+        These requirements are not easy to formalize.
 
     \subsection{Potential use}
         \label{subsec::introduction::contributions::use}
@@ -634,18 +641,18 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
         \subsubsection{Change detection}
             This is possible in two ways.
             First, one can consider the same approach that is used for error detection as a method for change detection in building \gls{acr::3d} models.
-            This equivalent to considering change as an semantic error that impacts the geometry of the building.
+            This is equivalent to considering change as an semantic error that impacts the geometry of the building.
             Second is the fact that change can be implicitly detected from geometric errors.
             In fact, the change that can be observed from sensor data, will render the outdated model invalid geometrically.
 
         \subsubsection{Building model correction}
             This is the most obvious usecase for this work.
             In practice, errors are detected by operators in order to correct them.
-            The first task, if automatized, can be time saving in the correction post-processing step.
-            It is even possible to automatize the whole correction process using the advances achieved in interactive reconstruction~\parencite{kowdle2011active}.
+            The first task, if automated, can be time saving in the correction post-processing step.
+            It is even possible to automate the whole correction process using the advances achieved in interactive reconstruction~\parencite{kowdle2011active}.
 
         \subsubsection{Reconstruction method selection}
-            Evaluation of the building models can help select the most adapted reconstruction methods for a certain urban scene.
+            Evaluation of the building models can help selecting the most adapted reconstruction methods for a certain urban scene.
             Indeed, depending on the needs of the potential final user, some errors are to be watched more than others.
             As an example, an insurance agent, who is only interested in flood simulations, will not be bothered by the geometric accuracy of \gls{acr::lod}-2 features and will focus principally at the \gls{acr::lod}-1 representation errors.
             Modeling algorithms are naturally biased towards a certain setting that depends on the hypotheses chosen by their creators.
@@ -689,8 +696,8 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             The first ensures that errors from the taxonomy can fit any scene, while the second implies that errors are not equivocal.
             It is also an adaptive categorization, since, depending on the final user needs, a set of errors can be extracted after specifying some parameters.
             
-        \subsubsection{\gls*{acr::3d} reference free evaluation}
-            Acquiring \gls{acr::3d} reference models is very expensive in ressources.
+        \subsubsection{\gls*{acr::3d} model reference free evaluation}
+            Acquiring \gls{acr::3d} reference models is very expensive in ressources and particularly not scalable at large scale.
             As a consequence, the problem is formulated as a supervized learning one.
             Based on the errors, that are extracted from the taxonomy, a classifier is trained in order to predict defects for unseen models.
 
