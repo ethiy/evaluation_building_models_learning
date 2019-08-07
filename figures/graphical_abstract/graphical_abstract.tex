@@ -13,7 +13,7 @@
 \begin{document}
     \begin{tikzpicture}
     	\node (residual) at (0,0) {
-            \includegraphics[height=1cm, angle=270]{images/graphical_abstract/residual}
+            \includegraphics[height=1cm, angle=270]{images/introduction/graphical_abstract/residual}
         };
         \path (residual.south) node[anchor=north] (residual_legend) {\tiny (c) Height-based};
         
@@ -24,7 +24,7 @@
         \path (model |- residual_legend) node (model_legend) {\tiny (a) Input model};
         
         \path (residual.east) + (.8,0) node[anchor=west] (ortho_projection) {
-            \includegraphics[height=1cm, angle=270]{images/graphical_abstract/orthoprojection}
+            \includegraphics[height=1cm, angle=270]{images/introduction/graphical_abstract/orthoprojection}
         };
         \path (ortho_projection |- residual_legend) node (orthoprojection_legend) {\tiny (d) Image-based};
         
