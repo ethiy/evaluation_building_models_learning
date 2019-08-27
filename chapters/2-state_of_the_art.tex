@@ -63,10 +63,10 @@
             In fact, after mapping the evaluated and reference models to a sphere, they compare their spherical harmonic~\parencite{brechbuhler1995parametrization} representations.
             Just as with edges, planes can be evaluated using angular measurements, as was proposed by~\textcite{landes2012quality} and~\textcite{henricsson19973}.
             Another alternative is to compare reconstructed and reference models based on surface area comparisons.
-            These are mostly based on ratios like completeness and correctness\footnote{in other words, precision and recall}~\parencite{rottensteiner2014results,landes2012quality,henricsson19973,schuster2003new}.\\
+            These are mostly based on ratios like completeness and correctness\footnote{in other words, recall and precision respectively.}~\parencite{rottensteiner2014results,landes2012quality,henricsson19973,schuster2003new}.\\
             Last, are three dimensional (\textit{i.e.} volume) evaluation.
             The same detection ratios that were computed for surfaces are again calculated to evaluate volumes this times, as shown by~\textcite{mohamed2013quality, zeng2014multicriteria,jaynes2003recognition,nguatem2017modeling}.
-            These are the only metrics used for volume that we are aware of.\\
+            These are the only metrics used for volumes that we are aware of.\\
 
             Regarding \textit{implicit} semantics, as far as we are aware, only one metric is widely used to evaluate its impact.
             As discussed previously in subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}, compaction is one byproduct of semantics.
@@ -74,6 +74,36 @@
             This is reflected, for instance, in the work of~\textcite{lafarge_ijcv12},~\textcite{zhang2017deep},~\textcite{duan_eccv16} and~\textcite{zhu2018large}.
 
         \subsubsection{Semantic labels based methods}
+            In a drive to provide a quantitative assessment of building models, the previously defined metrics fail to convey specific and localized information about a predetermined building model.
+            These indices are usually used to give a general idea of the quality of models produced by some modeling method.
+            Moreover, they do not usually carry semantics, which is critical for further processing steps such as manual correction~\parencite{elberink2011quality}.
+            Some evaluation methods, in an effort to alleviate these issues, yield semantic labels that describe the errors of an evaluated model.
+
+            The first ever work, that we are aware of, which tackles proposes semantic labels as outputs of the evaluation is by~\textcite{boudet2006supervised}.
+            The approach presented by the latter has four classes which indicate how much valid can the modeling be: "acceptable" and "correct" portray valid buildings while "false" and "generalized" are refused.
+            It can be seen as a four grade based score system expressing the confidence in a building model.
+            The main limitation of this method is the fact that the proposed labels do not specify what defects does models present if it is not valid.
+            It is, therefore, hard to use for model correction.
+            The confidence scoring depends also on each use case.
+            A comunications company would be more adament on the accuracy of roof parts, which would affect wave propagation, rather than a insurance company interested in flood damage estimation.
+            This means that each use case implies a relabeling that could be potentially different from other one.\\
+            The first hints of a fine grained semantic labeling of building model errors lay in the work of~\textcite{rottensteiner2014results}.
+            They are the first to report segmentation issues in labels instead of a global ratio.
+            They distinguish between oversegmentation cases, undersegmentation cases and cases where both co-occur.\\
+            These mentioned errors are not comprehensive: they do not cover all possible building model errors.
+            \textcite{michelin2013quality} came up with a rich taxonomy of errors that are categorized into three big families:
+            \begin{itemize}
+                \item Footprint errors: these portray errors relative to the building footprint, which is used by many modeling algorithms as input.
+                        Errors contained in this family are: "erroneous outline", "unexisting building", "missing inner court" and "inaccurate footprint".
+                \item Reconstruction errors: these are caused by the modeling approach.
+                        These defects can be the result of the incompatibility of some \textit{a priori} hypotheses about the scene, for instance.
+                        Such errors are: "under-segmentation", "over-segmentation", "inaccurate roof" and "Z translation".
+                \item Vegetation errors: this corresponds to a special case when modeled building are occluded, completely or partially, by vegetation.
+                        It becomes impossible to evaluate properly these models.
+            \end{itemize}
+            Although the last taxonomy being rich, it is not exhaustive as it misses cases that are not present in the urban zone that was studied in the paper, such as inaccurate primitive fitting.
+            Moreover, it adopts the point of view of the modeling method that was used to provide their dataset.
+            Knowing the specific weaknesses of the latter guided the choice of error family classification and the error definitions.
 
     \subsection{Reference data types}
         \label{subsec::state_of_the_art::quality::reference}
