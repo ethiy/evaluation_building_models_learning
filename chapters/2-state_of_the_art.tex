@@ -80,7 +80,7 @@
             Some evaluation methods, in an effort to alleviate these issues, yield semantic labels that describe the errors of an evaluated model.
 
             The first ever work, that we are aware of, which tackles proposes semantic labels as outputs of the evaluation is by~\textcite{boudet2006supervised}.
-            The approach presented by the latter has four classes which indicate how much valid can the modeling be: "acceptable" and "correct" portray valid buildings while "false" and "generalized" are refused.
+            The approach presented by the latter has four classes which indicate how much valid can the modeling be: ``acceptable'' and ``correct'' portray valid buildings while ``false"``and ``generalized"``are refused.
             It can be seen as a four grade based score system expressing the confidence in a building model.
             The main limitation of this method is the fact that the proposed labels do not specify what defects does models present if it is not valid.
             It is, therefore, hard to use for model correction.
@@ -94,23 +94,28 @@
             \textcite{michelin2013quality} came up with a rich taxonomy of errors that are categorized into three big families:
             \begin{itemize}
                 \item Footprint errors: these portray errors relative to the building footprint, which is used by many modeling algorithms as input.
-                        Errors contained in this family are: "erroneous outline", "unexisting building", "missing inner court" and "inaccurate footprint".
+                        Errors contained in this family are: ``erroneous outline'', ``unexisting building'', ``missing inner court'' and ``inaccurate footprint''.
                 \item Reconstruction errors: these are caused by the modeling approach.
                         These defects can be the result of the incompatibility of some \textit{a priori} hypotheses about the scene, for instance.
-                        Such errors are: "under-segmentation", "over-segmentation", "inaccurate roof" and "Z translation".
+                        Such errors are: ``under-segmentation'', ``over-segmentation'', ``inaccurate roof'' and ``Z translation''.
                 \item Vegetation errors: this corresponds to a special case when modeled building are occluded, completely or partially, by vegetation.
                         It becomes impossible to evaluate properly these models.
             \end{itemize}
-            Although the last taxonomy being rich, it is not exhaustive as it misses cases that are not present in the urban zone that was studied in the paper, such as inaccurate primitive fitting.
+            Although the last taxonomy being rich, it is not exhaustive enough as it misses cases that are not present in the urban zone that was studied in the paper, such as inaccurate primitive fitting.
             Moreover, it adopts the point of view of the modeling method that was used to provide their dataset.
             Knowing the specific weaknesses of the latter guided the choice of error family classification and the error definitions.
 
     \subsection{Reference data types}
         \label{subsec::state_of_the_art::quality::reference}
+        In order to evaluate models, reference data are utilized for comparison.
+        Based on the latter, another way to discriminate among modeling methods is possible.
+        The first class of reference data are high quality ground truth building \gls{acr::3d} models.
+        Remote sensing data is the second alternative that is used for reference.
+        Hereafter, is explained the difference between the two categories.
 
         \subsubsection{High resolution ground truth}
 
-        \subsubsection{Raw remote sensing data}
+        \subsubsection{Remote sensing data}
 
     \subsection{Objective statement}
 \section{Supervised learning and pattern recognition}
