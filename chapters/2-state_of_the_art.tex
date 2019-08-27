@@ -47,7 +47,7 @@
             The same points are used as a proxy for manual quality inspection by~\textcite{elberink2011quality}.
             Another alternative is to sample points from lines or surfaces to be compared.
             These could be predetermined manually as in~\textcite{kaartinen2005accuracy} or sampled regularely as demonstrated by~\textcite{vogtle2003quality} or by~\textcite{tran2019geometric}.
-            Imprecisions are not computed only relying the \gls{acr::rmse}, but can also be separated into planimetric and height inaccuraccies~\parencite{vogtle2003quality, kaartinen2005accuracy}.\\
+            Imprecisions are not computed only relying the \gls{acr::rmse}, but can also be separated into planimetric and height inaccuraccies~\parencite{vogtle2003quality, kaartinen2005accuracy, jaynes2003recognition}.\\
             Second comes edges and all one dimensional objects in general.
             These convey structural, in addition to positional, informations.
             \textcite{kaartinen2005accuracy} compares lengths as well as slopes of edges formed by reference points.
@@ -114,8 +114,18 @@
         Hereafter, is explained the difference between the two categories.
 
         \subsubsection{High resolution ground truth}
+            Ground truth building models are mainly acquired manually.
+            Herein, are listed the different ground truth measurement techniques, in descending order of accuracy.
+            The most obvious case consists in field measurements of the modeled building.
+            \textcite{dick2004modelling}, for instance, evaluated their buildings based on manual measurements taken on specific architectural features, like windows and columns, with an accuracy of \SI{0.01}{\m} for the first and \SI{0.1}{\m} for the second.
+            Complete and scalables measurements of buildings are possible using topographic survey.
+            Using the latter building models could be reconstructed with precision up to \SI{\pm 0.1}{\m}~\textcite{henricsson19973} or \SI{\pm 0.05}{\m}~\parencite{vogtle2003quality}.
+            There is also the possibility of manually modeling the building using oblique images, or stereoplotting.
+            ~\textcite{zebedin2008fusion} uses such a method to produce their reference data from aerial images with accuracy up to the order of \SI{\pm 0.15}{\m}.
+            The same procedure was used also by~\textcite{jaynes2003recognition} producing models with inaccuraccies bounded by \SI{\pm 1/3}{\m}.
 
         \subsubsection{Remote sensing data}
+            This is was used in studies like~\parencite{kaartinen2005accuracy} where models were precise up to \SI{0.083}{\cm} in plane and \SI{0.035}{\cm} in height.
 
     \subsection{Objective statement}
 \section{Supervised learning and pattern recognition}
