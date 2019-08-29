@@ -253,6 +253,29 @@
                   &= \frac{2}{\Vert\bm{w}\Vert}
             \end{align*}
 
+            The \gls{acr::svm} problem is written as:
+            \begin{equation*}
+                \begin{aligned}
+					& \max_{\bm{w}}
+					& & M \\
+					& \text{s.t.}
+					& & \begin{cases}
+						\bm{w}.\bm{x}^i + b \leq -1 & \tilde{y}^i = -1 \\
+						\bm{w}.\bm{x}^i + b \geq 1 & \tilde{y}^i = 1
+					\end{cases} \; \forall i = 1, \dots, n.
+				\end{aligned}
+            \end{equation*}
+            Or:
+            \begin{equation}
+                \label{eq::separable_svm_primal}
+                \begin{aligned}
+					& \min_{\bm{w}}
+					& & {\vert\vert \bm{w} \vert\vert}^2 \\
+					& \text{s.t.}
+					& & \tilde{y}^i.(\bm{w}.\bm{x}^i + b) \geq 1 \; \forall i = 1, \dots, n.
+				\end{aligned}
+            \end{equation}
+
             \paragraph{Linear \acrshort*{acr::svm}}
             \paragraph{Kernel \acrshort*{acr::svm}}
                 \subparagraph{Usual kernels}
