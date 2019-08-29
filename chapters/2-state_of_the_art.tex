@@ -161,9 +161,100 @@
 \section{Supervised learning and pattern recognition}
     \subsection{Classifiers}
         \subsubsection{Perceptron}
-        \subsubsection{SVM}
-            \paragraph{Linear SVM}
-            \paragraph{Kernel SVM}
+            In an effort to understand neural activity,~\textcite{rosenblatt1958perceptron} proposed the perceptron model.
+            This is the first building block in \gls{acr::nn}.
+            It has as input a number $d$ of stimuli, each one denoted $x_i,\quad \forall i = 1,2,\dots,d$.
+            For each stimulus indexed by $i\in \{1,\dots,d\}$, is associated a weight $w_i$.
+            Written in vectorial form, $\bm{x} = \begin{pmatrix}x_1\\ x_2\\ \vdots \\ x_d \end{pmatrix}$ (\textit{resp.} $\bm{w} = \begin{pmatrix}w_1\\ w_2\\ \vdots \\w_d \end{pmatrix}$) represent the input (\textit{resp.} the weights).
+            A score is obtained from a linear combination of all the stimuli: $s = \bm{w} \cdot \bm{x} = \sum_{i=1}^{d} w_i \cdot x_i$.
+            If the score is above a certain threshold $\theta \in \mathbb{R}$, the output of the perceptron is $1$.
+            Otherwise, the result is $0$.
+            The result of a perceptron can be summarized as:
+            \begin{equation}
+                \label{eq::perceptron}
+                \mathbf{D}_{perceptron}(\bm{x}) \triangleq \mathbb{1}_{\bm{w} \cdot \bm{x} \geq \theta} \quad.
+            \end{equation}
+            It could be rewritten also as:
+            \begin{equation}
+                \label{eq::perceptron_is_linear}
+                \mathbf{D}_{perceptron}(\bm{x}) \triangleq \mathbb{1}_{\bm{w} \cdot \bm{x} + b \geq 0}
+            \end{equation}
+            where:
+            \begin{conditions}
+                b & is called bias and $b = - \theta $.
+            \end{conditions}
+            We recognize here the decision function of a linear binary classifier.
+            This classifier model is not used widely, but as mentioned earlier, is a essential ingredient of \glspl{acr::nn}.
+            It combines a linear operation $\bm{x} \mapsto \bm{w} \cdot \bm{x} + b$ and a non linear one $a: s \mapsto \mathbb{1}_{s \geq 0}$.
+            The latter is an example of what is called an activation function.
+            The choice of the latter plays a critical role in the learning capability of the classifier.
+        \subsubsection{\acrlong*{acr::svm}}
+            \glspl{acr::svm} are a special type of linear classifiers (\textit{i.e.} perceptrons).
+            We transfrom the initial classes $\big(y^k\big)_{k=1,\dots,n}$ to $\big(\tilde{y}^k\big)_{k=1,\dots,n}$, using the map: $y \mapsto \tilde{y} = 2\cdot y - 1$.
+            There are always two possible classes $\{1, -1\}$.
+            This simple transformation is done to simplify the later equations.
+            In order to understand the idea behind the \gls{acr::svm} classifier, we start by assuming that the dataset to be classified $\big((\bm{x}^k, y^k)\big)_{k=1,\dots,n}$ is linearly separable.
+            It means that there is at least one hyperplane $(H_0)$ that can separate perfectly the two classes.
+            We can order points from one class based on their distance to the hyperplane $(H_0)$.
+            As a reminder, in a metric space $(X, d)$, the distance of a point $x \in X$ to a subset $A \subset X$:
+            \begin{equation}
+                d(x, A) \triangleq \inf\{d(x, a): a \in A\}
+            \end{equation}
+            The closest positive (\textit{resp.} negative) points (\textit{i.e.} of class $1$ (\textit{resp.}  $-1$)) to $(H_0)$ is called positive (\textit{resp.} negative) support vectors and are denoted by $\bm{x}^+$ (\textit{resp.} $\bm{x}^-$).
+            Support hyperplanes are the lines parallel to the separator and passing throough the support vectors.
+            This can be summarized as:
+            \begin{eqnarray}
+                \{\bm{x}^+_s: s = 1, \dots, n_{psp}\} &\triangleq \arg\min\{d(\bm{x}_k, H_0) : k=1,\dots,n \wedge \tilde{y}^k = 1\}\\
+                \{\bm{x}^-_s: s = 1, \dots, n_{nsp}\} &\triangleq \arg\min\{d(\bm{x}_k, H_0) : k=1,\dots,n \wedge \tilde{y}^k = -1\}
+            \end{eqnarray}
+            where:
+            \begin{conditions}
+                n_{psp} & is the number of positive support vectors.\\
+                n_{nsp} & is the number of negative support vectors.\\
+            \end{conditions}
+
+            \begin{figure}
+				\includestandalone[mode=buildnew, width=\textwidth]{figures/svm/linear_separable}
+				\caption{
+                    \label{fig::linear_separable} A linear separator in $\mathbb{R}^2$ corresponds to a line.
+                    In this case, $n_{psp} = n_{nsp} = 1$.
+                    As a consequence we did not index the support vectors.
+                    $M$ is the margin.
+                }
+            \end{figure}
+
+            In figure~\ref{fig::linear_separable}, we illustrate these notions.
+            The more points are close to the separator, the more uncertain they are.
+            Hence, support vectors being the last points which class is certain (since it is given), the points that lay between the two orange lines are the most uncertain ones.
+            The bigger the distance between these two lines the more nuanced the classifier decision is.
+            As a consequence, this distance has to be the biggest possible.
+            This is the principle behind \glspl{acr::svm}.
+            The optimized distance is called margin and denoted $M$.
+            We write:
+            \begin{equation*}
+                Sol \triangleq \{\omega \in \mathbb{R}^d : \omega.\bm{x} + b = 0\}.
+            \end{equation*}
+            We verify that:
+            \begin{equation*}
+                \forall \lambda \in \mathbb{R}\setminus\{0\} \quad (\bm{w}, b) \in  Sol \Rightarrow (\lambda . \bm{w}, \lambda.b) \in Sol.
+            \end{equation*}
+            $(\bm{w}, b)$ is then chosen so that the support hyperplanes verify:
+            \begin{equation}
+                \label{eq::support_lines}
+                \bm{w}\cdot\bm{x}^{\pm} + b = \pm 1
+            \end{equation}
+            The margin $M$ can be seen as the length of the orthogonal projection of a vector $\bm{v}$ going from a negative support vector to a positive one on any line carried by $\bm{w}$.
+            The choice of the vector supports is not important when using such a projection.
+            Consequently, we write $v = (\bm{x}^+ - \bm{x}^-)$.
+            \begin{align*}
+                M &= \frac{\bm{w}}{\Vert\bm{w}\Vert} \cdot (\bm{x}^+ - \bm{x}^-)\\
+                  &= \frac{\bm{w}\cdot\bm{x}^+ - \bm{w}\cdot\bm{x}^-}{\Vert\bm{w}\Vert}\\
+                  &= \frac{(\bm{w}\cdot\bm{x}^+ + b) - (\bm{w}\cdot\bm{x}^- + b)}{\Vert\bm{w}\Vert}\\
+                  &= \frac{2}{\Vert\bm{w}\Vert}
+            \end{align*}
+
+            \paragraph{Linear \acrshort*{acr::svm}}
+            \paragraph{Kernel \acrshort*{acr::svm}}
                 \subparagraph{Usual kernels}
                 \subparagraph{MKL}
             \paragraph{Properties}

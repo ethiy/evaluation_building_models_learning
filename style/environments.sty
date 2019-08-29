@@ -21,4 +21,14 @@
     }
 }
 
+
+% Units
 \DeclareSIUnit{\expert}{expert}
+
+
+% Equations
+\newenvironment{conditions}{
+    \par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}:{}$} l}
+}{
+    \end{tabular}\par\vspace{\belowdisplayskip}
+}
