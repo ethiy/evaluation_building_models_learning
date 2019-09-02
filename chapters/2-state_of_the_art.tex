@@ -192,92 +192,187 @@
             \glspl{acr::svm} are a special type of linear classifiers (\textit{i.e.} perceptrons).
             We transfrom the initial classes $\big(y^k\big)_{k=1,\dots,n}$ to $\big(\tilde{y}^k\big)_{k=1,\dots,n}$, using the map: $y \mapsto \tilde{y} = 2\cdot y - 1$.
             There are always two possible classes $\{1, -1\}$.
-            This simple transformation is done to simplify the later equations.
-            In order to understand the idea behind the \gls{acr::svm} classifier, we start by assuming that the dataset to be classified $\big((\bm{x}^k, y^k)\big)_{k=1,\dots,n}$ is linearly separable.
-            It means that there is at least one hyperplane $(H_0)$ that can separate perfectly the two classes.
-            We can order points from one class based on their distance to the hyperplane $(H_0)$.
-            As a reminder, in a metric space $(X, d)$, the distance of a point $x \in X$ to a subset $A \subset X$:
-            \begin{equation}
-                d(x, A) \triangleq \inf\{d(x, a): a \in A\}
-            \end{equation}
-            The closest positive (\textit{resp.} negative) points (\textit{i.e.} of class $1$ (\textit{resp.}  $-1$)) to $(H_0)$ is called positive (\textit{resp.} negative) support vectors and are denoted by $\bm{x}^+$ (\textit{resp.} $\bm{x}^-$).
-            Support hyperplanes are the lines parallel to the separator and passing throough the support vectors.
-            This can be summarized as:
-            \begin{eqnarray}
-                \{\bm{x}^+_s: s = 1, \dots, n_{psp}\} &\triangleq \arg\min\{d(\bm{x}_k, H_0) : k=1,\dots,n \wedge \tilde{y}^k = 1\}\\
-                \{\bm{x}^-_s: s = 1, \dots, n_{nsp}\} &\triangleq \arg\min\{d(\bm{x}_k, H_0) : k=1,\dots,n \wedge \tilde{y}^k = -1\}
-            \end{eqnarray}
-            where:
-            \begin{conditions}
-                n_{psp} & is the number of positive support vectors.\\
-                n_{nsp} & is the number of negative support vectors.\\
-            \end{conditions}
+            This simple transformation is done to simplify latter equations.
 
-            \begin{figure}
-				\includestandalone[mode=buildnew, width=\textwidth]{figures/svm/linear_separable}
-				\caption{
-                    \label{fig::linear_separable} A linear separator in $\mathbb{R}^2$ corresponds to a line.
-                    In this case, $n_{psp} = n_{nsp} = 1$.
-                    As a consequence we did not index the support vectors.
-                    $M$ is the margin.
-                }
-            \end{figure}
+            \paragraph{Hard margin}
+                In order to understand the idea behind the \gls{acr::svm} classifier, we start by assuming that the dataset to be classified $\big((\bm{x}^k, y^k)\big)_{k=1,\dots,n}$ is linearly separable.
+                It means that there is at least one hyperplane $(H_0)$ that can separate perfectly the two classes.
+                We can order points of class based on their distance to the hyperplane $(H_0)$.
+                As a reminder, in a metric space $(X, d)$, the distance of a point $x \in X$ to a subset $A \subset X$ is:
+                \begin{equation}
+                    d(x, A) \triangleq \inf\{d(x, a): a \in A\}
+                \end{equation}
+                The closest positive (\textit{resp.} negative) points (\textit{i.e.} of class $1$ (\textit{resp.}  $-1$)) to $(H_0)$ is called positive (\textit{resp.} negative) support vectors.
+                Support hyperplanes are the hyperplanes that are parallel to the separator and passes through the support vectors.
+                This can be summarized as:
+                \begin{eqnarray}
+                    \{\bm{x}^+_s: s = 1, 2, \dots, n_{psp}\} &\triangleq \arg\min\{d(\bm{x}_k, H_0) : k=1,\dots,n \wedge \tilde{y}^k = 1\}\\
+                    \{\bm{x}^-_s: s = 1, 2, \dots, n_{nsp}\} &\triangleq \arg\min\{d(\bm{x}_k, H_0) : k=1,\dots,n \wedge \tilde{y}^k = -1\}
+                \end{eqnarray}
+                where:
+                \begin{conditions}
+                    n_{psp} & is the number of positive support vectors.\\
+                    n_{nsp} & is the number of negative support vectors.\\
+                \end{conditions}
 
-            In figure~\ref{fig::linear_separable}, we illustrate these notions.
-            The more points are close to the separator, the more uncertain they are.
-            Hence, support vectors being the last points which class is certain (since it is given), the points that lay between the two orange lines are the most uncertain ones.
-            The bigger the distance between these two lines the more nuanced the classifier decision is.
-            As a consequence, this distance has to be the biggest possible.
-            This is the principle behind \glspl{acr::svm}.
-            The optimized distance is called margin and denoted $M$.
-            We write:
-            \begin{equation*}
-                Sol \triangleq \{\omega \in \mathbb{R}^d : \omega.\bm{x} + b = 0\}.
-            \end{equation*}
-            We verify that:
-            \begin{equation*}
-                \forall \lambda \in \mathbb{R}\setminus\{0\} \quad (\bm{w}, b) \in  Sol \Rightarrow (\lambda . \bm{w}, \lambda.b) \in Sol.
-            \end{equation*}
-            $(\bm{w}, b)$ is then chosen so that the support hyperplanes verify:
-            \begin{equation}
-                \label{eq::support_lines}
-                \bm{w}\cdot\bm{x}^{\pm} + b = \pm 1
-            \end{equation}
-            The margin $M$ can be seen as the length of the orthogonal projection of a vector $\bm{v}$ going from a negative support vector to a positive one on any line carried by $\bm{w}$.
-            The choice of the vector supports is not important when using such a projection.
-            Consequently, we write $v = (\bm{x}^+ - \bm{x}^-)$.
-            \begin{align*}
-                M &= \frac{\bm{w}}{\Vert\bm{w}\Vert} \cdot (\bm{x}^+ - \bm{x}^-)\\
-                  &= \frac{\bm{w}\cdot\bm{x}^+ - \bm{w}\cdot\bm{x}^-}{\Vert\bm{w}\Vert}\\
-                  &= \frac{(\bm{w}\cdot\bm{x}^+ + b) - (\bm{w}\cdot\bm{x}^- + b)}{\Vert\bm{w}\Vert}\\
-                  &= \frac{2}{\Vert\bm{w}\Vert}
-            \end{align*}
+                We write:
+                \begin{equation*}
+                    Sol \triangleq \{\omega \in \mathbb{R}^d : \omega.\bm{x} + b = 0\}.
+                \end{equation*}
+                We verify that:
+                \begin{equation*}
+                    \forall \lambda \in \mathbb{R}\setminus\{0\} \quad (\bm{w}, b) \in  Sol \Rightarrow (\lambda . \bm{w}, \lambda.b) \in Sol.
+                \end{equation*}
+                $(\bm{w}, b)$ is then chosen so that the support hyperplanes verify:
+                \begin{equation}
+                    \label{eq::support_lines}
+                    \begin{cases}
+                        \forall s=1,2,\dots,n_{psp} \quad \bm{w}\cdot\bm{x}^+_s + b = 1\\              
+                        \forall s=1,2,\dots,n_{nsp} \quad \bm{w}\cdot\bm{x}^-_s + b = -1                
+                    \end{cases}
+                \end{equation}
 
-            The \gls{acr::svm} problem is written as:
-            \begin{equation*}
-                \begin{aligned}
-					& \max_{\bm{w}}
-					& & M \\
-					& \text{s.t.}
-					& & \begin{cases}
-						\bm{w}.\bm{x}^i + b \leq -1 & \tilde{y}^i = -1 \\
-						\bm{w}.\bm{x}^i + b \geq 1 & \tilde{y}^i = 1
-					\end{cases} \; \forall i = 1, \dots, n.
-				\end{aligned}
-            \end{equation*}
-            Or:
-            \begin{equation}
-                \label{eq::separable_svm_primal}
-                \begin{aligned}
-					& \min_{\bm{w}}
-					& & {\vert\vert \bm{w} \vert\vert}^2 \\
-					& \text{s.t.}
-					& & \tilde{y}^i.(\bm{w}.\bm{x}^i + b) \geq 1 \; \forall i = 1, \dots, n.
-				\end{aligned}
-            \end{equation}
+                \begin{figure}
+                    \centering
+                    \includestandalone[mode=buildnew, width=\textwidth]{figures/svm/linear_separable}
+                    \caption{
+                        \label{fig::linear_separable} A hyperplane separator in $\mathbb{R}^2$ corresponds to a line.
+                        In this case, $n_{psp} = n_{nsp} = 1$.
+                        The support lines are plotted in orange.
+                        $M$ is the margin.
+                    }
+                \end{figure}
 
-            \paragraph{Linear \acrshort*{acr::svm}}
+                In figure~\ref{fig::linear_separable}, are illustrated these notions.
+                The uncertainty of classification at any point is a increasing function of its distance to the separator.
+                The given samples are supposed to be certain.
+                Since support vectors are the  closest points to $(H_0)$, the class of points $\bm{p}$ that verify $\vert\bm{w}\cdot\bm{p} + b\vert \geq 1$ is known with probability $1$.
+                Conversely, the points that lay between the support hyperplanes are the most uncertain.
+                The bigger the distance between these two lines the more nuanced the classifier decision is.
+                As a consequence, this distance has to be the biggest possible.
+                This is the main idea behind \glspl{acr::svm}.\\
+
+                This maximized distance is called margin and denoted $M$.
+                The margin can also be interepreted as the length of the orthogonal projection of any vector $\bm{v}_{st}$\footnote{$\forall (s, t) \in \{1,2,\dots,n_{nsp}\} \times \{1,2,\dots,n_{psp}\}$} going from a negative support vector $\bm{x}^-_s$ to a positive one $\bm{x}^+_t$ on any line carried by $\bm{w}$.
+                Since all support vectors of the same class lay on the same line, the choice of $(s,t)$ is inconsequential.
+                \begin{align}
+                    M &= \frac{\bm{w}}{\Vert\bm{w}\Vert} \cdot (\bm{x}^+_1 - \bm{x}^-_1) \nonumber \\
+                    &= \frac{\bm{w}\cdot\bm{x}^+_1 - \bm{w}\cdot\bm{x}^-_1}{\Vert\bm{w}\Vert} \nonumber \\
+                    &= \frac{(\bm{w}\cdot\bm{x}^+_1 + b) - (\bm{w}\cdot\bm{x}^-_1 + b)}{\Vert\bm{w}\Vert} \nonumber \\
+                    M &= \frac{2}{\Vert\bm{w}\Vert}
+                \end{align}
+
+                Maximizing $M$ is equivalent then to minimizing $\Vert\bm{w}\Vert$, or even better $\Vert\bm{w}\Vert^2$.
+                The certainty in the given samples is translated by the inequalities:
+                \begin{equation*}
+                    \begin{cases}
+                        \bm{w}\cdot\bm{x}^i + b \geq 1 & \forall i \in \{1, 2, \dots, n: \tilde{y}^i = 1\}\\
+                        \bm{w}\cdot\bm{x}^i + b \leq -1 & \forall i \in \{1, 2, \dots, n: \tilde{y}^i = 1\}
+                    \end{cases}.
+                \end{equation*}
+                These can be summed in one, as follows:
+                \begin{equation}
+                    \label{eq::hard_margin}
+                    \tilde{y}^i.(\bm{w}\cdot\bm{x}^i + b) \geq 1 \; \forall i = 1, 2, \dots, n.
+                \end{equation}
+                The \gls{acr::svm} problem can the be written, thus, as a convex constrained quadratic optimization one:
+                \begin{equation}
+                    \label{eq::hard_svm_primal}
+                    \begin{aligned}
+                        & \min_{\bm{w}}
+                        & & {\Vert \bm{w} \Vert}^2 \\
+                        & \text{s.t.}
+                        & & \tilde{y}^i.(\bm{w}\cdot\bm{x}^i + b) \geq 1 \; \forall i = 1, 2, \dots, n
+                    \end{aligned}.
+                \end{equation}
+
+            \paragraph{Soft margin}
+                In the previous case, we assumed that we are always certain about the classes of given samples.
+                The margin cannot contain then any of those points.
+                This explains the name hard margin.
+                We are always guaranteed to have a solution of a hard margin \gls{acr::svm} in the case of linear separability.
+                If the last condition is not met, there is not such solution.
+                To alleviate this problem, we allow some uncertainty in the given samples in order to fit the linear model.\\
+
+                \begin{figure}
+                    \centering
+                    \includestandalone[mode=buildnew, width=\textwidth]{figures/svm/non_linear_separable}
+                    \caption{
+                        \label{fig::soft_margin} A hyperplane separator in $\mathbb{R}^2$ corresponds to a line.
+                        In this case, $n_{psp} = n_{nsp} = 1$.
+                        The support lines are plotted in orange.
+                        $M$ is the margin.
+                    }
+                \end{figure}
+
+                To put this in mathematical terms, we start by the reminding the constraint of the hard margin problem in Equation~\ref{eq::hard_margin}.
+                To allow uncertainty for some given point $x^i$ comes back to allowing it to be in the wrong side of the support hyperplane: \textit{i.e.} $\tilde{y}^l.(\bm{w}\cdot\bm{x}^l + b) < 1$.
+                In this case, we define: $\xi^i := 1 - \tilde{y}^i.(\bm{w}\cdot\bm{x}^i + b) > 0$.
+                Otherwise, $\xi^i := 0$.
+                These defined values are called slack variables.
+                They express, by how much, each point is uncertain.
+                They can be expressed in a compressed form called hinge loss:
+                \begin{equation}
+                    \label{eq::slack_variables}
+                    \xi^i \triangleq \max\big(1 - \tilde{y}^i.(\bm{w}\cdot\bm{x}^i + b), 0\big).
+                \end{equation}
+                The soft margin constraint translates now to:
+                \begin{equation}
+                    \label{eq::soft_margin}
+                    \tilde{y}^i.(\bm{w}\cdot\bm{x}^i + b) \geq 1 - \xi^i.
+                \end{equation}
+                We distinguish four cases for slack variables:
+                \begin{itemize}
+                    \item $\xi^i = 0$: the points class is certain;
+                    \item $0 < \xi^i \leq 1$: the point is of the same class but is uncertain: \textit{i.e.} between the support hyperplane and the separator;
+                    \item $1 < \xi^i < 2$: the point is of the opposite class and is uncertain: \textit{i.e.} between the separator and the opposite support hyperplane;
+                    \item $2 \leq \xi^i$: the point is certainly of the opposite class: \textit{i.e.} beyond the opposite support hyperplane.
+                \end{itemize}
+                As a consequence, when a dataset is not linearly separable, at least one sample $i_0$ cannot fit in a linear model and $1 < \xi^{i_0}$.
+                All these situations are illustrated in Figure~\ref{fig::soft_margin}.\\
+
+                The idea is to find a configuration where most slack variables are null or near $0$.
+                Sparcity is also wished: we prefer having one wrong point rather than a lot of points that are uncertain.
+                For this purpose, these variables would be penalized against using an $L_1$ norm.
+                Since all slack variables are positive, the soft margin \gls{acr::svm} problem becomes:
+                \begin{equation}
+                    \label{eq::soft_svm_primal}
+                    \begin{aligned}
+                        & \min_{\bm{w}}
+                        & & {\Vert \bm{w} \Vert}^2 + C \cdot \sum_{i=1}^n \xi^i \\
+                        & \text{s.t.} & & \tilde{y}^i.(\bm{w}\cdot\bm{x}^i + b) \geq 1 \; \forall i = 1, 2, \dots, n\\
+                        & & & \xi^i \geq 0 \; \forall i = 1, 2, \dots, n
+                    \end{aligned}.
+                \end{equation}
+                where:
+                \begin{conditions}
+                    C & is the penalization constant.\\
+                \end{conditions}
+
+                A small $C$ means the slack variables are allowed to get big: the margin is expected to be big.
+                When $C$ is great it leads to a tight margin as it penalizes any uncertainty.
+                The special case where $C=\infty$ corresponds simply to the hard margin case.
+                Hence, the penalization constant is tuned, using cross-validation for instance, so as to achieve the best generalization power.
+
+                Since the problem stated in Equation~\ref{eq::soft_svm_primal} is a convex optimization problem, solving it is equivalent to solving the dual:
+                \begin{equation}
+                    \label{eq::soft_svm_dual}
+                    \begin{aligned}
+                        & \max
+                        & & \sum_{1\geq i \geq n} \alpha_i - \frac{1}{2}\cdot\sum_{\substack{1\geq l \geq n\\1\geq p \geq n}}\alpha_l\cdot\alpha_p\cdot\tilde{y}^l\cdot\tilde{y}^p\cdot\bm{x}^l\cdot\bm{x}^p\\
+                        &\text{s.t.} & & \sum_{1\geq i \geq n}\tilde{y}^i\cdot\alpha_i=0
+                        & & & 0 \leq \alpha_i \leq C \;\forall i=1,\dots,n
+                        \end{aligned}
+                \end{equation}
+                A fast solution of this problem is possible thanks to the work of~\textcite{platt1998sequential}.
+                This will not be detailed herein. 
+
             \paragraph{Kernel \acrshort*{acr::svm}}
+                Not all classification problems can be solved in a linear manner.
+                Unfortunately, \gls{acr::svm} is inherently linear.
+                However, there is a way to generalize this classifier.
+
+
                 \subparagraph{Usual kernels}
                 \subparagraph{MKL}
             \paragraph{Properties}
