@@ -234,20 +234,24 @@
                 
                 (78, 2) [p]
                 (80, 0) [n]
+
+                (77, -1) [p]
+                (79.5, 3) [n]
+                (78, 5) [n]
             };
             \addplot+ [smooth, orange, dashed, no markers] coordinates{
             	(75.6, -2)
             	(81, 7)
-            } node[pos=.85, rotate=66, above] {\tiny $\textbf{w}.\textbf{x} + b = 1$};
+            } node[pos=.85, rotate=66, above] {};
             
             \addplot+ [smooth, orange, dashed, no markers] coordinates{
             	(84.2, 7)
             	(78.8, -2)
-            } node[pos=.15, rotate=66, below] {\tiny $\textbf{w}.\textbf{x} + b = -1$};
+            } node[pos=.15, rotate=66, below] {};
             \addplot+ [smooth, green, dashdotted, no markers] coordinates{
             	(82.6, 7)
             	(77.2, -2)
-            }  node[pos=.15, rotate=66, above] {\tiny $\bm{w}\cdot\bm{x} + b = 0$};
+            }  node[pos=.15, rotate=66, above] {};
             
             \addplot[no markers] coordinates {(80, 0)} node[pin=270:{\tiny$\bm{x}^-_1$}]{};
             \addplot[no markers] coordinates {(78, 2)} node[pin=270:{\tiny$\bm{x}^+_1$}]{};
@@ -257,7 +261,16 @@
             
             \node[label=left:\tiny$M$] (margin_end) at (axis cs:81, .98) {};
             \path[<->, draw, thin] (axis cs:78, 2) -- (margin_end);
-	
+
+            \node[label=below:\tiny$0 < \xi^i < 1$] (uncertain_end) at (axis cs:76, -.71) {};
+            \path[<->, draw, thin] (axis cs:77, -1) -- (uncertain_end);
+
+            \node[label=above:\tiny$1 < \xi^i < 2$] (uncertain_flip_end) at (axis cs:81.75, 2.3) {};
+            \path[<->, draw, thin] (axis cs:79.5, 3) -- (uncertain_flip_end);
+
+            \node[label=above:\tiny$1 < \xi^i < 2$] (certain_flip_end) at (axis cs:82.5, 3.5) {};
+            \path[<->, draw, thin] (axis cs:78, 5) -- (certain_flip_end);
+
             \legend{\tiny+1, \tiny-1}
         \end{axis} 
     \end{tikzpicture}
