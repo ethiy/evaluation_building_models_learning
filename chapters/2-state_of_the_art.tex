@@ -16,6 +16,7 @@
     \subsection{Scale classification}
         \label{subsec::state_of_the_art::building_modeling::scale}
 
+    \clearpage
 \section{Quality evaluation of \gls*{acr::3d} building models}
     \label{sec::state_of_the_art::quality}
     We have seen previously the various methods used to automatically model building.
@@ -159,7 +160,28 @@
 
     \subsection{Objective statement}
 \section{Supervised learning and pattern recognition}
-    \subsection{Classifiers}
+    \label{sec::state_of_the_art::mlpr}
+    In this section are presented notions from statistic learning and computer vision domains that were usefull for this work.
+    This constitutes a simple reminder and is not a thorough survey of the field.
+    We start off with a brief description of utilized supervised classifiers in section~\ref{subsec::state_of_the_art::mlpr::classifiers}.
+    Second (section~\ref{subsec::state_of_the_art::mlpr::computer_vision}) comes a presentation of computer vision concepts on which our method is based.
+    Last is discussed graph classification that was also instrumental in this work.
+
+    \subsection{Supervised classifiers}
+        \label{subsec::state_of_the_art::mlpr::classifiers}
+        In this subsection, we denote the observations and their classes by $\big((\bm{x^i}, y^i)\big)_{i=1,2,\dots,n}$.
+        Features are in practice finite dimensional vectors: \textit{i.e.} $\forall i=1,2,\dots,n \; \bm{x^i} \in \mathbb{R}^d$.
+        Classes are modeled by a finite set bijective to the set $\{1,2,\dots,C\}$.
+        This corresponds to a training set in multiclass supervised setting: it is supervised since classes are given in training.\\
+
+        In the special case of binary classification, only two classes are possible $\forall i=1,2,\dots,n \; y^i \in \{0, 1\}$.
+        The multilabel classification problem is the case where each instance has a number $L$ of binary labels:\textit{i.e.} $\forall i=1,2,\dots,n \; y^i = (y^i_1, y^i_2, \dots, y^i_L) \in \{0, 1\}^L$.
+        In this case, associating features with each label $\forall i=1,2,\dots,n \; y^i_l$ can be seen as a independent binary classification problem.\\
+
+        Hereafter, are presented the different supervised classifiers used in this work.
+        We start by the perceptron model that useful to study in order to understand \glspl{acr::nn}.
+        Afterwards, is presented the \gls{acr::svm} algorithm, before describing Random Forests.
+        Both were used in this work.
         \subsubsection{Perceptron}
             In an effort to understand neural activity,~\textcite{rosenblatt1958perceptron} proposed the perceptron model.
             This is the first building block in \gls{acr::nn}.
@@ -267,7 +289,7 @@
                 \begin{equation*}
                     \begin{cases}
                         \bm{w}\cdot\bm{x}^i + b \geq 1 & \forall i \in \{1, 2, \dots, n: \tilde{y}^i = 1\}\\
-                        \bm{w}\cdot\bm{x}^i + b \leq -1 & \forall i \in \{1, 2, \dots, n: \tilde{y}^i = 1\}
+                        \bm{w}\cdot\bm{x}^i + b \leq -1 & \forall i \in \{1, 2, \dots, n: \tilde{y}^i = -1\}
                     \end{cases}.
                 \end{equation*}
                 These can be summed in one, as follows:
@@ -298,10 +320,10 @@
                     \centering
                     \includestandalone[mode=buildnew, width=\textwidth]{figures/svm/non_linear_separable}
                     \caption{
-                        \label{fig::soft_margin} A hyperplane separator in $\mathbb{R}^2$ corresponds to a line.
-                        In this case, $n_{psp} = n_{nsp} = 1$.
-                        The support lines are plotted in orange.
-                        $M$ is the margin.
+                        \label{fig::soft_margin} Illustration of a soft margin \gls{acr::svm}.
+                        The orange lines (\textit{resp.} green line) correspond to the support hyperplanes (\textit{resp.} separator).
+                        Dataset points are allowed to be inside the margin and even in the other side of the separator.
+                        It helps fit a natively linear classifier in a non linearly separable case.supervised classification
                     }
                 \end{figure}
 
@@ -360,8 +382,8 @@
                     \begin{aligned}
                         & \max
                         & & \sum_{1\geq i \geq n} \alpha_i - \frac{1}{2}\cdot\sum_{\substack{1\geq l \geq n\\1\geq p \geq n}}\alpha_l\cdot\alpha_p\cdot\tilde{y}^l\cdot\tilde{y}^p\cdot\bm{x}^l\cdot\bm{x}^p\\
-                        &\text{s.t.} & & \sum_{1\geq i \geq n}\tilde{y}^i\cdot\alpha_i=0
-                        & & & 0 \leq \alpha_i \leq C \;\forall i=1,\dots,n
+                        &\text{s.t.} & & \sum_{1\geq i \geq n}\tilde{y}^i\cdot\alpha_i=0 \\
+                        & & & 0 \leq \alpha_i \leq C \;\forall i=1,2,\dots,n
                         \end{aligned}
                 \end{equation}
                 A fast solution of this problem is possible thanks to the work of~\textcite{platt1998sequential}.
@@ -370,20 +392,125 @@
             \paragraph{Kernel \acrshort*{acr::svm}}
                 Not all classification problems can be solved in a linear manner.
                 Unfortunately, \gls{acr::svm} is inherently linear.
-                However, there is a way to generalize this classifier.
+                However, there is a way to generalize this classifier.\\
 
+                \begin{figure}
+                    \centering
+                    \begin{subfigure}{.48\textwidth}
+                        \centering
+                        \includestandalone[mode=buildnew, width=\linewidth]{figures/svm/circles_original}
+                        \caption{
+                            \label{fig::original_circles}
+                            Original representation of the dataset in the feature space.
+                        }
+                    \end{subfigure}
+                    \begin{subfigure}{.48\textwidth}
+                        \centering
+                        \includestandalone[mode=buildnew, width=\linewidth]{figures/svm/circles_polar}
+                        \caption{
+                            \label{fig::polar_circles}
+                            Representation of the dataset using polar coordinates
+                        }
+                    \end{subfigure}
+                    \caption{
+                        \label{fig::circles_transformation}
+                        Example of a transformation of a dataset that can be linearly separable in the maped space. 
+                    }
+                \end{figure}
+
+                The original feature space where the data is represented is not always an ideal one.
+                A solution is to find a transformation $\Phi: \mathbb{R}^d \rightarrow \mathscr{H}$ that maps initial feature vectors into a Hilbert space $(\mathscr{H}, \langle\cdot{,}\cdot\rangle_{\mathscr{H}})$ where distances between instances are meaningful.
+                There is no unique map that satisfy this type of properties
+                In Figure\ref{fig::circles_transformation}, is depicted an example of such a map.
+                Using a polar coordinate transformation 
+                \begin{align*}
+                    \Phi: \mathbb{R}^2 &\rightarrow \mathbb{R}^2 \\
+                    \begin{pmatrix}
+                        x \\
+                        y
+                    \end{pmatrix} &\mapsto \begin{pmatrix}
+                        \sqrt{x^2 + y^2} \\
+                        \text{arctan}_2(y, x)
+                    \end{pmatrix},
+                \end{align*}
+                the dataset can be linearly separable.
+                In this instance, the original probability distribution is known as it was generated manually.
+                This is usually not the case: in practice, the right mapping is difficult to come by.
+                It may involve usually heavy compuations.
+                However, as we are interested in distances between dataset points, there is an easier way around.
+                Using the ``kernel trick'', one can compute any distance in the target space $\mathscr{H}$ using only the scalar product:
+                \begin{align}
+                    \label{fig::kernel_definition}
+                    k: \mathbb{R}^d \times \mathbb{R}^d &\rightarrow \mathbb{R}\\
+                    (\bm{x}, \bm{y}) &\mapsto \langle\Phi(\bm{x}), \Phi(\bm{y})\rangle_{\mathscr{H}} \nonumber.
+                \end{align}
+                Going back to the dual optimization problem stated in Equation~\ref{eq::soft_svm_dual}, we see that only the scalar product between samples is needed.
+                Assuming the existance of an adequate mapping $\Phi$, and if we substitute each point by its representation in the new space, we can rewrite, so called, kernel \gls{acr::svm}.
+                \begin{equation}
+                    \label{eq::kernel_soft_svm_dual}
+                    \begin{aligned}
+                        & \max
+                        & & \sum_{1\geq i \geq n} \alpha_i - \frac{1}{2}\cdot\sum_{\substack{1\geq l \geq n\\1\geq p \geq n}}\alpha_l\cdot\alpha_p\cdot\tilde{y}^l\cdot\tilde{y}^p\cdot k(\bm{x}^l, \bm{x}^p)\\
+                        &\text{s.t.} & & \sum_{1\geq i \geq n}\tilde{y}^i\cdot\alpha_i=0 \\
+                        & & & 0 \leq \alpha_i \leq C \;\forall i=1,2,\dots,n
+                        \end{aligned}
+                \end{equation}
 
                 \subparagraph{Usual kernels}
+                    The choice of kernels is not easy.
+                    Practitioners experiment with different kernel types and parameters.
+                    One can engineer a kernel specific for their application.
+                    However, in general, there are some usual kernel that are chosen:
+                    \begin{itemize}
+                        \item the native linear kernel:
+                        \begin{equation}
+                            \label{eq::linear_kernel}
+                            k(\bm{x}, \bm{y}) = \bm{x} \cdot \bm{y};
+                        \end{equation}
+                        \item the \gls{acr::rbf} kernel: for some parameter $(\gamma) \in \mathbb{R}$
+                        \begin{equation}
+                            \label{eq::rbf_kernel}
+                            k_{\gamma}(\bm{x}, \bm{y}) = \exp{-\gamma \cdot \Vert \bm{x} - \bm{y} \Vert^2};
+                        \end{equation}
+                        \item the polynomial kernel: for some parameters $(c, d) \in \mathbb{R}_+ \times \mathbb{N} \setminus \{0\} $
+                        \begin{equation}
+                            \label{eq::polynomial_kernel}
+                            k_{\gamma, c}(\bm{x}, \bm{y}) = (\bm{x} \cdot \bm{y} + c)^d;
+                        \end{equation}
+                        \item the sigmoid kernel: for some parameters $(\gamma, c) \in \mathbb{R}^2$
+                        \begin{equation}
+                            \label{eq::sigmoid_kernel}
+                            k_{\gamma, c}(\bm{x}, \bm{y}) = \gamma \cdot \tanh(\bm{x} \cdot \bm{y} + c).
+                        \end{equation}
+                    \end{itemize}
+                    The choice of parameters in important not only for achieving good classification results but also to avoid overfitting problems.
+
                 \subparagraph{MKL}
+                    Some operations over kernels always yield valid kernels.
+                    This is true for instance for summation.
+                    In fact, fixing the number of kernels $K\in \mathbb{N} \setminus \{0\}$, for basis kernels $k_i \; \forall i=1,2,\dots,K$ weithed by $\mu_i \in \mathbb{R}_+\; \forall i=1,2,\dots,K$,
+                    \begin{equation*}
+                        k(\bm{x}, \bm{y}) = \sum_{i=1}^K \mu_i \cdot k_i(\bm{x}, \bm{y})
+                    \end{equation*}
+                    is also a valid kernel.
+                    Such kernels proved to be better in practice than using single kernels~\parencite{lanckriet2004statistical}.
+                    To simplify the problem, the solution is chosen in the simplex of the basis kernels: \textit{i.e.} $ (\mu_1, \mu_2, \dots, \mu_K) \in (\mathbb{R}_+)^K  \; s.t. \sum_{i=1}^K \mu_i = 1$.
+                    Multiple schemes were presented in order to solve the \gls{acr::mkl} \gls{acr::svm} problem~\parencite{rakotomamonjy2008simplemkl, sun2010multiple, varma2009more}.
+                    
             \paragraph{Properties}
+                \gls{acr::svm} is a
         \subsubsection{Random Forest}
             \paragraph{Decision trees}
             \paragraph{Bagging decision trees}
             \paragraph{Properties}
     \subsection{Computer vision}
-        \subsection{Edges and corners}
+        \label{subsec::state_of_the_art::mlpr::computer_vision}
+
+        \subsubsection{Edges and corners}
         \subsubsection{Scattering}
         \subsubsection{Convolutional neural networks}
     \subsection{Graph classification}
+        \label{subsec::state_of_the_art::mlpr::graph_classification}
+
         \subsubsection{Graph kernels}
         \subsubsection{Graph neural networks}
