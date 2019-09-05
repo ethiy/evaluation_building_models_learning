@@ -1,0 +1,71 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\usepackage{bm}
+
+\usepackage{forest}
+
+\begin{document}
+    \scriptsize
+    \forestset{
+        predicate/.style = {rounded corners, draw, align=center, base=top},
+    }
+    \begin{forest}
+        [
+            {$x_3 \geq 2.45$\\ $I_G=0.667$\\ dist.:(50, 50, 50)}, predicate
+            [
+                {$class = 1$\\$I_G=0$\\ dist.:(50, 0, 0)}, predicate, edge label={node[midway,left,font=\scriptsize]{$P_r(\bm{x}) = 0$}}
+            ]
+            [
+                {$x_4 \geq 1.75$\\ $I_G=0.5$\\ dist.:(0, 50, 50)}, predicate,edge label={node[midway,right,font=\scriptsize]{$P_r(\bm{x}) = 1$}}
+                [
+                    {$x_3 \geq 4.95$\\ $I_G=0.168$\\ dist.:(0, 49, 5)}, predicate, name=depth_2_west
+                    [
+                        {$x_4 \geq 1.65$\\ $I_G=0.041$\\ dist.:(0, 47, 1)}, predicate
+                        [
+                            {$class = 2$\\ $I_G=0$\\ dist.:(0, 47, 0)}, predicate, name=most_west
+                        ]
+                        [
+                            {$class = 3$\\ $I_G=0$\\ dist.:(0, 0, 1)}, predicate
+                        ]
+                    ]
+                    [
+                        {$x_4 \geq 1.55$\\ $I_G=0.444$\\ dist.:(0, 2, 4)}, predicate
+                        [
+                            {$class = 3$\\ $I_G=0$\\ dist.:(0, 0, 3)}, predicate
+                        ]
+                        [
+                            {$x_1 \geq 6.95$\\ $I_G=0.444$\\ dist.:(0, 2, 1)}, predicate
+                            [
+                                {$class = 2$\\ $I_G=0$\\ dist.:(0, 2, 0)}, predicate
+                            ]
+                            [
+                                {$class = 3$\\ $I_G=0$\\ dist.:(0, 0, 1)}, predicate
+                            ]
+                        ]
+                    ]
+                ]
+                [
+                    {$x_3 \geq 4.85$\\ $I_G=0.043$\\ dist.:(0, 1, 45)}, predicate, name=depth_2_east
+                    [
+                        {$x_2 \geq 3.1$\\ $I_G=0.44$\\ dist.:(0, 1, 2)}, predicate
+                        [
+                            {$class = 3$\\ $I_G=0$\\ dist.:(0, 0, 2)}, predicate
+                        ]
+                        [
+                            {$class = 2$\\ $I_G=0$\\ dist.:(0, 1, 0)}, predicate
+                        ]
+                    ]
+                    [
+                        {$class = 3$\\ $I_G=0$\\ dist.:(0, 0, 43)}, predicate, name=most_east
+                    ]
+                ]
+            ]
+        ];
+        \path (most_west.west |- depth_2_west.south) node[anchor=north east] (depth_2_start) {};
+        \path (most_east.east |- depth_2_east.south) node[anchor=north west] (depth_2_end) {};
+        \path[draw, dashed] (depth_2_start.south) -- (depth_2_end.south) node[pos=.05, above] {depth: 2};
+    \end{forest}
+\end{document}

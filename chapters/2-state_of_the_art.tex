@@ -169,14 +169,14 @@
 
     \subsection{Supervised classifiers}
         \label{subsec::state_of_the_art::mlpr::classifiers}
-        In this subsection, we denote the observations and their classes by $\big((\bm{x^i}, y^i)\big)_{i=1,2,\dots,n}$.
-        Features are in practice finite dimensional vectors: \textit{i.e.} $\forall i=1,2,\dots,n \; \bm{x^i} \in \mathbb{R}^d$.
+        In this subsection, we denote the observations and their classes by $\left((\bm{x^i}, y^i)\right)_{i=1,2,\dots,n}$.
+        Features are in practice finite dimensional vectors: \textit{i.e.} $\forall i=1,2,\dots,n \;, \bm{x^i} \in \mathbb{R}^d$.
         Classes are modeled by a finite set bijective to the set $\{1,2,\dots,C\}$.
         This corresponds to a training set in multiclass supervised setting: it is supervised since classes are given in training.\\
 
-        In the special case of binary classification, only two classes are possible $\forall i=1,2,\dots,n \; y^i \in \{0, 1\}$.
-        The multilabel classification problem is the case where each instance has a number $L$ of binary labels:\textit{i.e.} $\forall i=1,2,\dots,n \; y^i = (y^i_1, y^i_2, \dots, y^i_L) \in \{0, 1\}^L$.
-        In this case, associating features with each label $\forall i=1,2,\dots,n \; y^i_l$ can be seen as a independent binary classification problem.\\
+        In the special case of binary classification, only two classes are possible $\forall i=1,2,\dots,n \;,\allowbreak y^i \in \{0, 1\}$.
+        The multilabel classification problem is the case where each instance has a number $L$ of binary labels:\textit{i.e.} $\forall i=1,2,\dots,n \;, y^i = (y^i_1, y^i_2, \dots, y^i_L) \in \{0, 1\}^L$.
+        In this case, associating features with each label $\forall i=1,2,\dots,n \;, y^i_l$ can be seen as a independent binary classification problem.\\
 
         Hereafter, are presented the different supervised classifiers used in this work.
         We start by the perceptron model that useful to study in order to understand \glspl{acr::nn}.
@@ -187,19 +187,18 @@
             This is the first building block in \gls{acr::nn}.
             It has as input a number $d$ of stimuli, each one denoted $x_i,\quad \forall i = 1,2,\dots,d$.
             For each stimulus indexed by $i\in \{1,\dots,d\}$, is associated a weight $w_i$.
-            Written in vectorial form, $\bm{x} = \begin{pmatrix}x_1\\ x_2\\ \vdots \\ x_d \end{pmatrix}$ (\textit{resp.} $\bm{w} = \begin{pmatrix}w_1\\ w_2\\ \vdots \\w_d \end{pmatrix}$) represent the input (\textit{resp.} the weights).
-            A score is obtained from a linear combination of all the stimuli: $s = \bm{w} \cdot \bm{x} = \sum_{i=1}^{d} w_i \cdot x_i$.
+            Written in vectorial form, $\bm{x} = \begin{pmatrix}x_1 & x_2 & \hdots  & x_d \end{pmatrix}^\intercal$ (\textit{resp.} $\bm{w} = \begin{pmatrix}w_1 & w_2 & \hdots & w_d \end{pmatrix}^\intercal$) represent the input (\textit{resp.} the weights).
+            A score is obtained from a linear combination of all the stimuli: $s = \bm{w}^\intercal \cdot \bm{x} = \sum_{i=1}^{d} w_i \cdot x_i$.
             If the score is above a certain threshold $\theta \in \mathbb{R}$, the output of the perceptron is $1$.
             Otherwise, the result is $0$.
-            The result of a perceptron can be summarized as:
+            The result of a perceptron can be summarized as $\mathbb{1}_{\bm{w}^\intercal \cdot \bm{x} \geq \theta}$.
+            It could be rewritten formally as:
             \begin{equation}
                 \label{eq::perceptron}
-                \mathbf{D}_{perceptron}(\bm{x}) \triangleq \mathbb{1}_{\bm{w} \cdot \bm{x} \geq \theta} \quad.
-            \end{equation}
-            It could be rewritten also as:
-            \begin{equation}
-                \label{eq::perceptron_is_linear}
-                \mathbf{D}_{perceptron}(\bm{x}) \triangleq \mathbb{1}_{\bm{w} \cdot \bm{x} + b \geq 0}
+                \begin{aligned}
+                    \mathbf{D}_{\text{perceptron}, \bm{w}, b}: \mathbb{R}^d &\rightarrow \{0, 1\}\\
+                    \bm{x} &\mapsto \mathbb{1}_{\bm{w}^\intercal \cdot \bm{x} + b\geq 0} \quad.
+                \end{aligned}
             \end{equation}
             where:
             \begin{conditions}
@@ -212,12 +211,12 @@
             The choice of the latter plays a critical role in the learning capability of the classifier.
         \subsubsection{\acrlong*{acr::svm}}
             \glspl{acr::svm} are a special type of linear classifiers (\textit{i.e.} perceptrons).
-            We transfrom the initial classes $\big(y^k\big)_{k=1,\dots,n}$ to $\big(\tilde{y}^k\big)_{k=1,\dots,n}$, using the map: $y \mapsto \tilde{y} = 2\cdot y - 1$.
+            We transfrom the initial classes $\left(y^k\right)_{k=1, 2, \dots, n}$ to $\left(\tilde{y}^k\right)_{k=1, 2, \dots, n}$, using the map: $y \mapsto \tilde{y} = 2\cdot y - 1$.
             There are always two possible classes $\{1, -1\}$.
             This simple transformation is done to simplify latter equations.
 
             \paragraph{Hard margin}
-                In order to understand the idea behind the \gls{acr::svm} classifier, we start by assuming that the dataset to be classified $\big((\bm{x}^k, y^k)\big)_{k=1,\dots,n}$ is linearly separable.
+                In order to understand the idea behind the \gls{acr::svm} classifier, we start by assuming that the dataset to be classified $\left((\bm{x}^k, y^k)\right)_{k=1, 2, \dots, n}$ is linearly separable.
                 It means that there is at least one hyperplane $(H_0)$ that can separate perfectly the two classes.
                 We can order points of class based on their distance to the hyperplane $(H_0)$.
                 As a reminder, in a metric space $(X, d)$, the distance of a point $x \in X$ to a subset $A \subset X$ is:
@@ -228,8 +227,8 @@
                 Support hyperplanes are the hyperplanes that are parallel to the separator and passes through the support vectors.
                 This can be summarized as:
                 \begin{eqnarray}
-                    \{\bm{x}^+_s: s = 1, 2, \dots, n_{psp}\} &\triangleq \arg\min\{d(\bm{x}_k, H_0) : k=1,\dots,n \wedge \tilde{y}^k = 1\}\\
-                    \{\bm{x}^-_s: s = 1, 2, \dots, n_{nsp}\} &\triangleq \arg\min\{d(\bm{x}_k, H_0) : k=1,\dots,n \wedge \tilde{y}^k = -1\}
+                    \{\bm{x}^+_s: s = 1, 2, \dots, n_{psp}\} &\triangleq \arg\min\{d(\bm{x}_k, H_0) : k=1, 2, \dots, n \wedge \tilde{y}^k = 1\}\\
+                    \{\bm{x}^-_s: s = 1, 2, \dots, n_{nsp}\} &\triangleq \arg\min\{d(\bm{x}_k, H_0) : k=1, 2, \dots, n \wedge \tilde{y}^k = -1\}
                 \end{eqnarray}
                 where:
                 \begin{conditions}
@@ -249,8 +248,8 @@
                 \begin{equation}
                     \label{eq::support_lines}
                     \begin{cases}
-                        \forall s=1,2,\dots,n_{psp} \quad \bm{w}\cdot\bm{x}^+_s + b = 1\\              
-                        \forall s=1,2,\dots,n_{nsp} \quad \bm{w}\cdot\bm{x}^-_s + b = -1                
+                        \forall s=1,2,\dots,n_{psp} \quad \bm{w}^\intercal\cdot\bm{x}^+_s + b = 1\\              
+                        \forall s=1,2,\dots,n_{nsp} \quad \bm{w}^\intercal\cdot\bm{x}^-_s + b = -1                
                     \end{cases}
                 \end{equation}
 
@@ -268,7 +267,7 @@
                 In figure~\ref{fig::linear_separable}, are illustrated these notions.
                 The uncertainty of classification at any point is a increasing function of its distance to the separator.
                 The given samples are supposed to be certain.
-                Since support vectors are the  closest points to $(H_0)$, the class of points $\bm{p}$ that verify $\vert\bm{w}\cdot\bm{p} + b\vert \geq 1$ is known with probability $1$.
+                Since support vectors are the  closest points to $(H_0)$, the class of points $\bm{p}$ that verify $\vert\bm{w}^\intercal\cdot\bm{p} + b\vert \geq 1$ is known with probability $1$.
                 Conversely, the points that lay between the support hyperplanes are the most uncertain.
                 The bigger the distance between these two lines the more nuanced the classifier decision is.
                 As a consequence, this distance has to be the biggest possible.
@@ -278,9 +277,9 @@
                 The margin can also be interepreted as the length of the orthogonal projection of any vector $\bm{v}_{st}$\footnote{$\forall (s, t) \in \{1,2,\dots,n_{nsp}\} \times \{1,2,\dots,n_{psp}\}$} going from a negative support vector $\bm{x}^-_s$ to a positive one $\bm{x}^+_t$ on any line carried by $\bm{w}$.
                 Since all support vectors of the same class lay on the same line, the choice of $(s,t)$ is inconsequential.
                 \begin{align}
-                    M &= \frac{\bm{w}}{\Vert\bm{w}\Vert} \cdot (\bm{x}^+_1 - \bm{x}^-_1) \nonumber \\
-                    &= \frac{\bm{w}\cdot\bm{x}^+_1 - \bm{w}\cdot\bm{x}^-_1}{\Vert\bm{w}\Vert} \nonumber \\
-                    &= \frac{(\bm{w}\cdot\bm{x}^+_1 + b) - (\bm{w}\cdot\bm{x}^-_1 + b)}{\Vert\bm{w}\Vert} \nonumber \\
+                    M &= \frac{\bm{w}^\intercal}{\Vert\bm{w}\Vert} \cdot (\bm{x}^+_1 - \bm{x}^-_1) \nonumber \\
+                    &= \frac{\bm{w}^\intercal\cdot\bm{x}^+_1 - \bm{w}^\intercal\cdot\bm{x}^-_1}{\Vert\bm{w}\Vert} \nonumber \\
+                    &= \frac{(\bm{w}^\intercal\cdot\bm{x}^+_1 + b) - (\bm{w}^\intercal\cdot\bm{x}^-_1 + b)}{\Vert\bm{w}\Vert} \nonumber \\
                     M &= \frac{2}{\Vert\bm{w}\Vert}
                 \end{align}
 
@@ -288,14 +287,14 @@
                 The certainty in the given samples is translated by the inequalities:
                 \begin{equation*}
                     \begin{cases}
-                        \bm{w}\cdot\bm{x}^i + b \geq 1 & \forall i \in \{1, 2, \dots, n: \tilde{y}^i = 1\}\\
-                        \bm{w}\cdot\bm{x}^i + b \leq -1 & \forall i \in \{1, 2, \dots, n: \tilde{y}^i = -1\}
+                        \bm{w}^\intercal\cdot\bm{x}^i + b \geq 1 & \forall i \in \{1, 2, \dots, n: \tilde{y}^i = 1\}\\
+                        \bm{w}^\intercal\cdot\bm{x}^i + b \leq -1 & \forall i \in \{1, 2, \dots, n: \tilde{y}^i = -1\}
                     \end{cases}.
                 \end{equation*}
                 These can be summed in one, as follows:
                 \begin{equation}
                     \label{eq::hard_margin}
-                    \tilde{y}^i.(\bm{w}\cdot\bm{x}^i + b) \geq 1 \; \forall i = 1, 2, \dots, n.
+                    \tilde{y}^i.(\bm{w}^\intercal\cdot\bm{x}^i + b) \geq 1 \; \forall i = 1, 2, \dots, n.
                 \end{equation}
                 The \gls{acr::svm} problem can the be written, thus, as a convex constrained quadratic optimization one:
                 \begin{equation}
@@ -304,7 +303,7 @@
                         & \min_{\bm{w}}
                         & & {\Vert \bm{w} \Vert}^2 \\
                         & \text{s.t.}
-                        & & \tilde{y}^i.(\bm{w}\cdot\bm{x}^i + b) \geq 1 \; \forall i = 1, 2, \dots, n
+                        & & \tilde{y}^i.(\bm{w}^\intercal\cdot\bm{x}^i + b) \geq 1 \; \forall i = 1, 2, \dots, n
                     \end{aligned}.
                 \end{equation}
 
@@ -328,20 +327,20 @@
                 \end{figure}
 
                 To put this in mathematical terms, we start by the reminding the constraint of the hard margin problem in Equation~\ref{eq::hard_margin}.
-                To allow uncertainty for some given point $x^i$ comes back to allowing it to be in the wrong side of the support hyperplane: \textit{i.e.} $\tilde{y}^l.(\bm{w}\cdot\bm{x}^l + b) < 1$.
-                In this case, we define: $\xi^i := 1 - \tilde{y}^i.(\bm{w}\cdot\bm{x}^i + b) > 0$.
+                To allow uncertainty for some given point $x^i$ comes back to allowing it to be in the wrong side of the support hyperplane: \textit{i.e.} $\tilde{y}^l.(\bm{w}^\intercal\cdot\bm{x}^l + b) < 1$.
+                In this case, we define: $\xi^i := 1 - \tilde{y}^i.(\bm{w}^\intercal\cdot\bm{x}^i + b) > 0$.
                 Otherwise, $\xi^i := 0$.
                 These defined values are called slack variables.
                 They express, by how much, each point is uncertain.
                 They can be expressed in a compressed form called hinge loss:
                 \begin{equation}
                     \label{eq::slack_variables}
-                    \xi^i \triangleq \max\big(1 - \tilde{y}^i.(\bm{w}\cdot\bm{x}^i + b), 0\big).
+                    \xi^i \triangleq \max\left(1 - \tilde{y}^i.(\bm{w}^\intercal\cdot\bm{x}^i + b), 0\right).
                 \end{equation}
                 The soft margin constraint translates now to:
                 \begin{equation}
                     \label{eq::soft_margin}
-                    \tilde{y}^i.(\bm{w}\cdot\bm{x}^i + b) \geq 1 - \xi^i.
+                    \tilde{y}^i.(\bm{w}^\intercal\cdot\bm{x}^i + b) \geq 1 - \xi^i.
                 \end{equation}
                 We distinguish four cases for slack variables:
                 \begin{itemize}
@@ -362,8 +361,8 @@
                     \begin{aligned}
                         & \min_{\bm{w}}
                         & & {\Vert \bm{w} \Vert}^2 + C \cdot \sum_{i=1}^n \xi^i \\
-                        & \text{s.t.} & & \tilde{y}^i.(\bm{w}\cdot\bm{x}^i + b) \geq 1 \; \forall i = 1, 2, \dots, n\\
-                        & & & \xi^i \geq 0 \; \forall i = 1, 2, \dots, n
+                        & \text{s.t.} & & \tilde{y}^i.(\bm{w}^\intercal\cdot\bm{x}^i + b) \geq 1, \; \forall i = 1, 2, \dots, n\\
+                        & & & \xi^i \geq 0, \; \forall i = 1, 2, \dots, n
                     \end{aligned}.
                 \end{equation}
                 where:
@@ -381,7 +380,7 @@
                     \label{eq::soft_svm_dual}
                     \begin{aligned}
                         & \max
-                        & & \sum_{1\geq i \geq n} \alpha_i - \frac{1}{2}\cdot\sum_{\substack{1\geq l \geq n\\1\geq p \geq n}}\alpha_l\cdot\alpha_p\cdot\tilde{y}^l\cdot\tilde{y}^p\cdot\bm{x}^l\cdot\bm{x}^p\\
+                        & & \sum_{1\geq i \geq n} \alpha_i - \frac{1}{2}\cdot\sum_{\substack{1\geq l \geq n\\1\geq p \geq n}}\alpha_l\cdot\alpha_p\cdot\tilde{y}^l\cdot\tilde{y}^p\cdot(\bm{x}^l)^\intercal\cdot\bm{x}^p\\
                         &\text{s.t.} & & \sum_{1\geq i \geq n}\tilde{y}^i\cdot\alpha_i=0 \\
                         & & & 0 \leq \alpha_i \leq C \;\forall i=1,2,\dots,n
                         \end{aligned}
@@ -465,7 +464,7 @@
                         \item the native linear kernel:
                         \begin{equation}
                             \label{eq::linear_kernel}
-                            k(\bm{x}, \bm{y}) = \bm{x} \cdot \bm{y};
+                            k(\bm{x}, \bm{y}) = \bm{x}^\intercal \cdot \bm{y};
                         \end{equation}
                         \item the \gls{acr::rbf} kernel: for some parameter $(\gamma) \in \mathbb{R}$
                         \begin{equation}
@@ -475,17 +474,17 @@
                         \item the polynomial kernel: for some parameters $(c, d) \in \mathbb{R}_+ \times \mathbb{N} \setminus \{0\} $
                         \begin{equation}
                             \label{eq::polynomial_kernel}
-                            k_{\gamma, c}(\bm{x}, \bm{y}) = (\bm{x} \cdot \bm{y} + c)^d;
+                            k_{\gamma, c}(\bm{x}, \bm{y}) = (\bm{x}^\intercal \cdot \bm{y} + c)^d;
                         \end{equation}
                         \item the sigmoid kernel: for some parameters $(\gamma, c) \in \mathbb{R}^2$
                         \begin{equation}
                             \label{eq::sigmoid_kernel}
-                            k_{\gamma, c}(\bm{x}, \bm{y}) = \gamma \cdot \tanh(\bm{x} \cdot \bm{y} + c).
+                            k_{\gamma, c}(\bm{x}, \bm{y}) = \gamma \cdot \tanh(\bm{x}^\intercal \cdot \bm{y} + c).
                         \end{equation}
                     \end{itemize}
                     The choice of parameters in important not only for achieving good classification results but also to avoid overfitting problems.
 
-                \subparagraph{MKL}
+                \subparagraph{\acrlong*{acr::mkl}}
                     Some operations over kernels always yield valid kernels.
                     This is true for instance for summation.
                     In fact, fixing the number of kernels $K\in \mathbb{N} \setminus \{0\}$, for basis kernels $k_i \; \forall i=1,2,\dots,K$ weithed by $\mu_i \in \mathbb{R}_+\; \forall i=1,2,\dots,K$,
@@ -499,14 +498,170 @@
                     
             \paragraph{Properties}
                 \gls{acr::svm} is a
-        \subsubsection{Random Forest}
-            \paragraph{Decision trees}
+        \subsubsection{Random forest}
+            A random forest is an agregation of decision tree classifiers.
+            First, is explained how the latter works.
+            Afterwards, we describe how the aggregation of basic classifiers can be beneficial for classification, especially in the case of decision trees.
+            We end this subsubsection discussing some random forests properties.
+
+            \paragraph{Decision tree classifier}
+                \begin{figure}
+                    \centering
+                    \includestandalone[mode=buildnew, width=\textwidth]{figures/random_forest/decision_tree}
+                    \caption{
+                        \label{fig::decision_tree_graph} A visualization of a decision tree classifier learned using $I_G$ Gini index over the iris dataset.
+                        Three classes are possible.
+                        In each non leaf node is stated the thresholding condition.
+                        For a leaf, its class is presented instead.
+                        ``dist.''stands for distribution of classes in each node.
+                        The whole decision tree overfits to the data with a $100\%$ overall accuracy ratio.
+                        However, when cut at depth 2, the an overall accuracy ratio does not drop sizably ($96\%$).
+                    }
+                \end{figure}
+
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=.5\textwidth]{images/related_work/decision_tree_separator}
+                    \caption{
+                        \label{fig::decision_tree_separator} Visualization of a decision tree separator trained over generated data in a two dimensional feature space.
+                        The separator is composed exclusively of horiontal and vertical lines.
+                        We can also see how the decision tree overfits by adding narrow splits to accomodate lone points surrounded by others with an opposite class.
+                    }
+                \end{figure}
+
+                The decision tree classier consists on successive conditions.
+                It is easily modeled as a tree graph rooted at $r$.
+                Each non leaf node $b$ in tree has as input an observation $\bm{x}$ which is fed to logical predicate $P_b$.
+                Since we work with a first order logic\footnote{$P_b(\bm{x})$ can takle only two values.}, exactly two children are possible per node.
+                These predicates are very specific: only on one dimension $i_b$ of the data is taken into account.
+                The output is then computed by applying a threshold $t_b$ to $x_{i_b}$.
+                This can be simplifief as $P_b(\bm{x}) = \mathbb{1}_{x_{i_b} \geq t_b} $.
+                The chosen child is denoted $d_b(\bm{x}) \leftarrow \text{child}(b, \mathbb{1}_{x_{i_b} \geq t_b})$.
+                Leafs do not apply any predicate to their input.
+                Instead, based on their assigned class $c(l) \in \{1,2,\dots,C\}$ of the leaf $l$, they predict the label of the input.
+                The each dimension $x_i \in \mathscr{X}_i$ is treated separately.
+                Hence, decision trees can handle heterogenous feature vectors that are no longer restricted to be $\mathbb{R}^d$.
+                The decision function of a decision tree classier can be written as:
+                \begin{equation}
+                    \label{eq::df_decision_tree}
+                    \begin{aligned}
+                        D_{\text{decision tree}}: \prod_{i=1}^{d}\mathscr{X}_i &\rightarrow \{1,2,\dots,C\}\\
+                        \bm{x} &\mapsto c\left(d_{d_{\ddots_{d_r(\bm{x})}}(\bm{x})}\right)
+                    \end{aligned}
+                \end{equation}
+                This representation is complicated and too abstract.
+                In Figure~\ref{fig::decision_tree_graph}, is illustrated a typical and intuitive representation of decision tree classiers.
+                In Figure~\ref{fig::decision_tree_separator}, we can clearly attribute the fact that the separator is an aggregation of vertical and horiontal segments to the fact that only one dimension is taken into acoount at a time.\\
+
+                Up to now, we assumed the fact that the decision tree is already in place.
+                First, it should be trained: \textit{i.e.} we have to determine its structure and all the thresholds.
+                The goals is to have leaves with no prediction errors.
+                As a consequence, all obsevations that end up in this leaf must be of the same class: the leaf is called pure.
+                While a node is not pure, it will not be a leaf.
+                In order to determine its spliting threshold, is chosen the one that has the most gain in ``purity''.
+                Consequently, there is a need of a metric $I$ that can describe the heterogenuity of a node.
+                These are usually based on a probabilistic interepretation as we compute the fraction of observations $p_c$ that go through a node of class $c \in \{1, 2, \dots, C\}$.
+                Three examples are provided:
+                \begin{itemize}
+                    \item Gini index:
+                    \begin{equation}
+                        \label{eq::gini}
+                        I_G\left(\left(p_c\right)_{c=1, 2, \dots, C}\right) = \sum_{c=1}^{C} p_c \cdot \sum_{\substack{l=1, 2, \dots, C\\l \neq c}} p_l;
+                    \end{equation}
+                    \item Entropy:
+                    \begin{equation}
+                        \label{eq::entropy}
+                        I_H\left(\left(p_c\right)_{c=1, 2, \dots, C}\right) = - \sum_{c=1}^{C} p_c \cdot \log_2(p_c);
+                    \end{equation}
+                    \item Variance:
+                    \begin{equation}
+                        \label{eq::variance_index}
+                        I_V\left(\left(x_p^i\right)_{i\in S}\right) = \frac{1}{2 \cdot \vert S \vert^2} \cdot \sum_{(i,j) \in S\times S} \left(x_p^i - x_p^j\right),
+                    \end{equation}
+                    where:
+                    \begin{conditions}
+                        p & is the chosen dimension to split over;\\
+                        S & $\subset \{1, 2, \dots, n\}$ is a set of indices.
+                    \end{conditions}
+                \end{itemize}
+                If we consider $S_b$ the set of indices of input going through a node $b$, we can compute the gain of a split at node $b$ as:
+                \begin{equation}
+                    \label{eq::split_gain}
+                    G_b \triangleq I(S_b) - \sum_{c \in \{d_b(\bm{x}^i): i \in S_b\}} I(S_c)
+                \end{equation}
+                The optimal threshold is chosen so that it maximizes the gain $G_b$.\\
+                Stoping only when total purity is achieved can yield complicated decision trees that overfit easily.
+                This motivates the use for early stoping criteria:
+                \begin{itemize}
+                    \item a minimal number of observations going through each node.
+                    \item a minimal purity ratio computed as the ratio of all instances going through the node having the dominant class.
+                    \item a maximal depth of the tree.
+                \end{itemize}
+                To conclude, the class at each leaf is taken as the dominant class of instances entering it.
+
             \paragraph{Bagging decision trees}
+                \begin{figure}
+                    \centering
+                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/random_forest/bagging}
+                    \caption{
+                        \label{fig::bagging} Illustration of the principle of bagging.
+                        For each decision function $\forall l=1,2,3\;D_l$, is represented the instances where the classier fails $F(D_l) \rightarrow \{(\bm{x}, y) \in \prod_{i=1}^{d}\mathscr{X}_i \times \{1,2,\dots,C\} : D_l(\bm{x}) \neq y\}$.
+                        In the case of unweigthed bagging, the aggregated classier will fail when more than half the classiers fail.
+                        In this case, the set $F(D_{\text{bagging}})$ is the union of intersections of two different $F(D_l)$: $F(D_{\text{bagging}}) = \bigcup_{l\neq p} F(D_l) \cap F(D_p)$.
+                        In this case classiers are diverse and, as a consequence, the aggregated classier fails less frequently than a single one.
+                    }
+                \end{figure}
+
+                \begin{figure}
+                    \centering
+                    \begin{subfigure}{.48\textwidth}
+                        \includestandalone[mode=buildnew, width=\textwidth]{figures/random_forest/circles_dt}
+                        \caption{
+                            \label{fig::decision_tree_circles} Decision tree separator.
+                        }
+                    \end{subfigure}
+                    \begin{subfigure}{.48\textwidth}
+                        \includestandalone[mode=buildnew, width=\textwidth]{figures/random_forest/circles_rf}
+                        \caption{
+                            \label{fig::rf_circles} Random forest separator (in purple) with constituing decision trees.
+                        }
+                    \end{subfigure}
+                    \caption{
+                        \label{fig::decision_tree_vs_rf} Difference betwwen a single decision tree and a random forest visualized in feature space for a generated toy data.
+                        We see how a random forest aggregates multiple shallow decision trees in order to achieve a good generalization power instead of overfitting to the sampled data.
+                    }
+                \end{figure}
+
+                While reducing the complexity of the decision tree can help avoid overfitting problems, one can risk an underfitting in the classification.
+                In order to find a compromise, a bagging strategy can be adopted.
+                The principle of bagging is to multiply different underperforming classiers and aggregate them together.
+                These classiers should be taken as diverse as possible in order to cover the whole feature space.
+                The aggregation is achieved through a majority vote and, if the classiers can provide probabilities, the vote can be weighted.
+                This is illustrated in Figure~\ref{fig::bagging}.
+                Mathematically the decision function of an unweighted aggregation of classifiers $\left(D_l\right)_{l=1,2,\dots,L}$ can be written as:
+                \begin{equation}
+                    \label{eq::decision_function_hard_bagging}
+                    \begin{aligned}
+                        D_{\text{hard bagging}, \left(D_l\right)_{l=1,2,\dots,L}}: \prod_{i=1}^{d}\mathscr{X}_i &\rightarrow \{1,2,\dots,C\}\\
+                        \bm{x} &\mapsto \arg \max_{c=1,2,\dots,C}\lvert\{l\in\{1,2,\dots,L\}: D_l(\bm{x}) = c\}\rvert
+                    \end{aligned},
+                \end{equation}
+                while the weighted aggregation using classifier output probabilities $\left(p_l\right)_{l=1,2,\dots,L}$ is expressed as:
+                \begin{equation}
+                    \label{eq::decision_function_weighted_bagging}
+                    \begin{aligned}
+                        D_{\text{weighted bagging}, \left((D_l, p_l)\right)_{l=1,2,\dots,L}}: \prod_{i=1}^{d}\mathscr{X}_i &\rightarrow \{1,2,\dots,C\}\\
+                        \bm{x} &\mapsto \arg \max_{c=1,2,\dots,C} \sum_{l=1}^{L} p_l\left(D_l(\bm{x}) = c\right) 
+                    \end{aligned}.
+                \end{equation}
+                Multiple decision trees are trained where each one hopefull specializes in a certain pattern.
+                This possible by randomly selecting a subset of the features when learning spliting thresholds.
+                We depict in Figure~\ref{fig::decision_function_weighted_bagging} the different between a random forest and a single decision tree.
             \paragraph{Properties}
     \subsection{Computer vision}
         \label{subsec::state_of_the_art::mlpr::computer_vision}
 
-        \subsubsection{Edges and corners}
+        \subsubsection{Edges}
         \subsubsection{Scattering}
         \subsubsection{Convolutional neural networks}
     \subsection{Graph classification}
