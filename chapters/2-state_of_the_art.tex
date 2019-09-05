@@ -145,7 +145,7 @@
             Second, are \gls{acr::lidar} point clouds.
             This type of data have the inherent advantage, compared to images, of natively providing depth information.
             \textcite{kaartinen2005accuracy} used data that was acquired multiple times with a guarantied precision up to \SI{0.083}{\cm} in plane and \SI{0.035}{\cm} in height.
-            Out of the latter were chosen reference points that were compared to equivalents in the evaluated building models (check the previous subsubsection).
+            Out of the latter were chosen reference points that were compared to equivalents in the evaluated building models (check the previous sub-subsection).
             All the points could also be used for comparison by computing metrics such as \gls{acr::rmse}~\parencite{lafarge_ijcv12,zhu2018large}.
             Original input data is not always accessible.
             One issue arises when using different data: data registration.
@@ -502,7 +502,7 @@
             A random forest is an agregation of decision tree classifiers.
             First, is explained how the latter works.
             Afterwards, we describe how the aggregation of basic classifiers can be beneficial for classification, especially in the case of decision trees.
-            We end this subsubsection discussing some random forests properties.
+            We end this sub-subsection discussing some random forests properties.
 
             \paragraph{Decision tree classifier}
                 \begin{figure}
@@ -661,8 +661,52 @@
     \subsection{Computer vision}
         \label{subsec::state_of_the_art::mlpr::computer_vision}
 
-        \subsubsection{Edges}
-        \subsubsection{Scattering}
+        \subsubsection{Edge detection}
+            Edges in images virtual curves that delimits objects.
+            Edge detection has been well studied for a long time in image processing and computer vision fields.
+            Actually, an edge is defined formally as a sharp change in the image signal.
+            Once detected they can be used for many applications.
+            One such use is building modeling.
+            As seen previously, buildings can be modeled fairly as piecewise planar surfaces.
+            As a consequence, one important building geometric feature are segments resulting from intersections of such surfaces.
+            Hence the wide use of edge detection as a proxy for building \gls{acr::3d} modeling.
+            The goal of this sub-subsection is not to provide a thorough survey of edge detection techniques, but rather, explain the basic ideas behind.\\
+            
+            A natural way to detect discontinuities in the signal is to compute gradients and look for high amplitudes.
+            Indeed, one can apply Sobel filters
+            \begin{equation}
+                \label{eq::sobel_filters}
+                \begin{cases}
+                    S_x \triangleq \begin{pmatrix}
+                        -1 & 0 & 1\\
+                        -2 & 0 & 2\\
+                        -1 & 0 & 1
+                    \end{pmatrix}\\
+                    S_y \triangleq \begin{pmatrix}
+                        -1 & -2 & 1\\
+                        0 & 0 & 0\\
+                        -1 & 2 & 1
+                    \end{pmatrix}\\
+                \end{cases}
+            \end{equation}
+            \footnote{which correspond to a discretization of partial derivatives $\frac{\partial}{\partial x}$ and $\frac{\partial}{\partial y}$ respectively.} to an image $I$.
+            Afterwards are retrieved the gradient amplitudes per pixel:
+            \begin{equation}
+                \label{eq::sobel_amplitude}
+                G = \sqrt{\left(S_x\star I\right)^2 + \left(S_y\star I\right)^2},
+            \end{equation}
+            where the operations are applied term-wise.
+            However, edges are not the only feature relating to high gradient amplitudes.
+            Noise results also in small amplitude discontinuities in the image.
+            In order to filter out noise, one can apply low frequency filters that smooths the image.
+            For instance, one can apply Gaussian filters.
+            These should be tuned in so that they eradicate most of the noise without smudging edges.
+            The same basic idea is used again for line segment detction for instance~\parencite{von2008lsd}.
+            Other approaches are possible but are discussed herein, such as wavelet based approaches~\parencite{mallat1992singularity}.
+
+        \subsubsection{\acrlong*{acr::scatnet}}
+            The goal behind \glspl{acr::scatnet} is fore and foremost is to provide a convenient theoretic explanation of the efficiency of \glspl{acr::cnn}.
+            
         \subsubsection{Convolutional neural networks}
     \subsection{Graph classification}
         \label{subsec::state_of_the_art::mlpr::graph_classification}
