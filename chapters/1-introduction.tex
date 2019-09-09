@@ -116,46 +116,44 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             \Gls{acr::3d} models play an important role in visual localization~\parencite{piasco2018survey, ijgi4042842}.\\
             The basic idea is to match an image with a known \gls{acr::3d} model of the city which can be textured or not~\parencite{arth2015instant, ardeshir2014gis, cham2010estimating, christie2016semantics} as shown in Figure~\ref{fig::navigation}.
             \begin{figure}[htpb]
-                \begin{subfigure}{.18\textwidth}
-                    \begin{center}
-                        \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/pose_estimation/input_image}
-                        \caption{\label{subfig::input_image} Input image}
-                    \end{center}
-                \end{subfigure}
-                \hfill
-                \begin{subfigure}{.18\textwidth}
-                    \begin{center}
-                        \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/pose_estimation/init_pose}
-                        \caption{\label{subfig::init_pose} Initial estimation}
-                    \end{center}
-                \end{subfigure}
-                \hfill
-                \begin{subfigure}{.18\textwidth}
-                    \begin{center}
-                        \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/pose_estimation/best_pose}
-                        \caption{\label{subfig::final_pose} Final estimation}
-                    \end{center}
-                \end{subfigure}
-                \hfill
-                \begin{subfigure}{.18\textwidth}
-                    \begin{center}
-                        \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/pose_estimation/ground_truth}
-                        \caption{\label{subfig::gt_pose} Ground truth}
-                    \end{center}
-                \end{subfigure}
-                \hfill
-                \begin{subfigure}{.18\textwidth}
-                    \begin{center}
-                        \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/pose_estimation/pose_viz}
-                        \caption{\label{subfig::viz} Different poses.}
-                    \end{center}
-                \end{subfigure}
-                \caption{
-                    \label{fig::navigation} Position estimation that relies on urban \gls{acr::2d5} models.
-                    The initial pose is derived from a sensor measurement that is not reliable.
-                    In Subfigures~\ref{subfig::init_pose}(\textit{resp.}~\ref{subfig::final_pose} and~\ref{subfig::gt_pose}), the \gls{acr::2d5} model is projected on the image using the initial pose (\textit{resp.} the refined pose and the ground truth one).
-                    The \gls{acr::2d5} model helps refine the camera pose~\parencite{armagan2017semantic}.
-                    It is shown in the last graph(\textit{cf.} Subfigure~\ref{subfig::viz}), where the final estimation (green) is closer to the ground truth (red) than the initial one (blue)~\parencite{armagan2017semantic}.
+                \centering
+                \ffigbox[\FBwidth]{
+                    \begin{subfloatrow}[5]
+                        \ffigbox[\FBwidth]{
+                            \includegraphics[width=.13\textwidth]{images/introduction/3d_model_applications/pose_estimation/input_image}
+                        }{
+                            \caption{\label{subfig::input_image} Input image}
+                        }
+                        \ffigbox[\FBwidth]{
+                            \includegraphics[width=.13\textwidth]{images/introduction/3d_model_applications/pose_estimation/init_pose}
+                        }{
+                            \caption{\label{subfig::init_pose} Initial estimation}
+                        }
+                        \ffigbox[\FBwidth]{
+                            \includegraphics[width=.13\textwidth]{images/introduction/3d_model_applications/pose_estimation/best_pose}
+                        }{
+                            \caption{\label{subfig::final_pose} Final estimation}
+                        }
+                        \ffigbox[\FBwidth]{
+                            \includegraphics[width=.13\textwidth]{images/introduction/3d_model_applications/pose_estimation/ground_truth}
+                        }{
+                            \caption{\label{subfig::gt_pose} Ground truth}
+                        }
+                        \ffigbox[\FBwidth]{
+                            \includegraphics[width=.13\textwidth]{images/introduction/3d_model_applications/pose_estimation/pose_viz}
+                        }{
+                            \caption{\label{subfig::viz} Different poses.}
+                        }
+                    \end{subfloatrow}
+                }
+                {
+                    \caption{
+                        \label{fig::navigation} Position estimation that relies on urban \gls{acr::2d5} models.
+                        The initial pose is derived from a sensor measurement that is not reliable.
+                        In Subfigures~\ref{subfig::init_pose} (\textit{resp.}~\ref{subfig::final_pose} and~\ref{subfig::gt_pose}), the \gls{acr::2d5} model is projected on the image using the initial pose (\textit{resp.} the refined pose and the ground truth one).
+                        The \gls{acr::2d5} model helps refine the camera pose~\parencite{armagan2017semantic}.
+                        It is shown in the last graph (\textit{cf.} Subfigure~\ref{subfig::viz}), where the final estimation (green) is closer to the ground truth (red) than the initial one (blue)~\parencite{armagan2017semantic}.
+                    }
                 }
             \end{figure}
             Once the image matched, one can retrieve an absolute 6-\gls{acr::dog} pose estimation.
@@ -180,27 +178,30 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             It can also be employed in the service of art.
             Actually,~\textcite{aubry2014painting} and~\textcite{russell2011automatic} illustrated how it is possible to align paintings or photographs with \gls{acr::3d} scenes(\textit{cf.} Figure~\ref{subfig::historical_pose}).\\
             \begin{figure}[htpb]
-                \begin{subfigure}{.48\textwidth}
-                    \begin{center}
-                        \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/insitu_sewer_hololens}
-                        \caption{\label{subfig::augemented_reality} Virtual vizualization of sewers in Paris based on the \gls{acr::3d} model of the city~\parencite{devaux20183d}.}
-                    \end{center}
-                \end{subfigure}
-                \hfill
-                \begin{subfigure}{.48\textwidth}
-                    \begin{center}
-                        \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/trocadero_historical}
-                        \caption[
-                            Pose estimation of a historical aerial image of Trocadero square (Paris, France) that was registered~\parencite{harrach2019interactive} to a city \gls{acr::3d} model visualized with iTowns~\parencite{devaux2012web}.
-                        ]{
-                            \label{subfig::historical_pose} Pose estimation of a historical aerial image of Trocadero square (Paris, France) that was registered~\parencite{harrach2019interactive} to a city \gls{acr::3d} model visualized with iTowns\footnotemark~\parencite{devaux2012web}.
+                \centering
+                \ffigbox[\FBwidth]{
+                    \begin{subfloatrow}[2]
+                        \ffigbox[\FBwidth]{
+                            \includegraphics[width=.45\textwidth]{images/introduction/3d_model_applications/insitu_sewer_hololens}
+                        }{
+                            \caption{\label{subfig::augemented_reality} Virtual vizualization of sewers in Paris based on the \gls{acr::3d} model of the city~\parencite{devaux20183d}.}
                         }
-                    \end{center}
-                \end{subfigure}
-                \caption[
-                    Examples of \gls{acr::3d} model applications in the entertainement field (images are courtesy of Alexandre Devaux)
-                ]{
-                    \label{fig::entertainement} Examples of \gls{acr::3d} model applications in the entertainement field (images are courtesy of Alexandre Devaux\footnotemark).
+                        \ffigbox[\FBwidth]{
+                            \includegraphics[width=.45\textwidth]{images/introduction/3d_model_applications/trocadero_historical}
+                        }{
+                            \caption[
+                                Pose estimation of a historical aerial image of Trocadero square (Paris, France) that was registered~\parencite{harrach2019interactive} to a city \gls{acr::3d} model visualized with iTowns~\parencite{devaux2012web}.
+                            ]{
+                                \label{subfig::historical_pose} Pose estimation of a historical aerial image of Trocadero square (Paris, France) that was registered~\parencite{harrach2019interactive} to a city \gls{acr::3d} model visualized with iTowns\footnotemark~\parencite{devaux2012web}.
+                            }
+                        }
+                    \end{subfloatrow}
+                }{
+                    \caption[
+                        Examples of \gls{acr::3d} model applications in the entertainement field (images are courtesy of Alexandre Devaux)
+                    ]{
+                        \label{fig::entertainement} Examples of \gls{acr::3d} model applications in the entertainement field (images are courtesy of Alexandre Devaux\footnotemark).
+                    }
                 }
             \end{figure}
             This last work could be also used to help marketers sell living units.
@@ -277,8 +278,8 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             Trees are usually modeled by template matching, such as the ellipsoidal form model in~\textcite{lafarge_ijcv12}, or by generic, species dependent, \gls{acr::cad} models like in~\textcite{iovan2008detection}.\\
             \begin{figure}[htpb]
                 \centering
-                \includegraphics[width=.48\textwidth]{images/introduction/modeling_trees_1}
-                \includegraphics[width=.48\textwidth]{images/introduction/modeling_trees_2}
+                \includegraphics[width=.45\textwidth]{images/introduction/modeling_trees_1}
+                \includegraphics[width=.45\textwidth]{images/introduction/modeling_trees_2}
                 \caption{
                     \label{fig::3d_tree_models} The city model is populated with generic models of trees depending on their class~\parencite{iovan2008detection}.
                 }
@@ -374,23 +375,23 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
 
             \begin{figure}
                 \begin{center}
-                    \begin{subfigure}{\textwidth}
-                        \begin{center}
+                    \ffigbox[\FBwidth]{
+                        \ffigbox[\FBwidth]{
                             \includestandalone[mode=buildnew, width=.7\textwidth]{figures/model_vs_mesh/mesh_model}
+                        }{
                             \caption{3D mesh of a building surface ($\approx$ \num[output-exponent-marker = \text{e}]{1e5} triangles).}
-                        \end{center}
-                    \end{subfigure}
-                    \\
-                    \begin{subfigure}{\textwidth}
-                        \begin{center}
+                        }
+                        \ffigbox[\FBwidth]{
                             \includestandalone[mode=buildnew, width=.7\textwidth]{figures/model_vs_mesh/ground_truth_model}
+                        }{
                             \caption{Building 3D polyhedral model ($\approx$ 800 facets).}
-                        \end{center}
-                    \end{subfigure}
-                    \caption{
-                        \label{fig::3dmodel_vs_3dmesh} Example of the difference between a \gls{acr::3d} mesh compared to a \gls{acr::3d} model.
-                        The first describes only the geometry, while the second is rich in semantics:
-                        for each architectural feature corresponds a single geometric primitive.
+                        }
+                    }{
+                        \caption{
+                            \label{fig::3dmodel_vs_3dmesh} Example of the difference between a \gls{acr::3d} mesh compared to a \gls{acr::3d} model.
+                            The first describes only the geometry, while the second is rich in semantics:
+                            for each architectural feature corresponds a single geometric primitive.
+                        }
                     }
                 \end{center}
             \end{figure}
@@ -438,8 +439,8 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             There can also be variabilities in radiometry that needs to be taken into account.\addref
             \begin{figure}[htpb]
                 \centering
-                \includegraphics[width=.48\textwidth]{images/introduction/registration_1}
-                \includegraphics[width=.48\textwidth]{images/introduction/registration_2}
+                \includegraphics[width=.45\textwidth]{images/introduction/registration_1}
+                \includegraphics[width=.45\textwidth]{images/introduction/registration_2}
                 \caption{
                     \label{fig::3d_model_terrestrial_registration} Terrestrial \gls{acr::lidar} point clouds are registred against building \gls{acr::3d} models~\parencite{monnier2014}.
                     The registred point clouds can be used to enrich the \gls{acr::3d} models with detailed reconstructions of fa\c{c}ades.
@@ -483,27 +484,29 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             At a regional or continental scale, the differences become even more overt: \textit{c.f.} Figure~\ref{subfig::different_regions}.
             As a result, some choose to alternate automatic and interactive methods~\parencite{musialski2013survey}: an automatic reconstruction followed by a interactive correction step.
             \begin{figure}[htpb]
-                \begin{subfigure}{.48\textwidth}
-                    \begin{center}
-                        \includegraphics[width=\textwidth]{example-image}
-                        \caption{
-                            \label{subfig::xiiith_paris_haussmann_tower} Example of two nearly located buildings, in the XIIIth disctict of Paris, with different architectural styles:
-                            a Haussmann style building, dating from the begining of the XXth century, next to very tall tower, built \textit{circa} 1970s.
+                \ffigbox[\FBwidth]{
+                    \begin{subfloatrow}[2]
+                        \ffigbox[\FBwidth]{
+                            \includegraphics[width=.45\textwidth]{example-image}
+                        }{
+                            \caption{
+                                \label{subfig::xiiith_paris_haussmann_tower} Example of two nearly located buildings, in the XIIIth disctict of Paris, with different architectural styles:
+                                a Haussmann style building, dating from the begining of the XXth century, next to very tall tower, built \textit{circa} 1970s.
+                            }
                         }
-                    \end{center}
-                \end{subfigure}
-                \hfill
-                \begin{subfigure}{.48\textwidth}
-                    \begin{center}
-                        \includegraphics[width=\textwidth]{example-image}
-                        \caption{
-                            \label{subfig::different_regions} Example of two buildings from two different locations in the world:
-                            Blalallala.
-                        }
-                    \end{center}
-                \end{subfigure}
-                \caption{
-                    \label{fig::different_styles} Building architecture shows high heterogenuity not only across different regions, but also in the same urban scene.
+                        \ffigbox[\FBwidth]{
+                            \includegraphics[width=.45\textwidth]{example-image}
+                        }{
+                            \caption{
+                                \label{subfig::different_regions} Example of two buildings from two different locations in the world:
+                                Blalallala.
+                            }
+                        }                        
+                    \end{subfloatrow}
+                }{
+                    \caption{
+                        \label{fig::different_styles} Building architecture shows high heterogenuity not only across different regions, but also in the same urban scene.
+                    }
                 }
             \end{figure}
         

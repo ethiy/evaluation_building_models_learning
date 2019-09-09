@@ -393,25 +393,30 @@
 
                 \begin{figure}
                     \centering
-                    \begin{subfigure}{.48\textwidth}
-                        \centering
-                        \includestandalone[mode=buildnew, width=\linewidth]{figures/svm/circles_original}
+                    \ffigbox[\FBwidth]{
+                        \begin{subfloatrow}[2]
+                            \ffigbox[\FBwidth]{
+                                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/svm/circles_original}
+                            }{
+                                \caption{
+                                    \label{fig::original_circles}
+                                    Original representation of the dataset in the feature space.
+                                }
+                            }
+                            \ffigbox[\FBwidth]{
+                                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/svm/circles_polar}
+                            }{
+                                \caption{
+                                    \label{fig::polar_circles}
+                                    Representation of the dataset using polar coordinates
+                                }
+                            }
+                        \end{subfloatrow}
+                    }{
                         \caption{
-                            \label{fig::original_circles}
-                            Original representation of the dataset in the feature space.
+                            \label{fig::circles_transformation}
+                            Example of a transformation of a dataset that can be linearly separable in the maped space. 
                         }
-                    \end{subfigure}
-                    \begin{subfigure}{.48\textwidth}
-                        \centering
-                        \includestandalone[mode=buildnew, width=\linewidth]{figures/svm/circles_polar}
-                        \caption{
-                            \label{fig::polar_circles}
-                            Representation of the dataset using polar coordinates
-                        }
-                    \end{subfigure}
-                    \caption{
-                        \label{fig::circles_transformation}
-                        Example of a transformation of a dataset that can be linearly separable in the maped space. 
                     }
                 \end{figure}
 
@@ -612,21 +617,28 @@
 
                 \begin{figure}
                     \centering
-                    \begin{subfigure}{.48\textwidth}
-                        \includestandalone[mode=buildnew, width=\textwidth]{figures/random_forest/circles_dt}
+                    \ffigbox[\FBwidth]{
+                        \begin{subfloatrow}[2]
+                            \ffigbox[\FBwidth]{
+                                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/random_forest/circles_dt}
+                            }{
+                                \caption{
+                                    \label{fig::decision_tree_circles} Decision tree separator.
+                                }
+                            }
+                            \ffigbox[\FBwidth]{
+                                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/random_forest/circles_rf}
+                            }{
+                                \caption{
+                                    \label{fig::rf_circles} Random forest separator (in purple) with constituing decision trees.
+                                }
+                            }
+                        \end{subfloatrow}
+                    }{
                         \caption{
-                            \label{fig::decision_tree_circles} Decision tree separator.
+                            \label{fig::decision_tree_vs_rf} Difference betwwen a single decision tree and a random forest visualized in feature space for a generated toy data.
+                            We see how a random forest aggregates multiple shallow decision trees in order to achieve a good generalization power instead of overfitting to the sampled data.
                         }
-                    \end{subfigure}
-                    \begin{subfigure}{.48\textwidth}
-                        \includestandalone[mode=buildnew, width=\textwidth]{figures/random_forest/circles_rf}
-                        \caption{
-                            \label{fig::rf_circles} Random forest separator (in purple) with constituing decision trees.
-                        }
-                    \end{subfigure}
-                    \caption{
-                        \label{fig::decision_tree_vs_rf} Difference betwwen a single decision tree and a random forest visualized in feature space for a generated toy data.
-                        We see how a random forest aggregates multiple shallow decision trees in order to achieve a good generalization power instead of overfitting to the sampled data.
                     }
                 \end{figure}
 

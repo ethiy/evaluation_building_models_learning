@@ -3,6 +3,37 @@
     \subsection{The need for reference data}
    
 \section{The general framework}
+    In order to build a generic and flexible taxonomy, we rely on two criteria for error compilation: the building model \gls{acr::lod} and the error semantic level, named henceforth \textit{finesse} (cf. Figure~\ref{fig::taxonomy}). Different degrees of \textit{finesse} describe, from coarse to fine, the specificity of defects. Errors with maximal \textit{finesse} are called \textit{atomic} errors. Multiple \textit{atomic} errors can affect the same building. For instance, topological defects induce, almost always, geometrical ones. In practice, only independently coexisting \textit{atomic} defects are reported. The idea is to provide the most relevant information to be able to correct a model. \textit{Atomic} errors can thus be intuitively correlated to independent actions to be chosen by an operator or an algorithm so as to correct the model.
+
+    \section{The general framework}
+        The main idea of error hierarchization is to enable modularity in the taxonomy, and thus achieve a strong flexibility towards input urban scenes and desired error precision. A general layout is first drawn, followed by a more detailed error description.
+
+        At a first level, model qualifiability is studied. In fact, aside from formatting issues or geometric inconsistencies~\parencite{ledoux2018val3dity}, other reasons make building models unqualifiable. For instance, buildings can be occluded by vegetation and thus cannot be assessed with most of the remote sensing data sources. Generally speaking, input models can be impaired by some pathological cases that are outside our evaluation framework. In consequence, \textit{qualifiable} models are distinguished here from \textit{unqualifiable} buildings. This first level corresponds to a \textit{finesse} equal to $0$. At the \textit{finesse} level $1$, we predict the correctness of all qualifiable buildings. It is the lowest semantization level at which the evaluation of a model is expressed. Then, a model is either \textit{valid} or \textit{erroneous}. Most state-of-the-art evaluation methods address this level.
+
+        Model errors are grouped into three families depending on the underlying \gls{acr::lod}.
+        The first family of errors ``\textit{Building Errors}'' affects the building in its entirety.
+        It corresponds to an accuracy evaluation at \gls{acr::lod}-$0$ (footprint errors) $\cup$ \gls{acr::lod}-1 (height/geometric error).
+        At the next \gls{acr::lod}-2, the family ``\textit{Facet Errors}'' gathers defects that can alter fa\c{c}ade or roof fidelity.
+        The last error family, ``\textit{Superstructure Errors}'', describes errors that involve superstructures modeled at \gls{acr::lod}-3.
+        Only the first two families are studied in this paper.
+
+        Each family contains \textit{atomic} errors of maximal \textit{finesse} equal to $3$. Although they can co-occur in the same building model and across different families, these errors are semantically independent. They represent specific topological or geometric defects. Topological errors translate inaccurate structural modeling, while geometric defects raise positioning infidelity.
+
+        At evaluation time, three parameters play a role in determining which error labels to consider. The first is the \textbf{\gls{acr::elod}}. Every reconstruction method targets a certain set of \glspl*{acr::lod}. In consequence, when assessing a reconstruction, a \gls{acr::lod} must be specified. At a given \gls{acr::elod}, all error families involving higher orders will be ignored. Depending on the target of the qualification process, a \textbf{finesse} level might be preferred. This second evaluation parameter specifies the appropriate semantic level at which errors will be reported. The last one is error \textbf{exclusivity}. It conveys family error hierarchy. Errors of a given \gls{acr::lod}$ = l$ family are prioritized over ones with higher \gls{acr::lod}$ > l$.
+
+    \begin{figure}
+        \begin{center}
+            \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy_tree}
+            \caption{
+                \label{fig::taxonomy} 
+                The proposed taxonomy structure.
+                In our case of very high resolution overhead image modeling, only two family errors are depicted.
+                At \textit{finesse} level $2$, hierarchization is possible: the \textbf{exclusivity} parameter can thus act.
+                However, it is not the case at the \textit{atomic} errors level since they are independent.
+            }
+        \end{center}
+    \end{figure}
+
     \subsection{Quality evaluation scope}
     \subsection{Scalability vs observability compromise}
     \subsection{Error classification}
