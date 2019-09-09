@@ -187,7 +187,7 @@
             This is the first building block in \gls{acr::nn}.
             It has as input a number $d$ of stimuli, each one denoted $x_i,\quad \forall i = 1,2,\dots,d$.
             For each stimulus indexed by $i\in \{1,\dots,d\}$, is associated a weight $w_i$.
-            Written in vectorial form, $\bm{x} = \begin{pmatrix}x_1 & x_2 & \hdots  & x_d \end{pmatrix}^\intercal$ (\textit{resp.} $\bm{w} = \begin{pmatrix}w_1 & w_2 & \hdots & w_d \end{pmatrix}^\intercal$) represent the input (\textit{resp.} the weights).
+            Written in vectorial form, $\bm{x} = \begin{bmatrix}x_1 & x_2 & \hdots  & x_d \end{bmatrix}^\intercal$ (\textit{resp.} $\bm{w} = \begin{bmatrix}w_1 & w_2 & \hdots & w_d \end{bmatrix}^\intercal$) represent the input (\textit{resp.} the weights).
             A score is obtained from a linear combination of all the stimuli: $s = \bm{w}^\intercal \cdot \bm{x} = \sum_{i=1}^{d} w_i \cdot x_i$.
             If the score is above a certain threshold $\theta \in \mathbb{R}$, the output of the perceptron is $1$.
             Otherwise, the result is $0$.
@@ -278,8 +278,6 @@
                 Since all support vectors of the same class lay on the same line, the choice of $(s,t)$ is inconsequential.
                 \begin{align}
                     M &= \frac{\bm{w}^\intercal}{\Vert\bm{w}\Vert} \cdot (\bm{x}^+_1 - \bm{x}^-_1) \nonumber \\
-                    &= \frac{\bm{w}^\intercal\cdot\bm{x}^+_1 - \bm{w}^\intercal\cdot\bm{x}^-_1}{\Vert\bm{w}\Vert} \nonumber \\
-                    &= \frac{(\bm{w}^\intercal\cdot\bm{x}^+_1 + b) - (\bm{w}^\intercal\cdot\bm{x}^-_1 + b)}{\Vert\bm{w}\Vert} \nonumber \\
                     M &= \frac{2}{\Vert\bm{w}\Vert}
                 \end{align}
 
@@ -424,13 +422,13 @@
                 Using a polar coordinate transformation 
                 \begin{align*}
                     \Phi: \mathbb{R}^2 &\rightarrow \mathbb{R}^2 \\
-                    \begin{pmatrix}
+                    \begin{bmatrix}
                         x \\
                         y
-                    \end{pmatrix} &\mapsto \begin{pmatrix}
+                    \end{bmatrix} &\mapsto \begin{bmatrix}
                         \sqrt{x^2 + y^2} \\
                         \text{arctan}_2(y, x)
-                    \end{pmatrix},
+                    \end{bmatrix},
                 \end{align*}
                 the dataset can be linearly separable.
                 In this instance, the original probability distribution is known as it was generated manually.
@@ -656,7 +654,7 @@
                 \end{equation}
                 Multiple decision trees are trained where each one hopefull specializes in a certain pattern.
                 This possible by randomly selecting a subset of the features when learning spliting thresholds.
-                We depict in Figure~\ref{fig::decision_function_weighted_bagging} the different between a random forest and a single decision tree.
+                We depict in Figure~\ref{fig::decision_tree_vs_rf} the different between a random forest and a single decision tree.
             \paragraph{Properties}
     \subsection{Computer vision}
         \label{subsec::state_of_the_art::mlpr::computer_vision}
@@ -673,23 +671,23 @@
             The goal of this sub-subsection is not to provide a thorough survey of edge detection techniques, but rather, explain the basic ideas behind.\\
             
             A natural way to detect discontinuities in the signal is to compute gradients and look for high amplitudes.
-            Indeed, one can apply Sobel filters
+            Indeed, one can apply Sobel filters\footnote{which correspond to a discretization of partial derivatives $\frac{\partial}{\partial x}$ and $\frac{\partial}{\partial y}$ respectively.}
             \begin{equation}
                 \label{eq::sobel_filters}
                 \begin{cases}
-                    S_x \triangleq \begin{pmatrix}
+                    S_x \triangleq \begin{bmatrix}
                         -1 & 0 & 1\\
                         -2 & 0 & 2\\
                         -1 & 0 & 1
-                    \end{pmatrix}\\
-                    S_y \triangleq \begin{pmatrix}
+                    \end{bmatrix}\\
+                    S_y \triangleq \begin{bmatrix}
                         -1 & -2 & 1\\
                         0 & 0 & 0\\
                         -1 & 2 & 1
-                    \end{pmatrix}\\
+                    \end{bmatrix}\\
                 \end{cases}
             \end{equation}
-            \footnote{which correspond to a discretization of partial derivatives $\frac{\partial}{\partial x}$ and $\frac{\partial}{\partial y}$ respectively.} to an image $I$.
+            to an image $I$.
             Afterwards are retrieved the gradient amplitudes per pixel:
             \begin{equation}
                 \label{eq::sobel_amplitude}
@@ -705,8 +703,111 @@
             Other approaches are possible but are discussed herein, such as wavelet based approaches~\parencite{mallat1992singularity}.
 
         \subsubsection{\acrlong*{acr::scatnet}}
-            The goal behind \glspl{acr::scatnet} is fore and foremost is to provide a convenient theoretic explanation of the efficiency of \glspl{acr::cnn}.
-            
+            \glspl{acr::scatnet} are convolutional networks built using wavelet filters for image feature extraction.
+            Contrarily to \glspl{acr::cnn}, \glspl{acr::scatnet} seek an image representation $\Phi$ without relying on supervized learning, but rather using mathematical properties of the signal.
+            A scene that is captured from different point of views, while yielding different images, should have the same representation.
+            Just as with interset point detection~\parencite{harris1988combined,lowe1999object}, the representation of an image should be invariant to scale, translation and rotation~\parencite{mallat2012group,sifre2013rotation,bruna2013invariant}.
+            Let $x$ be an image and $G$ a group such as a translatin group.
+            The action of $g\in G$ on $x: u \mapsto x(u)$ is written as:
+            \begin{equation}
+                \label{eq::action_group}
+                L_g(x): u \mapsto x\left(g^{-1}(u)\right).
+            \end{equation}
+            $\Phi$ is said to be invariant to $g$ if and only if:
+            \begin{equation}
+                \label{eq::invariance}
+                \Phi\circ L_g\left(x\right) = \Phi(x),
+            \end{equation}
+            and covariant if and only if:
+            \begin{equation}
+                \label{eq::covariance}
+                \Phi\circ L_g\left(x\right) = L_g\circ\Phi(x).
+            \end{equation}
+            Images of similar objects should have a representations that are also similar.
+            Using Euclidean distances as a similarity measure, this property implies $\Phi$ to be contractive~\parencite{bruna2013invariant}.
+            Given two images $x$ and $y$, we write:
+            \begin{equation}
+                \label{eq::contractive}
+                \Vert \Phi(x) - \Phi(y) \Vert \leq \Vert x-y \Vert.
+            \end{equation}
+            Since images are subject to distortions and not all objects are rigid, the mapping $\Phi$ should be stable under small deformations~\parencite{bruna2013invariant,sifre2013rotation,mallat2012group}.
+            Given a small deformation modelled as a diffeomorphism\footnote{A differentiable bijection which inverse is differentiable also.} $\tau$ such that $\Vert\nabla \tau\Vert_\infty < 1$, there exists a constant $C>0$ such that for any image $x$:
+            \begin{equation}
+                \label{eq::stable_deformation}
+                \Vert \Phi(x) - \Phi\circ L_\tau(x) \Vert \leq C \cdot \Vert x\Vert \cdot \Vert\nabla \tau\Vert_\infty.
+            \end{equation}
+            where:
+            \begin{conditions}
+                L_\tau(x) & $u \mapsto x(u - \tau(u))$ is the action of the deformation $x$ on a signal $x$.
+            \end{conditions}
+
+            \glspl{acr::cnn} learn a representation that verifies these previous conditions stated in Equations~\ref{eq::invariance},~\ref{eq::contractive} and~\ref{eq::stable_deformation}.
+            In fact, \glspl{acr::cnn} are indeed are made invariant to translations and local deformations up to a scale mainly due to the pooling layers.
+            Since the weights are learned based on a classification objetive, images with similar content are supposed to be mapped to the same region.
+            A \gls{acr::scatnet} can be seen as a reverse engineered \gls{acr::cnn}.
+            The idea is to apply linear convolutional operators followed by a non-linearity and some pooling operators.
+            In a \gls{acr::scatnet} the learned filters are replaced by a specific wavelet decomposition, the non-linearity is acheived using the modulus operator and pooling is obtained through a low pass filter.
+            The low-pass filter is critical for the invariance condition, while the high frequencies are extracted using the wavelet convolutions.
+            The non-linearity, just in \glspl{acr::cnn}, is necessary in order to obtain interesting non-linear representations.\\
+
+            Based on a band-pass filter $\psi$ one can generate a two-dimentional wavelet filter bank using rotations $r$ and dilatations of scale $j$:
+            \begin{equation}
+                \label{eq::filter_bank}
+                \psi_{j,r} = 2^{-2\cdot j}\cdot\psi\left(2^{-j}\cdot r^{-1}(u)\right).
+            \end{equation}
+            When the Fourier transform of $\psi$ is centred at a frequency $\omega$, the wavelet $\psi_{j,r}$ is centered around $\left(2^{-j}\cdot r(\omega)\right)$ with bandwidth propotional to $2^{-j}$.
+            Based on these filters is computed the wavelet transform of a signal $x$: $\{x\star\psi_{j,r}\}_{j,r}$.
+            Morlet wavelets and a Gaussian low-pass filter are usual choices~\parencite{bruna2013invariant,sifre2013rotation}.
+            The basic bloc of a \gls{acr::scatnet} is the wavelet-modulus operator:
+            \begin{equation}
+                \label{eq::basic_operator}
+                U_{j,r}(x) = \vert x\star\psi_{j,r} \vert.
+            \end{equation}
+            This can be reapplyed successively like with \glspl{acr::cnn} at different scales and rotations:
+            \begin{equation}
+                \label{eq::basic_operator}
+                U[p](x) = U_{j_m,r_m}\circ U_{j_{m-1},r_{m-1}} \circ \dots U_{j_1,r_1} (x),
+            \end{equation}
+            where:
+            \begin{conditions}
+                p & is called a path and is the sequence of parameters $\left((j_i, r_i)\right)_{i=1,2,\dots,m}$.
+            \end{conditions}
+            A scattering transform at a path $p$ consists in a pooling of the the successive wavelet-modulus operators, using a scaled low-pass filter $\phi_J: u\mapsto 2^{-2\cdot J}\cdot\phi\left(2^{-\cdot J}\cdot u\right)$:
+            \begin{equation}
+                \label{eq::scattering_transform}
+                S_J[p](x) \triangleq U[p](x) \star \phi_J
+            \end{equation}
+
+            If these filters can cover the whole frequency space then the scattering transform is invertible.
+            Moreover, the scattering tranform can be proved to verify all the required conditions~\parencite{mallat2012group}.
+            The convolution depends on the choice of the group $G$.
+            For images, scaling can be diassociated from rotations and translations.
+            This is not true between rotations and translations~\parencite{sifre2013rotation,oyallon2015deep}.
+            Convolutions are computed on $G$:
+            \begin{equation}
+                \label{eq::group_convolution}
+                x\star y(g) = \int_{h\in G} x(h)\cdot y(h^{-1}*g)
+            \end{equation}
+            A logarithm is applied then to the scattering coefficients as well as a global scale space averaging in order to obtain a global image descriptor.
+
+            \begin{figure}
+                \centering
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/scattering_network}
+                \caption{
+                    \label{fig::scatnet} Illustration of a \gls{acr::scatnet}.
+                    At each level are computed are computed convolutions with a filter bank followed by a modulus operator.
+                    The scattering coefficients are obtained then by a low-pass filter (in blue).
+                    In practice, not all scattering coefficients are computed.
+                }
+            \end{figure}
+
+            In Figure~\ref{fig::scatnet} is represented the \acrlong{acr::scatnet}.
+            The number of scattering coefficients is exponential in the network depth.
+            Usually, not all coefficients are computed.
+            Instead they are computed following a non decreasing frequency path.
+            Moreover, most of the energy of the signal is contained in the first two layers.
+            This is why, in practice, the computation is stopped at that level.
+
         \subsubsection{Convolutional neural networks}
     \subsection{Graph classification}
         \label{subsec::state_of_the_art::mlpr::graph_classification}
