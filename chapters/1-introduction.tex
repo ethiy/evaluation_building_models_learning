@@ -641,24 +641,33 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
         Topologic consistency inspection, in contrast, as discussed in subsection~\ref{subsec::introduction::building_model_evaluation::topological}, has received ample attention from the \gls{acr::gis} community.
         In consequence, it will not be of the focus in this work.\\
 
-        Building model evaluation is, herein, studied under two constraints: \textbf{large-scale} and \textbf{automation}.
-        Each one will have an impact on what settings are to be considered.
-        Below, explained are the consequences of each constraint.\\
-
         Building modeling has been shown, earlier (\textit{cf.} subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}), to be a bottleneck for urban outdoor modeling at large scales.
         As a consequence, evaluating building \gls{acr::3d} models is essential for entire scene model inspection.
         The difference between buildings and most urban elements is the significance of semantics (\textit{cf.} subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}).
         The latter translates into structural geometric properties that are not faithfully captured by geometric fidelity metrics.
         As a consequence, the proposed approach should factor semantics in the evaluation.
-        As a result, like with \glspl{acr::lod}, errors are exptected to be discretized owing to the semantic character of the evaluation.
-        Due to the large scale of the study, the proposed categorization must be stable no matter how the treated urban scene change.\\
+        As a result, like with \glspl{acr::lod}, errors are exptected to be categorized owing to the semantic character of the evaluation.\\
 
-        Semantically aware inspection is natural for human operators.
-        It is, however, difficult to automate.
-        First, models could result from different pipelines and heterogenuous sensors.
-        Consequently, the automatic evaluation approach has to be independent from the used building modeling method.
-        It has also to take into consideration the \gls{acr::lod} of input models.
-        These requirements are not easy to formalize.
+        The evaluation is, herein, studied under two constraints: \textbf{large-scale} and \textbf{automation}.
+        Below, explained are the consequences of each one.
+        \paragraph{Large-scale}
+            Due to the large-scale requirement, the proposed categorization must be stable no matter how the treated urban scene change.
+            It is due to the fact that having each urban zone with its own specific error definitions would hinder scaling the defect categorization.
+            In fact, this would involve frequent human interactions in order to alleviate possible issues when merging conflicting error classifications.
+            Such interventions are always expensive and would scale poorly at city, country or continental levels.\\
+            Quality evaluation involves the use of reference data against which reconstructed building models are compared.
+            In subsection~\ref{subsec::state_of_the_art::quality::reference}, are discussed the different forms that these data can take.
+            A high quality reference usually requires manual labour that is evidently unscalable.
+            Consequently, the less costly the reference data is the more adapted the evaluation method will be to large scales.
+            Moreover, if possible, avoiding reference data altogether would be the best alternative.
+
+        \paragraph{Automation}
+            Semantically aware inspection is natural for human operators.
+            It is, however, difficult to automate.
+            In fact, models result from different reconstruction approaches and heterogenuous sensors.
+            They also come in all possible \glspl{acr::lod}.
+            This diversity in building models poses serious issues for any automatic evaluation system.
+            This means that the latter should be guaranteed to function properly independently from the origin of the evaluated models.
 
     \subsection{Potential use}
         \label{subsec::introduction::contributions::use}
@@ -670,9 +679,9 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             This is equivalent to considering change as an semantic error that impacts the geometry of the building.
             Second is the fact that change can be implicitly detected from geometric errors.
             In fact, the change that can be observed from sensor data, will render the outdated model invalid geometrically.
-            \begin{figure}[H]
+            \begin{figure}[htpb]
                 \centering
-                \includegraphics[width=\textwidth]{images/introduction/use/change_detection_taneja}
+                \includegraphics[width=.7\textwidth]{images/introduction/use/change_detection_taneja}
                 \caption{\label{fig::3d_change_detection} Illustration of change detection in urban areas~\parencite{taneja2013city}.}
             \end{figure}
 
@@ -681,9 +690,9 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             In practice, errors are detected by operators in order to correct them.
             The first task, if automated, can be time saving in the correction post-processing step.
             It is even possible to automate the whole correction process using the advances achieved in interactive reconstruction~\parencite{kowdle2011active}.
-            \begin{figure}[H]
+            \begin{figure}[htpb]
                 \centering
-                \includegraphics[width=\textwidth]{images/introduction/use/active_learning_kowdle}
+                \includegraphics[width=.7\textwidth]{images/introduction/use/active_learning_kowdle}
                 \caption{\label{fig::corrections} Example of an interactive pipeline that needs human operators to provide correct initial reconstructions~\parencite{kowdle2011active}.}
             \end{figure}
 
@@ -695,9 +704,9 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             They will produce less errors when those conjectures are met and fail otherwise.
             These assumptions are fixed, for instance, in terms of building types (Haussmann style, Manhattan-world \dots), geometric criterea (planar surfaces, symmetry \dots).
             Hence, choosing a modeling approach can determine how good are the models and vice versa.
-            \begin{figure}[H]
+            \begin{figure}[htpb]
                 \centering
-                \includegraphics[width=\textwidth]{images/introduction/use/comparison_li}
+                \includegraphics[width=.7\textwidth]{images/introduction/use/comparison_li}
                 \caption{\label{fig::comparison} Depiction of different models for the same building~\parencite{li2016manhattan}.}
             \end{figure}
 
@@ -710,9 +719,9 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             An automatic evaluation method can help check that the uploaded models respect the specifications.
             Another issue is the presence of vandalism in open data~\parencite{neis2012towards}.
             The presented approach can be used to help understandin user behaviors and detect vandaliser.
-            \begin{figure}[H]
+            \begin{figure}[htpb]
                 \centering
-                \includegraphics[width=\textwidth]{images/introduction/use/crowdsourcing}
+                \includegraphics[width=.7\textwidth]{images/introduction/use/crowdsourcing}
                 \caption{\label{fig::crowdsourcing} A sample of a building model made by a SketchUp user.}
             \end{figure}
 
