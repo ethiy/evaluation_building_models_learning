@@ -81,7 +81,7 @@
     \subsection{\textsc{Height based features}}
         For this modality, raw depth information is provided by a \gls{acr::dsm} as a 2D height grid: $dsm \in \mathbb{R}^{w\times h}$\footnote{$w$ (\textit{resp.} h) is the grid width (\textit{resp.} height)}.
         It must have been produced around the same time of the 3D reconstruction so as to avoid temporal discrepancies.
-        It is compared to the model height~\parencite{Bredif2007,zebedin2008fusion}.
+        It is compared to the model height~\parencite{bredif20073d,zebedin2008fusion}.
         The latter is inferred from its facets plane equations.
         It is then rasterized into the image: $alt \in \mathbb{R}^{w\times h}$ at the same spatial resolution as $dsm$.
         Their difference generates a discrepancy map (Figure~\ref{fig::pipeline}.c).
@@ -102,7 +102,7 @@
                 The difference is transformed into a vector using a histogram (d).
             }
         \end{figure}
-        Equation~\ref{eq::height_based_features} summarizes how building height-based features are computed. Different from a root mean square metric~\parencite{lafarge2012creating,Poullis2013}, the histogram captures the discrepancy distribution, which is particularly helpful in detecting undersegmentation defects or geometric imprecision. However, as for the previous geometric attributes, the grid structure of information coming from the model is lost. Errors cannot be spatialized and linked to a specific facet.
+        Equation~\ref{eq::height_based_features} summarizes how building height-based features are computed. Different from a root mean square metric~\parencite{lafarge2012creating,poullis2013framework}, the histogram captures the discrepancy distribution, which is particularly helpful in detecting undersegmentation defects or geometric imprecision. However, as for the previous geometric attributes, the grid structure of information coming from the model is lost. Errors cannot be spatialized and linked to a specific facet.
 
     \subsection{\textsc{Image based features}}
         We aim to benefit from the high frequencies in Very High Spatial Resolution optical images. Building edges correspond to sharp discontinuities in images~\parencite{ortner2007building}. We verify this by comparing these edges to local gradients. We start by projecting building models on the orthorectified image $I$ (Figure~\ref{fig::radio}). For each facet, we isolate an edge $s$ (Figure~\ref{fig::seg_inter}). In an ideal setting, gradients computed at pixels $g$ that intersect $s$ need to be almost be collinear with its normal $\vec{n}(s)$. In consequence, applying the same statistics functions $S$, we compute the distribution of the cosine similarity between the local gradient and the normal all along that $s$:
