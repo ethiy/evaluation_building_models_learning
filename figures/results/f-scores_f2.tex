@@ -1,0 +1,140 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{pgfplots}
+
+\begin{document}
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt, 92.26, 0.09
+        Nantes, 76.26, 0.66
+        Paris-13, 80.60, 0.0
+    }\Building
+
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt, 91.08, 0.24
+        Nantes, 92.78, 0.16
+        Paris-13, 94.99, 0.0
+    }\Facet
+
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt \(\rightarrow\) Nantes, 77.23, 0.07
+        Elancourt \(\rightarrow\) Paris-13, 79.79, 0.13
+        Nantes \(\rightarrow\) Paris-13, 75.76, 0.33
+        Nantes \(\rightarrow\) Elancourt, 87.44, 0.27
+        Paris-13 \(\rightarrow\) Nantes, 76.88, 0.62
+        Paris-13 \(\rightarrow\) Elancourt, 89.38, 0.09
+    }\BuildingTr
+
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt \(\rightarrow\) Nantes, 91.37, 0.64
+        Elancourt \(\rightarrow\) Paris-13, 93.47, 0.97
+        Nantes \(\rightarrow\) Paris-13, 90.76, 0.43
+        Nantes \(\rightarrow\) Elancourt, 90.26, 0.20
+        Paris-13 \(\rightarrow\) Nantes, 91.03, 0.24
+        Paris-13 \(\rightarrow\) Elancourt, 91.33, 0.22
+    }\FacetTr
+
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        20\%, 87.13, 0.31
+        30\%, 87.53, 0.38
+        40\%, 87.37, 0.27
+        50\%, 87.11, 0.19
+        60\%, 87.80, 0.24
+        70\%, 87.62, 0.12
+    }\BuildingRpr
+
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        20\%, 91.60, 0.35
+        30\%, 91.79, 0.33
+        40\%, 91.51, 0.50
+        50\%, 91.72, 0.31
+        60\%, 91.83, 0.49
+        70\%, 91.61, 0.35
+    }\FacetRpr
+    
+    \begin{tikzpicture} 
+        \node (origin) at (0,0) {};
+        \node (left) at (7.5, 0) {};
+        \node (right) at (15, 0) {};
+
+        \begin{axis}[
+            at={(origin)},
+            xlabel={(a) Per-area training and testing.},
+            xlabel style={
+                at={(8em,-8em)},
+                anchor=north
+            },
+            ylabel={F-score},
+            symbolic x coords={{Elancourt}, {Nantes}, {Paris-13}},
+            xtick=data,
+            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm},
+            ymax=99,
+            ymin=71
+        ]
+            \addplot+[no markers, magenta, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\Building};
+            \addplot+[no markers, magenta, dashed, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\Facet};
+        \end{axis} 
+
+        \begin{axis}[
+            at={(left)},
+            xlabel={(b) Transferability study.},
+            xlabel style={
+                at={(8em,-8em)},
+                anchor=north
+            },
+            yticklabels={,,},
+            symbolic x coords={
+                {Elancourt \(\rightarrow\) Nantes},
+                {Elancourt \(\rightarrow\) Paris-13},
+                {Nantes \(\rightarrow\) Paris-13},
+                {Nantes \(\rightarrow\) Elancourt},
+                {Paris-13 \(\rightarrow\) Nantes},
+                {Paris-13 \(\rightarrow\) Elancourt}
+            },
+            xtick=data,
+            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm},
+            ymax=99,
+            ymin=71,
+            legend style={
+                at={(7.5em,-12em)},
+                anchor=north,
+                legend columns=-2
+            }
+        ]
+            \addplot+[no markers, magenta, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BuildingTr};
+            \addplot+[no markers, magenta, dashed, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FacetTr};
+
+            \legend{\strut Building error, \strut Facet error}
+        \end{axis} 
+
+        \begin{axis}[
+            at={(right)},
+            xlabel={(c) Representativeness study.},
+            xlabel style={
+                at={(8em,-8em)},
+                anchor=north
+            },
+            yticklabels={,,},
+            symbolic x coords={
+                {20\%},
+                {30\%},
+                {40\%},
+                {50\%},
+                {60\%},
+                {70\%}
+            },
+            xtick=data,
+            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm},
+            ymax=99,
+            ymin=71
+        ]
+            \addplot+[no markers, magenta, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BuildingRpr};
+            \addplot+[no markers, magenta, dashed, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FacetRpr};
+        \end{axis} 
+    \end{tikzpicture}
+\end{document}

@@ -14,7 +14,8 @@
 
 
 \usepackage{graphicx}
-\usepackage{caption,subcaption}
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage{floatrow}
 
 \usepackage{standalone}
@@ -28,6 +29,7 @@
 \usepackage{tikz}
 \usetikzlibrary{calc, 3d, shadows, decorations, shapes.arrows, fadings}
 \usepackage{pgfplots}
+\usepackage{pgfplotstable}
 \usepackage{forest}
 
 \usepackage{amsmath}
@@ -140,14 +142,16 @@
         \input{chapters/1-introduction}
    
     \chapter{State-of-the-art}
-        \label{chap::introduction}
+        \label{chap::state_of_the_art}
         \input{chapters/2-state_of_the_art}
 
     \chapter{Semantic evaluation of \gls{acr::3d} models}
+        \label{chap::semantic_evaluation}
         \input{chapters/3-semantic_evaluation}
 
-    \chapter{Quality evaluation pipeline}
-        \input{chapters/4-methodology}
+    \chapter{Learned quality evaluation}
+        \label{chap::learned_evaluation}
+        \input{chapters/4-learned_evaluation}
 
     \chapter{The evaluation setup}
         \input{chapters/5-experiments}
