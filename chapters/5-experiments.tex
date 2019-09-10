@@ -4,11 +4,11 @@
 
 \clearpage
 
-\section{Datasets}
+\section{\textsc{Datasets}}
     
-    \subsection{Data preprocesing}
+    \subsection{\textsc{Data preprocesing}}
 
-    \subsection{Urban scenes and modelling techniques}
+    \subsection{\textsc{Urban scenes and modelling techniques}}
         \gls{acr::3d} models from three different cities of France are selected in order to assess the performance of our framework: \textbf{Elancourt}, \textbf{Nantes}, and the XIII\textsuperscript{th} district of Paris (\textbf{Paris-13}) (Figure~\ref{fig::zones_orthos}).
         \textbf{Elancourt} is a small city exhibiting a high diversity of building types: residential areas (hipped roof buildings), and industrial districts (larger buildings with flat roofs).
         \textbf{Nantes} represents a denser urban setting with lower building diversity.
@@ -27,7 +27,7 @@
         They were annotated according to the atomic errors list provided by our taxonomy.
         Figure~\ref{fig::data_stats} reports modeling errors statistics over the annotated buildings.
 
-    \subsection{Error statistics}
+    \subsection{\textsc{Error statistics}}
         Unqualifiable buildings represent a small\footnote{
             Geometrically inconsistent \gls{acr::3d} models were filtered out in a preprocessing (nadir projection) step.
             This fraction corresponds only to the occluded (partially or completly) buildings that could not be qualified.
@@ -45,8 +45,8 @@
         In general, all errors have the same frequency across datasets, apart from \texttt{FUS}, \texttt{BUS}, and \texttt{BIT}.
         They greatly change from Elancourt (less dense and more heterogeneous) to Paris and Nantes (compact and uniform patterns).
 
-\section{Pipeline evaluation}
-    \subsection{Experimental set-up}
+\section{\textsc{Pipeline evaluation}}
+    \subsection{\textsc{Experimental set-up}}
         Four feature configurations were tested: ``geometric features'' (\textbf{Geom.}) only, ``geometric and height features''(\textbf{Geom.} $\cup$ \textbf{Hei.}), ``geometric and image features''(\textbf{Geom.} $\cup$ \textbf{Im.}) as well as ``geometric, height and image features''(\textbf{All.}).
         Each feature modality generates a $20$ dimension vector.
         The \gls{acr::dsm}s and orthorectified images used to derive height and image features have the same spatial resolution as the reconstruction input data.
@@ -57,13 +57,13 @@
         Precision indicates how much samples, amongst the detected ones, were, in truth, part of the studied class~\parencite{Powers}.
         We also summarize these two ratios with their harmonic mean, the F-score.
 
-    \subsection{Feature analysis}
+    \subsection{\textsc{Feature analysis}}
         We assess the added value of each modality. Various feature configurations are studied.
         They are compared with a baseline consisting in predicting the errors using only the \gls{acr::rmse}, which is the standard measure in most of \gls{acr::3d} reconstruction methods.
         We conclude the analysis by studying the feature importance per training zone.
         All experiments are conducted performing a 10-fold cross validation to avoid overfitting/underfitting issues.
 
-        \subsubsection{RMSE predictive capacity}
+        \subsubsection{\textsc{RMSE predictive capacity}}
             We train the classifier on Elancourt with a one dimensional feature vector \gls{acr::rmse}. Mean test results are shown in Table~\ref{tab::rmse_prediction} We can conclude that the \gls{acr::rmse} is not able to detect our  errors.  We can distinguish two clusters: high recall and low precision and overall accuracy (BOS, FOS and FIG) and low recall and precision (BUS, BIB, BIT, FUS, FIB and FIT). The first group consists of the most numerous errors (Figure~\ref{fig::data_stats}). This explains how the classifier assigns to almost all samples the positive class: we end up with a high ratio of false positives (false alarms) and hence a high recall ratio but coupled with a weak precision and overall accuracy. The inverse happens with the rest of the errors as we obtain a high percentage of false negative.
             \begin{table}[h]
                 \begin{tabular}{c c c c c c c c c c}
@@ -84,7 +84,7 @@
                     $\bm{Acc}$ expresses the overall accuracy ratio.
                 }
             \end{table}
-        \subsubsection{Feature ablation study}
+        \subsubsection{\textsc{Feature ablation study}}
             \label{subsubsec:ablation}
             We tested the different feature configurations, at finesse level 3 and in all urban zones.
             Mean precision and recall test results are reported in Table~\ref{tab::ablation_f3}.
@@ -203,7 +203,7 @@
             This may result from the highly heterogeneous aspect of this dataset that encompasses high tower buildings with a densely populated city district.
             Finally, well represented errors are more easily detected than the less frequent ones, especially the rare ones like \texttt{FIT} in Nantes and Paris-13.
         
-        \subsubsection{Feature importance}
+        \subsubsection{\textsc{Feature importance}}
             Random forest classifiers can easily infer feature importance at training time.
             These were here computed and aggregated by modality in all urban scenes (Figure~\ref{fig::feature_importances}).
 
@@ -230,4 +230,4 @@
             However, during training, all modalities are relevant ($\sim$1/3 in Figure~\ref{fig::feature_importances}).
             This explains why all configurations are kept for subsequent analysis.
 
-    \subsection{Classifier analysis}
+    \subsection{\textsc{Classifier analysis}}

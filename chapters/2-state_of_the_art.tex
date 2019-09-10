@@ -4,29 +4,29 @@
 
 \clearpage
 
-\section{Automatic building \gls*{acr::3d} modelling}
+\section{\textsc{Automatic building \texorpdfstring{\gls*{acr::3d}}{3D} modelling}}
     \label{sec::state_of_the_art::building_modeling}
 
-    \subsection{Input data heterogenuity}
+    \subsection{\textsc{Input data heterogenuity}}
         \label{subsec::state_of_the_art::building_modeling::input}
-        \subsubsection{Acquisition mode}
+        \subsubsection{\textsc{Acquisition mode}}
 
-        \subsubsection{Data type}
+        \subsubsection{\textsc{Data type}}
 
-    \subsection{Automatization level}
+    \subsection{\textsc{Automatization level}}
         \label{subsec::state_of_the_art::building_modeling::automatization}
 
-    \subsection{Modeling strategy}
+    \subsection{\textsc{Modeling strategy}}
         \label{subsec::state_of_the_art::building_modeling::strategy}
 
-    \subsection{Indoor \textit{vs.} Outdoor}
+    \subsection{\textsc{Indoor \textit{vs.} Outdoor}}
         \label{subsec::state_of_the_art::building_modeling::in_out_door}
 
-    \subsection{Modeling pipeline scalability}
+    \subsection{\textsc{Modeling pipeline scalability}}
         \label{subsec::state_of_the_art::building_modeling::scalability}
 
     \clearpage
-\section{Quality evaluation of \gls*{acr::3d} building models}
+\section{\textsc{Quality evaluation of \texorpdfstring{\gls*{acr::3d}}{3D} building models}}
     \label{sec::state_of_the_art::quality}
     We have seen previously the various methods used to automatically model building.
     The goal of this section is to describe the available approaches that evaluate the quality of such models.
@@ -35,14 +35,14 @@
     An alternative prespective to charecterize quality evaluation methods: it relies upon the type of reference data (\textit{cf.} subsection~\ref{subsec::state_of_the_art::quality::reference}).
     Based on this survey, we state in details, in subsection~\ref{subsec::state_of_the_art::quality::novelty}, how the work presented in this thesis is different from what was already proposed in the literature. 
 
-    \subsection{Output types}
+    \subsection{\textsc{Output types}}
         \label{subsec::state_of_the_art::quality::output}
         We distinguish herein quality evaluation methods based on the output they produce.
         Fidelity metrics is a first instance of output types.
         The second is semantic labels.
         In what follows, we explain, in details, the differences between the two method types.
 
-        \subsubsection{Fidelity metrics based methods}
+        \subsubsection{\textsc{Fidelity metrics based methods}}
             One way to charecterize the quality of a building model is to compute indices or metrics reporting its accuracy.\\
 
             Most metrics provide information on the geometric precision of the model.
@@ -84,7 +84,7 @@
             As a consequence, it was used as a index to evaluate reconstructions\footnote{It is sometimes called by its antonym: complexity.}: the more a model was compact the better it was.
             This is reflected, for instance, in the work of~\textcite{lafarge_ijcv12},~\textcite{zhang2017deep},~\textcite{duan_eccv16},~\textcite{zeng2018neural} and~\textcite{zhu2018large}.
 
-        \subsubsection{Semantic labels based methods}
+        \subsubsection{\textsc{Semantic labels based methods}}
             In a drive to provide a quantitative assessment of building models, the previously defined metrics fail to convey specific and localized information about a predetermined building model.
             These indices are usually used to give a general idea of the quality of models produced by some modeling method.
             Moreover, they do not usually carry semantics, which is critical for further processing steps such as manual correction~\parencite{elberink2011quality}.
@@ -117,7 +117,7 @@
             Moreover, it adopts the point of view of the modeling method that was used to provide their dataset.
             Knowing the specific weaknesses of the latter guided the choice of error family classification and the error definitions.
 
-    \subsection{Reference data types}
+    \subsection{\textsc{Reference data types}}
         \label{subsec::state_of_the_art::quality::reference}
         In order to evaluate models, reference data are utilized for comparison.
         Based on the latter, another way to discriminate among modeling methods is possible.
@@ -125,7 +125,7 @@
         Remote sensing data is the second alternative that is used for reference.
         Hereafter, is explained the difference between the two categories.
 
-        \subsubsection{High resolution ground truth}
+        \subsubsection{\textsc{High resolution ground truth}}
             Ground truth building models are mainly acquired manually.
             Herein, are listed the different ground truth measurement techniques, in descending order of accuracy.\\
 
@@ -137,7 +137,7 @@
             ~\textcite{zebedin2008fusion} uses such a method to produce their reference data from aerial images with accuracy up to the order of \SI{\pm 0.15}{\m}.
             The same procedure was used also by~\textcite{jaynes2003recognition} producing models with inaccuraccies bounded by \SI{\pm 1/3}{\m}.
 
-        \subsubsection{Remote sensing data}
+        \subsubsection{\textsc{Remote sensing data}}
             Reference ground truth models are not easy to come by~\parencite{schuster2003new}.
             The previous choice is hard to scale up to district or city levels.
             On the other hand, remote sensing data, which are more available, could be used, instead, as reference.
@@ -168,7 +168,7 @@
             In fact, \gls{acr::dsm}, being a result of oblique images, can be used as proxy, to help extracting \gls{acr::3d} geometric features instead of recomputing correlation scores like in~\parencite{boudet2006supervised}.
             It can also be valuable for missing court detection by calculating sky viewshed angle scores~\parencite{michelin2013quality}.
 
-    \subsection{Novelty of the proposed method}
+    \subsection{\textsc{Novelty of the proposed method}}
         \label{subsec::state_of_the_art::quality::novelty}
         Based on the subsection~\ref{subsec::introduction::contributions::positioning}, we can understand how most quality evaluation methods are unsuitable for the objectives that where stated.\\
 
@@ -186,7 +186,7 @@
         It also offers a new taxonomy of errors that is intended to be exhaustive and generalizable.
         The last idea will be developped in details in section~\ref{chap::semantic_evaluation}, while section~\ref{chap::learned_evaluation} presents how features are chosen to represent building models and the learning process.
 
-\section{Supervised learning and pattern recognition}
+\section{\textsc{Supervised learning and pattern recognition}}
     \label{sec::state_of_the_art::mlpr}
     In this section are presented notions from statistic learning and computer vision domains that were usefull for this work.
     This constitutes a simple reminder and is not a thorough survey of the field.
@@ -194,7 +194,7 @@
     Second (section~\ref{subsec::state_of_the_art::mlpr::computer_vision}) comes a presentation of computer vision concepts on which our method is based.
     Last is discussed graph classification that was also instrumental in this work.
 
-    \subsection{Supervised classifiers}
+    \subsection{\textsc{Supervised classifiers}}
         \label{subsec::state_of_the_art::mlpr::classifiers}
         In this subsection, we denote the observations and their classes by $\left((\bm{x^i}, y^i)\right)_{i=1,2,\dots,n}$.
         Features are in practice finite dimensional vectors: \textit{i.e.} $\forall i=1,2,\dots,n \;, \bm{x^i} \in \mathbb{R}^d$.
@@ -209,7 +209,7 @@
         We start by the perceptron model that useful to study in order to understand \glspl{acr::nn}.
         Afterwards, is presented the \gls{acr::svm} algorithm, before describing Random Forests.
         Both were used in this work.
-        \subsubsection{Perceptron}
+        \subsubsection{\textsc{Perceptron}}
             In an effort to understand neural activity,~\textcite{rosenblatt1958perceptron} proposed the perceptron model.
             This is the first building block in \gls{acr::nn}.
             It has as input a number $d$ of stimuli, each one denoted $x_i,\quad \forall i = 1,2,\dots,d$.
@@ -236,7 +236,7 @@
             It combines a linear operation $\bm{x} \mapsto \bm{w} \cdot \bm{x} + b$ and a non linear one $a: s \mapsto \mathbb{1}_{s \geq 0}$.
             The latter is an example of what is called an activation function.
             The choice of the latter plays a critical role in the learning capability of the classifier.
-        \subsubsection{\acrlong*{acr::svm}}
+        \subsubsection{\textsc{\acrlong*{acr::svm}}}
             \glspl{acr::svm} are a special type of linear classifiers (\textit{i.e.} perceptrons).
             We transfrom the initial classes $\left(y^k\right)_{k=1, 2, \dots, n}$ to $\left(\tilde{y}^k\right)_{k=1, 2, \dots, n}$, using the map: $y \mapsto \tilde{y} = 2\cdot y - 1$.
             There are always two possible classes $\{1, -1\}$.
@@ -528,7 +528,7 @@
                     
             \paragraph{Properties}
                 \gls{acr::svm} is a
-        \subsubsection{Random forest}
+        \subsubsection{\textsc{Random forest}}
             A random forest is an agregation of decision tree classifiers.
             First, is explained how the latter works.
             Afterwards, we describe how the aggregation of basic classifiers can be beneficial for classification, especially in the case of decision trees.
@@ -695,10 +695,10 @@
                 This possible by randomly selecting a subset of the features when learning spliting thresholds.
                 We depict in Figure~\ref{fig::decision_tree_vs_rf} the different between a random forest and a single decision tree.
             \paragraph{Properties}
-    \subsection{Computer vision}
+    \subsection{\textsc{Computer vision}}
         \label{subsec::state_of_the_art::mlpr::computer_vision}
 
-        \subsubsection{Edge detection}
+        \subsubsection{\textsc{Edge detection}}
             Edges in images virtual curves that delimits objects.
             Edge detection has been well studied for a long time in image processing and computer vision fields.
             Actually, an edge is defined formally as a sharp change in the image signal.
@@ -741,7 +741,7 @@
             The same basic idea is used again for line segment detction for instance~\parencite{von2008lsd}.
             Other approaches are possible but are discussed herein, such as wavelet based approaches~\parencite{mallat1992singularity}.
 
-        \subsubsection{\acrlong*{acr::scatnet}}
+        \subsubsection{\textsc{\acrlong*{acr::scatnet}}}
             \glspl{acr::scatnet} are convolutional networks built using wavelet filters for image feature extraction.
             Contrarily to \glspl{acr::cnn}, \glspl{acr::scatnet} seek an image representation $\Phi$ without relying on supervized learning, but rather using mathematical properties of the signal.
             A scene that is captured from different point of views, while yielding different images, should have the same representation.
@@ -847,9 +847,9 @@
             Moreover, most of the energy of the signal is contained in the first two layers.
             This is why, in practice, the computation is stopped at that level.
 
-        \subsubsection{Convolutional neural networks}
-    \subsection{Graph classification}
+        \subsubsection{\textsc{Convolutional neural networks}}
+    \subsection{\textsc{Graph classification}}
         \label{subsec::state_of_the_art::mlpr::graph_classification}
 
-        \subsubsection{Graph kernels}
-        \subsubsection{Graph neural networks}
+        \subsubsection{\textsc{Graph kernels}}
+        \subsubsection{\textsc{Graph neural networks}}
