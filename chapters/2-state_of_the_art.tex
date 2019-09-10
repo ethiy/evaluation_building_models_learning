@@ -7,14 +7,23 @@
 \section{Automatic building \gls*{acr::3d} modelling}
     \label{sec::state_of_the_art::building_modeling}
 
-    \subsection{Input data classification}
+    \subsection{Input data heterogenuity}
         \label{subsec::state_of_the_art::building_modeling::input}
+        \subsubsection{Acquisition mode}
 
-    \subsection{Strategy classification}
+        \subsubsection{Data type}
+
+    \subsection{Automatization level}
+        \label{subsec::state_of_the_art::building_modeling::automatization}
+
+    \subsection{Modeling strategy}
         \label{subsec::state_of_the_art::building_modeling::strategy}
 
-    \subsection{Scale classification}
-        \label{subsec::state_of_the_art::building_modeling::scale}
+    \subsection{Indoor \textit{vs.} Outdoor}
+        \label{subsec::state_of_the_art::building_modeling::in_out_door}
+
+    \subsection{Modeling pipeline scalability}
+        \label{subsec::state_of_the_art::building_modeling::scalability}
 
     \clearpage
 \section{Quality evaluation of \gls*{acr::3d} building models}
@@ -24,6 +33,7 @@
     These could be distinguished based on two criteria.
     In subsection~\ref{subsec::state_of_the_art::quality::output}, are presented the quality evaluation methods based on their output.
     An alternative prespective to charecterize quality evaluation methods: it relies upon the type of reference data (\textit{cf.} subsection~\ref{subsec::state_of_the_art::quality::reference}).
+    Based on this survey, we state in details, in subsection~\ref{subsec::state_of_the_art::quality::novelty}, how the work presented in this thesis is different from what was already proposed in the literature. 
 
     \subsection{Output types}
         \label{subsec::state_of_the_art::quality::output}
@@ -158,7 +168,24 @@
             In fact, \gls{acr::dsm}, being a result of oblique images, can be used as proxy, to help extracting \gls{acr::3d} geometric features instead of recomputing correlation scores like in~\parencite{boudet2006supervised}.
             It can also be valuable for missing court detection by calculating sky viewshed angle scores~\parencite{michelin2013quality}.
 
-    \subsection{Objective statement}
+    \subsection{Novelty of the proposed method}
+        \label{subsec::state_of_the_art::quality::novelty}
+        Based on the subsection~\ref{subsec::introduction::contributions::positioning}, we can understand how most quality evaluation methods are unsuitable for the objectives that where stated.\\
+
+        In fact, the semantic character of the evaluation overrules approaches relying only on geometry based metrics.
+        This represents most of the methods discussed earlier (\textit{c.f.} subsection~\ref{subsec::state_of_the_art::quality::output}).
+        These metrics could be used afterwards one a semantic error is identified as a complement to help quantify the defect.
+        On the other hand, the need for reasonably available reference data, which is dictated by the large scale constraint, implies the reliance on remote sensing data based methods (\textit{c.f.} subsection~\ref{subsec::state_of_the_art::quality::reference}).\\
+
+        Methods that satisfy both conditions are in the number of two:~\textcite{boudet2006supervised,michelin2013quality}.
+        Both define semantic errors that are detected using Oblique images and \glspl{acr::dsm}.
+        A classier learns statistical properties of the building \gls{acr::3d} models using features that are derived from these sensor data.
+        The learning process further helps scaling the process to unseen data by predicting errors using the same attributes.\\
+
+        Our work relies on the same idea, but goes a bit farther by proposing the possibility to evaluate building models without using any reference data.
+        It also offers a new taxonomy of errors that is intended to be exhaustive and generalizable.
+        The last idea will be developped in details in section~\ref{chap::semantic_evaluation}, while section~\ref{chap::learned_evaluation} presents how features are chosen to represent building models and the learning process.
+
 \section{Supervised learning and pattern recognition}
     \label{sec::state_of_the_art::mlpr}
     In this section are presented notions from statistic learning and computer vision domains that were usefull for this work.
@@ -454,7 +481,7 @@
                         & \max
                         & & \sum_{1\geq i \geq n} \alpha_i - \frac{1}{2}\cdot\sum_{\substack{1\geq l \geq n\\1\geq p \geq n}}\alpha_l\cdot\alpha_p\cdot\tilde{y}^l\cdot\tilde{y}^p\cdot k(\bm{x}^l, \bm{x}^p)\\
                         &\text{s.t.} & & \sum_{1\geq i \geq n}\tilde{y}^i\cdot\alpha_i=0 \\
-                        & & & 0 \leq \alpha_i \leq C \;\forall i=1,2,\dots,n
+                        & & & 0 \leq \alpha_i \leq C \; \forall i=1,2,\dots,n
                         \end{aligned}
                 \end{equation}
 
