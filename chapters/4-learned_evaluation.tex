@@ -116,20 +116,22 @@
                 \floatbox{figure}{
                     \begin{subfloatrow}[2]
                         \ffigbox[\FBwidth]{
-                            \caption{}\label{fig::radio}
+                            \caption{
+                                Model facets (each represented by a specific color) are nadir projected onto the orthoimage.
+                            }\label{fig::radio}
                             }			
                             {
                                 \includegraphics[width=.45\textwidth]{images/features/image/nadir_superposition}
                             }
                         \quad
                         \ffigbox[\FBwidth]{
-                                \caption{}\label{fig::seg_inter}
+                                \caption{Local gradients (in purple), on intersecting pixels (in green), are compared to the edge (in red) normal (in black).}\label{fig::seg_inter}
                             }
                             {\includestandalone[mode=buildnew, width=.45\textwidth]{figures/features/radiometric_features}
                         }
                     \end{subfloatrow}
                 }{
-                    \caption{Illustration of how features are derived from optical images. Model facets (each represented by a specific color) are projected onto  the aerial image (a). (b) local gradients (in purple), on intersecting pixels (in green), are compared to the edge (in red) normal (in black).}\label{fig::image_based}
+                    \caption{Illustration of how features are derived from optical images.}\label{fig::image_based}
                 }
             \end{center}
         \end{figure}
@@ -149,9 +151,53 @@
         These image-based attributes are helpful for precision error detection. As example, facet imprecise borders can be detected as local gradients direction will be expected to differ greatly from the inaccurate edge. It can also be detrimental in under-segmentation detection as colors can change considerably from one facet or one building to another inducing an gradient orthogonal to edge normals.
 
     \section{Classification process}
+        Two sources of flexibility are taken into account.
+        First, the parametric nature of the taxonomy leads to a varying set of label.
+        Secondly, the classifier should be able to handle the heterogeneity of the feature vector and must adapt to different input vectors types and sizes.
+
     \subsection{Classification problems}
+        Both the classification problem nature and the label set are determined by the three previously defined taxonomy parameters (Table~\ref{tab::problems}).
+
+        \begin{table}
+            \begin{tabular}{c c c c}
+                \toprule
+                \textbf{\textit{finesse}} & \textbf{\gls{acr::elod}} & \textbf{exclusivity} & \textbf{Classification output}\\
+                \midrule
+                \scriptsize
+                1 & --- & --- & Binary(Valid, Erroneous)\\
+                2 & \gls{acr::lod}-1 & --- & Binary(Valid, Building error)\\
+                2 & \gls{acr::lod}-2 & on & MultiClass(Valid, Building error, Facet error)\\
+                2 & \gls{acr::lod}-2 & off & MultiLabel(Valid, Building error, Facet error)\\
+                3 & \gls{acr::lod}-1 & on & MultiLabel(children(Binary(Valid, Building error)))\\
+                3 & \gls{acr::lod}-2 & on & MultiLabel(children(MultiClass(Valid, Building error, Facet error)))\\
+                3 & \gls{acr::lod}-1 & off & MultiLabel(children(Building error))\\
+                3 & \gls{acr::lod}-2 & off & MultiLabel(children(Building error)$\cup$ children(Facet error))\\
+                \bottomrule
+            \end{tabular}
+            \caption{
+                \label{tab::problems} The summary of all possible classification problem types.
+                children($error$) lists the children of $error$ from the taxonomy tree (Figure~\ref{fig::taxonomy}).
+            }
+        \end{table}
+            
+        \textbf{\textit{Finesse}} = 1 level corresponds to the standard binary classification problem: ` `Valid'' or ``Erroneous''.
+        At \textit{finesse}=2, the \textbf{\gls{acr::elod}} can then take two values in the aerial reconstruction case: \gls{acr::lod}-1 or \gls{acr::lod}-2.
+        If set at \gls{acr::lod}-1, it is a binary classification problem: ``Valid'' or ``Building error''.
+        For \gls{acr::lod}-2, if the \textbf{exclusivity} is on, it will be a multi-class problem: ``Valid'', ``Building error'' or ``Facet errors''.
+        If set off, it becomes a multi-label one with the same labels.
+        At $\textit{finesse}=3$ level, if the \textbf{exclusivity} is on, it is a 2-stage classification problem.
+        In the first stage, a multi-class task\footnote{It is binary in the spcial case \gls{acr::elod} = \gls{acr::lod}1, problem, like in the previous semantic degree.}
+        predicts the error family, after which a second multi-label problem decides between the predicted error family children.
+        If the \textbf{exclusivity} is off, it turns into  1-stage multi-label problem that predicts the existence of each atomic error corresponding to the chosen \gls{acr::elod}.
+
     \subsection{Classifier choice}
-    \subsection{}
+        The highly modular nature of the framework with multimodal features involving many parameters restricts the choice of classifiers.
+        Random Forest classifiers~\parencite{breiman2001random,criminisi2013decision} are selected.
+        They can manage a large number of features with different dynamics and coming from multiple modalities.
+        Relying on their bagging property, a high number of trees ($1,000$ elements) is necessary to cover most of the feature space, while a limited tree depth ($4$) helps avoiding overfitting during training.
+        It adapts to any of our classification paradigm: multi-class or multi-label.
+        In the latter case, a one-vs-all approach is adopted in addition so as to address each label separately.
+
 \section{Richer features}
     \subsection{Graph classification}
     \subsection{Image classification}
