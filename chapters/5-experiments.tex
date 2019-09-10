@@ -1,12 +1,233 @@
 \minitoc
+
+\vfill
+
+\clearpage
+
 \section{Datasets}
+    
     \subsection{Data preprocesing}
+
     \subsection{Urban scenes and modelling techniques}
+        \gls{acr::3d} models from three different cities of France are selected in order to assess the performance of our framework: \textbf{Elancourt}, \textbf{Nantes}, and the XIII\textsuperscript{th} district of Paris (\textbf{Paris-13}) (Figure~\ref{fig::zones_orthos}).
+        \textbf{Elancourt} is a small city exhibiting a high diversity of building types: residential areas (hipped roof buildings), and industrial districts (larger buildings with flat roofs).
+        \textbf{Nantes} represents a denser urban setting with lower building diversity.
+        In Paris-13, high towers, with flat roof, coexist with Haussmann style buildings that typically exhibit highly fragmented roofs.
+        The Elancourt (\textit{resp.} Nantes and Paris-13) scene contains 2,009 (\textit{resp.} 748 and 478) annotated building models.
+        The \gls{acr::dsm} and orthorectified image resolution is \SI{6}{\cm} while it is \SI{10}{\cm} for the two other areas.
+
+        \gls{acr::3d} models were generated using the algorithm described in~\parencite{durupt2006}, out of existing building footprints and aerial VHR multi-view \glspl{acr::dsm}.
+        The modeling algorithm simulates possible roof structures with facets satisfying some geometric constraints.
+        The best configuration is selected using a scoring system on the extrapolated roofs.
+        Finally, vertical building fa\c{c}ades connect the optimal roof to the building footprint.
+        These models have a \gls{acr::lod}-2 level.
+        This method is adapted to roof types of low complexity and favors symmetrical models (residential areas).
+        It has been selected to ensure a varying error rate for the three areas of interest, especially since models were generated with partly erroneous cadastral maps.
+        3,235 buildings in total are considered.
+        They were annotated according to the atomic errors list provided by our taxonomy.
+        Figure~\ref{fig::data_stats} reports modeling errors statistics over the annotated buildings.
+
     \subsection{Error statistics}
+        Unqualifiable buildings represent a small\footnote{
+            Geometrically inconsistent \gls{acr::3d} models were filtered out in a preprocessing (nadir projection) step.
+            This fraction corresponds only to the occluded (partially or completly) buildings that could not be qualified.
+        } fraction of the dataset ($<$ 7.5\%).
+        Only a small fraction of buildings are valid\footnote{
+            Valid means the absence of errors for a specified building.
+        }:
+        57 (2.84\%) in Elancourt, 55 (7.35\%) for Nantes and 21 (4.39\%) in Paris-13.
+        Most buildings are affected by the \textit{Building Errors} family ($>$ 58.16\%) and the \textit{Facet Errors} one ($>$ 75.94\%).
+        At the \textit{finesse} level 3, more differences are noticed across.
+        Over-segmentation errors are generally well represented, for all \gls{acr::lod}s, with at least 38.9\% and at most 66.8\%.
+        The same is true for \texttt{FIG} (59.8-80\%).
+        Otherwise, the presence ratio is within the percentage interval of [10, 30], except for topological defects.
+        This negatively impacts the detection of such rare labels.
+        In general, all errors have the same frequency across datasets, apart from \texttt{FUS}, \texttt{BUS}, and \texttt{BIT}.
+        They greatly change from Elancourt (less dense and more heterogeneous) to Paris and Nantes (compact and uniform patterns).
+
 \section{Pipeline evaluation}
     \subsection{Experimental set-up}
+        Four feature configurations were tested: ``geometric features'' (\textbf{Geom.}) only, ``geometric and height features''(\textbf{Geom.} $\cup$ \textbf{Hei.}), ``geometric and image features''(\textbf{Geom.} $\cup$ \textbf{Im.}) as well as ``geometric, height and image features''(\textbf{All.}).
+        Each feature modality generates a $20$ dimension vector.
+        The \gls{acr::dsm}s and orthorectified images used to derive height and image features have the same spatial resolution as the reconstruction input data.
+        Labels are extracted from a non \textbf{exclusive} and \textbf{\gls{acr::elod}} $=$ \gls{acr::lod}-2 taxonomy.
+        All \textit{finesse} levels were tested. The overall accuracy is not interesting due to the highly unbalanced label distribution.
+        We prefer reporting recall ($Rec$) and precision ($Prec$) ratios.
+        Recall expresses, from a number of samples of a given class, the proportion that was rightfully detected as such.
+        Precision indicates how much samples, amongst the detected ones, were, in truth, part of the studied class~\parencite{Powers}.
+        We also summarize these two ratios with their harmonic mean, the F-score.
+
     \subsection{Feature analysis}
+        We assess the added value of each modality. Various feature configurations are studied.
+        They are compared with a baseline consisting in predicting the errors using only the \gls{acr::rmse}, which is the standard measure in most of \gls{acr::3d} reconstruction methods.
+        We conclude the analysis by studying the feature importance per training zone.
+        All experiments are conducted performing a 10-fold cross validation to avoid overfitting/underfitting issues.
+
         \subsubsection{RMSE predictive capacity}
+            We train the classifier on Elancourt with a one dimensional feature vector \gls{acr::rmse}. Mean test results are shown in Table~\ref{tab::rmse_prediction} We can conclude that the \gls{acr::rmse} is not able to detect our  errors.  We can distinguish two clusters: high recall and low precision and overall accuracy (BOS, FOS and FIG) and low recall and precision (BUS, BIB, BIT, FUS, FIB and FIT). The first group consists of the most numerous errors (Figure~\ref{fig::data_stats}). This explains how the classifier assigns to almost all samples the positive class: we end up with a high ratio of false positives (false alarms) and hence a high recall ratio but coupled with a weak precision and overall accuracy. The inverse happens with the rest of the errors as we obtain a high percentage of false negative.
+            \begin{table}[h]
+                \begin{tabular}{c c c c c c c c c c}
+                    \toprule
+                    & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG} \\
+                    \midrule
+                    $\bm{Rec}$ & 99.55 & 0.21 & 0 & 0 & 98.68 & 0.63 & 0 & 0 & 98.15 \\
+                    \midrule
+                    $\bm{Prec}$ & 68.78 & 33.33 & --- & 0 & 66.60 & 0.25 & --- & 0 & 61.15 \\
+                    \midrule
+                    $\bm{F_{score}}$ & 81.35 & 0.42 & 0 & 0 & 79.52 & 1.24 & 0 & 0 & 75.36 \\
+                    \midrule
+                    $\bm{Acc}$ & 68.46 & 75.65 & 89.57 & 94.66 & 66.36 & 83.62 & 88.24 & 98.36 & 60.86 \\
+                    \bottomrule
+                \end{tabular}
+                \caption{
+                    \label{tab::rmse} \textit{Finesse} 3 experiment results using \gls{acr::rmse} on Elancourt.
+                    $\bm{Acc}$ expresses the overall accuracy ratio.
+                }
+            \end{table}
         \subsubsection{Feature ablation study}
+            \label{subsubsec:ablation}
+            We tested the different feature configurations, at finesse level 3 and in all urban zones.
+            Mean precision and recall test results are reported in Table~\ref{tab::ablation_f3}.
+            F-scores are averaged across all feature configurations and represented in Figure~\ref{fig::f_score_ablation_f3}.
+            
+            \begin{figure}[h]
+                \centering
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/results/f-scores_f3}
+                \caption{\label{fig::f_score_ablation_f3} Mean F-score and standard deviation for the feature ablation study.}
+            \end{figure}
+
+            We can first conclude that geometric features alone are generally sufficient.
+            It is the best alternative for topological error detection as shown for \texttt{BOS}, \texttt{FOS}, \texttt{FUS}, \texttt{FIT} and \texttt{BIT} in Table~\ref{tab::ablation_f3}.
+            This is confirmed also by the low variance observed in Figure~\ref{fig::f_score_ablation_f3}.(a).
+            An exception is noticed with \texttt{BUS} in Elancourt, where height-based features allow an increase of around 9\% in recall without, practically, any loss in precision.
+            Similar behaviour is noticed for Nantes and Paris-13 with image-based features (+20\% in recall).
+            The first case can be explained by the discrepancy in height that can be observed between under-segmented buildings.
+            The second is made clear by the difference in roof colors, in dense uniform settings (Figure~\ref{fig::bul_err}.a).
+            This helps identifying different instances of buildings.
+
+            \begin{table}[p]
+                \tiny
+                \begin{center}
+                    \begin{tabular}{|x{.7cm} | x{1cm} x{1cm} | x{1cm} x{1cm} | x{1cm} x{1cm} | x{1cm} x{1cm} |}
+                        \hline
+                        \multicolumn{9}{|c|}{\textbf{\scriptsize Elancourt}}\\
+                        \hline
+                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                        \cline{2-9}
+                        & $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ \\
+                        \hline
+                        \texttt{BOS} & \textbf{93.96} & 76.15 & 91.43 & \textbf{77.76} & 91.51 & 76.08 & 90.83 & 76.14 \\
+                        \hline
+                        \texttt{BUS} & 32.98 & \textbf{76.47} & \textbf{41.86} & 75.57 & 40.38 & 71.00 & 39.32 & 71.81 \\
+                        \hline
+                        \texttt{BIB} & 12.32 & 67.57 & 12.81 & \textbf{68.42} & 16.26 & 67.35 & \textbf{16.75} & 68.0 \\
+                        \hline
+                        \texttt{BIT} & \textbf{25.25} & 92.59 & 20.20 & 90.91 & 20.20 & \textbf{95.24} & 11.11 & 91.67 \\
+                        \specialrule{.2em}{.1em}{.1em}
+                        \texttt{FOS} & 98.91 & 99.07 & 98.91 & \textbf{99.30} & \textbf{98.99} & 98.84 & 98.91 & 98.84 \\
+                        \hline
+                        \texttt{FUS} & \textbf{1.90} & 54.55 & 0.63 & \textbf{66.67} & 1.61 & 50 & 1.27 & \textbf{66.67} \\
+                        \hline
+                        \texttt{FIB} & \textbf{9.17} & 87.5 & 0 & --- & 8.30 & 82.61 & 7.42 & \textbf{100} \\
+                        \hline
+                        \texttt{FIT} & 6.67 & \textbf{100} & \textbf{8.73} & 95.24 & 3.33 & \textbf{100} & 3.33 & \textbf{100} \\
+                        \hline
+                        \texttt{FIG} & \textbf{80.54} & 73.14 & 80.45 & \textbf{72.62} & 78.69 & 72.12 & 79.02 & 71.82 \\
+                        \hline
+                        \hline
+                        \multicolumn{9}{|c|}{\textbf{\scriptsize Nantes}}\\
+                        \hline
+                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                        \cline{2-9}
+                        & $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ \\
+                        \hline
+                        \texttt{BOS} & \textbf{38.14} & 61.67 & 36.43 & 60.23 & 36.77 & \textbf{62.21} & 34.71 & 60.48 \\
+                        \hline
+                        \texttt{BUS} & 7.35 & 62.5 & 7.35 & 55.56 & \textbf{29.41} & \textbf{66.67} & 26.47 & 64.29 \\
+                        \hline
+                        \texttt{BIB} & 0 & --- & 0 & --- & \textbf{1.01} & \textbf{50.0} & \textbf{1.01} & \textbf{50.0} \\
+                        \hline
+                        \texttt{BIT} & 1.77 & 22.22 & \textbf{3.54} & 44.44 & 0 & 0 & 2.65 & \textbf{50.0} \\
+                        \specialrule{.2em}{.1em}{.1em}
+                        \texttt{FOS} & \textbf{98.54} & \textbf{98.13} & \textbf{98.54} & \textbf{98.13} & 98.33 & 97.92 & 98.12 & 97.91 \\
+                        \hline
+                        \texttt{FUS} & 27.62 & 55.24 & \textbf{27.62} & \textbf{59.18} & 24.76 & 54.74 & 23.33 & 53.85 \\
+                        \hline
+                        \texttt{FIB} & 37.80 & 62.0 & 36.59 & \textbf{63.16} & \textbf{49.39} & 60.90 & 46.39 & 60.90 \\
+                        \hline
+                        \texttt{FIT} & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
+                        \hline
+                        \texttt{FIG} & 86.32 & 78.09 & \textbf{86.77} & 78.02 & 84.53 & \textbf{78.71} & 83.86 & 78.08 \\
+                        \hline
+                        \hline
+                        \multicolumn{9}{|c|}{\textbf{\scriptsize Paris-13}}\\
+                        \hline
+                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                        \cline{2-9}
+                        & $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ \\
+                        \hline
+                        \texttt{BOS} & 45.54 & 65.25 & 46.53 & 68.61 & \textbf{50.0} & 68.24 & 46.53 & \textbf{70.15} \\
+                        \hline
+                        \texttt{BUS} & 6.35 & 66.67 & 7.94 & 71.43 & \textbf{22.22} & \textbf{77.78} & 7.94 & 62.5 \\
+                        \hline
+                        \texttt{BIB} & 0 & --- & 0 & --- & 0 & 0 & 0 & --- \\
+                        \hline
+                        \texttt{BIT} & \textbf{2.63} & \textbf{50.0} & 0 & --- & 1.32 & 50.0 & 0 & 0 \\
+                        \specialrule{.2em}{.1em}{.1em}
+                        \texttt{FOS} & 97.19 & 97.19 & 97.19 & 97.19 & \textbf{97.59} & \textbf{98.38} & 97.19 & 97.19 \\
+                        \hline
+                        \texttt{FUS} & \textbf{85.09} & \textbf{75.0} & 84.36 & 74.12 & 85.09 & 74.52 & 84.36 & 74.12 \\
+                        \hline
+                        \texttt{FIB} & 53.47 & 62.10 & 51.39 & 61.67 & \textbf{53.47} & \textbf{63.11} & 52.78 & 61.79 \\
+                        \hline
+                        \texttt{FIT} & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
+                        \hline
+                        \texttt{FIG} & 97.65 & 84.62 & \textbf{98.96} & \textbf{84.79} & 97.65 & 84.62 & \textbf{98.96} & \textbf{84.79} \\
+                        \hline
+                    \end{tabular}
+                \end{center}
+                \caption{
+                    \label{tab::ablation_f3} Feature ablation study preformed on the three areas at \textit{finesse} level 3.
+                    Test results are expressed in percentage.
+                    All \textit{atomic} errors are considered over all possible configurations.
+                }
+            \end{table}
+
+            Figure~\ref{fig::f_score_ablation_f3} shows all ``Building errors'' family labels are better detected for Elancourt.
+            It is also the case of \texttt{FOS} and \texttt{FIT}. A certain monotony can be noticed, at the exception of \texttt{BOS}.
+            Better resultas are obtained for Paris-13 than for Nantes, while having around half the number of models to train on.
+            This means that \texttt{BOS} cannot be easily learnt in Nantes.
+            It is coherent with the fact that the dataset represents a part of the dense downtown of the city.
+            The same monotony is observed, this time in reverse, with the rest of ``Facet errors'' defects. Paris-13 is much better with less training samples.
+            For geometric defects (\texttt{FIG} and \texttt{FIB}), Nantes is comparable to Paris-13, but, with \texttt{FUS}, it is way much worse.
+            This may result from the highly heterogeneous aspect of this dataset that encompasses high tower buildings with a densely populated city district.
+            Finally, well represented errors are more easily detected than the less frequent ones, especially the rare ones like \texttt{FIT} in Nantes and Paris-13.
+        
         \subsubsection{Feature importance}
+            Random forest classifiers can easily infer feature importance at training time.
+            These were here computed and aggregated by modality in all urban scenes (Figure~\ref{fig::feature_importances}).
+
+            \begin{figure}
+                \centering
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/results/feat_imp}
+                \caption{
+                    \label{fig::feature_importances} Modality importance computed by stacking single feature importances retrieved from the Random Forest classifier.
+                    The first (\textit{resp.} second and third) column represents Elancourt (\textit{resp.} Nantes and Paris-13).
+                }
+            \end{figure}
+            
+            At first, we observe how much individual attributes are important before being gathered.
+            For geometric features, all attributes are equally important.
+            However, concerning image and height-based features, only a few are relevant (higher feature importance ratio).
+            Indeed, these few attributes correspond to the highest and lowest values of the histograms.
+            As described earlier, image and height features consist of a histogram of distances between the model and the real measured signals:
+            vector cosine similarity, for the first, and the \(L_2\) norm for the last.
+            It is clear that the presence of errors would result in saturating the high values in the histogram, while an absence of defects would imply a big number of low values.
+            This intuitively explains the observed phenomenon.
+            
+            In a second time, we notice that no modality is more important than the others, contrarily to what was observed in Table~\ref{tab::ablation_f3}.
+            In fact, for most atomic errors, test results using geometric features are comparable to those obtained with more modalities.
+            However, during training, all modalities are relevant ($\sim$1/3 in Figure~\ref{fig::feature_importances}).
+            This explains why all configurations are kept for subsequent analysis.
+
     \subsection{Classifier analysis}

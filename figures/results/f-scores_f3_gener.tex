@@ -1,0 +1,118 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{pgfplots}
+
+\begin{document}
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        \textbf{Elancourt}, 70.10, 0.51
+        \textbf{Nantes}, 43.64, 4.10
+        \textbf{Paris-13}, 39.98, 4.53
+    }\BOS
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        \textbf{Elancourt}, 31.75, 3.58
+        \textbf{Nantes}, 6.60, 8.09
+        \textbf{Paris-13}, 4.70, 6.17
+    }\BUS
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        \textbf{Elancourt}, 10.19, 3.73
+        \textbf{Nantes}, 0, 0
+        \textbf{Paris-13}, 0, 0
+    }\BIB
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        \textbf{Elancourt}, 10.27, 4.10
+        \textbf{Nantes}, 18.84, 2.90
+        \textbf{Paris-13}, 8.12, 6.96
+    }\BIT
+
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        \textbf{Elancourt}, 98.27, 0.18
+        \textbf{Nantes}, 97.58, 0.57
+        \textbf{Paris-13}, 97.06, 0.54
+    }\FOS
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        \textbf{Elancourt}, 7.31, 7.46
+        \textbf{Nantes}, 38.19, 2.15
+        \textbf{Paris-13}, 47.39, 1.13
+    }\FUS
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        \textbf{Elancourt}, 34.04, 20.18
+        \textbf{Nantes}, 35.82, 14.33
+        \textbf{Paris-13}, 36.36, 14.41
+    }\FIB
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        \textbf{Elancourt}, 5.97, 0.10
+        \textbf{Nantes}, 0, 0
+        \textbf{Paris-13}, 0, 0
+    }\FIT
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        \textbf{Elancourt}, 80.77, 0.15
+        \textbf{Nantes}, 82.47, 0.36
+        \textbf{Paris-13}, 81.65, 0.89
+    }\FIG
+
+    \begin{tikzpicture} 
+        \node (origin) at (0,0) {};
+        \node (left) at (8, 0) {};
+
+        \begin{axis}[
+            at={(origin)},
+            xlabel={(a) Building errors.},
+            xlabel style={
+                at={(7.5em,-3.5em)},
+                anchor=north
+            },
+            ylabel={F-score},
+            symbolic x coords={{\textbf{Elancourt}}, {\textbf{Nantes}}, {\textbf{Paris-13}}},
+            xtick=data,
+            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm},
+            ymax=105,
+            ymin=-5,
+            legend style={
+                at={(7.5em,-7em)},
+                anchor=north,
+                legend columns=-2
+            }
+        ]
+            \addplot+[no markers, orange, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BOS};
+            \addplot+[no markers, blue, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BUS};
+            \addplot+[no markers, green, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BIB};
+            \addplot+[no markers, red, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BIT};
+            \legend{\strut BOS, \strut BUS, \strut BIB, \strut BIT}
+        \end{axis} 
+        \begin{axis}[
+            at={(left)},
+            xlabel={(b) Facet errors.},
+            xlabel style={
+                at={(7.5em,-3.5em)},
+                anchor=north
+            },
+            yticklabels={,,},
+            symbolic x coords={{\textbf{Elancourt}}, {\textbf{Nantes}}, {\textbf{Paris-13}}},
+            xtick=data,
+            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm},
+            ymax=105,
+            ymin=-5,
+            legend style={
+                at={(7.5em,-7em)},
+                anchor=north,
+                legend columns=-2
+            }
+        ]
+            \addplot+[no markers, dashed, orange, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FOS};
+            \addplot+[no markers, dashed, blue, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FUS};
+            \addplot+[no markers, dashed, green, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FIB};
+            \addplot+[no markers, dashed, red, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FIT};
+            \addplot+[no markers, dashed, purple, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FIG};
+            \legend{\strut FOS, \strut FUS, \strut FIB, \strut FIT, \strut FIG}
+        \end{axis} 
+    \end{tikzpicture}
+\end{document}
