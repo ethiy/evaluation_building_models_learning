@@ -4,9 +4,9 @@
 
 \clearpage
 
-\section{The general framework}
+\section{\textsc{The general framework}}
 
-    \subsection{Scalability \textit{vs.} exhaustivity compromise}
+    \subsection{\textsc{Scalability \textit{vs.} exhaustivity compromise}}
         As stated previously in subsection~\ref{subsec::introduction::contributions::positioning}, a semantic evaluation implies a categorization of errors affecting building models.
         In the same subsection, we stated characteristics that are desired to achieve a large scale and semantic evaluation.
         Before delving into details, are discussed the implications of such properties on the error definitions.\\
@@ -16,7 +16,7 @@
         Exhaustive vs generalizable
         The main idea of error hierarchization is to enable modularity in the taxonomy, and thus achieve a strong flexibility towards input urban scenes and desired error precision.
 
-    \subsection{Axes of a flexible quality evaluation}
+    \subsection{\textsc{Axes of a flexible quality evaluation}}
         In order to build a generic and scalable taxonomy, we rely on two criteria for error compilation: the building model \gls{acr::lod} and the error semantic level, named henceforth \textit{finesse} (cf. Figure~\ref{fig::taxonomy}).
         Different degrees of \textit{finesse} describe, from coarse to fine, the specificity of defects.
         Errors with maximal \textit{finesse} are called \textit{atomic} errors.
@@ -26,7 +26,7 @@
         The idea is to provide the most relevant information to be able to correct a model.
         \textit{Atomic} errors can thus be intuitively correlated to independent actions to be chosen by an operator or an algorithm so as to correct the model.
 
-    \subsection{A general classification of errors}
+    \subsection{\textsc{A general classification of errors}}
         Herein, a general layout is drawn following the principles discussed earlier.
 
         \begin{figure}
@@ -64,12 +64,12 @@
         They represent specific topological or geometric defects.
         Topological errors translate inaccurate structural modeling, while geometric defects raise positioning infidelity.
 
-\section{Application to the geospatial overhead case}
-    \subsection{Overhead roof modeling}
-    \subsection{Error definitions}
-    \subsection{Discussion}
+\section{\textsc{Application to the geospatial overhead case}}
+    \subsection{\textsc{Overhead roof modeling}}
+    \subsection{\textsc{Error definitions}}
+    \subsection{\textsc{Discussion}}
 
-\section{Parametric label extraction}
+\section{\textsc{Parametric label extraction}}
     At evaluation time, three parameters play a role in determining which error labels to consider.
     The first is the \textbf{\gls{acr::elod}}. Every reconstruction method targets a certain set of \glspl*{acr::lod}.
     In consequence, when assessing a reconstruction, a \gls{acr::lod} must be specified. At a given \gls{acr::elod}, all error families involving higher orders will be ignored.
@@ -77,5 +77,5 @@
     This second evaluation parameter specifies the appropriate semantic level at which errors will be reported.
     The last one is error \textbf{exclusivity}. It conveys family error hierarchy. Errors of a given \gls{acr::lod}$ = l$ family are prioritized over ones with higher \gls{acr::lod}$ > l$.
 
-    \subsection{Evaluation parameters}
-    \subsection{Evaluation labels}
+    \subsection{\textsc{Evaluation parameters}}
+    \subsection{\textsc{Evaluation labels}}

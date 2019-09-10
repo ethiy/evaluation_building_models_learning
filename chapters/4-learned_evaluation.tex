@@ -4,7 +4,7 @@
 
 \clearpage
 
-\section{Feature baseline}
+\section{\textsc{Feature baseline}}
     In order to detect such specific labels while guarantying a certain flexibility towards reference data, multiple modalities are necessary.
     The structure of the 3D model can be directly used to extract geometrical features.
     Dense depth information can be added, through for instance a \gls{acr::dsm}, so as to help detecting geometric defects that can be hardly discriminated otherwise (as in Figure~\ref{fig::fac_err}.(e)), in particular for the outer part of buildings. VHR optical images bring additional information (high frequencies and texture) that is particularly suited for inner defect detection.
@@ -14,7 +14,7 @@
     In addition of being very costly, these features are methodologically redundant with the 3D modeling techniques: they are vulnerable to the same defects.
     Conversely, evaluation metrics used in the 3D building reconstruction literature (\textit{e.g.}, \gls{acr::rmse}) are too weak for such a complex task.
 
-    \subsection{Geometric features}
+    \subsection{\textsc{Geometric features}}
         The model facet set is denoted by $\mathsf{F}$.
         $\forall (f, g) \in \mathsf{F} \times \mathsf{F} \; f \sim g$ correspond to facets $f$ and $g$ being adjacent:
         \textit{i.e.}, they share a common edge. As the roof topology graph in~\parencite{verma20063d}, the input building model $\mathsf{M}$ can be seen as a facet (dual) graph:
@@ -78,7 +78,7 @@
         Taking this type of information into account would implicate graph comparisons which are not genuinely simple tasks to achieve.
         Since our objective is to build a baseline, this approach has not yet been considered.
 
-    \subsection{Height based features}
+    \subsection{\textsc{Height based features}}
         For this modality, raw depth information is provided by a \gls{acr::dsm} as a 2D height grid: $dsm \in \mathbb{R}^{w\times h}$\footnote{$w$ (\textit{resp.} h) is the grid width (\textit{resp.} height)}.
         It must have been produced around the same time of the 3D reconstruction so as to avoid temporal discrepancies.
         It is compared to the model height~\parencite{Bredif2007,zebedin2008fusion}.
@@ -104,7 +104,7 @@
         \end{figure}
         Equation~\ref{eq::height_based_features} summarizes how building height-based features are computed. Different from a root mean square metric~\parencite{lafarge2012creating,Poullis2013}, the histogram captures the discrepancy distribution, which is particularly helpful in detecting undersegmentation defects or geometric imprecision. However, as for the previous geometric attributes, the grid structure of information coming from the model is lost. Errors cannot be spatialized and linked to a specific facet.
 
-    \subsection{Image based features}
+    \subsection{\textsc{Image based features}}
         We aim to benefit from the high frequencies in Very High Spatial Resolution optical images. Building edges correspond to sharp discontinuities in images~\parencite{ortner2007building}. We verify this by comparing these edges to local gradients. We start by projecting building models on the orthorectified image $I$ (Figure~\ref{fig::radio}). For each facet, we isolate an edge $s$ (Figure~\ref{fig::seg_inter}). In an ideal setting, gradients computed at pixels $g$ that intersect $s$ need to be almost be collinear with its normal $\vec{n}(s)$. In consequence, applying the same statistics functions $S$, we compute the distribution of the cosine similarity between the local gradient and the normal all along that $s$:
         \begin{equation}
             \label{eq::corr_seg}
@@ -150,12 +150,12 @@
         
         These image-based attributes are helpful for precision error detection. As example, facet imprecise borders can be detected as local gradients direction will be expected to differ greatly from the inaccurate edge. It can also be detrimental in under-segmentation detection as colors can change considerably from one facet or one building to another inducing an gradient orthogonal to edge normals.
 
-    \section{Classification process}
+    \section{\textsc{Classification process}}
         Two sources of flexibility are taken into account.
         First, the parametric nature of the taxonomy leads to a varying set of label.
         Secondly, the classifier should be able to handle the heterogeneity of the feature vector and must adapt to different input vectors types and sizes.
 
-    \subsection{Classification problems}
+    \subsection{\textsc{Classification problems}}
         Both the classification problem nature and the label set are determined by the three previously defined taxonomy parameters (Table~\ref{tab::problems}).
 
         \begin{table}
@@ -190,7 +190,7 @@
         predicts the error family, after which a second multi-label problem decides between the predicted error family children.
         If the \textbf{exclusivity} is off, it turns into  1-stage multi-label problem that predicts the existence of each atomic error corresponding to the chosen \gls{acr::elod}.
 
-    \subsection{Classifier choice}
+    \subsection{\textsc{Classifier choice}}
         The highly modular nature of the framework with multimodal features involving many parameters restricts the choice of classifiers.
         Random Forest classifiers~\parencite{breiman2001random,criminisi2013decision} are selected.
         They can manage a large number of features with different dynamics and coming from multiple modalities.
@@ -198,6 +198,6 @@
         It adapts to any of our classification paradigm: multi-class or multi-label.
         In the latter case, a one-vs-all approach is adopted in addition so as to address each label separately.
 
-\section{Richer features}
-    \subsection{Graph classification}
-    \subsection{Image classification}
+\section{\textsc{Richer features}}
+    \subsection{\textsc{Graph classification}}
+    \subsection{\textsc{Image classification}}
