@@ -16,7 +16,7 @@
         The Elancourt (\textit{resp.} Nantes and Paris-13) scene contains 2,009 (\textit{resp.} 748 and 478) annotated building models.
         The \gls{acr::dsm} and orthorectified image resolution is \SI{6}{\cm} while it is \SI{10}{\cm} for the two other areas.
 
-        \gls{acr::3d} models were generated using the algorithm described in~\parencite{durupt2006}, out of existing building footprints and aerial VHR multi-view \glspl{acr::dsm}.
+        \gls{acr::3d} models were generated using the algorithm described in~\parencite{durupt2006automatic}, out of existing building footprints and aerial VHR multi-view \glspl{acr::dsm}.
         The modeling algorithm simulates possible roof structures with facets satisfying some geometric constraints.
         The best configuration is selected using a scoring system on the extrapolated roofs.
         Finally, vertical building fa\c{c}ades connect the optimal roof to the building footprint.
@@ -54,7 +54,7 @@
         All \textit{finesse} levels were tested. The overall accuracy is not interesting due to the highly unbalanced label distribution.
         We prefer reporting recall ($Rec$) and precision ($Prec$) ratios.
         Recall expresses, from a number of samples of a given class, the proportion that was rightfully detected as such.
-        Precision indicates how much samples, amongst the detected ones, were, in truth, part of the studied class~\parencite{Powers}.
+        Precision indicates how much samples, amongst the detected ones, were, in truth, part of the studied class~\parencite{powers2011evaluation}.
         We also summarize these two ratios with their harmonic mean, the F-score.
 
     \subsection{\textsc{Feature analysis}}

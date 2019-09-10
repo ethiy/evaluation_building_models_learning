@@ -275,7 +275,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             There is little or no work, as far as we know, that discusses \gls{acr::3d} modeling water body situated in urban areas.
             Vegetation can be modeled accurately using \gls{acr::lidar} acquisition~\parencite{omasa20063d}.
             It is, however, too demanding in ressources and unnecessary in a large scale context.
-            Trees are usually modeled by template matching, such as the ellipsoidal form model in~\textcite{lafarge_ijcv12}, or by generic, species dependent, \gls{acr::cad} models like in~\textcite{iovan2008detection}.\\
+            Trees are usually modeled by template matching, such as the ellipsoidal form model in~\textcite{lafarge2012creating}, or by generic, species dependent, \gls{acr::cad} models like in~\textcite{iovan2008detection}.\\
             \begin{figure}[htpb]
                 \centering
                 \includegraphics[width=.45\textwidth]{images/introduction/modeling_trees_1}
@@ -368,7 +368,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             As a consequence, knowing the function of an object helps representing its geometry more efficiently.
             For instance, modeling a column using a cylinder and estimating its radius and height is more accurate than using a non-parametric representation of the same object at a given resolution, while using much less information.
             Hence, semantics implies compaction in the geometric representation of buildings.
-            That is why the last criteria was used, for example, in addition to the \gls{acr::rmse}, as an evaluation metric in~\textcite{lafarge_ijcv12}.\\
+            That is why the last criteria was used, for example, in addition to the \gls{acr::rmse}, as an evaluation metric in~\textcite{lafarge2012creating}.\\
             As a consequence, we distinguish, from now on, between a \textit{\gls{acr::3d} model} and a \textit{\gls{acr::3d} mesh} of a building.
             While the latter accounts for the geometric precision, the other conveys, in addition, semantic properties.
             This is illustrated in Figure~\ref{fig::3dmodel_vs_3dmesh}.\\
@@ -464,7 +464,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             Full automation, although not requiring a lot of ressources, is still unattainable, especially when it comes to semantics.
             Different strategies are used, where each one targets a specific resolution, balancing between compaction and geometric accuracy.
             Ordered from the most to the least compact, these strategies are listed herein.
-            In a Manhattan-world setting, one assumes that buildings are collections of boxes~\parencite{vanegas2010building, li2016manhattan}.~\textcite{lafarge_ijcv12, nan2017polyfit}
+            In a Manhattan-world setting, one assumes that buildings are collections of boxes~\parencite{vanegas2010building, li2016manhattan}.~\textcite{lafarge2012creating, nan2017polyfit}
             relies on the hypothesis that building are made of piecewise planar primitives.
             Rich grammars can give rise to less compact but more accurate models, as is the case of~\textcite{demir2015procedural} or~\textcite{zeng2018neural}.
             Mesh simplification strategies comes last in terms of compaction~\parencite{verdie2015lod, zhou20102}.
@@ -514,7 +514,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             As discussed, semantics play a prominent role in building \gls{acr::3d} models.
             Naturally, it should also be taken into account in the evaluation process.
             It is easier said than done.
-            Usually, it is indirectly checked using the compaction criterion~\parencite{lafarge_ijcv12}.\\
+            Usually, it is indirectly checked using the compaction criterion~\parencite{lafarge2012creating}.\\
             Up to now most studies try to evaluate the quality of modeling algorithms by assessing the accuracy of the geometry of a handfull of buildings.
             These evaluation approaches rely on purely geometric metrics (usually the \gls{acr::rmse}) to compare the reconstructed building to a reference models.
             In a large scale setting, this becomes prohibitive.
