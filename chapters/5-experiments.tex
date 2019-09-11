@@ -33,11 +33,11 @@
             This fraction corresponds only to the occluded (partially or completly) buildings that could not be qualified.
         } fraction of the dataset ($<$ 7.5\%).
         Only a small fraction of buildings are valid\footnote{
-            Valid means the absence of errors for a specified building.
+            \texttt{Valid} means the absence of errors for a specified building.
         }:
         57 (2.84\%) in Elancourt, 55 (7.35\%) for Nantes and 21 (4.39\%) in Paris-13.
-        Most buildings are affected by the \textit{Building Errors} family ($>$ 58.16\%) and the \textit{Facet Errors} one ($>$ 75.94\%).
-        At the \textit{finesse} level 3, more differences are noticed across.
+        Most buildings are affected by the \texttt{Building Errors} family ($>$ 58.16\%) and the \texttt{Facet Errors} one ($>$ 75.94\%).
+        At the \texttt{finesse} level 3, more differences are noticed across.
         Over-segmentation errors are generally well represented, for all \gls{acr::lod}s, with at least 38.9\% and at most 66.8\%.
         The same is true for \texttt{FIG} (59.8-80\%).
         Otherwise, the presence ratio is within the percentage interval of [10, 30], except for topological defects.
@@ -51,7 +51,7 @@
         Each feature modality generates a $20$ dimension vector.
         The \gls{acr::dsm}s and orthorectified images used to derive height and image features have the same spatial resolution as the reconstruction input data.
         Labels are extracted from a non \textbf{exclusive} and \textbf{\gls{acr::elod}} $=$ \gls{acr::lod}-2 taxonomy.
-        All \textit{finesse} levels were tested. The overall accuracy is not interesting due to the highly unbalanced label distribution.
+        All \texttt{finesse} levels were tested. The overall accuracy is not interesting due to the highly unbalanced label distribution.
         We prefer reporting recall ($Rec$) and precision ($Prec$) ratios.
         Recall expresses, from a number of samples of a given class, the proportion that was rightfully detected as such.
         Precision indicates how much samples, amongst the detected ones, were, in truth, part of the studied class~\parencite{powers2011evaluation}.
@@ -80,7 +80,7 @@
                     \bottomrule
                 \end{tabular}
                 \caption{
-                    \label{tab::rmse} \textit{Finesse} 3 experiment results using \gls{acr::rmse} on Elancourt.
+                    \label{tab::rmse} \texttt{Finesse} 3 experiment results using \gls{acr::rmse} on Elancourt.
                     $\bm{Acc}$ expresses the overall accuracy ratio.
                 }
             \end{table}
@@ -187,9 +187,9 @@
                     \end{tabular}
                 \end{center}
                 \caption{
-                    \label{tab::ablation_f3} Feature ablation study preformed on the three areas at \textit{finesse} level 3.
+                    \label{tab::ablation_f3} Feature ablation study preformed on the three areas at \texttt{finesse} level 3.
                     Test results are expressed in percentage.
-                    All \textit{atomic} errors are considered over all possible configurations.
+                    All \texttt{atomic} errors are considered over all possible configurations.
                 }
             \end{table}
 

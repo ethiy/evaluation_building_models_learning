@@ -9,7 +9,7 @@
     \subsection{Hierarchization and modularity}
         As stated previously in subsection~\ref{subsec::introduction::contributions::positioning}, a semantic evaluation implies a categorization of errors affecting building models.
         In the same subsection, we discussed properties that are desired so as to achieve a large scale and automatic semantic evaluation.
-        Before delving into details, the implications of such properties on error definitions are examined.\\
+        Before delving into details, the implications of such properties on error definitions are examined.
 
         \subsubsection{\textsc{Generalizability \textit{vs.} exhaustivity compromise}}
             Two conditions are required in the error classification.
@@ -19,7 +19,7 @@
             This conveys the exhaustivity of the evaluation.\\
             The two notions are condradictory.
             At one hand, every possible error at any level should be taken into account, while, on the other, the categorization has to stay always relevant no matter the origin of those models.
-            A compromise have to be reached in the definition of errors between these two properties.\\
+            A compromise have to be reached in the definition of errors between these two properties.
         
         \subsubsection{\textsc{General structure}}
             We porpose a hierarchical structure of the categorization of errors in order to mitigate the last point.
@@ -28,17 +28,44 @@
             This helps cover a wide range of possible defects while the basic errors are chosen to be as generalizable as possible.
             Hierarchization and modularity are the main ingredients in our proposed flexible framework.\\
 
-            To implement these properties for the error taxonomy, we rely on two criterea for error compilation: the input building model \gls{acr::lod} and the error semantic precision level, named henceforth \textit{finesse} (cf. Figure~\ref{fig::taxonomy}).
-            Different degrees of \textit{finesse} describe, from coarse to fine, the specificity of defects.
+            To implement these properties for the error taxonomy, we rely on two criterea for error compilation: the input building model \gls{acr::lod} and the error semantic precision level, named henceforth \texttt{finesse} (cf. Figure~\ref{fig::taxonomy}).
+            Different degrees of \texttt{finesse} describe, from coarse to fine, the specificity of defects.
             It corresponds to the error hierarchy levels.
             The \gls{acr::lod} is used on the other hand to differenciate between errors in the same specificity level.
-            Multiple errors at the same \textit{finesse} can indeed affect the same building.
+            Multiple errors at the same \texttt{finesse} can indeed affect the same building.
             For instance, topological defects almost always induce (and hence co-occur) with geometrical ones.
-            Errors with maximal \textit{finesse} are called \textit{atomic} errors.
-            \textit{Atomic} errors are to be intuitively correlated to independent actions needed by an operator or an algorithm so as to correct the model.
+            Errors with maximal \texttt{finesse} are called \texttt{atomic} errors.
+            \texttt{Atomic} errors are to be intuitively correlated to independent actions needed by an operator or an algorithm so as to correct the model.
 
     \subsection{\textsc{A general classification of errors}}
         Herein, based on the previous discussion, a general layout is detailed for building model evaluation.
+
+        At a first level, model qualifiability is studied.
+        In fact, aside from formatting issues or geometric inconsistencies~\parencite{ledoux2018val3dity}, other reasons make building models unqualifiable.
+        For instance, buildings can be occluded by vegetation and thus cannot be assessed with most of the remote sensing data sources.
+        Generally speaking, input models can be impaired by some pathological cases that are outside our evaluation framework.
+        In consequence, \texttt{Qualifiable} models are distinguished here from \texttt{Unqualifiable} buildings.
+        This first level corresponds to a \texttt{finesse} equal to 0. At the \texttt{finesse} level 1, we predict the correctness of all qualifiable buildings.
+        It is the lowest semantization level at which the evaluation of a model is expressed.
+        Then, a model is either \texttt{Valid} or \texttt{Erroneous}.
+        Most state-of-the-art evaluation methods address errors up to this level.\\
+        Model errors are grouped into two families depending on the underlying \gls{acr::lod}.
+        The first family of errors \texttt{Building Errors} affects the building in its entirety.
+        It corresponds to an accuracy evaluation at \gls{acr::lod}-0 (footprint errors) $\cup$ \gls{acr::lod}-1 (height/geometric error).
+        At the next \gls{acr::lod}-2, the family \texttt{Facet Errors} gathers defects that can alter the facet accuracy of fa\c{c}ades or roofs (\gls{acr::lod}-2) as well as superstructures and openings (\gls{acr::lod}-3).\\
+        Each family contains \texttt{atomic} errors of maximal \texttt{finesse} equal to 3.
+        Although they can co-occur in the same building model and across different families, these errors are semantically independent.
+        They represent specific topological or geometric defects.
+        Topological errors translate inaccurate structural modeling, while geometric defects raise positioning infidelity.\\
+
+        The general structure is not fixed and can evolve to adapt to more cases.
+        In fact, instead of grouping \gls{acr::lod}-2 and \gls{acr::lod}-3 errors, the latter can be made into a different family that can be called \texttt{Superstructure Errors}.
+        Due to the lack of sufficient observations, we did not make this choice in order to guaranty the generalizability of the taxonomy.
+        Another alternative consists, for instance, in gathering error families by resolution: this will produce a continuum of errors families going from the coarsest level that would correspond to \texttt{Building Errors} to the finest possible one.
+        This last option, although offering an exhaustive and potentially generalizable taxonomy, was ruled out since it does not provide a truly semantic description of the errors.
+        % For example, an operator that is presented with the error ``segmentation error at resolution 20\%'' would not have any information on 
+        Regarding \texttt{finesse}, it is also possible to have additional levels.
+        The maximal level of 3 was chosen in order to preserve the generalizability of the taxonomy, since the more specific the error categorization is, the more observations we need to define the corresponding errors.
 
         \begin{figure}
             \begin{center}
@@ -47,33 +74,11 @@
                     \label{fig::taxonomy} 
                     The proposed taxonomy structure.
                     In our case of very high resolution overhead image modeling, only two family errors are depicted.
-                    At \textit{finesse} level $2$, hierarchization is possible: the \textbf{exclusivity} parameter can thus act.
-                    However, it is not the case at the \textit{atomic} errors level since they are independent.
+                    At \texttt{finesse} level 2, hierarchization is possible: the \textbf{exclusivity} parameter can thus act.
+                    However, it is not the case at the \texttt{atomic} errors level since they are independent.
                 }
             \end{center}
         \end{figure}
-
-        At a first level, model qualifiability is studied.
-        In fact, aside from formatting issues or geometric inconsistencies~\parencite{ledoux2018val3dity}, other reasons make building models unqualifiable.
-        For instance, buildings can be occluded by vegetation and thus cannot be assessed with most of the remote sensing data sources.
-        Generally speaking, input models can be impaired by some pathological cases that are outside our evaluation framework.
-        In consequence, \textit{qualifiable} models are distinguished here from \textit{unqualifiable} buildings.
-        This first level corresponds to a \textit{finesse} equal to 0. At the \textit{finesse} level 1, we predict the correctness of all qualifiable buildings.
-        It is the lowest semantization level at which the evaluation of a model is expressed.
-        Then, a model is either \textit{valid} or \textit{erroneous}.
-        Most state-of-the-art evaluation methods address this level.
-
-        Model errors are grouped into three families depending on the underlying \gls{acr::lod}.
-        The first family of errors ``\textit{Building Errors}'' affects the building in its entirety.
-        It corresponds to an accuracy evaluation at \gls{acr::lod}-0 (footprint errors) $\cup$ \gls{acr::lod}-1 (height/geometric error).
-        At the next \gls{acr::lod}-2, the family ``\textit{Facet Errors}'' gathers defects that can alter fa\c{c}ade or roof fidelity.
-        The last error family, ``\textit{Superstructure Errors}'', describes errors that involve superstructures modeled at \gls{acr::lod}-3.
-        Only the first two families are studied in this paper.
-
-        Each family contains \textit{atomic} errors of maximal \textit{finesse} equal to 3.
-        Although they can co-occur in the same building model and across different families, these errors are semantically independent.
-        They represent specific topological or geometric defects.
-        Topological errors translate inaccurate structural modeling, while geometric defects raise positioning infidelity.
 
 \section{\textsc{Application to the geospatial overhead case}}
     \subsection{\textsc{Overhead roof modeling}}
