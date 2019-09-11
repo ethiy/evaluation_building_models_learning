@@ -7,17 +7,17 @@
 \begin{document}
 
     \tikzstyle{level 1}=[level distance=2cm, sibling distance=3.5cm]
-    \tikzstyle{level 2}=[level distance=3cm, sibling distance=3.5cm]
-    \tikzstyle{level 3}=[level distance=3cm, sibling distance=4cm]
+    \tikzstyle{level 2}=[level distance=3.5cm, sibling distance=3.5cm]
+    \tikzstyle{level 3}=[level distance=3.25cm, sibling distance=4cm]
     \tikzstyle{level 4}=[level distance=2.5cm, sibling distance=.75cm]
     
     \tikzstyle{bag} = [text width=4em, text centered]
-    \tikzstyle{end} = [circle, minimum width=3pt,fill, inner sep=0pt]
+    \tikzstyle{end} = [circle, minimum width=3pt, fill, inner sep=0pt]
     
     \begin{tikzpicture}[grow=right]
         \node[bag] (input) {\textsc{Input}}
             child {
-                node[end, label=right:\textsc{Unqualifiable}] (unqualifiable) {}
+                node[end, label=right:{\parbox[c]{12em}{\textsc{Unquali-\\fiable}}}] (unqualifiable) {}
             }
             child {
                 node[bag] (qualifiable) {Qualifiable}
@@ -70,17 +70,22 @@
             };
             
         \path (qualifiable |- valid.north) + (-1,1) node (qualifiability_max) {$\texttt{finesse}=0$};
-        \path (valid.north) + (-.75,1) node (correctness_max) {$\texttt{finesse}=1$};
-        \path (facet_errors |- valid.north) + (-1,1) node (families_max) {$\texttt{finesse}=2$};
-        \path (b_under |- valid.north) + (-1,1) node (atomic_max) {$\texttt{finesse}=3$};
-        \path (facet_errors |- input) + (-1,0) node (lod_max) {};
-        \path (b_under |- input) + (7.4,0) node (lod_min) {};
+        \path (valid.north) + (-1,1) node (correctness_max) {$\texttt{finesse}=1$};
+        \path (facet_errors |- valid.north) + (-1.25,1) node (families_max) {$\texttt{finesse}=2$};
+        \path (b_under |- valid.north) + (-.75,1) node (atomic_max) {$\texttt{finesse}=3$};
+        \path (families_max |- input) node (lod_max) {};
+        \path (b_under |- input) + (9,0) node (lod_min) {};
         
-        \draw[dashed, orange, ultra thick] (unqualifiable |- b_under.south) + (-1,-.5) -- (qualifiability_max);
-        \draw[dashed, green, ultra thick] (valid |- b_under.south) + (-.75,-.5) -- (correctness_max);
-        \draw[dashed, purple, ultra thick] (facet_errors |- b_under.south) + (-1,-.5) -- (families_max);
-        \draw[dashed, blue, ultra thick] (b_under.south) + (-1,-.5) -- (atomic_max);
+        \draw[dashed, orange, ultra thick] (qualifiability_max |- b_under.south) + (0,-.5) -- (qualifiability_max);
+        \draw[dashed, green, ultra thick] (correctness_max |- b_under.south) + (0,-.5) -- (correctness_max);
+        \draw[dashed, purple, ultra thick] (families_max |- b_under.south) + (0,-.5) -- (families_max);
+        \draw[dashed, blue, ultra thick] (atomic_max |- b_under.south) + (0,-.5) -- (atomic_max);
         
-        \draw[dash dot, ultra thick] (lod_max)  -- (lod_min) node[below, align=left, xshift=-1cm] {\scriptsize LoD-0 $\cup$ LoD-1} node [above, xshift=-.5cm] {\scriptsize LoD-2};
+        \draw[dash dot, ultra thick] (lod_max)  -- (lod_min) node[below, pos=.9] {\footnotesize \gls{acr::lod}-0 $\cup$ \gls{acr::lod}-1} node [above, pos=.9] {\footnotesize \gls{acr::lod}-2 $\cup$ \gls{acr::lod}-3};
+
+        \path (families_max |- b_under.south) + (0,-1) node (startbraces) {};
+        \path (lod_min |- b_under.south) + (0,-1) node (endbraces) {};
+        \draw[decorate, decoration={brace, amplitude=5pt}] (b_under.south) + (-1,-1) -- (startbraces) node[midway, yshift=-2em, align=center]{Family errors:\\possible \textbf{exclusivity}};
+        \draw[decorate, decoration={brace, amplitude=5pt,mirror}] (b_under.south) + (-1,-1) -- (endbraces) node[midway, yshift=-2em, align=center]{\texttt{Atomic} errors:\\no \textbf{exclusivity}};
     \end{tikzpicture}
 \end{document}

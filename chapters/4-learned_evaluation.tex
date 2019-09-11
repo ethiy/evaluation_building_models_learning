@@ -161,15 +161,15 @@
         \begin{table}
             \begin{tabular}{c c c c}
                 \toprule
-                \textbf{\textit{finesse}} & \textbf{\gls{acr::elod}} & \textbf{exclusivity} & \textbf{Classification output}\\
+                \textbf{\texttt{finesse}} & \textbf{\gls{acr::elod}} & \textbf{exclusivity} & \textbf{Classification output}\\
                 \midrule
                 \scriptsize
-                1 & --- & --- & Binary(Valid, Erroneous)\\
-                2 & \gls{acr::lod}-1 & --- & Binary(Valid, Building error)\\
-                2 & \gls{acr::lod}-2 & on & MultiClass(Valid, Building error, Facet error)\\
-                2 & \gls{acr::lod}-2 & off & MultiLabel(Valid, Building error, Facet error)\\
-                3 & \gls{acr::lod}-1 & on & MultiLabel(children(Binary(Valid, Building error)))\\
-                3 & \gls{acr::lod}-2 & on & MultiLabel(children(MultiClass(Valid, Building error, Facet error)))\\
+                1 & --- & --- & Binary(\texttt{Valid}, \texttt{Erroneous})\\
+                2 & \gls{acr::lod}-1 & --- & Binary(\texttt{Valid}, Building error)\\
+                2 & \gls{acr::lod}-2 & on & MultiClass(\texttt{Valid}, Building error, Facet error)\\
+                2 & \gls{acr::lod}-2 & off & MultiLabel(\texttt{Valid}, Building error, Facet error)\\
+                3 & \gls{acr::lod}-1 & on & MultiLabel(children(Binary(\texttt{Valid}, Building error)))\\
+                3 & \gls{acr::lod}-2 & on & MultiLabel(children(MultiClass(\texttt{Valid}, Building error, Facet error)))\\
                 3 & \gls{acr::lod}-1 & off & MultiLabel(children(Building error))\\
                 3 & \gls{acr::lod}-2 & off & MultiLabel(children(Building error)$\cup$ children(Facet error))\\
                 \bottomrule
@@ -180,12 +180,12 @@
             }
         \end{table}
             
-        \textbf{\textit{Finesse}} = 1 level corresponds to the standard binary classification problem: ` `Valid'' or ``Erroneous''.
-        At \textit{finesse}=2, the \textbf{\gls{acr::elod}} can then take two values in the aerial reconstruction case: \gls{acr::lod}-1 or \gls{acr::lod}-2.
-        If set at \gls{acr::lod}-1, it is a binary classification problem: ``Valid'' or ``Building error''.
-        For \gls{acr::lod}-2, if the \textbf{exclusivity} is on, it will be a multi-class problem: ``Valid'', ``Building error'' or ``Facet errors''.
+        \textbf{\texttt{Finesse}} = 1 level corresponds to the standard binary classification problem: \texttt{Valid} or \texttt{Erroneous}.
+        At \texttt{finesse}=2, the \textbf{\gls{acr::elod}} can then take two values in the aerial reconstruction case: \gls{acr::lod}-1 or \gls{acr::lod}-2.
+        If set at \gls{acr::lod}-1, it is a binary classification problem: \texttt{Valid} or ``Building error''.
+        For \gls{acr::lod}-2, if the \textbf{exclusivity} is on, it will be a multi-class problem: \texttt{Valid}, ``Building error'' or ``Facet errors''.
         If set off, it becomes a multi-label one with the same labels.
-        At $\textit{finesse}=3$ level, if the \textbf{exclusivity} is on, it is a 2-stage classification problem.
+        At $\texttt{finesse}=3$ level, if the \textbf{exclusivity} is on, it is a 2-stage classification problem.
         In the first stage, a multi-class task\footnote{It is binary in the spcial case \gls{acr::elod} = \gls{acr::lod}1, problem, like in the previous semantic degree.}
         predicts the error family, after which a second multi-label problem decides between the predicted error family children.
         If the \textbf{exclusivity} is off, it turns into  1-stage multi-label problem that predicts the existence of each atomic error corresponding to the chosen \gls{acr::elod}.
