@@ -105,6 +105,11 @@
         Equation~\ref{eq::height_based_features} summarizes how building height-based features are computed. Different from a root mean square metric~\parencite{lafarge2012creating,poullis2013framework}, the histogram captures the discrepancy distribution, which is particularly helpful in detecting undersegmentation defects or geometric imprecision. However, as for the previous geometric attributes, the grid structure of information coming from the model is lost. Errors cannot be spatialized and linked to a specific facet.
 
     \subsection{\textsc{Image based features}}
+    The framework is general enough to encompass both orthorectified images and oblique ones.
+    In this paper, we only used orthorectified images.
+    In an ideal scenario, using oriented images is better for edge verification (as already shown in~\parencite{michelin2013quality}) as orthoimages are a byproduct of earlier ones.
+    However, in practice, oblique imagery would give rise to other issues, especially, registration problems.
+
         We aim to benefit from the high frequencies in Very High Spatial Resolution optical images. Building edges correspond to sharp discontinuities in images~\parencite{ortner2007building}. We verify this by comparing these edges to local gradients. We start by projecting building models on the orthorectified image $I$ (Figure~\ref{fig::radio}). For each facet, we isolate an edge $s$ (Figure~\ref{fig::seg_inter}). In an ideal setting, gradients computed at pixels $g$ that intersect $s$ need to be almost be collinear with its normal $\vec{n}(s)$. In consequence, applying the same statistics functions $S$, we compute the distribution of the cosine similarity between the local gradient and the normal all along that $s$:
         \begin{equation}
             \label{eq::corr_seg}
