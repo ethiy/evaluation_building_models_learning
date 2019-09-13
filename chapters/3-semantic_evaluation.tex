@@ -70,7 +70,7 @@
         Regarding \texttt{finesse}, it is also possible to have additional levels.
         The maximal level of 3 was chosen in order to preserve the generalizability of the taxonomy, since the more specific the error categorization is, the more observations we need to define the corresponding errors.
 
-        \begin{figure}
+        \begin{figure}[h]
             \begin{center}
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy_tree}
                 \caption{
@@ -98,7 +98,10 @@
             Herein are presented the \texttt{atomic} errors regarding the \gls{acr::lod}-0 and \gls{acr::lod}-1 ascpects.
 
             \paragraph{\texttt{\acrlong*{acr::bus}}}
-                \begin{figure}
+                \gls{acr::bus} corresponds to the case where two or more buildings are modeled as one.
+                In Figure~\ref{fig::bus}, two distinct buildings were identified as one building, eventhough they can be visually distinguished.
+
+                \begin{figure}[h]
                     \centering
                     \ffigbox[\FBwidth]{
                         \begin{subfloatrow}[2]
@@ -128,16 +131,17 @@
                     }
                 \end{figure}
 
-                \gls{acr::bus} corresponds to the case where two or more buildings are modeled as one.
-                In Figure~\ref{fig::bus}, two distinct buildings were identified as one building, eventhough they can be visually distinguished.
-
-                This error is very common and results from a faulty footprint of the building.
+                This is a very common error which results from a faulty footprint of the building.
                 The latter is either retrieved automatically during the modeling~\parencite{lafarge2012creating}, or is provided as input~\parencite{durupt2006automatic}.
                 The first case is the most error inducing as it relies on extrinsic large scale remote sensing data that are devoid of semantics.
                 The second is expected to be more close to the reality, but can be unsuitable if outdated.
 
             \paragraph{\texttt{\acrlong*{acr::bos}}}
-                \begin{figure}
+                \gls{acr::bos} corresponds to the case where one building is subdivided into two or more.
+                This is the opposite of the previous situation.
+                Figure~\ref{fig::bos} shows a single building that, when modelled, was subdivided into three parts.
+
+                \begin{figure}[h]
                     \centering
                     \ffigbox[\FBwidth]{
                         \begin{subfloatrow}[2]
@@ -154,8 +158,7 @@
                             }{
                                 \label{subfig::bos_2d}
                                 \caption{
-                                    Nadir projection of the erroneous building superposed on the corresponding orthoimage.
-                                    We can recognize, based on the color differences of roof tiles, the existance of two buildings instead of one.
+                                    This a nadir projection of a single building that was modeled into three different ones depicted here in three different colors.
                                 }
                             }
                         \end{subfloatrow}
@@ -167,12 +170,18 @@
                     }
                 \end{figure}
 
-                \gls{acr::bos} corresponds to the case where one building is subdivided into two or more buildings.
-                This is the opposite of the previous situation.
-                Figure~\ref{fig::bos} shows a single building that, when modelled, was subdivided into three parts.
+                This is also a very common error.
+                It is the consequence of the same reasons as the under segmentation that was earlier discussed.
+                Both these errors are highly semantic and ,thus, creates confusion between both classes.
+                Depending on the chosen semantics, a building part (in the sense of CityGML) can be also considered as a single building in other cases.
+                In fact, there is no single geometric characteristic that can help separate buildings, such as convexity or compactness.
+                This issue is expected to weight negatively on the predictive capacity of the proposed evaluation approach as will be studied farther in sections~\ref{}.
 
             \paragraph{\texttt{\acrlong*{acr::bib}}}
-                \begin{figure}
+                \gls{acr::bib} corresponds to the case where at least one building footprint border is incorrectly located.
+                A sample is shown in Figure~\ref{fig::bib}.
+
+                \begin{figure}[h]
                     \centering
                     \ffigbox[\FBwidth]{
                         \begin{subfloatrow}[2]
@@ -187,7 +196,8 @@
                             }{
                                 \label{subfig::bib_2d}
                                 \caption{
-                                    Nadir projection of the erroneous building superposed on the corresponding orthoimage.
+                                    In red is the reconstructed model border that is far from being close to reality as can be checked using the orthoimage.
+                                    We can distinguish in green the actual edge using a Nadir projection.
                                 }
                             }
                         \end{subfloatrow}
@@ -199,11 +209,26 @@
                     }
                 \end{figure}
 
-                \gls{acr::bib} corresponds to the case where at least one building footprint border is incorrectly located.
-                A sample is shown in Figure~\ref{fig::bib}.
+                This is a purely geometric error that is caused by an imprecise footprint.
+                Semantics intervene as \gls{acr::bib} is mainly linked to the end user preferrences: one can ignore errors up to a certain threshold. 
+                The footprint border precision is understandably dependent on the used input data during the modeling process.
+                It is also expected that the error detection precision will hinge on the resolution of the used reference data and its registration accuracy.
+                Regarding automatic modeling methods, border imprecision can be attributed to the quality of the used edge detection algorithms~\parencite{nan2015template,baillard1999automatic,werner2002new} or inaccurate surface estimation\footnote{
+                    The border is computed as intersection of the detected surfaces.
+                }~\parencite{durupt2006automatic,xiong2014graph}.
+                Outside the scope this study, one can try also to estimate the imprecision so as to correct the reconstruction.
 
             \paragraph{\texttt{\acrlong*{acr::bit}}}
-                \begin{figure}
+                \gls{acr::bit} corresponds to the case where the building footprint suffers from topological defects.
+                Modeled as a \gls{acr::2d} flat surface, the cases that fall into this label are:
+                \begin{itemize}
+                    \item missing inner court: corresponds to a missing hole;
+                    \item inaccurate border shape:  is due to a wrong primitive fitting: the shape of the footprint can be better described by a diffenrent geometrical shape.
+                            In Figure~\ref{fig::bit} is given an example where the polygon has a wrong number of sides.
+                            Another case is where a circular footprint can be approximated by a polygon.
+                \end{itemize}
+
+                \begin{figure}[h]
                     \centering
                     \ffigbox[\FBwidth]{
                         \begin{subfloatrow}[2]
@@ -218,7 +243,7 @@
                             }{
                                 \label{subfig::bit_2d}
                                 \caption{
-                                    Nadir projection of the erroneous building superposed on the corresponding orthoimage.
+                                    The nadir projection comparison with the corresponding orthoimage gives away (in green) the correct footprint shape compared to the one that was reconstructed (in red).
                                 }
                             }
                         \end{subfloatrow}
@@ -230,19 +255,27 @@
                     }
                 \end{figure}
 
-                \gls{acr::bit} corresponds to the case where the building footprint suffers from topological defects as missing inner courts or wrong primitive fitting (for instance, a circular footprint approximated by a polygon).
-                In Figure~\ref{fig::bit}, we illustrate how the footprint morphology can be erroneous.
-                This error, as the earlier ones, result either from defective building identification process, or from an outdated cadastral map.
+                This error, as the earlier one, is a result of a defective edge estimation.
+                The main difference between the two is the fact that \gls{acr::bib} is geometric in nature while \gls{acr::bit} is topological.
+                Both errors are independent and can overlap.
 
             \paragraph{\texttt{\acrlong*{acr::big}}}
                 \gls{acr::big} corresponds to the case of inaccurate building geometric estimation.
-                In case \textbf{\gls{acr::elod}} > \gls{acr::lod}-0 $\cup$ \gls{acr::lod}-1, this error is not reported as it becomes redundant with below delineated errors.
+                Up to \gls{acr::lod}-1, it coincides with height imprecision.
+                This is yet again a geometric error.
+                Semantics play a role in the definition of the height of a building.
+                It can be defined as the height at the highest point, the mediane height or any other valid alternative.
+                In case of evaluating at higher than \gls{acr::lod}-2, this error is not reported as it becomes redundant with below delineated errors.
+                In fact, if a geometric error is detected at the facet level then it will naturally impact negatively on the geometry of the model as a whole.
             
         \subsubsection{\texttt{Facet errors} \textsc{family}}
             In this sub-subsection, \gls{acr::lod}-2 and \gls{acr::lod}-3 corresponding \texttt{atomic} errors are presented.
+            This is the same kind of error as \gls{acr::bus} but at the facet level.
 
             \paragraph{\texttt{\acrlong*{acr::fus}}}
-                \begin{figure}
+                \gls{acr::fus} corresponds to the case where one facet is subdivided into two or more facets.
+
+                \begin{figure}[h]
                     \centering
                     \ffigbox[\FBwidth]{
                         \begin{subfloatrow}[2]
@@ -260,7 +293,8 @@
                                 \label{subfig::fus_2d}
                                 \caption{
                                     Nadir projection of the erroneous building superposed on the corresponding orthoimage.
-                                    We can recognize, based on the color differences of roof tiles, the existance of two buildings instead of one.
+                                    This shows how a higher neighbooring building part can drive a misestimation of both facet planes which end up confused in one flat roof.
+                                    The line segment highlighted in green gives away the fact that the roof was undersegmented.
                                 }
                             }
                         \end{subfloatrow}
@@ -272,16 +306,24 @@
                     }
                 \end{figure}
 
-                \gls{acr::fus} corresponds to the case where one facet is subdivided into two or more facets.
-                Refer to Figure~\ref{fig::fus} for an example.
+                Usually automatic reconstruction methods rely on an initial surface (usually plane) extraction step that generates proposals for further refinement.
+                Noise from stereo pairing or missing data in point clouds result in imprecisions in surface retrieval which then lead to surfaces being confused.
+                The accuracy drops even further in some cases.
+                For instance, superstructures like dormer windows can be big enough to be confused with the roof facets.
+                An other setting where surfaces are hard to extract is when a building part is shadowed by an other one that is higher.
+                This is depicted in Figure~\ref{fig::fus}.
+                Methods relying only on plane extraction~\parencite{durupt2006automatic,taillandier2004automatic,nan2017polyfit} are particularly vulnerable to this error type.\\
 
-                This error is very common and results from a faulty footprint of the building.
-                The latter is either retrieved automatically during the modeling~\parencite{lafarge2012creating}, or is provided as input~\parencite{durupt2006automatic}.
-                The first case is the most error inducing as it relies on extrinsic large scale remote sensing data that are devoid of semantics.
-                The second is expected to be more close to the reality, but can be unsuitable if outdated.
+                This defect can be mitigated through the use of \gls{acr::3d} lines as cues to guide the plane extraction~\parencite{zebedin2008fusion,sinha2009piecewise}.
+                One can also discard plane extraction all together and try to reconstruct the building surface based only on \gls{acr::3d} lines (in other words, a wireframe building model)~\parencite{langlois2019surface,hofer2017efficient}.
+                Using grammars of possible stuctures is another alternative, provided it is adequate to the modeled building.
+                \textcite{lafarge2008structural} fits the best type of roof models to alleviate issues caused by high levels of noise like when working with Satellite based \glspl{acr::dsm}.
 
             \paragraph{\texttt{\acrlong*{acr::fos}}}
-                \begin{figure}
+                \gls{acr::fos} corresponds to the case where two or more facets are modeled as one, as illustrated in Figure~\ref{fig::fos}.
+                This is to \gls{acr::bos} what \gls{acr::fus} is to \gls{acr::bus}.
+
+                \begin{figure}[h]
                     \centering
                     \ffigbox[\FBwidth]{
                         \begin{subfloatrow}[2]
@@ -296,7 +338,9 @@
                             }{
                                 \label{subfig::fos_2d}
                                 \caption{
-                                    Nadir projection of the erroneous building superposed on the corresponding orthoimage.
+                                    A slim chimney in the below corner of the ridge results in a defect ladden \gls{acr::dsm} which translates into oversegmentation.
+                                    The erroneous edges are colored in red.
+                                    We can check using the orthoimage that these are not real.
                                 }
                             }
                         \end{subfloatrow}
@@ -308,10 +352,25 @@
                     }
                 \end{figure}
 
-                \gls{acr::fos} corresponds to the case where two or more facets are modeled as one, as illustrated in Figure~\ref{fig::fos}.
+                As seen previously, lines are used to help find correct planes and avoid under segmentation.
+                However, an overdetection of lines can lead to an oversegmentation of the model.
+                This is not rare due to problems that can be encountered with illumination conditions: for instance, a roof structure can cast its shadow on a neighbooring one and cause a gradient in image signal that will be translated to a virtual edge.
+                Superstructures play also a negative role just as explained previously.
+                This time it is the ones that are small in planar size compared to the noise order of magnitude that are not detected but add bumps that polutes the signal and result in an misestimation of planes.
+                High neighbooring buildings are also to blame due to the same reasons as with \gls{acr::fus}, but this time results in bumps like with superstructures.\\
+
+                To solve this kind of issues, mesh simplification techniques can be helpful.
+                In fact,~\textcite{verdie2015lod} uses this approach to smooth away these problems and produce a good generalization of the underlying buildings.
+                Another way is to filter the extracted lines relying on redundancy as shown in~\textcite{michelin2013quality}.
+                Grammar based methods can equally come to rescue.
+                As an example,~\textcite{bredif20073d} uses a set parameteric models in order to model superstructures and better fit \gls{acr::lod}-2 roof facets.
 
             \paragraph{\texttt{\acrlong*{acr::fib}}}
-                \begin{figure}
+                \gls{acr::fib} corresponds to the case where at least one facet border is incorrectly located.
+                As en example, Figure~\ref{fig::fib} shows that the central edge that links the two main roof sides does not correspond to the one on the image position.
+                This is a purely geometrical error similarly to \gls{acr::bib}.
+
+                \begin{figure}[h]
                     \centering
                     \ffigbox[\FBwidth]{
                         \begin{subfloatrow}[2]
@@ -326,7 +385,7 @@
                             }{
                                 \label{subfig::fib_2d}
                                 \caption{
-                                    Nadir projection of the erroneous building superposed on the corresponding orthoimage.
+                                    The nadir projection of the model on the orthoimage provides the real location (in green) of the edge.
                                 }
                             }
                         \end{subfloatrow}
@@ -338,11 +397,18 @@
                     }
                 \end{figure}
 
-                \gls{acr::fib} corresponds to the case where at least one facet border is incorrectly located.
-                As en example, Figure~\ref{fig::fib} shows that the central edge that links the two main roof sides does not correspond to the one on the image position.
+                Line extraction is usually very faithfull to the data and depends mostly to the resolution and quality of the input data used for modeling.
+                The most likely reason usually behind this kind of errors are usually imprecise fitting of primitives that lead to a shifted intersecting edge such as shown in Subfigure~\ref{subfig::fib::2d}.\\
+
+                Just as with oversegmentation, one way to make lines retrieval more accurate is to rely on redundancy by extracting them from different modalities.
+                An alternative is to rely on symetries \addref to automatically correct surface intersections.
 
             \paragraph{\texttt{\acrlong*{acr::fit}}}
-                \begin{figure}
+
+                \gls{acr::fit} corresponds to the case where the facet suffers from topological defects such as wrong primitive fitting (for example, a dome approximated by planar polygons).
+                In Figure~\ref{fig::fit}, we can observe how two cylindrical towers were reconstructed as a rectangular parallelepiped.
+
+                \begin{figure}[h]
                     \centering
                     \ffigbox[\FBwidth]{
                         \begin{subfloatrow}[2]
@@ -357,7 +423,7 @@
                             }{
                                 \label{subfig::fit_2d}
                                 \caption{
-                                    Nadir projection of the erroneous building superposed on the corresponding orthoimage.
+                                    the nadir projection reveals the true form (in green) of the towers that were completly misrepresented (in red).
                                 }
                             }
                         \end{subfloatrow}
@@ -369,11 +435,24 @@
                     }
                 \end{figure}
 
-                \gls{acr::fit} corresponds to the case where the facet suffers from topological defects such as wrong primitive fitting (for example, a dome approximated by planar polygons).
-                In Figure~\ref{fig::fit}, we can observe how two cylindrical towers were reconstructed as a rectangular parallelepiped.
+                This can be due to various reasons.
+                Most methods rely on the assumption that buildings are piecewise linear~\parencite{nan2017polyfit} or Manhattan-world like~\parencite{li2016boxfitting}.
+                This is evidently not always the case (\textit{cf.} Subfigure~\ref{subfig::fit_2d}).
+                Even with the right assumptions, this depicted case cannot have been well modeled.
+                If so it would have at least approximated the circular cylindrical structures with a regular polygon cylinder.
+                This is in fact due to the fact that the quality of the data was poor and was unreliable as was explained with the \gls{acr::fus} case in Subfigure~\ref{subfig::fus_2d}.
+                The same effect can cause a missing hole being undetected.\\
+
+                Solving this issue is hard besides the obvious change of primitive assumptions.
+                It depends highly on the quality of the data.
+                One can try to go overcome this issue once again, like with the undersegmentation problem, thanks to line detections to reveal convoluted structures when relying on plane extraction only. 
 
             \paragraph{\texttt{\acrlong*{acr::fig}}}
-                \begin{figure}
+                \gls{acr::fig} corresponds to the case of inaccurate facet geometric estimation.
+                In mathematical terms, this means that the surface primitive parameters where misestimated.
+                In Figure~\ref{fig::fig}, the planar surface slope was miscalculated as flat while it was of \textit{ca.} \SI{25}{\degree}.
+
+                \begin{figure}[h]
                     \centering
                     \ffigbox[\FBwidth]{
                         \begin{subfloatrow}[2]
@@ -388,7 +467,8 @@
                             }{
                                 \label{subfig::fig_2d}
                                 \caption{
-                                    Nadir projection of the erroneous building superposed on the corresponding orthoimage.
+                                    This kind of error is impossible is vizualize on the orthoimage.
+                                    Projected on the \gls{acr::dsm}, we can reveal the sloped character of the face.
                                 }
                             }
                         \end{subfloatrow}
@@ -400,23 +480,21 @@
                     }
                 \end{figure}
 
-                \gls{acr::fig} corresponds to the case of inaccurate facet geometric estimation :\textit{e.g.}, wrong height or inaccurate slope.
-                The latter is depicted in Figure~\ref{fig::fig}\footnote{
-                    There is a problem of slope. The model corresponds to a flat roof whereas in reality the slope is \textit{ca.} \SI{25}{\degree}.
-                    The error could only be shown if we provided the height residual.
-                    However, for the sake of homogeneity, we only provided orthoimages as background.
-                    It motivates also the need for a height-based modality.
-                    All these errors stem either from the modeling approach, or from the poor spatial resolution of the input data (DSM or point cloud)
-                }.
+                This is linked in particular to the input data quality.
+                The case of Subfigure~\ref{subfig:fig_2d} illustrates how neighbooring building parts polutes the data as it blunts away the slope of the roof.
+                This can be detected by taking into account semantics and detecting such cases in order to cast away the corruption for a correct estimation or by relying on the human operator intervention.
 
     \subsection{\textsc{Discussion}}
         \label{subsec::semantic_evaluation::overhead::discussion}
+
+        Auto-similarity.
+
         These errors can be related to state-of-the-art labels.
-        For instance, ``Missing Node'' (\textit{resp.} ``False Node'', ``Missing Edge'' and ``False Edge'') in~\citet{xiong2014graph} correspond to, or are included in, the topological \textit{atomic} errors from the \textit{Facet Errors} family: \texttt{FUS} (\textit{resp.} \texttt{FOS}, \texttt{FIT}, and \texttt{FIT}).
-        The difference is that we distinguish flaws that can affect superstructure facets (\gls*{acr::lod}-3) from the ones that impair building facets (\gls*{acr::lod}-2).
-        The taxonomy developed by~\citet{Michelin2013}\reviewed{, on the other hand, is closer to ours}.
+        For instance, ``Missing Node'' (\textit{resp.} ``False Node'', ``Missing Edge'' and ``False Edge'') in~\textcite{xiong2014graph} correspond to, or are included in, the topological \textit{atomic} errors from the \textit{Facet Errors} family: \texttt{FUS} (\textit{resp.} \texttt{FOS}, \texttt{FIT}, and \texttt{FIT}).
+        The difference is that we distinguish flaws that can affect superstructure facets (\gls{acr::lod}-3) from the ones that impair building facets (\gls{acr::lod}-2).
+        The taxonomy developed by~\textcite{michelin2013quality}, on the other hand, is closer to ours.
         In fact, while footprint errors is reshuffled into \textit{Building Errors} as \texttt{BIB} (``erroneous outline'' and ``imprecise footprint'') and \texttt{BIT} (``missing inner court'') , intrinsic reconstruction errors (``over-segmentation'', ``under segmentation'', ``inexact roof'' and ``Z translation'') can be re-adapted into both family errors.
-        Finally, ``vegetation occlusion'' and `` non existing'' are gathered into the \textit{unqualifiable} label at \textit{finesse} level 0.~\citet{boudet2006supervised}, however, studied the acceptability of a model in a whole.
+        Finally, ``vegetation occlusion'' and `` non existing'' are gathered into the \texttt{Unqualifiable} label at \texttt{finesse} level 0.~\textcite{boudet2006supervised}, however, studied the acceptability of a model in a whole.
         Their taxonomy cannot directly fit with our labels.
         The acceptability dimension can be incorporated into our framework by attributing an confidence score to each error: for example, a prediction probability.        
 
