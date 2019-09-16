@@ -7,7 +7,7 @@
 \section{\textsc{The general framework}}
     \label{sec::semantic_evaluation::general_framework}
 
-    \subsection{Hierarchization and modularity}
+    \subsection{\textsc{Hierarchization and modularity}}
         \label{subsec::semantic_evaluation::general_framework::hierarchization_moderularity}
         As stated previously in subsection~\ref{subsec::introduction::contributions::positioning}, a semantic evaluation implies a categorization of errors affecting building models.
         In the same subsection, we discussed properties that are desired so as to achieve a large scale and automatic semantic evaluation.
@@ -94,14 +94,16 @@
         In the template structure presented in section~\ref{subsec::semantic_evaluation::general_framework::error_classification}, were left out the \texttt{atomic} error definitions.
         Indeed, since they represent the most specific level, their choice is critical to guaranty both the exhaustivity and generalizability we are hoping for.
         We conducted a thourough inspection of all defects that we detected in our datasets and came up with the following definitions (\textit{cf.} Figures~\ref{fig::taxonomy}).
+        Eventhough these errors were defined based on models of buildings using overhead acquired data at large scales, we think they are exhaustive enough to describe the quality of models in other settings (fa\c{c}ade modeling, manually plotted \gls{acr::3d} models).
+
         \subsubsection{\texttt{Building errors} \textsc{family}}
             Herein are presented the \texttt{atomic} errors regarding the \gls{acr::lod}-0 and \gls{acr::lod}-1 ascpects.
 
             \paragraph{\texttt{\acrlong*{acr::bus}}}
                 \gls{acr::bus} corresponds to the case where two or more buildings are modeled as one.
-                In Figure~\ref{fig::bus}, two distinct buildings were identified as one building, eventhough they can be visually distinguished.
+                In Figure~\ref{fig::bus}, two distinct buildings were identified as one building, eventhough they can be visually distinguished.\\
 
-                \begin{figure}[h]
+                \begin{figure}[H]
                     \centering
                     \ffigbox[\FBwidth]{
                         \begin{subfloatrow}[2]
@@ -139,9 +141,9 @@
             \paragraph{\texttt{\acrlong*{acr::bos}}}
                 \gls{acr::bos} corresponds to the case where one building is subdivided into two or more.
                 This is the opposite of the previous situation.
-                Figure~\ref{fig::bos} shows a single building that, when modelled, was subdivided into three parts.
+                Figure~\ref{fig::bos} shows a single building that, when modelled, was subdivided into three parts.\\
 
-                \begin{figure}[h]
+                \begin{figure}[H]
                     \centering
                     \ffigbox[\FBwidth]{
                         \begin{subfloatrow}[2]
@@ -179,9 +181,9 @@
 
             \paragraph{\texttt{\acrlong*{acr::bib}}}
                 \gls{acr::bib} corresponds to the case where at least one building footprint border is incorrectly located.
-                A sample is shown in Figure~\ref{fig::bib}.
+                A sample is shown in Figure~\ref{fig::bib}.\\
 
-                \begin{figure}[h]
+                \begin{figure}[H]
                     \centering
                     \ffigbox[\FBwidth]{
                         \begin{subfloatrow}[2]
@@ -228,7 +230,7 @@
                             Another case is where a circular footprint can be approximated by a polygon.
                 \end{itemize}
 
-                \begin{figure}[h]
+                \begin{figure}[H]
                     \centering
                     \ffigbox[\FBwidth]{
                         \begin{subfloatrow}[2]
@@ -270,12 +272,12 @@
             
         \subsubsection{\texttt{Facet errors} \textsc{family}}
             In this sub-subsection, \gls{acr::lod}-2 and \gls{acr::lod}-3 corresponding \texttt{atomic} errors are presented.
-            This is the same kind of error as \gls{acr::bus} but at the facet level.
 
             \paragraph{\texttt{\acrlong*{acr::fus}}}
                 \gls{acr::fus} corresponds to the case where one facet is subdivided into two or more facets.
+                This is the same kind of error as \gls{acr::bus} but at the facet level.\\
 
-                \begin{figure}[h]
+                \begin{figure}[H]
                     \centering
                     \ffigbox[\FBwidth]{
                         \begin{subfloatrow}[2]
@@ -321,9 +323,9 @@
 
             \paragraph{\texttt{\acrlong*{acr::fos}}}
                 \gls{acr::fos} corresponds to the case where two or more facets are modeled as one, as illustrated in Figure~\ref{fig::fos}.
-                This is to \gls{acr::bos} what \gls{acr::fus} is to \gls{acr::bus}.
+                This is to \gls{acr::bos} what \gls{acr::fus} is to \gls{acr::bus}.\\
 
-                \begin{figure}[h]
+                \begin{figure}[H]
                     \centering
                     \ffigbox[\FBwidth]{
                         \begin{subfloatrow}[2]
@@ -368,9 +370,9 @@
             \paragraph{\texttt{\acrlong*{acr::fib}}}
                 \gls{acr::fib} corresponds to the case where at least one facet border is incorrectly located.
                 As en example, Figure~\ref{fig::fib} shows that the central edge that links the two main roof sides does not correspond to the one on the image position.
-                This is a purely geometrical error similarly to \gls{acr::bib}.
+                This is a purely geometrical error similarly to \gls{acr::bib}.\\
 
-                \begin{figure}[h]
+                \begin{figure}[H]
                     \centering
                     \ffigbox[\FBwidth]{
                         \begin{subfloatrow}[2]
@@ -398,7 +400,7 @@
                 \end{figure}
 
                 Line extraction is usually very faithfull to the data and depends mostly to the resolution and quality of the input data used for modeling.
-                The most likely reason usually behind this kind of errors are usually imprecise fitting of primitives that lead to a shifted intersecting edge such as shown in Subfigure~\ref{subfig::fib::2d}.\\
+                The most likely reason usually behind this kind of errors are usually imprecise fitting of primitives that lead to a shifted intersecting edge such as shown in Subfigure~\ref{subfig::fib_2d}.\\
 
                 Just as with oversegmentation, one way to make lines retrieval more accurate is to rely on redundancy by extracting them from different modalities.
                 An alternative is to rely on symetries \addref to automatically correct surface intersections.
@@ -406,9 +408,9 @@
             \paragraph{\texttt{\acrlong*{acr::fit}}}
 
                 \gls{acr::fit} corresponds to the case where the facet suffers from topological defects such as wrong primitive fitting (for example, a dome approximated by planar polygons).
-                In Figure~\ref{fig::fit}, we can observe how two cylindrical towers were reconstructed as a rectangular parallelepiped.
+                In Figure~\ref{fig::fit}, we can observe how two cylindrical towers were reconstructed as a rectangular parallelepiped.\\
 
-                \begin{figure}[h]
+                \begin{figure}[H]
                     \centering
                     \ffigbox[\FBwidth]{
                         \begin{subfloatrow}[2]
@@ -450,9 +452,9 @@
             \paragraph{\texttt{\acrlong*{acr::fig}}}
                 \gls{acr::fig} corresponds to the case of inaccurate facet geometric estimation.
                 In mathematical terms, this means that the surface primitive parameters where misestimated.
-                In Figure~\ref{fig::fig}, the planar surface slope was miscalculated as flat while it was of \textit{ca.} \SI{25}{\degree}.
+                In Figure~\ref{fig::fig}, the planar surface slope was miscalculated as flat while it was of \textit{ca.} \SI{25}{\degree}.\\
 
-                \begin{figure}[h]
+                \begin{figure}[H]
                     \centering
                     \ffigbox[\FBwidth]{
                         \begin{subfloatrow}[2]
@@ -480,23 +482,32 @@
                     }
                 \end{figure}
 
-                This is linked in particular to the input data quality.
-                The case of Subfigure~\ref{subfig:fig_2d} illustrates how neighbooring building parts polutes the data as it blunts away the slope of the roof.
-                This can be detected by taking into account semantics and detecting such cases in order to cast away the corruption for a correct estimation or by relying on the human operator intervention.
+                This is linked in particular to the input sensor data quality.
+                The case of Subfigure~\ref{subfig::fig_2d} illustrates how neighbooring building parts polutes the data as it blunts away the slope of the roof.
+                Semantics play again a role in detecting a purely geometric error.
+                For correction, as the corruption in the data resulting from the modeling limits could be filtered out using semantics, one can reestimate the parameters of the primitives.
+                Failing that, this correction step is usually conducted by human operators.
 
     \subsection{\textsc{Discussion}}
         \label{subsec::semantic_evaluation::overhead::discussion}
 
-        Auto-similarity.
+        In the previous subsection, we defined \texttt{atomic} errors based on our observations related to automatic overhead modeling of urban scenes.
+        We also discussed how each type of defects can be caused and how to be fixed.
+        Herein, we explore the properties of the ensuing taxonomy of errors and how they came to be.
+        In addition, we discuss also how this taxonomy is related to the ones from the litterature.
 
-        These errors can be related to state-of-the-art labels.
-        For instance, ``Missing Node'' (\textit{resp.} ``False Node'', ``Missing Edge'' and ``False Edge'') in~\textcite{xiong2014graph} correspond to, or are included in, the topological \textit{atomic} errors from the \textit{Facet Errors} family: \texttt{FUS} (\textit{resp.} \texttt{FOS}, \texttt{FIT}, and \texttt{FIT}).
-        The difference is that we distinguish flaws that can affect superstructure facets (\gls{acr::lod}-3) from the ones that impair building facets (\gls{acr::lod}-2).
-        The taxonomy developed by~\textcite{michelin2013quality}, on the other hand, is closer to ours.
-        In fact, while footprint errors is reshuffled into \textit{Building Errors} as \texttt{BIB} (``erroneous outline'' and ``imprecise footprint'') and \texttt{BIT} (``missing inner court'') , intrinsic reconstruction errors (``over-segmentation'', ``under segmentation'', ``inexact roof'' and ``Z translation'') can be re-adapted into both family errors.
-        Finally, ``vegetation occlusion'' and `` non existing'' are gathered into the \texttt{Unqualifiable} label at \texttt{finesse} level 0.~\textcite{boudet2006supervised}, however, studied the acceptability of a model in a whole.
-        Their taxonomy cannot directly fit with our labels.
-        The acceptability dimension can be incorporated into our framework by attributing an confidence score to each error: for example, a prediction probability.        
+        \subsubsection{\textsc{Error taxonomy properties}}
+            Auto-similarity.
+        
+        \subsubsection{\textsc{Related taxonomies}}
+            These errors can be related to state-of-the-art labels.
+            For instance, ``Missing Node'' (\textit{resp.} ``False Node'', ``Missing Edge'' and ``False Edge'') in~\textcite{xiong2014graph} correspond to, or are included in, the topological \textit{atomic} errors from the \textit{Facet Errors} family: \texttt{FUS} (\textit{resp.} \texttt{FOS}, \texttt{FIT}, and \texttt{FIT}).
+            The difference is that we distinguish flaws that can affect superstructure facets (\gls{acr::lod}-3) from the ones that impair building facets (\gls{acr::lod}-2).
+            The taxonomy developed by~\textcite{michelin2013quality}, on the other hand, is closer to ours.
+            In fact, while footprint errors is reshuffled into \textit{Building Errors} as \texttt{BIB} (``erroneous outline'' and ``imprecise footprint'') and \texttt{BIT} (``missing inner court'') , intrinsic reconstruction errors (``over-segmentation'', ``under segmentation'', ``inexact roof'' and ``Z translation'') can be re-adapted into both family errors.
+            Finally, ``vegetation occlusion'' and `` non existing'' are gathered into the \texttt{Unqualifiable} label at \texttt{finesse} level 0.~\textcite{boudet2006supervised}, however, studied the acceptability of a model in a whole.
+            Their taxonomy cannot directly fit with our labels.
+            The acceptability dimension can be incorporated into our framework by attributing an confidence score to each error: for example, a prediction probability.        
 
 \section{\textsc{Parametric label extraction}}
         \label{sec::semantic_evaluation::label_extraction}
