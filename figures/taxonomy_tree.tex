@@ -26,38 +26,38 @@
                             child {
                                 node[bag] (building_errors) {Building Errors}
                                 child {
-                                    node[end, label=right:\textsc{Under segmentation (\texttt{BUS})}] (b_under) {}
+                                    node[end, label=right:\texttt{\acrlong*{acr::big}}] (b_under) {}
                                 }
                                 child {
-                                    node[end, label=right:\textsc{Over-segmentation (\texttt{BOS})}] {}
+                                    node[end, label=right:\texttt{\acrlong*{acr::bit}}] {}
                                 }
                                 child {
-                                    node[end, label=right:\textsc{Imprecise borders (\texttt{BIB})}] {}
+                                    node[end, label=right:\texttt{\acrlong*{acr::bib}}] {}
                                 }
                                 child {
-                                    node[end, label=right:\textsc{Inaccurate topology (\texttt{BIT})}] {}
+                                    node[end, label=right:\texttt{\acrlong*{acr::bos}}] {}
                                 }
                                 child {
-                                    node[end, label=right:\textsc{Imprecise geometry (\texttt{BIG})}] {}
+                                    node[end, label=right:\texttt{\acrlong*{acr::bus}}] {}
                                 }
                                 edge from parent
                             }
                             child {
                                 node[bag] (facet_errors) {Facet Errors}
                                 child {
-                                    node[end, label=right:\textsc{Under segmentation (\texttt{FUS})}] {}
+                                    node[end, label=right:\texttt{\acrlong*{acr::fig}}] {}
                                 }
                                 child {
-                                    node[end, label=right:\textsc{Over-segmentation (\texttt{FOS})}] {}
+                                    node[end, label=right:\texttt{\acrlong*{acr::fit}}] {}
                                 }
                                 child {
-                                    node[end, label=right:\textsc{Imprecise borders (\texttt{FIB})}] {}
+                                    node[end, label=right:\texttt{\acrlong*{acr::fib}}] {}
                                 }
                                 child {
-                                    node[end, label=right:\textsc{Inaccurate topology (\texttt{FIT})}] {}
+                                    node[end, label=right:\texttt{\acrlong*{acr::fos}}] {}
                                 }
                                 child {
-                                    node[end, label=right:\textsc{Imprecise geometry (\texttt{FIG})}] {}
+                                    node[end, label=right:\texttt{\acrlong*{acr::fus}}] {}
                                 }
                                 edge from parent
                             }
@@ -74,14 +74,14 @@
         \path (facet_errors |- valid.north) + (-1.25,1) node (families_max) {$\texttt{finesse}=2$};
         \path (b_under |- valid.north) + (-.75,1) node (atomic_max) {$\texttt{finesse}=3$};
         \path (families_max |- input) node (lod_max) {};
-        \path (b_under |- input) + (9,0) node (lod_min) {};
+        \path (b_under |- input) + (9.2,0) node (lod_min) {};
         
         \draw[dashed, orange, ultra thick] (qualifiability_max |- b_under.south) + (0,-.5) -- (qualifiability_max);
         \draw[dashed, green, ultra thick] (correctness_max |- b_under.south) + (0,-.5) -- (correctness_max);
         \draw[dashed, purple, ultra thick] (families_max |- b_under.south) + (0,-.5) -- (families_max);
         \draw[dashed, blue, ultra thick] (atomic_max |- b_under.south) + (0,-.5) -- (atomic_max);
         
-        \draw[dash dot, ultra thick] (lod_max)  -- (lod_min) node[below, pos=.9] {\footnotesize \gls{acr::lod}-0 $\cup$ \gls{acr::lod}-1} node [above, pos=.9] {\footnotesize \gls{acr::lod}-2 $\cup$ \gls{acr::lod}-3};
+        \draw[dash dot, ultra thick] (lod_max)  -- (lod_min) node[below, pos=.9] {\footnotesize \acrshort*{acr::lod}-0 $\cup$ \acrshort*{acr::lod}-1} node [above, pos=.9] {\footnotesize \acrshort*{acr::lod}-2 $\cup$ \acrshort*{acr::lod}-3};
 
         \path (families_max |- b_under.south) + (0,-1) node (startbraces) {};
         \path (lod_min |- b_under.south) + (0,-1) node (endbraces) {};
