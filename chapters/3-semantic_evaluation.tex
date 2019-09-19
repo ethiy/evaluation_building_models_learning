@@ -2,6 +2,12 @@
 
 \vfill
 
+In this chapter are presented the first building bricks of our approach: the error definitions.
+We proceed by reprising the main consequences of the constraints that were imposed for our evaluation approach in subsection ~\ref{subsec::introduction::contributions::positioning}.
+These determine the desired properties that are seeked in this work.
+Based on this discussion, we establish, in section~\ref{sec::semantic_evaluation::general_framework} a general structure of the error taxonomy.
+In section~\ref{sec::semantic_evaluation::overhead}, is detailed an implementation of the 
+
 \clearpage
 
 \section{\textsc{The general framework}}
@@ -30,7 +36,7 @@
             This helps cover a wide range of possible defects while the basic errors are chosen to be as generalizable as possible.
             Hierarchization and modularity are the main ingredients in our proposed flexible framework.\\
 
-            To implement these properties for the error taxonomy, we rely on two criterea for error compilation: the input building model \gls{acr::lod} and the error semantic precision level, named henceforth \texttt{finesse} (cf. Figure~\ref{fig::taxonomy}).
+            To implement these properties for the error taxonomy, we rely on two criterea for error compilation: the input building model \gls{acr::lod} and the error semantic precision level, named henceforth \texttt{finesse} (\textit{cf.} Figure~\ref{fig::taxonomy}).
             Different degrees of \texttt{finesse} describe, from coarse to fine, the specificity of defects.
             It corresponds to the error hierarchy levels.
             The \gls{acr::lod} is used on the other hand to differenciate between errors in the same specificity level.
@@ -42,15 +48,15 @@
     \subsection{\textsc{A general classification of errors}}
         \label{subsec::semantic_evaluation::general_framework::error_classification}
         Herein, based on the previous discussion, a general layout is detailed for building model evaluation.
-
-        At a first level, model qualifiability is studied.
-        In fact, aside from formatting issues or geometric inconsistencies~\parencite{ledoux2018val3dity}, other reasons make building models unqualifiable.
-        For instance, buildings can be occluded by vegetation and thus cannot be assessed with most of the remote sensing data sources.
-        Generally speaking, input models can be impaired by some pathological cases that are outside our evaluation framework.
-        In consequence, \texttt{Qualifiable} models are distinguished here from \texttt{Unqualifiable} buildings.
-        This first level corresponds to a \texttt{finesse} equal to 0. At the \texttt{finesse} level 1, we predict the correctness of all qualifiable buildings.
-        It is the lowest semantization level at which the evaluation of a model is expressed.
-        Then, a model is either \texttt{Valid} or \texttt{Erroneous}.
+overhead
+        At a first level, model qualifiability is studied.overhead
+        In fact, aside from formatting issues or geometric inconsistencies~\parencite{ledoux2018val3dity}, other reasons make building models unqualifiable.overhead
+        For instance, buildings can be occluded by vegetation and thus cannot be assessed with most of the remote sensing data sources.overhead
+        Generally speaking, input models can be impaired by some pathological cases that are outside our evaluation framework.overhead
+        In consequence, \texttt{Qualifiable} models are distinguished here from \texttt{Unqualifiable} buildings.overhead
+        This first level corresponds to a \texttt{finesse} equal to 0. At the \texttt{finesse} level 1, we predict the correctness of all qualifiable buildinoverheadgs.
+        It is the lowest semantization level at which the evaluation of a model is expressed.overhead
+        Then, a model is either \texttt{Valid} or \texttt{Erroneous}.overhead
         Most state-of-the-art evaluation methods address errors up to this level.\\
         Model errors are grouped into two families depending on the underlying \gls{acr::lod}.
         The first family of errors \texttt{Building Errors} affects the building in its entirety.
@@ -63,7 +69,7 @@
 
         The general structure is not fixed and can evolve to adapt to more cases.
         In fact, instead of grouping \gls{acr::lod}-2 and \gls{acr::lod}-3 errors, the latter can be made into a different family that can be called \texttt{Superstructure Errors}.
-        Due to the lack of sufficient observations, we did not make this choice in order to guaranty the generalizability of the taxonomy.
+        Due to the lack of sufficient observations, we did not make this choice in order to guaranty the generalizability of the taxonomy.overhead
         Another alternative consists, for instance, in gathering error families by resolution: this will produce a continuum of errors families going from the coarsest level that would correspond to \texttt{Building Errors} to the finest possible one.
         This last option, although offering an exhaustive and potentially generalizable taxonomy, was ruled out since it does not provide a truly semantic description of the errors.
         % For example, an operator that is presented with the error ``segmentation error at resolution 20\%'' would not have any information on 
@@ -84,7 +90,7 @@
         \end{figure}
 
 \section{\textsc{Application to the geospatial overhead case}}
-    \label{sec::semantic_evaluation::overhead}
+    \label{sec::semantic_evaluation::overhead}overhead
     Our observations were based on large datasets of \gls{acr::3d} models of buildings reconstructed automatically using \gls{acr::vhr} geospatial images or, if available, \gls{acr::lidar} point clouds.
     We apply the framework introduced in the previous subsection to our special case.
     To do so, we will define the \texttt{atomic} errors before discussing their propoerties.
@@ -96,7 +102,7 @@
         We conducted a thourough inspection of all defects that we detected in our datasets and came up with the following definitions (\textit{cf.} Figures~\ref{fig::taxonomy}).
         Eventhough these errors were defined based on models of buildings using overhead acquired data at large scales, we think they are exhaustive enough to describe the quality of models in other settings (fa\c{c}ade modeling, manually plotted \gls{acr::3d} models).
 
-        \subsubsection{\texttt{Building errors} \textsc{family}}
+        \subsubsection{\texttt{Building Errors} \textsc{family}}
             Herein are presented the \texttt{atomic} errors regarding the \gls{acr::lod}-0 and \gls{acr::lod}-1 ascpects.
 
             \paragraph{\texttt{\acrlong*{acr::bus}}}
@@ -225,7 +231,7 @@
                 Modeled as a \gls{acr::2d} flat surface, the cases that fall into this label are:
                 \begin{itemize}
                     \item missing inner court: corresponds to a missing hole;
-                    \item inaccurate border shape:  is due to a wrong primitive fitting: the shape of the footprint can be better described by a diffenrent geometrical shape.
+                    \item inaccurate border shape:  is due to a wrong primitive fitting: the shape of the footprint can be better described by a different geometrical shape.
                             In Figure~\ref{fig::bit} is given an example where the polygon has a wrong number of sides.
                             Another case is where a circular footprint can be approximated by a polygon.
                 \end{itemize}
@@ -270,7 +276,7 @@
                 In case of evaluating at higher than \gls{acr::lod}-2, this error is not reported as it becomes redundant with below delineated errors.
                 In fact, if a geometric error is detected at the facet level then it will naturally impact negatively on the geometry of the model as a whole.
             
-        \subsubsection{\texttt{Facet errors} \textsc{family}}
+        \subsubsection{\texttt{Facet Errors} \textsc{family}}
             In this sub-subsection, \gls{acr::lod}-2 and \gls{acr::lod}-3 corresponding \texttt{atomic} errors are presented.
 
             \paragraph{\texttt{\acrlong*{acr::fus}}}
@@ -492,31 +498,152 @@
         \label{subsec::semantic_evaluation::overhead::discussion}
 
         In the previous subsection, we defined \texttt{atomic} errors based on our observations related to automatic overhead modeling of urban scenes.
-        We also discussed how each type of defects can be caused and how to be fixed.
-        Herein, we explore the properties of the ensuing taxonomy of errors and how they came to be.
-        In addition, we discuss also how this taxonomy is related to the ones from the litterature.
+        We also discussed how each type of defects can occur and how to proceed in order to correct them.
+        Herein, we explore the properties of the ensuing taxonomy of errors.
+        In addition, we also discuss the relation between this taxonomy and the ones that are present in the litterature.
 
         \subsubsection{\textsc{Error taxonomy properties}}
-            Auto-similarity.
+            The similarity of the \texttt{Building Errors} and \texttt{Facet Errors} is striking.
+            Indeed, this is was intended.
+            The idea came after observing that segmentation issues can occur both at building and facet errors.
+            We ruled that both should be separated as they occur at different \glspl{acr::lod} so as to have a fine representation of those defects as discussed in subsection~\ref{subsec::semantic_evaluation::general_framework::error_classification}.
+            If we define \texttt{atomic} errors on particular defects observed only at a certain level, we can expect that these definitions are going to be too specific.
+            This was the case of an earlier definition of errors based only on a smaller subset of our datasets~\parencite{ennafii2018semantic}.
+            For instance, at building level, in our dataset, missing courts are fairly present.
+            However, There are no cases where facets have holes like illustrated in Subfigure~\ref{subfig::facet_hole}.
+            Both can be grouped in one single label ``missing hole''.
+            This example, illustrated in Figure~\ref{fig::holes_levels}, makes the case for using similarity across \glspl{acr::lod} being instrumental for generalizability.\\
+            This will also be an interesting option to use even if the error families were different as was porposed in subsection~\ref{subsec::semantic_evaluation::general_framework::error_classification}.\\
+
+            \begin{figure}[h]
+                \centering
+                \ffigbox[\FBwidth]{
+                    \begin{subfloatrow}[2]
+                        \ffigbox[\FBwidth]{
+                            \includegraphics[width=.45\textwidth]{example-image}
+                        }{
+                            \label{subfig::building_hole}
+                            \caption{
+                                A hole at building level corresponds to an internal court.
+                            }
+                        }
+                        \ffigbox[\FBwidth]{
+                            \includegraphics[width=.45\textwidth]{images/errors/hole_facet}
+                        }{
+                            \label{subfig::facet_hole}
+                            \caption{
+                                Example of a facet with a triangular hole (image from~\textcite{ledoux2013validation}).
+                            }
+                        }
+                    \end{subfloatrow}
+                }{
+                    \caption{
+                        \label{fig::holes_levels}
+                        Holes observed at different \glspl{acr::lod}.
+                    }
+                }
+            \end{figure}
+
+            Defining errors in \gls{acr::3d} is not an easy task.
+            The \textit{implicit} semantics, discussed in sub-subsection~\ref{subsubsec::introduction::urban_3d_reconstruction::building_3d_modeling::semantics}, implies the fact that each facet of the model is special and has a meaning.
+            Each facet contained in the model is, hence, supposed to be unique and persistent: they cannot be replaced by an approximating set of different facets as in a mesh.
+            This meant that evaluating a whole building model amounts to evaluating each facet individually.
+            This simplifies greatly the issue as one can think of the problem moslty as a \gls{acr::2d} evaluation one.
+            In fact, the first four \texttt{atomic} errors at each level, involve only \gls{acr::2d} sufaces, which in the case of planar surfaces amount to polygon evaluation.
+            The last error is th one that takes into account the \gls{acr::3d} ascpect of the facets.
+            This explains why border imprecisions (which are geometric issues) were separated from the other geometric inaccuracies.
+            These latter errors are in fact somewhat overlapping.
+            In fact, if we imagine a bi-level roof of a building being modeled, a misestimation of the ridge of the building is always a result of a misestimation of the slope of the facets corresponding to the two roof levels.
+            The contrary is not necessarily true if one considers ????.
+
+            This could work for facades also not only overhead.
         
         \subsubsection{\textsc{Related taxonomies}}
-            These errors can be related to state-of-the-art labels.
-            For instance, ``Missing Node'' (\textit{resp.} ``False Node'', ``Missing Edge'' and ``False Edge'') in~\textcite{xiong2014graph} correspond to, or are included in, the topological \textit{atomic} errors from the \textit{Facet Errors} family: \texttt{FUS} (\textit{resp.} \texttt{FOS}, \texttt{FIT}, and \texttt{FIT}).
-            The difference is that we distinguish flaws that can affect superstructure facets (\gls{acr::lod}-3) from the ones that impair building facets (\gls{acr::lod}-2).
-            The taxonomy developed by~\textcite{michelin2013quality}, on the other hand, is closer to ours.
-            In fact, while footprint errors is reshuffled into \textit{Building Errors} as \texttt{BIB} (``erroneous outline'' and ``imprecise footprint'') and \texttt{BIT} (``missing inner court'') , intrinsic reconstruction errors (``over-segmentation'', ``under segmentation'', ``inexact roof'' and ``Z translation'') can be re-adapted into both family errors.
-            Finally, ``vegetation occlusion'' and `` non existing'' are gathered into the \texttt{Unqualifiable} label at \texttt{finesse} level 0.~\textcite{boudet2006supervised}, however, studied the acceptability of a model in a whole.
+            In this sub-subsection, we discuss the semantic error defnitions in the state-of-the-art.
+            As mentioned in subsection~\ref{subsec::state_of_the_art::quality::output::semantic},~\textcite{rottensteiner2012isprs} proposed two semantic errors over segmentation and under segmentation.
+            These, however, relate only to facets.
+            \textcite{xiong2014graph}, although not having as objective to evaluate the quality of a model in its entirety, provides some error labels relative to their reconstruction method.
+            For instance, ``Missing Node'' (\textit{resp.} ``False Node'', ``Missing Edge'' and ``False Edge'') correspond to, or are included in, the topological \texttt{atomic} errors from the \texttt{Facet Errors} family: \texttt{\gls{acr::fus}} (\textit{resp.} \texttt{\gls{acr::fos}}, \texttt{\gls{acr::fit}}, and \texttt{\gls{acr::fit}}).
+            The taxonomy developed by~\textcite{michelin2013quality}, on the other hand, is the closest to ours.
+            In fact, footprint errors could be reshuffled into \texttt{Building Errors} as \texttt{\gls{acr::bib}} (``erroneous outline'' and ``imprecise footprint'') and \texttt{\gls{acr::bit}} (``missing inner court'').
+            Intrinsic reconstruction errors are divided into both levels.
+            In fact, ``over-segmentation'', ``under segmentation'' could be part of both error families.
+            ``inaccurate roof'' is a general error that can include \texttt{\gls{acr::fib}} and possibly \texttt{\gls{acr::fit}} also.
+            ``Z translation'' is the last label in ``Reconstruction errors'' and is either a \texttt{\gls{acr::big}} error when working at \gls{acr::lod}-0 $\cup$ \gls{acr::lod}-1 level, or included into \texttt{\gls{acr::fig}} if dealing with flat roof facets.
+            Finally, ``vegetation occlusion'' and `` non existing'' are gathered into the \texttt{Unqualifiable} label at \texttt{finesse} level 0.
+            \textcite{boudet2006supervised}, studied rather the acceptability of a model as a whole.
+            Confidence in a building model is a subjectif assessement of building models that depend on the end user needs.
             Their taxonomy cannot directly fit with our labels.
             The acceptability dimension can be incorporated into our framework by attributing an confidence score to each error: for example, a prediction probability.        
 
 \section{\textsc{Parametric label extraction}}
-        \label{sec::semantic_evaluation::label_extraction}
-    At evaluation time, three parameters play a role in determining which error labels to consider.
-    The first is the \textbf{\gls{acr::elod}}. Every reconstruction method targets a certain set of \glspl{acr::lod}.
-    In consequence, when assessing a reconstruction, a \gls{acr::lod} must be specified. At a given \gls{acr::elod}, all error families involving higher orders will be ignored.
-    Depending on the target of the qualification process, a \textbf{finesse} level might be preferred.
-    This second evaluation parameter specifies the appropriate semantic level at which errors will be reported.
-    The last one is error \textbf{exclusivity}. It conveys family error hierarchy. Errors of a given \gls{acr::lod}$ = l$ family are prioritized over ones with higher \gls{acr::lod}$ > l$.
+    \label{sec::semantic_evaluation::label_extraction}
+    When evaluating building models, not all errors are going to be taken into account depending on the end user needs.
+    In fact, labels are extracted based on the taxonomy based on the evaluation settings.
+    We will see in this subsection how this is possible and what are the consequences of this choice.
 
     \subsection{\textsc{Evaluation parameters}}
+        At evaluation time, three parameters play a role in determining which error labels to consider.
+        We determine hereafter these parameters and their role.\\
+
+        The first parameter is the \textbf{\gls{acr::elod}}.
+        Every reconstruction method targets a certain set of \glspl{acr::lod}.
+        In consequence, when assessing a reconstruction, a \gls{acr::lod} must be specified.
+        At a given \gls{acr::elod}, all error families involving higher orders will be ignored.\\
+        Depending on the target of the qualification process, a \texttt{finesse} level might be preferred.
+        This corresponds to the second parameter called \textbf{\gls{acr::efin}}.
+        It specifies the appropriate semantic level at which errors will be reported.\\
+        The last one is error \textbf{exclusivity}.
+        It derives from the established family error hierarchy.
+        Errors of a given \gls{acr::lod}-$l$ family are prioritized over ones with higher \glspl{acr::lod}: \textit{i.e} \gls{acr::lod} > \gls{acr::lod}-$l$.
+        The latter are simply ignored.
+        This would correspond to the case where the quality evaluation is used by a correction module, either manually or automatically operated.
+        In this case, the latter should prioritize solving low \gls{acr::lod} errors rather than trying to solve more detailed ones.
+        This stems from the fact that dealing whith low \gls{acr::lod} errors would probably impact the shape of higher \gls{acr::lod} features.
+        As a consequence, doing so is going to be virtually wastfull in ressources.
+
     \subsection{\textsc{Evaluation labels}}
+        Depending on the previously defined parameters, the considered labels that will be used for the evaluation would differ.
+        We will visit herein all the possible cases based on the defined taxonomy for the overhead reconstruction case (\textit{cf.} Figure~\ref{fig::taxonomy}).
+        For this purpose we must define first the function $\text{children}$ that gives the children of a non-leaf node in the taxonomy tree:
+        \begin{equation}
+            \label{eq::children_taxonomy}
+            \begin{aligned}
+                \text{children}: V \setminus L &\rightarrow V\\
+                n &\mapsto \{m \in V : (n, m) \in E \}
+            \end{aligned}.
+        \end{equation}
+        where:
+        \begin{conditions}
+            V & is the set of all vertices of the taxonomy tree;\\
+            L & is the set of leaf nodes in the tree;\\
+            E & is the set of edges (directed) in the tree.
+        \end{conditions}
+        There are 8 cases corresponding to one for the case \textbf{\gls{acr::efin}} = 1, three for the error families level and four for the last case of \texttt{atomic} error level.
+        
+        \begin{enumerate}
+            \item \textbf{\gls{acr::efin}} = 1.
+                    The model can either be \texttt{Valid} or \texttt{Erroneous}.
+            \item \textbf{\gls{acr::efin}} = 2 and \textbf{\gls{acr::elod}} = \gls{acr::lod}-1.
+                    The model can either be \texttt{Valid} or has a \texttt{Building Error}.
+            \item \textbf{\gls{acr::efin}} = 2, \textbf{\gls{acr::elod}} = \gls{acr::lod}-2 an the \textbf{exclusivity} is \textsc{on}.
+                    The model can either be \texttt{Valid}, has a \texttt{Building Error} or a \texttt{Facet Error}.
+            \item \textbf{\gls{acr::efin}} = 2, \textbf{\gls{acr::elod}} = \gls{acr::lod}-2 an the \textbf{exclusivity} is \textsc{off}.
+                    The model can either has a \texttt{Building Error} or not.
+                    Independently, it can has also a \texttt{Facet Error} or not.
+            \item \textbf{\gls{acr::efin}} = 3, \textbf{\gls{acr::elod}} = \gls{acr::lod}-1 and the \textbf{exclusivity} is \textsc{on}.
+                    The model can either be \texttt{Valid} or has a \texttt{Building Error}.
+                    If the latter is the case, then is decided if the building model has an \gls{acr::lod}-1 \texttt{atomic} error or not.
+                    Each one of these errors is considered independently from the others.
+            \item \textbf{\gls{acr::efin}} = 3, \textbf{\gls{acr::elod}} = \gls{acr::lod}-1 and the \textbf{exclusivity} is \textsc{off}.
+                    The model can has each \gls{acr::lod}-1 \texttt{atomic} error or not independently from the others.
+            \item \textbf{\gls{acr::efin}} = 3, \textbf{\gls{acr::elod}} = \gls{acr::lod}-2 and the \textbf{exclusivity} is \textsc{on}.
+                    The model can either be \texttt{Valid}, has a \texttt{Building Error} or a \texttt{Facet Error}.
+                    If it is affected with a \texttt{Building Error} error, then only its corresponding \texttt{atomic} errors are considered being present or not independently.
+                    The same descision is applied if \texttt{Facet Error} was detected, but this time with \gls{acr::lod}-2 \texttt{atomic} errors.
+            \item \textbf{\gls{acr::efin}} = 3, \textbf{\gls{acr::elod}} = \gls{acr::lod}-2 and the \textbf{exclusivity} is \textsc{off}.
+                    The model can has each \texttt{atomic} error (\gls{acr::lod}-1 and \gls{acr::lod}-2) or not independently from the others.
+        \end{enumerate}
+
+        This will influence the evaluation pipeline that will be explained later in the next chapter.
+        In the latter, we will provide more insight how this takes place.
