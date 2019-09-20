@@ -6,7 +6,8 @@ In this chapter are presented the first building bricks of our approach: the err
 We proceed by reprising the main consequences of the constraints that were imposed for our evaluation approach in subsection ~\ref{subsec::introduction::contributions::positioning}.
 These determine the desired properties that are seeked in this work.
 Based on this discussion, we establish, in section~\ref{sec::semantic_evaluation::general_framework} a general structure of the error taxonomy.
-In section~\ref{sec::semantic_evaluation::overhead}, is detailed an implementation of the 
+In section~\ref{sec::semantic_evaluation::overhead}, is detailed an implementation of this general stucture for the overhead automatic modeling case.
+After discussing some properties of the chosen error defnitions, we explain, in the final section~\ref{sec::semantic_evaluation::label_extraction}, how the final labels are extracted from the error taxonomy based on the quality evaluation needs.
 
 \clearpage
 
@@ -553,10 +554,8 @@ overhead
             The last error is th one that takes into account the \gls{acr::3d} ascpect of the facets.
             This explains why border imprecisions (which are geometric issues) were separated from the other geometric inaccuracies.
             These latter errors are in fact somewhat overlapping.
-            In fact, if we imagine a bi-level roof of a building being modeled, a misestimation of the ridge of the building is always a result of a misestimation of the slope of the facets corresponding to the two roof levels.
-            The contrary is not necessarily true if one considers ????.
-
-            This could work for facades also not only overhead.
+            These discussed properties does not only help the generalizability and exhaustivity in the overhead case, but can also be applied for terrestrial based fa\c{c}ade modeling.
+            In fact, the same \texttt{atomic} errors can describe perfectly the possible errors that can affect facets of a fa\c{c}ade, owing always to the effect of \textit{implicit} semantics on building models.
         
         \subsubsection{\textsc{Related taxonomies}}
             In this sub-subsection, we discuss the semantic error defnitions in the state-of-the-art.
