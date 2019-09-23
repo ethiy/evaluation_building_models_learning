@@ -2,12 +2,94 @@
 
 \vfill
 
+In the previous chapter (chapter~\ref{chap::semantic_evaluation}), we developped a hierchical and modular taxonomy of errors for the overhead modeling case.
+Based on this taxonomy, and depending on the particular needs, specific error labels are extracted and considered during the quality evaluation.\\
+In this chapter, we present the second part of our proposed approach.
+It is based on formulating the problem as a supervized classification one.
+All related issues are detailed in section~\ref{sec::learned_evaluation::classification}.
+Next, in section~\ref{sec::learned_evaluation::baseline}, is presented a baseline of building \gls{acr::3d} model features.
+These are used to describe models and are fed to the supervized classifier.
+Third and last, richer extracted features are discussed in section~\ref{sec::learned_evaluation::richer_features}.
+These are proposed to better predict errors in the model.
+
 \clearpage
 
+\section{\textsc{Quality evaluation as classification}}
+    \label{sec::learned_evaluation::classification}
+    In order to satisfy the \textbf{large scale} condition imposed at subsection~\ref{subsec::introduction::contributions::positioning}, we propose to use a supervized learning method.
+    Errors are predicted based on learned statistical characteristics of the evaluated models.
+    The learned approach is usually used to take care of highly semantic tasks, such as ours, that are otherwise hard to process using engineered metrics \addref.\\
+    Provided an initial manual annotation effort, the prediction phase is fully automatic.
+    This, consequently, verifies the second constraint in~\ref{subsec::introduction::contributions::positioning} which is \textbf{automation}.\\
+
+    Two aspects should be discussed to in order to apply this approach to the building \gls{acr::3d} model quality evaluation.
+    First, as seen in section~\ref{sec::semantic_evaluation::label_extraction},the parametric nature of the taxonomy leads to a varying set of labels.
+    For this purpose, we describe in subsection~\ref{subsec::learned_evaluation::classification::different_porblems} the different classification problems depending on the evaluation parameters.
+    Secondly, the classifier should be able to handle the heterogeneity of the feature vector and must adapt to different input vectors types and sizes.
+    The choice of classifiers is, hence, discussed in subsection~\ref{subsec::learned_evaluation::classification::classifiers}.
+
+    \subsection{\textsc{Different classification problems}}
+        \label{subsec::learned_evaluation::classification::different_porblems}
+        The nature of the different classification problems are presented in Table~\ref{tab::classification_problems} depending on the three evaluation parameters from subsection~\ref{sec::semantic_evaluation::label_extraction}.
+
+        \begin{table}[htbp]
+            \small
+            \begin{tabular}{c c c x{11cm}}
+                \toprule
+                \textbf{\gls{acr::efin}} & \textbf{\gls{acr::elod}} & \textbf{exclusivity} & \textbf{Classification output}\\
+                \midrule
+                1 & --- & --- & Binary(\texttt{Valid}, \texttt{Erroneous})\\
+                2 & \gls{acr::lod}-1 & --- & Binary(\texttt{Valid}, \texttt{Building Errors})\\
+                2 & \gls{acr::lod}-2 & \textsc{on} & MultiClass(\texttt{Valid}, \texttt{Building Errors}, \texttt{Facet Errors})\\
+                2 & \gls{acr::lod}-2 & \textsc{off} & MultiLabel(\texttt{Building Errors}, \texttt{Facet Errors})\\
+                3 & \gls{acr::lod}-1 & \textsc{on} & MultiLabel(children(Binary(\texttt{Valid}, \texttt{Building Errors})))\\
+                3 & \gls{acr::lod}-2 & \textsc{on} & MultiLabel(children(MultiClass(\texttt{Valid}, \texttt{Building Errors}, \texttt{Facet Errors})))\\
+                3 & \gls{acr::lod}-1 & \textsc{off} & MultiLabel(children(\texttt{Building Errors}))\\
+                3 & \gls{acr::lod}-2 & \textsc{off} & MultiLabel(children(\texttt{Building Errors})$\cup$ children(\texttt{Facet Errors}))\\
+                \bottomrule
+            \end{tabular}
+            \caption{
+                \label{tab::classification_problems}
+                All possible classification problem types depending of the evaluation parameters:
+                \textbf{\gls{acr::efin}}, \textbf{\gls{acr::elod}} and \textbf{exclusivity}.
+            }
+        \end{table}
+
+        In Table~\ref{tab::classification_problems}, Binary(\texttt{Valid}, $l$) refers to the binary setting that predicts the most probable class \texttt{Valid} or $l$.
+        MultiClass($l_1, l_2, \dots, l_c$) (\textit{resp}. MultiLabel($l_1, l_2, \dots, l_c$)) corresponds to the multi-class (\textit{resp}. multi-label) setting.
+        We note that: MultiLabel(\texttt{Valid}, $l_1, l_2, \dots, l_c$)) = MultiLabel($l_1, l_2, \dots, l_c$).
+        Two consecutive classification problems relate to a hierchical classification:
+        depending on the class that is predicted in the first stage, a second classification problem chooses between corresponding labels.\\
+            
+        \textbf{\gls{acr::efin}} = 1 level corresponds to the standard binary classification problem: \texttt{Valid} or \texttt{Erroneous}.
+        At \textbf{\gls{acr::efin}} = 2, the \textbf{\gls{acr::elod}} can then take two values in the aerial reconstruction case: \gls{acr::lod}-1 or \gls{acr::lod}-2.
+        If set at \gls{acr::lod}-1, it is a binary classification problem: \texttt{Valid} or \texttt{Building Errors}.
+        For \gls{acr::lod}-2, if the \textbf{exclusivity} is on, it will be a multi-class problem: \texttt{Valid}, \texttt{Building Errors} or \texttt{Facet Errors}.
+        If set off, it becomes a multi-label one with the same labels.
+        At \textbf{\gls{acr::efin}} = 3 level, if the \textbf{exclusivity} is on, it is a 2-stage classification problem.
+        In the first stage, a multi-class task\footnote{It is binary in the spcial case \gls{acr::elod} = \gls{acr::lod}1, problem, like in the previous semantic degree.}
+        predicts the error family, after which a second multi-label problem decides between the predicted error family children.
+        If the \textbf{exclusivity} is off, it turns into  1-stage multi-label problem that predicts the existence of each atomic error corresponding to the chosen \gls{acr::elod}.
+
+    \subsection{\textsc{Classifier choice}}
+        \label{subsec::learned_evaluation::classification::classifiers}
+        The highly modular nature of the framework with multimodal features involving many parameters restricts the choice of classifiers.
+        Random Forest classifiers~\parencite{breiman2001random,criminisi2013decision} are selected.
+        They can manage a large number of features with different dynamics and coming from multiple modalities.
+        Relying on their bagging property, a high number of trees ($1,000$ elements) is necessary to cover most of the feature space, while a limited tree depth ($4$) helps avoiding overfitting during training.
+        It adapts to any of our classification paradigm: multi-class or multi-label.
+        In the latter case, a one-vs-all approach is adopted in addition so as to address each label separately.
+
+
+
 \section{\textsc{Feature baseline}}
-    In order to detect such specific labels while guarantying a certain flexibility towards reference data, multiple modalities are necessary.
+    \label{sec::learned_evaluation::baseline}
+    In order to detect labels previously defined in chapter~\ref{chap::semantic_evaluation}, we formulate the problem as a supervized learning classification problem.
+    Based on annotated 
+     while guarantying a certain flexibility towards reference data, multiple modalities are necessary.
     The structure of the 3D model can be directly used to extract geometrical features.
-    Dense depth information can be added, through for instance a \gls{acr::dsm}, so as to help detecting geometric defects that can be hardly discriminated otherwise (as in Figure~\ref{fig::fac_err}.(e)), in particular for the outer part of buildings. VHR optical images bring additional information (high frequencies and texture) that is particularly suited for inner defect detection.
+    Dense depth information can be added, through for instance a \gls{acr::dsm}, so as to help detecting geometric defects that can be hardly discriminated otherwise (as in Figure~\ref{fig::fac_err}.(e)), in particular for the outer part of buildings.
+    VHR optical images bring additional information (high frequencies and texture) that is particularly suited for inner defect detection.
 
     Since there is no comparable work that studies the previously defined errors, we propose a baseline for each modality.
     Attributes are kept simple so as to be used in most situations relying on generally available data. We avoid computing and comparing 3D lines~\parencite{michelin2013quality}, correlation scores~\parencite{boudet2006supervised} or any Structure-from-Motion (SfM) based metric~\parencite{kowdle2011active}.
@@ -155,54 +237,7 @@
         
         These image-based attributes are helpful for precision error detection. As example, facet imprecise borders can be detected as local gradients direction will be expected to differ greatly from the inaccurate edge. It can also be detrimental in under-segmentation detection as colors can change considerably from one facet or one building to another inducing an gradient orthogonal to edge normals.
 
-    \section{\textsc{Classification process}}
-        Two sources of flexibility are taken into account.
-        First, the parametric nature of the taxonomy leads to a varying set of label.
-        Secondly, the classifier should be able to handle the heterogeneity of the feature vector and must adapt to different input vectors types and sizes.
-
-    \subsection{\textsc{Classification problems}}
-        Both the classification problem nature and the label set are determined by the three previously defined taxonomy parameters (Table~\ref{tab::problems}).
-
-        \begin{table}
-            \begin{tabular}{c c c c}
-                \toprule
-                \textbf{\texttt{finesse}} & \textbf{\gls{acr::elod}} & \textbf{exclusivity} & \textbf{Classification output}\\
-                \midrule
-                \scriptsize
-                1 & --- & --- & Binary(\texttt{Valid}, \texttt{Erroneous})\\
-                2 & \gls{acr::lod}-1 & --- & Binary(\texttt{Valid}, Building error)\\
-                2 & \gls{acr::lod}-2 & on & MultiClass(\texttt{Valid}, Building error, Facet error)\\
-                2 & \gls{acr::lod}-2 & off & MultiLabel(\texttt{Valid}, Building error, Facet error)\\
-                3 & \gls{acr::lod}-1 & on & MultiLabel(children(Binary(\texttt{Valid}, Building error)))\\
-                3 & \gls{acr::lod}-2 & on & MultiLabel(children(MultiClass(\texttt{Valid}, Building error, Facet error)))\\
-                3 & \gls{acr::lod}-1 & off & MultiLabel(children(Building error))\\
-                3 & \gls{acr::lod}-2 & off & MultiLabel(children(Building error)$\cup$ children(Facet error))\\
-                \bottomrule
-            \end{tabular}
-            \caption{
-                \label{tab::problems} The summary of all possible classification problem types.
-                children($error$) lists the children of $error$ from the taxonomy tree (Figure~\ref{fig::taxonomy}).
-            }
-        \end{table}
-            
-        \textbf{\texttt{Finesse}} = 1 level corresponds to the standard binary classification problem: \texttt{Valid} or \texttt{Erroneous}.
-        At \texttt{finesse}=2, the \textbf{\gls{acr::elod}} can then take two values in the aerial reconstruction case: \gls{acr::lod}-1 or \gls{acr::lod}-2.
-        If set at \gls{acr::lod}-1, it is a binary classification problem: \texttt{Valid} or ``Building error''.
-        For \gls{acr::lod}-2, if the \textbf{exclusivity} is on, it will be a multi-class problem: \texttt{Valid}, ``Building error'' or ``Facet errors''.
-        If set off, it becomes a multi-label one with the same labels.
-        At $\texttt{finesse}=3$ level, if the \textbf{exclusivity} is on, it is a 2-stage classification problem.
-        In the first stage, a multi-class task\footnote{It is binary in the spcial case \gls{acr::elod} = \gls{acr::lod}1, problem, like in the previous semantic degree.}
-        predicts the error family, after which a second multi-label problem decides between the predicted error family children.
-        If the \textbf{exclusivity} is off, it turns into  1-stage multi-label problem that predicts the existence of each atomic error corresponding to the chosen \gls{acr::elod}.
-
-    \subsection{\textsc{Classifier choice}}
-        The highly modular nature of the framework with multimodal features involving many parameters restricts the choice of classifiers.
-        Random Forest classifiers~\parencite{breiman2001random,criminisi2013decision} are selected.
-        They can manage a large number of features with different dynamics and coming from multiple modalities.
-        Relying on their bagging property, a high number of trees ($1,000$ elements) is necessary to cover most of the feature space, while a limited tree depth ($4$) helps avoiding overfitting during training.
-        It adapts to any of our classification paradigm: multi-class or multi-label.
-        In the latter case, a one-vs-all approach is adopted in addition so as to address each label separately.
-
 \section{\textsc{Richer features}}
+    \label{sec::learned_evaluation::richer_features}
     \subsection{\textsc{Graph classification}}
     \subsection{\textsc{Image classification}}
