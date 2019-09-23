@@ -49,15 +49,15 @@ After discussing some properties of the chosen error defnitions, we explain, in 
     \subsection{\textsc{A general classification of errors}}
         \label{subsec::semantic_evaluation::general_framework::error_classification}
         Herein, based on the previous discussion, a general layout is detailed for building model evaluation.
-overhead
-        At a first level, model qualifiability is studied.overhead
-        In fact, aside from formatting issues or geometric inconsistencies~\parencite{ledoux2018val3dity}, other reasons make building models unqualifiable.overhead
-        For instance, buildings can be occluded by vegetation and thus cannot be assessed with most of the remote sensing data sources.overhead
-        Generally speaking, input models can be impaired by some pathological cases that are outside our evaluation framework.overhead
-        In consequence, \texttt{Qualifiable} models are distinguished here from \texttt{Unqualifiable} buildings.overhead
+
+        At a first level, model qualifiability is studied.
+        In fact, aside from formatting issues or geometric inconsistencies~\parencite{ledoux2018val3dity}, other reasons make building models unqualifiable.
+        For instance, buildings can be occluded by vegetation and thus cannot be assessed with most of the remote sensing data sources.
+        Generally speaking, input models can be impaired by some pathological cases that are outside our evaluation framework.
+        In consequence, \texttt{Qualifiable} models are distinguished here from \texttt{Unqualifiable} buildings.
         This first level corresponds to a \texttt{finesse} equal to 0. At the \texttt{finesse} level 1, we predict the correctness of all qualifiable buildinoverheadgs.
-        It is the lowest semantization level at which the evaluation of a model is expressed.overhead
-        Then, a model is either \texttt{Valid} or \texttt{Erroneous}.overhead
+        It is the lowest semantization level at which the evaluation of a model is expressed.
+        Then, a model is either \texttt{Valid} or \texttt{Erroneous}.
         Most state-of-the-art evaluation methods address errors up to this level.\\
         Model errors are grouped into two families depending on the underlying \gls{acr::lod}.
         The first family of errors \texttt{Building Errors} affects the building in its entirety.
@@ -70,7 +70,7 @@ overhead
 
         The general structure is not fixed and can evolve to adapt to more cases.
         In fact, instead of grouping \gls{acr::lod}-2 and \gls{acr::lod}-3 errors, the latter can be made into a different family that can be called \texttt{Superstructure Errors}.
-        Due to the lack of sufficient observations, we did not make this choice in order to guaranty the generalizability of the taxonomy.overhead
+        Due to the lack of sufficient observations, we did not make this choice in order to guaranty the generalizability of the taxonomy.
         Another alternative consists, for instance, in gathering error families by resolution: this will produce a continuum of errors families going from the coarsest level that would correspond to \texttt{Building Errors} to the finest possible one.
         This last option, although offering an exhaustive and potentially generalizable taxonomy, was ruled out since it does not provide a truly semantic description of the errors.
         % For example, an operator that is presented with the error ``segmentation error at resolution 20\%'' would not have any information on 
@@ -91,7 +91,7 @@ overhead
         \end{figure}
 
 \section{\textsc{Application to the geospatial overhead case}}
-    \label{sec::semantic_evaluation::overhead}overhead
+    \label{sec::semantic_evaluation::overhead}
     Our observations were based on large datasets of \gls{acr::3d} models of buildings reconstructed automatically using \gls{acr::vhr} geospatial images or, if available, \gls{acr::lidar} point clouds.
     We apply the framework introduced in the previous subsection to our special case.
     To do so, we will define the \texttt{atomic} errors before discussing their propoerties.
@@ -608,8 +608,11 @@ overhead
         \begin{equation}
             \label{eq::children_taxonomy}
             \begin{aligned}
-                \text{children}: V \setminus L &\rightarrow V\\
-                n &\mapsto \{m \in V : (n, m) \in E \}
+                \text{children}: V &\rightarrow V\\
+                n &\mapsto \begin{cases}
+                    \{n\} & n \in L\\
+                    \{m \in V : (n, m) \in E \} & n \notin L
+                \end{cases}
             \end{aligned}.
         \end{equation}
         where:
