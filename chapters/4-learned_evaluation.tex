@@ -17,15 +17,20 @@ These are proposed to better predict errors in the model.
 \section{\textsc{Quality evaluation as classification}}
     \label{sec::learned_evaluation::classification}
     In order to satisfy the \textbf{large scale} condition imposed at subsection~\ref{subsec::introduction::contributions::positioning}, we propose to use a supervized learning method.
+    As a first approach, errors are predicted at the building level, even for \texttt{Facet Errors}.
+    At a second time, once this previous task works perfectly, one can try and detect \gls{acr::lod}-2 $\cup$ \gls{acr::lod}-3 errors at facet level.
+    This is not explored in this work.\\
     Errors are predicted based on learned statistical characteristics of the evaluated models.
     The learned approach is usually used to take care of highly semantic tasks, such as ours, that are otherwise hard to process using engineered metrics \addref.\\
     Provided an initial manual annotation effort, the prediction phase is fully automatic.
     This, consequently, verifies the second constraint in~\ref{subsec::introduction::contributions::positioning} which is \textbf{automation}.\\
 
     Two aspects should be discussed to in order to apply this approach to the building \gls{acr::3d} model quality evaluation.
-    First, as seen in section~\ref{sec::semantic_evaluation::label_extraction},the parametric nature of the taxonomy leads to a varying set of labels.
+    First, as seen in section~\ref{sec::semantic_evaluation::label_extraction}, the parametric nature of the taxonomy leads to a varying set of labels.
     For this purpose, we describe in subsection~\ref{subsec::learned_evaluation::classification::different_porblems} the different classification problems depending on the evaluation parameters.
-    Secondly, the classifier should be able to handle the heterogeneity of the feature vector and must adapt to different input vectors types and sizes.
+    Second, the feature extraction procedure should also be compliant with the \textbf{large scale} objective set beforehand.
+    This aspect and more are detailed in section~\ref{subsec::learned_evaluation::classification::feature_extraction}.
+    Third, the classifier should be able to handle the heterogeneity of the feature vector and must adapt to different input vectors types and sizes.
     The choice of classifiers is, hence, discussed in subsection~\ref{subsec::learned_evaluation::classification::classifiers}.
 
     \subsection{\textsc{Different classification problems}}
@@ -38,14 +43,14 @@ These are proposed to better predict errors in the model.
                 \toprule
                 \textbf{\gls{acr::efin}} & \textbf{\gls{acr::elod}} & \textbf{exclusivity} & \textbf{Classification output}\\
                 \midrule
-                1 & --- & --- & Binary(\texttt{Valid}, \texttt{Erroneous})\\
-                2 & \gls{acr::lod}-1 & --- & Binary(\texttt{Valid}, \texttt{Building Errors})\\
-                2 & \gls{acr::lod}-2 & \textsc{on} & MultiClass(\texttt{Valid}, \texttt{Building Errors}, \texttt{Facet Errors})\\
-                2 & \gls{acr::lod}-2 & \textsc{off} & MultiLabel(\texttt{Building Errors}, \texttt{Facet Errors})\\
-                3 & \gls{acr::lod}-1 & \textsc{on} & MultiLabel(children(Binary(\texttt{Valid}, \texttt{Building Errors})))\\
-                3 & \gls{acr::lod}-2 & \textsc{on} & MultiLabel(children(MultiClass(\texttt{Valid}, \texttt{Building Errors}, \texttt{Facet Errors})))\\
-                3 & \gls{acr::lod}-1 & \textsc{off} & MultiLabel(children(\texttt{Building Errors}))\\
-                3 & \gls{acr::lod}-2 & \textsc{off} & MultiLabel(children(\texttt{Building Errors})$\cup$ children(\texttt{Facet Errors}))\\
+                1 & --- & --- & $binary(\texttt{Valid}, \texttt{Erroneous})$\\
+                2 & \gls{acr::lod}-1 & --- & $binary(\texttt{Valid}, \texttt{Building Errors})$\\
+                2 & \gls{acr::lod}-2 & \textsc{on} & $multi\_class(\texttt{Valid}, \texttt{Building Errors}, \texttt{Facet Errors})$\\
+                2 & \gls{acr::lod}-2 & \textsc{off} & $multi\_label(\texttt{Building Errors}, \texttt{Facet Errors})$\\
+                3 & \gls{acr::lod}-1 & \textsc{on} & $multi\_stage(\texttt{Valid}, \texttt{Building Errors})$\\
+                3 & \gls{acr::lod}-2 & \textsc{on} & $multi\_stage(\texttt{Valid}, \texttt{Building Errors}, \texttt{Facet Errors})$\\
+                3 & \gls{acr::lod}-1 & \textsc{off} & $multi\_label(\text{children}(\texttt{Building Errors}))$\\
+                3 & \gls{acr::lod}-2 & \textsc{off} & $multi\_label(\text{children}(\texttt{Building Errors})\cup \text{children}(\texttt{Facet Errors}))$\\
                 \bottomrule
             \end{tabular}
             \caption{
@@ -55,11 +60,21 @@ These are proposed to better predict errors in the model.
             }
         \end{table}
 
-        In Table~\ref{tab::classification_problems}, Binary(\texttt{Valid}, $l$) refers to the binary setting that predicts the most probable class \texttt{Valid} or $l$.
-        MultiClass($l_1, l_2, \dots, l_c$) (\textit{resp}. MultiLabel($l_1, l_2, \dots, l_c$)) corresponds to the multi-class (\textit{resp}. multi-label) setting.
-        We note that: MultiLabel(\texttt{Valid}, $l_1, l_2, \dots, l_c$)) = MultiLabel($l_1, l_2, \dots, l_c$).
-        Two consecutive classification problems relate to a hierchical classification:
-        depending on the class that is predicted in the first stage, a second classification problem chooses between corresponding labels.\\
+        In Table~\ref{tab::classification_problems}, $multi\_class(l_1, l_2, \dots, l_c)$ (\textit{resp}. $multi\_label(l_1, l_2, \dots, l_c)$) corresponds to the multi-class (\textit{resp}. multi-label) setting.
+        We note that:
+        \begin{equation*}
+            multi\_label(\texttt{Valid}, l_1, l_2, \dots, l_c) \equiv multi\_label(l_1, l_2, \dots, l_c).
+        \end{equation*}
+        $binary$ refers to the special case of $multi\_class$ where $c = 2$: \textit{i.e}
+        \begin{equation*}
+            binary(l_1, l_2) \equiv multi\_class(l_1, l_2)
+        \end{equation*}
+        Two consecutive classification problems can be concatenated in a hierchical multi-stage classification:
+        depending on the class that is predicted in the first stage multi-class classifier, a second classification problem chooses between corresponding labels.
+        This denoted by:
+        \begin{equation*}
+            multi\_stage((l_1, l_2, \dots, l_3)) \equiv multi\_label(\text{children}(multi\_class(l_1, l_2, \dots, l_3))).
+        \end{equation*}
             
         \textbf{\gls{acr::efin}} = 1 level corresponds to the standard binary classification problem: \texttt{Valid} or \texttt{Erroneous}.
         At \textbf{\gls{acr::efin}} = 2, the \textbf{\gls{acr::elod}} can then take two values in the aerial reconstruction case: \gls{acr::lod}-1 or \gls{acr::lod}-2.
@@ -67,36 +82,66 @@ These are proposed to better predict errors in the model.
         For \gls{acr::lod}-2, if the \textbf{exclusivity} is on, it will be a multi-class problem: \texttt{Valid}, \texttt{Building Errors} or \texttt{Facet Errors}.
         If set off, it becomes a multi-label one with the same labels.
         At \textbf{\gls{acr::efin}} = 3 level, if the \textbf{exclusivity} is on, it is a 2-stage classification problem.
-        In the first stage, a multi-class task\footnote{It is binary in the spcial case \gls{acr::elod} = \gls{acr::lod}1, problem, like in the previous semantic degree.}
+        In the first stage, a multi-class task\footnote{It is binary in the spcial case \gls{acr::elod} = \gls{acr::lod}-1, problem, like in the previous semantic degree.}
         predicts the error family, after which a second multi-label problem decides between the predicted error family children.
-        If the \textbf{exclusivity} is off, it turns into  1-stage multi-label problem that predicts the existence of each atomic error corresponding to the chosen \gls{acr::elod}.
-
+        If the \textbf{exclusivity} is off, it turns into one stage multi-label problem that predicts the existence of each atomic error corresponding to the chosen \gls{acr::elod}.
+    
+    \subsection{\textsc{Feature extraction}}
+        \label{subsec::learned_evaluation::classification::feature_extraction}
+        The proposed quality evaluation approach, being formulated as a supervized classification problem, requires extracting feature vectors describing characteristics of the evaluated model.
+        This is possible through the use of the intrinsic properties of the building model, as well as comparisons with external data.\\
+    
+        In intrinsic evaluation, the structure of the \gls{acr::3d} model can be directly used to extract geometric features.
+        Semantics as well as meta-data related to the building model could be processed also for the purpose of evaluating a model.
+        This corresponds to the minimal amount of information one can get from a model.
+        In this case, we talk about self-evaluation of building models.
+        Since we are considering all cases possible especially automatically reconstructed building models, only the model geometry is guaranteed to be always available.\\
+    
+        In extrinsic evaluation, features are extracted by comparing the polyhedric model to the available external data.
+        Obviously, high quality reference models are the best type of data to compare the evaluated model to.
+        However, remininding the reader with the \textbf{large scale} objective that was fixed earlier (subsection~\ref{subsec::introduction::contributions::use}), this is not a viable solution for this case.
+        We rely then on more basic reference data such as remote sensing acquired data that are the basis of large-scale modeling of urban scenes.\\
+        For instance, raw depth information can be utilized for such a task.
+        It can prove helpful in detecting geometric defects that are intrinsically of \gls{acr::3d} nature.
+        This was illustrated in Figure~\ref{fig::fig}, as comparing the projected model to the orthoimage did not yield anything out of place, contrarily to the \gls{acr::dsm} comparison.
+        Depth data can be take multiple forms: unstructured point clouds, originating for instance from \gls{acr::lidar} sensors, or dense depth maps such as \gls{acr::dsm} for the overhead case.\\
+        Optical images can be also used.
+        These provide complementary information such as edges (high frequencies, in general) and textures which are suited for inner defect detection as an example.
+        This type of data come in different shapes: oblique images or orthoimages.
+    
     \subsection{\textsc{Classifier choice}}
         \label{subsec::learned_evaluation::classification::classifiers}
-        The highly modular nature of the framework with multimodal features involving many parameters restricts the choice of classifiers.
-        Random Forest classifiers~\parencite{breiman2001random,criminisi2013decision} are selected.
-        They can manage a large number of features with different dynamics and coming from multiple modalities.
-        Relying on their bagging property, a high number of trees ($1,000$ elements) is necessary to cover most of the feature space, while a limited tree depth ($4$) helps avoiding overfitting during training.
-        It adapts to any of our classification paradigm: multi-class or multi-label.
-        In the latter case, a one-vs-all approach is adopted in addition so as to address each label separately.
+        The choice of classifiers shoud take into consideration the highly modular nature of the framework with multimodal features involving many parameters.
+        Two classifiers where chosen in this study: Random Forest and \gls{acr::svm}.
+        Both were discussed at great length in section~\ref{sec::state_of_the_art::mlpr}.
+        Hereafter, we explain how each one is used in this setting.\\
 
+        \paragraph{Random Forest}
+            Random Forest classifiers~\parencite{breiman2001random,criminisi2013decision} are selected.
+            They can manage a large number of features with different dynamics and coming from multiple modalities.
+            Relying on their bagging property, a high number of trees ($1,000$ elements) is necessary to cover most of the feature space, while a limited tree depth ($4$) helps avoiding overfitting during training.
+            It adapts to any of our classification paradigm: multi-class or multi-label.
+            In the latter case, a one-vs-all approach is adopted in addition so as to address each label separately.
 
+        \paragraph{\acrshort*{acr::svm}}
+            \gls{acr::svm}.
 
 \section{\textsc{Feature baseline}}
     \label{sec::learned_evaluation::baseline}
-    In order to detect labels previously defined in chapter~\ref{chap::semantic_evaluation}, we formulate the problem as a supervized learning classification problem.
-    Based on annotated 
-     while guarantying a certain flexibility towards reference data, multiple modalities are necessary.
-    The structure of the 3D model can be directly used to extract geometrical features.
-    Dense depth information can be added, through for instance a \gls{acr::dsm}, so as to help detecting geometric defects that can be hardly discriminated otherwise (as in Figure~\ref{fig::fac_err}.(e)), in particular for the outer part of buildings.
-    VHR optical images bring additional information (high frequencies and texture) that is particularly suited for inner defect detection.
+    Since there is no comparable work that studies the previously defined errors, we propose a baseline for each one of the three modalities: geometric, height based and image based features.
+    Attributes are kept simple so as to be used in most situations relying on generally available data.
+    We avoid computing and comparing \gls{acr::3d} lines~\parencite{michelin2013quality}, correlation scores~\parencite{boudet2006supervised} or any \gls{acr::sfm} based metric~\parencite{kowdle2011active}.
+    In addition of being very costly, these features are methodologically redundant with the \gls{acr::3d} modeling techniques.
+    They are, hence, vulnerable to the same defects.
+    Conversely, evaluation metrics used in the \gls{acr::3d} building reconstruction literature (\textit{e.g.}, \gls{acr::rmse}) are too weak for such a complex task.
+    This will be proven later on in section~\ref{}.
 
-    Since there is no comparable work that studies the previously defined errors, we propose a baseline for each modality.
-    Attributes are kept simple so as to be used in most situations relying on generally available data. We avoid computing and comparing 3D lines~\parencite{michelin2013quality}, correlation scores~\parencite{boudet2006supervised} or any Structure-from-Motion (SfM) based metric~\parencite{kowdle2011active}.
-    In addition of being very costly, these features are methodologically redundant with the 3D modeling techniques: they are vulnerable to the same defects.
-    Conversely, evaluation metrics used in the 3D building reconstruction literature (\textit{e.g.}, \gls{acr::rmse}) are too weak for such a complex task.
+    In subsection~\ref{subsec::learned_evaluation::baseline::geometric}, we describe the used baseline for geometric features.
+    Next, in subsection~\ref{subsec::learned_evaluation::baseline::height}, height based features extraction is explained.
+    We end with image based features in subsection~\ref{subsec::learned_evaluation::baseline::image}.
 
     \subsection{\textsc{Geometric features}}
+        \label{subsec::learned_evaluation::baseline::geometric}
         The model facet set is denoted by $\mathsf{F}$.
         $\forall (f, g) \in \mathsf{F} \times \mathsf{F} \; f \sim g$ correspond to facets $f$ and $g$ being adjacent:
         \textit{i.e.}, they share a common edge. As the roof topology graph in~\parencite{verma20063d}, the input building model $\mathsf{M}$ can be seen as a facet (dual) graph:
@@ -115,16 +160,20 @@ These are proposed to better predict errors in the model.
                 The green vector groups the node (facet) attributes while the blue one shows the edge features.
             }
         \end{figure}
+
         The dual graph is illustrated in Figure~\ref{fig::geometric_features}.
         For each facet $f \in \mathsf{F}$, we compute its degree (\textit{i.e.}, number of vertices; $d(f) \triangleq \vert\{v : v\text{ is a vertex of }f\}\vert$), its area $\mathscr{A}(f)$ and its circumference $\mathscr{C}(f)$.
-        For each graph edge $e=\{f, g\} \in \mathsf{E}$, we look for the distance between facet centroids $\Vert \mathscr{G}(f) - \mathscr{G}(g) \Vert$ and the angle formed by their normals $\arccos(\vec{n}(f), \vec{n}(g))$.
+        These are all geometric invariants with respect to $\mathbb{R}^3$ isometries, contrarily to facet centroids $\mathscr{G}(f)$ and normals $\vec{n}(f)$.
+        This is countersteped by looking, for each graph edge $e=\{f, g\} \in \mathsf{E}$, for the distance between facet centroids $\Vert \mathscr{G}(f) - \mathscr{G}(g) \Vert$ and the angle formed by their normals $\arccos(\vec{n}(f) \cdot \vec{n}(g))$.
         Statistical characteristics are then computed over building model facets using specific functions $S$, like a histogram:        
 
         \begin{equation}
+            \label{eq::histogram_extractor}
         	S = S^p_{hist}: l \mapsto histogram(l, p),
         \end{equation}
         with $p$ standing for histogram parameters. A simpler option could be:
         \begin{equation}
+            \label{eq::statistical_extractor}
             S = S_{synth}: l \mapsto \begin{bmatrix}
                 \max(l)\\
                 \min(l)\\
@@ -146,7 +195,7 @@ These are proposed to better predict errors in the model.
         Each building $\mathsf{M}$ can consequently be characterized by a geometric feature vector that accounts for its geometric characteristics:
 
         \begin{equation}
-        	\label{eq::geom_feat}
+        	\label{eq::geometric_features}
             v_{geometric}(\mathsf{M}) = \begin{bmatrix}
             	S \Big(\big(d(f)\big)_{f \in \mathsf{F}}\Big)\\
                 S \Big(\big(\mathscr{A}(f)\big)_{f \in \mathsf{F}}\Big)\\
@@ -155,19 +204,21 @@ These are proposed to better predict errors in the model.
                 S\Big(\big( \arccos(\vec{n}(f) \cdot \vec{n}(g)) \big)_{(f,g) \in \mathsf{E}}\Big)
             \end{bmatrix}.
         \end{equation}
+
         Additionally to individual facet statistics, regularity is taken into account by looking into adjacent graph nodes as in~\parencite{zhou20102}.
         Such features express a limited  part of structural information.
-        Taking this type of information into account would implicate graph comparisons which are not genuinely simple tasks to achieve.
+        Dealing with this type of information implies graph comparisons which are not a genuinely simple task to achieve.
         Since our objective is to build a baseline, this approach has not yet been considered.
 
     \subsection{\textsc{Height based features}}
-        For this modality, raw depth information is provided by a \gls{acr::dsm} as a 2D height grid: $dsm \in \mathbb{R}^{w\times h}$\footnote{$w$ (\textit{resp.} h) is the grid width (\textit{resp.} height)}.
-        It must have been produced around the same time of the 3D reconstruction so as to avoid temporal discrepancies.
+        \label{subsec::learned_evaluation::baseline::height}
+        For this modality, raw depth information is provided by a \gls{acr::dsm} as a \gls{acr::2d} height grid: $dsm \in \mathbb{R}^{w\times h}$\footnote{$w$ (\textit{resp.} $h$) is the grid width (\textit{resp.} height)}.
+        It must have been produced around the same time of the \gls{acr::3d} reconstruction so as to avoid temporal discrepancies.
         It is compared to the model height~\parencite{bredif20073d,zebedin2008fusion}.
         The latter is inferred from its facets plane equations.
-        It is then rasterized into the image: $alt \in \mathbb{R}^{w\times h}$ at the same spatial resolution as $dsm$.
-        Their difference generates a discrepancy map (Figure~\ref{fig::pipeline}.c).
-        A baseline approach is proposed relying on the statistics of pixel values computed using the $S$ functions (Figure~\ref{fig::height_based_features}).
+        It is then rasterized into an image $alt \in \mathbb{R}^{w\times h}$ using the same spatial resolution as $dsm$.
+        Their difference between the two height grid provides a discrepancy map (Figure~\ref{fig::graphical_abstract}.c).
+        A baseline approach is herein proposed relying on the statistics of pixel values computed using the $S$ functions (Figure~\ref{fig::height_based_features}).
 
         \begin{equation}
             \label{eq::height_based_features}
@@ -179,18 +230,23 @@ These are proposed to better predict errors in the model.
                 \label{fig::height_based_features}
                 Histogram height-based features computed from the \gls{acr::dsm} residuals.
                 (a) \glspl{acr::dsm}.
-                (b) Height maps extracted from the 3D model.
+                (b) Height maps extracted from the \gls{acr::3d} model.
                 (c) Difference between (a) and (b).
                 The difference is transformed into a vector using a histogram (d).
             }
         \end{figure}
-        Equation~\ref{eq::height_based_features} summarizes how building height-based features are computed. Different from a root mean square metric~\parencite{lafarge2012creating,poullis2013framework}, the histogram captures the discrepancy distribution, which is particularly helpful in detecting undersegmentation defects or geometric imprecision. However, as for the previous geometric attributes, the grid structure of information coming from the model is lost. Errors cannot be spatialized and linked to a specific facet.
+
+        Equation~\ref{eq::height_based_features} summarizes how building height-based features are computed.
+        Different from a \gls{acr::rmse}~\parencite{lafarge2012creating,poullis2013framework}, the histogram captures the discrepancy distribution, which is particularly helpful in detecting undersegmentation defects or geometric imprecision.
+        However, as for the previous geometric attributes, the grid structure information coming from the model is lost.
+        Errors cannot be spatialized and linked to a specific facet.
 
     \subsection{\textsc{Image based features}}
-    The framework is general enough to encompass both orthorectified images and oblique ones.
-    In this paper, we only used orthorectified images.
-    In an ideal scenario, using oriented images is better for edge verification (as already shown in~\parencite{michelin2013quality}) as orthoimages are a byproduct of earlier ones.
-    However, in practice, oblique imagery would give rise to other issues, especially, registration problems.
+        \label{subsec::learned_evaluation::baseline::image}
+        The framework is general enough to encompass both orthorectified images and oblique ones.
+        In this paper, we only used orthorectified images., while not being a raw sensor data and riddled with artifacts, are more accessible
+        In an ideal scenario, using oriented images is better for edge verification (as already shown in~\parencite{michelin2013quality}) as orthoimages are a byproduct of earlier ones.
+        However, in practice, oblique imagery would give rise to other issues, especially, registration problems.
 
         We aim to benefit from the high frequencies in Very High Spatial Resolution optical images. Building edges correspond to sharp discontinuities in images~\parencite{ortner2007building}. We verify this by comparing these edges to local gradients. We start by projecting building models on the orthorectified image $I$ (Figure~\ref{fig::radio}). For each facet, we isolate an edge $s$ (Figure~\ref{fig::seg_inter}). In an ideal setting, gradients computed at pixels $g$ that intersect $s$ need to be almost be collinear with its normal $\vec{n}(s)$. In consequence, applying the same statistics functions $S$, we compute the distribution of the cosine similarity between the local gradient and the normal all along that $s$:
         \begin{equation}
@@ -229,7 +285,7 @@ These are proposed to better predict errors in the model.
             D_{S_{hist}^p}(f, I) \triangleq \sum_{s \in q(f)} \Vert s \Vert \cdot \mathsf{D}_{S_{hist}^p}(s, I).
         \end{equation}
 
-        The same can be done over all facets of a building $\mathsf{M}$ (Equation~\ref{eq::corr_bul}). The weights are added in order to take into account the geometry heterogeneity. The gradient to normal comparison is similar to the 3D data fitting term formulated in~\parencite{li2016boxfitting}. Once again, the model structure is partially lost when simply summing histograms over all segments.
+        The same can be done over all facets of a building $\mathsf{M}$ (Equation~\ref{eq::corr_bul}). The weights are added in order to take into account the geometry heterogeneity. The gradient to normal comparison is similar to the \gls{acr::3d} data fitting term formulated in~\parencite{li2016boxfitting}. Once again, the model structure is partially lost when simply summing histograms over all segments.
         \begin{equation}
             \label{eq::corr_bul}
             v_{image}(\mathsf{M}) = D_{S_{hist}^p}(\mathsf{M}, I) \triangleq \sum_{f \in \mathsf{F}} \mathscr{A}(q(f)) \cdot \mathsf{D}_{S_{hist}^p}(f, I).
