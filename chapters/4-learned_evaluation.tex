@@ -153,7 +153,7 @@ These are proposed to better predict errors in the model.
 
         \begin{figure}[htbp]
             \centering
-            \includestandalone[mode=buildnew, width=.75\textwidth]{figures/features/geometric_features}
+            \includestandalone[mode=buildnew, width=.75\textwidth]{figures/features/geometric}
             \caption{
                 \label{fig::geometric_features}
                 Computed geometric attributes represented on the dual graph, for facets $f$ and $g$.
@@ -213,26 +213,25 @@ These are proposed to better predict errors in the model.
     \subsection{\textsc{Height based features}}
         \label{subsec::learned_evaluation::baseline::height}
         For this modality, raw depth information is provided by a \gls{acr::dsm} as a \gls{acr::2d} height grid: $dsm \in \mathbb{R}^{w\times h}$\footnote{$w$ (\textit{resp.} $h$) is the grid width (\textit{resp.} height)}.
-        It must have been produced around the same time of the \gls{acr::3d} reconstruction so as to avoid temporal discrepancies.
-        It is compared to the model height~\parencite{bredif20073d,zebedin2008fusion}.
+        This type of reference data must date back to the same time where the building models where produced.
+        Otherwise a lot of defects will result simply from change in the scenery.\\
+
+        The \gls{acr::dsm} is compared to the model height~\parencite{bredif20073d,zebedin2008fusion}.
         The latter is inferred from its facets plane equations.
-        It is then rasterized into an image $alt \in \mathbb{R}^{w\times h}$ using the same spatial resolution as $dsm$.
-        Their difference between the two height grid provides a discrepancy map (Figure~\ref{fig::graphical_abstract}.c).
+        It is rasterized into an grid structure $alt \in \mathbb{R}^{w\times h}$ using the same spatial resolution as $dsm$.
+        The difference between the two height grids provides a discrepancy map (Figure~\ref{fig::height_based_features}.c).
         A baseline approach is herein proposed relying on the statistics of pixel values computed using the $S$ functions (Figure~\ref{fig::height_based_features}).
 
         \begin{equation}
             \label{eq::height_based_features}
             v_{height}(\mathsf{M}) = S\big( dsm - alt \big).
         \end{equation}
-        \begin{figure}[H]
-            \includestandalone[mode=buildnew,width=\textwidth]{figures/features/altimetric_features}
+        \begin{figure}[htpb]
+            \centering
+            \includestandalone[width=\textwidth, mode=buildnew]{figures/features/height_based}
             \caption{
                 \label{fig::height_based_features}
-                Histogram height-based features computed from the \gls{acr::dsm} residuals.
-                (a) \glspl{acr::dsm}.
-                (b) Height maps extracted from the \gls{acr::3d} model.
-                (c) Difference between (a) and (b).
-                The difference is transformed into a vector using a histogram (d).
+                Height-based features computed from the \gls{acr::dsm} residuals using histograms.
             }
         \end{figure}
 
@@ -244,11 +243,25 @@ These are proposed to better predict errors in the model.
     \subsection{\textsc{Image based features}}
         \label{subsec::learned_evaluation::baseline::image}
         The framework is general enough to encompass both orthorectified images and oblique ones.
-        In this paper, we only used orthorectified images., while not being a raw sensor data and riddled with artifacts, are more accessible
+        For now, we rely only on more accessible orthorectified images, eventhough they can be riddled with artifacts.
         In an ideal scenario, using oriented images is better for edge verification (as already shown in~\parencite{michelin2013quality}) as orthoimages are a byproduct of earlier ones.
-        However, in practice, oblique imagery would give rise to other issues, especially, registration problems.
+        However, in practice, oblique imagery would give rise to other issues, especially, registration problems.\\
 
-        We aim to benefit from the high frequencies in Very High Spatial Resolution optical images. Building edges correspond to sharp discontinuities in images~\parencite{ortner2007building}. We verify this by comparing these edges to local gradients. We start by projecting building models on the orthorectified image $I$ (Figure~\ref{fig::radio}). For each facet, we isolate an edge $s$ (Figure~\ref{fig::seg_inter}). In an ideal setting, gradients computed at pixels $g$ that intersect $s$ need to be almost be collinear with its normal $\vec{n}(s)$. In consequence, applying the same statistics functions $S$, we compute the distribution of the cosine similarity between the local gradient and the normal all along that $s$:
+        We aim to benefit from the high frequencies in Very High Spatial Resolution optical images.
+        Building edges, like any image edge, correspond to sharp discontinuities in images~\parencite{ortner2007building}.
+        The latter are detected using gradient filters on images.
+        Gradient based features are advantageous compared to any radiometry based ones.
+        This is due to the fact that the latter are much less invariant to changes in the than the first ones.
+        Indeed, classic Computer Vision techniques rely on gradient based features:~\textcite{lowe2004distinctive,dalal2005histograms}.
+        This is adequate to our case where models and images are part of large heterogeneous datasets.\\
+        
+
+        We apply this to our context by comparing these edges to local gradients.
+        We start by projecting building models on the orthorectified image $I$ (Figure~\ref{subfig::model_nadir_projection}).
+        For each facet, we isolate an edge $s$ (Figure~\ref{subfig::segment_gradient_collinearity}).
+        In an ideal setting, gradients computed at pixels $g$ that intersect $s$ need to be almost be collinear with its normal $\vec{n}(s)$.
+        In consequence, applying the same statistics functions $S$, we compute the distribution of the cosine similarity between the local gradient and the normal all along that $s$:
+        
         \begin{equation}
             \label{eq::corr_seg}
             \mathsf{D}_S(s, I) \triangleq S \bigg( \Big(\frac{\nabla I(g) \cdot \vec{n}(s)}{\Vert \nabla I(g)\Vert}\Big)_{g \in I \textrm{ and } g \cap s \neq \emptyset} \bigg).
@@ -261,14 +274,15 @@ These are proposed to better predict errors in the model.
                         \ffigbox[\FBwidth]{
                             \caption{
                                 Model facets (each represented by a specific color) are nadir projected onto the orthoimage.
-                            }\label{fig::radio}
+                            }\label{subfig::model_nadir_projection}
                             }			
                             {
                                 \includegraphics[width=.45\textwidth]{images/features/image/nadir_superposition}
                             }
                         \quad
                         \ffigbox[\FBwidth]{
-                                \caption{Local gradients (in purple), on intersecting pixels (in green), are compared to the edge (in red) normal (in black).}\label{fig::seg_inter}
+                                \caption{Local gradients (in purple), on intersecting pixels (in green), are compared to the edge (in red) normal (in black).}
+                                \label{subfig::segment_gradient_collinearity}
                             }
                             {\includestandalone[mode=buildnew, width=.45\textwidth]{figures/features/radiometric_features}
                         }
@@ -279,19 +293,28 @@ These are proposed to better predict errors in the model.
             \end{center}
         \end{figure}
 
-        Once the distribution is computed over a segment, it is stacked over all facet edges to define the distribution over projected facets. In the case of histograms $S_{hist}^p$ with the same parameters (and thus the same bins), it is equivalent to summing out the previous vectors $\mathsf{D}_{S_{hist}^p}(s, I)$ over edges $s$ from the projection $q(f)$ of the facet $f$. In order to take into account the variability of segment dimensions, this sum is normalized by segment lengths.
+        Once the distribution is computed over a segment, it is stacked over all facet edges to define the distribution over projected facets.
+        In the case of histograms $S_{hist}^p$ with the same parameters (and thus the same bins), it is equivalent to summing out the previous vectors $\mathsf{D}_{S_{hist}^p}(s, I)$ over edges $s$ from the projection $q(f)$ of the facet $f$.
+        In order to take into account the variability of segment dimensions, this sum is normalized by segment lengths.
+
         \begin{equation}
             \label{eq::corr_fac}
             D_{S_{hist}^p}(f, I) \triangleq \sum_{s \in q(f)} \Vert s \Vert \cdot \mathsf{D}_{S_{hist}^p}(s, I).
         \end{equation}
 
-        The same can be done over all facets of a building $\mathsf{M}$ (Equation~\ref{eq::corr_bul}). The weights are added in order to take into account the geometry heterogeneity. The gradient to normal comparison is similar to the \gls{acr::3d} data fitting term formulated in~\parencite{li2016boxfitting}. Once again, the model structure is partially lost when simply summing histograms over all segments.
+        The same can be done over all facets of a building $\mathsf{M}$ (Equation~\ref{eq::corr_bul}).
+        The weights are added in order to take into account the geometry heterogeneity.
+        The gradient to normal comparison is similar to the \gls{acr::3d} data fitting term formulated in~\parencite{li2016boxfitting}.
+        Once again, the model structure is partially lost when simply summing histograms over all segments.
+
         \begin{equation}
             \label{eq::corr_bul}
             v_{image}(\mathsf{M}) = D_{S_{hist}^p}(\mathsf{M}, I) \triangleq \sum_{f \in \mathsf{F}} \mathscr{A}(q(f)) \cdot \mathsf{D}_{S_{hist}^p}(f, I).
         \end{equation}
         
-        These image-based attributes are helpful for precision error detection. As example, facet imprecise borders can be detected as local gradients direction will be expected to differ greatly from the inaccurate edge. It can also be detrimental in under-segmentation detection as colors can change considerably from one facet or one building to another inducing an gradient orthogonal to edge normals.
+        These image-based attributes are helpful for precision error detection.
+        As example, facet imprecise borders can be detected as local gradients direction will be expected to differ greatly from the inaccurate edge.
+        It can also be detrimental in under-segmentation detection as colors can change considerably from one facet or one building to another inducing an gradient orthogonal to edge normals.
 
 \section{\textsc{Richer features}}
     \label{sec::learned_evaluation::richer_features}
