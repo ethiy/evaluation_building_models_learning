@@ -242,12 +242,12 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
         We have seen, previously, how city \gls{acr::3d} models can be instrumental.
         They have a large range of applications in entertainement, industry, security, urbanization and sustainable developpement.
         In this work, the focus is put on outdoor, rather than indoor, modeling.\\
-        Precisely, we will raise, herein, the issue of large scale outdoor city modeling.
+        Precisely, we will raise, herein, the issue of large-scale outdoor city modeling.
         We will see how building reconstruction has a prominent role in the field.
         Afterwhat, we will discuss different building model acquisition techniques and how it influences their quality.
         We end with an examination of semantics in building models.
 
-        \subsubsection{\textsc{Large scale outdoor city modeling}}
+        \subsubsection{\textsc{Large-scale outdoor city modeling}}
             Not all urban items have the same importance.
             This is particularly true when modeling city scapes.
             For this purpose, all different urban elements are analysed based on temporal and spatial dimensions.
@@ -274,7 +274,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             }, without requiring \gls{acr::3d} human models.\\
             There is little or no work, as far as we know, that discusses \gls{acr::3d} modeling water body situated in urban areas.
             Vegetation can be modeled accurately using \gls{acr::lidar} acquisition~\parencite{omasa20063d}.
-            It is, however, too demanding in ressources and unnecessary in a large scale context.
+            It is, however, too demanding in ressources and unnecessary in a large-scale context.
             Trees are usually modeled by template matching, such as the ellipsoidal form model in~\textcite{lafarge2012creating}, or by generic, species dependent, \gls{acr::cad} models like in~\textcite{iovan2008detection}.\\
             \begin{figure}[htpb]
                 \centering
@@ -284,7 +284,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
                     \label{fig::3d_tree_models} The city model is populated with generic models of trees depending on their class~\parencite{iovan2008detection}.
                 }
             \end{figure}
-            Regarding the first and second groups, was proven, the lack of motivation for precise \gls{acr::3d} reconstruction, in a large scale setting.
+            Regarding the first and second groups, was proven, the lack of motivation for precise \gls{acr::3d} reconstruction, in a large-scale setting.
             Exhibiting less temporal volatility, precise modeling of items from the third group seems to be easier.
             In fact, terrain relief can be modeled simply from a \gls{acr::dsm} or a \gls{acr::dtm}.
             Although not being so easy to detect~\parencite{mnih2010learning}, roads could be naturally modeled using simple planar structures.
@@ -320,7 +320,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             Discussed herein are types of building models.
             Scale of reconstruction is a main factor in dividing the latter into two classes (\textit{cf.} Figure~\ref{fig::bim_vs_gis}).
             At a small scale, \gls{acr::bim} or \gls{acr::cad} models are easy to use.
-            On the contrary, \gls{acr::gis} models are more suitable at a large scale.\\
+            On the contrary, \gls{acr::gis} models are more suitable at a large-scale.\\
 
             \gls{acr::bim} models are volumetric in nature:
             each element is represented by a volumetric primitive.
@@ -342,11 +342,11 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             \end{figure}
 
             In contrast, \gls{acr::gis} models represent rather the surface of buildings.
-            The goal is to describe the building geometry, as well as all urban items, at a large scale.
+            The goal is to describe the building geometry, as well as all urban items, at a large-scale.
             Furthermore, this model type carries semantics related to all urban objects in the scene as well as their relations.
             These models could be acquired manually, as with \gls{acr::bim}, like the example of~\textcite{ref3dnat}.
             Another way to proceed consists in acquiring the geometry, automatically or interactively, using sensor data~\parencite{musialski2013survey}.
-            Crowdsourcing could be equally used for large scale reconstruction of buildings as depicted in~\textcite{uden2013open}.\\
+            Crowdsourcing could be equally used for large-scale reconstruction of buildings as depicted in~\textcite{uden2013open}.\\
 
             Some works tackled the issue of bridging the two model types~\parencite{deng2016mapping}.
             This field is far from being fully mature as proved by~\textcite{stoter2018geo}.
@@ -479,7 +479,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
                 }
             \end{figure}
             The compromise, between compaction and geometric precision, relies on an \textit{a prioiri} knowledge of the modeled urban scene.
-            Such hypotheses does not naturally hold at large scales.
+            Such hypotheses does not naturally hold at large-scales.
             Multiple factors play a role in architectural styles of buildings that do not always go hand in hand:
             a geographic proximity does not imply always a temporal or architectural closeness for buildings as depicted in Figure~\ref{subfig::xiiith_paris_haussmann_tower}.
             At a regional or continental scale, the differences become even more overt: \textit{c.f.} Figure~\ref{subfig::different_regions}.
@@ -518,7 +518,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             Usually, it is indirectly checked using the compaction criterion~\parencite{lafarge2012creating}.\\
             Up to now most studies try to evaluate the quality of modeling algorithms by assessing the accuracy of the geometry of a handfull of buildings.
             These evaluation approaches rely on purely geometric metrics (usually the \gls{acr::rmse}) to compare the reconstructed building to a reference models.
-            In a large scale setting, this becomes prohibitive.
+            In a large-scale setting, this becomes prohibitive.
             In fact, it means that one should reconstruct, at least, a whole disctict to be able to judge a city model.
             This is expensive in ressources and time.
             Alternatively, many works favor visual inspection of models.
@@ -601,7 +601,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
                     This is a more affordable and scalable but a less accurate solution.
                 \item Reference sensor data: they are used by operators in constrast with what is examined the geometry of a building model.
                     Oriented images, \gls{acr::dsm} and point clouds are instances of such data.
-                    This setting is, with the same or less positional accuracy as the previous case, the easiest to adopt in a large scale.
+                    This setting is, with the same or less positional accuracy as the previous case, the easiest to adopt in a large-scale.
             \end{itemize}
 
             Manual inspection is, actually, ideal in the sense that humans are naturally most suited to detect semantic flaws in building representation.
@@ -642,33 +642,38 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
         Topologic consistency inspection, in contrast, as discussed in subsection~\ref{subsec::introduction::building_model_evaluation::topological}, has received ample attention from the \gls{acr::gis} community.
         In consequence, it will not be of the focus in this work.\\
 
-        Building modeling has been shown, earlier (\textit{cf.} subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}), to be a bottleneck for urban outdoor modeling at large scales.
+        Building modeling has been shown, earlier (\textit{cf.} subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}), to be a bottleneck for urban outdoor modeling at large-scales.
         As a consequence, evaluating building \gls{acr::3d} models is essential for entire scene model inspection.
-        The difference between buildings and most urban elements is the significance of semantics (\textit{cf.} subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}).
-        The latter translates into structural geometric properties that are not faithfully captured by geometric fidelity metrics.
-        As a consequence, the proposed approach should factor semantics in the evaluation.
+        Semantics play a prominent role for building models (\textit{cf.} subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}).
+        Geometric fidelity metrics are sufficient in order to faithfully capture the structural properties induced by semantics.
+        As a consequence, the proposed approach should factor semantics in the evaluation as well.
         As a result, like with \glspl{acr::lod}, errors are exptected to be categorized owing to the semantic character of the evaluation.\\
 
         The evaluation is, herein, studied under two constraints: \textbf{large-scale} and \textbf{automation}.
-        Below, explained are the consequences of each one.
-        \paragraph{Large-scale}
-            Due to the large-scale requirement, the proposed categorization must be stable no matter how the treated urban scene change.
-            It is due to the fact that having each urban zone with its own specific error definitions would hinder scaling the defect categorization.
-            In fact, this would involve frequent human interactions in order to alleviate possible issues when merging conflicting error classifications.
-            Such interventions are always expensive and would scale poorly at city, country or continental levels.\\
-            Quality evaluation involves the use of reference data against which reconstructed building models are compared.
-            In subsection~\ref{subsec::state_of_the_art::quality::reference}, are discussed the different forms that these data can take.
-            A high quality reference usually requires manual labour that is evidently unscalable.
-            Consequently, the less costly the reference data is the more adapted the evaluation method will be to large scales.
-            Moreover, if possible, avoiding reference data altogether would be the best alternative.
+        Below, consequences of each one are discussed in detail.
+        \subsubsection{\textsc{Large-scale}}
+            The implications of this constraints are two-pronged.
+            Scalability is at odds with both the heterogeneity of building models and the reference data used for evaluation.
+            Both aspects are discussed herein.\\
 
-        \paragraph{Automation}
-            Semantically aware inspection is natural for human operators.
+            Due to the large-scale requirement, the proposed categorization must be stable no matter how the treated urban scene change.
+            The same robustness is pursued when considering the different \gls{acr::3d} modeling approaches and the heterogenuous sensors behind the evaluated building models.
+            As a consequence, the latter come in in all possible \glspl{acr::lod} and are vulnerable to particular defects, depending on the used modeling method and the input data type.
+            Having each urban zone or building model type with its own specific error definitions would hinder scaling the defect categorization.
+            In fact, this would involve frequent human interactions in order to alleviate possible issues when merging possibly conflicting error classifications.
+            Such interventions are always expensive and scale poorly at district, city or country level, let alone the global stage.\\
+
+            Quality evaluation involves the use of reference data against which reconstructed building models are compared.
+            In subsection~\ref{subsec::state_of_the_art::quality::reference}, are discussed the different forms these data can take.
+            A high quality reference usually requires manual labour that is evidently non scalable.
+            Actually, the less costly the reference data is, the more adaptive the evaluation method will be at large-scales.
+            In fact, the best alternative would be, if possible, to avoid using reference data altogether.
+
+        \subsubsection{\textsc{Automation}}
+            Semantically aware inspection is a natural task for human operators.
             It is, however, difficult to automate.
-            In fact, models result from different reconstruction approaches and heterogenuous sensors.
-            They also come in all possible \glspl{acr::lod}.
-            This diversity in building models poses serious issues for any automatic evaluation system.
-            This means that the latter should be guaranteed to function properly independently from the origin of the evaluated models.
+            In fact, as seen in Computer Vision,\addref the more semantic tasks are, the more difficult they are to automate.
+            It is even more arduous taking into account the large-scale constraint which implies a robustness to the natural heterogeneity in urban scenes as well as the variance of modeling approches.
 
     \subsection{\textsc{Potential use}}
         \label{subsec::introduction::contributions::use}
@@ -753,7 +758,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             It is also an adaptive categorization, since, depending on the final user needs, a set of errors can be extracted after specifying some parameters.
             
         \subsubsection{\textsc{\texorpdfstring{\gls*{acr::3d}}{3D} model reference free evaluation}}
-            Acquiring \gls{acr::3d} reference models is very expensive in ressources and particularly not scalable at large scale.
+            Acquiring \gls{acr::3d} reference models is very expensive in ressources and particularly not scalable at large-scale.
             As a consequence, the problem is formulated as a supervized learning one.
             Based on the errors, that are extracted from the taxonomy, a classifier is trained in order to predict defects for unseen models.
 
@@ -763,7 +768,7 @@ We conclude by stating our contributions (cf. section~\ref{sec::introduction::co
             They are computed based on the geometric attributes of the building model and the comparison to external data: optical images and height maps.
         
         \subsubsection{\textsc{Scalability}}
-            One of the goals of this work is to acheive scalability in large scale.
+            One of the goals of this work is to acheive scalability in large-scale.
             This implies the transferability of the learned predictors to unseen urban settings or untested modeling techniques.
             It involves also a representativeness and generalization study of the training sets.
             An analysis is conducted accordingly.
