@@ -2,13 +2,29 @@
 
 \vfill
 
+Presented herein is a detailed tour of the different notions necessary for the understanding of the present manuscript.
+It is divided into three sections.
+First, we categories, in section~\ref{sec::state_of_the_art::building_modeling}, the building \gls{acr::3d} modeling techniques.
+A global idea of the subject is required to have a good idea of what defects to expect in evaluated building models.
+Second, we present a complete state-of-the-art survey on quality evaluation for \gls{acr::3d} building models (\textit{cf}. section~\ref{sec::state_of_the_art::quality}).
+In the last section~\ref{sec::state_of_the_art::mlpr}, are presented the main tools that are used in our proposed approach.
+Indeed, we discuss aspects of supervised classification as well as some feature extraction techniques.
+
 \clearpage
 
-\section{\textsc{Automatic building \texorpdfstring{\gls*{acr::3d}}{3D} modelling}}
+\section{\textsc{Building \texorpdfstring{\gls*{acr::3d}}{3D} modeling}}
     \label{sec::state_of_the_art::building_modeling}
+    The goal of this section is to present a general prespective on \gls{acr::3d} modeling techniques.
+    This is not in any case a complete survey of this field.
+    We refer the reader to a comprehensive study of metods used in urban reconstruction by~\textcite{musialski2013survey}.\\
+    Herein, we classify the building modeling approaches based on different criteria.
+    In section~\ref{subsec::state_of_the_art::building_modeling::input}, we discuss the different types of input data fed to modeling pipelines.
+    Next, in section~\ref{subsec::state_of_the_art::building_modeling::automation}, is presented the different levels of automation in proposed \gls{acr::3d} modeling, while in section~\ref{subsec::state_of_the_art::building_modeling::strategy}, are discussed the different modeling strategies.
+    We finish by mentioning the differences between outdoor and indoor modeling in section~\ref{subsec::state_of_the_art::building_modeling::in_out_door}, as well as the scalability of the different techniques.
 
     \subsection{\textsc{Input data heterogenuity}}
         \label{subsec::state_of_the_art::building_modeling::input}
+        
         \subsubsection{\textsc{Acquisition mode}}
 
         \subsubsection{\textsc{Data type}}
@@ -28,26 +44,27 @@
     \clearpage
 \section{\textsc{Quality evaluation of \texorpdfstring{\gls*{acr::3d}}{3D} building models}}
     \label{sec::state_of_the_art::quality}
-    We have seen previously the various methods used to automatically model building.
+    We have seen previously the various methods used to automatically model buildings.
     The goal of this section is to describe the available approaches that evaluate the quality of such models.
-    These could be distinguished based on two criteria.
+    These could be distinguished based on two criteria.\\
     In subsection~\ref{subsec::state_of_the_art::quality::output}, are presented the quality evaluation methods based on their output.
-    An alternative prespective to charecterize quality evaluation methods: it relies upon the type of reference data (\textit{cf.} subsection~\ref{subsec::state_of_the_art::quality::reference}).
+    An alternative perspective to charecterize quality evaluation methods relies upon the type of reference data (\textit{cf.} subsection~\ref{subsec::state_of_the_art::quality::reference}).
     Based on this survey, we state in details, in subsection~\ref{subsec::state_of_the_art::quality::novelty}, how the work presented in this thesis is different from what was already proposed in the literature. 
 
     \subsection{\textsc{Output types}}
         \label{subsec::state_of_the_art::quality::output}
-        We distinguish herein quality evaluation methods based on the output they produce.
+        We distinguish herein quality evaluation methods based on the kind of output they produce.
         Fidelity metrics is a first instance of output types.
         The second is semantic labels.
-        In what follows, we explain, in details, the differences between the two method types.
+        In what follows, we explain, in details, these differences between the two method types.
 
         \subsubsection{\textsc{Fidelity metrics based methods}}
-            One way to charecterize the quality of a building model is to compute indices or metrics reporting its accuracy.\\
+            One way to characterize the quality of a building model is to compute indices or metrics reporting its accuracy.\\
 
             Most metrics provide information on the geometric precision of the model.
-            These are computed at different levels.
-            They are categorized here depending on the geometric dimension of the objects in question.\\
+            These are computed for different geometric objects.
+            Below, depending on the geometric dimension of the latter, we categorize the geometric fidelity metrics.\\
+
             We start with zero dimensional objects: \textit{i.e.} points.
             In this case, metrics are based on their coordinates.
             The goal is to detect positional inaccuraccies~\parencite{kaartinen2005accuracy}.
@@ -59,30 +76,33 @@
             Another alternative is to sample points from lines or surfaces to be compared.
             These could be predetermined manually as in~\textcite{kaartinen2005accuracy} or sampled regularely as demonstrated by~\textcite{vogtle2003quality} or by~\textcite{tran2019geometric}.
             Imprecisions are not computed only relying the \gls{acr::rmse}, but can also be separated into planimetric and height inaccuraccies~\parencite{vogtle2003quality, kaartinen2005accuracy, jaynes2003recognition}.\\
+
             Second comes edges and all one dimensional objects in general.
             These convey structural, in addition to positional, informations.
             \textcite{kaartinen2005accuracy} compares lengths as well as slopes of edges formed by reference points.
-            Edges metrics are also used as a intermediary as shown by~\textcite{elberink2011quality} and~\textcite{michelin2013quality}.
-            They are both interested in intersection edges.
-            While the first relies on \gls{acr::rmse}, the second computes more complex metrics that compares model edges to ones that are extracted based on sensor data.\\
-            Next, at the second dimension, are compared surfaces, bounded (for example, polygons) or not (like planes).
-            These hold more topological information than the first ones and hence are widely used for evaluation.
+            Edges related metrics are also used as a intermediary as shown by~\textcite{elberink2011quality} and~\textcite{michelin2013quality}.
+            They are both interested in edges resulting from facet intersections.
+            While the first relies on \gls{acr::rmse}, the second computes more complex metrics that compares model edges to ones extracted out of sensor data.\\
+
+            Next are compared surfaces (\textit{i.e.} two dimensional objects), bounded (for example, polygons) or not (like planes).
+            These hold more structural information than the first ones and hence are widely used for evaluation.
             \textcite{rottensteiner2014results} used height discrepency of roof planes so as to evaluate building models.
             This ideal for Manhattan-world assumptions as was the case of~\textcite{zebedin2008fusion}.
-            In addition to height discrepency, normal displacement is computed using always the same metric by~\textcite{henricsson19973}.
+            In addition to height discrepency, normal displacement is computed using always the same \gls{acr::rmse} metric by~\textcite{henricsson19973}.
             Conversely,~\textcite{zeng2014multicriteria} uses also a \gls{acr::rmse} for comparison, but not in the Euclidean space.
             In fact, after mapping the evaluated and reference models to a sphere, they compare their spherical harmonic~\parencite{brechbuhler1995parametrization} representations.
             Just as with edges, planes can be evaluated using angular measurements, as was proposed by~\textcite{landes2012quality} and~\textcite{henricsson19973}.
             Another alternative is to compare reconstructed and reference models based on surface area comparisons.
             These are mostly based on ratios like completeness and correctness\footnote{in other words, recall and precision respectively.}~\parencite{rottensteiner2014results,landes2012quality,henricsson19973,schuster2003new}.\\
+
             Last, are three dimensional (\textit{i.e.} volume) evaluation.
             The same detection ratios that were computed for surfaces are again calculated to evaluate volumes this times, as shown by~\textcite{mohamed2013quality, zeng2014multicriteria,jaynes2003recognition,nguatem2017modeling}.
             These are the only metrics used for volumes that we are aware of.\\
 
             Regarding \textit{implicit} semantics, as far as we are aware, only one metric is widely used to evaluate its impact.
             As discussed previously in subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}, compaction is one byproduct of semantics.
-            As a consequence, it was used as a index to evaluate reconstructions\footnote{It is sometimes called by its antonym: complexity.}: the more a model was compact the better it was.
-            This is reflected, for instance, in the work of~\textcite{lafarge2012creating},~\textcite{zhang2017deep},~\textcite{duan_eccv16},~\textcite{zeng2018neural} and~\textcite{zhu2018large}.
+            As a consequence, it was used as an index to evaluate reconstructions\footnote{It is sometimes called by its antonym: complexity.}: the more a model was compact the better it was.
+            This is reflected, for instance, in the work of~\textcite{lafarge2012creating},~\textcite{zhang2017deep},~\textcite{duan_eccv16},~\textcite{zeng2018neural} and~\textcite{zhu2018large}, where this metric is never used alone but always alongside geometric ones.
 
         \subsubsection{\textsc{Semantic labels based methods}}
             \label{subsec::state_of_the_art::quality::output::semantic}
@@ -92,31 +112,36 @@
             Some evaluation methods, in an effort to alleviate these issues, yield semantic labels that describe the errors of an evaluated model.
             Hereafter, are described the different types of labels that were proposed in the literature.\\
 
-            The first ever work, that we are aware of, which tackles proposes semantic labels as outputs of the evaluation is by~\textcite{boudet2006supervised}.
-            The approach presented by the latter has four classes which indicate how much valid can the modeling be: ``acceptable'' and ``correct'' portray valid buildings while ``false"``and ``generalized"``are refused.
+            \parencite{boudet2006supervised} was the first ever work, that we are aware of, which tackles semantic labels as outputs of the evaluation .
+            This approach has four classes which indicate how much valid can the modeling be: ``acceptable'' and ``correct'' portray valid buildings while ``false"``and ``generalized"``are refused.
             It can be seen as a four grade based score system expressing the confidence in a building model.
-            The main limitation of this method is the fact that the proposed labels do not specify what defects does models present if it is not valid.
+            The main limitation of this method is the fact that the proposed labels do not specify what defects a model presents if it is not valid.
             It is, therefore, hard to use for model correction.
-            The confidence scoring depends also on each use case.
+            Besides, the acceptable defect definitions depend also on each use case.
             For instance, a comunications company would be more adament on the accuracy of roof parts, which would affect wave propagation, rather than a insurance company interested in flood damage estimation.
             This means that each use case implies a relabeling that could be potentially different from other one.\\
+            
             The first hints of a fine grained semantic labeling of building model errors lay in the work of~\textcite{rottensteiner2014results}.
-            They are the first to report segmentation issues in labels instead of a global ratio.
+            This work was the first to report segmentation issues, at facet level, in labels instead of a global ratio.
             They distinguish between oversegmentation cases, undersegmentation cases and cases where both co-occur.\\
-            These mentioned errors are not comprehensive: they do not cover all possible building model errors.
-            \textcite{michelin2013quality} came up with a rich taxonomy of errors that are categorized into three big families:
+
+            On the other hand, these mentioned errors are not comprehensive: they do not cover all possible building model errors.
+            \textcite{michelin2013quality} came up with a richer taxonomy of errors that are categorized into three big families:
             \begin{itemize}
                 \item Footprint errors: these portray errors relative to the building footprint, which is used by many modeling algorithms as input.
                         Errors contained in this family are: ``erroneous outline'', ``unexisting building'', ``missing inner court'' and ``inaccurate footprint''.
                 \item Reconstruction errors: these are caused by the modeling approach.
                         These defects can be the result of the incompatibility of some \textit{a priori} hypotheses about the scene, for instance.
                         Such errors are: ``under-segmentation'', ``over-segmentation'', ``inaccurate roof'' and ``Z translation''.
-                \item Vegetation errors: this corresponds to a special case when modeled building are occluded, completely or partially, by vegetation.
+                \item Vegetation errors: this corresponds to a special case when modeled building are occluded, completely or partially, by higher vegetation.
                         It becomes impossible to evaluate properly these models.
             \end{itemize}
-            Although the last taxonomy being rich, it is not exhaustive enough as it misses cases that are not present in the urban zone that was studied in the paper, such as inaccurate primitive fitting.
+            Although the last taxonomy is rich, it is not exhaustive enough as it misses cases that are not present in the urban zone that was studied in the paper, such as inaccurate primitive choices.
             Moreover, it adopts the point of view of the modeling method that was used to provide their dataset.
             Knowing the specific weaknesses of the latter guided the choice of error family classification and the error definitions.
+            This is particularly clear when looking at their error categorization.
+            In fact, the first error class relates to the fact that the used building modeling approach~\parencite{durupt2006automatic} relies on footprints given as input.
+            The second category corresponds to the actual step of building roof structure inference.
 
     \subsection{\textsc{Reference data types}}
         \label{subsec::state_of_the_art::quality::reference}
@@ -124,6 +149,7 @@
         Based on the latter, another way to discriminate among modeling methods is possible.
         The first class of reference data are high quality ground truth building \gls{acr::3d} models.
         Remote sensing data is the second alternative that is used for reference.
+        Neither of these two choices do influence the type of output the evaluation method produces.
         Hereafter, is explained the difference between the two categories.
 
         \subsubsection{\textsc{High resolution ground truth}}
@@ -131,8 +157,8 @@
             Herein, are listed the different ground truth measurement techniques, in descending order of accuracy.\\
 
             The most obvious case consists in field measurements of the modeled building.
-            \textcite{dick2004modelling}, for instance, evaluated their buildings based on manual measurements taken on specific architectural features, like windows and columns, with an accuracy of \SI{0.01}{\m} for the first and \SI{0.1}{\m} for the second.
-            Complete and scalables measurements of buildings are possible using topographic survey.
+            \textcite{dick2004modeling}, for instance, evaluated their buildings based on manual tape measurements taken on specific architectural features, like windows and columns, with an accuracy of \SI{0.01}{\m} for the first and \SI{0.1}{\m} for the second.
+            Complete and scalables measurements of buildings are possible using topographic surveys.
             Using the latter, building models could be reconstructed with precision up to \SI{\pm 0.1}{\m}~\parencite{henricsson19973} or \SI{\pm 0.05}{\m}~\parencite{vogtle2003quality}.\\
             There is also the possibility of manually modeling the building using oblique images, or stereoplotting.
             ~\textcite{zebedin2008fusion} uses such a method to produce their reference data from aerial images with accuracy up to the order of \SI{\pm 0.15}{\m}.
@@ -141,7 +167,8 @@
         \subsubsection{\textsc{Remote sensing data}}
             Reference ground truth models are not easy to come by~\parencite{schuster2003new}.
             The previous choice is hard to scale up to district or city levels.
-            On the other hand, remote sensing data, which are more available, could be used, instead, as reference.
+            In fact, they are more suitable to evaluate few building models: \textit{e.g.} in order to validate a reconstruction method.
+            On the other hand, remote sensing data are more accessible and could be used, instead, as reference.
             In fact, since these are usually fed as input in modeling methods, it is only reasonable to evaluate the produced models in comparison to the intake.
             Listed here, are the different types of remote sensing data and how they could be used for building model evaluation.\\
 
@@ -155,7 +182,7 @@
             Orthoimages were used also to, for instance, compute \gls{acr::ndvi} scores for vegetation occluded building model discrimination.\\
             Second, are \gls{acr::lidar} point clouds.
             This type of data have the inherent advantage, compared to images, of natively providing depth information.
-            \textcite{kaartinen2005accuracy} used data that was acquired multiple times with a guarantied precision up to \SI{0.083}{\cm} in plane and \SI{0.035}{\cm} in height.
+            \textcite{kaartinen2005accuracy} used data that was acquired multiple times with a guarantied precision up to \SI{0.083}{\m} in plane and \SI{0.035}{\m} in height.
             Out of the latter were chosen reference points that were compared to equivalents in the evaluated building models (check the previous sub-subsection).
             All the points could also be used for comparison by computing metrics such as \gls{acr::rmse}~\parencite{lafarge2012creating,zhu2018large}.
             Original input data is not always accessible.
@@ -651,14 +678,14 @@
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/random_forest/circles_dt}
                             }{
                                 \caption{
-                                    \label{fig::decision_tree_circles} Decision tree separator.
+                                    \label{subfig::decision_tree_circles} Decision tree separator
                                 }
                             }
                             \ffigbox[\FBwidth]{
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/random_forest/circles_rf}
                             }{
                                 \caption{
-                                    \label{fig::rf_circles} Random forest separator (in purple) with constituing decision trees.
+                                    \label{subfig::rf_circles} Random forest separator (in purple) with constituing decision trees
                                 }
                             }
                         \end{subfloatrow}
@@ -696,7 +723,7 @@
                 This possible by randomly selecting a subset of the features when learning spliting thresholds.
                 We depict in Figure~\ref{fig::decision_tree_vs_rf} the different between a random forest and a single decision tree.
             \paragraph{Properties}
-    \subsection{\textsc{Computer vision}}
+    \subsection{\textsc{Feature extraction}}
         \label{subsec::state_of_the_art::mlpr::computer_vision}
 
         \subsubsection{\textsc{Edge detection}}
