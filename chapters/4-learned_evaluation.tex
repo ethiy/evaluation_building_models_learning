@@ -16,7 +16,7 @@ These are proposed to better predict errors in the model.
 
 \section{\textsc{Quality evaluation as classification}}
     \label{sec::learned_evaluation::classification}
-    In order to satisfy the \textbf{large scale} condition imposed at subsection~\ref{subsec::introduction::contributions::positioning}, we propose to use a supervized learning method.
+    In order to satisfy the \textbf{large-scale} condition imposed at subsection~\ref{subsec::introduction::contributions::positioning}, we propose to use a supervized learning method.
     As a first approach, errors are predicted at the building level, even for \texttt{Facet Errors}.
     At a second time, once this previous task works perfectly, one can try and detect \gls{acr::lod}-2 $\cup$ \gls{acr::lod}-3 errors at facet level.
     This is not explored in this work.\\
@@ -28,7 +28,7 @@ These are proposed to better predict errors in the model.
     Two aspects should be discussed to in order to apply this approach to the building \gls{acr::3d} model quality evaluation.
     First, as seen in section~\ref{sec::semantic_evaluation::label_extraction}, the parametric nature of the taxonomy leads to a varying set of labels.
     For this purpose, we describe in subsection~\ref{subsec::learned_evaluation::classification::different_porblems} the different classification problems depending on the evaluation parameters.
-    Second, the feature extraction procedure should also be compliant with the \textbf{large scale} objective set beforehand.
+    Second, the feature extraction procedure should also be compliant with the \textbf{large-scale} objective set beforehand.
     This aspect and more are detailed in section~\ref{subsec::learned_evaluation::classification::feature_extraction}.
     Third, the classifier should be able to handle the heterogeneity of the feature vector and must adapt to different input vectors types and sizes.
     The choice of classifiers is, hence, discussed in subsection~\ref{subsec::learned_evaluation::classification::classifiers}.
@@ -99,7 +99,7 @@ These are proposed to better predict errors in the model.
     
         In extrinsic evaluation, features are extracted by comparing the polyhedric model to the available external data.
         Obviously, high quality reference models are the best type of data to compare the evaluated model to.
-        However, remininding the reader with the \textbf{large scale} objective that was fixed earlier (subsection~\ref{subsec::introduction::contributions::use}), this is not a viable solution for this case.
+        However, remininding the reader with the \textbf{large-scale} objective that was fixed earlier (subsection~\ref{subsec::introduction::contributions::use}), this is not a viable solution for this case.
         We rely then on more basic reference data such as remote sensing acquired data that are the basis of large-scale modeling of urban scenes.\\
         For instance, raw depth information can be utilized for such a task.
         It can prove helpful in detecting geometric defects that are intrinsically of \gls{acr::3d} nature.
