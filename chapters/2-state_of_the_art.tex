@@ -214,7 +214,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
         Our work relies on the same idea, but goes a bit farther by proposing the possibility to evaluate building models without using any reference data.
         It also offers a new taxonomy of errors that is intended to be exhaustive and generalizable.
-        The last idea will be developped in details in section~\ref{chap::semantic_evaluation}, while section~\ref{chap::learned_evaluation} presents how features are chosen to represent building models and the learning process.
+        The last idea will be developped in details in chapter~\ref{chap::semantic_evaluation}, while chapter~\ref{chap::learned_evaluation} presents how features are chosen to represent building models and the learning process.
 
 \section{\textsc{Supervised learning and pattern recognition}}
     \label{sec::state_of_the_art::mlpr}
@@ -766,14 +766,32 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 
     \subsection{\textsc{Feature extraction}}
         \label{subsec::state_of_the_art::mlpr::feature_extraction}
-    
+            Before feeding observations to classifiers, representative features are extracted.
+            These are usually vectors from a finite dimensional space called feature space.
+            In the previous subsection, we considered a special case of feature spaces $\mathbb{R}^d$.\\
+
+            Feature extraction is not straight-forward.
+            It is either hand crafted or learned (using deep learning) to fit a specific need.
+            Image feature extraction is one such example where attributes are drawn from images in order to describe specific patterns such as edges~\parencite{canny1986computational}, corners~\parencite{harris1988combined} or \gls{acr::sift}~\parencite{lowe2004distinctive}.
+            Herein, we present a specific type of feature extractors called \glspl{acr::scatnet}.
+            Images can also be considered as specific type of graphs with a grid structure.
+            In the same sense, features can be extracted from graphs.
+            We will describe hence how to describe graphs for classification.
+
         \subsubsection{\textsc{\acrlong*{acr::scatnet} for image classification}}
-            \glspl{acr::scatnet} are convolutional networks built using wavelet filters for image feature extraction.
-            Contrarily to \glspl{acr::cnn}, \glspl{acr::scatnet} seek an image representation $\Phi$ without relying on supervized learning, but rather using mathematical properties of the signal.
-            A scene that is captured from different point of views, while yielding different images, should have the same representation.
+            \glspl{acr::scatnet} can be seen as a reverse engineered convolutional network.
+            They are built mainly relying on wavelet filters which are used to imitate filters from \glspl{acr::cnn}.
+            The latter learns automatically an image representation $\Phi$ trying to minimize a learning loss function.
+            \Glspl{acr::scatnet}, on the other hand, make use of mathematical properties of the image signal.\\
+
+            Some propeties are always required in order to acheive a good representation $\Phi$ of an image. 
+            A scene that is captured from different point of views, while yielding different images, should have close representations.
             Just as with interset point detection~\parencite{harris1988combined,lowe1999object}, the representation of an image should be invariant to scale, translation and rotation~\parencite{mallat2012group,sifre2013rotation,bruna2013invariant}.
-            Let $x$ be an image and $G$ a group such as a translatin group.
-            The action of $g\in G$ on $x: u \mapsto x(u)$ is written as:
+            Since images illustrate not only rigid objects, a good representation should allow small local deformations in the signal that can be attributed to distortions of non-rigid objects.\\
+
+            To formalize these properties, we introduce some mathematical notations.
+            Let $x: u \mapsto x(u)$ be an image (or any signal in general) and $G$ a group such as a translation group on the signal domain.
+            The action of $g\in G$ on $x$ is written as:
             \begin{equation}
                 \label{eq::action_group}
                 L_g(x): u \mapsto x\left(g^{-1}(u)\right).
@@ -795,25 +813,30 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 \label{eq::contractive}
                 \Vert \Phi(x) - \Phi(y) \Vert \leq \Vert x-y \Vert.
             \end{equation}
-            Since images are subject to distortions and not all objects are rigid, the mapping $\Phi$ should be stable under small deformations~\parencite{bruna2013invariant,sifre2013rotation,mallat2012group}.
-            Given a small deformation modelled as a diffeomorphism\footnote{A differentiable bijection which inverse is differentiable also.} $\tau$ such that $\Vert\nabla \tau\Vert_\infty < 1$, there exists a constant $C>0$ such that for any image $x$:
+            The mapping $\Phi$ should be stable under small local deformations.
+            A local deformation is modeled as a diffeomorphism\footnote{A differentiable bijection which inverse is differentiable also.} $\tau$.
+            A small one is formalized as a diffeomorphism $\tau$ that verifies $\Vert\nabla \tau\Vert_\infty < 1$~\parencite{bruna2013invariant,sifre2013rotation,mallat2012group}.
+            A good transform $\Phi$ , there exists a constant $C>0$ such that for any image $x$:
             \begin{equation}
                 \label{eq::stable_deformation}
-                \Vert \Phi(x) - \Phi\circ L_\tau(x) \Vert \leq C \cdot \Vert x\Vert \cdot \Vert\nabla \tau\Vert_\infty.
+                \exists C >0, \forall x \in \mathscr{I}\quad \Vert \Phi(x) - \Phi\circ L_\tau(x) \Vert \leq C \cdot \Vert x\Vert \cdot \Vert\nabla \tau\Vert_\infty.
             \end{equation}
             where:
             \begin{conditions}
-                L_\tau(x) & $u \mapsto x(u - \tau(u))$ is the action of the deformation $x$ on a signal $x$.
+                \mathscr{I} & is the set of all possible signals;\\
+                L_\tau(x) & $u \mapsto x(u - \tau(u))$ is the action of the deformation $tau$ on a signal $x$.
             \end{conditions}
 
-            \glspl{acr::cnn} learn a representation that verifies these previous conditions stated in Equations~\ref{eq::invariance},~\ref{eq::contractive} and~\ref{eq::stable_deformation}.
-            In fact, \glspl{acr::cnn} are indeed are made invariant to translations and local deformations up to a scale mainly due to the pooling layers.
-            Since the weights are learned based on a classification objetive, images with similar content are supposed to be mapped to the same region.
-            A \gls{acr::scatnet} can be seen as a reverse engineered \gls{acr::cnn}.
+            \glspl{acr::cnn} learn such a representation which verifies these previous conditions stated in Equations~\ref{eq::contractive},~\ref{eq::invariance} and~\ref{eq::stable_deformation}.
+            In fact, it is possible by virtue of some basic building blocs.
+            First, since the weights are learned based on a classification objetive, images with similar content are supposed to be mapped to the same region.
+            Second, pooling layers in \glspl{acr::cnn} provide a solution for invariance to translations and local deformations up to a scale.\\
+
+            The \gls{acr::scatnet} being a reverse engineered \gls{acr::cnn}, formalizes these ideas using wavelet transforms.
             The idea is to apply linear convolutional operators followed by a non-linearity and some pooling operators.
             In a \gls{acr::scatnet} the learned filters are replaced by a specific wavelet decomposition, the non-linearity is acheived using the modulus operator and pooling is obtained through a low pass filter.
-            The low-pass filter is critical for the invariance condition, while the high frequencies are extracted using the wavelet convolutions.
-            The non-linearity, just in \glspl{acr::cnn}, is necessary in order to obtain interesting non-linear representations.\\
+            The low-pass filter is critical for the invariance condition, while the lost high frequencies are retrieved using the wavelet convolutions.
+            The non-linearity, just as in \glspl{acr::cnn}, is necessary in order to obtain interesting non-linear representations.\\
 
             Based on a band-pass filter $\psi$ one can generate a two-dimentional wavelet filter bank using rotations $r$ and dilatations of scale $j$:
             \begin{equation}
@@ -837,14 +860,23 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             \begin{conditions}
                 p & is called a path and is the sequence of parameters $\left((j_i, r_i)\right)_{i=1,2,\dots,m}$.
             \end{conditions}
-            A scattering transform at a path $p$ consists in a pooling of the the successive wavelet-modulus operators, using a scaled low-pass filter $\phi_J: u\mapsto 2^{-2\cdot J}\cdot\phi\left(2^{-\cdot J}\cdot u\right)$:
+            A scattering transform at a path $p$ consists in applying a pooling operator $P_J$ on the successive wavelet-modulus operators, using a scaled low-pass filter $\phi_J: u\mapsto 2^{-2\cdot J}\cdot\phi\left(2^{-\cdot J}\cdot u\right)$:
             \begin{equation}
                 \label{eq::scattering_transform}
-                S_J[p](x) \triangleq U[p](x) \star \phi_J
+                S_J[p](x) \triangleq P_J\left(U[p](x)\right) = U[p](x) \star \phi_J
             \end{equation}
 
             If these filters can cover the whole frequency space then the scattering transform is invertible.
             Moreover, the scattering tranform can be proved to verify all the required conditions~\parencite{mallat2012group}.
+            In order to acheive invariance using a low-pass filter, the wavelet-modulus operator operator is required to be covariant with regards to $G$.
+            In fact, for $g \in G$:
+            \begin{equation*}
+                \begin{cases}
+                    P_J \circ L_g = P_J\\
+                    U[p] \circ L_g = L_g \circ U[p]
+                \end{cases}\Rightarrow S_J[p] \circ L_g = S_J[p]
+            \end{equation*}
+
             The convolution depends on the choice of the group $G$.
             For images, scaling can be diassociated from rotations and translations.
             This is not true between rotations and translations~\parencite{sifre2013rotation,oyallon2015deep}.
@@ -853,7 +885,8 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 \label{eq::group_convolution}
                 x\star y(g) = \int_{h\in G} x(h)\cdot y(h^{-1}*g)
             \end{equation}
-            A logarithm is applied then to the scattering coefficients as well as a global scale space averaging in order to obtain a global image descriptor.
+            For a the translation group,
+            A logarithm is then applied to the scattering coefficients as well as a global scale space averaging in order to obtain a global image descriptor.
 
             \begin{figure}
                 \centering
@@ -872,5 +905,5 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             Instead they are computed following a non decreasing frequency path.
             Moreover, most of the energy of the signal is contained in the first two layers.
             This is why, in practice, the computation is stopped at that level.
-        \subsubsection{\textsc{kernels for graph classification}}
+        \subsubsection{\textsc{Kernels for graph classification}}
             \label{subsec::state_of_the_art::mlpr::graph_classification}
