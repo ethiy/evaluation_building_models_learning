@@ -815,7 +815,8 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         L_{r_{\theta}}(x): u \mapsto x\left(r_{-\theta}(u)\right).
                     \end{equation}
                     Rotations and translations are not commutative in the general case.
-                    This justifies the definition of roto-translation groups.
+                    This justifies the definition of a roto-translation group, called also the rigid motion group and denoted $SE(2)$.
+                    Such a group is isomorphic to $\mathbb{R}^2 \times SO(2)$.
                     Let $v \in \mathbb{R}^2$ and $\theta \in [0, 2\cdot\pi)$, a member of such a group is defined as:
                     \begin{equation}
                         \label{eq::roto-translation}
@@ -829,22 +830,26 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \end{equation}
                 
                 \subparagraph{Group convolution}
-                    A convolution on a group $G$ is defined as:
+                    A convolution over a Lie group $G$ is defined as:
                     \begin{equation}
                         \label{eq::group_signal_convolution}
-                        x\star y: u \mapsto \int_{h\in G} x(h)\cdot y(h^{-1}(u)) dh
+                        x \ostar y: u \mapsto \int_{h\in G} x(h)\cdot y(h^{-1}(u)) \cdot dh
                     \end{equation}
+                    where:
+                    \begin{conditions}
+                        dh & is the Haar measure on $G$.
+                    \end{conditions}
 
                     For signals $x$ and $y$ that take inputs on the plane $\mathbb{R}^2$, we can recognize the usual definition of a convolution:
                     \begin{equation}
                         \label{eq::translation_convolution}
-                        x\star y: u \mapsto \int_{v \in \mathbb{R}^2} x(v)\cdot y(u - v) dv
+                        x \star y: u \mapsto \int_{v \in \mathbb{R}^2} x(v)\cdot y(u - v) \cdot dv
                     \end{equation}
 
-                    Applied in the rotation case to signals $x(u, \theta)$ on pairs from $\mathbb{R}^2 \times [0, 2\cdot\pi)$, we write:
+                    Applied in the roto-translation case to signals $x(u, \theta)$ on pairs from $\mathbb{R}^2 \times [0, 2\cdot\pi)$, we write:
                     \begin{equation}
                         \label{eq::roto-translation_convolution}
-                        x\star y: (u, \theta) \mapsto \int_{\substack{v \in \mathbb{R}^2\\\omega \in [0, 2\cdot\pi)}} x(v, \omega)\cdot y(r_{-\omega}(u - v), \theta - \omega) dv d\omega
+                        x \ostar_{SE(2)} y: (u, \theta) \mapsto \int_{\substack{v \in \mathbb{R}^2\\\omega \in [0, 2\cdot\pi)}} x(v, \omega)\cdot y(r_{-\omega}(u - v), \theta - \omega) \cdot dv d\omega
                     \end{equation}
             
             \paragraph{Invariance: formulation}
@@ -878,8 +883,9 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \mathscr{I} & is the set of all possible signals;\\
                     L_\tau(x) & $u \mapsto x(u - \tau(u))$ is the action of the deformation $tau$ on a signal $x$.
                 \end{conditions}
+                We say that $Phi$ is Lipschitz stable to deformations.
 
-            \paragraph{\gls{acr::scatnet}: a reverse engineered \gls{acr::cnn}}
+            \paragraph{\gls*{acr::scatnet}: a reverse engineered \gls*{acr::cnn}}
                 \glspl{acr::cnn} learn such a representation which verifies these previous conditions stated in Equations~\ref{eq::contractive},~\ref{eq::invariance} and~\ref{eq::stable_deformation}.
                 In fact, it is possible by virtue of some basic building blocs.
                 First, since the weights are learned based on a classification objetive, images with similar content are supposed to be mapped to the same region.
@@ -891,30 +897,117 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 The low-pass filter is critical for the invariance condition, while the lost high frequencies are retrieved using the wavelet convolutions.
                 The non-linearity, just as in \glspl{acr::cnn}, is necessary in order to obtain interesting non-linear final representations.\\
 
-                \subparagraph{Used wavelets}
-                    In order to define wavelets:
-                    mother wavelet
-                    low-pass
-                    gives:
-                    spatial ones
-                    angular ones
-                    and roto translation ones
-
-                    if average only spatial then rotation covariance
-                    else invariance
-
-                    Based on a band-pass filter $\psi$, one can generate a two-dimentional wavelet filter bank using rotations $r_{\theta}$ and dilatations of scale $j$:
+                \subparagraph{Wavelets filter bank}
+                    We need two sets of wavelets: spatial and angular.
+                    Spatial wavelet filters are derived based on a mother wavelet $\psi: \mathbb{R}^2 \rightarrow \mathbb{C}$ as follows:
                     \begin{equation}
-                        \label{eq::filter_bank}
-                        \psi_{j,\theta} = 2^{-2\cdot j}\cdot\psi\left(2^{-j}\cdot r_{-\theta}(u)\right).
+                        \label{eq::translation_filter_bank}
+                        \psi_{i,\theta} : u\mapsto 2^{-2\cdot i}\cdot\psi\left(2^{-i}\cdot r_{-\theta}(u)\right).
                     \end{equation}
-                    In accordance with these wavelets are defined 
-                    $\phi_J: u\mapsto 2^{-2\cdot J}\cdot\phi\left(2^{-\cdot J}\cdot u\right)$
-                    Roto-translation wavelets have spatial componenents and angular components.
+                    We also need a low-pass averaging filter $\phi: \mathbb{R}^2 \rightarrow \mathbb{R}$ scaled up to a desired size:
+                    \begin{equation}
+                        \label{eq::translation_low_pass}
+                        \phi_I: u\mapsto 2^{-2\cdot I}\cdot\phi\left(2^{-I}\cdot u\right)
+                    \end{equation}
+                    The angular wavelets are computed using $2\cdot\pi$-periodic mother wavelet $\bar\psi: \mathbb{R}^2 \rightarrow \mathbb{C}$ scaled as follows:
+                    \begin{equation}
+                        \label{eq::angular_filter_bank}
+                        \bar\psi_{\iota}: \omega \mapsto 2^{-\iota}\cdot\bar\psi\left(2^{-i}\cdot \omega\right)
+                    \end{equation}
+                    We also define need the constant averaging filter\footnote{It corresponds to a zero scale filter} defined as:
+                    \begin{equation}
+                        \label{eq::angular_low_pass}
+                        \bar\phi: \theta \mapsto \frac{1}{2\cdot\pi}
+                    \end{equation}
+                    Based on the spatial filter bank defined in Equation~\ref{eq::translation_filter_bank} and the angular one from Equation~\ref{eq::angular_filter_bank}, we define rigid motion wavelets in the next equations:
+                    \begin{align}
+                        \label{eq::roto-translation_filter_bank}
+                        \forall i\neq I, \theta \neq 0, \iota \neq 0 \quad \tilde{\psi}_{i, \theta, \iota}(u, \omega) &= \psi_{i,\theta}(u) \cdot \bar\psi_{\iota}(\omega)\\
+                        \forall \iota \neq 0 \quad \tilde{\psi}_{I, 0, \iota}(u, \omega) &= \phi_I(u) \cdot \bar\psi_{\iota}(\omega)\\
+                        \forall i\neq I, \theta \neq 0 \quad \tilde{\psi}_{i, \theta, 0}(u, \omega) &= \psi_{i,\theta}(u) \cdot \bar\phi(\omega).
+                    \end{align}
+                    The corresponding rigid motion averaging filter is obtained as:
+                    \begin{align}
+                        \label{eq::roto-translation_low_pass}
+                        \tilde{\phi}(u, \omega) &= \tilde{\psi}_{I, 0, 0}(u, \omega) = \phi_I(u) \cdot \bar\phi(\omega) \nonumber \\
+                        \tilde{\phi}(u, \omega) &= \frac{1}{2\cdot\pi} \cdot \phi_I(u)
+                    \end{align}
+                    These are separable filters that can help speed up the convolution computations as shown in~\textcite{sifre2013rotation}.
+                    In practice, $\psi$(\textit{resp}. $\bar\psi$) are taken as two (\textit{resp}. one) dimensional Morlet wavelets, while $\phi$ is taken as a Guassian~\parencite{oyallon2015deep,sifre2013rotation,bruna2013invariant}.
+                    A finite number $L$ of orientations are possible for angle indices: $\theta \in \{\frac{l\cdot\pi}{L}: l=1,2\dots,L\}$.
+                    In Figure~\ref{fig::morlet_vs_learned}, we can see that the 
+                     
+                \subparagraph{The wavelet-modulus operator}
+                    A wavelet transform of a signal $x$ consists in representing it using a wavelet filter bank: $\left(x\ostar\psi_{\lambda}\right)_{\lambda}$.
+                    Depending on the transformed signals, two versions of wavelet transforms are possible.
+                    If the signal takes one variable $u in \mathbb{R}^2$ then we write:
+                    \begin{equation}
+                        \label{eq::wavelet_transform_1}
+                        W: x \mapsto \left(x\star\psi_{i, \theta}\right)_{\substack{i=1, 2 \dots, I \\ \theta \in \{\frac{l\cdot\pi}{L}: l=1,2\dots,L\}}},
+                    \end{equation}
+                    if it takes two variables $(u, \omega) \in \mathbb{R}^2 \times [0, 2\cdot\pi)$ it becomes:
+                    \begin{equation}
+                        \label{eq::wavelet_transform_2}
+                        \widetilde{W}: x \mapsto \left(x\ostar_{SE(2)}\psi_{i, \theta, \iota}\right)_{\substack{i=1, 2 \dots, I \\ \theta \in \{\frac{l\cdot\pi}{L}: l=1,2\dots,L\}\\\iota=1,2\dots,\lfloor\log_2(L)\rfloor}}.
+                    \end{equation}
+                    An image is a discretization of a two dimensional signal.
+                    As a consequence, we can only apply the first transform in Equation~\ref{eq::wavelet_transform_1}.
+                    The result of such a mapping is an example of a signal on wich one can apply the second transform from Equation~\ref{eq::wavelet_transform_2}.
+                    For the right choice of wavelets, these operators can be proven to be invertible, contractive and Lipschitz stable to deformations~\parencite{mallat2012group}.\\
 
-            When the Fourier transform of $\psi$ is centred at a frequency $\omega$, the wavelet $\psi_{j,r}$ is centered around $\left(2^{-j}\cdot r(\omega)\right)$ with bandwidth propotional to $2^{-j}$.
-            Based on these filters is computed the wavelet transform of a signal $x$: $\{x\star\psi_{j,r}\}_{j,r}$.
-            Morlet wavelets and a Gaussian low-pass filter are usual choices~\parencite{bruna2013invariant,sifre2013rotation}.
+                    By applying a modulus we get the basic building bloc of \glspl{acr::scatnet} called the wavelet-modulus operator: $x \mapsto \vert x\ostar\psi_{\lambda} \vert$.
+                    This is delineated for the two cases as follows:
+                    \begin{align}
+                        \label{eq::wavelet-modulus_1_2}
+                        \forall (i, \theta)\{1, 2 \dots, I\} \times \{\frac{l\cdot\pi}{L}: l=1,2\dots,L\} \quad U_{i, \theta}: x \mapsto \vert x\star\psi_{i, \theta}\vert\\
+                        \forall (i, \theta, \iota)\{1, 2 \dots, I\} \times \{\frac{l\cdot\pi}{L}: l=1,2\dots,L\} \times \{1,2\dots,\lfloor\log_2(L)\rfloor\} \quad \widetilde{U}_{i, \theta, \iota}: x \mapsto \vert x\ostar_{SE(2)}\psi_{i, \theta, \iota} \vert
+                    \end{align}
+                    These operators are proven to be covariant to translations and rotations~\parencite{mallat2012group,sifre2013rotation}: \textit{i.e.} for a couple $(v, \vartheta) \in \mathbb{R}^2 \times [0, 2\cdot\pi)$:
+                    \begin{align}
+                        \label{eq::covariance_wavelet-modulus}
+                        L_{g_{v, \vartheta}} \circ U_{i, \theta} = U_{i, \theta} \circ L_{g_{v, \vartheta}}\\
+                        L_{g_{v, \vartheta}} \circ \widetilde{U}_{i, \theta, \iota} = U_{i, \theta, \iota} \circ L_{g_{v, \vartheta}}.
+                    \end{align}
+                    These conditions may remind the reader of the work of~\textcite{cohen2016group} on \gls{acr::gcnn}.
+                
+                \subparagraph{The average pooling}
+                    Contrarily to~\parencite{cohen2016group}, the pooling operations differ.
+                    \glspl{acr::gcnn} rely on max-pooling as standard practice in \glspl{acr::cnn}.
+                    This operator is actually covariant to actions of the rigid movement group.
+                    \parencite{bruna2013invariant, sifre2013rotation,oyallon2015deep}, however, rely on averaging (or low-pass) filters as pooling operators.
+                    These actually are invariant to translation and rotation:
+                    \begin{align}
+                        \label{eq::invariance_pooling}
+                        \phi_I = \phi_I \circ L_{t_v}\\
+                        \tilde{\phi}_I = \tilde{\phi}_I \circ L_{g_{v, \vartheta}}.
+                    \end{align}
+
+                    Considering the rigid mouvement as a nuisance,~\parencite{sifre2013rotation} considers invariance with regards to the roto-translation group.
+                    To do so they filter any signal $x(u)$ using $\phi_I$ yielding a signal:
+                    \begin{equation}
+                        \label{eq::pool_bi-dim}
+                        x \star \phi_I (u).
+                    \end{equation}
+                    For signals $\tilde{x}(u, omega)$ they are averaged using $\tilde{\phi}_I$ and giving as ouput:
+                    \begin{equation}
+                        \label{eq::pool_bi-dim-angular}
+                        \tilde{x} \ostar_{SE(2)} \tilde{\phi}_I (u, \omega).
+                    \end{equation}
+                    Applying the first operation~\ref{eq::pool_bi-dim} to the input image defines the first scattering coefficient:
+                    \begin{equation}
+                        \label{eq::scatter_input}
+                        S_0[x](u) \triangleq x \star \phi_I (u).
+                    \end{equation}
+                    
+                    To the image, is applied the wavelet-modulus operator giving $U_{i_1, \theta_1}$.
+                    The latter is pooled using the second operation~\ref{eq::pool_bi-dim-angular}.
+                    This defines the second layer of scattering coefficients:
+                    \begin{equation}
+                        \label{eq::scatter_first}
+                        S_1[x](u, i_1, \theta_1) \triangleq U_{i_1, .} \ostar_{SE(2)} \tilde{\phi}_I(u, \theta_1).
+                    \end{equation}
+
+            \paragraph{previous}
             The basic bloc of a \gls{acr::scatnet} is the wavelet-modulus operator:
             \begin{equation}
                 \label{eq::basic_operator}
