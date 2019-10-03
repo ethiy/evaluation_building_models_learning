@@ -933,9 +933,42 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         \tilde{\phi}(u, \omega) &= \frac{1}{2\cdot\pi} \cdot \phi_I(u)
                     \end{align}
                     These are separable filters that can help speed up the convolution computations as shown in~\textcite{sifre2013rotation}.
-                    In practice, $\psi$(\textit{resp}. $\bar\psi$) are taken as two (\textit{resp}. one) dimensional Morlet wavelets, while $\phi$ is taken as a Guassian~\parencite{oyallon2015deep,sifre2013rotation,bruna2013invariant}.
+                    In practice, $\psi$(\textit{resp}. $\bar\psi$) are taken as two (\textit{resp}. one) dimensional Morlet wavelets (\textit{cf.} Subfigure~\ref{subfig::morlet_filters}), while $\phi$ is taken as a Guassian~\parencite{oyallon2015deep,sifre2013rotation,bruna2013invariant}.
                     A finite number $L$ of orientations are possible for angle indices: $\theta \in \{\frac{l\cdot\pi}{L}: l=1,2\dots,L\}$.
-                    In Figure~\ref{fig::morlet_vs_learned}, we can see that the 
+                    In Figure~\ref{fig::morlet_vs_learned}, we can see that how the defined filter bank is similar to the ones learned by a \gls{acr::cnn}.
+                    \begin{figure}
+                        \centering
+                        \ffigbox{
+                            \ffigbox[\FBwidth]{
+                                \includegraphics[width=\textwidth]{images/related_work/morlet_wavelets}
+                            }{
+                                \label{subfig::morlet_filters}
+                                \caption{
+                                    Morlet wavelets at different scales ($I=5$) and orientations ($L=8$).
+                                    Left are presented the real part while the imaginary part is on the right.
+                                    Image taken from~\parencite{sifre2013rotation}.
+                                }
+                            }
+                            \ffigbox[\FBwidth]{
+                                \begin{tabular}{@{}l@{}}
+                                    \includegraphics[width=.5\textwidth]{images/related_work/first_layer_cnn}
+                                    \includegraphics[width=\textwidth]{images/related_work/second_layer_cnn}
+                                \end{tabular}
+                            }{
+                                \label{subfig::learned_filters}
+                                \caption{
+                                    Learned filters at the first (top) and second (bottom) layers of a \gls{acr::cnn}.
+                                    Image taken from~\parencite{lee2009convolutional}.
+                                }
+                            }
+                        }{
+                            \caption{
+                                \label{fig::3dmodel_vs_3dmesh} Example of the difference between a \gls{acr::3d} mesh compared to a \gls{acr::3d} model.
+                                The first describes only the geometry, while the second is rich in semantics:
+                                for each architectural feature corresponds a single geometric primitive.
+                            }
+                        }
+                    \end{figure}
                      
                 \subparagraph{The wavelet-modulus operator}
                     A wavelet transform of a signal $x$ consists in representing it using a wavelet filter bank: $\left(x\ostar\psi_{\lambda}\right)_{\lambda}$.
@@ -959,14 +992,14 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     This is delineated for the two cases as follows:
                     \begin{align}
                         \label{eq::wavelet-modulus_1_2}
-                        \forall (i, \theta)\{1, 2 \dots, I\} \times \{\frac{l\cdot\pi}{L}: l=1,2\dots,L\} \quad U_{i, \theta}: x \mapsto \vert x\star\psi_{i, \theta}\vert\\
-                        \forall (i, \theta, \iota)\{1, 2 \dots, I\} \times \{\frac{l\cdot\pi}{L}: l=1,2\dots,L\} \times \{1,2\dots,\lfloor\log_2(L)\rfloor\} \quad \widetilde{U}_{i, \theta, \iota}: x \mapsto \vert x\ostar_{SE(2)}\psi_{i, \theta, \iota} \vert
+                        U_{i, \theta}: x &\mapsto \vert x\star\psi_{i, \theta}\vert\\
+                        \widetilde{U}_{i, \theta, \iota}: x &\mapsto \vert x\ostar_{SE(2)}\psi_{i, \theta, \iota} \vert
                     \end{align}
                     These operators are proven to be covariant to translations and rotations~\parencite{mallat2012group,sifre2013rotation}: \textit{i.e.} for a couple $(v, \vartheta) \in \mathbb{R}^2 \times [0, 2\cdot\pi)$:
                     \begin{align}
                         \label{eq::covariance_wavelet-modulus}
-                        L_{g_{v, \vartheta}} \circ U_{i, \theta} = U_{i, \theta} \circ L_{g_{v, \vartheta}}\\
-                        L_{g_{v, \vartheta}} \circ \widetilde{U}_{i, \theta, \iota} = U_{i, \theta, \iota} \circ L_{g_{v, \vartheta}}.
+                        L_{g_{v, \vartheta}} \circ U_{i, \theta} &= U_{i, \theta} \circ L_{g_{v, \vartheta}}\\
+                        L_{g_{v, \vartheta}} \circ \widetilde{U}_{i, \theta, \iota} &= U_{i, \theta, \iota} \circ L_{g_{v, \vartheta}}.
                     \end{align}
                     These conditions may remind the reader of the work of~\textcite{cohen2016group} on \gls{acr::gcnn}.
                 
@@ -975,89 +1008,96 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \glspl{acr::gcnn} rely on max-pooling as standard practice in \glspl{acr::cnn}.
                     This operator is actually covariant to actions of the rigid movement group.
                     \parencite{bruna2013invariant, sifre2013rotation,oyallon2015deep}, however, rely on averaging (or low-pass) filters as pooling operators.
-                    These actually are invariant to translation and rotation:
-                    \begin{align}
-                        \label{eq::invariance_pooling}
-                        \phi_I = \phi_I \circ L_{t_v}\\
-                        \tilde{\phi}_I = \tilde{\phi}_I \circ L_{g_{v, \vartheta}}.
-                    \end{align}
 
                     Considering the rigid mouvement as a nuisance,~\parencite{sifre2013rotation} considers invariance with regards to the roto-translation group.
                     To do so they filter any signal $x(u)$ using $\phi_I$ yielding a signal:
                     \begin{equation}
                         \label{eq::pool_bi-dim}
-                        x \star \phi_I (u).
+                        P_I: x \mapsto x \star \phi_I (u).
                     \end{equation}
                     For signals $\tilde{x}(u, omega)$ they are averaged using $\tilde{\phi}_I$ and giving as ouput:
                     \begin{equation}
                         \label{eq::pool_bi-dim-angular}
-                        \tilde{x} \ostar_{SE(2)} \tilde{\phi}_I (u, \omega).
+                        \widetilde{P}_I: x \mapsto \tilde{x} \ostar_{SE(2)} \tilde{\phi}_I (u, \omega).
                     \end{equation}
+
+                    These operators are actually invariant to translation and rotation:
+                    \begin{align}
+                        \label{eq::invariance_pooling}
+                        P_I = P_I \circ L_{t_v}\\
+                        \tilde{P}_I = \tilde{P}_I \circ L_{g_{v, \vartheta}}.
+                    \end{align}
+
+                \subparagraph{Scattering coefficients}
                     Applying the first operation~\ref{eq::pool_bi-dim} to the input image defines the first scattering coefficient:
                     \begin{equation}
                         \label{eq::scatter_input}
                         S_0[x](u) \triangleq x \star \phi_I (u).
                     \end{equation}
                     
-                    To the image, is applied the wavelet-modulus operator giving $U_{i_1, \theta_1}$.
-                    The latter is pooled using the second operation~\ref{eq::pool_bi-dim-angular}.
+                    To the image, is applied the wavelet-modulus operator giving coefficients $U_{i_1, \theta_1}(x)$.
+                    The latter is averaged using the second operation~\ref{eq::pool_bi-dim-angular}.
                     This defines the second layer of scattering coefficients:
                     \begin{equation}
                         \label{eq::scatter_first}
-                        S_1[x](u, i_1, \theta_1) \triangleq U_{i_1, .} \ostar_{SE(2)} \tilde{\phi}_I(u, \theta_1).
+                        S_1[x](u, i_1, \theta_1) \triangleq U_{i_1, \bullet} \ostar_{SE(2)} \tilde{\phi}_I(u, \theta_1).
                     \end{equation}
 
-            \paragraph{previous}
-            The basic bloc of a \gls{acr::scatnet} is the wavelet-modulus operator:
-            \begin{equation}
-                \label{eq::basic_operator}
-                U_{j,r}(x) = \vert x\star\psi_{j,r} \vert.
-            \end{equation}
-            This can be reapplied successively like with \glspl{acr::cnn} at different scales and rotations:
-            \begin{equation}
-                \label{eq::basic_operator}
-                U[p](x) = U_{j_m,r_m}\circ U_{j_{m-1},r_{m-1}} \circ \dots U_{j_1,r_1} (x),
-            \end{equation}
-            where:
-            \begin{conditions}
-                p & is called a path and is the sequence of parameters $\left((j_i, r_i)\right)_{i=1,2,\dots,m}$.
-            \end{conditions}
-            A scattering transform at a path $p$ consists in applying a pooling operator $P_J$ on the successive wavelet-modulus operators, using a scaled low-pass filter $\phi_J: u\mapsto 2^{-2\cdot J}\cdot\phi\left(2^{-\cdot J}\cdot u\right)$:
-            \begin{equation}
-                \label{eq::scattering_transform}
-                S_J[p](x) \triangleq P_J\left(U[p](x)\right) = U[p](x) \star \phi_J
-            \end{equation}
+                    At the second level is applied the wavelet-modulus operator retrieves the high-frequencies lost after the low-pass filter using yet another time the wavelet-modulus operator yielding:
+                    \begin{equation}
+                        \label{eq::cascade_second}
+                        \widetilde{U}_{i_2,\iota_2, \theta_2} \circ U_{i_1, \theta_1}(x)
+                    \end{equation}
+                    Once again, an average pooling is applied on the latter:
+                    \begin{equation}
+                        \label{eq::scatter_second}
+                        S_2[x](u, i_1, \theta_1, i_2, \theta_2, \iota_2) \triangleq \widetilde{U}_{i_2,\iota_2, \theta_2} \circ U_{i_1, \bullet} \ostar_{SE(2)} \tilde{\phi}_I(u, \theta_1).
+                    \end{equation}
+                    
+                    This can be reapplied further giving casacaded scattering coefficients at level $m$:
+                    \begin{equation}
+                        \label{eq::scatter_second}
+                        S_m[x](u, p) \triangleq \widetilde{U}_{\lambda_m} \circ \widetilde{U}_{\lambda_{m-1}} \dots \circ \widetilde{U}_{\lambda_2} \circ U_{i_1, \bullet} \ostar_{SE(2)} \tilde{\phi}_I(u, \theta_1).
+                    \end{equation}
+                    where:
+                    \begin{conditions}
+                        p & $i_1, \theta_1, \lambda_2 \dots, \lambda_{m-1}, \lambda_m$ and is called a path;\\
+                        \lambda_k & $i_k, \theta_k, \iota_k$.
+                    \end{conditions}
 
-            If these filters can cover the whole frequency space then the scattering transform is invertible.
-            Moreover, the scattering tranform can be proved to verify all the required conditions~\parencite{mallat2012group}.
-            In order to acheive invariance using a low-pass filter, the wavelet-modulus operator operator is required to be covariant with regards to $G$.
-            In fact, for $g \in G$:
-            \begin{equation*}
-                \begin{cases}
-                    P_J \circ L_g = P_J\\
-                    U[p] \circ L_g = L_g \circ U[p]
-                \end{cases}\Rightarrow S_J[p] \circ L_g = S_J[p]
-            \end{equation*}
+                    The scattering coefficients are proved to be contractive and Lipschitz stable to deformations~\parencite{mallat2012group}.
+                    Moreover, they are invariant to actions of the group of rigid movement.
+                    In fact, concatenating a covariant operator and an invariant one yields an invariant operator~\parencite{mallat2012group,sifre2013rotation}.
 
-            In order to achieve invariance to scale, an average is computed the scale-space $\log(S(x(2^i\cdot u)))$.
-            A logarithm is then applied to the scattering coefficients as well as a global scale space averaging in order to obtain a global image descriptor.
+                    The energy of the signal is concentrated along increasing scale paths:\textit{i.e.} $\forall k=1,2,\dots,m-1 \; i_{k+1} > i_k$.
+                    This implies that computing coefficients along these paths is sufficient~\parencite{bruna2013invariant,sifre2013rotation,oyallon2015deep}.
+                    Furthermore, only the first two layers are computed as they concentrate most the energy of the signal~\parencite{bruna2013invariant,sifre2013rotation,oyallon2015deep}.
+                    This yields an efficient way of computing a scattering transform as discussed by~\textcite{oyallon2015deep,sifre2013rotation}.\\
 
-            \begin{figure}
-                \centering
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/scattering_network}
-                \caption{
-                    \label{fig::scatnet} Illustration of a \gls{acr::scatnet}.
-                    At each level are computed are computed convolutions with a filter bank followed by a modulus operator.
-                    The scattering coefficients are obtained then by a low-pass filter (in blue).
-                    In practice, not all scattering coefficients are computed.
-                }
-            \end{figure}
+                    \textcite{sifre2013rotation} goes on to propose a way to make the scattering invariant to scale effects also.
+                    This is done by introducing a logarithm that linearizes the dependency of scattering coefficients to scales $i_1$ and $i_2$~\parencite{sifre2013rotation,oyallon2015deep}.
+                    An scale-space averaging is thus applied to achieve the sought invariance.\\
 
-            In Figure~\ref{fig::scatnet} is represented the \acrlong{acr::scatnet}.
-            The number of scattering coefficients is exponential in the network depth.
-            Usually, not all coefficients are computed.
-            Instead they are computed following a non decreasing frequency path.
-            Moreover, most of the energy of the signal is contained in the first two layers.
-            This is why, in practice, the computation is stopped at that level.
+                    In contrast,~\textcite{oyallon2015deep} proposes to keep only the translation invariance and let the classifier decide on the relevance of rotation and scale invariance, much like in~\parencite{cohen2016group}.
+                    To do so only a spatial averaging convoluation is applied as $x \mapsto \tilde{x}(\bullet, \omega) \star \phi_I$ which is covariant to rotations.
+                    Similarly, they drop the scale-space averaging at the end, while the logarithm guaranties the covariance of the signal to scaling effects.
+                    The operations are also conducted in a way that renders the shape of the \gls{acr::scatnet}, shown in Figure~\ref{fig::scatnet}, more like that of \gls{acr::cnn}.
+
+                    \begin{figure}
+                        \centering
+                        \includestandalone[mode=buildnew, width=\textwidth]{figures/scattering_network}
+                        \caption{
+                            \label{fig::scatnet} Illustration of a \gls{acr::scatnet}.
+                            At each level are computed are computed convolutions with a filter bank followed by a modulus operator.
+                            The scattering coefficients are obtained then by a low-pass filter (in blue).
+                            In practice, scattering coefficients are only computed for increasing scale paths up to level $2$.
+                        }
+                    \end{figure}
         \subsubsection{\textsc{Kernels for graph classification}}
             \label{subsec::state_of_the_art::mlpr::graph_classification}
+            Standard machine learning practice usually assumes that the data to be classified lives in a finite dimensional space.
+            This is not the case for graphs in general.
+            In fact, Graphs can have varying numbers of nodes and edges.
+            Moreover, graphs can be different but provide the same structural information: we say they are isomorphic.
+            A valid representation for graphs should take care of these two issues: incorporate all possible graph sizes and be invariant to graph isomorphisms.
+            As accustomed in statistical learning, one way to alleviate representation issues for data is to directly compare graphs using kernels as seen previously in sub-subsection~\ref{subsubsec::}.
