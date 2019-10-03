@@ -15,11 +15,11 @@
     }
     \begin{forest} for tree={inner sep=1pt, l=25pt,l sep=5pt}
         [
-            {$x$}, signal, name=x
+            {$x(u)$}, signal, name=x
             [
-                {$U[\lambda_1](x)$}, signal, edge label={node[midway,left,font=\scriptsize]{$\vert x\star \psi_{\lambda_1}\vert$}}, name=x11
+                {$U_{i_1, \theta_1}(x)$}, signal, edge label={node[midway,left,font=\scriptsize]{$\vert x\star \psi_{i_1, \theta_1}\vert$}}, name=x11
                 [
-                    {$U[\lambda_1, \lambda_2](x)$}, signal, edge label={node[midway,left,font=\scriptsize]{$\vert \vert x\star \psi_{\lambda_1}\vert \star \psi_{\lambda_2}\vert$}}, name=x21
+                    {$\widetilde{U}_{\lambda_2} \circ U_{i_1, \bullet}(x)$}, signal, edge label={node[midway,left,font=\scriptsize]{$\vert \vert x\star \psi_{i_1, \bullet}\vert \star \psi_{\lambda_2}\vert$}}, name=x21
                     [
                         {}, unamed, name=x31
                     ]
@@ -173,11 +173,11 @@
                 ]
             ]
         ];
-        \path (x.north west) + (-1.5, .75)  node[rounded corners, draw, align=center] (s) {$S[\emptyset](x)$};
-        \path (x11.north west) + (-1, .5)  node[rounded corners, draw, align=center] (s11) {$S[\lambda_1](x)$};
+        \path (x.north west) + (-1.5, .75)  node[rounded corners, draw, align=center] (s) {$S_0[x](x)$};
+        \path (x11.north west) + (-1, .5)  node[rounded corners, draw, align=center] (s11) {$S_1[x]$};
         \path (x12.north west) + (-1, .5)  node (s12) {};
         \path (x13.north west) + (-1, .5)  node (s13) {};
-        \path (x21.west) + (-1.5, 0)  node[rounded corners, draw, align=center] (s21) {$S[\lambda_1, \lambda_2](x)$};
+        \path (x21.west) + (-1.5, 0)  node[rounded corners, draw, align=center] (s21) {$S_2[x]$};
         \path (x22.north west) + (-.5, .25)  node (s22) {};
         \path (x23.north west) + (-.5, .25)  node (s23) {};
         \path (x24.north west) + (-.5, .25)  node (s24) {};
