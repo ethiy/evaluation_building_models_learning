@@ -240,6 +240,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         Hereafter, are presented two supervised classifiers: the \gls{acr::svm} algorithm and Random Forests, both of which are used in this work.
 
         \subsubsection{\textsc{\acrlong*{acr::svm}}}
+            \label{subsubsec::state_of_the_art::mlpr::classifiers::svm}
             \glspl{acr::svm} are a special type of linear classifiers.
             The initial classes $\left(y^k\right)_{k=1, 2, \dots, n}$ are transformed into $\left(\tilde{y}^k\right)_{k=1, 2, \dots, n}$, using the map: $y \mapsto \tilde{y} = 2\cdot y - 1$.
             There are always two possible classes $\{1, -1\}$.
@@ -755,7 +756,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \item Prediction relies on simple comparisons and can be computed quickly.
                     \item They inherently yield probabilisties that are consistent.
                 \end{itemize}
-                As with \glspl{acr::svm}, Random Forests have some issues:
+                As seen with \glspl{acr::svm}, Random Forests have also some issues:
                 \begin{itemize}
                     \item It is not simple to interpret results of Random Forests and connect specific trees to recongnizable patterns.
                     \item They can take up a lot of memory to store all trees.
@@ -830,7 +831,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \end{equation}
                 
                 \subparagraph{Group convolution}
-                    A convolution over a Lie group $G$ is defined as:
+                    A convolution over a locally compact topological group $G$ is defined as:
                     \begin{equation}
                         \label{eq::group_signal_convolution}
                         x \ostar y: u \mapsto \int_{h\in G} x(h)\cdot y(h^{-1}(u)) \cdot dh
@@ -963,9 +964,10 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                             }
                         }{
                             \caption{
-                                \label{fig::3dmodel_vs_3dmesh} Example of the difference between a \gls{acr::3d} mesh compared to a \gls{acr::3d} model.
-                                The first describes only the geometry, while the second is rich in semantics:
-                                for each architectural feature corresponds a single geometric primitive.
+                                \label{fig::morlet_vs_learned}
+                                Comparison of the Morlet wavelet bank and the first and second layer filters learned from a \gls{acr::cnn}.
+                                The latter can be distinguished into two classes:
+                                an averaging filter that could be likened to $\phi$ and rotated and scaled (only in the second layer) filters that looks like Morlet wavelets.
                             }
                         }
                     \end{figure}
@@ -1093,6 +1095,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                             In practice, scattering coefficients are only computed for increasing scale paths up to level $2$.
                         }
                     \end{figure}
+
         \subsubsection{\textsc{Kernels for graph classification}}
             \label{subsec::state_of_the_art::mlpr::graph_classification}
             Standard machine learning practice usually assumes that the data to be classified lives in a finite dimensional space.
@@ -1100,4 +1103,202 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             In fact, Graphs can have varying numbers of nodes and edges.
             Moreover, graphs can be different but provide the same structural information: we say they are isomorphic.
             A valid representation for graphs should take care of these two issues: incorporate all possible graph sizes and be invariant to graph isomorphisms.
-            As accustomed in statistical learning, one way to alleviate representation issues for data is to directly compare graphs using kernels as seen previously in sub-subsection~\ref{subsubsec::}.
+            As accustomed in statistical learning, one way to alleviate representation issues for data is to directly compare graphs using kernels as seen previously in sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.\\
+            
+            This sub-subsection does aim at presenting a thourough survey of graph kernels.
+            The work of~\textcite{ghosh2018journey} presents a structured way to look at the different graph kernels that exist depending on the used methodology.
+            A different approach is proposed in~\textcite{kriege2019survey} where they study graph kernels based based on the underlying graphs.\\
+
+            Apart from the structure of the graph, kernels should take into account the labels or continuous attributes of the graph.
+            These could be given at node level or edge level.
+            We will present in hereafter the graph kernels that were used for our case.
+            This concerns continuously node attributed graph kernels as well as ones that cares only for the structural properties of the graph.\\
+
+            \paragraph{Basic kernel}
+                Let $G = \left(V, E\right)$ an undirected graph with vertices $v\in V$ and edges $e \in E =\{\{u, v\}: (u, v) \in V\times V\}$.
+                We can give attributes to each node $a: V \rightarrow \mathbb{R}^d$ or edges $b: E \rightarrow \mathbb{R}^{d'}$.\\
+
+                The most basic graph kernel would correspond to a scalar product of a global hashing vector of all attributes.
+                This is possible through the use of a histogram function for instance.
+                This will be described in details in subsection~\ref{subsec::learned_evaluation::baseline::geometric}.
+            
+            \paragraph{Random walk kernel}
+                Suppose we want to compute the similarity between two graphs $G = \left(V, E\right)$ and $G' = \left(V', E'\right)$.
+                We start by defining the direct product graph $G_{\times} = \left(V_{\times}, E_{\times}\right)$ defined as:
+                \begin{align}
+                    \label{eq::direct_product_graph}
+                    V_{\times} &\triangleq V \times V'\\
+                    E_{\times} &\triangleq \{\{(u, u'), (v, v')\}: \{u,v\} \in E \wedge \{u',v'\} \in E'\}.
+                \end{align}
+                This is vizualized in Figure~\ref{fig::direct_product_graph}.
+                \begin{figure}[htbp]
+                    \centering
+                    \includegraphics[height=.4\textheight]{images/related_work/direct_product_graphs}
+                    \caption{
+                        \label{fig::direct_product_graph}
+                        Depiction of a direct product (bottom) of two graphs (top).
+                        Nodes adjacent in $G_{\times}$ correspond to adjacent nodes in both graphs.
+                    }
+                \end{figure}
+                A graph $G$ could be represented by an adjacency matrix $A$:
+                \begin{equation}
+                    \label{eq::adjacency_matrix}
+                    A \triangleq \left(\delta_{\{u,v\}\in E}\right)_{(u, v) \in V\times V}
+                \end{equation}
+                We can also define a diagonal matrix of node degrees $D\triangleq \operatorname{diag}\left(\sum_{v \in V}A_{uv}\right)_{u \in V}$.
+                We can hence defined a normalized matrix:
+                \begin{equation}
+                    \label{eq::normalized_adjacency_matrix}
+                    P \triangleq A\cdot D^{-1}
+                \end{equation}
+                Actually, The latter can be interpreted as a transition probability matrix of a random walk on the graph:
+                $P_{uv}$ is the probability of choosing $u$ as the next node to visit starting from $v$.
+                Similarly, $\left(P^k\right)_{uv}$ expresses the probability of being in node $u$ after $k$ iterations, starting from $v$.
+                A random walk starts with an initial distribution $p$ over the nodes.
+                After $k$ iterations, the distribution is $P^k\cdot p$.
+                At any time, the walk can end with a probability $q_u$ at node $u$.
+                $p$ and $q$ are usefull to encode prior information of the graph~\parencite{vishwanathan2010graph}.\\
+
+                For the direct product graph, we compute adjacency matrices, initial probability distribution and stopping probabilities as follows:
+                \begin{align}
+                    \label{eq::direct_product_graph_walk}
+                    A_{\times} &= A \otimes A'\\
+                    P_{\times} &= P \otimes P'\\
+                    p_{\times} &= p \otimes p'\\
+                    q_{\times} &= q \otimes q'
+                \end{align}
+                where:
+                \begin{conditions}
+                    \otimes & referes to the Kronecker product.
+                \end{conditions}
+                In fact, a random walk on $G_{\times}$ is equivalent to a simultaneous random walk on $G$ and $G'$~\parencite{hammack2011handbook}.
+                A random walk helps discover the structure of the graph.
+                In consequence, a random walk on the direct product graph can be a good indicator of the similarity in structure of both graphs $G$ and $G'$.
+                It is defined as:
+                \begin{equation}
+                    \label{eq::random_walk_graph}
+                    k_{rw}(G, G') \triangleq \sum_{k=0}^\infty \lambda_k \cdot q_{\times}^T\cdot P_{\times}\cdot p_{\times}.
+                \end{equation}
+
+                This defintion actually generalizes a family of graph kernels based on walks on graphs~\parencite{vishwanathan2010graph}.
+                The choice of the series $\left(\lambda_k\right)_{k\in \mathbb{N}}$ is critical, as the kernel defined in Equation~\ref{eq::random_walk_graph} can diverge.
+                It is taken to be non-negative in order in ensure the positive semi-definite of the kernel.\\
+
+                Setting $p_{\times} \approx 1$ and $q_{\times} \approx 1$ and , two special cases are of interest.
+                \begin{itemize}
+                    \item $\forall k\in \mathbb{N} \; \lambda_k = \lambda^k$: this gives rise to a geometric random kernel:
+                            \begin{equation}
+                                \label{eq::geometric_random_kernel}
+                                k_{grw}(G, G') = \begin{bmatrix}
+                                    1, 1\dots,1
+                                \end{bmatrix}\cdot \left(I - \lambda\cdot A_{\times}\right)^{-1}\cdot\begin{bmatrix}
+                                    1\\
+                                    1\\
+                                    \vdots\\
+                                    1
+                                \end{bmatrix}.
+                            \end{equation}
+                            For this kernel to be valid, $\lambda$ should be less than the largest eigenvalue of $A_{\times}$.
+                    \item $\forall k\in \mathbb{N} \; \lambda_k = \frac{\lambda^k}{k!}$: this yields the so called exponential random kernel:
+                            \begin{equation}
+                                \label{eq::geometric_random_kernel}
+                                k_{erw}(G, G') = \begin{bmatrix}
+                                    1, 1\dots,1
+                                \end{bmatrix}\cdot \exp\left(\lambda\cdot A_{\times}\right)\cdot\begin{bmatrix}
+                                    1\\
+                                    1\\
+                                    \vdots\\
+                                    1
+                                \end{bmatrix}.
+                            \end{equation}
+                \end{itemize}
+                These graph kernels where already defined in~\parencite{gartner2003graph}.\\
+
+                Computationally, these involve heavy computations.
+                \textcite{vishwanathan2010graph} proposed efficient numerical algorithms to aleviate this problem.
+                However, these graphs suffer from other issues.
+                First, the kernel does take into account the attributes of graphs of they exist, although it is possible to adapt.
+                Second, these graphs suffer from tottering which is the fact that the random walk is mostly consistent of multiple movements between a small subset of vertices in a row.
+                Third, related to the previous point, the random walk would spend much time on central nodes that connect to most other nodes adding to their contribution to the kernel, while peripherial ones that can hold the most distinctive feature of the structure are watered down.
+
+            \paragraph{\gls*{acr::svm} $\vartheta$ kernel}
+                This is also a kernel takes advantage only of the structure of graphs.
+                It relies on the definition of Lovasz number of a graph $\vartheta(G)$.
+                We say
+                \begin{equation}
+                    \label{eq::orthonormal_representation}
+                    W(G) \subset \{\bm{w}_v: v \in V \wedge \bm{w}_v\in\mathbb{R}^d \wedge \Vert\bm{w}_v\Vert = 1\}
+                \end{equation}
+                is an orthonormal representation of a graph $G$ if and only if $\forall \{u,v\} \notin E \Rightarrow \bm{w}_u^T\cdot \bm{w}_v=0$.
+                The Lovasz number~\parencite{lovasz1979shannon} is defined as:
+                \begin{equation}
+                    \label{eq::lovazs_number}
+                    \vartheta(G) \triangleq \min_{\substack{\bm{c} \in \mathbb{R}^d\\W(G)}}\max_{v\in V} \left(\frac{1}{\bm{c}^T\cdot \bm{w}_v}\right)^2
+                \end{equation}
+                Which can be interpreted as the smallest cone enclosing a valid orthonormal representation.
+                Equally we define the same number over a subset of vertices $B \in V$ as follows:
+                \begin{equation}
+                    \label{eq::lovazs_number_subset}
+                    \vartheta_B(G) \triangleq \min_{\bm{c} \in \mathbb{R}^d}\max_{\bm{w}_v\in W_B^*(G)} \left(\frac{1}{\bm{c}^T\cdot \bm{w}_v}\right)^2
+                \end{equation}
+                where:
+                \begin{conditions}
+                    W^*_B(G) & is the restriction of $W^*(G)$ over the subset $B$;\\
+                    W^*(G) & is the maximizer of the problem in Equation~\ref{eq::lovazs_number}.
+                \end{conditions}
+
+                The Lovasz kernel~\parencite{johansson2014global} is defined based on a base kernel $\kappa: \mathbb{R} \times \mathbb{R} \rightarrow \mathbb{R}_+$ as:
+                \begin{equation}
+                    \label{eq::lovazs_number_kernel}
+                    k_{Lo}(G, G') \triangleq \sum_{\substack{B\subseteq V\\B'\subseteq V'\\\vert B \vert = \vert B' \vert}} \frac{1}{
+                        \begin{pmatrix}
+                            \vert V \vert\\
+                            \vert B \vert                            
+                        \end{pmatrix} \cdot \begin{pmatrix}
+                            \vert V \vert\\
+                            \vert B' \vert                            
+                        \end{pmatrix}
+                    } \cdot \kappa\left(\vartheta_B(G), \vartheta_{B'}(G')\right)
+                \end{equation}
+
+                The Lovasz number is, however, hard to compute~\parencite{johansson2014global}.
+                An approximation is possible using the work of~\textcite{jethava2013lovasz}.
+                It presents an alternative definition of Lovasz number.
+                We define $L \triangleq \{K \in S_{\vert V \vert}^+: \forall v \in V, K_{vv} = 1 \wedge \forall \{u, v\}  \notin E, K_{uv} = 0\}$ where $S_{\vert V \vert}^+$ is the set of $\vert V \vert \times \vert V \vert$ positive semi-definite matrices.
+                We can hence write:
+                \begin{equation}
+                    \label{eq::lovazs_number_alternative}
+                    \vartheta(G) = \min_{K \in L} \omega(K)
+                \end{equation}
+                where:
+                \begin{equation}
+                    \omega(K) = \max_{\alpha_v > 0, \forall v \in V} 2\cdot \sum_{v\in V} \alpha_v - \sum_{(u, v) \in V\times V} \alpha_u \cdot \alpha_v \cdot K_{uv}
+                \end{equation}
+                is dual one-class \gls{acr::svm} (\textit{cf.} sub-sebsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}).
+
+                If $\lambda_m$ is the minimum eigenvalue of $A$, for $\rho\geq-\lambda_m$, the matrix
+                \begin{equation}
+                    \label{eq::ls_matrix}
+                    K_{LS} \triangleq \frac{1}{\rho} \cdot A + I \in S_{\vert V \vert}^+
+                \end{equation}
+                is interesting as $\omega(K_{LS}) = \sum_{v\in V} \alpha_v$~\parencite{jethava2013lovasz}.
+                It is even more interesting as for Erdos–R\'enyi random graphs $\omega(K_{LS})$ is a constant factor approximation to the Lovasz number~\parencite{jethava2013lovasz} with high probability.
+
+                This justifies the defintion of the kernel:
+                \begin{equation}
+                    \label{eq::svm_kernel}
+                    k_{SVM}(G, G') \triangleq \sum_{\substack{B\subseteq V\\B'\subseteq V'\\\vert B \vert = \vert B' \vert}} \frac{1}{
+                        \begin{pmatrix}
+                            \vert V \vert\\
+                            \vert B \vert                            
+                        \end{pmatrix} \cdot \begin{pmatrix}
+                            \vert V \vert\\
+                            \vert B' \vert                            
+                        \end{pmatrix}
+                    } \cdot \kappa\left(\sum_{v\in B} \alpha_v, \sum_{v\in B'} \alpha_v\right).
+                \end{equation}
+                This is still very prohibitive in terms of compuational complexity as one has to sum over all $2^{\vert V \vert}$ (\textit{resp.} $2^{\vert V' \vert}$) subsets of $V$ (\textit{resp.} $V'$).
+                To avoid this issue for each graph only few of the subsets are visited.
+                
+            \paragraph{Multiscale Laplacian kernel}
+
