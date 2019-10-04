@@ -148,7 +148,7 @@ These are proposed to better predict errors in the model.
 
         \begin{equation}
         	\label{eq::model_graph}
-        	\mathsf{M} \triangleq \Big(\mathsf{F}, \mathsf{E} \triangleq \big\{ \{f, g\} \subset \mathsf{F} : f \sim g \big\} \Big).
+        	\mathsf{M} \triangleq \Big(\mathsf{F}, \mathsf{E} \triangleq \left\{ \left\{f, g\right\} \subset \mathsf{F} : f \sim g \right\} \Big).
         \end{equation}
 
         \begin{figure}[htbp]
@@ -162,9 +162,9 @@ These are proposed to better predict errors in the model.
         \end{figure}
 
         The dual graph is illustrated in Figure~\ref{fig::geometric_features}.
-        For each facet $f \in \mathsf{F}$, we compute its degree (\textit{i.e.}, number of vertices; $d(f) \triangleq \vert\{v : v\text{ is a vertex of }f\}\vert$), its area $\mathscr{A}(f)$ and its circumference $\mathscr{C}(f)$.
+        For each facet $f \in \mathsf{F}$, we compute its degree (\textit{i.e.}, number of vertices; $d(f) \triangleq \vert\left\{v : v\text{ is a vertex of }f\right\}\vert$), its area $\mathscr{A}(f)$ and its circumference $\mathscr{C}(f)$.
         These are all geometric invariants with respect to $\mathbb{R}^3$ isometries, contrarily to facet centroids $\mathscr{G}(f)$ and normals $\vec{n}(f)$.
-        This is countersteped by looking, for each graph edge $e=\{f, g\} \in \mathsf{E}$, for the distance between facet centroids $\Vert \mathscr{G}(f) - \mathscr{G}(g) \Vert$ and the angle formed by their normals $\arccos(\vec{n}(f) \cdot \vec{n}(g))$.
+        This is countersteped by looking, for each graph edge $e=\left\{f, g\right\} \in \mathsf{E}$, for the distance between facet centroids $\Vert \mathscr{G}(f) - \mathscr{G}(g) \Vert$ and the angle formed by their normals $\arccos(\vec{n}(f) \cdot \vec{n}(g))$.
         Statistical characteristics are then computed over building model facets using specific functions $S$, like a histogram:        
 
         \begin{equation}

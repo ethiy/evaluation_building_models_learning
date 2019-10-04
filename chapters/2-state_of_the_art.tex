@@ -228,12 +228,12 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         \label{subsec::state_of_the_art::mlpr::classifiers}
         In this subsection, we denote a family of observations and their classes by $\left((\bm{x^i}, y^i)\right)_{i=1,2,\dots,n}$.
         Features are in practice finite dimensional vectors: \textit{i.e.} $\forall i=1,2,\dots,n \;, \bm{x^i} \in \mathbb{R}^d$.
-        Classes are modeled by a finite set bijective to the set $\forall i=1,2,\dots,n \;, y_i \in \{1,2,\dots,C\}$.
+        Classes are modeled by a finite set bijective to the set $\forall i=1,2,\dots,n \;, y_i \in \left\{1,2,\dots,C\right\}$.
         The goal of supervised classification is to learn, based on the training set $\left((\bm{x^i}, y^i)\right)_{i=1,2,\dots,n}$, some statistical characteristics in order to predict the classes of new observations $\left(\bm{x^i}\right)_{i=1,2,\dots,n'}$\footnote{This is called the test set.}.
         This type of problems is said to be multi-class: each instance has one possible class out of a number of possibilities.
-        In the special case of binary classification, only two classes are possible $\forall i=1,2,\dots,n \;,\allowbreak y^i \in \{0, 1\}$.\\
+        In the special case of binary classification, only two classes are possible $\forall i=1,2,\dots,n \;,\allowbreak y^i \in \left\{0, 1\right\}$.\\
         
-        On another hand, the multi-label classification problem is the case where to each instance corresponds a number $L$ of binary labels: \textit{i.e.} $\forall i=1,2,\dots,n \;, y^i = (y^i_1, y^i_2, \dots, y^i_L) \in \{0, 1\}^L$.
+        On another hand, the multi-label classification problem is the case where to each instance corresponds a number $L$ of binary labels: \textit{i.e.} $\forall i=1,2,\dots,n \;, y^i = (y^i_1, y^i_2, \dots, y^i_L) \in \left\{0, 1\right\}^L$.
         In this case, associating features with each label $\forall i=1,2,\dots,n \;, y^i_l$ can be seen as an independent binary classification problem.
         This is different from multi-class problems, as for the latter only one class is possible while in the other multiple labels can be detected.\\
 
@@ -243,14 +243,14 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             \label{subsubsec::state_of_the_art::mlpr::classifiers::svm}
             \glspl{acr::svm} are a special type of linear classifiers.
             The initial classes $\left(y^k\right)_{k=1, 2, \dots, n}$ are transformed into $\left(\tilde{y}^k\right)_{k=1, 2, \dots, n}$, using the map: $y \mapsto \tilde{y} = 2\cdot y - 1$.
-            There are always two possible classes $\{1, -1\}$.
+            There are always two possible classes $\left\{1, -1\right\}$.
             This simple transformation is use so as to simplify the latter equations.
 
             We remind the reader of the decision function\footnote{A decision function assigns a class to given observation.} of a linear classifier:
             \begin{equation}
                 \label{eq::linear}
                 \begin{aligned}
-                    \mathbf{D}_{\text{linear}, \bm{w}, b}: \mathbb{R}^d &\rightarrow \{-1, 1\}\\
+                    \mathbf{D}_{\text{linear}, \bm{w}, b}: \mathbb{R}^d &\rightarrow \left\{-1, 1\right\}\\
                     \bm{x} &\mapsto 2 \cdot \mathbb{1}_{\bm{w}^\intercal \cdot \bm{x} + b\geq 0} - 1 \quad.
                 \end{aligned}
             \end{equation}
@@ -268,8 +268,8 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 Support hyperplanes are the hyperplanes that are parallel to the separator and passes through the support vectors.
                 This can be summarized as:
                 \begin{eqnarray}
-                    \{\bm{x}^+_s: s = 1, 2, \dots, n_{psp}\} &\triangleq \arg\min\{d(\bm{x}_k, H_0) : k=1, 2, \dots, n \wedge \tilde{y}^k = 1\}\\
-                    \{\bm{x}^-_s: s = 1, 2, \dots, n_{nsp}\} &\triangleq \arg\min\{d(\bm{x}_k, H_0) : k=1, 2, \dots, n \wedge \tilde{y}^k = -1\}
+                    \left\{\bm{x}^+_s: s = 1, 2, \dots, n_{psp}\right\} &\triangleq \arg\min\left\{d(\bm{x}_k, H_0) : k=1, 2, \dots, n \wedge \tilde{y}^k = 1\right\}\\
+                    \left\{\bm{x}^-_s: s = 1, 2, \dots, n_{nsp}\right\} &\triangleq \arg\min\left\{d(\bm{x}_k, H_0) : k=1, 2, \dots, n \wedge \tilde{y}^k = -1\right\}
                 \end{eqnarray}
                 where:
                 \begin{conditions}
@@ -279,13 +279,13 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
                 We define:
                 \begin{equation*}
-                    Sol \triangleq \{\omega \in \mathbb{R}^d : \omega.\bm{x} + b = 0\}.
+                    Sol \triangleq \left\{\omega \in \mathbb{R}^d : \omega.\bm{x} + b = 0\right\}.
                 \end{equation*}
                 We verify that:
                 \begin{equation*}
-                    \forall \lambda \in \mathbb{R}\setminus\{0\} \quad (\bm{w}, b) \in  Sol \Rightarrow (\lambda . \bm{w}, \lambda.b) \in Sol.
+                    \forall \lambda \in \mathbb{R}\setminus\left\{0\right\} \quad (\bm{w}, b) \in  Sol \Rightarrow (\lambda . \bm{w}, \lambda.b) \in Sol.
                 \end{equation*}
-                In other words, the solution $(\bm{w}^*, b^*)$ is unique up to multiplicatif term $\lambda \in \mathbb{R}\setminus\{0\}$.
+                In other words, the solution $(\bm{w}^*, b^*)$ is unique up to multiplicatif term $\lambda \in \mathbb{R}\setminus\left\{0\right\}$.
                 In this context, $(\bm{w}, b)$ is chosen so that the support hyperplanes verify:
                 \begin{equation}
                     \label{eq::support_lines}
@@ -315,7 +315,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 The main idea behind \glspl{acr::svm} is to maximize this distance.
                 The latter is called margin and denoted $M$.\\
 
-                In order to compute the margin, we can interpret it as the length of the orthogonal projection of any vector $\bm{v}_{st}$\footnote{$\forall (s, t) \in \{1,2,\dots,n_{nsp}\} \times \{1,2,\dots,n_{psp}\}$} going from a negative support vector $\bm{x}^-_s$ to a positive one $\bm{x}^+_t$ on any line carried by $\bm{w}$.
+                In order to compute the margin, we can interpret it as the length of the orthogonal projection of any vector $\bm{v}_{st}$\footnote{$\forall (s, t) \in \left\{1,2,\dots,n_{nsp}\right\} \times \left\{1,2,\dots,n_{psp}\right\}$} going from a negative support vector $\bm{x}^-_s$ to a positive one $\bm{x}^+_t$ on any line carried by $\bm{w}$.
                 Since all support vectors of the same class lay on the same line, the choice of $(s,t)$ is inconsequential.
                 We can hence deduce:
                 \begin{align}
@@ -328,8 +328,8 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 The certainty in the given samples is translated by the inequalities:
                 \begin{equation*}
                     \begin{cases}
-                        \bm{w}^\intercal\cdot\bm{x}^i + b \geq 1 & \forall i \in \{1, 2, \dots, n: \tilde{y}^i = 1\}\\
-                        \bm{w}^\intercal\cdot\bm{x}^i + b \leq -1 & \forall i \in \{1, 2, \dots, n: \tilde{y}^i = -1\}
+                        \bm{w}^\intercal\cdot\bm{x}^i + b \geq 1 & \forall i \in \left\{1, 2, \dots, n: \tilde{y}^i = 1\right\}\\
+                        \bm{w}^\intercal\cdot\bm{x}^i + b \leq -1 & \forall i \in \left\{1, 2, \dots, n: \tilde{y}^i = -1\right\}
                     \end{cases}.
                 \end{equation*}
                 These can be summed in one, as follows:
@@ -522,7 +522,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                             \label{eq::rbf_kernel}
                             k_{\gamma}(\bm{x}, \bm{y}) = \exp{-\gamma \cdot \Vert \bm{x} - \bm{y} \Vert^2};
                         \end{equation}
-                        \item the polynomial kernel: for some parameters $(c, d) \in \mathbb{R}_+ \times \mathbb{N} \setminus \{0\} $
+                        \item the polynomial kernel: for some parameters $(c, d) \in \mathbb{R}_+ \times \mathbb{N} \setminus \left\{0\right\} $
                         \begin{equation}
                             \label{eq::polynomial_kernel}
                             k_{\gamma, c}(\bm{x}, \bm{y}) = (\bm{x}^\intercal \cdot \bm{y} + c)^d;
@@ -538,7 +538,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 \subparagraph{\acrlong*{acr::mkl}}
                     Some operations over kernels always yield valid kernels.
                     This is true for instance for summation.
-                    In fact, fixing the number of kernels $K\in \mathbb{N} \setminus \{0\}$, for basis kernels $k_i \; \forall i=1,2,\dots,K$ weithed by $\mu_i \in \mathbb{R}_+\; \forall i=1,2,\dots,K$,
+                    In fact, fixing the number of kernels $K\in \mathbb{N} \setminus \left\{0\right\}$, for basis kernels $k_i \; \forall i=1,2,\dots,K$ weithed by $\mu_i \in \mathbb{R}_+\; \forall i=1,2,\dots,K$,
                     \begin{equation*}
                         k(\bm{x}, \bm{y}) = \sum_{i=1}^K \mu_i \cdot k_i(\bm{x}, \bm{y})
                     \end{equation*}
@@ -597,14 +597,14 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 This can be simplified as $P_b(\bm{x}) = \mathbb{1}_{x_{i_b} \geq t_b} $.
                 The chosen child is denoted $d_b(\bm{x}) \leftarrow \text{child}(b, \mathbb{1}_{x_{i_b} \geq t_b})$.
                 Leafs are the terminal nodes of the tree and they do not apply any predicate to their input.
-                Instead, based on the assigned class $c(l) \in \{1,2,\dots,C\}$ of the leaf $l$, they predict the label of the input.
+                Instead, based on the assigned class $c(l) \in \left\{1,2,\dots,C\right\}$ of the leaf $l$, they predict the label of the input.
                 Each dimension $x_i \in \mathscr{X}_i$ is treated separately.
                 Hence, decision trees can handle heterogenous feature vectors that are no longer restricted to be $\mathbb{R}^d$.
                 The decision function of a decision tree classifier can be written as:
                 \begin{equation}
                     \label{eq::df_decision_tree}
                     \begin{aligned}
-                        D_{\text{decision tree}}: \prod_{i=1}^{d}\mathscr{X}_i &\rightarrow \{1,2,\dots,C\}\\
+                        D_{\text{decision tree}}: \prod_{i=1}^{d}\mathscr{X}_i &\rightarrow \left\{1,2,\dots,C\right\}\\
                         \bm{x} &\mapsto c\left(d_{d_{\ddots_{d_r(\bm{x})}}(\bm{x})}\right)
                     \end{aligned}
                 \end{equation}
@@ -631,7 +631,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
                 The choice of the splitting dimension and the threshold at each node is made in the aim of achieving the most gain in the ``purity'' of child nodes.
                 As a consequence, there is a need of a metric $I$ that can describe the heterogenuity, as the opposite of purity, of a node.
-                These are usually based on a probabilistic interpretation as they compute the fraction of observations $p_c$ that go through a node of class $c \in \{1, 2, \dots, C\}$.
+                These are usually based on a probabilistic interpretation as they compute the fraction of observations $p_c$ that go through a node of class $c \in \left\{1, 2, \dots, C\right\}$.
                 Three examples are provided:
                 \begin{itemize}
                     \item Gini index:
@@ -652,13 +652,13 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     where:
                     \begin{conditions}
                         d_s & is the chosen dimension to split over;\\
-                        S & $\subset \{1, 2, \dots, n\}$ is an set of indices.
+                        S & $\subset \left\{1, 2, \dots, n\right\}$ is an set of indices.
                     \end{conditions}
                 \end{itemize}
                 Considering $S_b$ the set of indices of inputs going through a node $b$, one can compute the gain of a split at node $b$ as:
                 \begin{equation}
                     \label{eq::split_gain}
-                    G_b \triangleq I(S_b) - \sum_{c \in \{d_b(\bm{x}^i): i \in S_b\}} I(S_c)
+                    G_b \triangleq I(S_b) - \sum_{c \in \left\{d_b(\bm{x}^i): i \in S_b\right\}} I(S_c)
                 \end{equation}
                 The optimal splitting dimension and threshold are chosen so that they maximizes the gain $G_b$.
                 Details of how this is computed is outside ths scope of this manuscript and is not provided herein.
@@ -679,7 +679,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \includestandalone[mode=buildnew, height=.4\textheight]{figures/random_forest/ensemble}
                     \caption{
                         \label{fig::ensemble} Illustration of the principle of ensemble methods.
-                        For each decision function $\forall l=1,2,3\;D_l$, is represented the set where the each classifier fails $F(D_l) \leftarrow \{(\bm{x}, y) \in \prod_{i=1}^{d}\mathscr{X}_i \times \{1,2,\dots,C\} : D_l(\bm{x}) \neq y\}$.
+                        For each decision function $\forall l=1,2,3\;D_l$, is represented the set where the each classifier fails $F(D_l) \leftarrow \left\{(\bm{x}, y) \in \prod_{i=1}^{d}\mathscr{X}_i \times \left\{1,2,\dots,C\right\} : D_l(\bm{x}) \neq y\right\}$.
                         In the case of unweigthed bagging, the aggregated classifier will fail when more than half of the classifiers fail.
                         In this case, the set $F(D_{\text{bagging}})$ is the union of intersections of two different $F(D_l)$: $F(D_{\text{bagging}}) = \bigcup_{l\neq p} F(D_l) \cap F(D_p)$.
                         In this case where classifiers are diverse, the aggregated one fails less frequently than each single one.
@@ -723,15 +723,15 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 \begin{equation}
                     \label{eq::decision_function_hard_ensemble}
                     \begin{aligned}
-                        D_{\text{hard ensemble}, \left(D_l\right)_{l=1,2,\dots,L}}: \prod_{i=1}^{d}\mathscr{X}_i &\rightarrow \{1,2,\dots,C\}\\
-                        \bm{x} &\mapsto \arg \max_{c=1,2,\dots,C}\lvert\{l\in\{1,2,\dots,L\}: D_l(\bm{x}) = c\}\rvert
+                        D_{\text{hard ensemble}, \left(D_l\right)_{l=1,2,\dots,L}}: \prod_{i=1}^{d}\mathscr{X}_i &\rightarrow \left\{1,2,\dots,C\right\}\\
+                        \bm{x} &\mapsto \arg \max_{c=1,2,\dots,C}\lvert\left\{l\in\left\{1,2,\dots,L\right\}: D_l(\bm{x}) = c\right\}\rvert
                     \end{aligned},
                 \end{equation}
                 while the weighted aggregation using classifier output probabilities $\left(p_l\right)_{l=1,2,\dots,L}$ is expressed as:
                 \begin{equation}
                     \label{eq::decision_function_weighted_ensemble}
                     \begin{aligned}
-                        D_{\text{weighted ensemble}, \left((D_l, p_l)\right)_{l=1,2,\dots,L}}: \prod_{i=1}^{d}\mathscr{X}_i &\rightarrow \{1,2,\dots,C\}\\
+                        D_{\text{weighted ensemble}, \left((D_l, p_l)\right)_{l=1,2,\dots,L}}: \prod_{i=1}^{d}\mathscr{X}_i &\rightarrow \left\{1,2,\dots,C\right\}\\
                         \bm{x} &\mapsto \arg \max_{c=1,2,\dots,C} \sum_{l=1}^{L} p_l\left(D_l(\bm{x}) = c\right) 
                     \end{aligned}.
                 \end{equation}
@@ -935,7 +935,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \end{align}
                     These are separable filters that can help speed up the convolution computations as shown in~\textcite{sifre2013rotation}.
                     In practice, $\psi$(\textit{resp}. $\bar\psi$) are taken as two (\textit{resp}. one) dimensional Morlet wavelets (\textit{cf.} Subfigure~\ref{subfig::morlet_filters}), while $\phi$ is taken as a Guassian~\parencite{oyallon2015deep,sifre2013rotation,bruna2013invariant}.
-                    A finite number $L$ of orientations are possible for angle indices: $\theta \in \{\frac{l\cdot\pi}{L}: l=1,2\dots,L\}$.
+                    A finite number $L$ of orientations are possible for angle indices: $\theta \in \left\{\frac{l\cdot\pi}{L}: l=1,2\dots,L\right\}$.
                     In Figure~\ref{fig::morlet_vs_learned}, we can see that how the defined filter bank is similar to the ones learned by a \gls{acr::cnn}.
                     \begin{figure}
                         \centering
@@ -951,9 +951,9 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                                 }
                             }
                             \ffigbox[\FBwidth]{
-                                \begin{tabular}{@{}l@{}}
-                                    \includegraphics[width=.5\textwidth]{images/related_work/first_layer_cnn}
-                                    \includegraphics[width=\textwidth]{images/related_work/second_layer_cnn}
+                                \begin{tabular}{@{}c@{}}
+                                    \includegraphics[width=.5\textwidth]{images/related_work/first_layer_cnn}\\
+                                    \includegraphics[width=.75\textwidth]{images/related_work/second_layer_cnn}
                                 \end{tabular}
                             }{
                                 \label{subfig::learned_filters}
@@ -978,12 +978,12 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     If the signal takes one variable $u in \mathbb{R}^2$ then we write:
                     \begin{equation}
                         \label{eq::wavelet_transform_1}
-                        W: x \mapsto \left(x\star\psi_{i, \theta}\right)_{\substack{i=1, 2 \dots, I \\ \theta \in \{\frac{l\cdot\pi}{L}: l=1,2\dots,L\}}},
+                        W: x \mapsto \left(x\star\psi_{i, \theta}\right)_{\substack{i=1, 2 \dots, I \\ \theta \in \left\{\frac{l\cdot\pi}{L}: l=1,2\dots,L\right\}}},
                     \end{equation}
                     if it takes two variables $(u, \omega) \in \mathbb{R}^2 \times [0, 2\cdot\pi)$ it becomes:
                     \begin{equation}
                         \label{eq::wavelet_transform_2}
-                        \widetilde{W}: x \mapsto \left(x\ostar_{SE(2)}\psi_{i, \theta, \iota}\right)_{\substack{i=1, 2 \dots, I \\ \theta \in \{\frac{l\cdot\pi}{L}: l=1,2\dots,L\}\\\iota=1,2\dots,\lfloor\log_2(L)\rfloor}}.
+                        \widetilde{W}: x \mapsto \left(x\ostar_{SE(2)}\psi_{i, \theta, \iota}\right)_{\substack{i=1, 2 \dots, I \\ \theta \in \left\{\frac{l\cdot\pi}{L}: l=1,2\dots,L\right\}\\\iota=1,2\dots,\lfloor\log_2(L)\rfloor}}.
                     \end{equation}
                     An image is a discretization of a two dimensional signal.
                     As a consequence, we can only apply the first transform in Equation~\ref{eq::wavelet_transform_1}.
@@ -1115,20 +1115,58 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             This concerns continuously node attributed graph kernels as well as ones that cares only for the structural properties of the graph.\\
 
             \paragraph{Basic kernel}
-                Let $G = \left(V, E\right)$ an undirected graph with vertices $v\in V$ and edges $e \in E =\{\{u, v\}: (u, v) \in V\times V\}$.
-                We can give attributes to each node $a: V \rightarrow \mathbb{R}^d$ or edges $b: E \rightarrow \mathbb{R}^{d'}$.\\
+                Let $G = \left(V, E\right)$ an undirected graph with vertices $v\in V$ and edges $e \in E =\left\{\left\{u, v\right\}: (u, v) \in V\times V\right\}$.
+                We can give attributes to each node $a: V \rightarrow \mathbb{R}^{d_V}$ or edges $b: E \rightarrow \mathbb{R}^{d_E}$.\\
 
                 The most basic graph kernel would correspond to a scalar product of a global hashing vector of all attributes.
                 This is possible through the use of a histogram function for instance.
-                This will be described in details in subsection~\ref{subsec::learned_evaluation::baseline::geometric}.
+                This type of functions is described in details in subsection~\ref{subsec::learned_evaluation::baseline::geometric}.\\
+
+                Let $S\left(G, a(\bullet)_i\right): \mathbb{R}^{\vert V\vert} \rightarrow \mathbb{R}^{l_i}$ (\textit{resp.} $S\left(G, b(\bullet)_i\right): \mathbb{R}^{\vert E\vert} \rightarrow \mathbb{R}^{m_i}$) be a hashing function that describes the distribution of attributes $i$ of all nodes (\textit{resp.} edges) of graph $G$ as a $\mathbb{R}^{l_i}$ (\textit{resp.} $\mathbb{R}^{m_i}$) vector.
+                We can build a node based feature vector for the graph $G$:
+                \begin{equation}
+                    \label{eq::feature_node_graph}
+                    \Phi_V(G) \triangleq \begin{bmatrix}
+                        S\left(G, a(\bullet)_1\right)\\
+                        S\left(G, a(\bullet)_2\right)\\
+                        \vdots\\
+                        S\left(G, a(\bullet)_{d_V}\right)
+                    \end{bmatrix} \in \mathbb{R}^{\sum_{i=1}^{d_V} l_i}
+                \end{equation}
+                and an edge based one:
+                \begin{equation}
+                    \label{eq::feature_node_graph}
+                    \Phi_E(G) \triangleq \begin{bmatrix}
+                        S\left(G, b(\bullet)_1\right)\\
+                        S\left(G, b(\bullet)_2\right)\\
+                        \vdots\\
+                        S\left(G, b(\bullet)_{d_E}\right)
+                    \end{bmatrix} \in \mathbb{R}^{\sum_{i=1}^{d_E} m_i}.
+                \end{equation}
+
+                Based on a base kernel on vectors $\kappa$ (\textit{cf.} sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}), we can compute the similarity between two graphs $G = \left(V, E\right)$ and $G' = \left(V', E'\right)$:
+                \begin{align}
+                    \label{eq::feature_graph_kernels}
+                    k_V(G, G') &\triangleq \kappa(\Phi_V(G), \Phi_V(G'))\\
+                    k_E(G, G') &\triangleq \kappa(\Phi_E(G), \Phi_E(G')).
+                \end{align}
+                Concatenating both feature vectors would amount to a simple addition of these kernels:
+                \begin{equation}
+                    \label{eq::feature_graph_kernel_sum}
+                    k(G, G') \triangleq k_V(G, G') + k_E(G, G').
+                \end{equation}
+
+                This type of kernels is versatile as it can be applied to node and edge attributes as well as labels (with the right choice of hashing function).
+                However, it does not take into account the structure of the graph.
+                It is mainly used as a baseline for graph feature extraction.
+                The work of~\textcite{shervashidze2011weisfeiler} is an example of kernels that uses the same idea to describe graphs while taking account of their structure.
             
             \paragraph{Random walk kernel}
-                Suppose we want to compute the similarity between two graphs $G = \left(V, E\right)$ and $G' = \left(V', E'\right)$.
-                We start by defining the direct product graph $G_{\times} = \left(V_{\times}, E_{\times}\right)$ defined as:
+                In order to define this kernel, we start defining the direct product graph $G_{\times} = \left(V_{\times}, E_{\times}\right)$ where:
                 \begin{align}
                     \label{eq::direct_product_graph}
                     V_{\times} &\triangleq V \times V'\\
-                    E_{\times} &\triangleq \{\{(u, u'), (v, v')\}: \{u,v\} \in E \wedge \{u',v'\} \in E'\}.
+                    E_{\times} &\triangleq \left\{\left\{(u, u'), (v, v')\right\}: \left\{u,v\right\} \in E \wedge \left\{u',v'\right\} \in E'\right\}.
                 \end{align}
                 This is vizualized in Figure~\ref{fig::direct_product_graph}.
                 \begin{figure}[htbp]
@@ -1138,26 +1176,28 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         \label{fig::direct_product_graph}
                         Depiction of a direct product (bottom) of two graphs (top).
                         Nodes adjacent in $G_{\times}$ correspond to adjacent nodes in both graphs.
+                        Image taken from~\parencite{vishwanathan2010graph}.
                     }
                 \end{figure}
-                A graph $G$ could be represented by an adjacency matrix $A$:
+                We also need a definition of an adjacency matrix $A$ of a graph $G$:
                 \begin{equation}
                     \label{eq::adjacency_matrix}
-                    A \triangleq \left(\delta_{\{u,v\}\in E}\right)_{(u, v) \in V\times V}
+                    A \triangleq \left(\delta_{\left\{u,v\right\}\in E}\right)_{(u, v) \in V\times V}
                 \end{equation}
-                We can also define a diagonal matrix of node degrees $D\triangleq \operatorname{diag}\left(\sum_{v \in V}A_{uv}\right)_{u \in V}$.
-                We can hence defined a normalized matrix:
+                and the diagonal matrix of node degrees $D\triangleq \operatorname{diag}\left(\sum_{v \in V}A_{uv}\right)_{u \in V}$.
+                We finally define the normalized adjacency matrix as:
                 \begin{equation}
                     \label{eq::normalized_adjacency_matrix}
                     P \triangleq A\cdot D^{-1}
                 \end{equation}
-                Actually, The latter can be interpreted as a transition probability matrix of a random walk on the graph:
+
+                The latter could be interpreted as a transition probability matrix of a random walk on the graph:
                 $P_{uv}$ is the probability of choosing $u$ as the next node to visit starting from $v$.
                 Similarly, $\left(P^k\right)_{uv}$ expresses the probability of being in node $u$ after $k$ iterations, starting from $v$.
                 A random walk starts with an initial distribution $p$ over the nodes.
                 After $k$ iterations, the distribution is $P^k\cdot p$.
                 At any time, the walk can end with a probability $q_u$ at node $u$.
-                $p$ and $q$ are usefull to encode prior information of the graph~\parencite{vishwanathan2010graph}.\\
+                $p$ and $q$ are used to encode prior information of the graph~\parencite{vishwanathan2010graph}.\\
 
                 For the direct product graph, we compute adjacency matrices, initial probability distribution and stopping probabilities as follows:
                 \begin{align}
@@ -1171,9 +1211,10 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 \begin{conditions}
                     \otimes & referes to the Kronecker product.
                 \end{conditions}
-                In fact, a random walk on $G_{\times}$ is equivalent to a simultaneous random walk on $G$ and $G'$~\parencite{hammack2011handbook}.
-                A random walk helps discover the structure of the graph.
-                In consequence, a random walk on the direct product graph can be a good indicator of the similarity in structure of both graphs $G$ and $G'$.
+                In fact, a random walk on $G_{\times}$ is equivalent to a simultaneous random walk on $G$ and $G'$~\parencite{hammack2011handbook}.\\
+
+                A random walk on a graph depends heavily on the its structure.
+                In consequence, a random walk on the direct product graph can be used as an indicator of the similarity in structure of both graphs $G$ and $G'$.
                 It is defined as:
                 \begin{equation}
                     \label{eq::random_walk_graph}
@@ -1184,7 +1225,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 The choice of the series $\left(\lambda_k\right)_{k\in \mathbb{N}}$ is critical, as the kernel defined in Equation~\ref{eq::random_walk_graph} can diverge.
                 It is taken to be non-negative in order in ensure the positive semi-definite of the kernel.\\
 
-                Setting $p_{\times} \approx 1$ and $q_{\times} \approx 1$ and , two special cases are of interest.
+                Setting $p_{\times} \propto 1$ and $q_{\times} \propto 1$ and , two special cases are of interest.
                 \begin{itemize}
                     \item $\forall k\in \mathbb{N} \; \lambda_k = \lambda^k$: this gives rise to a geometric random kernel:
                             \begin{equation}
@@ -1220,23 +1261,25 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 First, the kernel does take into account the attributes of graphs of they exist, although it is possible to adapt.
                 Second, these graphs suffer from tottering which is the fact that the random walk is mostly consistent of multiple movements between a small subset of vertices in a row.
                 Third, related to the previous point, the random walk would spend much time on central nodes that connect to most other nodes adding to their contribution to the kernel, while peripherial ones that can hold the most distinctive feature of the structure are watered down.
+                It is possible to adress these issues as demonstrated by~\textcite{horvath2004cyclic, mahe2004extensions}.
+                However these kernels cannot be guaranteed to be computed in polynomial time~\parencite{vishwanathan2010graph}.
 
             \paragraph{\gls*{acr::svm} $\vartheta$ kernel}
-                This is also a kernel takes advantage only of the structure of graphs.
+                This is also a kernel which takes advantage only of the structure of graphs.
                 It relies on the definition of Lovasz number of a graph $\vartheta(G)$.
-                We say
+                We say that
                 \begin{equation}
                     \label{eq::orthonormal_representation}
-                    W(G) \subset \{\bm{w}_v: v \in V \wedge \bm{w}_v\in\mathbb{R}^d \wedge \Vert\bm{w}_v\Vert = 1\}
+                    W(G) \subset \left\{\bm{w}_v \in\mathbb{R}^d : v \in V \wedge \Vert\bm{w}_v\Vert = 1\right\}
                 \end{equation}
-                is an orthonormal representation of a graph $G$ if and only if $\forall \{u,v\} \notin E \Rightarrow \bm{w}_u^T\cdot \bm{w}_v=0$.
+                is an orthonormal representation of a graph $G$ if and only if $\forall \left\{u,v\right\} \notin E \Rightarrow \bm{w}_u^T\cdot \bm{w}_v=0$.
                 The Lovasz number~\parencite{lovasz1979shannon} is defined as:
                 \begin{equation}
                     \label{eq::lovazs_number}
                     \vartheta(G) \triangleq \min_{\substack{\bm{c} \in \mathbb{R}^d\\W(G)}}\max_{v\in V} \left(\frac{1}{\bm{c}^T\cdot \bm{w}_v}\right)^2
                 \end{equation}
-                Which can be interpreted as the smallest cone enclosing a valid orthonormal representation.
-                Equally we define the same number over a subset of vertices $B \in V$ as follows:
+                Which can be interpreted as the smallest cone enclosing a valid orthonormal representation of graph $G$.
+                Equally, we define the Lovasz number over a subset of vertices $B \in V$ as follows:
                 \begin{equation}
                     \label{eq::lovazs_number_subset}
                     \vartheta_B(G) \triangleq \min_{\bm{c} \in \mathbb{R}^d}\max_{\bm{w}_v\in W_B^*(G)} \left(\frac{1}{\bm{c}^T\cdot \bm{w}_v}\right)^2
@@ -1250,7 +1293,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 The Lovasz kernel~\parencite{johansson2014global} is defined based on a base kernel $\kappa: \mathbb{R} \times \mathbb{R} \rightarrow \mathbb{R}_+$ as:
                 \begin{equation}
                     \label{eq::lovazs_number_kernel}
-                    k_{Lo}(G, G') \triangleq \sum_{\substack{B\subseteq V\\B'\subseteq V'\\\vert B \vert = \vert B' \vert}} \frac{1}{
+                    k_{\vartheta}(G, G') \triangleq \sum_{\substack{B\subseteq V\\B'\subseteq V'\\\vert B \vert = \vert B' \vert}} \frac{1}{
                         \begin{pmatrix}
                             \vert V \vert\\
                             \vert B \vert                            
@@ -1264,7 +1307,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 The Lovasz number is, however, hard to compute~\parencite{johansson2014global}.
                 An approximation is possible using the work of~\textcite{jethava2013lovasz}.
                 It presents an alternative definition of Lovasz number.
-                We define $L \triangleq \{K \in S_{\vert V \vert}^+: \forall v \in V, K_{vv} = 1 \wedge \forall \{u, v\}  \notin E, K_{uv} = 0\}$ where $S_{\vert V \vert}^+$ is the set of $\vert V \vert \times \vert V \vert$ positive semi-definite matrices.
+                We define $$L \triangleq \left\{K \in S_{\vert V \vert}^+: \forall v \in V, K_{vv} = 1 \wedge \forall \left\{u, v\right\}  \notin E, K_{uv} = 0\right\}$$ where $S_{\vert V \vert}^+$ is the set of $\vert V \vert \times \vert V \vert$ positive semi-definite matrices.
                 We can hence write:
                 \begin{equation}
                     \label{eq::lovazs_number_alternative}
@@ -1282,12 +1325,12 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     K_{LS} \triangleq \frac{1}{\rho} \cdot A + I \in S_{\vert V \vert}^+
                 \end{equation}
                 is interesting as $\omega(K_{LS}) = \sum_{v\in V} \alpha_v$~\parencite{jethava2013lovasz}.
-                It is even more interesting as for Erdos–R\'enyi random graphs $\omega(K_{LS})$ is a constant factor approximation to the Lovasz number~\parencite{jethava2013lovasz} with high probability.
+                It is even more interesting, since for Erdos–R\'enyi random graphs, $\omega(K_{LS})$ is a constant factor approximation to the Lovasz number~\parencite{jethava2013lovasz} with high probability.
 
                 This justifies the defintion of the kernel:
                 \begin{equation}
                     \label{eq::svm_kernel}
-                    k_{SVM}(G, G') \triangleq \sum_{\substack{B\subseteq V\\B'\subseteq V'\\\vert B \vert = \vert B' \vert}} \frac{1}{
+                    k_{svm}(G, G') \triangleq \sum_{\substack{B\subseteq V\\B'\subseteq V'\\\vert B \vert = \vert B' \vert}} \frac{1}{
                         \begin{pmatrix}
                             \vert V \vert\\
                             \vert B \vert                            
@@ -1299,6 +1342,119 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 \end{equation}
                 This is still very prohibitive in terms of compuational complexity as one has to sum over all $2^{\vert V \vert}$ (\textit{resp.} $2^{\vert V' \vert}$) subsets of $V$ (\textit{resp.} $V'$).
                 To avoid this issue for each graph only few of the subsets are visited.
-                
-            \paragraph{Multiscale Laplacian kernel}
 
+            \paragraph{Multiscale Laplacian kernel}
+                Related to random walks on graphs, the Laplacian characterizes the structure of graphs especially its low eigenvalue eigenvectors~\parencite{kondor2016multiscale}.
+                It is defined as:
+                \begin{equation}
+                    \label{eq::laplacian_graph}
+                    L \triangleq D - A
+                \end{equation}
+
+                When $\vert V \vert = \vert V' \vert$, we can directly compare the two matrices.
+                The idea of a Laplacian graph kernel $k_{l}$ is to compare the two matrices by comparing related Gaussian probability distribution.
+                In fact, using a Gaussian graphical model, based on a graph $G$ and node variance $\frac{1}{\eta}$, for a random variable $\bm{x}$ is equivalent to:
+                \begin{equation}
+                    \label{eq::guassian_gm}
+                    \bm{x} \sim \mathscr{N}\left(0, \left(L + \eta \cdot I\right)^{-1}\right).
+                \end{equation}
+
+                Using a Bhattacharyya kernel on probabilisties and a regulizer parameter $\gamma>0$, we define~\parencite{kondor2016multiscale}:
+                \begin{equation}
+                    \label{eq::laplacian_kernel}
+                    k_{l}(G, G') \triangleq \frac{\left\lvert \left(\frac{1}{2} \cdot \left(L^{-1}+\gamma\cdot I\right)^{-1} + \frac{1}{2} \cdot \left(L^{\prime -1}+\gamma\cdot I\right)^{-1} \right)^{-1} \right\rvert^{\frac{1}{2}}}{\left\lvert L^{-1} + \gamma \cdot I\right\rvert^{\frac{1}{4}}\cdot\left\lvert L^{\prime -1} + \gamma \cdot I\right\rvert^{\frac{1}{4}}}.
+                \end{equation}
+                The added regulizer term is added in so as to avoid numerical issues when the one of the Laplacians has eigenvalues equal or close to zero.
+                The aplacian is not invariant to permutations as the graph.
+                Moreover, both graphs are required to be of the same size.
+                This kernel is not well adapted.
+                To alleviate this issue,~\textcite{kondor2016multiscale} proposes to describe the graph nodes by vertex permutation invariant features.
+                If $U$ (\textit{resp.} $U'$) is matrix which encodes such a transformation for graph $G$ (\textit{resp.} $G'$), $k_{l}$ is adapted in what is called feature space Laplacian graph kernel:
+                \begin{equation}
+                    \label{eq::feature_laplacian_kernel}
+                    k_{fl}(G, G') \triangleq \frac{\left\lvert \left(\frac{1}{2} \cdot S^{-1} + \frac{1}{2} \cdot S^{\prime -1} \right)^{-1} \right\rvert^{\frac{1}{2}}}{\left\lvert S\right\rvert^{\frac{1}{4}}\cdot\left\lvert S' \right\rvert^{\frac{1}{4}}}
+                \end{equation}
+                where $S = U\cdot L^{-1}\cdot U^T + \gamma \cdot I$ and $S' = U\cdot L^{\prime -1}\cdot U^T + \gamma \cdot I$.\\
+
+                Up to now, only the structure of the graph is taken into account.
+                To that extent, based on a base kernel $\kappa$ on node attributes, first are defined the Gram matrix $K=\left(\kappa\left(u, v\right)\right)_{(u,v) \in V \cup V'}$ and $\left\{ (\lambda_1, e_1), (\lambda_2, e_2)\dots,(\lambda_p, e_p) \right\}$ all \footnote{$p \leq \vert V \vert + \vert V' \vert$} its eigenvalues and their eigenvectors such that $\forall i = 1, 2 \dots, p\; \lambda_i > 0$.
+                We also need to define: $\widetilde{Q} = \begin{bmatrix}
+                    \lambda_1^{\frac{1}{2}}\cdot e_1, \lambda_1^{\frac{1}{2}}\cdot e_2 \dots, \lambda_1^{\frac{1}{2}}\cdot e_p
+                \end{bmatrix} \in \mathbb{R}^{p \times p}$.
+                For the first graph the first $\vert V \vert$(\textit{resp.} the last $\vert V' \vert$) rows of $\widetilde{Q}$ are taken to from $Q$ (\textit{resp.} $Q'$).
+                Both these matrices are needed to define $\bar{S} = Q^T\cdot L ^{-1}\cdot Q + \gamma \cdot I$ and $\bar{S}' = Q^{\prime T}\cdot L^{\prime -1}\cdot Q' + \gamma \cdot I$.
+                The generalized feature space Laplacian graph kernel is hence defined as:
+                \begin{equation}
+                    \label{eq::generalized_feature_laplacian_kernel}
+                    k^{\kappa}_{gfl}(G, G') \triangleq \frac{\left\lvert \left(\frac{1}{2} \cdot \bar{S}^{-1} + \frac{1}{2} \cdot \bar{S}^{\prime -1} \right)^{-1} \right\rvert^{\frac{1}{2}}}{\left\lvert \bar{S}\right\rvert^{\frac{1}{4}}\cdot\left\lvert \bar{S}' \right\rvert^{\frac{1}{4}}}.
+                \end{equation}
+                This kernel restricted to a subgraph can also be used as a base kernel for one at a larger scale.
+                In fact, considering a nested sequence of $L$ sets (neighborhoods) containing $v \in V$:
+                \begin{equation}
+                    \label{eq::centered_nested_subgraphs}
+                    v \in N_1(v) \subseteq N_2(v) \dots \subseteq N_L(v) \subseteq V.
+                \end{equation}
+                We denote by $G[A]$, the induced subgraph by $A \subseteq V$:
+                \begin{equation}
+                    \label{eq::induced_subgraph}
+                    G[A] \triangleq (A, \left\{\left\{u, v\right\} \in E: (u, v) \in A \times A \right\}).
+                \end{equation}
+
+                The Multiscale Laplacian Subgraph kernels are base kernels:
+                \begin{align}
+                    \kappa_0(v, v') \triangleq \kappa(v, v')\\
+                    \forall l = 1, 2\dots,L \quad \kappa_l(v, v') \triangleq k^{\kappa_{l-1}}_{gfl}\left(G[N_1(v)], G'[N'_1(v)]\right).
+                \end{align}
+                Finally, the Multiscale Laplacian Graph kernel is defined using the last base kernel:
+                \begin{equation}
+                    \label{eq::multiscale_laplacian_kernel}
+                    k_{msl}(G, G') \triangleq k^{\kappa_L}_{gfl}(G, G')
+                \end{equation}
+                These kernels ould be estimated efficiently by computing once the $\bar{S}$ matrices for all graphs, all multiscale base kernels for all nodes and using a low rank approximation.
+                More details are in the original paper~\parencite{kondor2016multiscale}.
+
+            \paragraph{Propagation kernel}
+                The propagation kernel was proposed by~\parencite{neumann2016propagation} and combines ideas from~\parencite{shervashidze2011weisfeiler} with random walks.
+                It relies on a simple kernel:
+                \begin{equation}
+                    \label{eq::simple_kernel}
+                    k_s(G, G') \triangleq \sum_{(v, v') \in V\times V'} \kappa(v, v')
+                \end{equation}
+                where $\kappa$ is a base kernel on node attributes (and/or labels).\\
+
+                In order to take advantage of the structure of the graph, attributes are propagated using a matrix $T$ giving a new graph $G_t$ at each time $t$, where $G_0 = G$.
+                The latter, if not given by the user, is taken to be $P$.
+                Once the attributes are propagated, the kernel from Equation~\ref{eq::simple_kernel} is computed for the new graphs.
+                At time $t_{max}$, we compute the propagation kernel:
+                \begin{equation}
+                    \label{eq::propagation_kernel}
+                    k_p(G, G') = \sum_{t=1}^{t_{max}} k_s(G_t, G_t').
+                \end{equation}
+
+                Two points are to be precised:
+                \begin{itemize}
+                    \item type of base kernels to use;
+                    \item attribute propagation.
+                \end{itemize}
+
+                Knowing the corresponding feature vector extractor $\phi_s(G)$ makes the computation of the simple graph kernel efficient~\parencite{shervashidze2011weisfeiler,neumann2016propagation}.
+                This is possible, provided a base kernel of the form: $\kappa(u, v) = \mathbb{1}_{h(u) = h(v)}$ where $h$ is a hash function defined over nodes.
+                By binning values $h(u)$ in a graph $G$ and encoding the results in a vector $b_h(G)$, the simple graph kernel can be expressed as:
+                \begin{equation}
+                    \label{eq::simple_kernel_binning}
+                    k_s(G, G') \triangleq b_h(G)^T\cdot b_h(G').
+                \end{equation}
+                The used hash function is the Locality sensitivity hashing~\parencite{neumann2016propagation}.
+
+                Nodes attributes are not directly hashed.
+                Instead, the latter are taken, at time $t$ and for node $u$, as samples of mixtures of Gaussian multivariate distributions $q_{t, u}$ using coefficients $W_t$ at each time $t$:
+                \begin{equation}
+                    \label{eq::attribute_samples}
+                    q_{t, u} \sim \sum_{v \in V} W_{uv}\cdot \mathscr{N}(a(v), \Sigma)
+                \end{equation}
+                where:
+                \begin{conditions}
+                    \Sigma & is the $\mathbb{R}^{d_V \times d_V}$ covariance matrix computed from the distribution of attributes $\left(a(v)\right)_{v\in V}$.
+                \end{conditions}
+                To propagate these distributions at the next iteration, The mixture coefficients are propagated using $T$: $W_{t+1} = T\cdot W_t$.
+                At initialization, $W_0 = I$ and hence $W_t= T^t$.
