@@ -1430,12 +1430,8 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \label{eq::propagation_kernel}
                     k_p(G, G') = \sum_{t=1}^{t_{max}} k_s(G_t, G_t').
                 \end{equation}
-
-                Two points are to be precised:
-                \begin{itemize}
-                    \item type of base kernels to use;
-                    \item attribute propagation.
-                \end{itemize}
+                Two points are still to be precised.
+                First, the type of base kernels to use and second, the attribute propagation scheme.\\
 
                 Knowing the corresponding feature vector extractor $\phi_s(G)$ makes the computation of the simple graph kernel efficient~\parencite{shervashidze2011weisfeiler,neumann2016propagation}.
                 This is possible, provided a base kernel of the form: $\kappa(u, v) = \mathbb{1}_{h(u) = h(v)}$ where $h$ is a hash function defined over nodes.
@@ -1444,7 +1440,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \label{eq::simple_kernel_binning}
                     k_s(G, G') \triangleq b_h(G)^T\cdot b_h(G').
                 \end{equation}
-                The used hash function is the Locality sensitivity hashing~\parencite{neumann2016propagation}.
+                The used hash function is the Locality sensitivity hashing~\parencite{neumann2016propagation}.\\
 
                 Nodes attributes are not directly hashed.
                 Instead, the latter are taken, at time $t$ and for node $u$, as samples of mixtures of Gaussian multivariate distributions $q_{t, u}$ using coefficients $W_t$ at each time $t$:
@@ -1458,3 +1454,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 \end{conditions}
                 To propagate these distributions at the next iteration, The mixture coefficients are propagated using $T$: $W_{t+1} = T\cdot W_t$.
                 At initialization, $W_0 = I$ and hence $W_t= T^t$.
+
+            \paragraph{Graph hopper kernel}
+                ~\parencite{feragen2013scalable}.
+                %https://ysig.github.io/GraKeL/dev/kernels/graph_hopper.html#feragen2013scalable
