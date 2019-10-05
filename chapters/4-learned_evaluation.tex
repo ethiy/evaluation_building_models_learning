@@ -6,17 +6,17 @@ In the previous chapter (chapter~\ref{chap::semantic_evaluation}), we developped
 Based on this taxonomy, and depending on the particular needs, specific error labels are extracted and considered during the quality evaluation.\\
 In this chapter, we present the second part of our proposed approach.
 It is based on formulating the problem as a supervized classification one.
-All related issues are detailed in section~\ref{sec::learned_evaluation::classification}.
-Next, in section~\ref{sec::learned_evaluation::baseline}, is presented a baseline of building \gls{acr::3d} model features.
+All related issues are detailed in Section~\ref{sec::learned_evaluation::classification}.
+Next, in Section~\ref{sec::learned_evaluation::baseline}, is presented a baseline of building \gls{acr::3d} model features.
 These are used to describe models and are fed to the supervized classifier.
-Third and last, richer extracted features are discussed in section~\ref{sec::learned_evaluation::richer_features}.
+Third and last, richer extracted features are discussed in Section~\ref{sec::learned_evaluation::richer_features}.
 These are proposed to better predict errors in the model.
 
 \clearpage
 
 \section{\textsc{Quality evaluation as classification}}
     \label{sec::learned_evaluation::classification}
-    In order to satisfy the \textbf{large-scale} condition imposed at subsection~\ref{subsec::introduction::contributions::positioning}, we propose to use a supervized learning method.
+    In order to satisfy the \textbf{large-scale} condition imposed at Subsection~\ref{subsec::introduction::contributions::positioning}, we propose to use a supervized learning method.
     As a first approach, errors are predicted at the building level, even for \texttt{Facet Errors}.
     At a second time, once this previous task works perfectly, one can try and detect \gls{acr::lod}-2 $\cup$ \gls{acr::lod}-3 errors at facet level.
     This is not explored in this work.\\
@@ -26,16 +26,16 @@ These are proposed to better predict errors in the model.
     This, consequently, verifies the second constraint in~\ref{subsec::introduction::contributions::positioning} which is \textbf{automation}.\\
 
     Two aspects should be discussed to in order to apply this approach to the building \gls{acr::3d} model quality evaluation.
-    First, as seen in section~\ref{sec::semantic_evaluation::label_extraction}, the parametric nature of the taxonomy leads to a varying set of labels.
-    For this purpose, we describe in subsection~\ref{subsec::learned_evaluation::classification::different_porblems} the different classification problems depending on the evaluation parameters.
+    First, as seen in Section~\ref{sec::semantic_evaluation::label_extraction}, the parametric nature of the taxonomy leads to a varying set of labels.
+    For this purpose, we describe in Subsection~\ref{subsec::learned_evaluation::classification::different_porblems} the different classification problems depending on the evaluation parameters.
     Second, the feature extraction procedure should also be compliant with the \textbf{large-scale} objective set beforehand.
-    This aspect and more are detailed in section~\ref{subsec::learned_evaluation::classification::feature_extraction}.
+    This aspect and more are detailed in Section~\ref{subsec::learned_evaluation::classification::feature_extraction}.
     Third, the classifier should be able to handle the heterogeneity of the feature vector and must adapt to different input vectors types and sizes.
-    The choice of classifiers is, hence, discussed in subsection~\ref{subsec::learned_evaluation::classification::classifiers}.
+    The choice of classifiers is, hence, discussed in Subsection~\ref{subsec::learned_evaluation::classification::classifiers}.
 
     \subsection{\textsc{Different classification problems}}
         \label{subsec::learned_evaluation::classification::different_porblems}
-        The nature of the different classification problems are presented in Table~\ref{tab::classification_problems} depending on the three evaluation parameters from subsection~\ref{sec::semantic_evaluation::label_extraction}.
+        The nature of the different classification problems are presented in Table~\ref{tab::classification_problems} depending on the three evaluation parameters from Subsection~\ref{sec::semantic_evaluation::label_extraction}.
 
         \begin{table}[htbp]
             \small
@@ -113,7 +113,7 @@ These are proposed to better predict errors in the model.
         \label{subsec::learned_evaluation::classification::classifiers}
         The choice of classifiers shoud take into consideration the highly modular nature of the framework with multimodal features involving many parameters.
         Two classifiers where chosen in this study: Random Forest and \gls{acr::svm}.
-        Both were discussed at great length in section~\ref{sec::state_of_the_art::mlpr}.
+        Both were discussed at great length in Section~\ref{sec::state_of_the_art::mlpr}.
         Hereafter, we explain how each one is used in this setting.\\
 
         \paragraph{Random Forest}
@@ -134,11 +134,11 @@ These are proposed to better predict errors in the model.
     In addition of being very costly, these features are methodologically redundant with the \gls{acr::3d} modeling techniques.
     They are, hence, vulnerable to the same defects.
     Conversely, evaluation metrics used in the \gls{acr::3d} building reconstruction literature (\textit{e.g.}, \gls{acr::rmse}) are too weak for such a complex task.
-    This will be proven later on in section~\ref{}.
+    This will be proven later on in Section~\ref{}.
 
-    In subsection~\ref{subsec::learned_evaluation::baseline::geometric}, we describe the used baseline for geometric features.
-    Next, in subsection~\ref{subsec::learned_evaluation::baseline::height}, height based features extraction is explained.
-    We end with image based features in subsection~\ref{subsec::learned_evaluation::baseline::image}.
+    In Subsection~\ref{subsec::learned_evaluation::baseline::geometric}, we describe the used baseline for geometric features.
+    Next, in Subsection~\ref{subsec::learned_evaluation::baseline::height}, height based features extraction is explained.
+    We end with image based features in Subsection~\ref{subsec::learned_evaluation::baseline::image}.
 
     \subsection{\textsc{Geometric features}}
         \label{subsec::learned_evaluation::baseline::geometric}

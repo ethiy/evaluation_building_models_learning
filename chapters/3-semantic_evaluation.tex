@@ -5,9 +5,9 @@
 In this chapter are presented the first building bricks of our approach: the error definitions.
 We proceed by reprising the main consequences of the constraints that were imposed for our evaluation approach in subsection ~\ref{subsec::introduction::contributions::positioning}.
 These determine the desired properties that are seeked in this work.
-Based on this discussion, we establish, in section~\ref{sec::semantic_evaluation::general_framework} a general structure of the error taxonomy.
-In section~\ref{sec::semantic_evaluation::overhead}, is detailed an implementation of this general stucture for the overhead automatic modeling case.
-After discussing some properties of the chosen error defnitions, we explain, in the final section~\ref{sec::semantic_evaluation::label_extraction}, how the final labels are extracted from the error taxonomy based on the quality evaluation needs.
+Based on this discussion, we establish, in Section~\ref{sec::semantic_evaluation::general_framework} a general structure of the error taxonomy.
+In Section~\ref{sec::semantic_evaluation::overhead}, is detailed an implementation of this general stucture for the overhead automatic modeling case.
+After discussing some properties of the chosen error defnitions, we explain, in the final Section~\ref{sec::semantic_evaluation::label_extraction}, how the final labels are extracted from the error taxonomy based on the quality evaluation needs.
 
 \clearpage
 
@@ -16,7 +16,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
 
     \subsection{\textsc{Hierarchization and modularity}}
         \label{subsec::semantic_evaluation::general_framework::hierarchization_moderularity}
-        As stated previously in subsection~\ref{subsec::introduction::contributions::positioning}, a semantic evaluation implies a categorization of errors affecting building models.
+        As stated previously in Subsection~\ref{subsec::introduction::contributions::positioning}, a semantic evaluation implies a categorization of errors affecting building models.
         In the same subsection, we discussed properties that are desired so as to achieve a large-scale and automatic semantic evaluation.
         Before delving into details, the implications of such properties on error definitions are examined.
 
@@ -98,7 +98,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
 
     \subsection{\textsc{Atomic error definitions}}
         \label{subsec::semantic_evaluation::overhead::atomic}
-        In the template structure presented in section~\ref{subsec::semantic_evaluation::general_framework::error_classification}, were left out the \texttt{atomic} error definitions.
+        In the template structure presented in Section~\ref{subsec::semantic_evaluation::general_framework::error_classification}, were left out the \texttt{atomic} error definitions.
         Indeed, since they represent the most specific level, their choice is critical to guaranty both the exhaustivity and generalizability we are hoping for.
         We conducted a thourough inspection of all defects that we detected in our datasets and came up with the following definitions (\textit{cf.} Figures~\ref{fig::taxonomy}).
         Eventhough these errors were defined based on models of buildings using overhead acquired data at large-scales, we think they are exhaustive enough to describe the quality of models in other settings (fa\c{c}ade modeling, manually plotted \gls{acr::3d} models).
@@ -507,14 +507,14 @@ After discussing some properties of the chosen error defnitions, we explain, in 
             The similarity of the \texttt{Building Errors} and \texttt{Facet Errors} is striking.
             Indeed, this is was intended.
             The idea came after observing that segmentation issues can occur both at building and facet errors.
-            We ruled that both should be separated as they occur at different \glspl{acr::lod} so as to have a fine representation of those defects as discussed in subsection~\ref{subsec::semantic_evaluation::general_framework::error_classification}.
+            We ruled that both should be separated as they occur at different \glspl{acr::lod} so as to have a fine representation of those defects as discussed in Subsection~\ref{subsec::semantic_evaluation::general_framework::error_classification}.
             If we define \texttt{atomic} errors on particular defects observed only at a certain level, we can expect that these definitions are going to be too specific.
             This was the case of an earlier definition of errors based only on a smaller subset of our datasets~\parencite{ennafii2018semantic}.
             For instance, at building level, in our dataset, missing courts are fairly present.
             However, There are no cases where facets have holes like illustrated in Subfigure~\ref{subfig::facet_hole}.
             Both can be grouped in one single label ``missing hole''.
             This example, illustrated in Figure~\ref{fig::holes_levels}, makes the case for using similarity across \glspl{acr::lod} being instrumental for generalizability.\\
-            This will also be an interesting option to use even if the error families were different as was porposed in subsection~\ref{subsec::semantic_evaluation::general_framework::error_classification}.\\
+            This will also be an interesting option to use even if the error families were different as was porposed in Subsection~\ref{subsec::semantic_evaluation::general_framework::error_classification}.\\
 
             \begin{figure}[h]
                 \centering
@@ -559,7 +559,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
         
         \subsubsection{\textsc{Related taxonomies}}
             In this sub-subsection, we discuss the semantic error defnitions in the state-of-the-art.
-            As mentioned in subsection~\ref{subsec::state_of_the_art::quality::output::semantic},~\textcite{rottensteiner2012isprs} proposed two semantic errors over segmentation and under segmentation.
+            As mentioned in Subsection~\ref{subsec::state_of_the_art::quality::output::semantic},~\textcite{rottensteiner2012isprs} proposed two semantic errors over segmentation and under segmentation.
             These, however, relate only to facets.
             \textcite{xiong2014graph}, although not having as objective to evaluate the quality of a model in its entirety, provides some error labels relative to their reconstruction method.
             For instance, ``Missing Node'' (\textit{resp.} ``False Node'', ``Missing Edge'' and ``False Edge'') correspond to, or are included in, the topological \texttt{atomic} errors from the \texttt{Facet Errors} family: \texttt{\gls{acr::fus}} (\textit{resp.} \texttt{\gls{acr::fos}}, \texttt{\gls{acr::fit}}, and \texttt{\gls{acr::fit}}).
