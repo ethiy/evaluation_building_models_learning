@@ -4,10 +4,10 @@
 
 Presented herein is a detailed tour of the different notions necessary for the understanding of the present manuscript.
 It is divided into three sections.
-First, we categories, in section~\ref{sec::state_of_the_art::building_modeling}, the building \gls{acr::3d} modeling techniques.
+First, we categories, in Section~\ref{sec::state_of_the_art::building_modeling}, the building \gls{acr::3d} modeling techniques.
 A global idea of the subject is required to have a good idea of what defects to expect in evaluated building models.
-Second, we present a complete state-of-the-art survey on quality evaluation for \gls{acr::3d} building models (\textit{cf}. section~\ref{sec::state_of_the_art::quality}).
-In the last section~\ref{sec::state_of_the_art::mlpr}, are presented the main tools that are used in our proposed approach.
+Second, we present a complete state-of-the-art survey on quality evaluation for \gls{acr::3d} building models (\textit{cf}. Section~\ref{sec::state_of_the_art::quality}).
+In the last Section~\ref{sec::state_of_the_art::mlpr}, are presented the main tools that are used in our proposed approach.
 Indeed, we discuss aspects of supervised classification as well as some feature extraction techniques.
 
 \clearpage
@@ -18,9 +18,9 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
     This is not in any case a complete survey of this field.
     We refer the reader to a comprehensive study of metods used in urban reconstruction by~\textcite{musialski2013survey}.\\
     Herein, we classify the building modeling approaches based on different criteria.
-    In section~\ref{subsec::state_of_the_art::building_modeling::input}, we discuss the different types of input data fed to modeling pipelines.
-    Next, in section~\ref{subsec::state_of_the_art::building_modeling::automation}, is presented the different levels of automation in proposed \gls{acr::3d} modeling, while in section~\ref{subsec::state_of_the_art::building_modeling::strategy}, are discussed the different modeling strategies.
-    We finish by mentioning the differences between outdoor and indoor modeling in section~\ref{subsec::state_of_the_art::building_modeling::in_out_door}, as well as the scalability of the different techniques.
+    In Section~\ref{subsec::state_of_the_art::building_modeling::input}, we discuss the different types of input data fed to modeling pipelines.
+    Next, in Section~\ref{subsec::state_of_the_art::building_modeling::automation}, is presented the different levels of automation in proposed \gls{acr::3d} modeling, while in Section~\ref{subsec::state_of_the_art::building_modeling::strategy}, are discussed the different modeling strategies.
+    We finish by mentioning the differences between outdoor and indoor modeling in Section~\ref{subsec::state_of_the_art::building_modeling::in_out_door}, as well as the scalability of the different techniques.
 
     \subsection{\textsc{Input data heterogenuity}}
         \label{subsec::state_of_the_art::building_modeling::input}
@@ -47,9 +47,9 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
     We have seen previously the various methods used to automatically model buildings.
     The goal of this section is to describe the available approaches that evaluate the quality of such models.
     These could be distinguished based on two criteria.\\
-    In subsection~\ref{subsec::state_of_the_art::quality::output}, are presented the quality evaluation methods based on their output.
-    An alternative perspective to charecterize quality evaluation methods relies upon the type of reference data (\textit{cf.} subsection~\ref{subsec::state_of_the_art::quality::reference}).
-    Based on this survey, we state in details, in subsection~\ref{subsec::state_of_the_art::quality::novelty}, how the work presented in this thesis is different from what was already proposed in the literature. 
+    In Subsection~\ref{subsec::state_of_the_art::quality::output}, are presented the quality evaluation methods based on their output.
+    An alternative perspective to charecterize quality evaluation methods relies upon the type of reference data (\textit{cf.} Subsection~\ref{subsec::state_of_the_art::quality::reference}).
+    Based on this survey, we state in details, in Subsection~\ref{subsec::state_of_the_art::quality::novelty}, how the work presented in this thesis is different from what was already proposed in the literature. 
 
     \subsection{\textsc{Output types}}
         \label{subsec::state_of_the_art::quality::output}
@@ -100,7 +100,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             These are the only metrics used for volumes that we are aware of.\\
 
             Regarding \textit{implicit} semantics, as far as we are aware, only one metric is widely used to evaluate its impact.
-            As discussed previously in subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}, compaction is one byproduct of semantics.
+            As discussed previously in Subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}, compaction is one byproduct of semantics.
             As a consequence, it was used as an index to evaluate reconstructions\footnote{It is sometimes called by its antonym: complexity.}: the more a model was compact the better it was.
             This is reflected, for instance, in the work of~\textcite{lafarge2012creating},~\textcite{zhang2017deep},~\textcite{duan_eccv16},~\textcite{zeng2018neural} and~\textcite{zhu2018large}, where this metric is never used alone but always alongside geometric ones.
 
@@ -200,12 +200,12 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
     \subsection{\textsc{Novelty of the proposed method}}
         \label{subsec::state_of_the_art::quality::novelty}
-        Based on the subsection~\ref{subsec::introduction::contributions::positioning}, we can understand how most quality evaluation methods are unsuitable for the objectives that where stated.\\
+        Based on the Subsection~\ref{subsec::introduction::contributions::positioning}, we can understand how most quality evaluation methods are unsuitable for the objectives that where stated.\\
 
         In fact, the semantic character of the evaluation overrules approaches relying only on geometry based metrics.
-        This represents most of the methods discussed earlier (\textit{c.f.} subsection~\ref{subsec::state_of_the_art::quality::output}).
+        This represents most of the methods discussed earlier (\textit{c.f.} Subsection~\ref{subsec::state_of_the_art::quality::output}).
         These metrics could be used afterwards one a semantic error is identified as a complement to help quantify the defect.
-        On the other hand, the need for reasonably available reference data, which is dictated by the large-scale constraint, implies the reliance on remote sensing data based methods (\textit{c.f.} subsection~\ref{subsec::state_of_the_art::quality::reference}).\\
+        On the other hand, the need for reasonably available reference data, which is dictated by the large-scale constraint, implies the reliance on remote sensing data based methods (\textit{c.f.} Subsection~\ref{subsec::state_of_the_art::quality::reference}).\\
 
         Methods that satisfy both conditions are in the number of two:~\textcite{boudet2006supervised,michelin2013quality}.
         Both define semantic errors that are detected using Oblique images and \glspl{acr::dsm}.
@@ -214,7 +214,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
         Our work relies on the same idea, but goes a bit farther by proposing the possibility to evaluate building models without using any reference data.
         It also offers a new taxonomy of errors that is intended to be exhaustive and generalizable.
-        The last idea will be developped in details in chapter~\ref{chap::semantic_evaluation}, while chapter~\ref{chap::learned_evaluation} presents how features are chosen to represent building models and the learning process.
+        The last idea will be developped in details in Chapter~\ref{chap::semantic_evaluation}, while Chapter~\ref{chap::learned_evaluation} presents how features are chosen to represent building models and the learning process.
 
 \section{\textsc{Supervised learning and pattern recognition}}
     \label{sec::state_of_the_art::mlpr}
@@ -1098,21 +1098,20 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
         \subsubsection{\textsc{Kernels for graph classification}}
             \label{subsec::state_of_the_art::mlpr::graph_classification}
-            Standard machine learning practice usually assumes that the data to be classified lives in a finite dimensional space.
-            This is not the case for graphs in general.
-            In fact, Graphs can have varying numbers of nodes and edges.
-            Moreover, graphs can be different but provide the same structural information: we say they are isomorphic.
-            A valid representation for graphs should take care of these two issues: incorporate all possible graph sizes and be invariant to graph isomorphisms.
-            As accustomed in statistical learning, one way to alleviate representation issues for data is to directly compare graphs using kernels as seen previously in sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.\\
+            Standard machine learning practice usually assumes that the observed instances live in a finite dimensional space.
+            This is not always the case.
+            In fact, graphs can have varying numbers of nodes and edges.
+            Moreover, they can be different while providing the same structural information: we say they are isomorphic.
+            A valid representation for graphs should then take care of these two issues: incorporate all possible graph sizes and be invariant to graph isomorphisms.
+            As accustomed in statistical learning, one way to alleviate these issues is to directly compare graphs using kernels as seen previously in sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.\\
             
-            This sub-subsection does aim at presenting a thourough survey of graph kernels.
-            The work of~\textcite{ghosh2018journey} presents a structured way to look at the different graph kernels that exist depending on the used methodology.
-            A different approach is proposed in~\textcite{kriege2019survey} where they study graph kernels based based on the underlying graphs.\\
+            This sub-subsection does not aim at presenting a thourough survey of graph kernels.
+            The work of~\textcite{ghosh2018journey} categorizes graph kernels depending on the used methodology.
+            A different approach is proposed in~\textcite{kriege2019survey}, where they study graph kernels based on the underlying graphs.\\
 
-            Apart from the structure of the graph, kernels should take into account the labels or continuous attributes of the graph.
+            Apart from the structure of the graph, kernels should also take into account the labels or continuous attributes assigned to a graph.
             These could be given at node level or edge level.
-            We will present in hereafter the graph kernels that were used for our case.
-            This concerns continuously node attributed graph kernels as well as ones that cares only for the structural properties of the graph.\\
+            We will present hereafter some graph kernels which were used in this work, namely, continuously node attributed ones, as well as those devoted only to its structural properties.\\
 
             \paragraph{Basic kernel}
                 Let $G = \left(V, E\right)$ an undirected graph with vertices $v\in V$ and edges $e \in E =\left\{\left\{u, v\right\}: (u, v) \in V\times V\right\}$.
@@ -1120,7 +1119,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
                 The most basic graph kernel would correspond to a scalar product of a global hashing vector of all attributes.
                 This is possible through the use of a histogram function for instance.
-                This type of functions is described in details in subsection~\ref{subsec::learned_evaluation::baseline::geometric}.\\
+                This type of functions is described in details in Subsection~\ref{subsec::learned_evaluation::baseline::geometric}.\\
 
                 Let $S\left(G, a(\bullet)_i\right): \mathbb{R}^{\vert V\vert} \rightarrow \mathbb{R}^{l_i}$ (\textit{resp.} $S\left(G, b(\bullet)_i\right): \mathbb{R}^{\vert E\vert} \rightarrow \mathbb{R}^{m_i}$) be a hashing function that describes the distribution of attributes $i$ of all nodes (\textit{resp.} edges) of graph $G$ as a $\mathbb{R}^{l_i}$ (\textit{resp.} $\mathbb{R}^{m_i}$) vector.
                 We can build a node based feature vector for the graph $G$:
@@ -1378,9 +1377,12 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
                 Up to now, only the structure of the graph is taken into account.
                 To that extent, based on a base kernel $\kappa$ on node attributes, first are defined the Gram matrix $K=\left(\kappa\left(u, v\right)\right)_{(u,v) \in V \cup V'}$ and $\left\{ (\lambda_1, e_1), (\lambda_2, e_2)\dots,(\lambda_p, e_p) \right\}$ all \footnote{$p \leq \vert V \vert + \vert V' \vert$} its eigenvalues and their eigenvectors such that $\forall i = 1, 2 \dots, p\; \lambda_i > 0$.
-                We also need to define: $\widetilde{Q} = \begin{bmatrix}
-                    \lambda_1^{\frac{1}{2}}\cdot e_1, \lambda_1^{\frac{1}{2}}\cdot e_2 \dots, \lambda_1^{\frac{1}{2}}\cdot e_p
-                \end{bmatrix} \in \mathbb{R}^{p \times p}$.
+                We also need to define
+                \begin{equation*}
+                    \widetilde{Q} = \begin{bmatrix}
+                        \lambda_1^{\frac{1}{2}}\cdot e_1, \lambda_1^{\frac{1}{2}}\cdot e_2 \dots, \lambda_1^{\frac{1}{2}}\cdot e_p
+                    \end{bmatrix} \in \mathbb{R}^{p \times p}.
+                \end{equation*}
                 For the first graph the first $\vert V \vert$(\textit{resp.} the last $\vert V' \vert$) rows of $\widetilde{Q}$ are taken to from $Q$ (\textit{resp.} $Q'$).
                 Both these matrices are needed to define $\bar{S} = Q^T\cdot L ^{-1}\cdot Q + \gamma \cdot I$ and $\bar{S}' = Q^{\prime T}\cdot L^{\prime -1}\cdot Q' + \gamma \cdot I$.
                 The generalized feature space Laplacian graph kernel is hence defined as:
