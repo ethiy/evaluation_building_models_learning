@@ -226,16 +226,34 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
     \subsection{\textsc{Supervised classifiers}}
         \label{subsec::state_of_the_art::mlpr::classifiers}
-        In this subsection, we denote a family of observations and their classes by $\left((\bm{x^i}, y^i)\right)_{i=1,2,\dots,n}$.
-        Features are in practice finite dimensional vectors: \textit{i.e.} $\forall i=1,2,\dots,n \;, \bm{x^i} \in \mathbb{R}^d$.
-        Classes are modeled by a finite set bijective to the set $\forall i=1,2,\dots,n \;, y_i \in \left\{1,2,\dots,C\right\}$.
-        The goal of supervised classification is to learn, based on the training set $\left((\bm{x^i}, y^i)\right)_{i=1,2,\dots,n}$, some statistical characteristics in order to predict the classes of new observations $\left(\bm{x^i}\right)_{i=1,2,\dots,n'}$\footnote{This is called the test set.}.
+        In this subsection, we denote a family of observations and their classes by
+        \begin{equation*}
+            \left((\bm{x^i}, y^i)\right)_{i=1,2,\dots,n}.
+        \end{equation*}
+        Features are in practice finite dimensional vectors:
+        \begin{equation*}
+            \forall i=1,2,\dots,n \;, \bm{x^i} \in \mathbb{R}^d.
+        \end{equation*}
+        Classes are modeled by a finite set bijective to the set \(\left\{1,2,\dots,C\right\}\):
+        \begin{equation*}
+            \forall i=1,2,\dots,n \;, y_i \in \left\{1,2,\dots,C\right\}            
+        \end{equation*}
+        The goal of supervised classification is to learn, based on the training set $\left((\bm{x^i}, y^i)\right)_{i=1,2,\dots,n}$, some statistical characteristics in order to predict the classes of some new observations:\footnote{This family is called the test set.}
+        \begin{equation*}
+            \left(\bm{x^i}\right)_{i=1,2,\dots,n'}.
+        \end{equation*}
         This type of problems is said to be multi-class: each instance has one possible class out of a number of possibilities.
-        In the special case of binary classification, only two classes are possible $\forall i=1,2,\dots,n \;,\allowbreak y^i \in \left\{0, 1\right\}$.\\
+        In the special case of binary classification, only two classes are possible:
+        \begin{equation*}
+            \forall i=1,2,\dots,n \;, y^i \in \left\{0, 1\right\}
+        \end{equation*}
         
-        On another hand, the multi-label classification problem is the case where to each instance corresponds a number $L$ of binary labels: \textit{i.e.} $\forall i=1,2,\dots,n \;, y^i = (y^i_1, y^i_2, \dots, y^i_L) \in \left\{0, 1\right\}^L$.
-        In this case, associating features with each label $\forall i=1,2,\dots,n \;, y^i_l$ can be seen as an independent binary classification problem.
-        This is different from multi-class problems, as for the latter only one class is possible while in the other multiple labels can be detected.\\
+        On another hand, the multi-label classification problem is the case where to each instance corresponds a number $L$ of binary labels:
+        \begin{equation*}
+            \forall i=1,2,\dots,n \;, y^i = (y^i_1, y^i_2, \dots, y^i_L) \in \left\{0, 1\right\}^L.
+        \end{equation*}
+        In this case, associating features with each label \(\left(\left(\bm{x^i}, y^i_l\right)\right)_{i=1,2,\dots,n}\) can be seen as an independent binary classification problem.
+        This is different from multi-class problems, as for the latter only one class is possible while in the other multiple labels can be detected per instance.\\
 
         Hereafter, are presented two supervised classifiers: the \gls{acr::svm} algorithm and Random Forests, both of which are used in this work.
 
@@ -263,7 +281,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             \paragraph{Hard margin}
                 In order to understand the idea behind the \gls{acr::svm} classifier, we start by assuming that the dataset to be classified $\left((\bm{x}^k, y^k)\right)_{k=1, 2, \dots, n}$ is linearly separable.
                 It means that there is at least one hyperplane $(H_0)$ that can separate perfectly the two classes.
-                We can order points of class based on their distance to the hyperplane $(H_0)$: $\bm{x} \mapsto d(\bm{x}, H_0)$.
+                We can order points of one class based on their distance to the hyperplane $(H_0)$: $\bm{x} \mapsto d(\bm{x}, H_0)$.
                 The closest positive (\textit{resp.} negative) points (\textit{i.e.} of class $1$ (\textit{resp.}  $-1$)) to $(H_0)$ are called positive (\textit{resp.} negative) support vectors.
                 Support hyperplanes are the hyperplanes that are parallel to the separator and passes through the support vectors.
                 This can be summarized as:
@@ -283,10 +301,10 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 \end{equation*}
                 We verify that:
                 \begin{equation*}
-                    \forall \lambda \in \mathbb{R}\setminus\left\{0\right\} \quad (\bm{w}, b) \in  Sol \Rightarrow (\lambda . \bm{w}, \lambda.b) \in Sol.
+                    \forall \lambda \in \mathbb{R}\setminus\left\{0\right\}, \; (\bm{w}, b) \in  Sol \Leftrightarrow (\lambda . \bm{w}, \lambda.b) \in Sol.
                 \end{equation*}
                 In other words, the solution $(\bm{w}^*, b^*)$ is unique up to multiplicatif term $\lambda \in \mathbb{R}\setminus\left\{0\right\}$.
-                In this context, $(\bm{w}, b)$ is chosen so that the support hyperplanes verify:
+                In this context, $(\bm{w}, b)$ is chosen so that \(\bm{w}\) points to the positive instances\footnote{The positive instances are inside the positive half-space.} and the support hyperplanes verify:
                 \begin{equation}
                     \label{eq::support_lines}
                     \begin{cases}
@@ -298,8 +316,12 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 \begin{figure}
                     \centering
                     \includestandalone[mode=buildnew, width=\textwidth]{figures/svm/linear_separable}
-                    \caption{
-                        \label{fig::linear_separable} A hyperplane separator in $\mathbb{R}^2$ corresponds to a line.
+                    \caption[
+                        Illustration of the hard-margin \gls{acr::svm}.
+                    ]{
+                        \label{fig::linear_separable} 
+                        Illustration of the hard-margin \gls{acr::svm}.
+                        A hyperplane separator in $\mathbb{R}^2$ corresponds to a line.
                         In this case, $n_{psp} = n_{nsp} = 1$.
                         The support lines are plotted in orange.
                         $M$ is the margin.
@@ -313,7 +335,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 Conversely, the points that lay between the support hyperplanes are the most uncertain.
                 The bigger the distance between these two lines the more nuanced the classifier decision is.
                 The main idea behind \glspl{acr::svm} is to maximize this distance.
-                The latter is called margin and denoted $M$.\\
+                It is called margin and denoted $M$.\\
 
                 In order to compute the margin, we can interpret it as the length of the orthogonal projection of any vector $\bm{v}_{st}$\footnote{$\forall (s, t) \in \left\{1,2,\dots,n_{nsp}\right\} \times \left\{1,2,\dots,n_{psp}\right\}$} going from a negative support vector $\bm{x}^-_s$ to a positive one $\bm{x}^+_t$ on any line carried by $\bm{w}$.
                 Since all support vectors of the same class lay on the same line, the choice of $(s,t)$ is inconsequential.
