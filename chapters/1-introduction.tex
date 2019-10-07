@@ -35,11 +35,19 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             Cadastral data, since conception, came in the form of \index{\gls{acr::2d}!maps}\gls{acr::2d} maps~\parencite{billen20033d}.
             Although many urban planning norms were always formulated taking into account height or depth information \parencite{brasebin20183d}, the need for a \index{\gls{acr::3d}!cadastre}\gls{acr::3d} cadastral management was made relevant with the advent of complex architectural features~\parencite{ijgi4042842}.
             To illustrate this case, we show, in figure~\ref{fig::3d_cadastre_need_example}, how \gls{acr::2d} cadastral maps are insufficient when it comes to modeling overhangs.\\
-            \begin{figure}
+            \begin{figure}[H]
                 \centering
                 \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/3d_cadastre}
-                \caption{\label{fig::3d_cadastre_need_example} Example of a problematic situation where \gls{acr::3d} cadastre would be of help and \gls{acr::2d} maps fail~\parencite{ijgi4042842}.}
+                \caption[
+                    Example of a problematic situation where \acrshort*{acr::3d} cadastre would be of help and \acrshort*{acr::2d} maps fail.
+                ]{
+                    \label{fig::3d_cadastre_need_example}
+                    Example of a problematic situation where \acrshort*{acr::3d} cadastre would be of help and \acrshort*{acr::2d} maps fail.
+                    The two building footprints overlap and are tricky to represent in \acrshort*{acr::3d}.
+                    Image taken from~\parencite{ijgi4042842}.
+                }
             \end{figure}
+
         \subsubsection{\textsc{Urban planning related challenges}}
             Urbanization raises some serious issues that need to be adressed.
             Consequently, decision makers and all stakeholders in general need to have adequate tools at their disposal.
@@ -53,23 +61,38 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             One has to compute the number of habitable units, which depends on the height of buildings.
             This motivates the need of \gls{acr::3d} data as shown in Figure~\ref{fig::3d_simulation}.
             The \index{vizualization} vizualization and \index{simulation}simulation of urban zones can be equally helpfull for \index{public consultation}public consultation~\parencite{WU2010291}.\\
+
             \begin{figure}[htpb]
                 \centering
                 \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/simplu}
-                \caption{
-                    \label{fig::3d_simulation} Example of \gls{acr::3d} urban scene simulated based on known urban norms with different values of parameters (building surface and height) using the SimPLU3D tool developped by~\textcite{brasebin2017stochastic}.
+                \caption[
+                    Example of \acrshort*{acr::3d} urban scene simulated based on known urban norms.
+                ]{
+                    \label{fig::3d_simulation}
+                    Example of \gls{acr::3d} urban scene simulated based on known urban norms.
+                    Results obtained using the SimPLU3D tool developped by~\textcite{brasebin2017stochastic}.
+                    Different parameter values (building surface \(s\) and initial height \(Hini\)) result in different urban scenery.
                     Urban planners can assess the projected urban density of future districts for better decision making.
+                    Image taken from the SimPLU3D website\footnotemark.
                 }
             \end{figure}
             \begin{figure}[htpb]
                 \centering
                 \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/brest_tramway}
-                \caption{
-                    \label{fig::public_consultation} Example of the use of city \gls{acr::3d} models in public consultation.
+                \caption[
+                    Example of the use of city \acrshort*{acr::3d} models in public consultation.
+                ]{
+                    \label{fig::public_consultation}
+                    Example of the use of city \gls{acr::3d} models in public consultation.
                     This image was produced using the \gls{acr::ign} Bati3D\textsuperscript{\textregistered} models of Brest, France.
                     The goal is to simulate the impact of the tramway line to be built on the urban landscape.
                 }
             \end{figure}
+
+            \addtocounter{footnote}{-1}
+            \footnotetext{
+                \href{https://simplu3d.github.io}{SimPLU3D}
+            }
             Related to urban planning, \gls{acr::3d} models could be used as a reference for other planners.
             These models could be used to describe the flow of vehicles and pedestrians in an urban environement as illustrated in~\textcite{vanhoey2017varcity}.
             In addition, it could be used in physical simulations for urban applications.
@@ -82,8 +105,12 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             \begin{figure}[htpb]
                 \centering
                 \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/noise_simulation}
-                \caption{
-                    \label{fig::noise_propogation} Example of \textbf{noise propagation} simulation using \gls{acr::3d} city models~\parencite{kurakula2007gis}.
+                \caption[
+                    Example of \textbf{noise propagation} simulation study using \acrshort*{acr::3d} city models.
+                ]{
+                    \label{fig::noise_propogation}
+                    Example of \textbf{noise propagation} simulation study using \gls{acr::3d} city models.
+                    Image taken from~\parencite{kurakula2007gis}.
                 }
             \end{figure}
             All these simulation derived informations could be supplied to decision makers in order to better plan the cities of tomorrow.
@@ -99,9 +126,13 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             \begin{figure}[htpb]
                 \centering
                 \includegraphics[width=.7\textwidth]{images/introduction/3d_model_applications/solar_potential}
-                \caption{
-                    \label{fig::solar_potential} Solar potential estimation using building \gls{acr::3d} models~\parencite{redweik2013solar}.
+                \caption[
+                    Solar potential estimation using building \acrshort*{acr::3d} models.
+                ]{
+                    \label{fig::solar_potential}
+                    Solar potential estimation using building \gls{acr::3d} models.
                     The slope, orientation and dimensions of roofs are determinant factors in computing solar irradiation.
+                    Image taken from~\parencite{redweik2013solar}.
                 }
             \end{figure}
             Another critical environemental issue that affects cities is air pollution.
@@ -147,12 +178,16 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                     \end{subfloatrow}
                 }
                 {
-                    \caption{
-                        \label{fig::navigation} Position estimation that relies on urban \gls{acr::2d5} models.
+                    \caption[
+                        Position estimation that relies on urban \gls{acr::2d5} models.
+                    ]{
+                        \label{fig::navigation}
+                        Position estimation that relies on urban \gls{acr::2d5} models.
                         The initial pose is derived from a sensor measurement that is not reliable.
                         In Subfigures~\ref{subfig::init_pose} (\textit{resp.}~\ref{subfig::final_pose} and~\ref{subfig::gt_pose}), the \gls{acr::2d5} model is projected on the image using the initial pose (\textit{resp.} the refined pose and the ground truth one).
                         The \gls{acr::2d5} model helps refine the camera pose~\parencite{armagan2017semantic}.
                         It is shown in the last graph (\textit{cf.} Subfigure~\ref{subfig::viz}), where the final estimation (green) is closer to the ground truth (red) than the initial one (blue)~\parencite{armagan2017semantic}.
+                        Images taken from~\parencite{armagan2017semantic}.
                     }
                 }
             \end{figure}
@@ -198,9 +233,11 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                     \end{subfloatrow}
                 }{
                     \caption[
-                        Examples of \gls{acr::3d} model applications in the entertainement field (images are courtesy of Alexandre Devaux)
+                        Examples of \acrshort*{acr::3d} model applications in the entertainement field
                     ]{
-                        \label{fig::entertainement} Examples of \gls{acr::3d} model applications in the entertainement field (images are courtesy of Alexandre Devaux\footnotemark).
+                        \label{fig::entertainement}
+                        Examples of \gls{acr::3d} model applications in the entertainement field.
+                        Images are courtesy of Alexandre Devaux\footnotemark.
                     }
                 }
             \end{figure}
@@ -228,8 +265,12 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             \begin{figure}[htpb]
                 \centering
                 \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/explosion_simulation}            
-                \caption{
-                    \label{fig::explosion_simulation} Explosion simulation in urban environments~\parencite{ijgi4042842}.
+                \caption[
+                    Explosion simulation in urban environments using \acrshort*{acr::3d} building models.
+                ]{
+                    \label{fig::explosion_simulation}
+                    Explosion simulation in urban environments using \gls{acr::3d} building models.
+                    Image taken from~\parencite{ijgi4042842}.
                 }
             \end{figure}
             Security forces can equally benefit from city \gls{acr::3d} modeling.
@@ -280,8 +321,12 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                 \centering
                 \includegraphics[width=.45\textwidth]{images/introduction/modeling_trees_1}
                 \includegraphics[width=.45\textwidth]{images/introduction/modeling_trees_2}
-                \caption{
-                    \label{fig::3d_tree_models} The city model is populated with generic models of trees depending on their class~\parencite{iovan2008detection}.
+                \caption[
+                    The city model is populated with generic models of trees depending on their class.
+                ]{
+                    \label{fig::3d_tree_models}
+                    The city model is populated with generic models of trees depending on their class.
+                    Images taken from~\parencite{iovan2008detection}.
                 }
             \end{figure}
             Regarding the first and second groups, was proven, the lack of motivation for precise \gls{acr::3d} reconstruction, in a large-scale setting.
@@ -295,8 +340,12 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             \begin{figure}[htpb]
                 \centering
                 \includegraphics[width=\textwidth]{images/introduction/modeling_road_signs}
-                \caption{
-                    \label{fig::3d_road_signs_models} A city model populated with detected road signs using \gls{acr::cad} models~\parencite{soheilian2013detection}.
+                \caption[
+                    A city model populated with detected road signs using \acrshort*{acr::cad} models.
+                ]{
+                    \label{fig::3d_road_signs_models}
+                    A city model populated with detected road signs using \gls{acr::cad} models.
+                    Image taken from~\parencite{soheilian2013detection}.
                 }
             \end{figure}
 
@@ -336,8 +385,13 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             \begin{figure}[htpb]
                 \centering
                 \includegraphics[width=\textwidth]{images/introduction/bim_vs_gis}            
-                \caption{
-                    \label{fig::bim_vs_gis} \gls{acr::ifc} and CityGML representations of the same object (building storey): \gls{acr::bim} (right hand side) is an inherently volumetric model while \gls{acr::gis} (left hand side) represent the surface of the building~\parencite{nagel2009conceptual}.
+                \caption[
+                    \acrshort*{acr::ifc} and CityGML representations of the same object (building storey).
+                ]{
+                    \label{fig::bim_vs_gis}
+                    \gls{acr::ifc} and CityGML representations of the same object (building storey).
+                    \gls{acr::bim} (right hand side) is an inherently volumetric model while \gls{acr::gis} (left hand side) represent the surface of the building.
+                    Image taken from~\parencite{nagel2009conceptual}.
                 }
             \end{figure}
 
@@ -388,8 +442,11 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                             \caption{Building 3D polyhedral model ($\approx$ 800 facets).}
                         }
                     }{
-                        \caption{
-                            \label{fig::3dmodel_vs_3dmesh} Example of the difference between a \gls{acr::3d} mesh compared to a \gls{acr::3d} model.
+                        \caption[
+                            Example of the difference between a \acrshort*{acr::3d} mesh compared to a \acrshort*{acr::3d} model.
+                        ]{
+                            \label{fig::3dmodel_vs_3dmesh}
+                            Example of the difference between a \gls{acr::3d} mesh compared to a \gls{acr::3d} model.
                             The first describes only the geometry, while the second is rich in semantics:
                             for each architectural feature corresponds a single geometric primitive.
                         }
@@ -413,9 +470,13 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             \begin{figure}[htpb]
                 \centering
                 \includegraphics[width=.7\textwidth]{images/introduction/lods}            
-                \caption{
-                    \label{fig::lods} \gls{acr::lod} categorization used in this work~\parencite{biljecki2016improved}.
+                \caption[
+                    \acrshort*{acr::lod} categorization used in this work.
+                ]{
+                    \label{fig::lods}
+                    \gls{acr::lod} categorization used in this work.
                     \gls{acr::lod}-4 is ignored herein.
+                    Image taken from~\parencite{biljecki2016improved}.
                 }
             \end{figure}
     \subsection{\textsc{Obstacles in building \texorpdfstring{\gls*{acr::3d}}{3D} modeling}}
@@ -442,10 +503,14 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                 \centering
                 \includegraphics[width=.45\textwidth]{images/introduction/registration_1}
                 \includegraphics[width=.45\textwidth]{images/introduction/registration_2}
-                \caption{
-                    \label{fig::3d_model_terrestrial_registration} Terrestrial \gls{acr::lidar} point clouds are registred against building \gls{acr::3d} models~\parencite{monnier2014}.
+                \caption[
+                    Terrestrial \acrshort*{acr::lidar} point clouds are registred against building \acrshort*{acr::3d} models.
+                ]{
+                    \label{fig::3d_model_terrestrial_registration}
+                    Terrestrial \gls{acr::lidar} point clouds are registred against building \gls{acr::3d} models.
                     The registred point clouds can be used to enrich the \gls{acr::3d} models with detailed reconstructions of fa\c{c}ades.
                     In \textcolor{Red}{red}, are represented the raw point cloud while the registred one is illustrated in \textcolor{Blue}{blue}.
+                    Image taken from~\parencite{monnier2014}.
                 }
             \end{figure}
 
@@ -473,8 +538,11 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             \begin{figure}[htpb]
                 \centering
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/modeling_approaches}            
-                \caption{
-                    \label{fig::modeling_strategies} Modeling strategies and the targeted compaction and geometric accuracy.
+                \caption[
+                    Modeling strategies and the targeted compaction and geometric accuracy.
+                ]{
+                    \label{fig::modeling_strategies}
+                    Modeling strategies and the targeted compaction and geometric accuracy.
                     Depending on the final use of the model, a compromise is chosen between the model compaction and its geometric accuracy.
                 }
             \end{figure}
@@ -506,7 +574,8 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                     \end{subfloatrow}
                 }{
                     \caption{
-                        \label{fig::different_styles} Building architecture shows high heterogenuity not only across different regions, but also in the same urban scene.
+                        \label{fig::different_styles}
+                        Building architecture shows high heterogenuity not only across different regions, but also in the same urban scene.
                     }
                 }
             \end{figure}
@@ -688,7 +757,13 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             \begin{figure}[htpb]
                 \centering
                 \includegraphics[width=.7\textwidth]{images/introduction/use/change_detection_taneja}
-                \caption{\label{fig::3d_change_detection} Illustration of change detection in urban areas~\parencite{taneja2013city}.}
+                \caption[
+                    Illustration of change detection in urban areas.
+                ]{
+                    \label{fig::3d_change_detection}
+                    Illustration of change detection in urban areas.
+                    Image taken from~\parencite{taneja2013city}.
+                }
             \end{figure}
 
         \subsubsection{\textsc{Building model correction}}
@@ -699,7 +774,13 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             \begin{figure}[htpb]
                 \centering
                 \includegraphics[width=.7\textwidth]{images/introduction/use/active_learning_kowdle}
-                \caption{\label{fig::corrections} Example of an interactive pipeline that needs human operators to provide correct initial reconstructions~\parencite{kowdle2011active}.}
+                \caption[
+                    Example of an interactive pipeline that needs human operators to provide correct initial reconstructions.
+                ]{
+                    \label{fig::corrections}
+                    Example of an interactive pipeline that needs human operators to provide correct initial reconstructions.
+                    Image taken from~\parencite{kowdle2011active}.
+                }
             \end{figure}
 
         \subsubsection{\textsc{Reconstruction method selection}}
@@ -713,7 +794,13 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             \begin{figure}[htpb]
                 \centering
                 \includegraphics[width=.7\textwidth]{images/introduction/use/comparison_li}
-                \caption{\label{fig::comparison} Depiction of different models for the same building~\parencite{li2016manhattan}.}
+                \caption[
+                    Depiction of different models for the same building.
+                ]{
+                    \label{fig::comparison}
+                    Depiction of different models for the same building.
+                    Image taken from~\parencite{li2016manhattan}.
+                }
             \end{figure}
 
             \subsubsection{\textsc{Crowdsourcing evaluating}}
@@ -728,7 +815,10 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             \begin{figure}[htpb]
                 \centering
                 \includegraphics[width=.7\textwidth]{images/introduction/use/crowdsourcing}
-                \caption{\label{fig::crowdsourcing} A sample of a building model made by a SketchUp user.}
+                \caption{
+                    \label{fig::crowdsourcing}
+                    A sample of a building model made by a SketchUp user.
+                }
             \end{figure}
 
     \subsection{\textsc{Main contributions}}
@@ -739,8 +829,10 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
         \begin{figure}[htpb]
             \centering
             \includestandalone[mode=buildnew, width=\textwidth]{figures/graphical_abstract/graphical_abstract}            
-            \caption{
-                \label{fig::graphical_abstract} Our semantic evaluation framework for 3D building models (a).
+            \caption[
+                Our semantic evaluation framework for \acrshort*{acr::3d} building models.
+            ]{
+                \label{fig::graphical_abstract} Our semantic evaluation framework for \gls{acr::3d} building models (a).
                 Semantic errors affecting the building are predicted using a supervised classifier and handcrafted features.
                 In addition to the input model topological structure (b), features are extracted from Very High resolution overhead data.
                 It can be based on a comparison with the \gls*{acr::dsm} (c).
