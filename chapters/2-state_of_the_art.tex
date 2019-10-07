@@ -6,7 +6,7 @@ Presented herein is a detailed tour of the different notions necessary for the u
 It is divided into three sections.
 First, we categories, in Section~\ref{sec::state_of_the_art::building_modeling}, the building \gls{acr::3d} modeling techniques.
 A global idea of the subject is required to have a good idea of what defects to expect in evaluated building models.
-Second, we present a complete state-of-the-art survey on quality evaluation for \gls{acr::3d} building models (\textit{cf}. Section~\ref{sec::state_of_the_art::quality}).
+Second, we present a complete state-of-the-art survey on quality evaluation for \gls{acr::3d} building models (\textit{cf.} Section~\ref{sec::state_of_the_art::quality}).
 In the last Section~\ref{sec::state_of_the_art::mlpr}, are presented the main tools that are used in our proposed approach.
 Indeed, we discuss aspects of supervised classification as well as some feature extraction techniques.
 
@@ -956,7 +956,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         \tilde{\phi}(u, \omega) &= \frac{1}{2\cdot\pi} \cdot \phi_I(u)
                     \end{align}
                     These are separable filters that can help speed up the convolution computations as shown in~\textcite{sifre2013rotation}.
-                    In practice, $\psi$(\textit{resp}. $\bar\psi$) are taken as two (\textit{resp}. one) dimensional Morlet wavelets (\textit{cf.} Subfigure~\ref{subfig::morlet_filters}), while $\phi$ is taken as a Guassian~\parencite{oyallon2015deep,sifre2013rotation,bruna2013invariant}.
+                    In practice, $\psi$(\textit{resp.} $\bar\psi$) are taken as two (\textit{resp.} one) dimensional Morlet wavelets (\textit{cf.} Subfigure~\ref{subfig::morlet_filters}), while $\phi$ is taken as a Guassian~\parencite{oyallon2015deep,sifre2013rotation,bruna2013invariant}.
                     A finite number $L$ of orientations are possible for angle indices: $\theta \in \left\{\frac{l\cdot\pi}{L}: l=1,2\dots,L\right\}$.
                     In Figure~\ref{fig::morlet_vs_learned}, we can see that how the defined filter bank is similar to the ones learned by a \gls{acr::cnn}.
                     \begin{figure}
@@ -1167,8 +1167,9 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
                 Based on a base kernel on vectors $\kappa$ (\textit{cf.} sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}), we can compute the similarity between two graphs $G = \left(V, E\right)$ and $G' = \left(V', E'\right)$:
                 \begin{align}
-                    \label{eq::feature_graph_kernels}
+                    \label{eq::feature_graph_kernel_nodes}
                     k_V(G, G') &\triangleq \kappa(\Phi_V(G), \Phi_V(G'))\\
+                    \label{eq::feature_graph_kernel_edges}
                     k_E(G, G') &\triangleq \kappa(\Phi_E(G), \Phi_E(G')).
                 \end{align}
                 Concatenating both feature vectors would amount to a simple addition of these kernels:
@@ -1238,12 +1239,12 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 In consequence, a random walk on the direct product graph can be used as an indicator of the similarity in structure of both graphs $G$ and $G'$.
                 It is defined as:
                 \begin{equation}
-                    \label{eq::random_walk_graph}
+                    \label{eq::random_walk_kernel}
                     k_{rw}(G, G') \triangleq \sum_{k=0}^\infty \lambda_k \cdot q_{\times}^T\cdot P_{\times}\cdot p_{\times}.
                 \end{equation}
 
                 This defintion actually generalizes a family of graph kernels based on walks on graphs~\parencite{vishwanathan2010graph}.
-                The choice of the series $\left(\lambda_k\right)_{k\in \mathbb{N}}$ is critical, as the kernel defined in Equation~\ref{eq::random_walk_graph} can diverge.
+                The choice of the series $\left(\lambda_k\right)_{k\in \mathbb{N}}$ is critical, as the kernel defined in Equation~\ref{eq::random_walk_kernel} can diverge.
                 It is taken to be non-negative in order in ensure the positive semi-definite of the kernel.\\
 
                 Setting $p_{\times} \propto 1$ and $q_{\times} \propto 1$ and , two special cases are of interest.
@@ -1426,8 +1427,8 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
                 The Multiscale Laplacian Subgraph kernels are base kernels:
                 \begin{align}
-                    \kappa_0(v, v') \triangleq \kappa(v, v')\\
-                    \forall l = 1, 2\dots,L \quad \kappa_l(v, v') \triangleq k^{\kappa_{l-1}}_{gfl}\left(G[N_1(v)], G'[N'_1(v)]\right).
+                    \kappa_0(v, v') &\triangleq \kappa(v, v')\\
+                    \forall l = 1, 2\dots,L \quad \kappa_l(v, v') &\triangleq k^{\kappa_{l-1}}_{gfl}\left(G[N_1(v)], G'[N'_1(v)]\right).
                 \end{align}
                 Finally, the Multiscale Laplacian Graph kernel is defined using the last base kernel:
                 \begin{equation}
@@ -1480,5 +1481,66 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 At initialization, $W_0 = I$ and hence $W_t= T^t$.
 
             \paragraph{Graph hopper kernel}
-                ~\parencite{feragen2013scalable}.
-                %https://ysig.github.io/GraKeL/dev/kernels/graph_hopper.html#feragen2013scalable
+                Random walk kernels, just as the basic kernels defined in Equations~\ref{eq::feature_graph_kernel_nodes} and~\ref{eq::feature_graph_kernel_edges} and propagation kernels, are instances of R-convolution kernels~\parencite{haussler1999convolution}:\textit{i.e.} they can be written as a sum of kernels of substructures of graphs.
+                In the case of the class of kernels defined in Equation~\ref{eq::random_walk_kernel}, it can be decomposed into a sum of kernels on all equal length walks from both graphs \(G\) and \(G'\)~\parencite{vishwanathan2010graph}.
+                The shortest path kernel proposes to replace walks by shortest paths between pairs of vertices.
+                The graph hopper kernel proposes also to compare pairs of nodes from two graphs in an scalable way~\parencite{feragen2013scalable}.
+
+                A path \(\pi\) between two vertices \((v_s,v_e) \in V\times V\) is a sequence of nodes \(\left(v_i\right)_{i=1,2\dots,\vert \pi \vert}\) such that:
+                \begin{equation*}
+                    \begin{cases}
+                        \forall i=1,2\dots,\vert \pi \vert-1,\; \{v_i, v_{i+1}\} \in E\\
+                        \forall i=1,2\dots,\vert \pi \vert,\; \pi(i) \triangleq v_i\\ 
+                        v_1 = v_s\\
+                        v_e = v_{\vert \pi \vert}
+                    \end{cases}
+                \end{equation*}
+                The set of all shortest paths between nodes of graph \(G\) (\textit{resp.} \(G'\)) is denoted \(\mathscr{P}\) (\textit{resp.} \(\mathscr{P}'\)).
+
+                Let \(\left(\pi, \pi'\right) \in \mathscr{P} \times \mathscr{P}'\).
+                To compare both paths, is defined a path kernel:
+                \begin{equation}
+                    \label{eq::path_kernel}
+                    k_p(\pi, \pi') \triangleq \sum_{i=1}^{\vert \pi \vert} \kappa\left(\pi(i), \pi'(i)\right) \cdot \mathbb{1}_{\vert \pi \vert = \vert \pi' \vert}
+                \end{equation}
+                where:
+                \begin{conditions}
+                    \kappa & is a base kernel between nodes.
+                \end{conditions}
+                This kernel compares paths with similar length by hopping along them simultaneously.
+
+                Based on this kernel, one can compare two graphs \(G\) and \(G'\) by comparing paths from both:
+                \begin{equation}
+                    \label{eq::graph_hopper_kernel}
+                    k_{gh}(G, G') \triangleq \sum_{\substack{\pi \in \mathscr{P}\\\pi' \in \mathscr{P}'}} k_p(\pi, \pi').
+                \end{equation}
+                This kernel can be computed efficiently as it can be trandformed into:
+                \begin{equation}
+                    \label{eq::graph_hopper_kernel_second}
+                    k_{gh}(G, G') = \sum_{\substack{v \in V\\v' \in V'}} w(v, v')\cdot \kappa(v, v').
+                \end{equation}
+                where:
+                \begin{conditions}
+                    w(v, v') & is the number of times \(v\) and \(v'\) appear at the same coordinate \(i\) of some shortest paths \(\pi\) and \(\pi'\) with the same length \(\vert \pi \vert = \vert \pi' \vert\).
+                \end{conditions}
+
+                Let
+                \begin{equation*}
+                    \delta \triangleq \max_{\pi \in \mathscr{P}} \vert \pi \vert
+                \end{equation*}
+                the maximal length of shortest paths in \(G\).
+                Define also matrix
+                \begin{equation*}
+                    M_G(v) \triangleq \left(\left\lvert\left\{\pi \in \mathscr{P}: \pi(i) = v \wedge \left\lvert\pi\right\rvert = j \right\}\right\rvert\right)_{\substack{i=1,2\dots,\delta\\j=1,2\dots,\delta}}
+                \end{equation*}
+                which in row \(i\) and column \(j\) stores how many times does \(v\) appear as the \(i\)\textsuperscript{th} member of paths of length \(j\).
+                We can write:
+                \begin{equation}
+                    \label{eq::w_as_matrix_inner_product}
+                    w(v, v') = \langle M_G(v), M_{G'}(v')\rangle_F
+                \end{equation}
+                where:
+                \begin{conditions}
+                    \langle \bullet, \bullet \rangle_F & is Frobenius inner product on matrices.
+                \end{conditions}
+                This quantity can be computed efficiently for each graph with a time complexity two orders of magnitude less than that of basic shortest paths kernel~\parencite{feragen2013scalable}.
