@@ -317,7 +317,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \centering
                     \includestandalone[mode=buildnew, width=\textwidth]{figures/svm/linear_separable}
                     \caption[
-                        Illustration of the hard-margin \gls{acr::svm}.
+                        Illustration of the hard-margin \acrshort*{acr::svm}.
                     ]{
                         \label{fig::linear_separable} 
                         Illustration of the hard-margin \gls{acr::svm}.
@@ -376,12 +376,14 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 This explains the name hard margin.
                 We are always guaranteed to have a solution of a hard margin \gls{acr::svm} in the case of linear separability.
                 however, if the last condition is not met, there is no such solution.
-                To alleviate this problem, we allow some uncertainty in the given samples in order to fit the linear model.\\
+                To alleviate this problem,~\textcite{cortes1995support} allowed some uncertainty in the given samples in order to fit the linear model.\\
 
                 \begin{figure}
                     \centering
                     \includestandalone[mode=buildnew, width=\textwidth]{figures/svm/non_linear_separable}
-                    \caption{
+                    \caption[
+                        Illustration of a soft margin \acrshort*{acr::svm}.
+                    ]{
                         \label{fig::soft_margin} Illustration of a soft margin \gls{acr::svm}.
                         The orange lines (\textit{resp.} green line) correspond to the support hyperplanes (\textit{resp.} separator).
                         Dataset points are allowed to be inside the margin and even in the other side of the separator.
@@ -488,7 +490,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 The original feature space where the data is represented is not always an ideal\footnote{An ideal space is one where distances between points are meaningful} one.
                 A solution is to find a transformation $\Phi: \mathbb{R}^d \rightarrow \mathscr{H}$ that maps initial feature vectors into a Hilbert space $(\mathscr{H}, \langle\cdot{,}\cdot\rangle_{\mathscr{H}})$ where distances between instances are meaningful.
                 There is no unique map that satisfy this type of properties.
-                We are particularly intersted in a map which transforms the data into a space where they are hopefully linearly separable.
+                We are particularly intersted in a map which transforms the data into a space where they are hopefully linearly separable~\parencite{boser1992training}.
                 This illustrated in Figure\ref{fig::circles_transformation}.
                 Using a polar coordinate transformation 
                 \begin{align*}
@@ -509,7 +511,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 However, as we are interested in distances between dataset points, there is an easier way around.
                 Using the ``kernel trick'', one can compute any distance in the target space $\mathscr{H}$ using only the scalar product:
                 \begin{align}
-                    \label{fig::kernel_definition}
+                    \label{eq::kernel_definition}
                     k: \mathbb{R}^d \times \mathbb{R}^d &\rightarrow \mathbb{R}\\
                     (\bm{x}, \bm{y}) &\mapsto \langle\Phi(\bm{x}), \Phi(\bm{y})\rangle_{\mathscr{H}} \nonumber.
                 \end{align}
@@ -600,8 +602,11 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 \begin{figure}[htbp]
                     \centering
                     \includestandalone[mode=buildnew, width=\textwidth]{figures/random_forest/decision_tree}
-                    \caption{
-                        \label{fig::decision_tree_graph} A visualization of a decision tree classifier learned using $I_G$ Gini index over the iris dataset~\parencite{fisher1936use}.
+                    \caption[
+                        A visualization of a decision tree classifier learned using $I_G$ Gini index over the iris dataset.
+                    ]{
+                        \label{fig::decision_tree_graph}
+                        A visualization of a decision tree classifier learned using $I_G$ Gini index over the iris dataset~\parencite{fisher1936use}.
                         Three classes are possible.
                         Each non leaf node states a thresholding condition.
                         For a leaf, its class is presented instead.
@@ -637,8 +642,11 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 \begin{figure}[htbp]
                     \centering
                     \includegraphics[width=.5\textwidth]{images/related_work/decision_tree_separator}
-                    \caption{
-                        \label{fig::decision_tree_separator} Visualization of a decision tree separator trained over generated data in a two dimensional feature space.
+                    \caption[
+                        Visualization of a decision tree separator trained over generated data in a two dimensional feature space.
+                    ]{
+                        \label{fig::decision_tree_separator}
+                        Visualization of a decision tree separator trained over generated data in a two dimensional feature space.
                         The separator is composed exclusively of horizontal and vertical lines.
                         We can also see how the decision tree overfits by adding narrow splits to accomodate lone points surrounded by others with an opposite class.
                     }
@@ -699,7 +707,9 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 \begin{figure}
                     \centering
                     \includestandalone[mode=buildnew, height=.4\textheight]{figures/random_forest/ensemble}
-                    \caption{
+                    \caption[
+                        Illustration of the principle of ensemble methods.
+                    ]{
                         \label{fig::ensemble} Illustration of the principle of ensemble methods.
                         For each decision function $\forall l=1,2,3\;D_l$, is represented the set where the each classifier fails $F(D_l) \leftarrow \left\{(\bm{x}, y) \in \prod_{i=1}^{d}\mathscr{X}_i \times \left\{1,2,\dots,C\right\} : D_l(\bm{x}) \neq y\right\}$.
                         In the case of unweigthed bagging, the aggregated classifier will fail when more than half of the classifiers fail.
@@ -728,8 +738,11 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                             }
                         \end{subfloatrow}
                     }{
-                        \caption{
-                            \label{fig::decision_tree_vs_rf} Difference between a single decision tree and a random forest visualized in feature space for a generated toy data.
+                        \caption[
+                            Difference between a single decision tree and a random forest visualized in feature space for a generated toy data.
+                        ]{
+                            \label{fig::decision_tree_vs_rf}
+                            Difference between a single decision tree and a random forest visualized in feature space for a generated toy data.
                             We see how a random forest aggregates multiple shallow decision trees in order to achieve a good generalization power instead of overfitting to the sampled data.
                         }
                     }
@@ -966,7 +979,9 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                                 \includegraphics[width=\textwidth]{images/related_work/morlet_wavelets}
                             }{
                                 \label{subfig::morlet_filters}
-                                \caption{
+                                \caption[
+                                    Morlet wavelets at different scales ($I=5$) and orientations ($L=8$).
+                                ]{
                                     Morlet wavelets at different scales ($I=5$) and orientations ($L=8$).
                                     Left are presented the real part while the imaginary part is on the right.
                                     Image taken from~\parencite{sifre2013rotation}.
@@ -979,13 +994,17 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                                 \end{tabular}
                             }{
                                 \label{subfig::learned_filters}
-                                \caption{
+                                \caption[
+                                    Learned filters at the first and second layers of a \acrshort*{acr::cnn}.
+                                ]{
                                     Learned filters at the first (top) and second (bottom) layers of a \gls{acr::cnn}.
                                     Image taken from~\parencite{lee2009convolutional}.
                                 }
                             }
                         }{
-                            \caption{
+                            \caption[
+                                Comparison of the Morlet wavelet bank and the first and second layer filters learned from a \acrshort*{acr::cnn}.
+                            ]{
                                 \label{fig::morlet_vs_learned}
                                 Comparison of the Morlet wavelet bank and the first and second layer filters learned from a \gls{acr::cnn}.
                                 The latter can be distinguished into two classes:
@@ -1110,7 +1129,9 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \begin{figure}
                         \centering
                         \includestandalone[mode=buildnew, width=\textwidth]{figures/scattering_network}
-                        \caption{
+                        \caption[
+                            Illustration of a \acrshort*{acr::scatnet}.
+                        ]{
                             \label{fig::scatnet} Illustration of a \gls{acr::scatnet}.
                             At each level are computed are computed convolutions with a filter bank followed by a modulus operator.
                             The scattering coefficients are obtained then by a low-pass filter (in blue).
