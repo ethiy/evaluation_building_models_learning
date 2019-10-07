@@ -1135,7 +1135,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             These could be given at node level or edge level.
             We will present hereafter some graph kernels which were used in this work, namely, continuously node attributed ones, as well as those devoted only to its structural properties.\\
 
-            \paragraph{Basic kernel}
+            \paragraph{Basic kernels}
                 Let $G = \left(V, E\right)$ an undirected graph with vertices $v\in V$ and edges $e \in E =\left\{\left\{u, v\right\}: (u, v) \in V\times V\right\}$.
                 We can give attributes to each node $a: V \rightarrow \mathbb{R}^{d_V}$ or edges $b: E \rightarrow \mathbb{R}^{d_E}$.\\
 
@@ -1514,16 +1514,11 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \label{eq::graph_hopper_kernel}
                     k_{gh}(G, G') \triangleq \sum_{\substack{\pi \in \mathscr{P}\\\pi' \in \mathscr{P}'}} k_p(\pi, \pi').
                 \end{equation}
-                This kernel can be computed efficiently as it can be trandformed into:
+                Defining \(w(v, v')\) as the number of times \(v\) and \(v'\) appear at the same coordinate \(i\) of some shortest paths \(\pi\) and \(\pi'\) with the same length \(\vert \pi \vert = \vert \pi' \vert\), this kernel can be computed efficiently as it can be transformed into:
                 \begin{equation}
                     \label{eq::graph_hopper_kernel_second}
                     k_{gh}(G, G') = \sum_{\substack{v \in V\\v' \in V'}} w(v, v')\cdot \kappa(v, v').
                 \end{equation}
-                where:
-                \begin{conditions}
-                    w(v, v') & is the number of times \(v\) and \(v'\) appear at the same coordinate \(i\) of some shortest paths \(\pi\) and \(\pi'\) with the same length \(\vert \pi \vert = \vert \pi' \vert\).
-                \end{conditions}
-
                 Let
                 \begin{equation*}
                     \delta \triangleq \max_{\pi \in \mathscr{P}} \vert \pi \vert
