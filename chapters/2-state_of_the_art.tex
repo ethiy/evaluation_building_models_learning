@@ -12,36 +12,49 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
 \clearpage
 
-\section{\textsc{Building \texorpdfstring{\gls*{acr::3d}}{3D} modeling}}
+\section{\textsc{Automatic Building \texorpdfstring{\gls*{acr::3d}}{3D} modeling}}
     \label{sec::state_of_the_art::building_modeling}
-    The goal of this section is to present a general prespective on \gls{acr::3d} modeling techniques.
-    This is not in any case a complete survey of this field.
-    We refer the reader to a comprehensive study of metods used in urban reconstruction by~\textcite{musialski2013survey}.\\
-    Herein, we classify the building modeling approaches based on different criteria.
-    In Section~\ref{subsec::state_of_the_art::building_modeling::input}, we discuss the different types of input data fed to modeling pipelines.
-    Next, in Section~\ref{subsec::state_of_the_art::building_modeling::automation}, is presented the different levels of automation in proposed \gls{acr::3d} modeling, while in Section~\ref{subsec::state_of_the_art::building_modeling::strategy}, are discussed the different modeling strategies.
-    We finish by mentioning the differences between outdoor and indoor modeling in Section~\ref{subsec::state_of_the_art::building_modeling::in_out_door}, as well as the scalability of the different techniques.
+    In this work, we are studying large-scale urban modeling quality evaluation.
+    Building models, at this scale, cannot be obtained manually.
+    Automatically acquired building models are, actually, the first target of our study.
+    As a consequence, there is a need for a global presentation of automatic building \gls{acr::3d} modeling.
+    The aim of this section is not to give a thourough survey of all \gls{acr::3d} modeling techniques, but rather explain the main approaches and how they affect the quality of the final product.
+    For a comprehensive study of urban reconstruction methods, we refer the reader to the work of~\textcite{musialski2013survey}.\\
+    In Subsection~\ref{subsec::state_of_the_art::building_modeling::building_extraction}, we present the different approaches used for building delineation.
+    Afterwards, we present, in Subsection~\ref{subsec::state_of_the_art::building_modeling::modeling_strategies}, a general categorization of modeling strategies for buildings.
 
-    \subsection{\textsc{Input data heterogenuity}}
-        \label{subsec::state_of_the_art::building_modeling::input}
+    \subsection{\textsc{Building extraction}}
+        \label{subsec::state_of_the_art::building_modeling::building_extraction}
+        In automatic building modeling, in order to model the building surface out of the input sensor data, the building location must first be determined.
+        There are actually two ways to approach this problem.
+        The first relies on retrieving building footprints out of a \gls{acr::gis} database, such as cadastral ones~\parencite{durupt2006automatic,biljecki2017generating,biljecki2019raise,taillandier2004automatic,ledoux2011topologically}.
+        In constrast, the second approach type extracts building outlines directly from the input sensor data~\parencite{poullis2009automatic,lafarge2012creating,nguatem2017modeling,zhu2018large}.
+        Both approaches suffer from shortcomings.\\
+
+        The first one relies on the fact that the \gls{acr::gis} database is acquired at the same time as the sensor data.
+        Otherwise, there will be no guaranty that the modeled scene has not changed on the meantime.
+        For instance, a building can be removed --- as a whole or partially --- between the two data acquisitions.
+        This would result in having terrain or vegetation reconstructed as a building part.\\
+        Even if the database is guaranteed to be produced at the same time as the input data, another issue can cause problems.
+        In some datasets, building outlines are actually not stored in their original form: they are instead deformed to fit their specifications.
+        For instance, buildings smaller than a certain area can be ommitted.
+        The generalization level plays also a role as small features could be smoothed away.\\
         
-        \subsubsection{\textsc{Acquisition mode}}
+        The classification based one is solely dependent on the input data quality.
+        Contrarily to the first case, there is no redundancy that can help filter out noise in the data.
+        \Gls{acr::lidar} point clouds are, for example, too sparse and unstructured for instance to detect exatct boundaries between objects\addref.
+        Conversly, images offer an alternative but can suffer from issues related to shadows that are detrimental to building delineation\addref.\\
+        The classification process is not flawless either.
+        Just as with \gls{acr::gis} databases, classification relies on some \textit{a priori} informations that are encoded in regularization terms~\parencite{lafarge2008structural,zhu2018large,zeng2018neural}.
+        These are needed to retrieve outlines of buildings efficiently.
+        However, they can also fail to represent faithfully the ground truth and results in wrong building footprint extraction.
 
-        \subsubsection{\textsc{Data type}}
+    \subsection{\textsc{Modeling strategies}}
+        \label{subsec::state_of_the_art::building_modeling::modeling_strategies}
+        Once the building footprint is extracted, the goal is to generalize the surface of the building out of the input data.
+        Several strategies are conducted.
+        They can be classified in three categories: Top-down, bottom-up and mixed approaches.\\
 
-    \subsection{\textsc{Automation level}}
-        \label{subsec::state_of_the_art::building_modeling::automation}
-
-    \subsection{\textsc{Modeling strategy}}
-        \label{subsec::state_of_the_art::building_modeling::strategy}
-
-    \subsection{\textsc{Indoor \textit{vs.} Outdoor}}
-        \label{subsec::state_of_the_art::building_modeling::in_out_door}
-
-    \subsection{\textsc{Modeling pipeline scalability}}
-        \label{subsec::state_of_the_art::building_modeling::scalability}
-
-    \clearpage
 \section{\textsc{Quality evaluation of \texorpdfstring{\gls*{acr::3d}}{3D} building models}}
     \label{sec::state_of_the_art::quality}
     We have seen previously the various methods used to automatically model buildings.

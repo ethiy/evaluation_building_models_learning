@@ -35,15 +35,15 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             Cadastral data, since conception, came in the form of \index{\gls{acr::2d}!maps}\gls{acr::2d} maps~\parencite{billen20033d}.
             Although many urban planning norms were always formulated taking into account height or depth information \parencite{brasebin20183d}, the need for a \index{\gls{acr::3d}!cadastre}\gls{acr::3d} cadastral management was made relevant with the advent of complex architectural features~\parencite{ijgi4042842}.
             To illustrate this case, we show, in figure~\ref{fig::3d_cadastre_need_example}, how \gls{acr::2d} cadastral maps are insufficient when it comes to modeling overhangs.\\
-            \begin{figure}[H]
+            \begin{figure}[!htpb]
                 \centering
-                \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/3d_cadastre}
+                \includegraphics[width=.9\textwidth]{images/introduction/3d_model_applications/3d_cadastre}
                 \caption[
                     Example of a problematic situation where \acrshort*{acr::3d} cadastre would be of help and \acrshort*{acr::2d} maps fail.
                 ]{
                     \label{fig::3d_cadastre_need_example}
                     Example of a problematic situation where \acrshort*{acr::3d} cadastre would be of help and \acrshort*{acr::2d} maps fail.
-                    The two building footprints overlap and are tricky to represent in \acrshort*{acr::3d}.
+                    The two building footprints overlap and are tricky to represent in \acrshort*{acr::2d}.
                     Image taken from~\parencite{ijgi4042842}.
                 }
             \end{figure}
@@ -89,10 +89,6 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                 }
             \end{figure}
 
-            \addtocounter{footnote}{-1}
-            \footnotetext{
-                \href{https://simplu3d.github.io}{SimPLU3D}
-            }
             Related to urban planning, \gls{acr::3d} models could be used as a reference for other planners.
             These models could be used to describe the flow of vehicles and pedestrians in an urban environement as illustrated in~\textcite{vanhoey2017varcity}.
             In addition, it could be used in physical simulations for urban applications.
@@ -102,17 +98,19 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             This is the usecase of~\textcite{varduhn2015multi}, where \gls{acr::3d} models are used to assess the flood risk.
             Such information could be instrumental for evacuation planning or for insurance managers.
             In the same direction, one can simulate fire propagation~\parencite{dimitropoulos2010fire} or estimating noise propagation in urban scenes~\parencite{stoter20083d} (\textit{cf.} Figure~\ref{fig::noise_propogation}).
+
             \begin{figure}[htpb]
                 \centering
                 \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/noise_simulation}
                 \caption[
-                    Example of \textbf{noise propagation} simulation study using \acrshort*{acr::3d} city models.
+                    Example of noise propagation simulation study using \acrshort*{acr::3d} city models.
                 ]{
                     \label{fig::noise_propogation}
-                    Example of \textbf{noise propagation} simulation study using \gls{acr::3d} city models.
+                    Example of noise propagation simulation study using \gls{acr::3d} city models.
                     Image taken from~\parencite{kurakula2007gis}.
                 }
             \end{figure}
+
             All these simulation derived informations could be supplied to decision makers in order to better plan the cities of tomorrow.
 
         \subsubsection{\textsc{Environmental challenges}}
@@ -122,7 +120,8 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             This motivates the need to quantify the energy consumption of urban settlements~\parencite{WATE20153372} or retrofitting costs~\parencite{previtali2014automatic}.
             ~\textcite{biljecki2015propagation} also use \gls{acr::3d} models of buildings in order to predict solar irradiation.
             In fact, solar potential estimation can be useful for assessing the benefits of expensive solar panels projects.
-            This kind of studies can also be applied in urban planning as the simulations could be undergone for future urban developpements.\\
+            This kind of studies can also be applied in urban planning as the simulations could be undergone for future urban developpements.
+
             \begin{figure}[htpb]
                 \centering
                 \includegraphics[width=.7\textwidth]{images/introduction/3d_model_applications/solar_potential}
@@ -135,6 +134,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                     Image taken from~\parencite{redweik2013solar}.
                 }
             \end{figure}
+
             Another critical environemental issue that affects cities is air pollution.
             Indeed, it has serious implications on human health as demonstrated in~\textcite{pascal2013assessing} and~\textcite{chen2013evidence}.
             In order to understand its dynamics, researchers simulate the local air flow (\textit{i.e.} the city microclimate) using computational fluid dynamics.
@@ -146,6 +146,11 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             Localization is an important step in visual navigation~\parencite{bonin2008visual}.
             \Gls{acr::3d} models play an important role in visual localization~\parencite{piasco2018survey, ijgi4042842}.\\
             The basic idea is to match an image with a known \gls{acr::3d} model of the city which can be textured or not~\parencite{arth2015instant, ardeshir2014gis, cham2010estimating, christie2016semantics} as shown in Figure~\ref{fig::navigation}.
+
+            % \addtocounter{footnote}{-1}
+            \footnotetext{
+                \href{https://simplu3d.github.io}{SimPLU3D}
+            }
             \begin{figure}[htpb]
                 \centering
                 \ffigbox[\FBwidth]{
@@ -191,6 +196,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                     }
                 }
             \end{figure}
+
             Once the image matched, one can retrieve an absolute 6-\gls{acr::dog} pose estimation.
             This is especially helpfull in urban canyons as shown in~\textcite{piasco2018survey}.\\
             The same ideas can be applied also for indoor environments, such as social cues aware robots navigating alongside humans~\parencite{gupta2018social} or industrial grade robots\addref.
@@ -527,7 +533,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             Some interactive approaches have been proposed to model building.
             The operator is still needed for highly complex semantic tasks~\parencite{mayunga2005semi, castellazzi2015laser}.
             Such methods suffer from imprecision compared to the fully manual ones: for instance,~\textcite{mayunga2005semi} produces models with geometric error standard deviation in the order of \SI{1}{\m}.\\
-            Full automation, although not requiring a lot of ressources, is still unattainable, especially when it comes to semantics.
+            Full automation is still unattainable, especially when it comes to semantics.
             Different strategies are used, where each one targets a specific resolution, balancing between compaction and geometric accuracy.
             Ordered from the most to the least compact, these strategies are listed herein.
             In a Manhattan-world setting, one assumes that buildings are collections of boxes~\parencite{vanegas2010building, li2016manhattan}.~\textcite{lafarge2012creating, nan2017polyfit}
