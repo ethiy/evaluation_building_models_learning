@@ -27,9 +27,9 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         \label{subsec::state_of_the_art::building_modeling::building_extraction}
         In automatic building modeling, in order to model the building surface out of the input sensor data, the building location must first be determined.
         There are actually two ways to approach this problem.
-        The first relies on retrieving building footprints out of a \gls{acr::gis} database, such as cadastral ones~\parencite{durupt2006automatic,biljecki2017generating,biljecki2019raise,taillandier2004automatic,ledoux2011topologically}.
+        The first relies on retrieving building footprints out of a \gls{acr::gis} database, such as cadastral ones~\parencite{horna2007building,durupt2006automatic,biljecki2017generating,biljecki2019raise,taillandier2004automatic,ledoux2011topologically}.
         In constrast, the second approach type extracts building outlines directly from the input sensor data~\parencite{poullis2009automatic,lafarge2012creating,nguatem2017modeling,zhu2018large}.
-        Both approaches suffer from shortcomings.\\
+        Both approaches suffer from some shortcomings.\\
 
         The first one relies on the fact that the \gls{acr::gis} database is acquired at the same time as the sensor data.
         Otherwise, there will be no guaranty that the modeled scene has not changed on the meantime.
@@ -51,9 +51,35 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
     \subsection{\textsc{Modeling strategies}}
         \label{subsec::state_of_the_art::building_modeling::modeling_strategies}
-        Once the building footprint is extracted, the goal is to generalize the surface of the building out of the input data.
+        Once the building footprint is extracted, the goal is to generalize its surface out of the input data.
         Several strategies are conducted.
-        They can be classified in three categories: Top-down, bottom-up and mixed approaches.\\
+        They can be classified in three categories: Model-driven, Data-driven and mixed approaches.\\
+
+        Model-driven, also called top-down, methods rely on strong assumptions on the type of buildings to be modeled.
+        For example the Manhattan-world class assumes that buildings are an aggregation of boxes~\parencite{li2016manhattan,vanegas2010building,ledoux2011topologically,arroyo2015dimension}.
+        This is actually an instance of grammars utilized in procedural modeling.
+        In the latter, a set of predetermined rules are used to determine the best shapes, out of a library, in order to better fit the input data~\parencite{lafarge2008structural,demir2015procedural,martinovic2013bayesian,mathias2011procedural,zeng2018neural,koutsourakis2009single,nan2015template,zhou20102}.
+        Top-down approaches are usually used when the input data resolution are not sufficiently accurate to retrieve detailed architectural features of the building~\parencite{lafarge2008structural}.\\
+
+        On the other hand, data-driven, or bottom-up, modeling techniques need very high resolution sensor data in order to retrieve constituing geometric features of the building.
+        This is usually achieved using primitive extraction.
+        For instance, building surfaces could be viewed as piece-wise planar structures~\parencite{nan2017polyfit,taillandier2004automatic,lafarge2012creating}.
+        As a consequence, plane arrangement are drawn from the original data.
+        Edges are also examples of features that can be extracted from the data to guide building modeling~\parencite{baillard1999automatic,}.
+        A second step consists on aggregating the extracted geometric features into a model.
+        This is usually implemented either through a greedy approach~\parencite{taillandier2004automatic} or a global optimization method~\parencite{zhu2018large,holzmann2018semantically,poullis2013framework,verdie2015lod}.\\
+
+        The first type of methods suffers typically from topological defects when the grammar is not comprehensive enough, while the second kind knows other drawbacks, mainly, segmentation problems.
+        One way to alleviate these issues is to mix the two approaches.
+        \textcite{werner2002new}, for instance, fits predetermined shapes (wedges and rectangles) to already extracted edges and planes.
+        However, these are usually greedy approaches that do not scale well.\\
+
+        There are still some limitations that these automatic approaches did not adress.
+        Higher resolution sensors are yielding more and more data with high frequencies that are still not taken into account.
+        These can pose serious problems in modeling:~\textcite{bredif20073d} that undetected superstructures can lead to bad quality models and their reconstruction can help in that regard.
+        High buildings can cast shadows on, or occlude, neighbooring ones which result in issues with their surface retrieval.
+        This has not been widely studied\addref, as buildings are moslty modeled one by one.
+        All these issues and more induce defects that should be characterized and classified for a better understanding of the field.
 
 \section{\textsc{Quality evaluation of \texorpdfstring{\gls*{acr::3d}}{3D} building models}}
     \label{sec::state_of_the_art::quality}
@@ -62,7 +88,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
     These could be distinguished based on two criteria.\\
     In Subsection~\ref{subsec::state_of_the_art::quality::output}, are presented the quality evaluation methods based on their output.
     An alternative perspective to charecterize quality evaluation methods relies upon the type of reference data (\textit{cf.} Subsection~\ref{subsec::state_of_the_art::quality::reference}).
-    Based on this survey, we state in details, in Subsection~\ref{subsec::state_of_the_art::quality::novelty}, how the work presented in this thesis is different from what was already proposed in the literature. 
+    Based on this survey, we state in details, in Subsection~\ref{subsec::state_of_the_art::quality::novelty}, how the approach presented in this thesis is different from what was already proposed in the literature.
 
     \subsection{\textsc{Output types}}
         \label{subsec::state_of_the_art::quality::output}
