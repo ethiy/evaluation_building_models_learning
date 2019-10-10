@@ -6,33 +6,47 @@
 \usepackage{tikz}
 \usetikzlibrary{3d}
 
+\newenvironment{3dtikzpicture}[3][]{
+	\pgfmathsetmacro\xx{cos(#3)}
+	\pgfmathsetmacro\xy{cos(#2)*sin(#3)}
+	\pgfmathsetmacro\yx{-sin(#3)}
+	\pgfmathsetmacro\yy{cos(#2)*cos(#3)}
+	\pgfmathsetmacro\zy{sin(#2)}
+	\begin{tikzpicture}[x={(\xx cm,\xy cm)},y={(\yx cm,\yy cm)},z={(0,\zy cm)},#1]
+}{
+	\end{tikzpicture}
+}
+
 \begin{document}
-	\tikzset{face/.style={fill=lightgray,draw=black,very thin,line join=round}}
-	\tikzset{error/.style={line width=3pt}}
-    \begin{tikzpicture}[x  = {(-0.5cm,-0.5cm)},
-                        y  = {(0.9659cm,-0.25882cm)},
-                        z  = {(0cm,1cm)},
-                        scale = 1,
-                        color = {lightgray}]
+	\tikzset{
+        face/.style={
+            fill=lightgray,
+            draw=black,
+            very thin,
+            line join=round,
+            fill opacity=.8
+        },
+        error/.style={line width=1pt}
+    }
+    \begin{3dtikzpicture}{45}{45}[scale=1]
+        \begin{scope}[canvas is zy plane at x=3]
+            \path[face, dashed] (0,0) -- (2,0) -- (2.5,2) -- (2,4) -- (0,4) -- cycle;
+		\end{scope}
+        \begin{scope}[canvas is zx plane at y=4]
+          	\path[face, dashed] (0,0) rectangle (2,3);
+        \end{scope}
+        \path[face] (0,0,2) -- (0,2,2.5) -- (3,0,2) -- cycle;
+        \path[face] (3,0,2) -- (0,2,2.5) -- (3,2,2.5) -- cycle;
+        \path[face] (0,4,2) -- (3,2,2.5) -- (0,2,2.5) -- cycle;
+        \path[face] (0,4,2) -- (3,2,2.5) -- (3,4,2) -- cycle;
         \begin{scope}[canvas is zy plane at x=0]
-          	\path[face,shade] (0,0) -- (2,0) -- (2.5,1.75) -- (2,4) -- (0,4) -- cycle;
+          	\path[face,shade] (0,0) -- (2,0) -- (2.5,2) -- (2,4) -- (0,4) -- cycle;
         \end{scope}
         \begin{scope}[canvas is zx plane at y=0]
   			\path[face,shade] (0,0) rectangle (2,3);
 		\end{scope}
-        \begin{scope}[canvas is zy plane at x=3]
-            \path[face] (0,0) -- (2,0) -- (2.75,2.5) -- (2,4) -- (0,4) -- cycle;
-		\end{scope}
-        \begin{scope}[canvas is zx plane at y=4]
-          	\path[face] (0,0) rectangle (2,3);
-        \end{scope}
-        \path[face] (0,0,2) -- (0,1.75,2.5) -- (3,0,2) -- cycle;
-        \path[face] (3,0,2) -- (0,1.75,2.5) -- (3,2.5,2.75) -- cycle;
-        \path[face] (0,4,2) -- (3,2.5,2.75) -- (0,1.75,2.5) -- cycle;
-        \path[face] (0,4,2) -- (3,2.5,2.75) -- (3,4,2) -- cycle;
-        
-        \path[error, red] (0,1.75,2.5) edge  node[midway,below,align=center] {} (3,2.5,2.75);
-        \path[error, blue] (3,0,2) edge node[above,align=left] {} (0,1.75,2.5);
-        \path[error, blue] (0,4,2) edge node[below,align=right] {} (3,2.5,2.75);
-    \end{tikzpicture}
+
+        \path[error, blue] (3,0,2) edge node[above,align=left] {} (0,2,2.5);
+        \path[error, blue] (0,4,2) edge node[below,align=right] {} (3,2,2.5);
+    \end{3dtikzpicture}
 \end{document}
