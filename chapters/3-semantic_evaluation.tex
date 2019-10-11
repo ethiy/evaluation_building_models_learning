@@ -112,9 +112,9 @@ After discussing some properties of the chosen error defnitions, we explain, in 
 
                 \begin{figure}[H]
                     \centering
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[\textwidth]{
                         \begin{subfloatrow}[2]
-                            \ffigbox[\FBwidth]{
+                            \ffigbox[\textwidth]{
                                 \includegraphics[width=.45\textwidth]{example-image}
                             }{
                                 \label{subfig::bus_3d}
@@ -122,7 +122,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                                     Depiction of the a case where two building that are reconstructed as one.
                                 }
                             }
-                            \ffigbox[\FBwidth]{
+                            \ffigbox[\textwidth]{
                                 \includegraphics[width=.45\textwidth]{images/errors/building/under_segmentation}
                             }{
                                 \label{subfig::bus_2d}
@@ -152,9 +152,9 @@ After discussing some properties of the chosen error defnitions, we explain, in 
 
                 \begin{figure}[H]
                     \centering
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[\textwidth]{
                         \begin{subfloatrow}[2]
-                            \ffigbox[\FBwidth]{
+                            \ffigbox[\textwidth]{
                                 \includegraphics[width=.45\textwidth]{example-image}
                             }{
                                 \label{subfig::bos_3d}
@@ -162,7 +162,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                                     Depiction of the a case where two building that are reconstructed as one.
                                 }
                             }
-                            \ffigbox[\FBwidth]{
+                            \ffigbox[\textwidth]{
                                 \includegraphics[width=.45\textwidth]{images/errors/building/over_segmentation}
                             }{
                                 \label{subfig::bos_2d}
@@ -192,15 +192,15 @@ After discussing some properties of the chosen error defnitions, we explain, in 
 
                 \begin{figure}[H]
                     \centering
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[\textwidth]{
                         \begin{subfloatrow}[2]
-                            \ffigbox[\FBwidth]{
+                            \ffigbox[\textwidth]{
                                 \includegraphics[width=.45\textwidth]{example-image}
                             }{
                                 \label{subfig::bib_3d}
                                 \caption{\gls{acr::3d} depiction of the error.}
                             }
-                            \ffigbox[\FBwidth]{
+                            \ffigbox[\textwidth]{
                                 \includegraphics[width=.45\textwidth]{images/errors/building/border}
                             }{
                                 \label{subfig::bib_2d}
@@ -239,15 +239,15 @@ After discussing some properties of the chosen error defnitions, we explain, in 
 
                 \begin{figure}[H]
                     \centering
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[\textwidth]{
                         \begin{subfloatrow}[2]
-                            \ffigbox[\FBwidth]{
+                            \ffigbox[\textwidth]{
                                 \includegraphics[width=.45\textwidth]{example-image}
                             }{
                                 \label{subfig::bit_3d}
                                 \caption{\gls{acr::3d} depiction of the error.}
                             }
-                            \ffigbox[\FBwidth]{
+                            \ffigbox[\textwidth]{
                                 \includegraphics[width=.45\textwidth]{images/errors/building/topology}
                             }{
                                 \label{subfig::bit_2d}
@@ -281,31 +281,42 @@ After discussing some properties of the chosen error defnitions, we explain, in 
             In this sub-subsection, \gls{acr::lod}-2 and \gls{acr::lod}-3 corresponding \texttt{atomic} errors are presented.
 
             \paragraph{\texttt{\acrlong*{acr::fus}}}
-                \gls{acr::fus} corresponds to the case where one facet is subdivided into two or more facets.
-                This is the same kind of error as \gls{acr::bus} but at the facet level.\\
+                \texttt{\gls{acr::fus}} corresponds to the case where one facet is subdivided into two or more facets.
+                This is the same kind of error as \texttt{\gls{acr::bus}} but at the facet level.\\
 
                 \begin{figure}[H]
                     \centering
-                    \ffigbox[\FBwidth]{
-                        \begin{subfloatrow}[2]
-                            \ffigbox[\FBwidth]{
-                                \includegraphics[width=.45\textwidth]{example-image}
+                    \ffigbox[\textwidth]{
+                        \begin{subfloatrow}
+                            \ffigbox[0.5\textwidth]{
+                                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/correct_fos_fus_fib_fig}
+                            }{
+                                \label{subfig::gt_fus_3d}
+                                \caption{Ground truth \gls{acr::3d} model.}
+                            }
+                            \ffigbox[0.5\textwidth]{
+                                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/fus}
                             }{
                                 \label{subfig::fus_3d}
                                 \caption{
-                                    Depiction of the a case where two building that are reconstructed as one.
+                                    \gls{acr::3d} model with a \texttt{\gls{acr::fus}} error.
+                                    The erroneous facet is colored in orange.
                                 }
                             }
-                            \ffigbox[\FBwidth]{
-                                \includegraphics[width=.45\textwidth, angle=270]{images/errors/facet/under_segmentation}
-                            }{
-                                \label{subfig::fus_2d}
-                                \caption{
-                                    Nadir projection of the erroneous building superposed on the corresponding orthoimage.
-                                    This shows how a higher neighbooring building part can drive a misestimation of both facet planes which end up confused in one flat roof.
-                                    The line segment highlighted in green gives away the fact that the roof was undersegmented.
+                        \end{subfloatrow}
+                        \vskip1em
+                        \begin{subfloatrow}
+                                \centering
+                                \ffigbox[.75\textwidth]{
+                                        \includegraphics[width=.5\textwidth, angle=270]{images/errors/facet/under_segmentation}
+                                }{
+                                    \label{subfig::fus_2d}
+                                    \caption{
+                                        Nadir projection of the erroneous building superposed on the corresponding orthoimage.
+                                        This shows how a higher neighbooring building part can drive a misestimation of both facet planes which end up confused in one flat roof.
+                                        The line segment highlighted in green gives away the fact that the roof was undersegmented.
+                                    }
                                 }
-                            }
                         \end{subfloatrow}
                     }{
                         \caption{
@@ -329,34 +340,47 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 \textcite{lafarge2008structural} fits the best type of roof models to alleviate issues caused by high levels of noise like when working with Satellite based \glspl{acr::dsm}.
 
             \paragraph{\texttt{\acrlong*{acr::fos}}}
-                \gls{acr::fos} corresponds to the case where two or more facets are modeled as one, as illustrated in Figure~\ref{fig::fos}.
-                This is to \gls{acr::bos} what \gls{acr::fus} is to \gls{acr::bus}.\\
+                \texttt{\gls{acr::fos}} corresponds to the case where two or more facets are modeled as one, as illustrated in Figure~\ref{fig::fos}.
+                This is to \texttt{\gls{acr::bos}} what \texttt{\gls{acr::fus}} is to \texttt{\gls{acr::bus}}.\\
 
                 \begin{figure}[H]
                     \centering
-                    \ffigbox[\FBwidth]{
-                        \begin{subfloatrow}[2]
-                            \ffigbox[\FBwidth]{
-                                \includegraphics[width=.45\textwidth]{example-image}
+                    \ffigbox[\textwidth]{
+                        \begin{subfloatrow}
+                            \ffigbox[0.5\textwidth]{
+                                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/correct_fos_fus_fib_fig}
+                            }{
+                                \label{subfig::gt_fos_3d}
+                                \caption{Ground truth \gls{acr::3d} model.}
+                            }
+                            \ffigbox[0.5\textwidth]{
+                                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/fos}
                             }{
                                 \label{subfig::fos_3d}
-                                \caption{\gls{acr::3d} depiction of the error.}
-                            }
-                            \ffigbox[\FBwidth]{
-                                \includegraphics[width=.45\textwidth, angle=270]{images/errors/facet/over_segmentation}
-                            }{
-                                \label{subfig::fos_2d}
                                 \caption{
-                                    A slim chimney in the below corner of the ridge results in a defect ladden \gls{acr::dsm} which translates into oversegmentation.
-                                    The erroneous edges are colored in red.
-                                    We can check using the orthoimage that these are not real.
+                                    \gls{acr::3d} model with a \texttt{\gls{acr::fos}} error.
+                                    In blue are colored the erroneous edges.
                                 }
                             }
+                        \end{subfloatrow}
+                        \vskip1em
+                        \begin{subfloatrow}
+                                \centering
+                                \ffigbox[.75\textwidth]{
+                                    \includegraphics[height=.5\textwidth, angle=270]{images/errors/facet/over_segmentation}
+                                }{
+                                    \label{subfig::fos_2d}
+                                    \caption{
+                                        A slim chimney in the below corner of the ridge results in a defect ladden \gls{acr::dsm} which translates into an oversegmentation.
+                                        The erroneous edges are colored in red.
+                                        We can check using the orthoimage that these are not real.
+                                    }
+                                }
                         \end{subfloatrow}
                     }{
                         \caption{
                             \label{fig::fos}
-                            Illustration of a \gls{acr::fos} error.
+                            Illustration of a \texttt{\gls{acr::fos}} error.
                         }
                     }
                 \end{figure}
@@ -366,7 +390,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 This is not rare due to problems that can be encountered with illumination conditions: for instance, a roof structure can cast its shadow on a neighbooring one and cause a gradient in image signal that will be translated to a virtual edge.
                 Superstructures play also a negative role just as explained previously.
                 This time it is the ones that are small in planar size compared to the noise order of magnitude that are not detected but add bumps that polutes the signal and result in an misestimation of planes.
-                High neighbooring buildings are also to blame due to the same reasons as with \gls{acr::fus}, but this time results in bumps like with superstructures.\\
+                High neighbooring buildings are also to blame due to the same reasons as with \texttt{\gls{acr::fus}}, but this time results in bumps like with superstructures.\\
 
                 To solve this kind of issues, mesh simplification techniques can be helpful.
                 In fact,~\textcite{verdie2015lod} uses this approach to smooth away these problems and produce a good generalization of the underlying buildings.
@@ -375,28 +399,41 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 As an example,~\textcite{bredif20073d} uses a set parameteric models in order to model superstructures and better fit \gls{acr::lod}-2 roof facets.
 
             \paragraph{\texttt{\acrlong*{acr::fib}}}
-                \gls{acr::fib} corresponds to the case where at least one facet border is incorrectly located.
+                \texttt{\gls{acr::fib}} corresponds to the case where at least one facet border is incorrectly located.
                 As en example, Figure~\ref{fig::fib} shows that the central edge that links the two main roof sides does not correspond to the one on the image position.
-                This is a purely geometrical error similarly to \gls{acr::bib}.\\
+                This is a purely geometrical error similarly to \texttt{\gls{acr::bib}}.\\
 
                 \begin{figure}[H]
                     \centering
-                    \ffigbox[\FBwidth]{
-                        \begin{subfloatrow}[2]
-                            \ffigbox[\FBwidth]{
-                                \includegraphics[width=.45\textwidth]{example-image}
+                    \ffigbox[\textwidth]{
+                        \begin{subfloatrow}
+                            \ffigbox[0.5\textwidth]{
+                                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/correct_fos_fus_fib_fig}
+                            }{
+                                \label{subfig::gt_fib_3d}
+                                \caption{Ground truth \gls{acr::3d} model.}
+                            }
+                            \ffigbox[0.5\textwidth]{
+                                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/fib}
                             }{
                                 \label{subfig::fib_3d}
-                                \caption{\gls{acr::3d} depiction of the error.}
-                            }
-                            \ffigbox[\FBwidth]{
-                                \includegraphics[width=.45\textwidth]{images/errors/facet/border}
-                            }{
-                                \label{subfig::fib_2d}
                                 \caption{
-                                    The nadir projection of the model on the orthoimage provides the real location (in green) of the edge.
+                                    \gls{acr::3d} model with a \texttt{\gls{acr::fib}} error.
+                                    The misplaced edge is colored in red.
                                 }
                             }
+                        \end{subfloatrow}
+                        \vskip1em
+                        \begin{subfloatrow}
+                                \centering
+                                \ffigbox[.75\textwidth]{
+                                    \includegraphics[width=.5\textwidth]{images/errors/facet/border}
+                                }{
+                                    \label{subfig::fib_2d}
+                                    \caption{
+                                        The nadir projection of the model on the orthoimage provides the real location (in green) of the edge.
+                                    }
+                                }
                         \end{subfloatrow}
                     }{
                         \caption{
@@ -413,28 +450,40 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 An alternative is to rely on symetries \addref to automatically correct surface intersections.
 
             \paragraph{\texttt{\acrlong*{acr::fit}}}
-
-                \gls{acr::fit} corresponds to the case where the facet suffers from topological defects such as wrong primitive fitting (for example, a dome approximated by planar polygons).
+                \texttt{\gls{acr::fit}} corresponds to the case where the facet suffers from topological defects such as wrong primitive fitting (for example, a dome approximated by planar polygons).
                 In Figure~\ref{fig::fit}, we can observe how two cylindrical towers were reconstructed as a rectangular parallelepiped.\\
 
                 \begin{figure}[H]
                     \centering
-                    \ffigbox[\FBwidth]{
-                        \begin{subfloatrow}[2]
-                            \ffigbox[\FBwidth]{
-                                \includegraphics[width=.45\textwidth]{example-image}
+                    \ffigbox[\textwidth]{
+                        \begin{subfloatrow}
+                            \ffigbox[0.5\textwidth]{
+                                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/correct_fit}
+                            }{
+                                \label{subfig::gt_fit_3d}
+                                \caption{Ground truth \gls{acr::3d} model.}
+                            }
+                            \ffigbox[0.5\textwidth]{
+                                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/fit}
                             }{
                                 \label{subfig::fit_3d}
-                                \caption{\gls{acr::3d} depiction of the error.}
-                            }
-                            \ffigbox[\FBwidth]{
-                                \includegraphics[width=.45\textwidth]{images/errors/facet/topology}
-                            }{
-                                \label{subfig::fit_2d}
                                 \caption{
-                                    the nadir projection reveals the true form (in green) of the towers that were completly misrepresented (in red).
+                                    \gls{acr::3d} model with a \texttt{\gls{acr::fit}} error.
+                                    The facet in teal has a missing hole.
                                 }
                             }
+                        \end{subfloatrow}
+                        \vskip1em
+                        \begin{subfloatrow}
+                                \centering
+                                \ffigbox[.75\textwidth]{
+                                    \includegraphics[width=.5\textwidth]{images/errors/facet/topology}
+                                }{
+                                    \label{subfig::fit_2d}
+                                    \caption{
+                                        The nadir projection reveals the true form (in green) of the towers that were completly misrepresented (in red).
+                                    }
+                                }
                         \end{subfloatrow}
                     }{
                         \caption{
@@ -449,7 +498,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 This is evidently not always the case (\textit{cf.} Subfigure~\ref{subfig::fit_2d}).
                 Even with the right assumptions, this depicted case cannot have been well modeled.
                 If so it would have at least approximated the circular cylindrical structures with a regular polygon cylinder.
-                This is in fact due to the fact that the quality of the data was poor and was unreliable as was explained with the \gls{acr::fus} case in Subfigure~\ref{subfig::fus_2d}.
+                This is in fact due to the fact that the quality of the data was poor and was unreliable as was explained with the \texttt{\gls{acr::fus}} case in Subfigure~\ref{subfig::fus_2d}.
                 The same effect can cause a missing hole being undetected.\\
 
                 Solving this issue is hard besides the obvious change of primitive assumptions.
@@ -457,22 +506,35 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 One can try to go overcome this issue once again, like with the undersegmentation problem, thanks to line detections to reveal convoluted structures when relying on plane extraction only. 
 
             \paragraph{\texttt{\acrlong*{acr::fig}}}
-                \gls{acr::fig} corresponds to the case of inaccurate facet geometric estimation.
+                \texttt{\gls{acr::fig}} corresponds to the case of inaccurate facet geometric estimation.
                 In mathematical terms, this means that the surface primitive parameters where misestimated.
                 In Figure~\ref{fig::fig}, the planar surface slope was miscalculated as flat while it was of \textit{ca.} \SI{25}{\degree}.\\
 
                 \begin{figure}[H]
                     \centering
-                    \ffigbox[\FBwidth]{
-                        \begin{subfloatrow}[2]
-                            \ffigbox[\FBwidth]{
-                                \includegraphics[width=.45\textwidth]{example-image}
+                    \ffigbox[\textwidth]{
+                        \begin{subfloatrow}
+                            \ffigbox[0.5\textwidth]{
+                                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/correct_fos_fus_fib_fig}
+                            }{
+                                \label{subfig::gt_fig_3d}
+                                \caption{Ground truth \gls{acr::3d} model.}
+                            }
+                            \ffigbox[0.5\textwidth]{
+                                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/fig}
                             }{
                                 \label{subfig::fig_3d}
-                                \caption{\gls{acr::3d} depiction of the error.}
+                                \caption{
+                                    \gls{acr::3d} model with a \texttt{\gls{acr::fig}} error.
+                                    The facet in purple has a wrong slope: It is flat instead of being sloped.
+                                }
                             }
-                            \ffigbox[\FBwidth]{
-                                \includegraphics[width=.45\textwidth]{images/errors/facet/geometry}
+                        \end{subfloatrow}
+                        \vskip1em
+                        \begin{subfloatrow}
+                                \centering
+                                \ffigbox[.75\textwidth]{
+                                    \includegraphics[width=.5\textwidth]{images/errors/facet/geometry}
                             }{
                                 \label{subfig::fig_2d}
                                 \caption{
