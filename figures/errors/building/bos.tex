@@ -1,0 +1,46 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\usepackage{tikz}
+\usetikzlibrary{3d}
+
+\newenvironment{3dtikzpicture}[3][]{
+	\pgfmathsetmacro\xx{cos(#3)}
+	\pgfmathsetmacro\xy{cos(#2)*sin(#3)}
+	\pgfmathsetmacro\yx{-sin(#3)}
+	\pgfmathsetmacro\yy{cos(#2)*cos(#3)}
+	\pgfmathsetmacro\zy{sin(#2)}
+	\begin{tikzpicture}[x={(\xx cm,\xy cm)},y={(\yx cm,\yy cm)},z={(0,\zy cm)},#1]
+}{
+	\end{tikzpicture}
+}
+
+\begin{document}
+	\tikzset{
+        face/.style={
+            fill=lightgray,
+            draw=black,
+            very thin,
+            line join=round,
+            fill opacity=.8
+        }
+    }
+    \begin{3dtikzpicture}{45}{45}[scale=1]
+        \begin{scope}[canvas is zy plane at x=3]
+            \path[face, dashed] (0,0) -- (2,0) -- (2.5,2) -- (2,4) -- (0,4) -- cycle;
+		\end{scope}
+        \begin{scope}[canvas is zx plane at y=4]
+          	\path[face, dashed] (0,0) rectangle (2,3);
+        \end{scope}
+        \path[face] (0,0,2) -- (0,2,2.5) -- (3,2,2.5) -- (3,0,2) -- cycle;
+        \path[face] (0,4,2)-- (3,4,2) -- (3,2,2.5) -- (0,2,2.5) -- cycle;
+        \begin{scope}[canvas is zy plane at x=0]
+          	\path[face,shade] (0,0) -- (2,0) -- (2.5,2) -- (2,4) -- (0,4) -- cycle;
+        \end{scope}
+        \begin{scope}[canvas is zx plane at y=0]
+  			\path[face,shade] (0,0) rectangle (2,3);
+		\end{scope}
+    \end{3dtikzpicture}
+\end{document}
