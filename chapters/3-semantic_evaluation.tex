@@ -6,43 +6,55 @@ In this chapter are presented the first building bricks of our approach: the err
 We proceed by reprising the main consequences of the constraints that were imposed for our evaluation approach in subsection ~\ref{subsec::introduction::contributions::positioning}.
 These determine the desired properties that are seeked in this work.
 Based on this discussion, we establish, in Section~\ref{sec::semantic_evaluation::general_framework} a general structure of the error taxonomy.
-In Section~\ref{sec::semantic_evaluation::overhead}, is detailed an implementation of this general stucture for the overhead automatic modeling case.
+Section~\ref{sec::semantic_evaluation::overhead} details an implementation of this general stucture for the overhead automatic modeling case.
 After discussing some properties of the chosen error defnitions, we explain, in the final Section~\ref{sec::semantic_evaluation::label_extraction}, how the final labels are extracted from the error taxonomy based on the quality evaluation needs.
 
 \clearpage
 
 \section{\textsc{The general framework}}
     \label{sec::semantic_evaluation::general_framework}
+    As stated previously in Subsection~\ref{subsec::introduction::contributions::positioning}, a semantic evaluation implies a categorization of errors affecting building models.
+    In the same subsection, we discussed the desired properties in order to achieve a large-scale and automatic semantic evaluation.
+    Before delving into details, we first examine the implications of such properties on error definitions in Subsection~\ref{subsec::semantic_evaluation::general_framework::hierarchization_moderularity}.
+    Next, Subsection~\ref{subsec::semantic_evaluation::general_framework::error_classification} presents a general layout of the proposed error taxonomy.
 
     \subsection{\textsc{Hierarchization and modularity}}
         \label{subsec::semantic_evaluation::general_framework::hierarchization_moderularity}
-        As stated previously in Subsection~\ref{subsec::introduction::contributions::positioning}, a semantic evaluation implies a categorization of errors affecting building models.
-        In the same subsection, we discussed properties that are desired so as to achieve a large-scale and automatic semantic evaluation.
-        Before delving into details, the implications of such properties on error definitions are examined.
+        The goal of this subsection is to state the desired characteristics in the categorization of building model defects based on the discussion in Subsection~\ref{subsec::introduction::contributions::positioning}.
+        We introduce first two notions: generalizability and exhaustivity.
+        These are directly linked to the large-scale aspect of the evaluation approach.
+        These are implemented in the error categorization based on two principles: hierarchization and modularity.
 
-        \subsubsection{\textsc{Generalizability \textit{vs.} exhaustivity compromise}}
-            Two conditions are required in the error classification.
-            The first one entails the error definitions incongruence with the evaluated urban scenes.
-            This implies the proposed error categorization capacity to be generalizable.
-            The second is the dissonance between the latter and the input evaluation models.
-            This conveys the exhaustivity of the evaluation.\\
+        \subsubsection{\textsc{The generalizability \textit{vs.} exhaustivity compromise}}
+            In Subsection~\ref{subsec::introduction::contributions::positioning}, we have seen how the large-scale constraint on the quality evaluation approach entails the method robustness to changes in the urban scene as well as to the pipeline behind the evaluated model.
+            The first condition implies the proposed error categorization capacity to be generalizable: the ability to describe defects of building models unhindered by the specificities of one scene or another.
+            The second conveys the exhaustivity of the evaluation: the power to take into account all possible errors that a building model can be affected by, free of any consideration of its origin.\\
+
             The two notions are condradictory.
-            At one hand, every possible error at any level should be taken into account, while, on the other, the categorization has to stay always relevant no matter the origin of those models.
-            A compromise have to be reached in the definition of errors between these two properties.
+            At one hand, every possible defect should be accounted for at all levels.
+            This may be possible through a meticulous analysis of models from a specific area.
+            In fact, similar to the procedural modeling approaches, building model errors could be portayed relying on expert knowledge.
+            For instance, Haussmann style building modeling defects could be described exhaustively.
+            Eventhough these errors would be sufficient for a small disctrict in downtown Paris, they are clearly not comprehensive enough to encorporate cases from other types of buildings like in La D\'efense, just \SI{3}{\km} away of Paris, let alone ones from Timbuktu, Mali.\\
+
+            On the other, the categorization has to stay always relevant no matter the origin of those models.
+            This can be, for example, achieved based on a list of errors that are common across all possible building types.
+            However, this has the disadvantage of not covering all the instances specific one input method or another.
+            A compromise have to be reached in the definition of errors between generalizability and exhaustivity.
         
         \subsubsection{\textsc{General structure}}
-            We porpose a hierarchical structure of the categorization of errors in order to mitigate the last point.
-            The more high in the ladder the error is, translates to more generalizability (and less exhaustivity) of the latter.
-            At the same level, to avoid having to exhaustively list all possible errors, the identified defects are described modularly based on some predefined independent errors.
+            We introduce a hierarchical structure to categorize errors in order to mitigate the last point.
+            The higher in the ladder the error is, the more generalizability (and less exhaustivity) is achieved.
+            At the same hierarchical level, to avoid having to exhaustively list all possible errors, the identified defects are described modularly based on some predefined independent errors.
             This helps cover a wide range of possible defects while the basic errors are chosen to be as generalizable as possible.
             Hierarchization and modularity are the main ingredients in our proposed flexible framework.\\
 
-            To implement these properties for the error taxonomy, we rely on two criterea for error compilation: the input building model \gls{acr::lod} and the error semantic precision level, named henceforth \texttt{finesse} (\textit{cf.} Figure~\ref{fig::taxonomy}).
+            To implement these properties for the error taxonomy, we rely on two criteria for error compilation: the input building model \gls{acr::lod} and the error semantic precision level, named henceforth \texttt{finesse} (\textit{cf.} Figure~\ref{fig::taxonomy}).
             Different degrees of \texttt{finesse} describe, from coarse to fine, the specificity of defects.
-            It corresponds to the error hierarchy levels.
-            The \gls{acr::lod} is used on the other hand to differenciate between errors in the same specificity level.
+            \texttt{Finesse} degrees corresponds to error hierarchy levels.
+            The \gls{acr::lod} is used, on the other hand, to differenciate between errors in the same specificity (or \texttt{finesse}) level.
             Multiple errors at the same \texttt{finesse} can indeed affect the same building.
-            For instance, topological defects almost always induce (and hence co-occur) with geometrical ones.
+            For instance, topological defects almost always induce (and hence co-occur) with geometrical ones.\\
             Errors with maximal \texttt{finesse} are called \texttt{atomic} errors.
             \texttt{Atomic} errors are to be intuitively correlated to independent actions needed by an operator or an algorithm so as to correct the model.
 
@@ -52,19 +64,20 @@ After discussing some properties of the chosen error defnitions, we explain, in 
 
         At a first level, model qualifiability is studied.
         In fact, aside from formatting issues or geometric inconsistencies~\parencite{ledoux2018val3dity}, other reasons make building models unqualifiable.
-        For instance, buildings can be occluded by vegetation and thus cannot be assessed with most of the remote sensing data sources.
+        For instance, buildings can be occluded by vegetation and thus cannot be assessed from most of the remote sensing data sources.
         Generally speaking, input models can be impaired by some pathological cases that are outside our evaluation framework.
         In consequence, \texttt{Qualifiable} models are distinguished here from \texttt{Unqualifiable} buildings.
-        This first level corresponds to a \texttt{finesse} equal to 0. At the \texttt{finesse} level 1, we predict the correctness of all qualifiable buildinoverheadgs.
+        This first level corresponds to a \texttt{finesse} equal to 0.\\
+        At the \texttt{finesse} level 1, we predict the correctness of all qualifiable buildings.
         It is the lowest semantization level at which the evaluation of a model is expressed.
         Then, a model is either \texttt{Valid} or \texttt{Erroneous}.
         Most state-of-the-art evaluation methods address errors up to this level.\\
         Model errors are grouped into two families depending on the underlying \gls{acr::lod}.
         The first family of errors \texttt{Building Errors} affects the building in its entirety.
-        It corresponds to an accuracy evaluation at \gls{acr::lod}-0 (footprint errors) $\cup$ \gls{acr::lod}-1 (height/geometric error).
+        It corresponds to an accuracy evaluation at \gls{acr::lod}-0 (footprint errors) $\cup$ \gls{acr::lod}-1 (height/geometric error).\\
         At the next \gls{acr::lod}-2, the family \texttt{Facet Errors} gathers defects that can alter the facet accuracy of fa\c{c}ades or roofs (\gls{acr::lod}-2) as well as superstructures and openings (\gls{acr::lod}-3).\\
         Each family contains \texttt{atomic} errors of maximal \texttt{finesse} equal to 3.
-        Although they can co-occur in the same building model and across different families, these errors are semantically independent.
+        Although they can co-occur in the same building model and across different families, these errors are semantically independent\footnote{As mentioned before, they relate, instinctively, to independent corrective tasks.}.
         They represent specific topological or geometric defects.
         Topological errors translate inaccurate structural modeling, while geometric defects raise positioning infidelity.\\
 
@@ -73,9 +86,8 @@ After discussing some properties of the chosen error defnitions, we explain, in 
         Due to the lack of sufficient observations, we did not make this choice in order to guaranty the generalizability of the taxonomy.
         Another alternative consists, for instance, in gathering error families by resolution: this will produce a continuum of errors families going from the coarsest level that would correspond to \texttt{Building Errors} to the finest possible one.
         This last option, although offering an exhaustive and potentially generalizable taxonomy, was ruled out since it does not provide a truly semantic description of the errors.
-        % For example, an operator that is presented with the error ``segmentation error at resolution 20\%'' would not have any information on 
         Regarding \texttt{finesse}, it is also possible to have additional levels.
-        The maximal level of 3 was chosen in order to preserve the generalizability of the taxonomy, since the more specific the error categorization is, the more observations we need to define the corresponding errors.
+        The maximal level of 3 was chosen in order to preserve the generalizability of the taxonomy, since the more specific the error categorization is, the more observations are needed to define the corresponding errors.
 
         \begin{figure}[htbp]
             \begin{center}
@@ -611,7 +623,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                         }{
                             \label{subfig::building_hole}
                             \caption{
-                                A hole at building (viewed from the top) level corresponds to an internal court.
+                                A hole at building (viewed from the top) level (\gls{acr::lod}-1) corresponds to an internal court.
                             }
                         }
                         \ffigbox[\FBwidth]{
@@ -619,7 +631,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                         }{
                             \label{subfig::facet_hole}
                             \caption{
-                                Example of a facet with a rectangular hole.
+                                Example of a facet (\gls{acr::lod}-2) with a rectangular hole corresponding to a balcony.
                             }
                         }
                     \end{subfloatrow}
