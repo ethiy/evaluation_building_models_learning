@@ -1,0 +1,61 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\usepackage{tikz}
+\usetikzlibrary{3d}
+
+\newenvironment{3dtikzpicture}[3][]{
+	\pgfmathsetmacro\xx{cos(#3)}
+	\pgfmathsetmacro\xy{cos(#2)*sin(#3)}
+	\pgfmathsetmacro\yx{-sin(#3)}
+	\pgfmathsetmacro\yy{cos(#2)*cos(#3)}
+	\pgfmathsetmacro\zy{sin(#2)}
+	\begin{tikzpicture}[x={(\xx cm,\xy cm)},y={(\yx cm,\yy cm)},z={(0,\zy cm)},#1]
+}{
+	\end{tikzpicture}
+}
+
+\begin{document}
+	\tikzset{
+        face/.style={
+            fill=lightgray,
+            draw=black,
+            very thin,
+            line join=round,
+            fill opacity=.8
+        }
+    }
+    \begin{3dtikzpicture}{15}{20}[scale=1]
+        \begin{scope}[canvas is zx plane at y=5]
+          	\path[face, dashed] (0,0) rectangle (2,4);
+        \end{scope}
+        \begin{scope}[canvas is zy plane at x=4]
+          	\path[face, dashed] (0,0) rectangle (2,5);
+        \end{scope}
+        \begin{scope}[canvas is zx plane at y=3]
+          	\path[face] (0,1.5) rectangle (2,2.75);
+        \end{scope}
+        \begin{scope}[canvas is zy plane at x=1.5]
+          	\path[face, dashed] (0,2) rectangle (2,3);
+        \end{scope}
+        \begin{scope}[canvas is zy plane at x=2.75]
+          	\path[face] (0,2) rectangle (2,3);
+        \end{scope}
+        \begin{scope}[canvas is zx plane at y=2]
+          	\path[face, dashed] (0,1.5) rectangle (2,2.75);
+        \end{scope}
+
+        \begin{scope}[canvas is yx plane at z=2]
+            \path[face, even odd rule] (0,0) rectangle (5,4) (3,2.75) rectangle (2,1.5);
+        \end{scope}
+
+        \begin{scope}[canvas is zy plane at x=0]
+          	\path[face] (0,0) rectangle (2,5);
+        \end{scope}
+        \begin{scope}[canvas is zx plane at y=0]
+          	\path[face] (0,0) rectangle (2,4);
+        \end{scope}
+    \end{3dtikzpicture}
+\end{document}
