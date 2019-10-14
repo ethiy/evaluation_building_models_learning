@@ -77,7 +77,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
         Regarding \texttt{finesse}, it is also possible to have additional levels.
         The maximal level of 3 was chosen in order to preserve the generalizability of the taxonomy, since the more specific the error categorization is, the more observations we need to define the corresponding errors.
 
-        \begin{figure}[h]
+        \begin{figure}[htbp]
             \begin{center}
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy_tree}
                 \caption{
@@ -110,7 +110,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 \texttt{\gls{acr::bus}} corresponds to the case where two or more buildings are modeled as one.
                 In Figure~\ref{fig::bus}, two distinct buildings were identified as one building, eventhough they can be visually distinguished.\\
 
-                \begin{figure}[H]
+                \begin{figure}[htbp]
                     \centering
                     \ffigbox[\textwidth]{
                         \begin{subfloatrow}
@@ -163,7 +163,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 This is the opposite of the previous situation.
                 Figure~\ref{fig::bos} shows a single building that, when modeled, was subdivided into three parts.\\
 
-                \begin{figure}[H]
+                \begin{figure}[htbp]
                     \centering
                     \ffigbox[\textwidth]{
                         \includegraphics[width=.45\textwidth]{images/errors/building/over_segmentation}
@@ -186,7 +186,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 \texttt{\gls{acr::bib}} corresponds to the case where at least one building footprint border is incorrectly located.
                 A sample is shown in Figure~\ref{fig::bib}.\\
 
-                \begin{figure}[H]
+                \begin{figure}[htbp]
                     \centering
                     \ffigbox[\textwidth]{
                         \begin{subfloatrow}
@@ -247,7 +247,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                             Another case is where a circular footprint can be approximated by a polygon.
                 \end{itemize}
 
-                \begin{figure}[H]
+                \begin{figure}[htbp]
                     \centering
                     \ffigbox[\textwidth]{
                         \begin{subfloatrow}
@@ -308,7 +308,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 \texttt{\gls{acr::fus}} corresponds to the case where one facet is subdivided into two or more facets.
                 This is the same kind of error as \texttt{\gls{acr::bus}} but at the facet level.\\
 
-                \begin{figure}[H]
+                \begin{figure}[htbp]
                     \centering
                     \ffigbox[\textwidth]{
                         \begin{subfloatrow}
@@ -367,7 +367,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 \texttt{\gls{acr::fos}} corresponds to the case where two or more facets are modeled as one, as illustrated in Figure~\ref{fig::fos}.
                 This is to \texttt{\gls{acr::bos}} what \texttt{\gls{acr::fus}} is to \texttt{\gls{acr::bus}}.\\
 
-                \begin{figure}[H]
+                \begin{figure}[htbp]
                     \centering
                     \ffigbox[\textwidth]{
                         \begin{subfloatrow}
@@ -427,7 +427,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 As en example, Figure~\ref{fig::fib} shows that the central edge that links the two main roof sides does not correspond to the one on the image position.
                 This is a purely geometrical error similarly to \texttt{\gls{acr::bib}}.\\
 
-                \begin{figure}[H]
+                \begin{figure}[htbp]
                     \centering
                     \ffigbox[\textwidth]{
                         \begin{subfloatrow}
@@ -477,7 +477,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 \texttt{\gls{acr::fit}} corresponds to the case where the facet suffers from topological defects such as wrong primitive fitting (for example, a dome approximated by planar polygons).
                 In Figure~\ref{fig::fit}, we can observe how two cylindrical towers were reconstructed as a rectangular parallelepiped.\\
 
-                \begin{figure}[H]
+                \begin{figure}[htbp]
                     \centering
                     \ffigbox[\textwidth]{
                         \begin{subfloatrow}
@@ -534,7 +534,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 In mathematical terms, this means that the surface primitive parameters where misestimated.
                 In Figure~\ref{fig::fig}, the planar surface slope was miscalculated as flat while it was of \textit{ca.} \SI{25}{\degree}.\\
 
-                \begin{figure}[H]
+                \begin{figure}[htbp]
                     \centering
                     \ffigbox[\textwidth]{
                         \begin{subfloatrow}
@@ -602,7 +602,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
             This example, illustrated in Figure~\ref{fig::holes_levels}, makes the case for using similarity across \glspl{acr::lod} being instrumental for generalizability.\\
             This will also be an interesting option to use even if the error families were different as was porposed in Subsection~\ref{subsec::semantic_evaluation::general_framework::error_classification}.\\
 
-            \begin{figure}[h]
+            \begin{figure}[htbp]
                 \centering
                 \ffigbox[\FBwidth]{
                     \begin{subfloatrow}[2]
