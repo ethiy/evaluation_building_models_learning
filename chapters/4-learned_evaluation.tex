@@ -49,8 +49,8 @@ These are proposed to better predict errors in the model.
                 2 & \gls{acr::lod}-2 & \textsc{off} & $multi\_label(\texttt{Building Errors}, \texttt{Facet Errors})$\\
                 3 & \gls{acr::lod}-1 & \textsc{on} & $multi\_stage(\texttt{Valid}, \texttt{Building Errors})$\\
                 3 & \gls{acr::lod}-2 & \textsc{on} & $multi\_stage(\texttt{Valid}, \texttt{Building Errors}, \texttt{Facet Errors})$\\
-                3 & \gls{acr::lod}-1 & \textsc{off} & $multi\_label(\text{children}(\texttt{Building Errors}))$\\
-                3 & \gls{acr::lod}-2 & \textsc{off} & $multi\_label(\text{children}(\texttt{Building Errors})\cup \text{children}(\texttt{Facet Errors}))$\\
+                3 & \gls{acr::lod}-1 & \textsc{off} & $multi\_label(\operatorname{children}(\texttt{Building Errors}))$\\
+                3 & \gls{acr::lod}-2 & \textsc{off} & $multi\_label(\operatorname{children}(\texttt{Building Errors})\cup \operatorname{children}(\texttt{Facet Errors}))$\\
                 \bottomrule
             \end{tabular}
             \caption{
@@ -73,7 +73,7 @@ These are proposed to better predict errors in the model.
         depending on the class that is predicted in the first stage multi-class classifier, a second classification problem chooses between corresponding labels.
         This denoted by:
         \begin{equation*}
-            multi\_stage((l_1, l_2, \dots, l_3)) \equiv multi\_label(\text{children}(multi\_class(l_1, l_2, \dots, l_3))).
+            multi\_stage((l_1, l_2, \dots, l_3)) \equiv multi\_label(\operatorname{children}(multi\_class(l_1, l_2, \dots, l_3))).
         \end{equation*}
             
         \textbf{\gls{acr::efin}} = 1 level corresponds to the standard binary classification problem: \texttt{Valid} or \texttt{Erroneous}.
