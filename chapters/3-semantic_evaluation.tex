@@ -14,7 +14,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
 \section{\textsc{The general framework}}
     \label{sec::semantic_evaluation::general_framework}
     As stated previously in Subsection~\ref{subsec::introduction::contributions::positioning}, a semantic evaluation implies a categorization of errors affecting building models.
-    In the same subsection, we discussed the desired properties in order to achieve a large-scale and automatic semantic evaluation.
+    In the same subsection, we discussed the desired properties in order to achieve a \textbf{large-scale} and \textbf{automatic} semantic evaluation.
     Before delving into details, we first examine the implications of such properties on error definitions in Subsection~\ref{subsec::semantic_evaluation::general_framework::hierarchization_moderularity}.
     Next, Subsection~\ref{subsec::semantic_evaluation::general_framework::error_classification} presents a general layout of the proposed error taxonomy.
 
@@ -22,11 +22,11 @@ After discussing some properties of the chosen error defnitions, we explain, in 
         \label{subsec::semantic_evaluation::general_framework::hierarchization_moderularity}
         The goal of this subsection is to state the desired characteristics in the categorization of building model defects based on the discussion in Subsection~\ref{subsec::introduction::contributions::positioning}.
         We introduce first two notions: generalizability and exhaustivity.
-        These are directly linked to the large-scale aspect of the evaluation approach.
+        These are directly linked to the \textbf{large-scale} aspect of the evaluation approach.
         These are implemented in the error categorization based on two principles: hierarchization and modularity.
 
         \subsubsection{\textsc{The generalizability \textit{vs.} exhaustivity compromise}}
-            In Subsection~\ref{subsec::introduction::contributions::positioning}, we have seen how the large-scale constraint on the quality evaluation approach entails the method robustness to changes in the urban scene as well as to the pipeline behind the evaluated model.
+            In Subsection~\ref{subsec::introduction::contributions::positioning}, we have seen how the \textbf{large-scale} constraint on the quality evaluation approach entails the method robustness to changes in the urban scene as well as to the pipeline behind the evaluated model.
             The first condition implies the proposed error categorization capacity to be generalizable: the ability to describe defects of building models unhindered by the specificities of one scene or another.
             The second conveys the exhaustivity of the evaluation: the power to take into account all possible errors that a building model can be affected by, free of any consideration of its origin.\\
 
@@ -113,7 +113,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
         In the template structure presented in Section~\ref{subsec::semantic_evaluation::general_framework::error_classification}, were left out the \texttt{atomic} error definitions.
         Indeed, since they represent the most specific level, their choice is critical to guaranty both the desired exhaustivity and generalizability.
         We conducted a thourough inspection of all defects that we detected in our datasets and came up with the following definitions (\textit{cf.} Figures~\ref{fig::taxonomy}).
-        Eventhough these errors were defined based on models of buildings computed out of overhead acquired data at large-scales, we think they are exhaustive enough to describe the quality of models in other settings (fa\c{c}ade modeling, manually plotted \gls{acr::3d} models).
+        Eventhough these errors were defined based on models of buildings computed out of overhead acquired data at large scales, we think they are exhaustive enough to describe the quality of models in other settings (fa\c{c}ade modeling, manually plotted \gls{acr::3d} models).
 
         \subsubsection{\texttt{Building Errors} \textsc{family}}
             Herein are presented the \texttt{atomic} errors regarding the \gls{acr::lod}-0 and \gls{acr::lod}-1 aspects.

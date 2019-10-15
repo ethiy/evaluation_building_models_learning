@@ -731,7 +731,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             Scalability is at odds with both the heterogeneity of building models and the reference data used for evaluation.
             Both aspects are discussed herein.\\
 
-            Due to the large-scale requirement, the proposed categorization must be stable no matter how the treated urban scene change.
+            Due to the \textbf{large-scale} requirement, the proposed categorization must be stable no matter how the treated urban scene change.
             The same robustness is pursued when considering the different \gls{acr::3d} modeling approaches and the heterogenuous sensors behind the evaluated building models.
             As a consequence, the latter come in in all possible \glspl{acr::lod} and are vulnerable to particular defects, depending on the used modeling method and the input data type.
             Having each urban zone or building model type with its own specific error definitions would hinder scaling the defect categorization.
@@ -741,14 +741,14 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             Quality evaluation involves the use of reference data against which reconstructed building models are compared.
             In Subsection~\ref{subsec::state_of_the_art::quality::reference}, are discussed the different forms these data can take.
             A high quality reference usually requires manual labour that is evidently non scalable.
-            Actually, the less costly the reference data is, the more adaptive the evaluation method will be at large-scales.
+            Actually, the less costly the reference data is, the more adaptive the evaluation method will be at large scales.
             In fact, the best alternative would be, if possible, to avoid using reference data altogether.
 
         \subsubsection{\textsc{Automation}}
             Semantically aware inspection is a natural task for human operators.
-            It is, however, difficult to automate.
+            It is, however, challenging to automate.
             In fact, as seen in Computer Vision,\addref the more semantic tasks are, the more difficult they are to automate.
-            It is even more arduous taking into account the large-scale constraint which implies a robustness to the natural heterogeneity in urban scenes as well as the variance of modeling approches.
+            It is even more arduous taking into account the \textbf{large-scale} constraint which implies a robustness to the natural heterogeneity in urban scenes as well as the variance of modeling approches.
 
     \subsection{\textsc{Potential use}}
         \label{subsec::introduction::contributions::use}
@@ -792,7 +792,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
         \subsubsection{\textsc{Reconstruction method selection}}
             Evaluation of the building models can help selecting the most adapted reconstruction methods for a certain urban scene.
             Indeed, depending on the needs of the potential final user, some errors are to be watched more than others.
-            As an example, an insurance agent, who is only interested in \textbf{flood simulation}s, will not be interested by the geometric accuracy of \gls{acr::lod}-2 features and will focus principally at the \gls{acr::lod}-1 representation errors.
+            As an example, an insurance agent, who is only interested in flood simulations, will not be interested by the geometric accuracy of \gls{acr::lod}-2 features and will focus principally at the \gls{acr::lod}-1 representation errors.
             Modeling algorithms are naturally biased towards a given setting that depends on the hypotheses chosen by their creators.
             They will produce less errors when those conjectures are met and fail otherwise.
             These assumptions are fixed, for instance, in terms of building types (Haussmann style, Manhattan-world \dots), geometric criterea (planar surfaces, symmetry \dots).
