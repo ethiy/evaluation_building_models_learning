@@ -42,7 +42,7 @@
         57 (2.84\%) in Elancourt, 55 (7.35\%) for Nantes and 21 (4.39\%) in Paris-13.
         Most buildings are affected by the \texttt{Building Errors} family ($>$ 58.16\%) and the \texttt{Facet Errors} one ($>$ 75.94\%).
         At the \texttt{finesse} level 3, more differences are noticed across.
-        Over-segmentation errors are generally well represented, for all \gls{acr::lod}s, with at least 38.9\% and at most 66.8\%.
+        Over-segmentation errors are generally well represented, for all \glspl{acr::lod}, with at least 38.9\% and at most 66.8\%.
         The same is true for \texttt{FIG} (59.8-80\%).
         Otherwise, the presence ratio is within the percentage interval of [10, 30], except for topological defects.
         This negatively impacts the detection of such rare labels.
@@ -50,10 +50,13 @@
         They greatly change from Elancourt (less dense and more heterogeneous) to Paris and Nantes (compact and uniform patterns).
 
 \section{\textsc{Pipeline evaluation}}
+    \label{sec::experiments::evaluation}
+
     \subsection{\textsc{Experimental set-up}}
+        \label{subsec::experiments::evaluation::setup}
         Four feature configurations were tested: ``geometric features'' (\textbf{Geom.}) only, ``geometric and height features''(\textbf{Geom.} $\cup$ \textbf{Hei.}), ``geometric and image features''(\textbf{Geom.} $\cup$ \textbf{Im.}) as well as ``geometric, height and image features''(\textbf{All.}).
         Each feature modality generates a $20$ dimension vector.
-        The \gls{acr::dsm}s and orthorectified images used to derive height and image features have the same spatial resolution as the reconstruction input data.
+        The \glspl{acr::dsm} and orthorectified images used to derive height and image features have the same spatial resolution as the reconstruction input data.
         Labels are extracted from a non \textbf{exclusive} and \textbf{\gls{acr::elod}} $=$ \gls{acr::lod}-2 taxonomy.
         All \texttt{finesse} levels were tested. The overall accuracy is not interesting due to the highly unbalanced label distribution.
         We prefer reporting recall ($Rec$) and precision ($Prec$) ratios.
@@ -62,6 +65,7 @@
         We also summarize these two ratios with their harmonic mean, the F-score.
 
     \subsection{\textsc{Feature analysis}}
+        \label{subsec::experiments::evaluation::feature_analysis}
         We assess the added value of each modality. Various feature configurations are studied.
         They are compared with a baseline consisting in predicting the errors using only the \gls{acr::rmse}, which is the standard measure in most of \gls{acr::3d} reconstruction methods.
         We conclude the analysis by studying the feature importance per training zone.

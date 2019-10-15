@@ -539,7 +539,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         y
                     \end{bmatrix} &\mapsto \begin{bmatrix}
                         \sqrt{x^2 + y^2} \\
-                        \text{arctan}_2(y, x)
+                        \operatorname{arctan}_2(y, x)
                     \end{bmatrix},
                 \end{align*}
                 the dataset can be linearly separable.
@@ -664,7 +664,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 These predicates are of a specific form: only one dimension $i_b$ of the data is taken into account.
                 The output is then computed by applying a threshold $t_b$ to $x_{i_b}$.
                 This can be simplified as $P_b(\bm{x}) = \mathbb{1}_{x_{i_b} \geq t_b} $.
-                The chosen child is denoted $d_b(\bm{x}) \leftarrow \text{child}(b, \mathbb{1}_{x_{i_b} \geq t_b})$.
+                The chosen child is denoted $d_b(\bm{x}) \leftarrow \operatorname{child}(b, \mathbb{1}_{x_{i_b} \geq t_b})$.
                 Leafs are the terminal nodes of the tree and they do not apply any predicate to their input.
                 Instead, based on the assigned class $c(l) \in \left\{1,2,\dots,C\right\}$ of the leaf $l$, they predict the label of the input.
                 Each dimension $x_i \in \mathscr{X}_i$ is treated separately.
