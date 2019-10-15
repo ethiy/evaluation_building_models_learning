@@ -24,7 +24,7 @@ These are proposed to better model defect predictions.
 
     Errors are predicted based on learned statistical characteristics of the evaluated models.
     The learned approach is usually used to take care of highly semantic tasks, such as ours, that are otherwise hard to process using engineered metrics \addref.\\
-    Provided an initial manual annotation effort, the prediction phase is fully automatic, as will be proved by experimental results in Chapter~\ref{chap::experimental_setup}.
+    Provided an initial manual annotation effort, the prediction phase is fully automatic, as will be proved by experimental results in Chapter~\ref{chap::experiments}.
     In order for this approach to be scalable at large scales, and hence verify the second constraint in Subsection~\ref{subsec::introduction::contributions::positioning} which is \textbf{automation}, prediction results should be stable enough independently of the urban scene.
     This is fully studied in Chapter~\ref{chap::more_experiments}.\\
 
@@ -94,23 +94,23 @@ These are proposed to better model defect predictions.
         The proposed quality evaluation approach, being formulated as a supervized classification problem, requires extracting feature vectors describing characteristics of the evaluated model.
         This is possible through the use of the intrinsic properties of the building model, as well as comparisons with external data.\\
     
-        In intrinsic evaluation, the structure of the \gls{acr::3d} model can be directly used to extract geometric features.
-        Semantics as well as meta-data related to the building model could be processed also for the purpose of evaluating a model.
-        This corresponds to the minimal amount of information one can get from a model.
+        Intrinsic feature extraction consists in make use of the geometric structure of the \gls{acr::3d} model.
+        Equally, semantics, as well as building model meta-data, could be utilized for the purpose of intrinsically evaluating a model.
+        This case corresponds to the minimal amount of information one can use for building model evaluation.
         In this case, we talk about self-evaluation of building models.
-        Since we are considering all cases possible especially automatically reconstructed building models, only the model geometry is guaranteed to be always available.\\
+        Since we are considering all possible cases, especially automatically reconstructed building models, only the model geometry is guaranteed to be always available.\\
     
-        In extrinsic evaluation, features are extracted by comparing the polyhedric model to the available external data.
+        Extrinsic feature extraction relies on comparing the model to an available external data.
         Obviously, high quality reference models are the best type of data to compare the evaluated model to.
-        However, remininding the reader with the \textbf{large-scale} objective that was fixed earlier (subsection~\ref{subsec::introduction::contributions::use}), this is not a viable solution for this case.
+        However, taking into consideration the \textbf{large-scale} objective that was fixed earlier (subsection~\ref{subsec::introduction::contributions::use}), this is not a viable solution.
         We rely then on more basic reference data such as remote sensing acquired data that are the basis of large-scale modeling of urban scenes.\\
-        For instance, raw depth information can be utilized for such a task.
+        For instance, raw depth information can be used in quality evaluation.
         It can prove helpful in detecting geometric defects that are intrinsically of \gls{acr::3d} nature.
         This was illustrated in Figure~\ref{fig::fig}, as comparing the projected model to the orthoimage did not yield anything out of place, contrarily to the \gls{acr::dsm} comparison.
-        Depth data can be take multiple forms: unstructured point clouds, originating for instance from \gls{acr::lidar} sensors, or dense depth maps such as \gls{acr::dsm} for the overhead case.\\
-        Optical images can be also used.
-        These provide complementary information such as edges (high frequencies, in general) and textures which are suited for inner defect detection as an example.
-        This type of data come in different shapes: oblique images or orthoimages.
+        Depth data can take multiple forms: unstructured point clouds, originating for instance from \gls{acr::lidar} sensors, or dense depth maps such as \gls{acr::dsm} for the overhead case.\\
+        Optical images can also be employed in this framework.
+        These provide complementary information such as edges (high frequencies, in general) and textures which are suited for inner defect detection as an example (\textit{cf.} Subfigure~\ref{subfig::fus_2d}).
+        This type of data comes usually in two different shapes: oblique images or orthoimages.
     
     \subsection{\textsc{Classifier choice}}
         \label{subsec::learned_evaluation::classification::classifiers}
@@ -120,18 +120,25 @@ These are proposed to better model defect predictions.
         Hereafter, we explain how each one is used in this setting.\\
 
         \paragraph{Random Forest}
-            Random Forest classifiers~\parencite{breiman2001random,criminisi2013decision} are selected.
-            They can manage a large number of features with different dynamics and coming from multiple modalities.
-            Relying on their bagging property, a high number of trees ($1,000$ elements) is necessary to cover most of the feature space, while a limited tree depth ($4$) helps avoiding overfitting during training.
-            It adapts to any of our classification paradigm: multi-class or multi-label.
-            In the latter case, a one-vs-all approach is adopted in addition so as to address each label separately.
+            Random Forest classifiers is a natural choice in our case.
+            As seen in Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::rf}, this type of classifiers can manage a large number of features with different dynamics and coming from multiple modalities.
+            In fact, the computed features can be geometric, image based or height based.
+            Each one of these modalities can be heterogeneous in terms of extracted value types as will be discussed later in Section~\ref{sec::learned_evaluation::baseline}.
+            Relying on their bagging property, a high number of trees is chosen to cover most of the feature space, while a limited tree depth was set to avoid overfitting during training.
+            It adapts easily to any of our classification paradigms: multi-class or multi-label.
+            The first multi-class case is handled natively by the Random Forest classifier, while for the second one, a one-vs-all approach is adopted so as to address each label separately.
 
         \paragraph{\acrshort*{acr::svm}}
-            \gls{acr::svm}.
+            \glspl{acr::svm} do not manage heterogeneity in feature vectors and only binary classification is inherently handled.
+            However, it offers other advantages that are not met by Random Forest.
+            In fact, \glspl{acr::svm} can be useful when labels are not equally distributed in the training set.
+            This is actually the case of some errors that are rare in our dataset: specifically the inaccurate topology ones (\textit{cf.} Subsection~\ref{subsec::experiments::datasets::stats}).
+            This type of classifiers naturally encorporates kernels such as the ones presented later in Subsection~\ref{subsec::learned_evaluation::richer_features::graph}.
+            Finally, it is also preferred when dealing with high dimensional feature vectors like those produced by \glspl{acr::scatnet} (\textit{cf.} Subsection~\ref{subsec::learned_evaluation::richer_features::image}).
 
 \section{\textsc{Feature baseline}}
     \label{sec::learned_evaluation::baseline}
-    Since there is no comparable work that studies the previously defined errors, we propose a baseline for each one of the three modalities: geometric, height based and image based features.
+    Since there is no comparable work that studied the errors defined in Chapter~\ref{chap::semantic_evaluation}, we propose a baseline for each one of the three modalities: geometric, height based and image based features.
     Attributes are kept simple so as to be used in most situations relying on generally available data.
     We avoid computing and comparing \gls{acr::3d} lines~\parencite{michelin2013quality}, correlation scores~\parencite{boudet2006supervised} or any \gls{acr::sfm} based metric~\parencite{kowdle2011active}.
     In addition of being very costly, these features are methodologically redundant with the \gls{acr::3d} modeling techniques.
@@ -322,4 +329,6 @@ These are proposed to better model defect predictions.
 \section{\textsc{Richer features}}
     \label{sec::learned_evaluation::richer_features}
     \subsection{\textsc{Graph classification}}
+        \label{subsec::learned_evaluation::richer_features::graph}
     \subsection{\textsc{Image classification}}
+        \label{subsec::learned_evaluation::richer_features::image}

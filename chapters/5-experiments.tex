@@ -5,10 +5,13 @@
 \clearpage
 
 \section{\textsc{Datasets}}
+    \label{sec::experiments::datasets}
     
     \subsection{\textsc{Data preprocesing}}
+        \label{subsec::experiments::datasets::preprocessing}
 
     \subsection{\textsc{Urban scenes and modeling techniques}}
+        \label{subsec::experiments::datasets::scenes}
         \gls{acr::3d} models from three different cities of France are selected in order to assess the performance of our framework: \textbf{Elancourt}, \textbf{Nantes}, and the XIII\textsuperscript{th} district of Paris (\textbf{Paris-13}) (Figure~\ref{fig::zones_orthos}).
         \textbf{Elancourt} is a small city exhibiting a high diversity of building types: residential areas (hipped roof buildings), and industrial districts (larger buildings with flat roofs).
         \textbf{Nantes} represents a denser urban setting with lower building diversity.
@@ -28,6 +31,7 @@
         Figure~\ref{fig::data_stats} reports modeling errors statistics over the annotated buildings.
 
     \subsection{\textsc{Error statistics}}
+        \label{subsec::experiments::datasets::stats}
         Unqualifiable buildings represent a small\footnote{
             Geometrically inconsistent \gls{acr::3d} models were filtered out in a preprocessing (nadir projection) step.
             This fraction corresponds only to the occluded (partially or completly) buildings that could not be qualified.
