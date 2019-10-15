@@ -242,9 +242,9 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         Quality evaluation approaches presented hereinabove are mostly unsuitable for the stated objectives in Subsection~\ref{subsec::introduction::contributions::positioning}.\\
 
         In fact, the semantic character of the evaluation overrules approaches relying only on geometry based metrics.
-        This represents most of the methods discussed earlier (\textit{c.f.} Subsection~\ref{subsec::state_of_the_art::quality::output}).
+        This represents most of the methods discussed earlier (\textit{cf.} Subsection~\ref{subsec::state_of_the_art::quality::output}).
         Actually, these metrics could be used once a semantic error is identified to help quantify the defect.
-        On the other hand, the need for reasonably available reference data, which is dictated by the \textbf{large-scale} constraint, implies the reliance on remote sensing data based methods (\textit{c.f.} Subsection~\ref{subsec::state_of_the_art::quality::reference}).\\
+        On the other hand, the need for reasonably available reference data, which is dictated by the \textbf{large-scale} constraint, implies the reliance on remote sensing data based methods (\textit{cf.} Subsection~\ref{subsec::state_of_the_art::quality::reference}).\\
 
         Methods that are both semantic and rely only on more readily available remote sensing data are in the number of two:~\textcite{boudet2006supervised,michelin2013quality}.
         Both define semantic errors that are predicted with the help of Oblique images and \glspl{acr::dsm}.
@@ -257,7 +257,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
 \section{\textsc{Supervised learning and pattern recognition}}
     \label{sec::state_of_the_art::mlpr}
-    In this section are presented notions from statistic learning and computer vision domains that were usefull for this work.
+    In this section are presented notions from statistic learning and computer vision domains that were useful for this work.
     This constitutes a simple reminder and is not a thorough survey of the field.
     Section~\ref{subsec::state_of_the_art::mlpr::classifiers} start off with a brief description of utilized supervised classifiers in .
     Second (section~\ref{subsec::state_of_the_art::mlpr::feature_extraction}) comes a presentation of computer vision concepts on which our method is based.
@@ -626,12 +626,15 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                             Even with an expert knowledge, one can easily overfit to the training data.
                     \item In the same sense, parameter fitting is not straight-forward and time-consuming.
                             Practically, it is a result of a trial and error or grid search approach.
-                    \item Eventhough it can be adapted to multi-class or multi-output setteings, the \gls{acr::svm} is natively designed for binary classification.
+                    \item Eventhough it can be adapted to multi-class or multi-output settings, the \gls{acr::svm} is natively designed for binary classification.
+                    \item \gls{acr::svm} does not handle well attributes of different types.
+                            Features vectors are preprocessed, usually normalized, before training.
                     \item \gls{acr::svm} does not yield probabilities natively.
                             Although it is possible to compute scores that are in the unit interval, these are difficult to interpret as probabilities.
                 \end{itemize}
 
         \subsubsection{\textsc{Random forest}}
+            \label{subsubsec::state_of_the_art::mlpr::classifiers::rf}
             A random forest is an agregation of decision tree classifiers.
             First, is explained how the latter works.
             Afterwards, we describe how the aggregation of basic classifiers can be beneficial for classification, especially in the case of decision trees.
