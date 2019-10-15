@@ -138,13 +138,13 @@ These are proposed to better model defect predictions.
 
 \section{\textsc{Feature baseline}}
     \label{sec::learned_evaluation::baseline}
-    Since there is no comparable work that studied the errors defined in Chapter~\ref{chap::semantic_evaluation}, we propose a baseline for each one of the three modalities: geometric, height based and image based features.
+    Since there is no comparable work that studied the learned detection of errors defined in Chapter~\ref{chap::semantic_evaluation}, we propose a baseline for each one of the three modalities: geometric, height based and image based features.
     Attributes are kept simple so as to be used in most situations relying on generally available data.
     We avoid computing and comparing \gls{acr::3d} lines~\parencite{michelin2013quality}, correlation scores~\parencite{boudet2006supervised} or any \gls{acr::sfm} based metric~\parencite{kowdle2011active}.
     In addition of being very costly, these features are methodologically redundant with the \gls{acr::3d} modeling techniques.
     They are, hence, vulnerable to the same defects.
     Conversely, evaluation metrics used in the \gls{acr::3d} building reconstruction literature (\textit{e.g.}, \gls{acr::rmse}) are too weak for such a complex task.
-    This will be proven later on in Section~\ref{}.
+    This will be proven later on in Section~\ref{subsec::experiments::evaluation::feature_analysis}.
 
     In Subsection~\ref{subsec::learned_evaluation::baseline::geometric}, we describe the used baseline for geometric features.
     Next, in Subsection~\ref{subsec::learned_evaluation::baseline::height}, height based features extraction is explained.
@@ -158,7 +158,7 @@ These are proposed to better model defect predictions.
 
         \begin{equation}
         	\label{eq::model_graph}
-        	\mathsf{M} \triangleq \Big(\mathsf{F}, \mathsf{E} \triangleq \left\{ \left\{f, g\right\} \subset \mathsf{F} : f \sim g \right\} \Big).
+        	\mathsf{M} \triangleq \left(\mathsf{F}, \mathsf{E} \triangleq \left\{ \left\{f, g\right\} \subset \mathsf{F} : f \sim g \right\} \right).
         \end{equation}
 
         \begin{figure}[htbp]
@@ -172,29 +172,29 @@ These are proposed to better model defect predictions.
         \end{figure}
 
         The dual graph is illustrated in Figure~\ref{fig::geometric_features}.
-        For each facet $f \in \mathsf{F}$, we compute its degree (\textit{i.e.}, number of vertices; $d(f) \triangleq \vert\left\{v : v\text{ is a vertex of }f\right\}\vert$), its area $\mathscr{A}(f)$ and its circumference $\mathscr{C}(f)$.
+        For each facet $f \in \mathsf{F}$, we compute its degree (\textit{i.e.}, number of vertices; $d(f) \triangleq \left\lvert\left\{v : v\text{ is a vertex of }f\right\}\right\rvert$), its area $\mathscr{A}(f)$ and its circumference $\mathscr{C}(f)$.
         These are all geometric invariants with respect to $\mathbb{R}^3$ isometries, contrarily to facet centroids $\mathscr{G}(f)$ and normals $\vec{n}(f)$.
         This is countersteped by looking, for each graph edge $e=\left\{f, g\right\} \in \mathsf{E}$, for the distance between facet centroids $\Vert \mathscr{G}(f) - \mathscr{G}(g) \Vert$ and the angle formed by their normals $\arccos(\vec{n}(f) \cdot \vec{n}(g))$.
         Statistical characteristics are then computed over building model facets using specific functions $S$, like a histogram:        
 
         \begin{equation}
             \label{eq::histogram_extractor}
-        	S = S^p_{hist}: l \mapsto histogram(l, p),
+        	S = S^p_{\text{histogram}}: l \mapsto histogram(l, p),
         \end{equation}
         with $p$ standing for histogram parameters. A simpler option could be:
         \begin{equation}
             \label{eq::statistical_extractor}
-            S = S_{synth}: l \mapsto \begin{bmatrix}
+            S = S_{\text{manual}}: l \mapsto \begin{bmatrix}
                 \max(l)\\
                 \min(l)\\
-                \text{mean}(l)\\
-                \text{median}(l)\\
+                \operatorname{mean}(l)\\
+                \operatorname{median}(l)\\
                 \sigma(l)
             \end{bmatrix},
         \end{equation}
         where:
         \begin{conditions}
-            \sigma(l) & represents the standard deviation over a tuple $l$
+            \sigma(l) & represents the standard deviation over samples $l$.
         \end{conditions}
 
         These features are designed for general topological errors.
@@ -206,7 +206,7 @@ These are proposed to better model defect predictions.
 
         \begin{equation}
         	\label{eq::geometric_features}
-            v_{geometric}(\mathsf{M}) = \begin{bmatrix}
+            v_{\text{geometry}}(\mathsf{M}) = \begin{bmatrix}
             	S \Big(\big(d(f)\big)_{f \in \mathsf{F}}\Big)\\
                 S \Big(\big(\mathscr{A}(f)\big)_{f \in \mathsf{F}}\Big)\\
                 S \Big(\big(\mathscr{C}(f)\big)_{f \in \mathsf{F}}\Big)\\
@@ -234,8 +234,9 @@ These are proposed to better model defect predictions.
 
         \begin{equation}
             \label{eq::height_based_features}
-            v_{height}(\mathsf{M}) = S\big( dsm - alt \big).
+            v_{\text{height}}\left(\mathsf{M}\right) = S\left( dsm - alt \right).
         \end{equation}
+        
         \begin{figure}[htpb]
             \centering
             \includestandalone[width=\textwidth, mode=buildnew]{figures/features/height_based}
@@ -274,10 +275,10 @@ These are proposed to better model defect predictions.
         
         \begin{equation}
             \label{eq::corr_seg}
-            \mathsf{D}_S(s, I) \triangleq S \bigg( \Big(\frac{\nabla I(g) \cdot \vec{n}(s)}{\Vert \nabla I(g)\Vert}\Big)_{g \in I \textrm{ and } g \cap s \neq \emptyset} \bigg).
+            \mathsf{D}_S(s, I) \triangleq S \left( \left(\frac{\nabla I(g) \cdot \vec{n}(s)}{\left\rVert \nabla I(g)\right\rVert}\right)_{\substack{g \in I \\ g \cap s \neq \emptyset}} \right).
         \end{equation}
 
-        \begin{figure}[H]
+        \begin{figure}[htpb]
             \begin{center}
                 \floatbox{figure}{
                     \begin{subfloatrow}[2]
@@ -304,12 +305,12 @@ These are proposed to better model defect predictions.
         \end{figure}
 
         Once the distribution is computed over a segment, it is stacked over all facet edges to define the distribution over projected facets.
-        In the case of histograms $S_{hist}^p$ with the same parameters (and thus the same bins), it is equivalent to summing out the previous vectors $\mathsf{D}_{S_{hist}^p}(s, I)$ over edges $s$ from the projection $q(f)$ of the facet $f$.
+        In the case of histograms $S^p_{\text{histogram}}$ with the same parameters (and thus the same bins), it is equivalent to summing out the previous vectors $\mathsf{D}_{S^p_{\text{histogram}}}(s, I)$ over edges $s$ from the projection $q(f)$ of the facet $f$.
         In order to take into account the variability of segment dimensions, this sum is normalized by segment lengths.
 
         \begin{equation}
             \label{eq::corr_fac}
-            D_{S_{hist}^p}(f, I) \triangleq \sum_{s \in q(f)} \Vert s \Vert \cdot \mathsf{D}_{S_{hist}^p}(s, I).
+            D_{S^p_{\text{histogram}}}\left(f, I\right) \triangleq \sum_{s \in q(f)} \left\rVert s \right\lVert \cdot \mathsf{D}_{S^p_{\text{histogram}}}(s, I).
         \end{equation}
 
         The same can be done over all facets of a building $\mathsf{M}$ (Equation~\ref{eq::corr_bul}).
@@ -319,7 +320,7 @@ These are proposed to better model defect predictions.
 
         \begin{equation}
             \label{eq::corr_bul}
-            v_{image}(\mathsf{M}) = D_{S_{hist}^p}(\mathsf{M}, I) \triangleq \sum_{f \in \mathsf{F}} \mathscr{A}(q(f)) \cdot \mathsf{D}_{S_{hist}^p}(f, I).
+            v_{\text{image}}\left(\mathsf{M}\right) = D_{S^p_{\text{histogram}}}\left(\mathsf{M}, I\right) \triangleq \sum_{f \in \mathsf{F}} \mathscr{A}\left(q(f)\right) \cdot \mathsf{D}_{S^p_{\text{histogram}}}(f, I).
         \end{equation}
         
         These image-based attributes are helpful for precision error detection.
