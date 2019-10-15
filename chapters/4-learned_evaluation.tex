@@ -15,14 +15,18 @@ These are proposed to better model defect predictions.
 
 \section{\textsc{Quality evaluation as classification}}
     \label{sec::learned_evaluation::classification}
-    In order to satisfy the \textbf{large-scale} condition imposed at Subsection~\ref{subsec::introduction::contributions::positioning}, we propose to use a supervized learning method.
-    As a first approach, errors are predicted at the building level, even for \texttt{Facet Errors}.
-    At a second time, once this previous task works perfectly, one can try and detect \gls{acr::lod}-2 $\cup$ \gls{acr::lod}-3 errors at facet level.
-    This is not explored in this work.\\
+    In order to satisfy the \textbf{large-scale} condition imposed at Subsection~\ref{subsec::introduction::contributions::positioning}, we propose to formulate the problem as a supervized learning one.
+    Errors are considered as labels while features are computed so as to describe the observed buildings.
+    Actually, as a first approach, the existence of all errors is predicted at the building level, even for \texttt{Facet Errors} labels\footnote{These errors are, in fact, by definition more local.}.
+    Determining which facet is affected by an error is a much more challenging problem than the previous one.
+    That is why the facet level prediction of errors is not explored in this work.
+    The goal is, instead, to test the feasibility of the learning approach.\\
+
     Errors are predicted based on learned statistical characteristics of the evaluated models.
     The learned approach is usually used to take care of highly semantic tasks, such as ours, that are otherwise hard to process using engineered metrics \addref.\\
-    Provided an initial manual annotation effort, the prediction phase is fully automatic.
-    This, consequently, verifies the second constraint in~\ref{subsec::introduction::contributions::positioning} which is \textbf{automation}.\\
+    Provided an initial manual annotation effort, the prediction phase is fully automatic, as will be proved by experimental results in Chapter~\ref{chap::experimental_setup}.
+    In order for this approach to be scalable at large scales, and hence verify the second constraint in Subsection~\ref{subsec::introduction::contributions::positioning} which is \textbf{automation}, prediction results should be stable enough independently of the urban scene.
+    This is fully studied in Chapter~\ref{chap::more_experiments}.\\
 
     Two aspects should be discussed to in order to apply this approach to the building \gls{acr::3d} model quality evaluation.
     First, as seen in Section~\ref{sec::semantic_evaluation::label_extraction}, the parametric nature of the taxonomy leads to a varying set of labels.
@@ -34,7 +38,7 @@ These are proposed to better model defect predictions.
 
     \subsection{\textsc{Different classification problems}}
         \label{subsec::learned_evaluation::classification::different_porblems}
-        The nature of the different classification problems are presented in Table~\ref{tab::classification_problems} depending on the three evaluation parameters from Subsection~\ref{sec::semantic_evaluation::label_extraction}.
+        The nature of the different classification problems are presented in Table~\ref{tab::classification_problems} depending on the three evaluation parameters defined in Subsection~\ref{sec::semantic_evaluation::label_extraction}.\\
 
         \begin{table}[htbp]
             \small
@@ -69,10 +73,10 @@ These are proposed to better model defect predictions.
             binary(l_1, l_2) \equiv multi\_class(l_1, l_2)
         \end{equation*}
         Two consecutive classification problems can be concatenated in a hierchical multi-stage classification:
-        depending on the class that is predicted in the first stage multi-class classifier, a second classification problem chooses between corresponding labels.
+        depending on the class that is predicted in the first stage multi-class classifier, a second classification problem predicts the existence of some corresponding labels.
         This denoted by:
         \begin{equation*}
-            multi\_stage((l_1, l_2, \dots, l_3)) \equiv multi\_label(\operatorname{children}(multi\_class(l_1, l_2, \dots, l_3))).
+            multi\_stage(l_1, l_2, \dots, l_3) \equiv multi\_label(\operatorname{children}(multi\_class(l_1, l_2, \dots, l_3))).
         \end{equation*}
             
         \textbf{\gls{acr::efin}} = 1 level corresponds to the standard binary classification problem: \texttt{Valid} or \texttt{Erroneous}.
