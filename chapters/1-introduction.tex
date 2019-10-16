@@ -144,8 +144,8 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
         \subsubsection{\textsc{Autonomous navigation related challenges}}
             Autonomous navigation has seen a great technological leap in recent years.
             Localization is an important step in visual navigation~\parencite{bonin2008visual}.
-            \Gls{acr::3d} models play an important role in visual localization~\parencite{piasco2018survey, biljecki2015applications}.\\
-            The basic idea is to match an image with a known \gls{acr::3d} model of the city which can be textured or not~\parencite{arth2015instant, ardeshir2014gis, cham2010estimating, christie2016semantics} as shown in Figure~\ref{fig::navigation}.
+            \Gls{acr::3d} models play an important role in visual localization~\parencite{biljecki2015applications,piasco2018survey}.\\
+            The basic idea is to match an image with a known \gls{acr::3d} model of the city which can be textured or not~\parencite{cham2010estimating,ardeshir2014gis,arth2015instant,christie2016semantics} as shown in Figure~\ref{fig::navigation}.
 
             % \addtocounter{footnote}{-1}
             \footnotetext{
@@ -217,7 +217,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             For instance, tourists can use such tools to prepare their trip by familiarizing themselves with the city they are visiting.
             This can be possible through mixed or augmented reality as shown by~\textcite{devaux20183d} (\textit{cf.} Figure~\ref{subfig::augemented_reality}).
             It can also be employed in the service of art.
-            Actually,~\textcite{aubry2014painting} and~\textcite{russell2011automatic} illustrated how it is possible to align paintings or photographs with \gls{acr::3d} scenes(\textit{cf.} Figure~\ref{subfig::historical_pose}).\\
+            Actually,~\textcite{russell2011automatic,aubry2014painting} illustrated how it is possible to align paintings or photographs with \gls{acr::3d} scenes(\textit{cf.} Figure~\ref{subfig::historical_pose}).\\
             \begin{figure}[htpb]
                 \centering
                 \ffigbox[\FBwidth]{
@@ -312,7 +312,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
 
             Besides technical difficulties, there are ethical and legal issues when reconstructing \gls{acr::3d} models of humans and vehicles.
             Indeed, accurate reconstruction involves person indentification.
-            This has proven to be an intricate subject, as shown by~\textcite{tavani2011ethics} and~\textcite{thornton2010individual}.
+            This has proven to be an intricate subject, as shown by~\textcite{thornton2010individual,tavani2011ethics}.
             Adding to the previous discussion about the high temporal frequency of such objects, seeking the most faithfull models proves to be superfluous.
             In fact, one can populate city models by generic \gls{acr::cad} models of these humans~\parencite{shao2007autonomous} and vehicles.
             Even more so, a lot of aspects of human/vehicle and city interactions do not require \gls{acr::3d} modeling.
@@ -463,7 +463,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             As argued previously, compaction, which results from semantics, is a primordial characteristic of building \gls{acr::3d} models.
             It implies a discretization in generalization levels.
             Indeed,~\textcite{groger2012citygml} uses this property to formalize a discrete and intuitive \gls{acr::lod} scale.
-            Even though the original \gls{acr::lod} specification was far from being mature it is widely used in the \gls{acr::gis} and computer vision communities~\parencite{biljecki2014formalisation, rau2006lod}.
+            Even though the original \gls{acr::lod} specification was far from being mature it is widely used in the \gls{acr::gis} and computer vision communities~\parencite{rau2006lod,biljecki2014formalisation}.
             A detailed study of the issue was conducted in~\textcite{biljecki2014formalisation} and ~\textcite{biljecki2016improved}.
             All the same, this work will content itself with the simple intuitive definition of \glspl{acr::lod}.\\
             A \gls*{acr::lod}-0 model corresponds to the \gls{acr::2d5} footprint of the building.
@@ -536,10 +536,10 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             Full automation is still unattainable, especially when it comes to semantics.
             Different strategies are used, where each one targets a specific resolution, balancing between compaction and geometric accuracy.
             Ordered from the most to the least compact, these strategies are listed herein.
-            In a Manhattan-world setting, one assumes that buildings are collections of boxes~\parencite{vanegas2010building, li2016manhattan}.~\textcite{lafarge2012creating, nan2017polyfit}
-            relies on the hypothesis that building are made of piecewise planar primitives.
-            Rich grammars can give rise to less compact but more accurate models, as is the case of~\textcite{demir2015procedural} or~\textcite{zeng2018neural}.
-            Mesh simplification strategies comes last in terms of compaction~\parencite{verdie2015lod, zhou20102}.
+            In a Manhattan-world setting, one assumes that buildings are collections of boxes~\parencite{vanegas2010building, li2016manhattan}.
+            \textcite{lafarge2012creating, nan2017polyfit} relies on the hypothesis that building are made of piecewise planar primitives.
+            Rich grammars can give rise to less compact but more accurate models, as is the case of~\textcite{demir2015procedural,zeng2018neural}.
+            Mesh simplification strategies comes last in terms of compaction~\parencite{zhou20102,verdie2015lod}.
             A sketch of this comparison is presented in Figure~\ref{fig::modeling_strategies}.\\
             \begin{figure}[htpb]
                 \centering
@@ -625,7 +625,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
         This leads to the use of \gls{acr::3d} \glspl{acr::lcc} to check the consistency of city models~\parencite{gorszczyk2016automatic}.
         The idea relies, however, on the presence of reference data to compare to.
         While being very useful for format conversion, sanity checks, as intended in the original paper, are pointless when inspecting \gls{acr::3d} models in the wild.\\
-        Not all efforts did fully explore the topological possiblities that are provided by the standard~\parencite{biljecki2016most, ledoux2013validation}.
+        Not all efforts did fully explore the topological possiblities that are provided by the standard~\parencite{ledoux2013validation,biljecki2016most}.
         In fact, most assume that polygons and solids in the representation are not allowed to have holes, like the work of~\textcite{groger2011achieve, alam2014towards}.
         This was, however, the case of~\textcite{ledoux2013validation}.
         Their work built on the axioms of~\textcite{groger2011achieve}: it does not only deal with polygons and surfaces, but also takes care of solids and allows holes of different dimensions (polygons with holes, surfaces with boundaries\footnote{

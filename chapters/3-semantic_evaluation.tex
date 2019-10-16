@@ -245,7 +245,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 Actually, semantics play a role as \texttt{\gls{acr::bib}} is mainly linked to the end user preferences: one can ignore errors up to a certain threshold. 
                 As with previous \texttt{\gls{acr::bus}} and \texttt{\gls{acr::bos}} errors, the footprint border precision is understandably susceptible on the quality of the input data used for modeling.
                 It is also expected that the error detection precision will hinge on the resolution of the used reference data and its registration accuracy.
-                Regarding automatic modeling methods, border imprecision can be attributed to the quality of the used edge detection algorithms~\parencite{nan2015template,baillard1999automatic,werner2002new} or inaccurate surface estimation\footnote{
+                Regarding automatic modeling methods, border imprecision can be attributed to the quality of the used edge detection algorithms~\parencite{baillard1999automatic,werner2002new,nan2015template} or inaccurate surface estimation\footnote{
                     The border is computed as intersection of the detected surfaces.
                 }~\parencite{durupt2006automatic,xiong2014graph}.
                 Outside the scope this study, one can try also to estimate the imprecision so as to correct the reconstruction.
@@ -400,10 +400,10 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 For instance, superstructures like dormer windows can be big enough to be confused with the roof facets.
                 Another setting where surfaces are hard to extract occurs when a building part is shadowed by an other that is higher.
                 This is depicted in Subfigure~\ref{subfig::fus_2d}.
-                Methods relying only on plane extraction~\parencite{durupt2006automatic,taillandier2004automatic,nan2017polyfit} are particularly vulnerable to this error type.\\
+                Methods relying only on plane extraction~\parencite{taillandier2004automatic,durupt2006automatic,nan2017polyfit} are particularly vulnerable to this error type.\\
 
                 This defect can be mitigated through the use of \gls{acr::3d} lines as cues to guide the plane extraction~\parencite{zebedin2008fusion,sinha2009piecewise}.
-                One can also discard plane extraction all together and try to reconstruct the building surface based only on \gls{acr::3d} lines (in other words, a wireframe building model)~\parencite{langlois2019surface,hofer2017efficient}.
+                One can also discard plane extraction all together and try to reconstruct the building surface based only on \gls{acr::3d} lines (in other words, a wireframe building model)~\parencite{hofer2017efficient,langlois2019surface}.
                 Using grammars of possible stuctures is another alternative, provided it is adequate to the modeled building.
                 \textcite{lafarge2008structural} fits the best type of roof models to alleviate issues caused by high levels of noise like when working with Satellite based \glspl{acr::dsm}.
                 In some cases, there may be no remedy for the issue, as the used grammar is not exhaustive enough, a \gls{acr::3d} line goes undetected or even a human operator intervention is unable to dispel the ambiguity.
@@ -704,7 +704,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
             ``Z translation'' is the last label in ``Reconstruction errors'' and is either a \texttt{\gls{acr::big}} error when working at \gls{acr::lod}-0 $\cup$ \gls{acr::lod}-1 level, or included into \texttt{\gls{acr::fig}} if dealing with flat roof facets.
             Finally, ``vegetation occlusion'' and `` non existing'' are gathered into the \texttt{Unqualifiable} label at \texttt{finesse} level 0.\\
 
-            Last, \textcite{boudet2006supervised} studied rather the acceptability of a model as a whole.
+            Last,~\textcite{boudet2006supervised} studied rather the acceptability of a model as a whole.
             Confidence in a building model is a subjective assessment of building models that depend on the end user needs.
             Consequently, such a taxonomy cannot directly fit with our labels.
             The acceptability dimension can be incorporated into our framework by attributing a confidence score to each error: for example, a prediction probability.        

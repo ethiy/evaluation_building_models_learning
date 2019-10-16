@@ -27,7 +27,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         \label{subsec::state_of_the_art::building_modeling::building_extraction}
         In automatic building modeling, in order to model the building surface out of the input sensor data, the building location must first be determined.
         There are actually two ways to approach this problem.
-        The first relies on retrieving building footprints out of a \gls{acr::gis} database, such as cadastral ones~\parencite{horna2007building,durupt2006automatic,biljecki2017generating,biljecki2019raise,taillandier2004automatic,ledoux2011topologically}.
+        The first relies on retrieving building footprints out of a \gls{acr::gis} database, such as cadastral ones~\parencite{taillandier2004automatic,durupt2006automatic,horna2007building,ledoux2011topologically,biljecki2017generating,biljecki2019raise}.
         In constrast, the second approach type extracts building outlines directly from the input sensor data~\parencite{poullis2009automatic,lafarge2012creating,nguatem2017modeling,zhu2018large}.
         Both approaches suffer from some shortcomings.\\
 
@@ -57,18 +57,18 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         They can be classified in three categories: Model-driven, Data-driven and mixed approaches.\\
 
         Model-driven, also called top-down, methods rely on strong assumptions on the type of buildings to be modeled.
-        For example the Manhattan-world class assumes that buildings are an aggregation of boxes~\parencite{li2016manhattan,vanegas2010building,ledoux2011topologically,arroyo2015dimension}.
+        For example the Manhattan-world class assumes that buildings are an aggregation of boxes~\parencite{vanegas2010building,ledoux2011topologically,arroyo2015dimension,li2016manhattan}.
         This is actually an instance of grammars utilized in procedural modeling.
-        In the latter, a set of predetermined rules are used to determine the best shapes, out of a library, in order to better fit the input data~\parencite{lafarge2008structural,demir2015procedural,martinovic2013bayesian,mathias2011procedural,zeng2018neural,koutsourakis2009single,nan2015template,zhou20102}.
+        In the latter, a set of predetermined rules are used to determine the best shapes, out of a library, in order to better fit the input data~\parencite{lafarge2008structural,koutsourakis2009single,zhou20102,mathias2011procedural,martinovic2013bayesian,nan2015template,demir2015procedural,zeng2018neural}.
         Top-down approaches are usually used when the input data resolution is not sufficiently accurate to directly retrieve detailed architectural features of the building~\parencite{lafarge2008structural}.\\
 
         On the other hand, data-driven, or bottom-up, modeling techniques need very high resolution sensor data in order to retrieve constituing geometric features of the building.
         This is usually achieved using primitive extraction.
-        For instance, building surfaces could be viewed as piece-wise planar structures~\parencite{nan2017polyfit,taillandier2004automatic,lafarge2012creating}.
+        For instance, building surfaces could be viewed as piece-wise planar structures~\parencite{taillandier2004automatic,lafarge2012creating,nan2017polyfit}.
         As a consequence, plane arrangements are drawn from the original data.
-        Edges are also examples of features that can be extracted from the data to guide building modeling~\parencite{baillard1999automatic,}.
+        Edges are also examples of features that can be extracted from the data to guide building modeling~\parencite{baillard1999automatic}.
         A second step consists in aggregating the extracted geometric features into a model.
-        This is usually implemented either through a greedy approach~\parencite{taillandier2004automatic} or a global optimization method~\parencite{zhu2018large,holzmann2018semantically,poullis2013framework,verdie2015lod}.\\
+        This is usually implemented either through a greedy approach~\parencite{taillandier2004automatic} or a global optimization method~\parencite{poullis2013framework,verdie2015lod,zhu2018large,holzmann2018semantically}.\\
 
         The first type of methods suffers typically from topological defects when the grammar is not comprehensive enough, while the second kind knows other drawbacks, mainly, segmentation problems.
         One way to alleviate these issues is to mix the two approaches.
@@ -111,16 +111,16 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             In constrast, the choice of points to be inspected is not simple.
             Corner points resulting from the intersection of edges in the model is one choice.
             In fact,~\textcite{zeng2014multicriteria} registers corner points from the evaluated model and the corresponding reference.
-            Based on this registration, a comparison is drawn using \gls{acr::rmse}, just as in~\parencite{landes2012quality} and~\parencite{you2011quality}.
+            Based on this registration, a comparison is drawn using \gls{acr::rmse}, just as in~\parencite{you2011quality,landes2012quality}.
             The same points are used as a proxy for manual quality inspection by~\textcite{elberink2011quality}.
             Another alternative is to sample points from lines or surfaces to be compared.
-            These could be predetermined manually as in~\textcite{kaartinen2005accuracy} or sampled regularely as demonstrated by~\textcite{vogtle2003quality} or by~\textcite{tran2019geometric}.
-            Imprecisions are not computed only relying the \gls{acr::rmse}, but can also be separated into planimetric and height inaccuraccies~\parencite{vogtle2003quality, kaartinen2005accuracy, jaynes2003recognition}.\\
+            These could be predetermined manually as in~\textcite{kaartinen2005accuracy} or sampled regularely as demonstrated by~\textcite{vogtle2003quality,tran2019geometric}.
+            Imprecisions are not computed only relying the \gls{acr::rmse}, but can also be separated into planimetric and height inaccuraccies~\parencite{vogtle2003quality,jaynes2003recognition,kaartinen2005accuracy}.\\
 
             Second comes edges and all one dimensional objects in general.
             These convey structural, in addition to positional, informations.
             \textcite{kaartinen2005accuracy} compares lengths as well as slopes of edges formed by reference points.
-            Edges related metrics are also used as an intermediary as shown by~\textcite{elberink2011quality} and~\textcite{michelin2013quality}.
+            Edges related metrics are also used as an intermediary as shown by~\textcite{elberink2011quality,michelin2013quality}.
             They are both interested in edges resulting from facet intersections.
             While the first relies on \gls{acr::rmse}, the second computes more complex metrics that compares model edges to ones extracted out of sensor data.\\
 
@@ -131,18 +131,18 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             In addition to height discrepency, normal displacement is computed using always the same \gls{acr::rmse} metric by~\textcite{henricsson19973}.
             Conversely,~\textcite{zeng2014multicriteria} uses also a \gls{acr::rmse} for comparison, but not in the Euclidean space.
             In fact, after mapping the evaluated and reference models to a sphere, they compare their spherical harmonic~\parencite{brechbuhler1995parametrization} representations.
-            Just as with edges, planes can be evaluated using angular measurements, as was proposed by~\textcite{landes2012quality} and~\textcite{henricsson19973}.
+            Just as with edges, planes can be evaluated using angular measurements, as was proposed by~\textcite{henricsson19973,landes2012quality}.
             Another alternative is to compare reconstructed and reference models based on surface area comparisons.
-            These are mostly based on ratios like completeness and correctness\footnote{In other words, recall and precision respectively.}~\parencite{rottensteiner2014results,landes2012quality,henricsson19973,schuster2003new}.\\
+            These are mostly based on ratios like completeness and correctness\footnote{In other words, recall and precision respectively.}~\parencite{henricsson19973,schuster2003new,landes2012quality,rottensteiner2014results}.\\
 
             Last, are three dimensional (\textit{i.e.} volume) evaluation.
-            The same detection ratios that were computed for surfaces are again calculated to evaluate volumes this times, as shown by~\textcite{mohamed2013quality, zeng2014multicriteria,jaynes2003recognition,nguatem2017modeling}.
+            The same detection ratios that were computed for surfaces are again calculated to evaluate volumes this times, as shown by~\textcite{jaynes2003recognition,mohamed2013quality, zeng2014multicriteria,nguatem2017modeling}.
             These are the only metrics used for volumes that we are aware of.\\
 
             Regarding \textit{implicit} semantics, as far as we are aware, only one metric is widely used to evaluate its impact.
             As discussed previously in Subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}, compaction is one byproduct of semantics.
             As a consequence, it was used as an index to evaluate reconstructions\footnote{It is sometimes called by its antonym: complexity.}: the more a model was compact the better it was.
-            This is reflected, for instance, in the work of~\textcite{lafarge2012creating},~\textcite{zhang2017deep},~\textcite{duan_eccv16},~\textcite{zeng2018neural} and~\textcite{zhu2018large}, where this metric is never used alone but always alongside geometric ones.
+            This is reflected, for instance, in the work of~\textcite{lafarge2012creating,duan_eccv16,zhang2017deep,zeng2018neural,zhu2018large}, where this metric is never used alone but always alongside geometric ones.
 
         \subsubsection{\textsc{Semantic labels based methods}}
             \label{subsec::state_of_the_art::quality::output::semantic}
@@ -568,7 +568,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 \end{equation}
 
                 There are more theoretical details for kernels which are not discussed herein.
-                For more details on the subject, one can check the work by~\textcite{aronszajn1950theory},~\textcite{vapnik2013nature} or~\textcite{shawe2004kernel}.
+                For more details on the subject, one can check the work by~\textcite{aronszajn1950theory,shawe2004kernel,vapnik2013nature}.
 
                 \subparagraph{Usual kernels}
                     The choice of kernels is not easy.
@@ -609,7 +609,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     is also a valid kernel.
                     Such kernels proved to be better in practice than using single kernels~\parencite{lanckriet2004statistical}.
                     To simplify the problem, the solution is chosen in the simplex of the basis kernels: \textit{i.e.} $ (\mu_1, \mu_2, \dots, \mu_K) \in (\mathbb{R}_+)^K  \; s.t. \sum_{i=1}^K \mu_i = 1$.
-                    Multiple schemes were presented in order to solve the \gls{acr::mkl} \gls{acr::svm} problem~\parencite{rakotomamonjy2008simplemkl, sun2010multiple, varma2009more}.
+                    Multiple schemes were presented in order to solve the \gls{acr::mkl} \gls{acr::svm} problem~\parencite{rakotomamonjy2008simplemkl,varma2009more,sun2010multiple}.
                     
             \paragraph{Properties}
                 Herein are presented properties of the \gls{acr::svm} classifier based on a practical point of view.
@@ -1012,7 +1012,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         \tilde{\phi}(u, \omega) &= \frac{1}{2\cdot\pi} \cdot \phi_I(u)
                     \end{align}
                     These are separable filters that can help speed up the convolution computations as shown in~\textcite{sifre2013rotation}.
-                    In practice, $\psi$(\textit{resp.} $\bar\psi$) are taken as two (\textit{resp.} one) dimensional Morlet wavelets (\textit{cf.} Subfigure~\ref{subfig::morlet_filters}), while $\phi$ is taken as a Guassian~\parencite{oyallon2015deep,sifre2013rotation,bruna2013invariant}.
+                    In practice, $\psi$(\textit{resp.} $\bar\psi$) are taken as two (\textit{resp.} one) dimensional Morlet wavelets (\textit{cf.} Subfigure~\ref{subfig::morlet_filters}), while $\phi$ is taken as a Guassian~\parencite{sifre2013rotation,bruna2013invariant,oyallon2015deep}.
                     A finite number $L$ of orientations are possible for angle indices: $\theta \in \left\{\frac{l\cdot\pi}{L}: l=1,2\dots,L\right\}$.
                     In Figure~\ref{fig::morlet_vs_learned}, we can see how the designed filter bank is similar to the ones learned by a \gls{acr::cnn}.
                     \begin{figure}
@@ -1158,7 +1158,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     The energy of the signal is concentrated along increasing scale paths: \textit{i.e.} $\forall k=1,2,\dots,m-1 \; i_{k+1} > i_k$.
                     This implies that computing coefficients along these paths is sufficient~\parencite{bruna2013invariant,sifre2013rotation,oyallon2015deep}.
                     Furthermore, only the first two layers are computed as they concentrate most the energy of the signal~\parencite{bruna2013invariant,sifre2013rotation,oyallon2015deep}.
-                    This yields an efficient way of computing a scattering transform as discussed by~\textcite{oyallon2015deep,sifre2013rotation}.\\
+                    This yields an efficient way of computing a scattering transform as discussed by~\textcite{sifre2013rotation,oyallon2015deep}.\\
 
                     \textcite{sifre2013rotation} goes on to propose a way to make the scattering invariant to scale effects also.
                     This is done by introducing a logarithm that linearizes the dependency of scattering coefficients to scales $i_1$ and $i_2$~\parencite{sifre2013rotation,oyallon2015deep}.
