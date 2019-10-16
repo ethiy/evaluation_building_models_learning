@@ -133,7 +133,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             In fact, after mapping the evaluated and reference models to a sphere, they compare their spherical harmonic~\parencite{brechbuhler1995parametrization} representations.
             Just as with edges, planes can be evaluated using angular measurements, as was proposed by~\textcite{landes2012quality} and~\textcite{henricsson19973}.
             Another alternative is to compare reconstructed and reference models based on surface area comparisons.
-            These are mostly based on ratios like completeness and correctness\footnote{in other words, recall and precision respectively.}~\parencite{rottensteiner2014results,landes2012quality,henricsson19973,schuster2003new}.\\
+            These are mostly based on ratios like completeness and correctness\footnote{In other words, recall and precision respectively.}~\parencite{rottensteiner2014results,landes2012quality,henricsson19973,schuster2003new}.\\
 
             Last, are three dimensional (\textit{i.e.} volume) evaluation.
             The same detection ratios that were computed for surfaces are again calculated to evaluate volumes this times, as shown by~\textcite{mohamed2013quality, zeng2014multicriteria,jaynes2003recognition,nguatem2017modeling}.
@@ -377,7 +377,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 The main idea behind \glspl{acr::svm} is to maximize this distance.
                 It is called margin and denoted $M$.\\
 
-                In order to compute the margin, we can interpret it as the length of the orthogonal projection of any vector $\bm{v}_{st}$\footnote{$\forall (s, t) \in \left\{1,2,\dots,n_{nsp}\right\} \times \left\{1,2,\dots,n_{psp}\right\}$} going from a negative support vector $\bm{x}^-_s$ to a positive one $\bm{x}^+_t$ on any line carried by $\bm{w}$.
+                In order to compute the margin, we can interpret it as the length of the orthogonal projection of any vector $\bm{v}_{st}$\footnote{$\forall (s, t) \in \left\{1,2,\dots,n_{nsp}\right\} \times \left\{1,2,\dots,n_{psp}\right\}$.} going from a negative support vector $\bm{x}^-_s$ to a positive one $\bm{x}^+_t$ on any line carried by $\bm{w}$.
                 Since all support vectors of the same class lay on the same line, the choice of $(s,t)$ is inconsequential.
                 We can hence deduce:
                 \begin{align}
@@ -527,7 +527,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     }
                 \end{figure}
 
-                The original feature space where the data is represented is not always an ideal\footnote{An ideal space is one where distances between points are meaningful} one.
+                The original feature space where the data is represented is not always an ideal\footnote{An ideal space is one where distances between points are meaningful.} one.
                 A solution is to find a transformation $\Phi: \mathbb{R}^d \rightarrow \mathscr{H}$ that maps initial feature vectors into a Hilbert space $(\mathscr{H}, \langle\cdot{,}\cdot\rangle_{\mathscr{H}})$ where distances between instances are meaningful.
                 There is no unique map that satisfy this type of properties.
                 We are particularly intersted in a map which transforms the data into a space where they are hopefully linearly separable~\parencite{boser1992training}.
@@ -1488,7 +1488,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \begin{equation*}
                         K=\left(\kappa\left(u, v\right)\right)_{(u,v) \in V \cup V'} \in \mathbb{R}^{\left(\vert V \vert + \vert V' \vert\right) \times \left(\vert V \vert + \vert V' \vert\right)}.
                     \end{equation*}
-                    Let $\left\{ (\lambda_1, e_1), (\lambda_2, e_2)\dots,(\lambda_p, e_p) \right\}$ be all\footnote{$p \leq \vert V \vert + \vert V' \vert$} its eigenvalues and their eigenvectors such that $\forall i = 1, 2 \dots, p,\; \lambda_i > 0$.
+                    Let $\left\{ (\lambda_1, e_1), (\lambda_2, e_2)\dots,(\lambda_p, e_p) \right\}$ be all\footnote{$p \leq \vert V \vert + \vert V' \vert$.} its eigenvalues and their eigenvectors such that $\forall i = 1, 2 \dots, p,\; \lambda_i > 0$.
                     We also need to define
                     \begin{equation*}
                         \widetilde{Q} = \begin{bmatrix}
