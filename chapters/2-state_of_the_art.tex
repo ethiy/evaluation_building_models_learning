@@ -1356,21 +1356,21 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
             \paragraph{\gls*{acr::svm} $\vartheta$ kernel}
                 This is also a kernel which takes advantage only of the structure of graphs.
-                It relies on the definition of Lovasz number of a graph $\vartheta(G)$.
+                It relies on the definition of Lov\'asz number of a graph $\vartheta(G)$.
                 For each vertex $v \in V$, we can assign a unit vector \(\bm{w}_v \in \left\{u \in \mathbb{R}^d: \left\lVert u \right\rVert = 1 \right\}\).
                 The set of vectors \(W(G) \triangleq \left(\bm{w}_v\right)_{v \in V}\) is said to be an orthonormal representation of a graph $G$ is a set of such vectors if and only if:
                 \begin{equation*}
                     \forall \left\{u,v\right\} \notin E \Rightarrow \bm{w}_u^T\cdot \bm{w}_v=0.
                 \end{equation*}
 
-                \subparagraph{Lovasz $\vartheta$ kernel}
-                    The Lovasz number~\parencite{lovasz1979shannon} is defined as:
+                \subparagraph{Lov\'asz $\vartheta$ kernel}
+                    The Lov\'asz number~\parencite{lovasz1979shannon} is defined as:
                     \begin{equation}
                         \label{eq::lovazs_number}
                         \vartheta(G) \triangleq \min_{\substack{\bm{c} \in \mathbb{R}^d\\W(G)}}\max_{v\in V} \left(\frac{1}{\bm{c}^T\cdot \bm{w}_v}\right)^2
                     \end{equation}
                     Which can be interpreted as the smallest cone enclosing a valid orthonormal representation of graph $G$.\\
-                    Equally, we define the Lovasz number over a subset of vertices $B \in V$ as follows:
+                    Equally, we define the Lov\'asz number over a subset of vertices $B \in V$ as follows:
                     \begin{equation}
                         \label{eq::lovazs_number_subset}
                         \vartheta_B(G) \triangleq \min_{\bm{c} \in \mathbb{R}^d}\max_{\bm{w}_v\in W_B^*(G)} \left(\frac{1}{\bm{c}^T\cdot \bm{w}_v}\right)^2
@@ -1381,7 +1381,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         W^*(G) & is the maximizer of the problem in Equation~\ref{eq::lovazs_number}.
                     \end{conditions}
 
-                    The Lovasz kernel~\parencite{johansson2014global} is defined based on a base kernel $\kappa: \mathbb{R} \times \mathbb{R} \rightarrow \mathbb{R}_+$ as:
+                    The Lov\'asz kernel~\parencite{johansson2014global} is defined based on a base kernel $\kappa: \mathbb{R} \times \mathbb{R} \rightarrow \mathbb{R}_+$ as:
                     \begin{equation}
                         \label{eq::lovazs_number_kernel}
                         k_{\vartheta}(G, G') \triangleq \sum_{\substack{B\subseteq V\\B'\subseteq V'\\\vert B \vert = \vert B' \vert}} \frac{1}{
@@ -1395,10 +1395,10 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         } \cdot \kappa\left(\vartheta_B(G), \vartheta_{B'}(G')\right)
                     \end{equation}
 
-                \subparagraph{Lovasz number approximation}
-                    The Lovasz number is, however, hard to compute~\parencite{johansson2014global}.
+                \subparagraph{Lov\'asz number approximation}
+                    The Lov\'asz number is, however, hard to compute~\parencite{johansson2014global}.
                     An approximation is possible using the work of~\textcite{jethava2013lovasz}.
-                    It presents an alternative definition of Lovasz number.
+                    It presents an alternative definition of Lov\'asz number.
                     We define $$L \triangleq \left\{K \in S_{\vert V \vert}^+: \forall v \in V, K_{vv} = 1 \wedge \forall \left\{u, v\right\}  \notin E, K_{uv} = 0\right\}$$ where $S_{\vert V \vert}^+$ is the set of $\vert V \vert \times \vert V \vert$ positive semi-definite matrices.
                     We can hence write:
                     \begin{equation}
@@ -1417,7 +1417,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         K_{LS} \triangleq \frac{1}{\rho} \cdot A + I \in S_{\vert V \vert}^+
                     \end{equation}
                     is interesting as $\omega(K_{LS}) = \sum_{v\in V} \alpha_v$~\parencite{jethava2013lovasz}.
-                    It is even more interesting, since for Erdos–R\'enyi random graphs, $\omega(K_{LS})$ is a constant factor approximation to the Lovasz number~\parencite{jethava2013lovasz} with high probability.
+                    It is even more interesting, since for Erdos–R\'enyi random graphs, $\omega(K_{LS})$ is a constant factor approximation to the Lov\'asz number~\parencite{jethava2013lovasz} with high probability.
 
                     This justifies the definition of the kernel:
                     \begin{equation}
