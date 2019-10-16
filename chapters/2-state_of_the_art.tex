@@ -816,9 +816,9 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 Bagging is an instance of ensemble approach.
                 In order to have different classifiers specializing in a certain pattern, each one is trained on a randomly determined subset of the training data~\parencite{breiman1996bagging}.
                 The idea is that each one of these subsets would exhibit a particular aspect that is crucial for the classification.
-                The aggregation of each classifier knowledge would eventually help generalize in prediction time.\\
+                The aggregation of each classifier knowledge would eventually help generalize at prediction time.\\
 
-                Random forest do not only rely on a simple bagging but also on a second random sampling: this time it is on the dimensions.
+                Random forest do not only rely on a simple bagging but also on a second random sampling: this time it is on the feature dimensions.
                 When splitting a node at training time, only a subset of randomly chosen dimensions is considered~\parencite{breiman2001random}.
                 We depict in Figure~\ref{fig::decision_tree_vs_rf} the difference between a random forest and a single decision tree.
 
@@ -831,15 +831,15 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \item Since at each time only a subset of features are considered, Random Forests can scale easily under high dimensionality.
                     \item The ensemble character of Random Forests allows them to adapt to outliers and hence have a good generalization power.
                     \item Prediction relies on simple comparisons and can be computed quickly.
-                    \item They inherently yield probabilisties that are consistent.
+                    \item They inherently yield probabilities that are consistent.
                 \end{itemize}
                 As seen with \glspl{acr::svm}, Random Forests have also some issues:
                 \begin{itemize}
-                    \item It is not simple to interpret results of Random Forests and connect specific trees to recongnizable patterns.
+                    \item It is not simple to interpret results of Random Forests and connect specific trees to recognizable patterns.
                     \item They can take up a lot of memory to store all trees.
                             They can also require a lot of computations to train.
                     \item They do not allow the possibility of using kernels to represent the data.
-                    \item They does not handle well imbalanced datasets and must be adapted accordingly.
+                    \item They do not handle well imbalanced datasets and must be adapted accordingly.
                 \end{itemize}
                 
     \subsection{\textsc{Feature extraction}}
@@ -849,7 +849,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             In the previous subsection, we considered a special case of feature spaces $\mathbb{R}^d$.\\
 
             Feature extraction is not straight-forward.
-            It is either hand crafted or learned (using deep learning) to fit a specific need.
+            Features are either hand crafted or learned (using deep learning) to fit a specific need.
             Image feature extraction is one such example where attributes are drawn from images in order to describe specific patterns such as edges~\parencite{canny1986computational}, corners~\parencite{harris1988combined} or \gls{acr::sift}~\parencite{lowe2004distinctive}.
             Herein, we present a specific type of feature extractors called \glspl{acr::scatnet}.
             Images can also be considered as specific type of graphs with a grid structure.
@@ -862,15 +862,15 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             The latter learns automatically an image representation $\Phi$ trying to minimize a learning loss function.
             \Glspl{acr::scatnet}, on the other hand, make use of mathematical properties of the image signal.\\
 
-            Some propeties are always required in order to acheive a good representation $\Phi$ of an image. 
-            A scene that is captured from different point of views, while yielding different images, should have close representations.
-            Just as with interset point detection~\parencite{harris1988combined,lowe2004distinctive}, the representation of an image should be invariant to scale, translation and rotation~\parencite{mallat2012group,sifre2013rotation,bruna2013invariant}.
+            Some properties are always required in order to achieve a good representation $\Phi$ of an image. 
+            A scene that is captured from different points of view, while yielding different images, should have close representations.
+            Just as with interset point detection~\parencite{lowe2004distinctive}, the representation of an image should be invariant to scale, translation and rotation~\parencite{mallat2012group,sifre2013rotation,bruna2013invariant}.
             Since images illustrate not only rigid objects, a good representation should allow small local deformations in the signal that can be attributed to distortions of non-rigid objects.\\
 
             \paragraph{Mathematical notations}
                 To formalize these properties, we introduce some mathematical notations.
                 \subparagraph{Action of a group}
-                    Let $x: u \mapsto x(u)$ be an image (or any signal in general) and $(G, *)$ a group such as the set of translation operators on signals.
+                    Let $x: u \mapsto x(u)$ be an image (or any signal in general) and $(G, *)$ a group such as, for example, the set of translation operators on signals.
                     The action of $g\in G$ on $x$ is written as:
                     \begin{equation}
                         \label{eq::action_group}
@@ -941,7 +941,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \label{eq::covariance}
                     \Phi\circ L_g\left(x\right) = L_g\circ\Phi(x).
                 \end{equation}
-                Images of similar objects should have a representations that are also similar.
+                Images of similar objects should have also similar representations.
                 Using Euclidean distances as a similarity measure, this property implies $\Phi$ to be contractive~\parencite{bruna2013invariant}.
                 Given two images $x$ and $y$, we write:
                 \begin{equation}
@@ -949,9 +949,9 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \Vert \Phi(x) - \Phi(y) \Vert \leq \Vert x-y \Vert.
                 \end{equation}
                 The mapping $\Phi$ should be stable under small local deformations.
-                A local deformation is modeled as a diffeomorphism\footnote{A differentiable bijection which inverse is differentiable also.} $\tau$.
-                A small one is formalized as a diffeomorphism $\tau$ that verifies $\Vert\nabla \tau\Vert_\infty < 1$~\parencite{bruna2013invariant,sifre2013rotation,mallat2012group}.
-                A good transform $\Phi$ , there exists a constant $C>0$ such that for any image $x$:
+                A local deformation is modeled as a diffeomorphism\footnote{A differentiable bijection which inverse is also differentiable.} $\tau$.
+                A small one is formalized as a diffeomorphism $\tau$ that verifies $\Vert\nabla \tau\Vert_\infty < 1$~\parencite{mallat2012group,bruna2013invariant,sifre2013rotation}.
+                Consequently a good transform $\Phi$ should be Lipschitz stable to deformations:
                 \begin{equation}
                     \label{eq::stable_deformation}
                     \exists C >0, \forall x \in \mathscr{I}\quad \Vert \Phi(x) - \Phi\circ L_\tau(x) \Vert \leq C \cdot \Vert x\Vert \cdot \Vert\nabla \tau\Vert_\infty.
@@ -959,19 +959,19 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 where:
                 \begin{conditions}
                     \mathscr{I} & is the set of all possible signals;\\
-                    L_\tau(x) & $u \mapsto x(u - \tau(u))$ is the action of the deformation $tau$ on a signal $x$.
+                    L_\tau(x) & $u \mapsto x(u - \tau(u))$ is the action of the deformation $\tau$ on a signal $x$.
                 \end{conditions}
-                We say that $Phi$ is Lipschitz stable to deformations.
 
             \paragraph{\gls*{acr::scatnet}: a reverse engineered \gls*{acr::cnn}}
                 \glspl{acr::cnn} learn such a representation which verifies these previous conditions stated in Equations~\ref{eq::contractive},~\ref{eq::invariance} and~\ref{eq::stable_deformation}.
                 In fact, it is possible by virtue of some basic building blocs.
-                First, since the weights are learned based on a classification objetive, images with similar content are supposed to be mapped to the same region.
+                First, since the weights are learned based on a classification objective, images with similar content are supposed to be mapped to the same region.
                 Second, pooling layers in \glspl{acr::cnn} provide a solution for invariance to translations and local deformations up to a scale.\\
 
-                The \gls{acr::scatnet} being a reverse engineered \gls{acr::cnn}, formalizes these ideas using wavelet transforms.
+                \glspl{acr::scatnet} formalizes these ideas using wavelet transforms.
+                Actually, \glspl{acr::scatnet} were originally developped to better understand \glspl{acr::cnn}.
                 The idea is to apply linear convolutional operators followed by a non-linearity and some pooling operators.
-                In a \gls{acr::scatnet} the learned filters are replaced by a specific wavelet decomposition, the non-linearity is acheived using the modulus operator and pooling is obtained through a low pass filter.
+                In a \gls{acr::scatnet} the learned filters are replaced by a specific wavelet decomposition, the non-linearity is achieved using the modulus operator and pooling is obtained through a low pass filter.
                 The low-pass filter is critical for the invariance condition, while the lost high frequencies are retrieved using the wavelet convolutions.
                 The non-linearity, just as in \glspl{acr::cnn}, is necessary in order to obtain interesting non-linear final representations.\\
 
@@ -990,9 +990,9 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     The angular wavelets are computed using $2\cdot\pi$-periodic mother wavelet $\bar\psi: \mathbb{R}^2 \rightarrow \mathbb{C}$ scaled as follows:
                     \begin{equation}
                         \label{eq::angular_filter_bank}
-                        \bar\psi_{\iota}: \omega \mapsto 2^{-\iota}\cdot\bar\psi\left(2^{-i}\cdot \omega\right)
+                        \bar\psi_{\xi}: \omega \mapsto 2^{-\xi}\cdot\bar\psi\left(2^{-\xi}\cdot \omega\right)
                     \end{equation}
-                    We also define need the constant averaging filter\footnote{It corresponds to a zero scale filter} defined as:
+                    We also define the constant averaging filter\footnote{It corresponds to a zero scale filter.} defined as:
                     \begin{equation}
                         \label{eq::angular_low_pass}
                         \bar\phi: \theta \mapsto \frac{1}{2\cdot\pi}
@@ -1000,8 +1000,8 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     Based on the spatial filter bank defined in Equation~\ref{eq::translation_filter_bank} and the angular one from Equation~\ref{eq::angular_filter_bank}, we define rigid motion wavelets in the next equations:
                     \begin{align}
                         \label{eq::roto-translation_filter_bank}
-                        \forall i\neq I, \theta \neq 0, \iota \neq 0 \quad \tilde{\psi}_{i, \theta, \iota}(u, \omega) &= \psi_{i,\theta}(u) \cdot \bar\psi_{\iota}(\omega)\\
-                        \forall \iota \neq 0 \quad \tilde{\psi}_{I, 0, \iota}(u, \omega) &= \phi_I(u) \cdot \bar\psi_{\iota}(\omega)\\
+                        \forall i\neq I, \theta \neq 0, \xi \neq 0 \quad \tilde{\psi}_{i, \theta, \xi}(u, \omega) &= \psi_{i,\theta}(u) \cdot \bar\psi_{\xi}(\omega)\\
+                        \forall \xi \neq 0 \quad \tilde{\psi}_{I, 0, \xi}(u, \omega) &= \phi_I(u) \cdot \bar\psi_{\xi}(\omega)\\
                         \forall i\neq I, \theta \neq 0 \quad \tilde{\psi}_{i, \theta, 0}(u, \omega) &= \psi_{i,\theta}(u) \cdot \bar\phi(\omega).
                     \end{align}
                     The corresponding rigid motion averaging filter is obtained as:
@@ -1013,7 +1013,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     These are separable filters that can help speed up the convolution computations as shown in~\textcite{sifre2013rotation}.
                     In practice, $\psi$(\textit{resp.} $\bar\psi$) are taken as two (\textit{resp.} one) dimensional Morlet wavelets (\textit{cf.} Subfigure~\ref{subfig::morlet_filters}), while $\phi$ is taken as a Guassian~\parencite{oyallon2015deep,sifre2013rotation,bruna2013invariant}.
                     A finite number $L$ of orientations are possible for angle indices: $\theta \in \left\{\frac{l\cdot\pi}{L}: l=1,2\dots,L\right\}$.
-                    In Figure~\ref{fig::morlet_vs_learned}, we can see that how the defined filter bank is similar to the ones learned by a \gls{acr::cnn}.
+                    In Figure~\ref{fig::morlet_vs_learned}, we can see how the designed filter bank is similar to the ones learned by a \gls{acr::cnn}.
                     \begin{figure}
                         \centering
                         \ffigbox{
@@ -1025,7 +1025,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                                     Morlet wavelets at different scales ($I=5$) and orientations ($L=8$).
                                 ]{
                                     Morlet wavelets at different scales ($I=5$) and orientations ($L=8$).
-                                    Left are presented the real part while the imaginary part is on the right.
+                                    Left are presented the real parts while the imaginary parts are on the right.
                                     Image taken from~\parencite{sifre2013rotation}.
                                 }
                             }
@@ -1058,7 +1058,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 \subparagraph{The wavelet-modulus operator}
                     A wavelet transform of a signal $x$ consists in representing it using a wavelet filter bank: $\left(x\ostar\psi_{\lambda}\right)_{\lambda}$.
                     Depending on the transformed signals, two versions of wavelet transforms are possible.
-                    If the signal takes one variable $u in \mathbb{R}^2$ then we write:
+                    If the signal takes one variable $u \in \mathbb{R}^2$ then we write:
                     \begin{equation}
                         \label{eq::wavelet_transform_1}
                         W: x \mapsto \left(x\star\psi_{i, \theta}\right)_{\substack{i=1, 2 \dots, I \\ \theta \in \left\{\frac{l\cdot\pi}{L}: l=1,2\dots,L\right\}}},
@@ -1066,11 +1066,11 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     if it takes two variables $(u, \omega) \in \mathbb{R}^2 \times [0, 2\cdot\pi)$ it becomes:
                     \begin{equation}
                         \label{eq::wavelet_transform_2}
-                        \widetilde{W}: x \mapsto \left(x\ostar_{SE(2)}\psi_{i, \theta, \iota}\right)_{\substack{i=1, 2 \dots, I \\ \theta \in \left\{\frac{l\cdot\pi}{L}: l=1,2\dots,L\right\}\\\iota=1,2\dots,\lfloor\log_2(L)\rfloor}}.
+                        \widetilde{W}: x \mapsto \left(x\ostar_{SE(2)}\psi_{i, \theta, \xi}\right)_{\substack{i=1, 2 \dots, I \\ \theta \in \left\{\frac{l\cdot\pi}{L}: l=1,2\dots,L\right\}\\\xi=1,2\dots,\lfloor\log_2(L)\rfloor}}.
                     \end{equation}
                     An image is a discretization of a two dimensional signal.
                     As a consequence, we can only apply the first transform in Equation~\ref{eq::wavelet_transform_1}.
-                    The result of such a mapping is an example of a signal on wich one can apply the second transform from Equation~\ref{eq::wavelet_transform_2}.
+                    The result of such a mapping is an example of a signal on which one can apply the second transform from Equation~\ref{eq::wavelet_transform_2}.
                     For the right choice of wavelets, these operators can be proven to be invertible, contractive and Lipschitz stable to deformations~\parencite{mallat2012group}.\\
 
                     By applying a modulus we get the basic building bloc of \glspl{acr::scatnet} called the wavelet-modulus operator: $x \mapsto \vert x\ostar\psi_{\lambda} \vert$.
@@ -1078,13 +1078,13 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \begin{align}
                         \label{eq::wavelet-modulus_1_2}
                         U_{i, \theta}: x &\mapsto \vert x\star\psi_{i, \theta}\vert\\
-                        \widetilde{U}_{i, \theta, \iota}: x &\mapsto \vert x\ostar_{SE(2)}\psi_{i, \theta, \iota} \vert
+                        \widetilde{U}_{i, \theta, \xi}: x &\mapsto \vert x\ostar_{SE(2)}\psi_{i, \theta, \xi} \vert
                     \end{align}
                     These operators are proven to be covariant to translations and rotations~\parencite{mallat2012group,sifre2013rotation}: \textit{i.e.} for a couple $(v, \vartheta) \in \mathbb{R}^2 \times [0, 2\cdot\pi)$:
                     \begin{align}
                         \label{eq::covariance_wavelet-modulus}
                         L_{g_{v, \vartheta}} \circ U_{i, \theta} &= U_{i, \theta} \circ L_{g_{v, \vartheta}}\\
-                        L_{g_{v, \vartheta}} \circ \widetilde{U}_{i, \theta, \iota} &= U_{i, \theta, \iota} \circ L_{g_{v, \vartheta}}.
+                        L_{g_{v, \vartheta}} \circ \widetilde{U}_{i, \theta, \xi} &= U_{i, \theta, \xi} \circ L_{g_{v, \vartheta}}.
                     \end{align}
                     These conditions may remind the reader of the work of~\textcite{cohen2016group} on \gls{acr::gcnn}.
                 
@@ -1094,13 +1094,13 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     This operator is actually covariant to actions of the rigid movement group.
                     \parencite{bruna2013invariant, sifre2013rotation,oyallon2015deep}, however, rely on averaging (or low-pass) filters as pooling operators.
 
-                    Considering the rigid mouvement as a nuisance,~\parencite{sifre2013rotation} considers invariance with regards to the roto-translation group.
+                    Considering the rigid movement as a nuisance,~\parencite{sifre2013rotation} considers invariance with regards to the roto-translation group.
                     To do so they filter any signal $x(u)$ using $\phi_I$ yielding a signal:
                     \begin{equation}
                         \label{eq::pool_bi-dim}
                         P_I: x \mapsto x \star \phi_I (u).
                     \end{equation}
-                    For signals $\tilde{x}(u, omega)$ they are averaged using $\tilde{\phi}_I$ and giving as ouput:
+                    For signals $\tilde{x}(u, \omega)$ they are averaged using $\tilde{\phi}_I$ and giving as ouput:
                     \begin{equation}
                         \label{eq::pool_bi-dim-angular}
                         \widetilde{P}_I: x \mapsto \tilde{x} \ostar_{SE(2)} \tilde{\phi}_I (u, \omega).
@@ -1120,7 +1120,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         S_0[x](u) \triangleq x \star \phi_I (u).
                     \end{equation}
                     
-                    To the image, is applied the wavelet-modulus operator giving coefficients $U_{i_1, \theta_1}(x)$.
+                    To the image, the wavelet-modulus operator is applied giving coefficients $U_{i_1, \theta_1}(x)$.
                     The latter is averaged using the second operation~\ref{eq::pool_bi-dim-angular}.
                     This defines the second layer of scattering coefficients:
                     \begin{equation}
@@ -1128,18 +1128,18 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         S_1[x](u, i_1, \theta_1) \triangleq U_{i_1, \bullet} \ostar_{SE(2)} \tilde{\phi}_I(u, \theta_1).
                     \end{equation}
 
-                    At the second level is applied the wavelet-modulus operator retrieves the high-frequencies lost after the low-pass filter using yet another time the wavelet-modulus operator yielding:
+                    At the second level is applied the wavelet-modulus operator retrieving the high-frequencies lost after the low-pass filter using yet another time the wavelet-modulus operator yielding:
                     \begin{equation}
                         \label{eq::cascade_second}
-                        \widetilde{U}_{i_2,\iota_2, \theta_2} \circ U_{i_1, \theta_1}(x)
+                        \widetilde{U}_{i_2,\xi_2, \theta_2} \circ U_{i_1, \theta_1}(x)
                     \end{equation}
                     Once again, an average pooling is applied on the latter:
                     \begin{equation}
                         \label{eq::scatter_second}
-                        S_2[x](u, i_1, \theta_1, i_2, \theta_2, \iota_2) \triangleq \widetilde{U}_{i_2,\iota_2, \theta_2} \circ U_{i_1, \bullet} \ostar_{SE(2)} \tilde{\phi}_I(u, \theta_1).
+                        S_2[x](u, i_1, \theta_1, i_2, \theta_2, \xi_2) \triangleq \widetilde{U}_{i_2,\xi_2, \theta_2} \circ U_{i_1, \bullet} \ostar_{SE(2)} \tilde{\phi}_I(u, \theta_1).
                     \end{equation}
                     
-                    This can be reapplied further giving casacaded scattering coefficients at level $m$:
+                    This can be reapplied further giving cascaded scattering coefficients at level $m$:
                     \begin{equation}
                         \label{eq::scatter_second}
                         S_m[x](u, p) \triangleq \widetilde{U}_{\lambda_m} \circ \widetilde{U}_{\lambda_{m-1}} \dots \circ \widetilde{U}_{\lambda_2} \circ U_{i_1, \bullet} \ostar_{SE(2)} \tilde{\phi}_I(u, \theta_1).
@@ -1147,7 +1147,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     where:
                     \begin{conditions}
                         p & $i_1, \theta_1, \lambda_2 \dots, \lambda_{m-1}, \lambda_m$ and is called a path;\\
-                        \lambda_k & $i_k, \theta_k, \iota_k$.
+                        \lambda_k & $i_k, \theta_k, \xi_k$.
                     \end{conditions}
 
                     The scattering coefficients are proved to be contractive and Lipschitz stable to deformations~\parencite{mallat2012group}.
@@ -1161,7 +1161,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
                     \textcite{sifre2013rotation} goes on to propose a way to make the scattering invariant to scale effects also.
                     This is done by introducing a logarithm that linearizes the dependency of scattering coefficients to scales $i_1$ and $i_2$~\parencite{sifre2013rotation,oyallon2015deep}.
-                    An scale-space averaging is thus applied to achieve the sought invariance.\\
+                    A scale-space averaging is thus applied to achieve the sought invariance~\parencite{sifre2013rotation}.\\
 
                     In contrast,~\textcite{oyallon2015deep} proposes to keep only the translation invariance and let the classifier decide on the relevance of rotation and scale invariance, much like in~\parencite{cohen2016group}.
                     To do so only a spatial averaging convoluation is applied as $x \mapsto \tilde{x}(\bullet, \omega) \star \phi_I$ which is covariant to rotations.
@@ -1188,11 +1188,11 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             In fact, graphs can have varying numbers of nodes and edges.
             Moreover, they can be different while providing the same structural information: we say they are isomorphic.
             A valid representation for graphs should then take care of these two issues: incorporate all possible graph sizes and be invariant to graph isomorphisms.
-            As accustomed in statistical learning, one way to alleviate these issues is to directly compare graphs using kernels as seen previously in sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.\\
+            As accustomed in statistical learning, one way to alleviate these issues is to directly compare graphs using kernels as seen previously in Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.\\
             
             This sub-subsection does not aim at presenting a thourough survey of graph kernels.
             The work of~\textcite{ghosh2018journey} categorizes graph kernels depending on the used methodology.
-            A different approach is proposed in~\textcite{kriege2019survey}, where they study graph kernels based on the underlying graphs.\\
+            A different approach is proposed in~\textcite{kriege2019survey}, where graph kernels are studied based on the underlying graphs.\\
 
             Apart from the structure of the graph, kernels should also take into account the labels or continuous attributes assigned to a graph.
             These could be given at node level or edge level.
@@ -1200,35 +1200,35 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
             \paragraph{Basic kernels}
                 Let $G = \left(V, E\right)$ an undirected graph with vertices $v\in V$ and edges $e \in E =\left\{\left\{u, v\right\}: (u, v) \in V\times V\right\}$.
-                We can give attributes to each node $a: V \rightarrow \mathbb{R}^{d_V}$ or edges $b: E \rightarrow \mathbb{R}^{d_E}$.\\
+                Attributes can be associated to each node $a: V \rightarrow \mathbb{R}^{d_V}$ or edge $b: E \rightarrow \mathbb{R}^{d_E}$.\\
 
                 The most basic graph kernel would correspond to a scalar product of a global hashing vector of all attributes.
                 This is possible through the use of a histogram function for instance.
                 This type of functions is described in details in Subsection~\ref{subsec::learned_evaluation::baseline::geometric}.\\
 
-                Let $S\left(G, a(\bullet)_i\right): \mathbb{R}^{\vert V\vert} \rightarrow \mathbb{R}^{l_i}$ (\textit{resp.} $S\left(G, b(\bullet)_i\right): \mathbb{R}^{\vert E\vert} \rightarrow \mathbb{R}^{m_i}$) be a hashing function that describes the distribution of attributes $i$ of all nodes (\textit{resp.} edges) of graph $G$ as a $\mathbb{R}^{l_i}$ (\textit{resp.} $\mathbb{R}^{m_i}$) vector.
+                Let $S\left(\left(a(v)_i\right)_{v\in V}\right): \mathbb{R}^{\vert V\vert} \rightarrow \mathbb{R}^l$ (\textit{resp.} $S\left(\left(b(e)_i\right)_{e\in E}\right): \mathbb{R}^{\vert E\vert} \rightarrow \mathbb{R}^{m}$) be a hashing function that describes the distribution of attributes $i$ of all nodes (\textit{resp.} edges) of graph $G$ as a $\mathbb{R}^{l_i}$ (\textit{resp.} $\mathbb{R}^{m_i}$) vector.
                 We can build a node based feature vector for the graph $G$:
                 \begin{equation}
                     \label{eq::feature_node_graph}
                     \Phi_V(G) \triangleq \begin{bmatrix}
-                        S\left(G, a(\bullet)_1\right)\\
-                        S\left(G, a(\bullet)_2\right)\\
+                        S\left(\left(a(v)_1\right)_{v\in V}\right)\\
+                        S\left(\left(a(v)_2\right)_{v\in V}\right)\\
                         \vdots\\
-                        S\left(G, a(\bullet)_{d_V}\right)
-                    \end{bmatrix} \in \mathbb{R}^{\sum_{i=1}^{d_V} l_i}
+                        S\left(\left(a(v)_{d_V}\right)_{v\in V}\right)
+                    \end{bmatrix} \in \mathbb{R}^{d_V \cdot l}
                 \end{equation}
                 and an edge based one:
                 \begin{equation}
                     \label{eq::feature_node_graph}
                     \Phi_E(G) \triangleq \begin{bmatrix}
-                        S\left(G, b(\bullet)_1\right)\\
-                        S\left(G, b(\bullet)_2\right)\\
+                        S\left(\left(b(e)_1\right)_{e \in E}\right)\\
+                        S\left(\left(b(e)_2\right)_{e \in E}\right)\\
                         \vdots\\
-                        S\left(G, b(\bullet)_{d_E}\right)
-                    \end{bmatrix} \in \mathbb{R}^{\sum_{i=1}^{d_E} m_i}.
+                        S\left(\left(b(e)_{d_E}\right)_{e \in E}\right)
+                    \end{bmatrix} \in \mathbb{R}^{d_E \cdot m}.
                 \end{equation}
 
-                Based on a base kernel on vectors $\kappa$ (\textit{cf.} sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}), we can compute the similarity between two graphs $G = \left(V, E\right)$ and $G' = \left(V', E'\right)$:
+                Based on a base kernel on vectors $\kappa$ (\textit{cf.} Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}), we can compute the similarity between two graphs $G = \left(V, E\right)$ and $G' = \left(V', E'\right)$:
                 \begin{align}
                     \label{eq::feature_graph_kernel_nodes}
                     k_V(G, G') &\triangleq \kappa(\Phi_V(G), \Phi_V(G'))\\
@@ -1247,7 +1247,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 The work of~\textcite{shervashidze2011weisfeiler} is an example of kernels that uses the same idea to describe graphs while taking account of their structure.
             
             \paragraph{Random walk kernel}
-                In order to define this kernel, we need to defined the adjacency matrix $A$ of a graph $G$:
+                In order to define this kernel, we need to define the adjacency matrix $A$ of a graph $G$:
                 \begin{equation}
                     \label{eq::adjacency_matrix}
                     A \triangleq \left(\delta_{\left\{u,v\right\}\in E}\right)_{(u, v) \in V\times V}
@@ -1283,7 +1283,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         ]{
                             \label{fig::direct_product_graph}
                             Depiction of a direct product (bottom) of two graphs (top).
-                            Nodes adjacent in $G_{\times}$ correspond to adjacent nodes in both graphs.
+                            Nodes adjacent in the direct product graph $G_{\times}$ correspond to adjacent nodes in both graphs.
                             Image taken from~\parencite{vishwanathan2010graph}.
                         }
                     \end{figure}
@@ -1298,7 +1298,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \end{align}
                     where:
                     \begin{conditions}
-                        \otimes & referes to the Kronecker product.
+                        \otimes & refers to the Kronecker product.
                     \end{conditions}
                     In fact, a random walk on $G_{\times}$ is equivalent to a simultaneous random walk on $G$ and $G'$~\parencite{hammack2011handbook}.\\
 
@@ -1309,12 +1309,11 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         \label{eq::random_walk_kernel}
                         k_{rw}(G, G') \triangleq \sum_{k=0}^\infty \lambda_k \cdot q_{\times}^T\cdot P_{\times}\cdot p_{\times}.
                     \end{equation}
-
-                \subparagraph{Special cases}
-                    This defintion actually generalizes a family of graph kernels based on walks on graphs~\parencite{vishwanathan2010graph}.
                     The choice of the series $\left(\lambda_k\right)_{k\in \mathbb{N}}$ is critical, as the kernel defined in Equation~\ref{eq::random_walk_kernel} can diverge.
                     It is taken to be non-negative in order in ensure the positive semi-definite of the kernel.\\
 
+                \subparagraph{Special cases}
+                    This defintion actually generalizes a family of graph kernels based on walks on graphs~\parencite{vishwanathan2010graph}.
                     Setting $p_{\times} \propto 1$ and $q_{\times} \propto 1$ and , two special cases are of interest.
                     \begin{itemize}
                         \item $\forall k\in \mathbb{N} \; \lambda_k = \lambda^k$: this gives rise to a geometric random kernel:
@@ -1343,26 +1342,22 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                                     \end{bmatrix}.
                                 \end{equation}
                     \end{itemize}
-                    These graph kernels where already defined in~\parencite{gartner2003graph}.\\
+                    These graph kernels were already defined in~\parencite{gartner2003graph}.\\
 
                 Computationally, these involve heavy computations.
-                \textcite{vishwanathan2010graph} proposed efficient numerical algorithms to aleviate this problem.
+                \textcite{vishwanathan2010graph} proposed efficient numerical algorithms to alleviate this problem.
                 However, these graphs suffer from other issues.
-                First, the kernel does take into account the attributes of graphs of they exist, although it is possible to adapt.
-                Second, these graphs suffer from tottering which is the fact that the random walk is mostly consistent of multiple movements between a small subset of vertices in a row.
+                First, the kernel does take into account the attributes of graphs if they exist, although it is possible to adapt.
+                Second, these kernels suffer from tottering which is the fact that the random walk is mostly consistent of multiple movements between a small subset of vertices in a row.
                 Third, related to the previous point, the random walk would spend much time on central nodes that connect to most other nodes adding to their contribution to the kernel, while peripherial ones that can hold the most distinctive feature of the structure are watered down.
-                It is possible to adress these issues as demonstrated by~\textcite{horvath2004cyclic, mahe2004extensions}.
+                It is possible to address these issues as demonstrated by~\textcite{horvath2004cyclic, mahe2004extensions}.
                 However these kernels cannot be guaranteed to be computed in polynomial time~\parencite{vishwanathan2010graph}.
 
             \paragraph{\gls*{acr::svm} $\vartheta$ kernel}
                 This is also a kernel which takes advantage only of the structure of graphs.
                 It relies on the definition of Lovasz number of a graph $\vartheta(G)$.
-                We say that
-                \begin{equation}
-                    \label{eq::orthonormal_representation}
-                    W(G) \subset \left\{\bm{w}_v \in\mathbb{R}^d : v \in V \wedge \Vert\bm{w}_v\Vert = 1\right\}
-                \end{equation}
-                is an orthonormal representation of a graph $G$ if and only if
+                For each vertex $v \in V$, we can assign a unit vector \(\bm{w}_v \in \left\{u \in \mathbb{R}^d: \left\lVert u \right\rVert = 1 \right\}\).
+                The set of vectors \(W(G) \triangleq \left(\bm{w}_v\right)_{v \in V}\) is said to be an orthonormal representation of a graph $G$ is a set of such vectors if and only if:
                 \begin{equation*}
                     \forall \left\{u,v\right\} \notin E \Rightarrow \bm{w}_u^T\cdot \bm{w}_v=0.
                 \end{equation*}
@@ -1413,9 +1408,9 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \begin{equation}
                         \omega(K) = \max_{\alpha_v > 0, \forall v \in V} 2\cdot \sum_{v\in V} \alpha_v - \sum_{(u, v) \in V\times V} \alpha_u \cdot \alpha_v \cdot K_{uv}
                     \end{equation}
-                    is dual one-class \gls{acr::svm} (\textit{cf.} sub-sebsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}).
+                    is dual one-class \gls{acr::svm} (\textit{cf.} Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}).
 
-                    If $\lambda_m$ is the minimum eigenvalue of $A$, for $\rho\geq-\lambda_m$, the matrix
+                    If $\lambda_m$ is the minimum eigenvalue of the adjacency matrix $A$ (\textit{cf.} Equation~\ref{eq::adjacency_matrix}), for $\rho\geq-\lambda_m$, the matrix
                     \begin{equation}
                         \label{eq::ls_matrix}
                         K_{LS} \triangleq \frac{1}{\rho} \cdot A + I \in S_{\vert V \vert}^+
@@ -1423,7 +1418,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     is interesting as $\omega(K_{LS}) = \sum_{v\in V} \alpha_v$~\parencite{jethava2013lovasz}.
                     It is even more interesting, since for Erdos–R\'enyi random graphs, $\omega(K_{LS})$ is a constant factor approximation to the Lovasz number~\parencite{jethava2013lovasz} with high probability.
 
-                    This justifies the defintion of the kernel:
+                    This justifies the definition of the kernel:
                     \begin{equation}
                         \label{eq::svm_kernel}
                         k_{svm}(G, G') \triangleq \sum_{\substack{B\subseteq V\\B'\subseteq V'\\\vert B \vert = \vert B' \vert}} \frac{1}{
@@ -1437,7 +1432,19 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         } \cdot \kappa\left(\sum_{v\in B} \alpha_v, \sum_{v\in B'} \alpha_v\right).
                     \end{equation}
                     This is still very prohibitive in terms of compuational complexity as one has to sum over all $2^{\vert V \vert}$ (\textit{resp.} $2^{\vert V' \vert}$) subsets of $V$ (\textit{resp.} $V'$).
-                    To avoid this issue for each graph only few of the subsets are visited.
+                    To avoid this issue, for each graph, only a set \(\mathscr{S}\) (\textit{resp.} \(\mathscr{S}'\)) of few of the subsets of \(G\) (\textit{resp.} \(G'\)) are visited:
+                    \begin{equation}
+                        \label{eq::svm_approximated_kernel}
+                        \hat{k}_{svm}(G, G') \triangleq \sum_{\substack{B\in \mathscr{S}\\B'\in \mathscr{S}'\\\vert B \vert = \vert B' \vert}} \frac{1}{
+                            \begin{pmatrix}
+                                \vert V \vert\\
+                                \vert B \vert                            
+                            \end{pmatrix} \cdot \begin{pmatrix}
+                                \vert V \vert\\
+                                \vert B' \vert                            
+                            \end{pmatrix}
+                        } \cdot \kappa\left(\sum_{v\in B} \alpha_v, \sum_{v\in B'} \alpha_v\right).
+                    \end{equation}
 
             \paragraph{Multiscale Laplacian kernel}
                 Related to random walks on graphs, the Laplacian characterizes the structure of graphs, especially its low eigenvalue eigenvectors~\parencite{kondor2016multiscale}.
@@ -1456,18 +1463,18 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         \bm{x} \sim \mathscr{N}\left(0, \left(L + \eta \cdot I\right)^{-1}\right).
                     \end{equation}
 
-                    Using a Bhattacharyya kernel on probabilisties and a regulizer parameter $\gamma>0$, we define~\parencite{kondor2016multiscale}:
+                    Using a Bhattacharyya kernel on probabilities and a regulizer parameter $\gamma>0$, we define~\parencite{kondor2016multiscale}:
                     \begin{equation}
                         \label{eq::laplacian_kernel}
                         k_{l}(G, G') \triangleq \frac{\left\lvert \left(\frac{1}{2} \cdot \left(L^{-1}+\gamma\cdot I\right)^{-1} + \frac{1}{2} \cdot \left(L^{\prime -1}+\gamma\cdot I\right)^{-1} \right)^{-1} \right\rvert^{\frac{1}{2}}}{\left\lvert L^{-1} + \gamma \cdot I\right\rvert^{\frac{1}{4}}\cdot\left\lvert L^{\prime -1} + \gamma \cdot I\right\rvert^{\frac{1}{4}}}.
                     \end{equation}
                     The added regulizer term is added in so as to avoid numerical issues when the one of the Laplacians has eigenvalues equal or close to zero.
-                    The Laplacian is not invariant to permutations as the graph.
+                    The Laplacian is not invariant to permutations as the graph as described in~\textcite{kondor2016multiscale}.
                     Moreover, both graphs are required to be of the same size.\\
 
                     This kernel is not well adapted.
                     To alleviate this issue,~\textcite{kondor2016multiscale} proposes to describe the graph nodes by vertex permutation invariant features.
-                    If $U$ (\textit{resp.} $U'$) is matrix which encodes such a transformation for graph $G$ (\textit{resp.} $G'$), $k_{l}$ is adapted in what is called feature space Laplacian graph kernel:
+                    If $U$ (\textit{resp.} $U'$) is a matrix which encodes such a transformation for graph $G$ (\textit{resp.} $G'$), $k_{l}$ is adapted in what is called feature space Laplacian graph kernel:
                     \begin{equation}
                         \label{eq::feature_laplacian_kernel}
                         k_{fl}(G, G') \triangleq \frac{\left\lvert \left(\frac{1}{2} \cdot S^{-1} + \frac{1}{2} \cdot S^{\prime -1} \right)^{-1} \right\rvert^{\frac{1}{2}}}{\left\lvert S\right\rvert^{\frac{1}{4}}\cdot\left\lvert S' \right\rvert^{\frac{1}{4}}}
@@ -1484,7 +1491,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     We also need to define
                     \begin{equation*}
                         \widetilde{Q} = \begin{bmatrix}
-                            \lambda_1^{\frac{1}{2}}\cdot e_1, \lambda_1^{\frac{1}{2}}\cdot e_2 \dots, \lambda_1^{\frac{1}{2}}\cdot e_p
+                            \sqrt{\lambda_1}\cdot e_1, \sqrt{\lambda_2}\cdot e_2 \dots, \sqrt{\lambda_p}\cdot e_p
                         \end{bmatrix} \in \mathbb{R}^{p \times p}.
                     \end{equation*}
                     For graph \(G\) (\textit{resp.} \(G'\)), the first $\vert V \vert$ (\textit{resp.} the last $\vert V' \vert$) rows of $\widetilde{Q}$ are taken from $Q$ (\textit{resp.} $Q'$).
@@ -1506,7 +1513,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         \label{eq::centered_nested_subgraphs}
                         v \in N_1(v) \subseteq N_2(v) \dots \subseteq N_L(v) \subseteq V.
                     \end{equation}
-                    We denote by $G[A]$, the induced subgraph by $A \subseteq V$:
+                    Let us denote by $G[A]$ the induced subgraph by $A \subseteq V$:
                     \begin{equation}
                         \label{eq::induced_subgraph}
                         G[A] \triangleq (A, \left\{\left\{u, v\right\} \in E: (u, v) \in A \times A \right\}).
@@ -1522,7 +1529,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         \label{eq::multiscale_laplacian_kernel}
                         k_{msl}(G, G') \triangleq k^{\kappa_L}_{gfl}(G, G')
                     \end{equation}
-                    These kernels ould be estimated efficiently by computing once the $\bar{S}$ matrices for all graphs, all multiscale base kernels for all nodes and using a low rank approximation.
+                    These kernels could be estimated efficiently by computing once the $\bar{S}$ matrices for all graphs, all multiscale base kernels for all nodes and using a low rank approximation.
                     More details are available in the original paper~\parencite{kondor2016multiscale}.
 
             \paragraph{Propagation kernel}
@@ -1532,10 +1539,10 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \label{eq::simple_kernel}
                     k_s(G, G') \triangleq \sum_{(v, v') \in V\times V'} \kappa(v, v')
                 \end{equation}
-                where $\kappa$ is a base kernel on node attributes\footnote{It can accomodate also the case of labelled and partially labeled graphs.}.\\
+                where $\kappa$ is a base kernel on node attributes\footnote{It can accomodate also the case of labeled and partially labeled graphs.}.\\
 
                 In order to take advantage of the structure of the graph, attributes are propagated using a matrix $T$ giving a new graph $G_t$ at each time $t$, where $G_0 = G$.
-                The latter, if not given by the user, is taken to be $P$ (\textit{cf.} Equation~\ref{eq::normalized_adjacency_matrix}).
+                If not given by the user, \(T\) is taken to be the normalized adjacency matrix $P$ (\textit{cf.} Equation~\ref{eq::normalized_adjacency_matrix}).
                 Once the attributes are propagated, the kernel from Equation~\ref{eq::simple_kernel} is computed for the new graphs.
                 At time $t_{max}$, we compute the propagation kernel:
                 \begin{equation}
@@ -1572,8 +1579,8 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             \paragraph{Graph hopper kernel}
                 Random walk kernels, just as the basic kernels defined in Equations~\ref{eq::feature_graph_kernel_nodes} and~\ref{eq::feature_graph_kernel_edges} and propagation kernels, are instances of R-convolution kernels~\parencite{haussler1999convolution}: \textit{i.e.} they can be written as a sum of kernels of substructures of graphs.
                 In the case of the class of kernels defined in Equation~\ref{eq::random_walk_kernel}, it can be decomposed into a sum of kernels on all equal length walks from both graphs \(G\) and \(G'\)~\parencite{vishwanathan2010graph}.
-                The shortest path kernel proposes to replace walks by shortest paths between pairs of vertices.
-                The graph hopper kernel proposes also to compare pairs of nodes from two graphs in an scalable way~\parencite{feragen2013scalable}.
+                In order to deal with issues of these kernels, the shortest path kernel~\parencite{borgwardt2005shortest} proposes to replace walks by shortest paths between pairs of vertices.
+                The graph hopper kernel proposes also to compare pairs of nodes from two graphs in a scalable way~\parencite{feragen2013scalable}.
 
                 \subparagraph{Path kernel}
                     A path \(\pi\) between two vertices \((v_s,v_e) \in V\times V\) is a sequence of nodes \(\left(\pi_i\right)_{i=1,2\dots,\vert \pi \vert}\) such that:
@@ -1587,7 +1594,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     The set of all shortest paths between nodes of graph \(G\) (\textit{resp.} \(G'\)) is denoted \(\mathscr{P}\) (\textit{resp.} \(\mathscr{P}'\)).
 
                     Let \(\left(\pi, \pi'\right) \in \mathscr{P} \times \mathscr{P}'\).
-                    To compare both paths, is defined a path kernel:
+                    To compare both paths, a path kernel is defined:
                     \begin{equation}
                         \label{eq::path_kernel}
                         k_p(\pi, \pi') \triangleq \sum_{i=1}^{\vert \pi \vert} \kappa\left(\pi_i, \pi'_i\right) \cdot \mathbb{1}_{\vert \pi \vert = \vert \pi' \vert}
