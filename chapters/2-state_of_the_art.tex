@@ -14,13 +14,13 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
 \section{\textsc{Automatic Building \texorpdfstring{\gls*{acr::3d}}{3D} modeling}}
     \label{sec::state_of_the_art::building_modeling}
-    In this work, we are studying large-scale urban modeling quality evaluation.
+    In this work, we study large-scale urban modeling quality evaluation.
     Building models, at this scale, cannot be obtained manually.
     Automatically acquired building models are, actually, the first target of our study.
-    As a consequence, there is a need for a global presentation of automatic building \gls{acr::3d} modeling.
+    As a consequence, there is a need for a overview of automatic building \gls{acr::3d} modeling.
     The aim of this section is not to give a thourough survey of all \gls{acr::3d} modeling techniques, but rather explain the main approaches and how they affect the quality of the final product.
     For a comprehensive study of urban reconstruction methods, we refer the reader to the work of~\textcite{musialski2013survey}.\\
-    In Subsection~\ref{subsec::state_of_the_art::building_modeling::building_extraction}, we present the different approaches used for building delineation.
+    Subsection~\ref{subsec::state_of_the_art::building_modeling::building_extraction} presents the different approaches used for building delineation.
     Afterwards, we present, in Subsection~\ref{subsec::state_of_the_art::building_modeling::modeling_strategies}, a general categorization of modeling strategies for buildings.
 
     \subsection{\textsc{Building extraction}}
@@ -32,26 +32,27 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         Both approaches suffer from some shortcomings.\\
 
         The first one relies on the fact that the \gls{acr::gis} database is acquired at the same time as the sensor data.
-        Otherwise, there will be no guaranty that the modeled scene has not changed on the meantime.
+        Otherwise, there will be no guaranty that the modeled scene has not changed in the meantime.
         For instance, a building can be removed --- as a whole or partially --- between the two data acquisitions.
         This would result in having terrain or vegetation reconstructed as a building part.\\
         Even if the database is guaranteed to be produced at the same time as the input data, another issue can cause problems.
         In some datasets, building outlines are actually not stored in their original form: they are instead deformed to fit their specifications.
         For instance, buildings smaller than a certain area can be ommitted.
-        The generalization level plays also a role as small features could be smoothed away.\\
+        The specified generalization level can also play a role as small features could be smoothed away.
+        A part from this type of issues, the provided building outlines could be erroneous simply due to a faulty, wether manual or automatic, process.\\
         
         The classification based one is solely dependent on the input data quality.
         Contrarily to the first case, there is no redundancy that can help filter out noise in the data.
-        \Gls{acr::lidar} point clouds are, for example, too sparse and unstructured for instance to detect exatct boundaries between objects\addref.
-        Conversly, images offer an alternative but can suffer from issues related to shadows that are detrimental to building delineation\addref.\\
+        \Gls{acr::lidar} point clouds are, for example, too sparse and unstructured for instance to detect exact boundaries between objects~\parencite{michelin2012building}.
+        Conversly, images offer an alternative but, as a passive sensor, can suffer from issues related to shadows that are detrimental to building delineation~\parencite{adeline2013shadow}.\\
         The classification process is not flawless either.
-        Just as with \gls{acr::gis} databases, classification relies on some \textit{a priori} informations that are encoded in regularization terms~\parencite{lafarge2008structural,zhu2018large,zeng2018neural}.
+        Just as with \gls{acr::gis} databases, classification relies on some \textit{a priori} informations that are generally encoded in regularization terms~\parencite{lafarge2008structural,zhu2018large,zeng2018neural}.
         These are needed to retrieve outlines of buildings efficiently.
         However, they can also fail to represent faithfully the ground truth and results in wrong building footprint extraction.
 
     \subsection{\textsc{Modeling strategies}}
         \label{subsec::state_of_the_art::building_modeling::modeling_strategies}
-        Once the building footprint is extracted, the goal is to generalize its surface out of the input data.
+        Once the building footprint is extracted, the goal is to generalize its \gls{acr::3d} surface out of the input data.
         Several strategies are conducted.
         They can be classified in three categories: Model-driven, Data-driven and mixed approaches.\\
 
@@ -59,14 +60,14 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         For example the Manhattan-world class assumes that buildings are an aggregation of boxes~\parencite{li2016manhattan,vanegas2010building,ledoux2011topologically,arroyo2015dimension}.
         This is actually an instance of grammars utilized in procedural modeling.
         In the latter, a set of predetermined rules are used to determine the best shapes, out of a library, in order to better fit the input data~\parencite{lafarge2008structural,demir2015procedural,martinovic2013bayesian,mathias2011procedural,zeng2018neural,koutsourakis2009single,nan2015template,zhou20102}.
-        Top-down approaches are usually used when the input data resolution are not sufficiently accurate to retrieve detailed architectural features of the building~\parencite{lafarge2008structural}.\\
+        Top-down approaches are usually used when the input data resolution is not sufficiently accurate to directly retrieve detailed architectural features of the building~\parencite{lafarge2008structural}.\\
 
         On the other hand, data-driven, or bottom-up, modeling techniques need very high resolution sensor data in order to retrieve constituing geometric features of the building.
         This is usually achieved using primitive extraction.
         For instance, building surfaces could be viewed as piece-wise planar structures~\parencite{nan2017polyfit,taillandier2004automatic,lafarge2012creating}.
-        As a consequence, plane arrangement are drawn from the original data.
+        As a consequence, plane arrangements are drawn from the original data.
         Edges are also examples of features that can be extracted from the data to guide building modeling~\parencite{baillard1999automatic,}.
-        A second step consists on aggregating the extracted geometric features into a model.
+        A second step consists in aggregating the extracted geometric features into a model.
         This is usually implemented either through a greedy approach~\parencite{taillandier2004automatic} or a global optimization method~\parencite{zhu2018large,holzmann2018semantically,poullis2013framework,verdie2015lod}.\\
 
         The first type of methods suffers typically from topological defects when the grammar is not comprehensive enough, while the second kind knows other drawbacks, mainly, segmentation problems.
@@ -75,10 +76,10 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         However, these are usually greedy approaches that do not scale well.\\
 
         There are still some limitations that these automatic approaches did not adress.
-        Higher resolution sensors are yielding more and more data with high frequencies that are still not taken into account.
-        These can pose serious problems in modeling:~\textcite{bredif20073d} that undetected superstructures can lead to bad quality models and their reconstruction can help in that regard.
-        High buildings can cast shadows on, or occlude, neighbooring ones which result in issues with their surface retrieval.
-        This has not been widely studied\addref, as buildings are moslty modeled one by one.
+        Higher resolution sensors are yielding more and more data with high frequencies that are still not taken into account as most produced models are at most \gls{acr::lod}-2 ones.
+        These can pose serious problems in modeling:~\textcite{bredif20073d} proved that undetected superstructures can lead to bad quality models and their reconstruction can help in that regard.
+        High buildings can cast shadows on, or occlude, neighbooring ones which results in issues with their surface retrieval.
+        This has not been widely studied~\parencite{lafarge2012creating,bao2013generating}, as buildings are moslty modeled one by one.
         All these issues and more induce defects that should be characterized and classified for a better understanding of the field.
 
 \section{\textsc{Quality evaluation of \texorpdfstring{\gls*{acr::3d}}{3D} building models}}
