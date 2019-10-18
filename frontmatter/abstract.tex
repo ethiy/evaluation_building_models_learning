@@ -1,1 +1,16 @@
-This is the abstract.
+The automatic generation of 3D building models from geospatial data is now a standard procedure.
+An abundant literature covers the last two decades and several softwares are now available.
+However, urban areas are very complex environments.
+Inevitably, practitioners still have to visually assess, at city-scale, the correctness of these models and detect frequent reconstruction errors.
+Such a process relies on experts, and is highly time-consuming with approximately \SI[per-mode=repeated-symbol]{2}{\hour\per\km\squared\per\expert}.
+This work proposes an approach for automatically evaluating the quality of 3D building models.
+Potential errors are compiled in a novel hierarchical and modular taxonomy.
+This allows, for the first time, to disentangle fidelity and modeling errors, whatever the level of details of the modeled buildings.
+The quality of models is predicted using the geometric properties of buildings and, when available, Very High Resolution images and Digital Surface Models.
+A baseline of handcrafted, yet generic, features is fed into a Random Forest or Support Vector Machine classifiers.
+Richer features, relying on graph kernels as well as Scattering Networks, were proposed to better take into consideration structure.
+Both multi-class and multi-label cases are studied: due to the interdependence between classes of errors, it is possible to retrieve all errors at the same time while simply predicting correct and erroneous buildings.
+The proposed framework was tested on three distinct urban areas in France with more than 3,000 buildings.
+80\%-99\% F-score values are attained for the most frequent errors.
+For scalability purposes, the impact of the urban area composition on the error prediction was also studied, in terms of transferability, generalization, and representativeness of the classifiers.
+It shows the necessity of multi-modal remote sensing data and mixing training samples from various cities to ensure a stability of the detection ratios, even with very limited training set sizes.
