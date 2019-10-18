@@ -1,3 +1,5 @@
+\pdfobjcompresslevel 0
+
 \documentclass[12pt, twoside]{book}
 
 \usepackage[paper=a4paper, top=1.5cm, bottom=2cm, left=2.5cm, right=2.5cm, headheight=15pt]{geometry}
@@ -114,18 +116,18 @@
     \pagestyle{plain}
    
     \input{frontmatter/0-cover_page}
-    \input{frontmatter/dedication}
+    % \input{frontmatter/dedication}
     \leftchapter
     \chapter{\textsc{Abstract}}
         \input{frontmatter/abstract}
     \selectlanguage{french}
     \chapter{\textsc{Résumé}}
         \input{frontmatter/resume}
-    \chapter{\textsc{Résumé étendu}}
-        \input{frontmatter/resume_long}
+    % \chapter{\textsc{Résumé étendu}}
+    %     \input{frontmatter/resume_long}
     \selectlanguage{english}
-    \chapter{\textsc{Acknowlegements}}
-        \input{frontmatter/acknowledgments}
+    % \chapter{\textsc{Acknowlegements}}
+    %     \input{frontmatter/acknowledgments}
 
     \printglossary[type=\acronymtype]
     \printglossary

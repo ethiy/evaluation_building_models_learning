@@ -19,6 +19,19 @@
         The Elancourt (\textit{resp.} Nantes and Paris-13) scene contains 2,009 (\textit{resp.} 748 and 478) annotated building models.
         The \gls{acr::dsm} and orthorectified image resolution is \SI{6}{\cm} while it is \SI{10}{\cm} for the two other areas.
 
+        \begin{figure}[htpb]
+            \ffigbox[\textwidth]{
+                \includegraphics[width=\textwidth]{images/datasets/france_map}
+            }{
+                \label{fig::france_map}
+                \caption{
+                    Map of France showing the studied urban scenes.
+                    Each square corresponds to a city:
+                    \textcolor[rgb]{.84,.1,.11}{\(\blacksquare\)} \textbf{Paris-13}.
+                }
+            }
+        \end{figure}
+
         \gls{acr::3d} models were generated using the algorithm described in~\parencite{durupt2006automatic}, out of existing building footprints and aerial VHR multi-view \glspl{acr::dsm}.
         The modeling algorithm simulates possible roof structures with facets satisfying some geometric constraints.
         The best configuration is selected using a scoring system on the extrapolated roofs.
