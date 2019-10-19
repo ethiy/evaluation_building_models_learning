@@ -830,7 +830,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \item As decision trees deal with each feature independently, they can natively, as well as Random Forests, handle heterogenous data.
                         It can handle boolean features along with integer or real ones.
                     \item Since at each time only a subset of features are considered, Random Forests can scale easily under high dimensionality.
-                    \item The ensemble character of Random Forests allows them to adapt to outliers and hence have a good generalization power.
+                    \item The ensemble character of Random Forests allows them to adapt to outliers and hence, provided a large enough trainning dataset, can achieve a good generalization power.
                     \item Prediction relies on simple comparisons and can be computed quickly.
                     \item They inherently yield probabilities that are consistent.
                 \end{itemize}
@@ -858,6 +858,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             We will describe hence how to describe graphs for classification.
 
         \subsubsection{\textsc{\acrlong*{acr::scatnet} for image classification}}
+            \label{subsubsec::state_of_the_art::mlpr::feature_extraction::scatnet}
             \glspl{acr::scatnet} can be seen as a reverse engineered convolutional network.
             They are built mainly relying on wavelet filters which are used to imitate filters from \glspl{acr::cnn}.
             The latter learns automatically an image representation $\Phi$ trying to minimize a learning loss function.
@@ -1183,7 +1184,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \end{figure}
 
         \subsubsection{\textsc{Kernels for graph classification}}
-            \label{subsec::state_of_the_art::mlpr::graph_classification}
+            \label{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}
             Standard machine learning practice usually assumes that the observed instances live in a finite dimensional space.
             This is not always the case.
             In fact, graphs can have varying numbers of nodes and edges.
@@ -1220,7 +1221,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 \end{equation}
                 and an edge based one:
                 \begin{equation}
-                    \label{eq::feature_node_graph}
+                    \label{eq::feature_edge_graph}
                     \Phi_E(G) \triangleq \begin{bmatrix}
                         S\left(\left(b(e)_1\right)_{e \in E}\right)\\
                         S\left(\left(b(e)_2\right)_{e \in E}\right)\\
