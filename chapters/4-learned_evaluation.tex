@@ -122,14 +122,14 @@ These are proposed to better model defect predictions.
         \paragraph{Random Forest}
             Random Forest classifiers is a natural choice in our case.
             As seen in Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::rf}, this type of classifiers can manage a large number of features with different dynamics and coming from multiple modalities.
-            In fact, the computed features can be geometric, image based or height based.
-            Each one of these modalities can be heterogeneous in terms of extracted value types as will be discussed later in Section~\ref{sec::learned_evaluation::baseline}.
-            Relying on their bagging property, a high number of trees is chosen to cover most of the feature space, while a limited tree depth was set to avoid overfitting during training.
-            It adapts easily to any of our classification paradigms: multi-class or multi-label.
-            The first multi-class case is handled natively by the Random Forest classifier, while for the second one, a one-vs-all approach is adopted so as to address each label separately.
+            In fact, the computed features could be geometric, image based or height based.
+            Each one of these modalities can also be heterogeneous in terms of extracted value types, as will be discussed later in Section~\ref{sec::learned_evaluation::baseline}.
+            Relying on their bagging property, a high number of trees is required to cover most of the feature space, while a limited tree depth is needed to avoid overfitting during training.
+            While the multi-class case is natively taken into account by the Random Forest classifier, the multi-label one requires adopting a one-vs-all approach so as to address each label separately.
 
         \paragraph{\acrshort*{acr::svm}}
-            \glspl{acr::svm} do not manage heterogeneity in feature vectors and only binary classification is inherently handled.
+            \glspl{acr::svm} do not manage well enough heterogeneity in feature vectors.
+            Moreover, only binary classification is inherently handled.
             However, it offers other advantages that are not met by Random Forest.
             In fact, \glspl{acr::svm} can be useful when labels are not equally distributed in the training set.
             This is actually the case of some errors that are rare in our dataset: specifically the inaccurate topology ones (\textit{cf.} Subsection~\ref{subsec::experiments::datasets::stats}).
@@ -172,9 +172,9 @@ These are proposed to better model defect predictions.
         \end{figure}
 
         The dual graph is illustrated in Figure~\ref{fig::geometric_features}.
-        For each facet $f \in \mathsf{F}$, we compute its degree (\textit{i.e.}, number of vertices; $d(f) \triangleq \left\lvert\left\{v : v\text{ is a vertex of }f\right\}\right\rvert$), its area $\mathscr{A}(f)$ and its circumference $\mathscr{C}(f)$.
-        These are all geometric invariants with respect to $\mathbb{R}^3$ isometries, contrarily to facet centroids $\mathscr{G}(f)$ and normals $\vec{n}(f)$.
-        This is countersteped by looking, for each graph edge $e=\left\{f, g\right\} \in \mathsf{E}$, for the distance between facet centroids $\Vert \mathscr{G}(f) - \mathscr{G}(g) \Vert$ and the angle formed by their normals $\arccos(\vec{n}(f) \cdot \vec{n}(g))$.
+        For each facet $f \in \mathsf{F}$, we compute its degree (\textit{i.e.}, number of vertices; $d\left(f\right) \triangleq \left\lvert\left\{v : v\text{ is a vertex of }f\right\}\right\rvert$), its area $\mathscr{A}\left(f\right)$ and its circumference $\mathscr{C}\left(f\right)$.
+        These are all geometric invariants with respect to $\mathbb{R}^3$ isometries, contrarily to facet centroids $\mathscr{G}\left(f\right)$ and normals $\vec{n}\left(f\right)$.
+        This is countersteped by looking, for each graph edge $e=\left\{f, g\right\} \in \mathsf{E}$, for the distance between facet centroids $\Vert \mathscr{G}\left(f\right) - \mathscr{G}\left(g\right) \Vert$ and the angle formed by their normals $\arccos\left(\vec{n}\left(f\right) \cdot \vec{n}\left(g\right)\right)$.
         Statistical characteristics are then computed over building model facets using specific functions $S$, like a histogram:        
 
         \begin{equation}
@@ -207,11 +207,11 @@ These are proposed to better model defect predictions.
         \begin{equation}
         	\label{eq::geometric_features}
             v_{\text{geometry}}(\mathsf{M}) = \begin{bmatrix}
-            	S \Big(\big(d(f)\big)_{f \in \mathsf{F}}\Big)\\
-                S \Big(\big(\mathscr{A}(f)\big)_{f \in \mathsf{F}}\Big)\\
-                S \Big(\big(\mathscr{C}(f)\big)_{f \in \mathsf{F}}\Big)\\
-                S \Big(\big( \vert\vert \mathscr{G}(f) - \mathscr{G}(g) \vert\vert \big)_{(f,g) \in \mathsf{E}}\Big)\\
-                S\Big(\big( \arccos(\vec{n}(f) \cdot \vec{n}(g)) \big)_{(f,g) \in \mathsf{E}}\Big)
+            	S \left(\left(d\left(f\right)\right)_{f \in \mathsf{F}}\right)\\
+                S \left(\left(\mathscr{A}\left(f\right)\right)_{f \in \mathsf{F}}\right)\\
+                S \left(\left(\mathscr{C}\left(f\right)\right)_{f \in \mathsf{F}}\right)\\
+                S \left(\left( \left\lVert \mathscr{G}\left(f\right) - \mathscr{G}\left(g\right) \right\rVert \right)_{(f,g) \in \mathsf{E}}\right)\\
+                S\left(\left( \arccos\left(\vec{n}\left(f\right) \cdot \vec{n}\left(g\right)\right) \right)_{(f,g) \in \mathsf{E}}\right)
             \end{bmatrix}.
         \end{equation}
 
@@ -275,7 +275,7 @@ These are proposed to better model defect predictions.
         
         \begin{equation}
             \label{eq::corr_seg}
-            \mathsf{D}_S(s, I) \triangleq S \left( \left(\frac{\nabla I(g) \cdot \vec{n}(s)}{\left\rVert \nabla I(g)\right\rVert}\right)_{\substack{g \in I \\ g \cap s \neq \emptyset}} \right).
+            \mathsf{D}_S(s, I) \triangleq S \left( \left(\frac{\nabla I\left(g\right) \cdot \vec{n}(s)}{\left\rVert \nabla I\left(g\right)\right\rVert}\right)_{\substack{g \in I \\ g \cap s \neq \emptyset}} \right).
         \end{equation}
 
         \begin{figure}[htpb]
@@ -305,12 +305,12 @@ These are proposed to better model defect predictions.
         \end{figure}
 
         Once the distribution is computed over a segment, it is stacked over all facet edges to define the distribution over projected facets.
-        In the case of histograms $S^p_{\text{histogram}}$ with the same parameters (and thus the same bins), it is equivalent to summing out the previous vectors $\mathsf{D}_{S^p_{\text{histogram}}}(s, I)$ over edges $s$ from the projection $q(f)$ of the facet $f$.
+        In the case of histograms $S^p_{\text{histogram}}$ with the same parameters (and thus the same bins), it is equivalent to summing out the previous vectors $\mathsf{D}_{S^p_{\text{histogram}}}(s, I)$ over edges $s$ from the projection $q\left(f\right)$ of the facet $f$.
         In order to take into account the variability of segment dimensions, this sum is normalized by segment lengths.
 
         \begin{equation}
             \label{eq::corr_fac}
-            D_{S^p_{\text{histogram}}}\left(f, I\right) \triangleq \sum_{s \in q(f)} \left\rVert s \right\lVert \cdot \mathsf{D}_{S^p_{\text{histogram}}}(s, I).
+            D_{S^p_{\text{histogram}}}\left(f, I\right) \triangleq \sum_{s \in q\left(f\right)} \left\rVert s \right\lVert \cdot \mathsf{D}_{S^p_{\text{histogram}}}(s, I).
         \end{equation}
 
         The same can be done over all facets of a building $\mathsf{M}$ (Equation~\ref{eq::corr_bul}).
@@ -320,7 +320,7 @@ These are proposed to better model defect predictions.
 
         \begin{equation}
             \label{eq::corr_bul}
-            v_{\text{image}}\left(\mathsf{M}\right) = D_{S^p_{\text{histogram}}}\left(\mathsf{M}, I\right) \triangleq \sum_{f \in \mathsf{F}} \mathscr{A}\left(q(f)\right) \cdot \mathsf{D}_{S^p_{\text{histogram}}}(f, I).
+            v_{\text{image}}\left(\mathsf{M}\right) = D_{S^p_{\text{histogram}}}\left(\mathsf{M}, I\right) \triangleq \sum_{f \in \mathsf{F}} \mathscr{A}\left(q\left(f\right)\right) \cdot \mathsf{D}_{S^p_{\text{histogram}}}(f, I).
         \end{equation}
         
         These image-based attributes are helpful for precision error detection.
@@ -329,9 +329,28 @@ These are proposed to better model defect predictions.
 
 \section{\textsc{Richer features}}
     \label{sec::learned_evaluation::richer_features}
+    The features presented in the previous section are by construction a simple first iteration.
+    Their goal is to test the feasibility of the learned quality evaluation approach.
+    This is actually discussed in details in Chapters~\ref{chap::experiments} and~\ref{chap::more_experiments}.\\
+
+    This section presents features that better exploits structural information of the input models.
+    In the last section, we identifed two types of observations from which features are extacted: graph-like and image-like data.
+    Richer graph based feature are proposed in Subsection~\ref{subsec::learned_evaluation::richer_features::graph}.
+    For images, better attributes are also presented in the next Subsection~\ref{subsec::learned_evaluation::richer_features::image}.
+
     \subsection{\textsc{Graph classification}}
         \label{subsec::learned_evaluation::richer_features::graph}
+        In Subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}, were discussed some kernels that can describe adequately graphs.
+        The geometric baseline features we provided in Subsection~\ref{subsec::learned_evaluation::baseline::geometric}, more precisely in Equation~\ref{eq::geometric_features}, could actually be seen as a concatenation of the basic feature maps from Equations~\ref{eq::feature_node_graph} and~\ref{eq::feature_edge_graph}.
+        This corresponds, in fact, to the basic kernel in Equation~\ref{eq::feature_graph_kernel_sum}.\\
 
+        The biggest disadvantage of this basic kernel is its disregard towards the structural information stored in the graph.
+        That is why we propose to use the other kernels that are presented in Subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}.
+        
+        - no edges -> no problem edge features are based on node ones
+        - kenrles structure only
+        - different node modalities -> different kernels
+        - linear combination -> MKL
 
     \subsection{\textsc{Image classification}}
         \label{subsec::learned_evaluation::richer_features::image}
