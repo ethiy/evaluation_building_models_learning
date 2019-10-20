@@ -172,9 +172,9 @@ These are proposed to better model defect predictions.
         \end{figure}
 
         The dual graph is illustrated in Figure~\ref{fig::geometric_features}.
-        For each facet $f \in \mathsf{F}$, we compute its degree (\textit{i.e.}, number of vertices; $d\left(f\right) \triangleq \left\lvert\left\{v : v\text{ is a vertex of }f\right\}\right\rvert$), its area $\mathscr{A}\left(f\right)$ and its circumference $\mathscr{C}\left(f\right)$.
+        For each facet $f \in \mathsf{F}$, we compute its degree (\textit{i.e.}, number of vertices; $f \mapsto d\left(f\right) \triangleq \left\lvert\left\{v : v\text{ is a vertex of }f\right\}\right\rvert$), its area $f \mapsto \mathscr{A}\left(f\right)$ and its circumference $f \mapsto \mathscr{C}\left(f\right)$.
         These are all geometric invariants with respect to $\mathbb{R}^3$ isometries, contrarily to facet centroids $\mathscr{G}\left(f\right)$ and normals $\vec{n}\left(f\right)$.
-        This is countersteped by looking, for each graph edge $e=\left\{f, g\right\} \in \mathsf{E}$, for the distance between facet centroids $\Vert \mathscr{G}\left(f\right) - \mathscr{G}\left(g\right) \Vert$ and the angle formed by their normals $\arccos\left(\vec{n}\left(f\right) \cdot \vec{n}\left(g\right)\right)$.
+        This is countersteped by looking, for each graph edge $e=\left\{f, g\right\} \in \mathsf{E}$, for the distance between facet centroids $\left\{f, g\right\} \mapsto \left\lVert \mathscr{G}\left(f\right) - \mathscr{G}\left(g\right) \right\rVert$ and the angle formed by their normals $\left\{f, g\right\} \mapsto \arccos\left(\vec{n}\left(f\right) \cdot \vec{n}\left(g\right)\right)$.
         Statistical characteristics are then computed over building model facets using specific functions $S$, like a histogram:        
 
         \begin{equation}
@@ -346,9 +346,10 @@ These are proposed to better model defect predictions.
 
         The biggest disadvantage of this basic kernel is its disregard towards the structural information stored in the graph.
         That is why we propose to use the other kernels that are presented in Subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}.
+        None of these kernels takes into account edge attributes.
+        This is actually not an issue as both the edge attributes of the facet graph (\textit{cf.} Equation~\ref{eq::model_graph}) are in fact a function of node attributes: centroid \(f \mapsto \mathscr{G}\left(f\right)\) and normal \(f \mapsto \vec{n}\left(f\right)\).
+        Some of these kernels do not utilize the node attributes either as they take only account of the structure of the graph.
         
-        - no edges -> no problem edge features are based on node ones
-        - kenrles structure only
         - different node modalities -> different kernels
         - linear combination -> MKL
 
