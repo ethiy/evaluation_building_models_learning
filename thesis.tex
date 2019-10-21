@@ -17,9 +17,10 @@
 
 \usepackage{graphicx}
 \usepackage{floatrow}
-\usepackage{caption}
-\usepackage{subfig}
+\usepackage[labelsep=colon]{caption}
+\usepackage{subcaption}
 \renewcommand{\thesubfigure}{\alph{subfigure}}
+\captionsetup[subfigure]{subrefformat=parens, labelformat=parens, labelsep=space}
 
 
 \usepackage{standalone}
@@ -116,18 +117,18 @@
     \pagestyle{plain}
    
     \input{frontmatter/0-cover_page}
-    % \input{frontmatter/dedication}
+    \input{frontmatter/dedication}
     \leftchapter
     \chapter{\textsc{Abstract}}
         \input{frontmatter/abstract}
     \selectlanguage{french}
     \chapter{\textsc{Résumé}}
         \input{frontmatter/resume}
-    % \chapter{\textsc{Résumé étendu}}
-    %     \input{frontmatter/resume_long}
+    \chapter{\textsc{Résumé étendu}}
+        \input{frontmatter/resume_long}
     \selectlanguage{english}
-    % \chapter{\textsc{Acknowlegements}}
-    %     \input{frontmatter/acknowledgments}
+    \chapter{\textsc{Acknowlegements}}
+        \input{frontmatter/acknowledgments}
 
     \printglossary[type=\acronymtype]
     \printglossary

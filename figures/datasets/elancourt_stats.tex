@@ -1,0 +1,223 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
+\begin{document}
+    \pgfplotstableread[col sep=comma,header=false]{
+        Unqualifiable, 62, 1947
+        Building errors, 1420, 589
+        Facet errors, 1648, 361
+    }\foneEl
+
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2}
+        }
+    ]{sum}{\foneEl}
+
+    \pgfplotstableread[col sep=comma, header=false]{
+        BOS, 1342, 667
+        BUS, 473, 1536
+        BIB, 203, 1806
+        BIT, 99, 1910
+    }\buildingEl
+
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2}
+        }
+    ]{sum}{\buildingEl}
+
+    \pgfplotstableread[col sep=comma, header=false]{
+        FOS, 1648, 361
+        FUS, 315, 1694
+        FIB, 229, 1780
+        FIT, 30, 1979
+        FIG, 1187, 822
+    }\facetEl
+
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2}
+        }
+    ]{sum}{\facetEl}
+    
+    \pgfplotstableread[col sep=comma,header=false]{
+        Unqualifiable, 56, 692
+        Building errors, 435, 313
+        Facet errors, 568, 180
+    }\foneNa
+
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2}
+        }
+    ]{sum}{\foneNa}
+
+    \pgfplotstableread[col sep=comma, header=false]{
+        BOS, 291, 457
+        BUS, 68, 680
+        BIB, 99, 649
+        BIT, 113, 635
+    }\buildingNa
+
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2}
+        }
+    ]{sum}{\buildingNa}
+
+    \pgfplotstableread[col sep=comma, header=false]{
+        FOS, 478, 270
+        FUS, 210, 538
+        FIB, 164, 584
+        FIT, 11, 737
+        FIG, 446, 302
+    }\facetNa
+
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2}
+        }
+    ]{sum}{\facetNa}
+    
+    \pgfplotstableread[col sep=comma,header=false]{
+        Unqualifiable, 23, 455
+        Building errors, 303, 175
+        Facet errors, 411, 67
+    }\fonePa
+
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2}
+        }
+    ]{sum}{\fonePa}
+
+    \pgfplotstableread[col sep=comma, header=false]{
+        BOS, 202, 276
+        BUS, 63, 415
+        BIB, 55, 423
+        BIT, 76, 402
+    }\buildingPa
+
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2}
+        }
+    ]{sum}{\buildingPa}
+
+    \pgfplotstableread[col sep=comma, header=false]{
+        FOS, 249, 229
+        FUS, 275, 203
+        FIB, 144, 334
+        FIT, 6, 472
+        FIG, 383, 95
+    }\facetPa
+
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2}
+        }
+    ]{sum}{\facetPa}
+
+    \pgfplotsset{
+        percentage plot/.style={
+            point meta=explicit,
+            every node near coord/.append style={
+                xshift=14pt,
+                yshift=8pt,
+                anchor=east,
+                font=\large,
+                color=black,
+                align=center,
+                text width=.85cm
+            },
+            nodes near coords={
+                \pgfmathtruncatemacro\iszero{\originalvalue==0}
+                \ifnum\iszero=0
+                    \pgfmathprintnumber[fixed zerofill,precision=0]{\pgfplotspointmeta}
+                \fi
+            },
+            nodes near coords align={vertical},
+            yticklabel=\pgfmathprintnumber{\tick}\,$\%$,
+            visualization depends on={y \as \originalvalue}
+        },
+        percentage series/.style={
+            table/y expr=(\thisrow{#1}/\thisrow{sum}*100),table/meta=#1
+        }
+    }
+
+    \begin{tikzpicture}
+        \node (origin) at (.5,0) {};
+        \node (left) at (-8.1, -9.5) {};
+        \node (right) at (4.5, -9.5) {};
+
+        \begin{axis}[
+            title={\large(a)},
+            at={(origin)},
+            ylabel={Ratio},
+            ybar,
+            height=8cm,
+            width=10cm,
+            enlarge x limits=0.25,
+            percentage plot,
+            bar width=.7cm,
+            symbolic x coords={Unqualifiable, Building errors, Facet errors},
+            xtick=data,
+            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm},
+            ymax=100,
+            ymin=0
+        ]
+            \addplot table [percentage series=1] {\foneEl};
+            \addplot table [percentage series=1] {\foneNa};
+            \addplot table [percentage series=1] {\fonePa};
+        \end{axis}
+        \begin{axis}[
+            title={\large(b)},
+            at={(left)},
+            ybar,
+            height=8cm,
+            width=14cm,
+            enlarge x limits=0.2,
+            percentage plot,
+            bar width=.7cm,
+            ylabel={Ratio},
+            symbolic x coords={BOS, BUS, BIB, BIT},
+            xtick=data,
+            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm},
+            ymax=100,
+            ymin=0,
+            legend style={
+                at={(11cm,-4em)},
+                anchor=north,
+                legend columns=-2
+            }
+        ]
+            \addplot table [percentage series=1] {\buildingEl};
+            \addplot table [percentage series=1] {\buildingNa};
+            \addplot table [percentage series=1] {\buildingPa};
+            \legend{\strut Elancourt, \strut Nantes, \strut Paris-13}
+        \end{axis}
+        \begin{axis}[
+            title={\large(c)},
+            at={(right)},
+            ybar,
+            height=8cm,
+            width=16cm,
+            enlarge x limits=0.15,
+            percentage plot,
+            bar width=.7cm,
+            yticklabels={,,},
+            symbolic x coords={FOS, FUS, FIB, FIT, FIG},
+            xtick=data,
+            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm},
+            ymax=100,
+            ymin=0
+        ]
+            \addplot table [percentage series=1] {\facetEl};
+            \addplot table [percentage series=1] {\facetNa};
+            \addplot table [percentage series=1] {\facetPa};
+        \end{axis}
+    \end{tikzpicture}
+\end{document}

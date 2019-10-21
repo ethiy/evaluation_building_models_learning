@@ -440,12 +440,14 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                         \ffigbox[\FBwidth]{
                             \includestandalone[mode=buildnew, width=.7\textwidth]{figures/model_vs_mesh/mesh_model}
                         }{
-                            \caption{3D mesh of a building surface ($\approx$ \num[output-exponent-marker = \text{e}]{1e5} triangles).}
+                            \captionof{subfigure}{3D mesh of a building surface ($\approx$ \num[output-exponent-marker = \text{e}]{1e5} triangles).}
                         }
                         \ffigbox[\FBwidth]{
                             \includestandalone[mode=buildnew, width=.7\textwidth]{figures/model_vs_mesh/ground_truth_model}
                         }{
-                            \caption{Building 3D polyhedral model ($\approx$ 800 facets).}
+                            \captionof{subfigure}{
+                                Building 3D polyhedral model ($\approx$ 800 facets).
+                            }
                         }
                     }{
                         \caption[
