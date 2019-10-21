@@ -60,7 +60,7 @@
             }{
                 \label{fig::paris-13_ortho}
                 \caption{
-                    Orthoimage shwoing the heterogeneous of the XIII\textsuperscript{th} district of Paris.
+                    Orthoimage showing the heterogeneous of the XIII\textsuperscript{th} district of Paris.
                 }
             }
         \end{figure}
@@ -106,23 +106,63 @@
         The best configuration is selected using a scoring system on the extrapolated roofs.
         Finally, vertical building fa\c{c}ades connect the optimal roof to the building footprint.
         These models have a \gls{acr::lod}-2 level.
-        This method is adapted to roof types of low complexity and favors symmetrical models (residential areas).
+        This method is adapted to roof types of low complexity and favors symmetrical models that are common in residential areas.
         It has been selected to ensure a varying error rate for the three areas of interest, especially since models were generated with partly erroneous cadastral maps.
         3,235 buildings in total are considered.
         They were annotated according to the atomic errors list provided by our taxonomy.
-        Figure~\ref{fig::data_stats} reports modeling errors statistics over the annotated buildings.
 
     \subsection{\textsc{Error statistics}}
         \label{subsec::experiments::datasets::stats}
-        Unqualifiable buildings represent a small\footnote{
-            Geometrically inconsistent \gls{acr::3d} models were filtered out in a preprocessing (nadir projection) step.
-            This fraction corresponds only to the occluded (partially or completly) buildings that could not be qualified.
-        } fraction of the dataset ($<$ 7.5\%).
-        Only a small fraction of buildings are valid\footnote{
-            \texttt{Valid} means the absence of errors for a specified building.
-        }:
-        57 (2.84\%) in Elancourt, 55 (7.35\%) for Nantes and 21 (4.39\%) in Paris-13.
-        Most buildings are affected by the \texttt{Building Errors} family ($>$ 58.16\%) and the \texttt{Facet Errors} one ($>$ 75.94\%).
+
+        \begin{figure}[htpb]
+            \ffigbox[\textwidth]{
+                \begin{subfloatrow}
+                    \ffigbox[\textwidth]{
+                        \includestandalone[mode=buildnew, width=\textwidth]{figures/datasets/families_stats}
+                    }{
+                        \caption{
+                            \label{subfig::family_errors}
+                            Occurence statistics for error families computed for each area: \texttt{finesse} = 2.
+                        }
+                    }
+                \end{subfloatrow}
+                \begin{subfloatrow}
+                    \ffigbox[\textwidth]{
+                        \includestandalone[mode=buildnew, width=\textwidth]{figures/datasets/lod1_stats}
+                    }{
+                        \caption{
+                            \label{subfig::lod1_errors}
+                            Occurence statistics for Building errors depending each area.
+                        }
+                    }
+                \end{subfloatrow}
+                \begin{subfloatrow}
+                    \ffigbox[\textwidth]{
+                        \includestandalone[mode=buildnew, width=\textwidth]{figures/datasets/lod2_stats}
+                    }{
+                        \caption{
+                            \label{subfig::lod2_errors}
+                            Occurence statistics for Facet errors depending each area.
+                        }
+                    }
+                \end{subfloatrow}
+            }{
+                \label{fig::error_statistics}
+                \caption{
+                    Error statistics depending on the \texttt{finesse} level.
+                    The number of each errors is shown over the bars which height indicates rather its frequency.
+                }
+            }
+        \end{figure}
+
+        Figure~\ref{fig::error_statistics} reports modeling errors statistics over the annotated buildings.
+        These statistics are first analysed depending on the family errors at the \texttt{finesse} = 2 level (\textit{cf.} Subfigure~\ref{subfig::family_errors}).
+        Due to the fact that geometrically inconsistent \gls{acr::3d} models were filtered out in a preprocessing (nadir projection) step, \texttt{Unqualifiable} buildings represent a small fraction of the dataset ($<$ 7.5\%).
+        Actually, this latter corresponds to the, partially or completly, occluded buildings that could not be qualified.
+        Moreover, only a small fraction of buildings are \texttt{Valid}:
+        57 (2.84\%) in \textbf{Elancourt}, 55 (7.35\%) for \textbf{Nantes} and 21 (4.39\%) in \textbf{Paris-13}.
+        Most buildings are affected by the \texttt{Building Errors} family ($>$ 58.16\%) and the \texttt{Facet Errors} one ($>$ 75.94\%).\\
+
         At the \texttt{finesse} level 3, more differences are noticed across.
         Over-segmentation errors are generally well represented, for all \glspl{acr::lod}, with at least 38.9\% and at most 66.8\%.
         The same is true for \texttt{FIG} (59.8-80\%).

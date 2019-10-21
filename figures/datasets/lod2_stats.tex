@@ -1,0 +1,98 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
+\begin{document}
+    \pgfplotstableread[col sep=comma, header=false]{
+        FOS, 1648, 361
+        FUS, 315, 1694
+        FIB, 229, 1780
+        FIT, 30, 1979
+        FIG, 1187, 822
+    }\facetEl
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2}
+        }
+    ]{sum}{\facetEl}
+
+    \pgfplotstableread[col sep=comma, header=false]{
+        FOS, 478, 270
+        FUS, 210, 538
+        FIB, 164, 584
+        FIT, 11, 737
+        FIG, 446, 302
+    }\facetNa
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2}
+        }
+    ]{sum}{\facetNa}
+    
+    \pgfplotstableread[col sep=comma, header=false]{
+        FOS, 249, 229
+        FUS, 275, 203
+        FIB, 144, 334
+        FIT, 6, 472
+        FIG, 383, 95
+    }\facetPa
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2}
+        }
+    ]{sum}{\facetPa}
+
+    \pgfplotsset{
+        percentage plot/.style={
+            point meta=explicit,
+            every node near coord/.append style={
+                xshift=14pt,
+                yshift=8pt,
+                anchor=east,
+                color=black,
+                align=center,
+                text width=.85cm
+            },
+            nodes near coords={
+                \pgfmathtruncatemacro\iszero{\originalvalue==0}
+                \ifnum\iszero=0
+                    \pgfmathprintnumber[fixed zerofill,precision=0]{\pgfplotspointmeta}
+                \fi
+            },
+            nodes near coords align={vertical},
+            yticklabel=\pgfmathprintnumber{\tick}\,$\%$,
+            visualization depends on={y \as \originalvalue}
+        },
+        percentage series/.style={
+            table/y expr=(\thisrow{#1}/\thisrow{sum}*100),table/meta=#1
+        }
+    }
+
+    \begin{tikzpicture}
+        \begin{axis}[
+            ylabel={Ratio},
+            ybar,
+            height=8cm,
+            width=14cm,
+            enlarge x limits=0.2,
+            percentage plot,
+            bar width=.7cm,
+            symbolic x coords={FOS, FUS, FIB, FIT, FIG},
+            xtick=data,
+            xtick pos=left,
+            ytick pos=left,
+            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm, font=\ttfamily},
+            ymax=100,
+            ymin=0,
+            legend style={
+                legend columns=-2
+            }
+        ]
+            \addplot table [percentage series=1] {\facetEl};
+            \addplot table [percentage series=1] {\facetNa};
+            \addplot table [percentage series=1] {\facetPa};
+            \legend{\strut Elancourt, \strut Nantes, \strut Paris-13}
+        \end{axis}
+    \end{tikzpicture}
+\end{document}
