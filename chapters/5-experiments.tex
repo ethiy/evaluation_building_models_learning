@@ -12,22 +12,91 @@
 
     \subsection{\textsc{Urban scenes and modeling techniques}}
         \label{subsec::experiments::datasets::scenes}
-        \gls{acr::3d} models from three different cities of France are selected in order to assess the performance of our framework: \textbf{Elancourt}, \textbf{Nantes}, and the XIII\textsuperscript{th} district of Paris (\textbf{Paris-13}) (Figure~\ref{fig::zones_orthos}).
-        \textbf{Elancourt} is a small city exhibiting a high diversity of building types: residential areas (hipped roof buildings), and industrial districts (larger buildings with flat roofs).
-        \textbf{Nantes} represents a denser urban setting with lower building diversity.
-        In Paris-13, high towers, with flat roof, coexist with Haussmann style buildings that typically exhibit highly fragmented roofs.
-        The Elancourt (\textit{resp.} Nantes and Paris-13) scene contains 2,009 (\textit{resp.} 748 and 478) annotated building models.
-        The \gls{acr::dsm} and orthorectified image resolution is \SI{6}{\cm} while it is \SI{10}{\cm} for the two other areas.
+        \gls{acr::3d} models from three different cities of France are selected in order to assess the performance of our framework: \textbf{Elancourt}, \textbf{Nantes}, and the XIII\textsuperscript{th} district of Paris (\textbf{Paris-13}) (\textit{cf.} Figure~\ref{fig::france_map}).
+        Figure~\ref{fig::elancourt_ortho} depicts the small city of \textbf{Elancourt} which contains diverse of building types: residential areas with gable and hip roof buildings and large industrial flat roof building based districts (\textit{cf.} Subfigure~\ref{subfig::elancourt_samples}).
+        \textbf{Nantes}, as shown in Figure~\ref{fig::nantes_ortho}, represents a denser urban setting but with a lower building diversity (\textit{cf.} Subfigure~\ref{subfig::nantes_samples}).
+        In Figure~\ref{fig::paris-13_ortho}, one can see how \textbf{Paris-13} consists of mostly flat roof high towers which coexist with Haussmann style buildings that typically exhibit highly fragmented roofs (\textit{cf.} Subfigure~\ref{subfig::paris-13_samples}).
+        The \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}) scene contains 2,009 (\textit{resp.} 748 and 478) annotated building models.
+        The \gls{acr::dsm} as well as the orthorectified image resolution is \SI{6}{\cm} for the first area while it is \SI{10}{\cm} for the other ones.
 
         \begin{figure}[htpb]
             \ffigbox[\textwidth]{
-                \includegraphics[width=\textwidth]{images/datasets/france_map}
+                \includegraphics[width=.75\textwidth]{images/datasets/france_map}
             }{
                 \label{fig::france_map}
                 \caption{
                     Map of France showing the studied urban scenes.
                     Each square corresponds to a city:
-                    \textcolor[rgb]{.84,.1,.11}{\(\blacksquare\)} \textbf{Paris-13}.
+                    \textcolor[rgb]{.84,.1,.11}{\(\blacksquare\)} \textbf{Paris-13}, \textcolor[rgb]{1,.79,.5}{\(\blacksquare\)} \textbf{Elancourt}, \textcolor[rgb]{.17,.51,.73}{\(\blacksquare\)} \textbf{Nantes}.
+                }
+            }
+        \end{figure}
+
+        \begin{figure}[htpb]
+            \ffigbox[\FBwidth]{
+                \includegraphics[width=\textwidth]{images/datasets/Elancourt}
+            }{
+                \label{fig::elancourt_ortho}
+                \caption{
+                    Orthoimage showing the diversity of buildings in Elancourt.
+                }
+            }
+        \end{figure}
+
+        \begin{figure}[htpb]
+            \ffigbox[\FBwidth]{
+                \includegraphics[width=\textwidth]{images/datasets/Nantes}
+            }{
+                \label{fig::nantes_ortho}
+                \caption{
+                    Orthoimage depicting the dense city center of Nantes.
+                }
+            }
+        \end{figure}
+
+        \begin{figure}[htpb]
+            \ffigbox[\FBwidth]{
+                \includegraphics[width=\textwidth]{images/datasets/Paris-13}
+            }{
+                \label{fig::paris-13_ortho}
+                \caption{
+                    Orthoimage shwoing the heterogeneous of the XIII\textsuperscript{th} district of Paris.
+                }
+            }
+        \end{figure}
+
+        \begin{figure}[htpb]
+            \ffigbox[\textwidth]{
+                \begin{subfloatrow}[3]
+                    \ffigbox[\FBwidth]{
+                        \includegraphics[width=.3\textwidth]{images/datasets/elancourt}
+                    }{
+                        \label{subfig::elancourt_samples}
+                        \caption{
+                            Elancourt contains flat roof buildings (top) as well as gable roof ones (bottom).
+                        }
+                    }
+                    \ffigbox[\FBwidth]{
+                        \includegraphics[width=.3\textwidth]{images/datasets/nantes}
+                    }{
+                        \label{subfig::nantes_samples}
+                        \caption{
+                            Nantes exhibits high rising towers (top) along side densely packed fragmented roof buildings (bottom).
+                        }
+                    }
+                    \ffigbox[\FBwidth]{
+                        \includegraphics[width=.3\textwidth]{images/datasets/paris-13}
+                    }{
+                        \label{subfig::paris-13_samples}
+                        \caption{
+                            The XIII\textsuperscript{th} district of Paris is made of Haussmannian buildings (top) and high rising towers bottom).
+                        }
+                    }
+                \end{subfloatrow}
+            }{
+                \label{fig::france_map}
+                \caption{
+                    Samples of building types per region.
                 }
             }
         \end{figure}
