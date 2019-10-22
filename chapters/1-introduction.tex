@@ -645,16 +645,16 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
 
         We should also mention the efforts made to fix the invalid models. 
         These methods could be divided into local and global ones.
-        \begin{itemize}
-            \item \textbf{Local approaches}: they rely on local topological operators to solve detected issues in the model.
-                One such method is CityDoctor~\parencite{alam2014towards}.
-                On the downside, these methods have the tendency to introduce more errors in the hope of solving present ones.
-                In fact, the problem is often ill-posed, and multiple solutions can be suggested to alleviate the same problem.
-            \item \textbf{Global approaches}: the idea is to represent models as volumes constrained by the defectuous surfaces.
-            The goal here, as in urban reconstruction, is to infere topological information from the observed geometric properties, taking into account the unreliability of the data as well as \textit{a priori} information on the model.
-            This is the case of~\textcite{zhao2013automatic}, which relies on a tetrahydralization of the input model volume and a heuristic carving of unnecessary 3-simplices.
-            This approach, in fact, resembles the surface reconstruction procedures from unstructured point clouds using Delaunay triangulation~\parencite{cazals2006delaunay, berger2014state}.
-        \end{itemize}
+        \begin{description}
+            \item[Local approaches:] they rely on local topological operators to solve detected issues in the model.
+                    One such method is CityDoctor~\parencite{alam2014towards}.
+                    On the downside, these methods have the tendency to introduce more errors in the hope of solving present ones.
+                    In fact, the problem is often ill-posed, and multiple solutions can be suggested to alleviate the same problem.
+            \item[Global approaches:] the idea is to represent models as volumes constrained by the defectuous surfaces.
+                    The goal here, as in urban reconstruction, is to infere topological information from the observed geometric properties, taking into account the unreliability of the data as well as \textit{a priori} information on the model.
+                    This is the case of~\textcite{zhao2013automatic}, which relies on a tetrahydralization of the input model volume and a heuristic carving of unnecessary 3-simplices.
+                    This approach, in fact, resembles the surface reconstruction procedures from unstructured point clouds using Delaunay triangulation~\parencite{cazals2006delaunay, berger2014state}.
+        \end{description}
 
     \subsection{\textsc{Geometric inspection}}
         \label{subsec::introduction::building_model_evaluation::geometric}
@@ -676,16 +676,16 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
         \subsubsection{\textsc{Manual evalutation}}
             Manual inspection involves a human operator checking the validity of the reconstructed geometry compared to a reference data.
             The latter could be classified into two types:
-            \begin{itemize}
-                \item Reference building \gls{acr::3d} models: these are high quality models that were manually produced.
+            \begin{description}
+                \item[Reference building \gls{acr::3d} models:] These are high quality models that were manually produced.
                     One approach is to acquire these on the field by topographic survey.
                     This is, nevertheless, very expensive.
                     Another alternative is to use stereoplotted models using oriented images.
                     This is a more affordable and scalable but a less accurate solution.
-                \item Reference sensor data: they are used by operators in constrast with what is examined the geometry of a building model.
+                \item[Reference sensor data:] They are used by operators in constrast with what is examined the geometry of a building model.
                     Oriented images, \gls{acr::dsm} and point clouds are instances of such data.
                     This setting is, with the same or less positional accuracy as the previous case, the easiest to adopt in a large-scale.
-            \end{itemize}
+            \end{description}
 
             Manual inspection is, actually, ideal in the sense that humans are naturally most suited to detect semantic flaws in building representation.
             The latter are, however, not so adapted for quantitative comparisons.

@@ -114,11 +114,18 @@
     \subsection{\textsc{Error statistics}}
         \label{subsec::experiments::datasets::stats}
 
+        Some of the models obtained using the previous datasets were annotated manually in order to build training datasets.
+        To annotate a building model, the manual operator compares the nadir projection of the model to the corresponding orthoimage and \gls{acr::dsm}.
+        This was possible thanks to the work\footnote{\href{https://github.com/CHUPClem/sGrISner.git}{GIS Graphical interface for annotation.}} of Clémence Chupin, who was a Master student at \gls{acr::ensg}.
+        Figure~\ref{fig::error_statistics} reports modeling errors statistics over the annotated buildings.
+
         \begin{figure}[htpb]
+            \centering
             \ffigbox[\textwidth]{
                 \begin{subfloatrow}
+                    \centering
                     \ffigbox[\textwidth]{
-                        \includestandalone[mode=buildnew, width=\textwidth]{figures/datasets/families_stats}
+                        \includestandalone[mode=buildnew, width=.7\textwidth]{figures/datasets/families_stats}
                     }{
                         \caption{
                             \label{subfig::family_errors}
@@ -127,8 +134,9 @@
                     }
                 \end{subfloatrow}
                 \begin{subfloatrow}
+                    \centering
                     \ffigbox[\textwidth]{
-                        \includestandalone[mode=buildnew, width=\textwidth]{figures/datasets/lod1_stats}
+                        \includestandalone[mode=buildnew, width=.8\textwidth]{figures/datasets/lod1_stats}
                     }{
                         \caption{
                             \label{subfig::lod1_errors}
@@ -137,6 +145,7 @@
                     }
                 \end{subfloatrow}
                 \begin{subfloatrow}
+                    \centering
                     \ffigbox[\textwidth]{
                         \includestandalone[mode=buildnew, width=\textwidth]{figures/datasets/lod2_stats}
                     }{
@@ -150,12 +159,11 @@
                 \label{fig::error_statistics}
                 \caption{
                     Error statistics depending on the \texttt{finesse} level.
-                    The number of each errors is shown over the bars which height indicates rather its frequency.
+                    The height of bars indicates the frequency of each errors while the number of occurences is displayed over.
                 }
             }
         \end{figure}
 
-        Figure~\ref{fig::error_statistics} reports modeling errors statistics over the annotated buildings.
         These statistics are first analysed depending on the family errors at the \texttt{finesse} = 2 level (\textit{cf.} Subfigure~\ref{subfig::family_errors}).
         Due to the fact that geometrically inconsistent \gls{acr::3d} models were filtered out in a preprocessing (nadir projection) step, \texttt{Unqualifiable} buildings represent a small fraction of the dataset ($<$ 7.5\%).
         Actually, this latter corresponds to the, partially or completly, occluded buildings that could not be qualified.
@@ -163,39 +171,119 @@
         57 (2.84\%) in \textbf{Elancourt}, 55 (7.35\%) for \textbf{Nantes} and 21 (4.39\%) in \textbf{Paris-13}.
         Most buildings are affected by the \texttt{Building Errors} family ($>$ 58.16\%) and the \texttt{Facet Errors} one ($>$ 75.94\%).\\
 
-        At the \texttt{finesse} level 3, more differences are noticed across.
-        Over-segmentation errors are generally well represented, for all \glspl{acr::lod}, with at least 38.9\% and at most 66.8\%.
+        At the \texttt{finesse} level 3, two axes of analysis are possible.
+        First, we group errors that are very frequent in the dataset.
+        Over-segmentation errors (\texttt{FOS} and \texttt{BOS}), in both error families, are well represented ranging from 38.9\% up to 66.8\%.
         The same is true for \texttt{FIG} (59.8-80\%).
-        Otherwise, the presence ratio is within the percentage interval of [10, 30], except for topological defects.
-        This negatively impacts the detection of such rare labels.
-        In general, all errors have the same frequency across datasets, apart from \texttt{FUS}, \texttt{BUS}, and \texttt{BIT}.
-        They greatly change from Elancourt (less dense and more heterogeneous) to Paris and Nantes (compact and uniform patterns).
+        \texttt{FIT}, on the other hand, are very rare in all the areas with ratios a little less than 1.5\%.
+        The rest have a presence ratio within the percentage interval of [10, 30].
+        The errors that are rare are understandably going to impact negatively the learning process.\\
+        
+        Second, we can compare error frequency discrepancies depending on the studied scene.
+        \textbf{Elancourt} is different compared to the relatively close sets \textbf{Nantes} and \textbf{Paris-13}, with regards to \texttt{BOS}, \texttt{BUS} and \texttt{BIT}.
+        In fact, the last two areas are more densely urbanized than the first one exhibitting the same properties at \gls{acr::lod}-0.
+        \texttt{BIB}, on the other hand, are equally distributed over the different datasets as it depends mostly on the input sensor data resolution independently of building types.\\
+        At the facet level, \texttt{FIT} is also equally occuring across all the scenes different from the rest of \texttt{Facet errors}.
+        In fact, \texttt{FOS} occurence ratio is related to the size of facets in urban scenes.
+        Actually, the less complex roof structures are, the more big are facets and the more chance they have to be over segmented.
+        Indeed, \textbf{Elancourt}, \textbf{Nantes} and \textbf{Paris-13} scenes are ordered in an ascending manner of their roof structure complexity.
+        Conversely, in line with the previous analysis, \texttt{FUS} are less present in \textbf{Elancourt} than in \textbf{Nantes} which, in turn, contains less of the same error than \textbf{Paris-13}.
+        \texttt{FIB} is distributed in the same manner as \texttt{FUS}.
+        This is mainly due to the fact that the more a roof structure is complex the more precision errors are possible.
+        \texttt{FIG} does not keep the same dynamic as its frequency keeps stable from \textbf{Elancourt} and \textbf{Nantes} but jumps considerably in \textbf{Paris-13}.
+        This may be explained by the fact that the gap in \texttt{FUS} error ratios between \textbf{Paris-13} and \textbf{Nantes} is more important than that of \texttt{FOS} errors, contrarily to the same gaps for the same errors between \textbf{Nantes} and \textbf{Elancourt} which compensate each other.
 
 \section{\textsc{Pipeline evaluation}}
     \label{sec::experiments::evaluation}
 
     \subsection{\textsc{Experimental set-up}}
         \label{subsec::experiments::evaluation::setup}
-        Four feature configurations were tested: ``geometric features'' (\textbf{Geom.}) only, ``geometric and height features''(\textbf{Geom.} $\cup$ \textbf{Hei.}), ``geometric and image features''(\textbf{Geom.} $\cup$ \textbf{Im.}) as well as ``geometric, height and image features''(\textbf{All.}).
-        Each feature modality generates a $20$ dimension vector.
-        The \glspl{acr::dsm} and orthorectified images used to derive height and image features have the same spatial resolution as the reconstruction input data.
-        Labels are extracted from a non \textbf{exclusive} and \textbf{\gls{acr::elod}} $=$ \gls{acr::lod}-2 taxonomy.
-        All \texttt{finesse} levels were tested. The overall accuracy is not interesting due to the highly unbalanced label distribution.
-        We prefer reporting recall ($Rec$) and precision ($Prec$) ratios.
-        Recall expresses, from a number of samples of a given class, the proportion that was rightfully detected as such.
-        Precision indicates how much samples, amongst the detected ones, were, in truth, part of the studied class~\parencite{powers2011evaluation}.
-        We also summarize these two ratios with their harmonic mean, the F-score.
 
-    \subsection{\textsc{Feature analysis}}
-        \label{subsec::experiments::evaluation::feature_analysis}
-        We assess the added value of each modality. Various feature configurations are studied.
-        They are compared with a baseline consisting in predicting the errors using only the \gls{acr::rmse}, which is the standard measure in most of \gls{acr::3d} reconstruction methods.
-        We conclude the analysis by studying the feature importance per training zone.
-        All experiments are conducted performing a 10-fold cross validation to avoid overfitting/underfitting issues.
+        \subsubsection{\textsc{Feature configuration}}
+            \label{subsubsec::experiments::evaluation::setup::feature_configurations}
+            \paragraph{Baseline features}
+                The geometric features are always available.
+                As a consequence, we tested four feature configurations: ``geometric features'' (\textbf{Geom.}) only, ``geometric and height features''(\textbf{Geom.} $\cup$ \textbf{Hei.}), ``geometric and image features''(\textbf{Geom.} $\cup$ \textbf{Im.}) as well as ``geometric, height and image features''(\textbf{All.}).
+                In order to have a better compare the important of each modality, the feature vectors they produce are of the same size.
+                Actually, using the function \(S_{\text{manual}}\) defined in Equation~\ref{eq::statistical_extractor}, the geometric feature vector in Equation~\ref{eq::geometric_features} is of dimension
+                \begin{equation*}
+                    \underbrace{4}_{\substack{\text{the output dimension}\\\text{of the function } S_{\text{manual}} }} \times \underbrace{5}_{\substack{\text{the number of the facet}\\\text{graph attributes}}} = 20.
+                \end{equation*}
+                Regarding height based feature vectors their dimension depend on the histogram parameters.
+                Since we compute differences between observed and model height at terrain level also (\textit{cf.} Subsection~\ref{subsec::learned_evaluation::baseline::height}), and because these are virtually unbounded and can differ from one scene to another, the maximum possible discrepancy is limited to \SI{\pm 50}{\m} for all scenes.
+                In order to have the same feature vector dimension for this modality, the number of bins is fixed manually to \(20\).
+                For image based features, the cosine similarity between normal vectors, used in Equation~\ref{eq::corr_fac}, is by definition bounded in the interval [-1, 1].
+                This interval is consequently divided evenly into \(20\) bins for the histogram computation.
+                The \glspl{acr::dsm} and orthorectified images used to derive height and image features have the same spatial resolution as the reconstruction input data.\\
 
-        \subsubsection{\textsc{RMSE predictive capacity}}
-            We train the classifier on Elancourt with a one dimensional feature vector \gls{acr::rmse}. Mean test results are shown in Table~\ref{tab::rmse_prediction} We can conclude that the \gls{acr::rmse} is not able to detect our  errors.  We can distinguish two clusters: high recall and low precision and overall accuracy (BOS, FOS and FIG) and low recall and precision (BUS, BIB, BIT, FUS, FIB and FIT). The first group consists of the most numerous errors (Figure~\ref{fig::data_stats}). This explains how the classifier assigns to almost all samples the positive class: we end up with a high ratio of false positives (false alarms) and hence a high recall ratio but coupled with a weak precision and overall accuracy. The inverse happens with the rest of the errors as we obtain a high percentage of false negative.
-            \begin{table}[h]
+            \paragraph{Richer features}
+
+        \subsubsection{\textsc{Considered labels}}
+            All \texttt{finesse} levels were tested.
+            The input models are generalized to \gls{acr::lod}-2.
+            As a consequence, we chose \texttt{\gls{acr::elod}} $=$ \gls{acr::lod}-2.
+            If the \texttt{exclusivity} is \textsc{on}, at \texttt{finesse} level 3, the second stage classification results depends on the first one.
+            We are, at this stage, trying to prove the feasability, in the first place, of the proposed approach.
+            As proven in the latter experiments (\textit{cf.} Section~\ref{}), the first stage results are not good enough to test this configuration.
+            That is why we limited the experiments to the case where the \texttt{exclusivity} is set to be \textsc{off}.
+
+        \subsubsection{\textsc{Classification settings}}
+
+            \paragraph{Classifiers}
+                As discussed in , two 
+                \subparagraph{Random Forest}
+                    1,000
+                    4
+                    Kernel PCA
+                    20: same dimensions
+                    50: better results?
+
+                \subparagraph{\acrshort*{acr::svm}}
+                    Kernels for graphs are up
+                    Kernels for feature vectors : rbf gamma .001 to not over fit
+                    C 10 not to overpenalize
+
+            \paragraph{Used metrics}
+                The overall accuracy is not interesting due to the highly unbalanced label distribution.
+                We prefer reporting recall ($Rec$) and precision ($Prec$) ratios.
+                As a reminder these metrics are defined as follows:
+                \begin{align}
+                    \label{eq::recall_precision}
+                    Rec &\triangleq \frac{tp}{tp + fp}\\
+                    Prec &\triangleq \frac{tp}{tp + fn},
+                \end{align}
+                where:
+                \begin{conditions}
+                    tp & the number of instances predicted positive that are positive in reality;\\
+                    fp & the number of instances predicted positive that are negative in reality;\\
+                    fn & the number of instances predicted negative that are positive in reality.
+                \end{conditions}
+                Recall expresses, from a number of samples of a given class, the proportion that was rightfully detected as such.
+                Precision indicates how much samples, amongst the detected ones, were, in truth, part of the studied class~\parencite{powers2011evaluation}.
+                We also summarize these two ratios with their harmonic mean, the F-score:
+                \begin{equation}
+                    \label{eq::f_score}
+                    F_{score} \triangleq \frac{2}{\frac{1}{Rec} + \frac{1}{Prec}}.
+                \end{equation}
+                Unless said otherwise, all experiments were conducted performing a 10-fold cross validation to avoid overfitting/underfitting issues.
+                Only test results are reported.
+
+    \subsection{\textsc{Baseline feature analysis}}
+        \label{subsec::experiments::evaluation::baseline_feature_analysis}
+        At this stage, we study only the baseline features proposed in Section~\ref{sec::learned_evaluation::baseline}.
+        The goal is to assess the added value of each modality.
+        First, the \gls{acr::rmse} is proven to be inadequate for detecting errors in our taxonomy.
+        Second, prediction results from all possible feature configurations are compared in Subsubsection~\ref{subsubsec::experiments::evaluation::setup::feature_configurations}.
+        Third and last, we conclude the analysis by studying the feature importance, for all training zones.
+
+        \subsubsection{\textsc{\acrshort*{acr::rmse} predictive capacity}}
+            The \gls{acr::rmse} is the standard measure in most of \gls{acr::3d} reconstruction methods.
+            As a consequence, we use it herein as a reference that our baseline is to be compared to.
+            We train the classifier on Elancourt with the one dimensional feature vector containing the \gls{acr::rmse}.
+            This scene was sufficient enough for our analysis.
+            Mean test results are shown in Table~\ref{tab::rmse_prediction}.\\
+
+            \begin{table}[htpb]
                 \begin{tabular}{c c c c c c c c c c}
                     \toprule
                     & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG} \\
@@ -214,13 +302,25 @@
                     $\bm{Acc}$ expresses the overall accuracy ratio.
                 }
             \end{table}
+
+            We can distinguish two groups of errors: 
+            \begin{description}
+                \item[\texttt{BOS}, \texttt{FOS} and \texttt{FIG}:] These have a high recall and a low precision and overall accuracy;
+                \item[\texttt{BUS}, \texttt{BIB}, \texttt{BIT}, \texttt{FUS}, \texttt{FIB} and \texttt{FIT}:] These have low recall and precision ratios.
+            \end{description}
+            The first (\textit{resp.} second) group coincides exactly with errors that affect more (\textit{resp.} less) than half of the buildings.
+            For this kind of errors, the classifier assigns to almost all samples the positive class.
+            In fact, we end up with a high ratio of false positives (false alarms) and hence a high recall ratio that is coupled with a weak precision and overall accuracy.
+            Exactly the inverse happens with the rest of the errors as we obtain a high percentage of false negative.
+            We can safely conclude that the \gls{acr::rmse} is not able to detect errors defined in our taxonomy.
+
         \subsubsection{\textsc{Feature ablation study}}
             \label{subsubsec:ablation}
-            We tested the different feature configurations, at finesse level 3 and in all urban zones.
+            We tested the different feature configurations, at \texttt{finesse} level 3 and in all urban zones.
             Mean precision and recall test results are reported in Table~\ref{tab::ablation_f3}.
             F-scores are averaged across all feature configurations and represented in Figure~\ref{fig::f_score_ablation_f3}.
             
-            \begin{figure}[h]
+            \begin{figure}[htpb]
                 \centering
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/results/f-scores_f3}
                 \caption{\label{fig::f_score_ablation_f3} Mean F-score and standard deviation for the feature ablation study.}
@@ -236,9 +336,9 @@
             This helps identifying different instances of buildings.
 
             \begin{table}[p]
-                \tiny
+                \footnotesize
                 \begin{center}
-                    \begin{tabular}{|x{.7cm} | x{1cm} x{1cm} | x{1cm} x{1cm} | x{1cm} x{1cm} | x{1cm} x{1cm} |}
+                    \begin{tabular}{| c | c c | c c | c c | c c |}
                         \hline
                         \multicolumn{9}{|c|}{\textbf{\scriptsize Elancourt}}\\
                         \hline

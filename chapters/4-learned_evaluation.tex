@@ -188,14 +188,9 @@ These are proposed to better model defect predictions.
                 \max(l)\\
                 \min(l)\\
                 \operatorname{mean}(l)\\
-                \operatorname{median}(l)\\
-                \sigma(l)
-            \end{bmatrix},
+                \operatorname{median}(l)
+            \end{bmatrix}.
         \end{equation}
-        where:
-        \begin{conditions}
-            \sigma(l) & represents the standard deviation over samples $l$.
-        \end{conditions}
 
         These features are designed for general topological errors.
         For instance, over-segmentation may result in small facet areas and small angles between their normals.
@@ -210,8 +205,8 @@ These are proposed to better model defect predictions.
             	S \left(\left(d\left(f\right)\right)_{f \in \mathsf{F}}\right)\\
                 S \left(\left(\mathscr{A}\left(f\right)\right)_{f \in \mathsf{F}}\right)\\
                 S \left(\left(\mathscr{C}\left(f\right)\right)_{f \in \mathsf{F}}\right)\\
-                S \left(\left( \left\lVert \mathscr{G}\left(f\right) - \mathscr{G}\left(g\right) \right\rVert \right)_{(f,g) \in \mathsf{E}}\right)\\
-                S\left(\left( \arccos\left(\vec{n}\left(f\right) \cdot \vec{n}\left(g\right)\right) \right)_{(f,g) \in \mathsf{E}}\right)
+                S \left(\left( \left\lVert \mathscr{G}\left(f\right) - \mathscr{G}\left(g\right) \right\rVert \right)_{\left\{f, g\right\} \in \mathsf{E}}\right)\\
+                S\left(\left( \arccos\left(\vec{n}\left(f\right) \cdot \vec{n}\left(g\right)\right) \right)_{\left\{f, g\right\} \in \mathsf{E}}\right)
             \end{bmatrix}.
         \end{equation}
 
@@ -230,12 +225,16 @@ These are proposed to better model defect predictions.
         The latter is inferred from its facets plane equations.
         It is rasterized into an grid structure $alt \in \mathbb{R}^{w\times h}$ using the same spatial resolution as $dsm$.
         The difference between the two height grids provides a discrepancy map (Figure~\ref{fig::height_based_features}.c).
-        A baseline approach is herein proposed relying on the statistics of pixel values computed using the $S$ functions (Figure~\ref{fig::height_based_features}).
+        A baseline approach is herein proposed relying on the statistics of pixel values computed using the $S$ functions (Figure~\ref{fig::height_based_features}).\\
 
         \begin{equation}
             \label{eq::height_based_features}
             v_{\text{height}}\left(\mathsf{M}\right) = S\left( dsm - alt \right).
         \end{equation}
+
+        The histogram could actually be computed for the building alone without taking into account the terrain arround it.
+        However, since reference data is unavailable, cropping out the terrain height values implies that the building model footrpint is flawless, which is not the case.
+        As a consequence, the heigth discrepancies around the building model are also computed in order to provide some information on the footprint shape, and hence detect \texttt{BIT} or \texttt{BIB} errors.\\
         
         \begin{figure}[htpb]
             \centering
