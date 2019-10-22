@@ -77,7 +77,7 @@
             width=14cm,
             enlarge x limits=0.2,
             percentage plot,
-            bar width=.7cm,
+            bar width=.5cm,
             symbolic x coords={FOS, FUS, FIB, FIT, FIG},
             xtick=data,
             xtick pos=left,
@@ -86,7 +86,9 @@
             ymax=100,
             ymin=0,
             legend style={
-                legend columns=-2
+                legend columns=-2,
+                at={(0.5,.99)},
+                anchor=north
             }
         ]
             \addplot table [percentage series=1] {\facetEl};

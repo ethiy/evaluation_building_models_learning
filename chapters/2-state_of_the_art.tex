@@ -167,15 +167,15 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
             On the other hand, these mentioned errors are not comprehensive: they do not cover all possible building model errors.
             \textcite{michelin2013quality} came up with a richer taxonomy of errors that are categorized into three big families:
-            \begin{itemize}
-                \item Footprint errors: these portray errors relative to the building footprint, which is used by many modeling algorithms as input.
+            \begin{description}
+                \item[Footprint errors:] these portray errors relative to the building footprint, which is used by many modeling algorithms as input.
                         Errors contained in this family are: ``erroneous outline'', ``unexisting building'', ``missing inner court'' and ``inaccurate footprint''.
-                \item Reconstruction errors: these are caused by the modeling approach.
+                \item[Reconstruction errors:] these are caused by the modeling approach.
                         These defects can be the result of the incompatibility of some \textit{a priori} hypotheses about the scene, for instance.
                         Such errors are: ``under-segmentation'', ``over-segmentation'', ``inaccurate roof'' and ``Z translation''.
-                \item Vegetation errors: this corresponds to a special case when modeled building are occluded, completely or partially, by higher vegetation.
+                \item[Vegetation errors:] this corresponds to a special case when modeled building are occluded, completely or partially, by higher vegetation.
                         It becomes impossible to evaluate properly these models.
-            \end{itemize}
+            \end{description}
             Although the last taxonomy is rich, it is not exhaustive enough as it misses cases that are not present in the urban zone that was studied in the paper, such as inaccurate primitive choices.
             Moreover, it adopts the point of view of the modeling method that was used to provide their dataset.
             Knowing the specific weaknesses of the latter guided the choice of error family classification and the error definitions.
@@ -448,12 +448,12 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \tilde{y}^i.(\bm{w}^\intercal\cdot\bm{x}^i + b) \geq 1 - \xi^i.
                 \end{equation}
                 Four cases are distinguished, for slack variables:
-                \begin{itemize}
-                    \item $\xi^i = 0$: the class of the point is certain;
-                    \item $0 < \xi^i \leq 1$: the point is of the same class but is uncertain: \textit{i.e.} between the support hyperplane and the separator;
-                    \item $1 < \xi^i < 2$: the point is of the opposite class and is uncertain: \textit{i.e.} between the separator and the opposite support hyperplane;
-                    \item $2 \leq \xi^i$: the point is certainly of the opposite class: \textit{i.e.} beyond the opposite support hyperplane.
-                \end{itemize}
+                \begin{description}
+                    \item[$\xi^i = 0$ :] The class of the point is certain;
+                    \item[$0 < \xi^i \leq 1$ :] The point is of the same class but is uncertain: \textit{i.e.} between the support hyperplane and the separator;
+                    \item[$1 < \xi^i < 2$ :] The point is of the opposite class and is uncertain: \textit{i.e.} between the separator and the opposite support hyperplane;
+                    \item[$2 \leq \xi^i$ :] The point is certainly of the opposite class: \textit{i.e.} beyond the opposite support hyperplane.
+                \end{description}
                 As a consequence, when a dataset is not linearly separable, at least one sample $i_0$ cannot fit in a linear model and $1 < \xi^{i_0}$.
                 All these situations are illustrated in Figure~\ref{fig::soft_margin}.\\
 
@@ -706,18 +706,18 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 As a consequence, there is a need of a metric $I$ that can describe the heterogenuity, as the opposite of purity, of a node.
                 These are usually based on a probabilistic interpretation as they compute the fraction of observations $p_c$ that go through a node of class $c \in \left\{1, 2, \dots, C\right\}$.
                 Three examples are provided:
-                \begin{itemize}
-                    \item Gini index:
+                \begin{description}
+                    \item[Gini index:]
                     \begin{equation}
                         \label{eq::gini}
                         I_G\left(\left(p_c\right)_{c=1, 2, \dots, C}\right) = \sum_{c=1}^{C} p_c \cdot \sum_{\substack{l=1, 2, \dots, C\\l \neq c}} p_l;
                     \end{equation}
-                    \item Entropy:
+                    \item[Entropy:]
                     \begin{equation}
                         \label{eq::entropy}
                         I_H\left(\left(p_c\right)_{c=1, 2, \dots, C}\right) = - \sum_{c=1}^{C} p_c \cdot \log_2(p_c);
                     \end{equation}
-                    \item Variance:
+                    \item[Variance:]
                     \begin{equation}
                         \label{eq::variance_index}
                         I_V\left(\left(x_{d_s}^i\right)_{i\in S}\right) = \frac{1}{2 \cdot \vert S \vert^2} \cdot \sum_{(i,j) \in S\times S} \left(x_{d_s}^i - x_{d_s}^j\right),
@@ -727,7 +727,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         d_s & is the chosen dimension to split over;\\
                         S & $\subset \left\{1, 2, \dots, n\right\}$ is an set of indices.
                     \end{conditions}
-                \end{itemize}
+                \end{description}
                 Considering $S_b$ the set of indices of inputs going through a node $b$, one can compute the gain of a split at node $b$ as:
                 \begin{equation}
                     \label{eq::split_gain}

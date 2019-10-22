@@ -77,11 +77,13 @@
             xtick=data,
             xtick pos=left,
             ytick pos=left,
-            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm, font=\ttfamily, text width=2cm, align=right},
+            x tick label style={font=\ttfamily, text width=2cm, align=center},
             ymax=100,
             ymin=0,
             legend style={
-                legend columns=-2
+                legend columns=-2,
+                at={(0.5,.99)},
+                anchor=north
             }
         ]
             \addplot table [percentage series=1] {\foneEl};
