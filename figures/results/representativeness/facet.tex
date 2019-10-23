@@ -5,41 +5,63 @@
 \begin{document}
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 98.27, 0.18
-        Nantes, 97.58, 0.57
-        Paris-13, 97.06, 0.54
+        20\%, 98.55, 0.13
+        30\%, 98.57, 0.19
+        40\%, 98.52, 0.22
+        50\%, 98.62, 0.19
+        60\%, 98.41, 0.47
+        70\%, 98.73, 0.09
     }\FOS
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 7.31, 7.46
-        Nantes, 38.19, 2.15
-        Paris-13, 47.39, 1.13
+        20\%, 44.38, 5.50
+        30\%, 45.30, 4.73
+        40\%, 46.15, 0.97
+        50\%, 50.05, 2.38
+        60\%, 48.27, 3.36
+        70\%, 44.65, 2.02
     }\FUS
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 34.04, 20.18
-        Nantes, 35.82, 14.33
-        Paris-13, 36.36, 14.41
+        20\%, 25.55, 10.93
+        30\%, 33.95, 6.39
+        40\%, 38.99, 3.76
+        50\%, 37.53, 5.89
+        60\%, 37.03, 10.57
+        70\%, 34.98, 10.44
     }\FIB
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 5.97, 0.10
-        Nantes, 0, 0
-        Paris-13, 0, 0
+        20\%, 2.40, 2.80
+        30\%, 5.96, 5.13
+        40\%, 1.72, 3.45
+        50\%, 2.17, 4.35
+        60\%, 2.27, 4.54
+        70\%, 5.00, 5.77
     }\FIT
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 80.77, 0.15
-        Nantes, 82.47, 0.36
-        Paris-13, 81.65, 0.89
+        20\%, 79.49, 0.37
+        30\%, 80.20, 0.74
+        40\%, 80.03, 1.11
+        50\%, 80.52, 0.74
+        60\%, 80.17, 1.84
+        70\%, 79.45, 1.37
     }\FIG
 
     \begin{tikzpicture} 
         \begin{axis}[
             ylabel={F-score},
-            symbolic x coords={{Elancourt}, {Nantes}, {Paris-13}},
+            symbolic x coords={
+                {20\%},
+                {30\%},
+                {40\%},
+                {50\%},
+                {60\%},
+                {70\%}
+            },
             xtick=data,
-            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm, font=\bfseries},
+            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm},
             xtick align=outside,
             ymax=100,
             ymin=0,
