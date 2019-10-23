@@ -249,8 +249,8 @@
                 As a reminder these metrics are defined as follows:
                 \begin{align}
                     \label{eq::recall_precision}
-                    Rec &\triangleq \frac{tp}{tp + fp}\\
-                    Prec &\triangleq \frac{tp}{tp + fn},
+                    \bm{Rec} &\triangleq \frac{tp}{tp + fp}\\
+                    \bm{Prec} &\triangleq \frac{tp}{tp + fn},
                 \end{align}
                 where:
                 \begin{conditions}
@@ -318,29 +318,14 @@
             \label{subsubsec:ablation}
             We tested the different feature configurations, at \texttt{finesse} level 3 and in all urban zones.
             Mean precision and recall test results are reported in Table~\ref{tab::ablation_f3}.
-            F-scores are averaged across all feature configurations and represented in Figure~\ref{fig::f_score_ablation_f3}.
-            
-            \begin{figure}[htpb]
-                \centering
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/results/f-scores_f3}
-                \caption{\label{fig::f_score_ablation_f3} Mean F-score and standard deviation for the feature ablation study.}
-            \end{figure}
+            F-scores are averaged across all feature configurations and represented in Figure~\ref{fig::f_score_ablation_f3}.\\
 
-            We can first conclude that geometric features alone are generally sufficient.
-            It is the best alternative for topological error detection as shown for \texttt{BOS}, \texttt{FOS}, \texttt{FUS}, \texttt{FIT} and \texttt{BIT} in Table~\ref{tab::ablation_f3}.
-            This is confirmed also by the low variance observed in Figure~\ref{fig::f_score_ablation_f3}.(a).
-            An exception is noticed with \texttt{BUS} in Elancourt, where height-based features allow an increase of around 9\% in recall without, practically, any loss in precision.
-            Similar behaviour is noticed for Nantes and Paris-13 with image-based features (+20\% in recall).
-            The first case can be explained by the discrepancy in height that can be observed between under-segmented buildings.
-            The second is made clear by the difference in roof colors, in dense uniform settings (Figure~\ref{fig::bul_err}.a).
-            This helps identifying different instances of buildings.
-
-            \begin{table}[p]
-                \footnotesize
+            \begin{table}[htpb]
+                \small
                 \begin{center}
                     \begin{tabular}{| c | c c | c c | c c | c c |}
                         \hline
-                        \multicolumn{9}{|c|}{\textbf{\scriptsize Elancourt}}\\
+                        \multicolumn{9}{|c|}{\textbf{Elancourt}}\\
                         \hline
                         &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
                         \cline{2-9}
@@ -365,7 +350,7 @@
                         \texttt{FIG} & \textbf{80.54} & 73.14 & 80.45 & \textbf{72.62} & 78.69 & 72.12 & 79.02 & 71.82 \\
                         \hline
                         \hline
-                        \multicolumn{9}{|c|}{\textbf{\scriptsize Nantes}}\\
+                        \multicolumn{9}{|c|}{\textbf{Nantes}}\\
                         \hline
                         &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
                         \cline{2-9}
@@ -390,7 +375,7 @@
                         \texttt{FIG} & 86.32 & 78.09 & \textbf{86.77} & 78.02 & 84.53 & \textbf{78.71} & 83.86 & 78.08 \\
                         \hline
                         \hline
-                        \multicolumn{9}{|c|}{\textbf{\scriptsize Paris-13}}\\
+                        \multicolumn{9}{|c|}{\textbf{Paris-13}}\\
                         \hline
                         &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
                         \cline{2-9}
@@ -423,26 +408,64 @@
                 }
             \end{table}
 
-            Figure~\ref{fig::f_score_ablation_f3} shows all ``Building errors'' family labels are better detected for Elancourt.
+            \begin{figure}[htpb]
+                \centering
+                \ffigbox[\FBwidth]{
+                    \begin{subfloatrow}[2]
+                        \ffigbox[\FBwidth]{
+                            \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/ablation/f-scores_f3_building}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_ablation_f3_building}
+                                \texttt{Building errors.}
+                            }
+                        }
+                        \ffigbox[\FBwidth]{
+                            \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/ablation/f-scores_f3_facet}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_ablation_f3_facet}
+                                \texttt{Facet errors.}
+                            }
+                        }
+                    \end{subfloatrow}
+                }{
+                    \caption{
+                        \label{fig::f_score_ablation_f3}
+                        Mean F-score and standard deviation for the feature ablation study.
+                    }
+                }
+            \end{figure}
+
+            We can first conclude that geometric features alone are generally sufficient.
+            It is the best alternative for topological error detection as shown for \texttt{BOS}, \texttt{FOS}, \texttt{FUS}, \texttt{FIT} and \texttt{BIT} in Table~\ref{tab::ablation_f3}.
+            This is confirmed also by the low variance observed in Subfigure~\ref{subfig::f_score_ablation_f3_building}.
+            An exception is noticed with \texttt{BUS} in Elancourt, where height-based features allow an increase of around 9\% in recall without, practically, any loss in precision.
+            Similar behaviour is noticed for Nantes and Paris-13 with image-based features (+20\% in recall).
+            The first case can be explained by the discrepancy in height that can be observed between under-segmented buildings.
+            The second is made clear by the difference in roof colors, in dense uniform settings (Figure~\ref{fig::bul_err}.a).
+            This helps identifying different instances of buildings.
+
+            Figure~\ref{fig::f_score_ablation_f3} shows all \texttt{Building errors} family labels are better detected for \textbf{Elancourt}.
             It is also the case of \texttt{FOS} and \texttt{FIT}. A certain monotony can be noticed, at the exception of \texttt{BOS}.
-            Better resultas are obtained for Paris-13 than for Nantes, while having around half the number of models to train on.
-            This means that \texttt{BOS} cannot be easily learnt in Nantes.
+            Better resultas are obtained for \textbf{Paris-13} than for \textbf{Nantes}, while having around half the number of models to train on.
+            This means that \texttt{BOS} cannot be easily learnt in \textbf{Nantes}.
             It is coherent with the fact that the dataset represents a part of the dense downtown of the city.
-            The same monotony is observed, this time in reverse, with the rest of ``Facet errors'' defects. Paris-13 is much better with less training samples.
-            For geometric defects (\texttt{FIG} and \texttt{FIB}), Nantes is comparable to Paris-13, but, with \texttt{FUS}, it is way much worse.
+            The same monotony is observed, this time in reverse, with the rest of \texttt{Facet errors} defects. \textbf{Paris-13} is much better with less training samples.
+            For geometric defects (\texttt{FIG} and \texttt{FIB}), \textbf{Nantes} is comparable to \textbf{Paris-13}, but, with \texttt{FUS}, it is way much worse.
             This may result from the highly heterogeneous aspect of this dataset that encompasses high tower buildings with a densely populated city district.
-            Finally, well represented errors are more easily detected than the less frequent ones, especially the rare ones like \texttt{FIT} in Nantes and Paris-13.
+            Finally, well represented errors are more easily detected than the less frequent ones, especially the rare ones like \texttt{FIT} in \textbf{Nantes} and \textbf{Paris-13}.
         
         \subsubsection{\textsc{Feature importance}}
             Random forest classifiers can easily infer feature importance at training time.
             These were here computed and aggregated by modality in all urban scenes (Figure~\ref{fig::feature_importances}).
 
-            \begin{figure}
+            \begin{figure}[htpb]
                 \centering
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/results/feat_imp}
                 \caption{
                     \label{fig::feature_importances} Modality importance computed by stacking single feature importances retrieved from the Random Forest classifier.
-                    The first (\textit{resp.} second and third) column represents Elancourt (\textit{resp.} Nantes and Paris-13).
+                    The first (\textit{resp.} second and third) column represents \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
                 }
             \end{figure}
             
