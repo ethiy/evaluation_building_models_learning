@@ -48,17 +48,17 @@
             \path[fill=gray!50,fill opacity=.5, rounded corners, dashed] (top_left) rectangle (bottom_right);
         \end{pgfonlayer}
         
-        \path[edge, out=60,in=120,looseness=25, black] (top) to node[midway, above, align=center]{\scriptsize{Representativeness (5.3)}} (top);
+        \path[edge, out=60,in=120,looseness=25, black!50!yellow] (top) to node[midway, above, align=center]{\scriptsize{Representativeness (5.3)}} (top);
                 
         \path[edge, out=70,in=110,looseness=8] (z1) to node[midway, above, align=center]{4.3} (z1);
         \path[edge, out=70,in=110,looseness=8] (z2) to node[midway, above, align=center]{4.3} (z2);
         \path[edge, out=70,in=110,looseness=8] (z3) to node[midway, above, align=center]{4.3} (z3);
         
-        \path[edge, black] (z1) to node[midway, sloped, above, align=center]{\scriptsize{Transferability (5.1)}} (z2.west);
-        \path[edge, black] (z1) to node[midway, sloped, above, align=center]{\scriptsize{Transferability (5.1)}} (z3.200);
+        \path[edge, darkgreen] (z1) to node[midway, sloped, above, align=center]{\scriptsize{Transferability (5.1)}} (z2.west);
+        \path[edge, darkgreen] (z1) to node[midway, sloped, above, align=center]{\scriptsize{Transferability (5.1)}} (z3.200);
         
-        \path[branch, black, out=0, in=195] (z1) to (-1.15, -0.125);
-        \path[branch, black, out=120, in=240] (z3.120) to (-1.15, -0.125);
-        \path[edge, black] (-1.15, -0.125) to node[left, sloped, above, align=center]{\scriptsize{Generalization (5.2)}} (z2);
+        \path[branch, purple, out=0, in=195] (z1) to (-1.15, -0.125);
+        \path[branch, purple, out=120, in=240] (z3.120) to (-1.15, -0.125);
+        \path[edge, purple] (-1.15, -0.125) to node[left, sloped, above, align=center]{\scriptsize{Generalization (5.2)}} (z2);
 	\end{tikzpicture}
 \end{document}

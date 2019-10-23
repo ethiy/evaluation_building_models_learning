@@ -277,6 +277,7 @@
         Third and last, we conclude the analysis by studying the feature importance, for all training zones.
 
         \subsubsection{\textsc{\acrshort*{acr::rmse} predictive capacity}}
+            \label{subsubsec::experiments::evaluation::baseline_feature_analysis::rmse}
             The \gls{acr::rmse} is the standard measure in most of \gls{acr::3d} reconstruction methods.
             As a consequence, we use it herein as a reference that our baseline is to be compared to.
             We train the classifier on Elancourt with the one dimensional feature vector containing the \gls{acr::rmse}.
@@ -315,7 +316,7 @@
             We can safely conclude that the \gls{acr::rmse} is not able to detect errors defined in our taxonomy.
 
         \subsubsection{\textsc{Feature ablation study}}
-            \label{subsubsec:ablation}
+            \label{subsubsec::experiments::evaluation::baseline_feature_analysis::ablation}
             We tested the different feature configurations, at \texttt{finesse} level 3 and in all urban zones.
             Mean precision and recall test results are reported in Table~\ref{tab::ablation_f3}.
             F-scores are averaged across all feature configurations and represented in Figure~\ref{fig::f_score_ablation_f3}.\\
@@ -413,7 +414,7 @@
                 \ffigbox[\FBwidth]{
                     \begin{subfloatrow}[2]
                         \ffigbox[\FBwidth]{
-                            \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/ablation/f-scores_f3_building}
+                            \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/ablation/building}
                         }{
                             \caption{
                                 \label{subfig::f_score_ablation_f3_building}
@@ -421,7 +422,7 @@
                             }
                         }
                         \ffigbox[\FBwidth]{
-                            \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/ablation/f-scores_f3_facet}
+                            \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/ablation/facet}
                         }{
                             \caption{
                                 \label{subfig::f_score_ablation_f3_facet}
@@ -458,6 +459,7 @@
             Finally, well represented errors are more easily detected than the less frequent ones, especially the rare ones like \texttt{FIT} in \textbf{Nantes} and \textbf{Paris-13}.
         
         \subsubsection{\textsc{Feature importance}}
+            \label{subsubsec::experiments::evaluation::baseline_feature_analysis::feature_importance}
             Random forest classifiers can easily infer feature importances at training time.
             These were here computed and aggregated by modality in all urban scenes (\textit{cf.} Figure~\ref{fig::feature_importances}).\\
 
