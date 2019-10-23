@@ -1,0 +1,179 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
+\begin{document}
+    \pgfplotstableread[col sep=comma, header=false]{
+        BOS, 31.0, 34.9, 34.1
+        BUS, 33.0, 33.8, 33.2
+        BIB, 32.9, 33.8, 33.3
+        BIT, 32.7, 33.4, 33.8
+    }\buildingEl
+
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2} + \thisrow{3}
+        }
+    ]{sum}{\buildingEl}
+
+    \pgfplotstableread[col sep=comma, header=false]{
+        FOS, 32.6, 33.3, 34.1
+        FUS, 32.6, 34.1, 33.3
+        FIT, 32.5, 34.9, 32.6
+        FIB, 32.6, 31.7, 35.7
+        FIG, 33.4, 33.4, 33.2
+    }\facetEl
+
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2} + \thisrow{3}
+        }
+    ]{sum}{\facetEl}
+    
+    \pgfplotstableread[col sep=comma, header=false]{
+        BOS, 33.6, 31.6, 34.8
+        BUS, 32.9, 34.2, 32.9
+        BIB, 32.2, 33.9, 33.9
+        BIT, 33.7, 33.5, 32.8
+    }\buildingNa
+
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2} + \thisrow{3}
+        }
+    ]{sum}{\buildingNa}
+
+    \pgfplotstableread[col sep=comma, header=false]{
+        FOS, 35.3, 33.7, 30.9
+        FUS, 31.6, 33.2, 35.2
+        FIT, 33.3, 33.7, 33.1
+        FIB, 33.5, 32.0, 34.4
+        FIG, 33.4, 35.1, 31.5
+    }\facetNa
+
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2} + \thisrow{3}
+        }
+    ]{sum}{\facetNa}
+    
+    \pgfplotstableread[col sep=comma, header=false]{
+        BOS, 31.0, 34.9, 34.1
+        BUS, 33.0, 33.8, 33.2
+        BIB, 32.9, 33.8, 33.3
+        BIT, 32.7, 33.4, 33.8
+    }\buildingPa
+
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2} + \thisrow{3}
+        }
+    ]{sum}{\buildingPa}
+
+    \pgfplotstableread[col sep=comma, header=false]{
+        FOS, 32.6, 33.3, 34.1
+        FUS, 32.6, 34.1, 33.3
+        FIT, 32.5, 34.9, 32.6
+        FIB, 32.6, 31.7, 35.7
+        FIG, 33.4, 33.4, 32.2
+    }\facetPa
+
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2} + \thisrow{3}
+        }
+    ]{sum}{\facetPa}
+
+    \pgfplotsset{
+        percentage plot/.style={
+            point meta=explicit,
+            every node near coord/.append style={
+                xshift=17pt,
+                yshift=-3em,
+                anchor=east,
+                font=\small,
+                color=black,
+                align=center,
+                text width=1cm
+            },
+            nodes near coords align={vertical},
+            yticklabel=\pgfmathprintnumber{\tick}\,$\%$,
+            visualization depends on={y \as \originalvalue}
+        },
+        percentage series/.style={
+            table/y expr=(\thisrow{#1}/\thisrow{sum}*100),table/meta=#1
+        }
+    }
+
+    \begin{tikzpicture}
+        \begin{axis}[
+            ylabel={Feature importance},
+            ybar stacked,
+            height=6cm,
+            width=13cm,
+            percentage plot,
+            symbolic x coords={FOS, FUS, FIB, FIT, FIG},
+            xtick align=outside,
+            xtick pos=left,
+            ytick pos=left,
+            xtick=data,
+            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm},
+            ymax=100,
+            ymin=0,
+            legend style={
+                at={(1.01,1)},
+                anchor=north west
+            }
+        ]
+            \addplot table [percentage series=1] {\facetEl};
+            \addplot table [percentage series=2] {\facetEl};
+            \addplot table [percentage series=3] {\facetEl};
+            \legend{
+                \small \strut Geometry,
+                \small \strut Height,
+                \small \strut Image
+            }
+        \end{axis}
+        \begin{axis}[
+            ybar stacked,
+            bar shift=-15pt,
+            height=6cm,
+            width=13cm,
+            percentage plot,
+            yticklabels={,,},
+            symbolic x coords={FOS, FUS, FIB, FIT, FIG},
+            xtick align=outside,
+            xtick pos=left,
+            ytick pos=left,
+            xtick=data,
+            xticklabels={,,},
+            ymax=100,
+            ymin=0
+        ]
+            \addplot+ table [percentage series=1] {\facetNa};
+            \addplot+ table [percentage series=2] {\facetNa};
+            \addplot+ table [percentage series=3] {\facetNa};
+        \end{axis}
+        \begin{axis}[
+            ybar stacked,
+            bar shift=15pt,
+            height=6cm,
+            width=13cm,
+            percentage plot,
+            yticklabels={,,},
+            symbolic x coords={FOS, FUS, FIB, FIT, FIG},
+            xtick align=outside,
+            xtick pos=left,
+            ytick pos=left,
+            xtick=data,
+            xticklabels={,,},
+            ymax=100,
+            ymin=0
+        ]
+            \addplot+ table [percentage series=1] {\facetPa};
+            \addplot+ table [percentage series=2] {\facetPa};
+            \addplot+ table [percentage series=3] {\facetPa};
+        \end{axis}
+    \end{tikzpicture}
+\end{document}

@@ -6,6 +6,24 @@
 
 \section{\textsc{Scalabilitys analysis}}
     \label{sec::more_experiments::scalability}
+    It is established that the scene composition can affect greatly model defect detection.
+    This fact motivates studying training the classifier and testing prediction on different scenes.
+    The goal is to prove the resilience of the prediction to unseen urban scenes.
+    As the annotation process require a lot of effort, this trait is crucial to guarantee the scalability of this method.
+    Different configurations are possible as depicted in Figure~\ref{fig::scalability_study}.
+    In a first experiment, we train on one urban scene and test on another one (\textit{transferability} of the classifier model).
+    In a second configuration, the classifier is trained on two scenes and tested on the last one: the goal is to investigate \textit{generalization}.
+    The last experiment targets the \textit{representativeness} of a single 3-area dataset by trying multiple train-test splits.
+
+    \begin{figure}[htbp]
+        \ffigbox[\FBwidth]{
+            \includestandalone[mode=buildnew, width=.55\textwidth]{figures/scalabitity_graph}
+        }
+        {
+            \caption{\label{fig::scalability_study} A graph representing possible experiments: arrow origins represent training scenes while test ones are depicted as targets. \(Z_i, i=1,2,3\) represent the urban zones. All these nodes are assembled in one, meaning that all urban scenes were aggregated in on train/test node. The numbers indicate in which section each experiment is analyzed.}
+        }
+    \end{figure}
+
     \subsection{\textsc{Transferability study}}
         \subsubsection{\textsc{}}
         \subsubsection{\textsc{}}

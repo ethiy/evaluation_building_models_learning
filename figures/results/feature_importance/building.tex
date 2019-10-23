@@ -107,51 +107,51 @@
     }
 
     \begin{tikzpicture}
-        \node (origin) at (0,0) {};
-        \node (left) at (10.25, 0) {};
-        
         \begin{axis}[
-             at={(origin)},
-            xlabel={(a) Building errors.},
-            xlabel style={
-                at={(12em,-1.5em)},
-                anchor=north
-            },
             ylabel={Feature importance},
             ybar stacked,
             height=6cm,
-            width=11cm,
+            width=10.4cm,
             enlarge x limits=0.15,
             percentage plot,
             symbolic x coords={BOS, BUS, BIB, BIT},
             xtick=data,
-            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm},
+            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm, font=\ttfamily},
+            xtick align=outside,
+            xtick pos=left,
+            ytick pos=left,
             ymax=100,
             ymin=0,
             legend style={
-                at={(10cm,-.6)},
-                anchor=south,
-                legend columns=-2
+                at={(1.01,1)},
+                anchor=north west
             }
         ]
             \addplot table [percentage series=1] {\buildingEl};
             \addplot table [percentage series=2] {\buildingEl};
             \addplot table [percentage series=3] {\buildingEl};
-            \legend{\strut Geometry, \strut Height, \strut Image}
+            \legend{
+                \small \strut Geometry,
+                \small \strut Height,
+                \small \strut Image
+            }
         \end{axis}
         \begin{axis}[
             ybar stacked,
             bar shift=-15pt,
             height=6cm,
-            width=11cm,
+            width=10.4cm,
             enlarge x limits=0.15,
             percentage plot,
             symbolic x coords={BOS, BUS, BIB, BIT},
+            xtick align=outside,
+            xtick pos=left,
+            ytick pos=left,
             xtick=data,
             xticklabels={,,},
             yticklabels={,,},
             ymax=100,
-            ymin=0,
+            ymin=0
         ]
             \addplot+ table [percentage series=1] {\buildingNa};
             \addplot+ table [percentage series=2] {\buildingNa};
@@ -161,78 +161,22 @@
             ybar stacked,
             bar shift=15pt,
             height=6cm,
-            width=11cm,
+            width=10.4cm,
             enlarge x limits=0.15,
             percentage plot,
             symbolic x coords={BOS, BUS, BIB, BIT},
+            xtick align=outside,
+            xtick pos=left,
+            ytick pos=left,
             xtick=data,
             xticklabels={,,},
             yticklabels={,,},
             ymax=100,
-            ymin=0,
+            ymin=0
         ]
             \addplot+ table [percentage series=1] {\buildingPa};
             \addplot+ table [percentage series=2] {\buildingPa};
             \addplot+ table [percentage series=3] {\buildingPa};
-        \end{axis}
-
-        \begin{axis}[
-            at={(left)},
-            ybar stacked,
-            height=6cm,
-            width=13cm,
-            percentage plot,
-            xlabel={(b) Facet errors.},
-            xlabel style={
-                at={(12em,-1.5em)},
-                anchor=north
-            },
-            yticklabels={,,},
-            symbolic x coords={FOS, FUS, FIB, FIT, FIG},
-            xtick=data,
-            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm},
-            ymax=100,
-            ymin=0
-        ]
-            \addplot table [percentage series=1] {\facetEl};
-            \addplot table [percentage series=2] {\facetEl};
-            \addplot table [percentage series=3] {\facetEl};
-        \end{axis}
-        \begin{axis}[
-            at={(left)},
-            ybar stacked,
-            bar shift=-15pt,
-            height=6cm,
-            width=13cm,
-            percentage plot,
-            yticklabels={,,},
-            symbolic x coords={FOS, FUS, FIB, FIT, FIG},
-            xtick=data,
-            xticklabels={,,},
-            ymax=100,
-            ymin=0
-        ]
-            \addplot+ table [percentage series=1] {\facetNa};
-            \addplot+ table [percentage series=2] {\facetNa};
-            \addplot+ table [percentage series=3] {\facetNa};
-        \end{axis}
-        \begin{axis}[
-            at={(left)},
-            ybar stacked,
-            bar shift=15pt,
-            height=6cm,
-            width=13cm,
-            percentage plot,
-            yticklabels={,,},
-            symbolic x coords={FOS, FUS, FIB, FIT, FIG},
-            xtick=data,
-            xticklabels={,,},
-            ymax=100,
-            ymin=0
-        ]
-            \addplot+ table [percentage series=1] {\facetPa};
-            \addplot+ table [percentage series=2] {\facetPa};
-            \addplot+ table [percentage series=3] {\facetPa};
         \end{axis}
     \end{tikzpicture}
 \end{document}
