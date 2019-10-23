@@ -5,36 +5,55 @@
 \begin{document}
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 70.10, 0.51
-        Nantes, 43.64, 4.10
-        Paris-13, 39.98, 4.53
+        20\%, 75.14, 0.53
+        30\%, 75.37, 0.74
+        40\%, 75.62, 0.93
+        50\%, 74.92, 0.26
+        60\%, 74.89, 0.48
+        70\%, 75.10, 1.04
     }\BOS
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 31.75, 3.58
-        Nantes, 6.60, 8.09
-        Paris-13, 4.70, 6.17
+        20\%, 46.42, 4.45
+        30\%, 46.98, 1.31
+        40\%, 47.36, 4.06
+        50\%, 42.42, 4.23
+        60\%, 47.73, 3.13
+        70\%, 46.45, 3.08
     }\BUS
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 10.19, 3.73
-        Nantes, 0, 0
-        Paris-13, 0, 0
+        20\%, 11.23, 7.13
+        30\%, 10.02, 3.70
+        40\%, 12.47, 3.64
+        50\%, 12.0, 1.39
+        60\%, 16.43, 4.67
+        70\%, 11.60, 3.53
     }\BIB
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 10.27, 4.10
-        Nantes, 18.84, 2.90
-        Paris-13, 8.12, 6.96
+        20\%, 10.75, 5.47
+        30\%, 14.67, 5.63
+        40\%, 6.09, 2.52
+        50\%, 10.00, 6.08
+        60\%, 9.77, 3.87
+        70\%, 11.22, 8.49
     }\BIT
 
     \begin{tikzpicture} 
         \begin{axis}[
             ylabel={F-score},
-            symbolic x coords={{Elancourt}, {Nantes}, {Paris-13}},
-            xtick=data,
-            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm, font=\bfseries},
+            symbolic x coords={
+                {20\%},
+                {30\%},
+                {40\%},
+                {50\%},
+                {60\%},
+                {70\%}
+            },
             xtick align=outside,
+            xtick=data,
+            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm},
             ymax=80,
             ymin=0,
             xtick pos=left,
