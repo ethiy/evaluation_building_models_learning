@@ -1,0 +1,66 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{pgfplots}
+
+\begin{document}
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt, 98.97, 0.10
+        Nantes, 98.20, 0.16
+        Paris-13, 97.39, 0.40
+    }\FOS
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt, 2.63, 1.04
+        Nantes, 35.29, 2.37
+        Paris-13, 79.25, 0.41
+    }\FUS
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt, 11.37, 7.67
+        Nantes, 50.13, 4.10
+        Paris-13, 57.09, 0.79
+    }\FIB
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt, 10.35, 4.73
+        Nantes, 0, 0
+        Paris-13, 0, 0
+    }\FIT
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt, 75.88, 0.73
+        Nantes, 81.64, 0.58
+        Paris-13, 91.00, 0.38
+    }\FIG
+
+    \begin{tikzpicture} 
+        \begin{axis}[
+            ylabel={F-score},
+            symbolic x coords={{Elancourt}, {Nantes}, {Paris-13}},
+            xtick=data,
+            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm, font=\bfseries},
+            ymax=100,
+            ymin=0,
+            xtick pos=left,
+            ytick pos=left,
+            legend style={
+                at={(1.01,1)},
+                anchor=north west
+            }
+        ]
+            \addplot+[no markers, dashed, orange, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FOS};
+            \addplot+[no markers, dashed, blue, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FUS};
+            \addplot+[no markers, dashed, green, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FIB};
+            \addplot+[no markers, dashed, red, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FIT};
+            \addplot+[no markers, dashed, purple, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FIG};
+            \legend{
+                \small \strut \texttt{FOS},
+                \small \strut \texttt{FUS},
+                \small \strut \texttt{FIB},
+                \small \strut \texttt{FIT},
+                \small \strut \texttt{FIG}
+            }
+        \end{axis} 
+    \end{tikzpicture}
+\end{document}
