@@ -122,17 +122,17 @@
         \begin{figure}[htpb]
             \centering
             \ffigbox[\textwidth]{
-                \begin{subfloatrow}
-                    \centering
-                    \ffigbox[\textwidth]{
-                        \includestandalone[mode=buildnew, width=.7\textwidth]{figures/datasets/families_stats}
-                    }{
-                        \caption{
-                            \label{subfig::family_errors}
-                            Occurence statistics for error families computed for each area: \texttt{finesse} = 2.
-                        }
-                    }
-                \end{subfloatrow}
+                \includestandalone[mode=buildnew, width=.7\textwidth]{figures/datasets/families_stats}
+            }{
+                \caption{
+                    \label{fig::family_errors}
+                    Occurence statistics for error families computed for each area: \texttt{finesse} = 2.
+                }
+            }
+        \end{figure}
+        \begin{figure}[htpb]
+            \centering
+            \ffigbox[\textwidth]{
                 \begin{subfloatrow}
                     \centering
                     \ffigbox[\textwidth]{
@@ -164,7 +164,7 @@
             }
         \end{figure}
 
-        These statistics are first analysed depending on the family errors at the \texttt{finesse} = 2 level (\textit{cf.} Subfigure~\ref{subfig::family_errors}).
+        These statistics are first analysed depending on the family errors at the \texttt{finesse} = 2 level (\textit{cf.} Figure~\ref{fig::family_errors}).
         Due to the fact that geometrically inconsistent \gls{acr::3d} models were filtered out in a preprocessing (nadir projection) step, \texttt{Unqualifiable} buildings represent a small fraction of the dataset ($<$ 7.5\%).
         Actually, this latter corresponds to the, partially or completly, occluded buildings that could not be qualified.
         Moreover, only a small fraction of buildings are \texttt{Valid}:
@@ -281,7 +281,7 @@
             As a consequence, we use it herein as a reference that our baseline is to be compared to.
             We train the classifier on Elancourt with the one dimensional feature vector containing the \gls{acr::rmse}.
             This scene was sufficient enough for our analysis.
-            Mean test results are shown in Table~\ref{tab::rmse_prediction}.\\
+            Mean test results are shown in Table~\ref{tab::rmse_results}.\\
 
             \begin{table}[htpb]
                 \begin{tabular}{c c c c c c c c c c}
@@ -298,7 +298,7 @@
                     \bottomrule
                 \end{tabular}
                 \caption{
-                    \label{tab::rmse} \texttt{Finesse} 3 experiment results using \gls{acr::rmse} on Elancourt.
+                    \label{tab::rmse_results} \texttt{Finesse} 3 experiment results using \gls{acr::rmse} on Elancourt.
                     $\bm{Acc}$ expresses the overall accuracy ratio.
                 }
             \end{table}
@@ -437,17 +437,18 @@
                 }
             \end{figure}
 
-            We can first conclude that geometric features alone are generally sufficient.
-            It is the best alternative for topological error detection as shown for \texttt{BOS}, \texttt{FOS}, \texttt{FUS}, \texttt{FIT} and \texttt{BIT} in Table~\ref{tab::ablation_f3}.
-            This is confirmed also by the low variance observed in Subfigure~\ref{subfig::f_score_ablation_f3_building}.
-            An exception is noticed with \texttt{BUS} in Elancourt, where height-based features allow an increase of around 9\% in recall without, practically, any loss in precision.
-            Similar behaviour is noticed for Nantes and Paris-13 with image-based features (+20\% in recall).
+            First, we can point out that fact that geometric features alone are generally sufficient.
+            It is actually the best alternative for topological error detection as shown for \texttt{BOS}, \texttt{FOS}, \texttt{FUS}, \texttt{FIT} and \texttt{BIT} in Table~\ref{tab::ablation_f3}.
+            This is confirmed also by the low variance observed in Subfigure~\ref{subfig::f_score_f3_building}.
+            An exception is noticed with \texttt{BUS} in \textbf{Elancourt}, where height-based features allow an increase of around 9\% in recall without, practically, any loss in precision.
+            Similar behaviour is noticed for \textbf{Nantes} and \textbf{Paris-13} with image-based features (+20\% in recall).
             The first case can be explained by the discrepancy in height that can be observed between under-segmented buildings.
             The second is made clear by the difference in roof colors, in dense uniform settings (Figure~\ref{fig::bul_err}.a).
-            This helps identifying different instances of buildings.
+            This helps identifying different instances of buildings.\\
 
-            Figure~\ref{fig::f_score_ablation_f3} shows all \texttt{Building errors} family labels are better detected for \textbf{Elancourt}.
-            It is also the case of \texttt{FOS} and \texttt{FIT}. A certain monotony can be noticed, at the exception of \texttt{BOS}.
+            Figure~\ref{fig::f_score_ablation_f3} shows that all \texttt{Building errors} labels are better detected in \textbf{Elancourt}.
+            It is also the case of \texttt{FOS} and \texttt{FIT}.
+            A certain monotony can be noticed, at the exception of \texttt{BOS}.
             Better resultas are obtained for \textbf{Paris-13} than for \textbf{Nantes}, while having around half the number of models to train on.
             This means that \texttt{BOS} cannot be easily learnt in \textbf{Nantes}.
             It is coherent with the fact that the dataset represents a part of the dense downtown of the city.
@@ -457,15 +458,37 @@
             Finally, well represented errors are more easily detected than the less frequent ones, especially the rare ones like \texttt{FIT} in \textbf{Nantes} and \textbf{Paris-13}.
         
         \subsubsection{\textsc{Feature importance}}
-            Random forest classifiers can easily infer feature importance at training time.
-            These were here computed and aggregated by modality in all urban scenes (Figure~\ref{fig::feature_importances}).
+            Random forest classifiers can easily infer feature importances at training time.
+            These were here computed and aggregated by modality in all urban scenes (\textit{cf.} Figure~\ref{fig::feature_importances}).\\
 
             \begin{figure}[htpb]
                 \centering
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/results/feat_imp}
-                \caption{
-                    \label{fig::feature_importances} Modality importance computed by stacking single feature importances retrieved from the Random Forest classifier.
-                    The first (\textit{resp.} second and third) column represents \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
+                \ffigbox[\textwidth]{
+                    \begin{subfloatrow}
+                        \ffigbox[\textwidth]{
+                            \includestandalone[mode=buildnew, width=.8\textwidth]{figures/results/feature_importance/building}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_ablation_f3_building}
+                                \texttt{Building errors.}
+                            }
+                        }
+                    \end{subfloatrow}
+                    \begin{subfloatrow}
+                        \ffigbox[\textwidth]{
+                            \includestandalone[mode=buildnew, width=\textwidth]{figures/results/feature_importance/facet}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_ablation_f3_facet}
+                                \texttt{Facet errors.}
+                            }
+                        }
+                    \end{subfloatrow}
+                }{
+                    \caption{
+                        \label{fig::feature_importances} Modality importance computed by stacking single feature importances retrieved from the Random Forest classifier.
+                        The first (\textit{resp.} second and third) column represents \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
+                    }
                 }
             \end{figure}
             

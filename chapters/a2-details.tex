@@ -88,3 +88,34 @@
         \end{tabular}
         \caption{\label{tab::data_stats} Ground truth detailed statistics over the annotated datasets.}
     \end{table}
+
+\section{Experimental results}
+    \subsection{Ablation study}
+        \begin{table}
+            \tiny
+            \begin{tabular}{c c c c}
+                \toprule
+                & \textbf{Elancourt} & \textbf{Nantes} & \textbf{Paris-13}\\
+                \midrule
+                \texttt{BOS} & 83.52 $\pm$ 0.66 & 45.71 $\pm$ 1.28 & 55.13 $\pm$ 4.10 \\
+                \midrule
+                \texttt{BUS} & 50.56 $\pm$ 3.26 & 26.11 $\pm$ 15.12 & 18.64 $\pm$ 10.69 \\
+                \midrule
+                \texttt{BIB} & 23.87 $\pm$ 3.10 & 0.99 $\pm$ 1.14 & 0 $\pm$ 0 \\
+                \midrule
+                \texttt{BIT} & 31.47 $\pm$ 8.35 & 3.72 $\pm$ 2.82 & 1.89 $\pm$ 2.40 \\
+                \midrule
+                \midrule
+                \texttt{FOS} & 98.97 $\pm$ 0.10 & 98.20 $\pm$ 0.16 & 97.39 $\pm$ 0.40 \\
+                \midrule
+                \texttt{FUS} & 2.63 $\pm$ 1.04 & 35.29 $\pm$ 2.37 & 79.25 $\pm$ 0.41 \\
+                \midrule
+                \texttt{FIB} & 11.37 $\pm$ 7.67 & 50.13 $\pm$ 4.10 & 57.09 $\pm$ 0.79 \\
+                \midrule
+                \texttt{FIT} & 10.35 $\pm$ 4.73 & 0 $\pm$ 0 & 0 $\pm$ 0 \\
+                \midrule
+                \texttt{FIG} & 75.88 $\pm$ 0.73 & 81.64 $\pm$ 0.58 & 91.00 $\pm$ 0.38 \\
+                \bottomrule
+            \end{tabular}
+            \caption{\label{tab::f_score_ablation_f3} Mean F-score and standard deviation for the feature ablation study.}
+        \end{table}
