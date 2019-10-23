@@ -1,0 +1,78 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{pgfplots}
+
+\begin{document}
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt \(\rightarrow\) Nantes, 59.12, 0.13
+        Elancourt \(\rightarrow\) Paris-13, 57.98, 2.87
+        Nantes \(\rightarrow\) Paris-13, 74.36, 0.68
+        Nantes \(\rightarrow\) Elancourt, 27.97, 2.10
+        Paris-13 \(\rightarrow\) Nantes, 35.14, 1.55
+        Paris-13 \(\rightarrow\) Elancourt, 76.53, 0.93
+    }\BOS
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt \(\rightarrow\) Nantes, 12.06, 14.33
+        Elancourt \(\rightarrow\) Paris-13, 10.44, 15.94
+        Nantes \(\rightarrow\) Paris-13, 27.37, 7.36
+        Nantes \(\rightarrow\) Elancourt, 7.08, 5.38
+        Paris-13 \(\rightarrow\) Nantes, 8.29, 5.14
+        Paris-13 \(\rightarrow\) Elancourt, 27.60, 3.92
+    }\BUS
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt \(\rightarrow\) Nantes, 0, 0
+        Elancourt \(\rightarrow\) Paris-13, 1.75, 2.02
+        Nantes \(\rightarrow\) Paris-13, 17.68, 6.34
+        Nantes \(\rightarrow\) Elancourt, 0, 0
+        Paris-13 \(\rightarrow\) Nantes, 0, 0
+        Paris-13 \(\rightarrow\) Elancourt, 27.28, 4.37
+    }\BIB
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt \(\rightarrow\) Nantes, 8.26, 8.59
+        Elancourt \(\rightarrow\) Paris-13, 3.73, 3.15
+        Nantes \(\rightarrow\) Paris-13, 10.66, 3.12
+        Nantes \(\rightarrow\) Elancourt, 17.96, 3.48
+        Paris-13 \(\rightarrow\) Nantes, 23.75, 4.81
+        Paris-13 \(\rightarrow\) Elancourt, 12.09, 4.86
+    }\BIT
+
+    \begin{tikzpicture} 
+        \begin{axis}[
+            ylabel={F-score},
+            symbolic x coords={
+                {Elancourt \(\rightarrow\) Nantes},
+                {Elancourt \(\rightarrow\) Paris-13},
+                {Nantes \(\rightarrow\) Paris-13},
+                {Nantes \(\rightarrow\) Elancourt},
+                {Paris-13 \(\rightarrow\) Nantes},
+                {Paris-13 \(\rightarrow\) Elancourt}
+            },
+            xtick=data,
+            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm, font=\bfseries},
+            xtick align=outside,
+            ymax=80,
+            ymin=0,
+            xtick pos=left,
+            ytick pos=left,
+            legend style={
+                at={(1.01,1)},
+                anchor=north west
+            }
+        ]
+            \addplot+[no markers, orange, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BOS};
+            \addplot+[no markers, blue, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BUS};
+            \addplot+[no markers, green, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BIB};
+            \addplot+[no markers, red, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BIT};
+            \legend{
+                \small \strut \texttt{BOS},
+                \small \strut \texttt{BUS},
+                \small \strut \texttt{BIB},
+                \small \strut \texttt{BIT}
+            }
+        \end{axis} 
+    \end{tikzpicture}
+\end{document}

@@ -1,0 +1,89 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{pgfplots}
+
+\begin{document}
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt \(\rightarrow\) Nantes, 94.18, 8.17
+        Elancourt \(\rightarrow\) Paris-13, 97.40, 0.16
+        Nantes \(\rightarrow\) Paris-13, 98.87, 0.02
+        Nantes \(\rightarrow\) Elancourt, 96.35, 1.16
+        Paris-13 \(\rightarrow\) Nantes, 96.99, 0.92
+        Paris-13 \(\rightarrow\) Elancourt, 98.51, 0.29
+    }\FOS
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt \(\rightarrow\) Nantes, 14.54, 13.22
+        Elancourt \(\rightarrow\) Paris-13, 25.57, 17.69
+        Nantes \(\rightarrow\) Paris-13, 4.02, 2.81
+        Nantes \(\rightarrow\) Elancourt, 58.33, 3.08
+        Paris-13 \(\rightarrow\) Nantes, 49.17, 3.53
+        Paris-13 \(\rightarrow\) Elancourt, 7.84, 1.35
+    }\FUS
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt \(\rightarrow\) Nantes, 43.62, 16.83
+        Elancourt \(\rightarrow\) Paris-13, 34.46, 17.46
+        Nantes \(\rightarrow\) Paris-13, 27.16, 11.96
+        Nantes \(\rightarrow\) Elancourt, 58.22, 3.16
+        Paris-13 \(\rightarrow\) Nantes, 55.58, 3.01
+        Paris-13 \(\rightarrow\) Elancourt, 20.37, 12.16
+    }\FIB
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt \(\rightarrow\) Nantes, 7.74, 8.99
+        Elancourt \(\rightarrow\) Paris-13, 0, 0
+        Nantes \(\rightarrow\) Paris-13, 6.78, 0.13
+        Nantes \(\rightarrow\) Elancourt, 0, 0
+        Paris-13 \(\rightarrow\) Nantes, 0, 0
+        Paris-13 \(\rightarrow\) Elancourt, 6.71, 0.65
+    }\FIT
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt \(\rightarrow\) Nantes, 80.58, 1.53
+        Elancourt \(\rightarrow\) Paris-13, 87.64, 0.55
+        Nantes \(\rightarrow\) Paris-13, 76.26, 0.20
+        Nantes \(\rightarrow\) Elancourt, 84.61, 5.94
+        Paris-13 \(\rightarrow\) Nantes, 81.86, 0.92
+        Paris-13 \(\rightarrow\) Elancourt, 78.32, 0.79
+    }\FIG
+
+    \begin{tikzpicture} 
+        \begin{axis}[
+            ylabel={F-score},
+            symbolic x coords={
+                {Elancourt \(\rightarrow\) Nantes},
+                {Elancourt \(\rightarrow\) Paris-13},
+                {Nantes \(\rightarrow\) Paris-13},
+                {Nantes \(\rightarrow\) Elancourt},
+                {Paris-13 \(\rightarrow\) Nantes},
+                {Paris-13 \(\rightarrow\) Elancourt}
+            },
+            xtick=data,
+            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm, font=\bfseries},
+            xtick align=outside,
+            ymax=100,
+            ymin=0,
+            xtick pos=left,
+            ytick pos=left,
+            legend style={
+                at={(1.01,1)},
+                anchor=north west
+            }
+        ]
+            \addplot+[no markers, dashed, orange, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FOS};
+            \addplot+[no markers, dashed, blue, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FUS};
+            \addplot+[no markers, dashed, green, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FIB};
+            \addplot+[no markers, dashed, red, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FIT};
+            \addplot+[no markers, dashed, purple, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FIG};
+            \legend{
+                \small \strut \texttt{FOS},
+                \small \strut \texttt{FUS},
+                \small \strut \texttt{FIB},
+                \small \strut \texttt{FIT},
+                \small \strut \texttt{FIG}
+            }
+        \end{axis} 
+    \end{tikzpicture}
+\end{document}

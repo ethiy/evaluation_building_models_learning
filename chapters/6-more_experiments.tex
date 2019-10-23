@@ -6,34 +6,204 @@
 
 \section{\textsc{Scalabilitys analysis}}
     \label{sec::more_experiments::scalability}
-    It is established that the scene composition can affect greatly model defect detection.
+    In the previous chapter, error detection was proven to be dependent on the scene composition
     This fact motivates studying training the classifier and testing prediction on different scenes.
     The goal is to prove the resilience of the prediction to unseen urban scenes.
-    As the annotation process require a lot of effort, this trait is crucial to guarantee the scalability of this method.
-    Different configurations are possible as depicted in Figure~\ref{fig::scalability_study}.
-    In a first experiment, we train on one urban scene and test on another one (\textit{transferability} of the classifier model).
-    In a second configuration, the classifier is trained on two scenes and tested on the last one: the goal is to investigate \textit{generalization}.
-    The last experiment targets the \textit{representativeness} of a single 3-area dataset by trying multiple train-test splits.
+    As the annotation process requires a lot of effort, this trait is crucial to guarantee the scalability of this method under the \textbf{large-scale} constraint.
+    Different configurations are possible, as depicted in Figure~\ref{fig::scalability_study}.
+    In the first type of experiments, we train on one urban scene and test on another one.
+    The goal is to examine the \texttt{transferability} of the classifier model.
+    Experimental results are reported and analyzed in Subsection~\ref{subsec::more_experiments::scalability::transferability}.
+    In a second configuration, the classifier is trained on two scenes and tested on the last one: the objective is to investigate the classifier \texttt{generalization}.
+    The results of such experiments are shown in Subsection~\ref{subsec::more_experiments::scalability::generalization}.
+    The last experiment class, whose results are presented in Subsection~\ref{subsec::more_experiments::scalability::representativeness}, targets the \texttt{representativeness} of a single 3-area dataset by trying multiple train-test split sizes.
 
     \begin{figure}[htbp]
         \ffigbox[\FBwidth]{
-            \includestandalone[mode=buildnew, width=.55\textwidth]{figures/scalabitity_graph}
+            \includestandalone[mode=buildnew, width=.8\textwidth]{figures/scalabitity_graph}
         }
         {
-            \caption{\label{fig::scalability_study} A graph representing possible experiments: arrow origins represent training scenes while test ones are depicted as targets. \(Z_i, i=1,2,3\) represent the urban zones. All these nodes are assembled in one, meaning that all urban scenes were aggregated in on train/test node. The numbers indicate in which section each experiment is analyzed.}
+            \caption{
+                \label{fig::scalability_study}
+                A graph representing possible experiments: arrow origins represent training scenes while test ones are depicted as targets.
+                \(Z_i, i=1,2,3\) represent the urban zones.
+                All these nodes are assembled in one, meaning that all urban scenes were aggregated in on train/test node.
+                The numbers indicate in which section each experiment is analyzed.
+            }
         }
     \end{figure}
 
+    We will see how \texttt{Building errors} depend on the training scene, in contrast to \texttt{Facet errors}.
+    The latter will prove to be more transferable and generalizable than the first one.
+    We will also discuss how every modalities play a role in error prediction.
+    Image-based features will demonstrate to be the most valuable compared to height-based ones.
+    Eventually, we will review each \texttt{atomic} error prediction sensitivity provided the training set.
+
     \subsection{\textsc{Transferability study}}
-        \subsubsection{\textsc{}}
-        \subsubsection{\textsc{}}
-        \subsubsection{\textsc{}}
+        \label{subsec::more_experiments::scalability::transferability}
+        In this configuration, we test how transferable are the learned classifiers from one urban scene to another.
+        We train on a zone $Z_i$ and test on another one $Z_j$.
+        We will denote each transferability experiment by the couple $(Z_i, Z_j)$ or by $Z_i \rightarrow Z_j$.
+        Six transferability couples are possible.
+        F-scores are shown, per label, and per experiment, in Figure~\ref{fig::f_score_transferability_f3}.\\
+        
+        \begin{figure}[htbp]
+            \ffigbox[\FBwidth]{
+                \begin{subfloatrow}[2]
+                    \ffigbox[\FBwidth]{
+                        \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/transferability/building}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_transferability_f3_building}
+                            \texttt{Building errors.}
+                        }
+                    }
+                    \ffigbox[\FBwidth]{
+                        \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/transferability/facet}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_transferability_f3_facet}
+                            \texttt{Facet errors.}
+                        }
+                    }
+                \end{subfloatrow}
+            }{
+                \caption{
+                    \label{fig::f_score_transferability_f3}
+                    Mean F-score and standard deviation for the transferability study.
+                }
+            }
+        \end{figure}
+
+        First, a \texttt{coherence} analysis is performed.
+        We compare the results of the transferability experiments to the ablation results with the same training scene.
+        This is achieved by looking, for a given area $Z_i$ in all couples $(Z_i, Z_j)_{\forall j \neq i}$, at the differences between Figure~\ref{fig::f_score_transferability_f3} and Table~\ref{tab::ablation_f3}/Figure~\ref{fig::f_score_ablation_f3}.
+        Secondly, we investigate how an urban scene composition helps predicting defects in an unseen one.
+        This is called the \texttt{projectivity} comparison.
+        For a given test scene $Z_j$ in couples $(Z_i, Z_j)_{\forall i \neq j}$, we compare results from Figure~\ref{fig::f_score_transferability_f3} with Table~\ref{tab::ablation_f3}/Figure~\ref{fig::f_score_ablation_f3}.
+        All these comparisons are provided in Table~\ref{tab::comparison}.
+        In both settings, if a feature type appears, it means it is, by a large margin, the most decisive one.
+        A color scheme was devised to encode the amplitude of change.
+        All various feature configurations are tested these experiments.
+        If a modality stands out, in terms of the F-score, it is mentioned in the corresponding cell in Table~\ref{tab::comparison}.\\
+
+        \begin{table}[htbp]
+            \footnotesize 
+            \centering
+            \renewcommand{\arraystretch}{1.5}
+            \begin{tabular}{c c c | c c c c c |c c c c c}
+                \hline
+                &&&\texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
+                \hline
+                \multirow{12}{*}{\rotatebox{90}{\textbf{Transferability}}}&\multirow{6}{*}{\rotatebox{90}{\texttt{Coherence}}}&\textbf{Elancourt} $\rightarrow$ \textbf{Nantes} &\cellcolor{LOSS2535} & \cellcolor{LOSS1525}&\cellcolor{LOSS1525}& \cellcolor{LOSS1525}& \cellcolor{STBL}& \cellcolor{GAIN0515} \textbf{Im.}&\cellcolor{GAIN15} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.}&\cellcolor{GAIN0515}\\
+                && \textbf{Elancourt} $\rightarrow$ \textbf{Paris-13}  & \cellcolor{LOSS2535}& \cellcolor{LOSS1525}& \cellcolor{LOSS1525}& \cellcolor{LOSS1525}& \cellcolor{STBL}& \cellcolor{GAIN0515}\textbf{Im.}& \cellcolor{GAIN15}\textbf{Im.}& \cellcolor{LOSS0515}&\cellcolor{GAIN15}\\
+                && \textbf{Nantes} $\rightarrow$ \textbf{Paris-13}  & \cellcolor{LOSS0515}& \cellcolor{LOSS1525}& & \cellcolor{GAIN0515} \textbf{Geom.}& \cellcolor{STBL}& \cellcolor{GAIN15}& \cellcolor{GAIN0515}& &\cellcolor{STBL} \textbf{Hei.}\\
+                && \textbf{Nantes} $\rightarrow$ \textbf{Elancourt}  &\cellcolor{GAIN15} & \cellcolor{STBL}& \cellcolor{GAIN15}&\cellcolor{GAIN0515} \textbf{Geom.} & \cellcolor{STBL}& \cellcolor{LOSS1525}&\cellcolor{LOSS1525}&\cellcolor{GAIN0515}&\cellcolor{LOSS0515}\\
+                && \textbf{Paris-13} $\rightarrow$ \textbf{Nantes}  &\cellcolor{LOSS0515} & \cellcolor{LOSS0515}& & \cellcolor{GAIN15} \textbf{Geom.}&\cellcolor{STBL} & \cellcolor{LOSS2535}& \cellcolor{LOSS1525}& & \cellcolor{LOSS1525}\\
+                && \textbf{Paris-13} $\rightarrow$ \textbf{Elancourt}  &\cellcolor{GAIN15} &\cellcolor{GAIN0515} & \cellcolor{GAIN15}& \cellcolor{GAIN0515} \textbf{Geom.}& \cellcolor{STBL}& \cellcolor{LOSS3545}& \cellcolor{STBL} &\cellcolor{GAIN0515} & \cellcolor{LOSS0515}\\
+                \cline{2-12}
+                &\multirow{6}{*}{\rotatebox{90}{\texttt{Projectivity}}}&\textbf{Elancourt} $\rightarrow$ \textbf{Nantes} &\cellcolor{LOSS0515} & \cellcolor{LOSS1525}&\cellcolor{LOSS0515}& \cellcolor{LOSS1525}& \cellcolor{STBL}& \cellcolor{STBL}&\cellcolor{GAIN15} \textbf{Im.} & \cellcolor{LOSS0515}&\cellcolor{STBL}\\
+                && \textbf{Elancourt} $\rightarrow$ \textbf{Paris-13}  & \cellcolor{LOSS0515}& \cellcolor{LOSS1525}& \cellcolor{STBL}& \cellcolor{LOSS1525}& \cellcolor{STBL}& \cellcolor{GAIN0515}\textbf{Im.}& \cellcolor{GAIN0515}\textbf{Im.}& \cellcolor{LOSS0515}&\cellcolor{STBL}\\
+                && \textbf{Nantes} $\rightarrow$ \textbf{Paris-13}  & \cellcolor{LOSS0515}& \cellcolor{LOSS1525}& & \cellcolor{GAIN15}& \cellcolor{STBL}& \cellcolor{GAIN0515}& \cellcolor{GAIN0515}& &\cellcolor{STBL}\\
+                && \textbf{Nantes} $\rightarrow$ \textbf{Elancourt}  &\cellcolor{GAIN0515} & \cellcolor{LOSS0515}& \cellcolor{LOSS0515}&\cellcolor{GAIN0515}All & \cellcolor{STBL}& \cellcolor{LOSS1525}&\cellcolor{LOSS0515}\textbf{Im.} &\cellcolor{GAIN0515}\textbf{Im.} &\cellcolor{STBL}\\
+                && \textbf{Paris-13} $\rightarrow$ \textbf{Nantes}  &\cellcolor{LOSS1525} & \cellcolor{LOSS0515}& & \cellcolor{GAIN0515}&\cellcolor{STBL} & \cellcolor{LOSS2535}& \cellcolor{STBL}& & \cellcolor{LOSS0515} \textbf{Hei.}\\
+                && \textbf{Paris-13} $\rightarrow$ \textbf{Elancourt}  &\cellcolor{STBL} &\cellcolor{LOSS0515} & \cellcolor{GAIN0515}\textbf{Im.} & \cellcolor{STBL}& \cellcolor{STBL}& \cellcolor{LOSS3545}& \cellcolor{LOSS1525}\textbf{Im.} & & \cellcolor{STBL}\\
+                \hline                                            
+                \multirow{3}{*}{\rotatebox{90}{\textbf{General}.}  }&& \textbf{Elancourt}   & \cellcolor{LOSS1525}& \cellcolor{LOSS1525}\textbf{Im.}& \cellcolor{LOSS1525}&\cellcolor{LOSS1525} &\cellcolor{STBL} &\cellcolor{GAIN0515}\textbf{Im.} &\cellcolor{GAIN15}\textbf{Im.} &\cellcolor{LOSS0515}\textbf{Geom.} & \cellcolor{LOSS0515} Hei\\
+                && \textbf{Nantes}   & \cellcolor{STBL}All& \cellcolor{LOSS1525}\textbf{Im.}&\cellcolor{LOSS0515}\textbf{Im.} &\cellcolor{GAIN15} &\cellcolor{STBL} & \cellcolor{STBL}& \cellcolor{LOSS1525}\textbf{Im.}& &\cellcolor{STBL}\\
+                && \textbf{Paris-13}   &\cellcolor{LOSS1525}All &\cellcolor{LOSS1525} & &\cellcolor{GAIN0515}\textbf{Hei.} &\cellcolor{STBL} &\cellcolor{LOSS3545} &\cellcolor{LOSS1525}\textbf{Im.} & &\cellcolor{LOSS0515}\\
+                \hline
+            \end{tabular}
+            \renewcommand{\arraystretch}{1}
+            \caption{
+                \label{tab::comparison} Evolution of the F-score value, for each error, between each tested configuration and the best result per area (\textit{cf.} Section~\ref{subsubsec::experiments::evaluation::baseline_feature_analysis::ablation}).
+                Feature sets having a significant impact on the classification results are mentioned.
+                Otherwise, \textbf{Geom.} \textbf{Im.}, and \textbf{Hei.} contribute equally.
+                The color indicates the magnitude: \textcolor{LOSS3545}{$\blacksquare$}: $[-45,-35\%[$-- \textcolor{LOSS2535}{$\blacksquare$}: $[-35,-25\%[$ -- \textcolor{LOSS1525}{$\blacksquare$}: $[-25,15\%[$-- \textcolor{LOSS0515}{$\blacksquare$}: $[-15, 5\%[$ -- \textcolor{STBL}{$\blacksquare$}: $[-5,5\%[$-- \textcolor{GAIN0515}{$\blacksquare$}: $[5,15\%[$ -- \textcolor{GAIN15}{$\blacksquare$}: $[15,25\%]$ -- $\square$: statistics cannot be computed.
+            }
+        \end{table}
+
+
+        To summarize the comparisons, error family wise, out of 22 \texttt{Building errors} possible projectivity comparisons, 14 yield worse results.
+        This proves how hard it is, for this error family, to transfer learned classifiers.
+        It is, however, the contrary for the ``Facet errors''.
+        Only 8 out of 27 \texttt{projectivity} errors are worse than training on the same test area.\\
+
+        As mentioned earlier, additional modalities play a important role in prediction accuracy.
+        We start with image-based attributes.
+        In some cases, they were pivotal in obtaining better results for geometric errors (\texttt{FIB}, \texttt{BIB}), as well as for topological ones (\texttt{FUS}, \texttt{FIT}).
+        These features have a significant \texttt{coherence} power when trained over \textbf{Elancourt} (\texttt{FIB} and \texttt{FUS}), and projects very well to other scenes (\texttt{FIB}, \texttt{FUS}, \texttt{BIB} and \texttt{FIT}, Table~\ref{tab::comparison}).
+        On the other hand, as expected, geometric features alone are best for topological errors, when trained on dense areas, especially \texttt{BIT} (Table~\ref{tab::comparison}).
+        Finally, although sticking out for \texttt{FIG} in a minor capacity (\textit{cf.} Table~\ref{tab::comparison}), height-based features proved to be less transferable.
+        In fact, adding height-based features leads, in most cases, to a small decrease in accuracy ($\approx 2\%$) for \texttt{atomic} errors.
+        All these previous findings further justify why we did not leave out any modality, as they are more frequently critical for transferability than in the ablation study (Table~\ref{tab::ablation_f3}).\\
+
+        An analysis can also be drawn for \texttt{atomic} errors with respect to the best training scene.
+        We can see that for \texttt{BOS}, training on a dense urban scene like \textbf{Nantes}, is the best solution, as for topology errors (\texttt{FIT} and \texttt{BIT}).
+        \textbf{Paris-13} represents also a dense downtown scene but with even more diverse building types.
+        This is instrumental to achieve transferability for \texttt{BUS} and \texttt{BIB}.
+        Conversely, \textbf{Elancourt} offers more heterogeneity on the \gls{acr::lod}-2 level.
+        As a consequence, it is the best training zone for \texttt{FUS}, \texttt{FIB} and \texttt{FIG}.
+        Finally, as one can obviously suspect, \texttt{FOS} learning is evenly transferable, as it is well detected when training on any scene.
+
     \subsection{\textsc{Generalization study}}
-        \subsubsection{\textsc{}}
-        \subsubsection{\textsc{}}
-        \subsubsection{\textsc{}}
+        \label{subsec::more_experiments::scalability::generalization}
+        We try to find out how omitting one urban zone from the training dataset affects the test results on that same area.
+        An other way to look at it is, from an operational point of view, to find out how much learning on a union of many urban scenes is helpful when testing on an unseen one.
+        We also seek to confirm the outcome of the transferability experiments.
+        Experiments that merge all zones except $Z_i$ ($\underset{\forall j \neq i}{\bigcup} Z_j$) for training and test on $Z_i$ are noted by the couple $(\underset{\forall j \neq i}{\bigcup} Z_j, Z_i)$ or by $ \underset{\forall j \neq i}{\bigcup} Z_j \rightarrow Z_i$.
+        There are three possibilities: \textbf{Elancourt} $\cup$ \textbf{Nantes} $\rightarrow$ \textbf{Paris-13}, \mbox{\textbf{Paris-13}}\,$\cup$\,\textbf{Nantes}\,$\rightarrow$\,\textbf{Elancourt} and \mbox{\textbf{Paris-13}}\,$\cup$\,\textbf{Elancourt}\,$\rightarrow$\,\textbf{Nantes}.
+        The F-score evolution per experiment and error is depicted in Figure~\ref{fig::f_score_generalization_f3}.\\
+    
+        \begin{figure}[htbp]
+            \ffigbox[\FBwidth]{
+                \begin{subfloatrow}[2]
+                    \ffigbox[\FBwidth]{
+                        \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/generalization/building}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_generalization_f3_building}
+                            \texttt{Building errors.}
+                        }
+                    }
+                    \ffigbox[\FBwidth]{
+                        \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/generalization/facet}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_generalization_f3_facet}
+                            \texttt{Facet errors.}
+                        }
+                    }
+                \end{subfloatrow}
+            }{
+                \caption{\label{fig::f_score_generalization_f3} Mean F-score and standard deviation for the generalization study per test zone.}
+            }
+        \end{figure}
+            
+        We compare these experiments with the ablation study on the same area (\textit{cf.} Table~\ref{tab::comparison}).
+        We analyse result along the same criteria as the transferability study.\\
+    
+        We start again with a comparison depending on error families.
+        Out of the 11 possibilities for the \texttt{Building errors} family, 8 yield worse results.
+        For the \texttt{Facet errors} family, 6 out of 13 comparisons exhibit the same trend.
+        This is worst than the transferability comparisons in ratio.
+        This results from the fact that fusing more datasets, that are not tailored for a specific error detection, does not help alleviating the problem.
+        It only evens out the best (\textit{resp.} worst) performances by including the best (\textit{resp.} worst) urban scene in the training set.\\
+        
+        Similarly to the previous study, image and height modalities play a major role in error detection.
+        Image-based features are crucial for \texttt{FIB}, \texttt{BIB}, \texttt{FUS} and \texttt{BUS} detection (Table~\ref{tab::comparison}).
+        Height-based attributes, however, induce a larger improvement in predicting \texttt{FIG} and \texttt{BIT}, while geometric ones are relegated to playing a minor role.
+        Otherwise, a curiosity can be noticed: only when fusing all modalities together, in \textbf{Paris-13} and \textbf{Nantes}, does predictions improve for \texttt{BOS}.\\
+        
+        We also confirm the observations about the best urban scene for error prediction training.
+        In this case, the best zone should always give the worst scores.
+        It is mostly the case with all atomic errors, with the exception of \texttt{BIT}.
+        This outlier can be explained by the resemblance of the \textbf{Paris-13} \gls{acr::3d} model to \textbf{Nantes} (which was established to be the best) samples.
+        Indeed, for most labels, \textbf{Nantes} and \textbf{Paris-13} reach the same scores.
+        However, the discrepancy in F-scores proves the added value for each dataset.
+    
     \subsection{\textsc{Representativeness study}}
-        \subsubsection{\textsc{}}
+        \label{subsec::more_experiments::scalability::representativeness}
 
 \section{\textsc{\texttt{Finesse} study}}
     \subsection{\textsc{Error family detection}}
