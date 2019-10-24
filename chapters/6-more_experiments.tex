@@ -126,10 +126,9 @@
         \end{table}
 
 
-        To summarize the comparisons, error family wise, out of 22 \texttt{Building errors} possible projectivity comparisons, 14 yield worse results.
+        To summarize the comparisons, error family wise, out of 22 \texttt{Building errors} possible \texttt{projectivity} comparisons, 14 yield worse results.
         This proves how hard it is, for this error family, to transfer learned classifiers.
-        It is, however, the contrary for the \texttt{Facet errors}.
-        Only 8 out of 27 \texttt{projectivity} errors are worse than training on the same test area.\\
+        Conversely, \texttt{Facet errors}, only 8 out of 27 \texttt{projectivity} scores are worse compared to training and testing on the same test area.\\
 
         As mentioned earlier, additional modalities play a important role in prediction accuracy.
         We start with image-based attributes.
@@ -309,8 +308,8 @@
                         \centering
                         \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/finesse_2/ablation}
                     }{
-                        \label{subfig::f_score_ablation_f2}
                         \subcaption{
+                            \label{subfig::f_score_ablation_f2}
                             Test scores for classifiers trained on the same zone.
                         }
                     }
@@ -318,8 +317,8 @@
                         \centering
                         \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/finesse_2/representativeness}
                     }{
-                        \label{subfig::f_score_representativeness_f2}
                         \subcaption{
+                            \label{subfig::f_score_representativeness_f2}
                             Representativeness experiments.
                         }
                     }
@@ -332,14 +331,14 @@
                     \centering
                     \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/finesse_2/transferability}
                 }{
-                    \label{subfig::f_score_transferability_f2}
                     \subcaption{
+                        \label{subfig::f_score_transferability_f2}
                         Transferability experiments.
                     }
                 }
                 \ffigbox[][][b]{
-                    \label{fig::f_score_f2}
                     \caption{
+                        \label{fig::f_score_f2}
                         F-score mean and standard deviation for the feature ablation study outcomes per zone for \texttt{finesse} level 2.
                     }
                 }{}
