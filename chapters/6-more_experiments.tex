@@ -47,12 +47,13 @@
         Six transferability couples are possible.
         F-scores are shown, per label, and per experiment, in Figure~\ref{fig::f_score_transferability_f3}.\\
         
+        \thisfloatsetup{subfloatrowsep=none}
         \begin{figure}[htbp]
             \ffigbox[\FBwidth]{
                 \begin{subfloatrow}[2]
                     \centering
                     \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/transferability/building}
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/transferability/building}
                     }{
                         \caption{
                             \label{subfig::f_score_transferability_f3_building}
@@ -60,7 +61,7 @@
                         }
                     }
                     \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/transferability/facet}
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/transferability/facet}
                     }{
                         \caption{
                             \label{subfig::f_score_transferability_f3_facet}
@@ -127,7 +128,7 @@
 
         To summarize the comparisons, error family wise, out of 22 \texttt{Building errors} possible projectivity comparisons, 14 yield worse results.
         This proves how hard it is, for this error family, to transfer learned classifiers.
-        It is, however, the contrary for the ``Facet errors''.
+        It is, however, the contrary for the \texttt{Facet errors}.
         Only 8 out of 27 \texttt{projectivity} errors are worse than training on the same test area.\\
 
         As mentioned earlier, additional modalities play a important role in prediction accuracy.
@@ -156,12 +157,13 @@
         There are three possibilities: \textbf{Elancourt} $\cup$ \textbf{Nantes} $\rightarrow$ \textbf{Paris-13}, \mbox{\textbf{Paris-13}}\,$\cup$\,\textbf{Nantes}\,$\rightarrow$\,\textbf{Elancourt} and \mbox{\textbf{Paris-13}}\,$\cup$\,\textbf{Elancourt}\,$\rightarrow$\,\textbf{Nantes}.
         The F-score evolution per experiment and error is depicted in Figure~\ref{fig::f_score_generalization_f3}.\\
     
+        \thisfloatsetup{subfloatrowsep=none}
         \begin{figure}[htbp]
             \ffigbox[\FBwidth]{
                 \begin{subfloatrow}[2]
                     \centering
                     \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/generalization/building}
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/generalization/building}
                     }{
                         \caption{
                             \label{subfig::f_score_generalization_f3_building}
@@ -169,7 +171,7 @@
                         }
                     }
                     \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/generalization/facet}
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/generalization/facet}
                     }{
                         \caption{
                             \label{subfig::f_score_generalization_f3_facet}
@@ -210,12 +212,12 @@
         We can, thereafter, understand how much learning on one scene typology can affect results compared to a mixed training set.
         Figure~\ref{fig::f_score_representativeness_f3} depicts F-score as a function of training ratios (between 20-70\%) and \texttt{atomic} errors.\\
                 
+        \thisfloatsetup{subfloatrowsep=none}
         \begin{figure}[htbp]
-            \centering
             \ffigbox[\textwidth]{
                 \begin{subfloatrow}[2]
                     \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, width=.48\textwidth]{figures/results/representativeness/building}
+                        \includestandalone[mode=buildnew, height=6.5cm]{figures/results/representativeness/building}
                     }{
                         \caption{
                             \label{subfig::f_score_representativeness_f3_building}
@@ -223,7 +225,7 @@
                         }
                     }
                     \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, width=.48\textwidth]{figures/results/representativeness/facet}
+                        \includestandalone[mode=buildnew, height=6.5cm]{figures/results/representativeness/facet}
                     }{
                         \caption{
                             \label{subfig::f_score_representativeness_f3_facet}
@@ -300,38 +302,123 @@
         \end{table}
     
         \begin{figure}[htbp]
-            \centering
             \ffigbox[\FBwidth]{
-                \begin{subfloatrow}[3]
+                \begin{subfloatrow*}
+                    \floatsetup[figure]{floatrowsep=none}\killfloatstyle
                     \ffigbox[\FBwidth]{
                         \centering
-                        \includestandalone[mode=buildnew, width=.33\textwidth]{figures/results/finesse_2/ablation}
+                        \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/finesse_2/ablation}
                     }{
-                        \label{subfig::f_score_ablation_f2} Test scores for classifiers trained on the same zone.
+                        \label{subfig::f_score_ablation_f2}
+                        \subcaption{
+                            Test scores for classifiers trained on the same zone.
+                        }
                     }
                     \ffigbox[\FBwidth]{
                         \centering
-                        \includestandalone[mode=buildnew, width=.33\textwidth]{figures/results/finesse_2/transferability}
+                        \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/finesse_2/representativeness}
                     }{
-                        \label{subfig::f_score_transferability_f2} Transferability experiments.
+                        \label{subfig::f_score_representativeness_f2}
+                        \subcaption{
+                            Representativeness experiments.
+                        }
                     }
-                    \ffigbox[\FBwidth]{
-                        \centering
-                        \includestandalone[mode=buildnew, width=.33\textwidth]{figures/results/finesse_2/representativeness}
-                    }{
-                        \label{subfig::f_score_representativeness_f2} Representativeness experiments.
+                \end{subfloatrow*}
+            }{}
+            \renewlengthtocommand\settowidth\Mylen{\subfloatrowsep}\vskip\Mylen
+            \BottomFloatBoxes\floatsetup[subfigure]{heightadjust=none}
+            \begin{subfloatrow*}
+                \ffigbox[\FBwidth]{
+                    \centering
+                    \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/finesse_2/transferability}
+                }{
+                    \label{subfig::f_score_transferability_f2}
+                    \subcaption{
+                        Transferability experiments.
                     }
-                \end{subfloatrow}
-            }{
-                \caption{
-                    \label{fig::f_score_ablation_f2}
-                    F-score mean and standard deviation for the feature ablation study outcomes per zone for \texttt{finesse} level 2.
                 }
-            }
+                \ffigbox[][][b]{
+                    \label{fig::f_score_f2}
+                    \caption{
+                        F-score mean and standard deviation for the feature ablation study outcomes per zone for \texttt{finesse} level 2.
+                    }
+                }{}
+            \end{subfloatrow*}
         \end{figure}
+    
+        We start by the ablation study.
+        Table~\ref{tab::ablation_f2} reveals that inserting more remote sensing modalities do not change the prediction results dramatically.
+        This is perfectly illustrated, in Figure~\ref{fig::f_score_f2}, by the low variance of F-scores for the three areas of interest.
+        These results are in line with the conclusions at the \texttt{finesse} level 3.
+        In the higher \texttt{finesse} level, only \texttt{BUS}, from all \texttt{atomic} errors, was highly impacted by a change in the feature configuration.
+        This may explain the observed low variability.
+        Moreover, we can note the prevalence of \texttt{FOS}\footnote{
+            Between 60\% and 85\% of building models, in all areas, have this defect.
+        } and \texttt{FIG}\footnote{
+            They affect between 70\% and 95\% of building models, depending on the urban scene.
+        } in the \texttt{Facet errors} family.
+        This, added to the fact that they are, in a large capacity, easily detected individually\footnote{
+            \texttt{FOS} (\textit{resp.} \texttt{FIG}) achieves more than 90\% (\textit{resp.} 80\%) in F-score, as depicted in Subfigure~\ref{subfig::f_score_ablation_f3_facet}
+        } helps understanding why the F-score reaches at least 90\% for this family (Subfigure~\ref{subfig::f_score_ablation_f2}).
+        As with \texttt{finesse} level 3 experiments, \texttt{Facet errors} yields higher prediction scores than on \texttt{Building errors}.
+        Indeed, we can see a smaller discrepancy, that is below 5\%, between F-scores on different scenes for \texttt{Facet errors} than for \texttt{Building errors} with 15\%.\\
+
+        The transferability study (Subfigure~\ref{subfig::f_score_transferability_f2}) compares the F-scores with the ablation study provided in Subfigure~\ref{subfig::f_score_ablation_f2}.
+        Out of all 12 possible comparisons, only 2 exhibit a decrease in error discrimination.
+        Both affect the \texttt{Building errors} family when trained on \textbf{Nantes}.
+        \texttt{Facet errors}, on the other hand, confirms, its transferability and stability, with less than 5\% of discrepancy between the two extremal values.
+        For this reason, we skip the generalization study, all together, at this section.\\
+
+        The representativeness study conducted for the \texttt{finesse} level 2 results in the F-scores that are illustrated in Subfigure~\ref{subfig::f_score_representativeness_f2}.
+        Family detection scores are very stable across all different tested split ratios.
+        Moreover, in contrast to \texttt{atomic} errors results (cf. Figure~\ref{fig::f_score_representativeness_f3}), F-scores do not vary by more than 1\% in mean and standard deviation.
+        This proves that at \texttt{finesse} level 2, error family prediction is evened out independent of different split ratios, as opposed to higher order errors.
+        Again, it benefits from the higher heterogeneity of the training set with multiple areas.
     
     \subsection{\textsc{Detection of erroneous models}}
         \label{subsec::more_experiments::finesse::1}
+        \begin{table}
+            \renewcommand{\arraystretch}{1.5}
+            \begin{tabular}{|c | c c | c c | c c | c c |}
+                \hline
+                \multicolumn{9}{|c|}{\textbf{Elancourt}}\\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                \cline{2-9}
+                & $\bm{Rec}$ & \texttt{Valid} &  $\bm{Rec}$ & \texttt{Valid} &  $\bm{Rec}$ & \texttt{Valid} &  $\bm{Rec}$ & \texttt{Valid} \\
+                \hline
+                \texttt{Erroneous} & 99.95 & $\frac{1}{57}$ & 99.95 & $\frac{1}{57}$ & 99.95 & $\frac{0}{57}$ & 99.95 & $\frac{1}{57}$ \\
+                \hline
+                \hline
+                \multicolumn{9}{|c|}{\textbf{Nantes}}\\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                \cline{2-9}
+                & $\bm{Rec}$ & \texttt{Valid} &  $\bm{Rec}$ & \texttt{Valid} &  $\bm{Rec}$ & \texttt{Valid} &  $\bm{Rec}$ & \texttt{Valid} \\
+                \hline
+                \texttt{Erroneous} & 99.84 & $\frac{0}{55}$ & 99.84 & $\frac{0}{55}$ & 100 & $\frac{0}{55}$ & \textbf{100} & $\frac{0}{55}$ \\
+                \hline
+                \hline
+                \multicolumn{9}{|c|}{\textbf{Paris-13}}\\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                \cline{2-9}
+                & $\bm{Rec}$ & \texttt{Valid} &  $\bm{Rec}$ & \texttt{Valid} &  $\bm{Rec}$ & \texttt{Valid} &  $\bm{Rec}$ & \texttt{Valid} \\
+                \hline
+                \texttt{Erroneous} & 99.77 & $\frac{3}{21}$ & 99.77 & $\frac{3}{21}$ & 99.77 & $\frac{3}{21}$ & 99.77 & $\frac{3}{21}$ \\
+                \hline
+            \end{tabular}
+            \caption{\label{tab::ablation_f1}Test results expressed in percentage for the \texttt{finesse}$ =1$ case. All four configurations are compared across both family errors.}
+        \end{table}
+        
+        For the level 1 in \texttt{finesse}, we start with the feature ablation experiments.
+        Since valid samples are very rare in our case, it is expected that it will be very difficult to detect these instances.
+        In consequence, in Table~\ref{tab::ablation_f1}, we choose to report correctly \texttt{Valid} buildings instead of computing the precision score in percentage.
+            
+        At this level, even more that the error family semantic degree, feature configurations have virtually no impact on test results: \textbf{Elancourt} was the only exception when image features are added to geometric ones.
+        Furthermore, we confirm expectations as, at most, only 1 out of 57 (\textit{resp.} 0 out of 55 and 3 out of 21) valid instances are detected for \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
+        As a consequence, we do not report the rest of previously conducted experiments for this \texttt{finesse} level.
+        Indeed, it is senseless to compare detection transferability, generalization or representativeness if we hardly detect them at all on the same training scene.
 
 \section{\textsc{Richer features contributions}}
     \subsection{\textsc{Results}}
