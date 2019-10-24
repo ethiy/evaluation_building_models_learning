@@ -92,7 +92,7 @@
                 xshift=17pt,
                 yshift=-3em,
                 anchor=east,
-                font=\small,
+                font=\footnotesize,
                 color=black,
                 align=center,
                 text width=1cm
@@ -116,24 +116,25 @@
             percentage plot,
             symbolic x coords={BOS, BUS, BIB, BIT},
             xtick=data,
-            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm, font=\ttfamily},
+            x tick label style={rotate=60, anchor=east, yshift=-2mm, font=\ttfamily},
             xtick align=outside,
             xtick pos=left,
             ytick pos=left,
             ymax=100,
             ymin=0,
             legend style={
-                at={(1.01,1)},
-                anchor=north west
+                legend columns=-2,
+                at={(.5,1.02)},
+                anchor=south
             }
         ]
             \addplot table [percentage series=1] {\buildingEl};
             \addplot table [percentage series=2] {\buildingEl};
             \addplot table [percentage series=3] {\buildingEl};
             \legend{
-                \small \strut Geometry,
-                \small \strut Height,
-                \small \strut Image
+                \footnotesize \strut Geometry,
+                \footnotesize \strut Height,
+                \footnotesize \strut Image
             }
         \end{axis}
         \begin{axis}[

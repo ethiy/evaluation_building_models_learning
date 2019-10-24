@@ -33,15 +33,19 @@
             ylabel={F-score},
             symbolic x coords={{Elancourt}, {Nantes}, {Paris-13}},
             xtick=data,
-            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm, font=\bfseries},
+            x tick label style={rotate=60, anchor=east, yshift=-2mm, font=\bfseries},
             xtick align=outside,
             ymax=80,
             ymin=0,
             xtick pos=left,
             ytick pos=left,
+            every axis plot/.append style={very thick, dashed},
+            /pgfplots/error bars/error bar style={very thick},
+            /pgfplots/error bars/error mark options={very thick, rotate=90, solid},
             legend style={
-                at={(1.01,1)},
-                anchor=north west
+                legend columns=-2,
+                at={(.5,1.02)},
+                anchor=south
             }
         ]
             \addplot+[no markers, orange, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BOS};
@@ -49,10 +53,10 @@
             \addplot+[no markers, green, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BIB};
             \addplot+[no markers, red, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BIT};
             \legend{
-                \small \strut \texttt{BOS},
-                \small \strut \texttt{BUS},
-                \small \strut \texttt{BIB},
-                \small \strut \texttt{BIT}
+                \footnotesize \strut \texttt{BOS},
+                \footnotesize \strut \texttt{BUS},
+                \footnotesize \strut \texttt{BIB},
+                \footnotesize \strut \texttt{BIT}
             }
         \end{axis} 
     \end{tikzpicture}

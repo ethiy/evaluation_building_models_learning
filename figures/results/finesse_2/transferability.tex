@@ -1,0 +1,60 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{pgfplots}
+
+\begin{document}
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt \(\rightarrow\) Nantes, 77.23, 0.07
+        Elancourt \(\rightarrow\) Paris-13, 79.79, 0.13
+        Nantes \(\rightarrow\) Paris-13, 75.76, 0.33
+        Nantes \(\rightarrow\) Elancourt, 87.44, 0.27
+        Paris-13 \(\rightarrow\) Nantes, 76.88, 0.62
+        Paris-13 \(\rightarrow\) Elancourt, 89.38, 0.09
+    }\BuildingTr
+
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        Elancourt \(\rightarrow\) Nantes, 91.37, 0.64
+        Elancourt \(\rightarrow\) Paris-13, 93.47, 0.97
+        Nantes \(\rightarrow\) Paris-13, 90.76, 0.43
+        Nantes \(\rightarrow\) Elancourt, 90.26, 0.20
+        Paris-13 \(\rightarrow\) Nantes, 91.03, 0.24
+        Paris-13 \(\rightarrow\) Elancourt, 91.33, 0.22
+    }\FacetTr
+
+    \begin{tikzpicture} 
+        \begin{axis}[
+            symbolic x coords={
+                {Elancourt \(\rightarrow\) Nantes},
+                {Elancourt \(\rightarrow\) Paris-13},
+                {Nantes \(\rightarrow\) Paris-13},
+                {Nantes \(\rightarrow\) Elancourt},
+                {Paris-13 \(\rightarrow\) Nantes},
+                {Paris-13 \(\rightarrow\) Elancourt}
+            },
+            xtick=data,
+            x tick label style={rotate=60, anchor=east, yshift=-2mm, font=\bfseries},
+            xtick align=outside,
+            ymax=100,
+            ymin=70,
+            xtick pos=left,
+            ytick pos=left,
+            every axis plot/.append style={very thick},
+            /pgfplots/error bars/error bar style={very thick},
+            /pgfplots/error bars/error mark options={very thick, rotate=90, solid},
+            legend style={
+                legend columns=-2,
+                at={(.5,1.02)},
+                anchor=south
+            }
+        ]
+            \addplot+[no markers, magenta, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BuildingTr};
+            \addplot+[no markers, magenta, dashed, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FacetTr};
+            \legend{
+                \footnotesize \strut \texttt{Building error},
+                \footnotesize \strut \texttt{Facet error}
+            }
+        \end{axis} 
+    \end{tikzpicture}
+\end{document}

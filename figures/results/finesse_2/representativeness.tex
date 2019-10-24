@@ -1,0 +1,59 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{pgfplots}
+
+\begin{document}
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        20\%, 87.13, 0.31
+        30\%, 87.53, 0.38
+        40\%, 87.37, 0.27
+        50\%, 87.11, 0.19
+        60\%, 87.80, 0.24
+        70\%, 87.62, 0.12
+    }\BuildingRpr
+
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        20\%, 91.60, 0.35
+        30\%, 91.79, 0.33
+        40\%, 91.51, 0.50
+        50\%, 91.72, 0.31
+        60\%, 91.83, 0.49
+        70\%, 91.61, 0.35
+    }\FacetRpr
+    
+    \begin{tikzpicture} 
+        \begin{axis}[
+            symbolic x coords={
+                {20\%},
+                {30\%},
+                {40\%},
+                {50\%},
+                {60\%},
+                {70\%}
+            },
+            xtick=data,
+            xtick align=outside,
+            ymax=95,
+            ymin=80,
+            xtick pos=left,
+            ytick pos=left,
+            every axis plot/.append style={very thick},
+            /pgfplots/error bars/error bar style={very thick},
+            /pgfplots/error bars/error mark options={very thick, rotate=90, solid},
+            legend style={
+                legend columns=-2,
+                at={(.5,1.02)},
+                anchor=south
+            }
+        ]
+            \addplot+[no markers, magenta, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BuildingRpr};
+            \addplot+[no markers, magenta, dashed, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FacetRpr};
+            \legend{
+                \footnotesize \strut \texttt{Building error},
+                \footnotesize \strut \texttt{Facet error}
+            }
+        \end{axis} 
+    \end{tikzpicture}
+\end{document}

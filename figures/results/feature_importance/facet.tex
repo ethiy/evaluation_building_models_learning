@@ -118,21 +118,22 @@
             xtick pos=left,
             ytick pos=left,
             xtick=data,
-            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm},
+            x tick label style={rotate=60, anchor=east, yshift=-2mm},
             ymax=100,
             ymin=0,
             legend style={
-                at={(1.01,1)},
-                anchor=north west
+                legend columns=-2,
+                at={(.5,1.02)},
+                anchor=south
             }
         ]
             \addplot table [percentage series=1] {\facetEl};
             \addplot table [percentage series=2] {\facetEl};
             \addplot table [percentage series=3] {\facetEl};
             \legend{
-                \small \strut Geometry,
-                \small \strut Height,
-                \small \strut Image
+                \footnotesize \strut Geometry,
+                \footnotesize \strut Height,
+                \footnotesize \strut Image
             }
         \end{axis}
         \begin{axis}[
