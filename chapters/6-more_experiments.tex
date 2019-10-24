@@ -301,48 +301,45 @@
         \end{table}
     
         \begin{figure}[htbp]
-            \ffigbox[\FBwidth]{
-                \begin{subfloatrow*}
-                    \floatsetup[figure]{floatrowsep=none}\killfloatstyle
-                    \ffigbox[\FBwidth]{
+            \ffigbox[\textwidth]{
+                \begin{subfloatrow}[2]
+                    \ffigbox[0.5\textwidth]{
                         \centering
                         \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/finesse_2/ablation}
                     }{
-                        \subcaption{
+                        \caption{
                             \label{subfig::f_score_ablation_f2}
                             Test scores for classifiers trained on the same zone.
                         }
                     }
+                    \ffigbox[0.5\textwidth]{
+                        \centering
+                        \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/finesse_2/transferability}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_transferability_f2}
+                            Transferability experiments.
+                        }
+                    }
+                \end{subfloatrow}
+                \vskip1em
+                \begin{subfloatrow}
                     \ffigbox[\FBwidth]{
                         \centering
                         \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/finesse_2/representativeness}
                     }{
-                        \subcaption{
+                        \caption{
                             \label{subfig::f_score_representativeness_f2}
                             Representativeness experiments.
                         }
                     }
-                \end{subfloatrow*}
-            }{}
-            \renewlengthtocommand\settowidth\Mylen{\subfloatrowsep}\vskip\Mylen
-            \BottomFloatBoxes\floatsetup[subfigure]{heightadjust=none}
-            \begin{subfloatrow*}
-                \ffigbox[\FBwidth]{
-                    \centering
-                    \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/finesse_2/transferability}
-                }{
-                    \subcaption{
-                        \label{subfig::f_score_transferability_f2}
-                        Transferability experiments.
-                    }
+                \end{subfloatrow}
+            }{
+                \caption{
+                    \label{fig::f_score_f2}
+                    F-score mean and standard deviation for the feature ablation study outcomes per zone for \texttt{finesse} level 2.
                 }
-                \ffigbox[][][b]{
-                    \caption{
-                        \label{fig::f_score_f2}
-                        F-score mean and standard deviation for the feature ablation study outcomes per zone for \texttt{finesse} level 2.
-                    }
-                }{}
-            \end{subfloatrow*}
+            }
         \end{figure}
     
         We start by the ablation study.
