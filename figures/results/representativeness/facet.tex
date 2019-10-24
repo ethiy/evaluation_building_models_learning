@@ -51,7 +51,6 @@
 
     \begin{tikzpicture} 
         \begin{axis}[
-            ylabel={F-score},
             symbolic x coords={
                 {20\%},
                 {30\%},
@@ -61,15 +60,18 @@
                 {70\%}
             },
             xtick=data,
-            x tick label style={rotate=45, anchor=east, xshift=-1.5mm, yshift=-2mm},
             xtick align=outside,
             ymax=100,
             ymin=0,
             xtick pos=left,
             ytick pos=left,
+            every axis plot/.append style={very thick, dashed},
+            /pgfplots/error bars/error bar style={very thick},
+            /pgfplots/error bars/error mark options={very thick, rotate=90, solid},
             legend style={
-                at={(1.01,1)},
-                anchor=north west
+                legend columns=-2,
+                at={(.5,1.02)},
+                anchor=south
             }
         ]
             \addplot+[no markers, dashed, orange, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FOS};
@@ -78,11 +80,11 @@
             \addplot+[no markers, dashed, red, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FIT};
             \addplot+[no markers, dashed, purple, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FIG};
             \legend{
-                \small \strut \texttt{FOS},
-                \small \strut \texttt{FUS},
-                \small \strut \texttt{FIB},
-                \small \strut \texttt{FIT},
-                \small \strut \texttt{FIG}
+                \footnotesize \strut \texttt{FOS},
+                \footnotesize \strut \texttt{FUS},
+                \footnotesize \strut \texttt{FIB},
+                \footnotesize \strut \texttt{FIT},
+                \footnotesize \strut \texttt{FIG}
             }
         \end{axis} 
     \end{tikzpicture}

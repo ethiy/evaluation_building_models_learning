@@ -50,6 +50,7 @@
         \begin{figure}[htbp]
             \ffigbox[\FBwidth]{
                 \begin{subfloatrow}[2]
+                    \centering
                     \ffigbox[\FBwidth]{
                         \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/transferability/building}
                     }{
@@ -116,7 +117,7 @@
             \end{tabular}
             \renewcommand{\arraystretch}{1}
             \caption{
-                \label{tab::comparison} Evolution of the F-score value, for each error, between each tested configuration and the best result per area (\textit{cf.} Section~\ref{subsubsec::experiments::evaluation::baseline_feature_analysis::ablation}).
+                \label{tab::comparison} Evolution of the F-score value, for each error, between each tested configuration and the best result per area (\t{cf.} Section~\ref{subsubsec::experiments::evaluation::baseline_feature_analysis::ablation}).
                 Feature sets having a significant impact on the classification results are mentioned.
                 Otherwise, \textbf{Geom.} \textbf{Im.}, and \textbf{Hei.} contribute equally.
                 The color indicates the magnitude: \textcolor{LOSS3545}{$\blacksquare$}: $[-45,-35\%[$-- \textcolor{LOSS2535}{$\blacksquare$}: $[-35,-25\%[$ -- \textcolor{LOSS1525}{$\blacksquare$}: $[-25,15\%[$-- \textcolor{LOSS0515}{$\blacksquare$}: $[-15, 5\%[$ -- \textcolor{STBL}{$\blacksquare$}: $[-5,5\%[$-- \textcolor{GAIN0515}{$\blacksquare$}: $[5,15\%[$ -- \textcolor{GAIN15}{$\blacksquare$}: $[15,25\%]$ -- $\square$: statistics cannot be computed.
@@ -134,7 +135,7 @@
         In some cases, they were pivotal in obtaining better results for geometric errors (\texttt{FIB}, \texttt{BIB}), as well as for topological ones (\texttt{FUS}, \texttt{FIT}).
         These features have a significant \texttt{coherence} power when trained over \textbf{Elancourt} (\texttt{FIB} and \texttt{FUS}), and projects very well to other scenes (\texttt{FIB}, \texttt{FUS}, \texttt{BIB} and \texttt{FIT}, Table~\ref{tab::comparison}).
         On the other hand, as expected, geometric features alone are best for topological errors, when trained on dense areas, especially \texttt{BIT} (Table~\ref{tab::comparison}).
-        Finally, although sticking out for \texttt{FIG} in a minor capacity (\textit{cf.} Table~\ref{tab::comparison}), height-based features proved to be less transferable.
+        Finally, although sticking out for \texttt{FIG} in a minor capacity (\t{cf.} Table~\ref{tab::comparison}), height-based features proved to be less transferable.
         In fact, adding height-based features leads, in most cases, to a small decrease in accuracy ($\approx 2\%$) for \texttt{atomic} errors.
         All these previous findings further justify why we did not leave out any modality, as they are more frequently critical for transferability than in the ablation study (Table~\ref{tab::ablation_f3}).\\
 
@@ -158,6 +159,7 @@
         \begin{figure}[htbp]
             \ffigbox[\FBwidth]{
                 \begin{subfloatrow}[2]
+                    \centering
                     \ffigbox[\FBwidth]{
                         \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/generalization/building}
                     }{
@@ -180,7 +182,7 @@
             }
         \end{figure}
             
-        We compare these experiments with the ablation study on the same area (\textit{cf.} Table~\ref{tab::comparison}).
+        We compare these experiments with the ablation study on the same area (\t{cf.} Table~\ref{tab::comparison}).
         We analyse result along the same criteria as the transferability study.\\
     
         We start again with a comparison depending on error families.
@@ -188,7 +190,7 @@
         For the \texttt{Facet errors} family, 6 out of 13 comparisons exhibit the same trend.
         This is worst than the transferability comparisons in ratio.
         This results from the fact that fusing more datasets, that are not tailored for a specific error detection, does not help alleviating the problem.
-        It only evens out the best (\textit{resp.} worst) performances by including the best (\textit{resp.} worst) urban scene in the training set.\\
+        It only evens out the best (\t{resp.} worst) performances by including the best (\t{resp.} worst) urban scene in the training set.\\
         
         Similarly to the previous study, image and height modalities play a major role in error detection.
         Image-based features are crucial for \texttt{FIB}, \texttt{BIB}, \texttt{FUS} and \texttt{BUS} detection (Table~\ref{tab::comparison}).
@@ -209,20 +211,19 @@
         Figure~\ref{fig::f_score_representativeness_f3} depicts F-score as a function of training ratios (between 20-70\%) and \texttt{atomic} errors.\\
                 
         \begin{figure}[htbp]
+            \centering
             \ffigbox[\textwidth]{
-                \begin{subfloatrow}
+                \begin{subfloatrow}[2]
                     \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, width=.7\textwidth]{figures/results/representativeness/building}
+                        \includestandalone[mode=buildnew, width=.48\textwidth]{figures/results/representativeness/building}
                     }{
                         \caption{
                             \label{subfig::f_score_representativeness_f3_building}
                             \texttt{Building errors.}
                         }
                     }
-                \end{subfloatrow}
-                \begin{subfloatrow}
                     \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, width=.7\textwidth]{figures/results/representativeness/facet}
+                        \includestandalone[mode=buildnew, width=.48\textwidth]{figures/results/representativeness/facet}
                     }{
                         \caption{
                             \label{subfig::f_score_representativeness_f3_facet}
@@ -299,10 +300,34 @@
         \end{table}
     
         \begin{figure}[htbp]
-            \begin{center}
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/results/f-scores_f2}
-                \caption{\label{fig::f_score_ablation_f2} F-score mean and standard deviation for the feature ablation study outcomes per zone for \textit{finesse} level 2. (a) corresponds to the ablation study, (b) to the transferability experiments and (c) to the representativeness setting.}
-            \end{center}
+            \centering
+            \ffigbox[\FBwidth]{
+                \begin{subfloatrow}[3]
+                    \ffigbox[\FBwidth]{
+                        \centering
+                        \includestandalone[mode=buildnew, width=.33\textwidth]{figures/results/finesse_2/ablation}
+                    }{
+                        \label{subfig::f_score_ablation_f2} Test scores for classifiers trained on the same zone.
+                    }
+                    \ffigbox[\FBwidth]{
+                        \centering
+                        \includestandalone[mode=buildnew, width=.33\textwidth]{figures/results/finesse_2/transferability}
+                    }{
+                        \label{subfig::f_score_transferability_f2} Transferability experiments.
+                    }
+                    \ffigbox[\FBwidth]{
+                        \centering
+                        \includestandalone[mode=buildnew, width=.33\textwidth]{figures/results/finesse_2/representativeness}
+                    }{
+                        \label{subfig::f_score_representativeness_f2} Representativeness experiments.
+                    }
+                \end{subfloatrow}
+            }{
+                \caption{
+                    \label{fig::f_score_ablation_f2}
+                    F-score mean and standard deviation for the feature ablation study outcomes per zone for \texttt{finesse} level 2.
+                }
+            }
         \end{figure}
     
     \subsection{\textsc{Detection of erroneous models}}
