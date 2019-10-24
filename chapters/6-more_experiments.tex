@@ -412,12 +412,15 @@
         
         For the level 1 in \texttt{finesse}, we start with the feature ablation experiments.
         Since valid samples are very rare in our case, it is expected that it will be very difficult to detect these instances.
-        In consequence, in Table~\ref{tab::ablation_f1}, we choose to report correctly \texttt{Valid} buildings instead of computing the precision score in percentage.
+        In consequence, in Table~\ref{tab::ablation_f1}, we choose to report correctly \texttt{Valid} buildings instead of computing the precision score in percentage.\\
             
         At this level, even more that the error family semantic degree, feature configurations have virtually no impact on test results: \textbf{Elancourt} was the only exception when image features are added to geometric ones.
         Furthermore, we confirm expectations as, at most, only 1 out of 57 (\textit{resp.} 0 out of 55 and 3 out of 21) valid instances are detected for \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
         As a consequence, we do not report the rest of previously conducted experiments for this \texttt{finesse} level.
         Indeed, it is senseless to compare detection transferability, generalization or representativeness if we hardly detect them at all on the same training scene.
+
+
+\section{\textsc{Classifier analysis}}
 
 \section{\textsc{Richer features contributions}}
     \subsection{\textsc{Results}}
