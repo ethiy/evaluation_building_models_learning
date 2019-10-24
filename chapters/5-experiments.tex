@@ -122,7 +122,7 @@
         \begin{figure}[htpb]
             \centering
             \ffigbox[\textwidth]{
-                \includestandalone[mode=buildnew, width=.7\textwidth]{figures/datasets/families_stats}
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/datasets/families_stats}
             }{
                 \caption{
                     \label{fig::family_errors}
@@ -136,7 +136,7 @@
                 \begin{subfloatrow}
                     \centering
                     \ffigbox[\textwidth]{
-                        \includestandalone[mode=buildnew, width=.8\textwidth]{figures/datasets/lod1_stats}
+                        \includestandalone[mode=buildnew, width=\textwidth]{figures/datasets/lod1_stats}
                     }{
                         \caption{
                             \label{subfig::lod1_errors}
@@ -144,6 +144,7 @@
                         }
                     }
                 \end{subfloatrow}
+                \vskip1em
                 \begin{subfloatrow}
                     \centering
                     \ffigbox[\textwidth]{
@@ -409,12 +410,13 @@
                 }
             \end{table}
 
+            \thisfloatsetup{subfloatrowsep=none}
             \begin{figure}[htpb]
                 \centering
                 \ffigbox[\FBwidth]{
                     \begin{subfloatrow}[2]
                         \ffigbox[\FBwidth]{
-                            \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/ablation/building}
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/ablation/building}
                         }{
                             \caption{
                                 \label{subfig::f_score_ablation_f3_building}
@@ -422,7 +424,7 @@
                             }
                         }
                         \ffigbox[\FBwidth]{
-                            \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/ablation/facet}
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/ablation/facet}
                         }{
                             \caption{
                                 \label{subfig::f_score_ablation_f3_facet}
@@ -471,17 +473,18 @@
                             \includestandalone[mode=buildnew, width=.8\textwidth]{figures/results/feature_importance/building}
                         }{
                             \caption{
-                                \label{subfig::f_score_ablation_f3_building}
+                                \label{subfig::feature_importances_building}
                                 \texttt{Building errors.}
                             }
                         }
                     \end{subfloatrow}
+                    \vskip1em
                     \begin{subfloatrow}
                         \ffigbox[\textwidth]{
                             \includestandalone[mode=buildnew, width=\textwidth]{figures/results/feature_importance/facet}
                         }{
                             \caption{
-                                \label{subfig::f_score_ablation_f3_facet}
+                                \label{subfig::feature_importances_facet}
                                 \texttt{Facet errors.}
                             }
                         }

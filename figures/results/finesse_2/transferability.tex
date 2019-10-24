@@ -5,33 +5,34 @@
 \begin{document}
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt \(\rightarrow\) Nantes, 77.23, 0.07
-        Elancourt \(\rightarrow\) Paris-13, 79.79, 0.13
-        Nantes \(\rightarrow\) Paris-13, 75.76, 0.33
-        Nantes \(\rightarrow\) Elancourt, 87.44, 0.27
-        Paris-13 \(\rightarrow\) Nantes, 76.88, 0.62
-        Paris-13 \(\rightarrow\) Elancourt, 89.38, 0.09
+        El. \(\rightarrow\) Na., 77.23, 0.07
+        El. \(\rightarrow\) P13, 79.79, 0.13
+        Na. \(\rightarrow\) P13, 75.76, 0.33
+        Na. \(\rightarrow\) El., 87.44, 0.27
+        P13 \(\rightarrow\) Na., 76.88, 0.62
+        P13 \(\rightarrow\) El., 89.38, 0.09
     }\BuildingTr
 
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt \(\rightarrow\) Nantes, 91.37, 0.64
-        Elancourt \(\rightarrow\) Paris-13, 93.47, 0.97
-        Nantes \(\rightarrow\) Paris-13, 90.76, 0.43
-        Nantes \(\rightarrow\) Elancourt, 90.26, 0.20
-        Paris-13 \(\rightarrow\) Nantes, 91.03, 0.24
-        Paris-13 \(\rightarrow\) Elancourt, 91.33, 0.22
+        El. \(\rightarrow\) Na., 91.37, 0.64
+        El. \(\rightarrow\) P13, 93.47, 0.97
+        Na. \(\rightarrow\) P13, 90.76, 0.43
+        Na. \(\rightarrow\) El., 90.26, 0.20
+        P13 \(\rightarrow\) Na., 91.03, 0.24
+        P13 \(\rightarrow\) El., 91.33, 0.22
     }\FacetTr
 
     \begin{tikzpicture} 
         \begin{axis}[
+            ylabel={F-score},
             symbolic x coords={
-                {Elancourt \(\rightarrow\) Nantes},
-                {Elancourt \(\rightarrow\) Paris-13},
-                {Nantes \(\rightarrow\) Paris-13},
-                {Nantes \(\rightarrow\) Elancourt},
-                {Paris-13 \(\rightarrow\) Nantes},
-                {Paris-13 \(\rightarrow\) Elancourt}
+                {El. \(\rightarrow\) Na.},
+                {El. \(\rightarrow\) P13},
+                {Na. \(\rightarrow\) P13},
+                {Na. \(\rightarrow\) El.},
+                {P13 \(\rightarrow\) Na.},
+                {P13 \(\rightarrow\) El.}
             },
             xtick=data,
             x tick label style={rotate=60, anchor=east, yshift=-2mm, font=\bfseries},
@@ -45,7 +46,7 @@
             /pgfplots/error bars/error mark options={very thick, rotate=90, solid},
             legend style={
                 legend columns=-2,
-                at={(.5,1.02)},
+                at={(.5,1.05)},
                 anchor=south
             }
         ]
