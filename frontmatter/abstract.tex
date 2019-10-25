@@ -7,7 +7,7 @@ This work proposes an approach for automatically evaluating the quality of 3D bu
 Potential errors are compiled in a novel hierarchical and modular taxonomy.
 This allows, for the first time, to disentangle fidelity and modeling errors, whatever the level of details of the modeled buildings.
 The quality of models is predicted using the geometric properties of buildings and, when available, Very High Resolution images and Digital Surface Models.
-A baseline of handcrafted, yet generic, features is fed into a Random Forest or Support Vector Machine classifiers.
+A baseline of handcrafted, yet generic, features is fed into a \acrlong*{acr::rf} or \acrlong*{acr::svm} classifiers.
 Richer features, relying on graph kernels as well as Scattering Networks, were proposed to better take into consideration structure.
 Both multi-class and multi-label cases are studied: due to the interdependence between classes of errors, it is possible to retrieve all errors at the same time while simply predicting correct and erroneous buildings.
 The proposed framework was tested on three distinct urban areas in France with more than 3,000 buildings.

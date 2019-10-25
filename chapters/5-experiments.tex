@@ -17,7 +17,7 @@
         \textbf{Nantes}, as shown in Figure~\ref{fig::nantes_ortho}, represents a denser urban setting but with a lower building diversity (\textit{cf.} Subfigure~\ref{subfig::nantes_samples}).
         In Figure~\ref{fig::paris-13_ortho}, one can see how \textbf{Paris-13} consists of mostly flat roof high towers which coexist with Haussmann style buildings that typically exhibit highly fragmented roofs (\textit{cf.} Subfigure~\ref{subfig::paris-13_samples}).
         The \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}) scene contains 2,009 (\textit{resp.} 748 and 478) annotated building models.
-        The \gls{acr::dsm} as well as the orthorectified image resolution is \SI{6}{\cm} for the first area while it is \SI{10}{\cm} for the other ones.
+        The \gls{acr::dsm} as well as the orthorectified image resolution is \SI{0.06}{\m} for the first area while it is \SI{0.1}{\m} for the other ones.
 
         \begin{figure}[htpb]
             \ffigbox[\textwidth]{
@@ -232,7 +232,7 @@
 
             \paragraph{Classifiers}
                 As discussed in , two 
-                \subparagraph{Random Forest}
+                \subparagraph{\acrshort*{acr::rf}}
                     1,000
                     4
                     Kernel PCA
@@ -462,7 +462,7 @@
         
         \subsubsection{\textsc{Feature importance}}
             \label{subsubsec::experiments::evaluation::baseline_feature_analysis::feature_importance}
-            Random forest classifiers can easily infer feature importances at training time.
+            \gls{acr::rf} classifiers can easily infer feature importances at training time.
             These were here computed and aggregated by modality in all urban scenes (\textit{cf.} Figure~\ref{fig::feature_importances}).\\
 
             \begin{figure}[htpb]
@@ -491,7 +491,7 @@
                     \end{subfloatrow}
                 }{
                     \caption{
-                        \label{fig::feature_importances} Modality importance computed by stacking single feature importances retrieved from the Random Forest classifier.
+                        \label{fig::feature_importances} Modality importance computed by stacking single feature importances retrieved from the \gls{acr::rf} classifier.
                         The first (\textit{resp.} second and third) column represents \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
                     }
                 }
