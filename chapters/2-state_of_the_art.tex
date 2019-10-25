@@ -247,7 +247,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         Actually, these metrics could be used once a semantic error is identified to help quantify the defect.
         On the other hand, the need for reasonably available reference data, which is dictated by the \textbf{large-scale} constraint, implies the reliance on remote sensing data based methods (\textit{cf.} Subsection~\ref{subsec::state_of_the_art::quality::reference}).\\
 
-        Methods that are both semantic and rely only on more readily available remote sensing data are in the number of two:~\textcite{boudet2006supervised,michelin2013quality}.
+        Methods that are both semantic and rely only on more readily available remote sensing data are in the number of two:~\parencite{boudet2006supervised,michelin2013quality}.
         Both define semantic errors that are predicted with the help of Oblique images and \glspl{acr::dsm}.
         A classifier learns statistical properties of the building \gls{acr::3d} models using features that are derived from these sensor data.
         The learning process further helps scaling the process to unseen data by predicting errors using the same attributes.\\
@@ -261,7 +261,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
     In this section are presented notions from statistic learning and computer vision domains that were useful for this work.
     This constitutes a simple reminder and is not a thorough survey of the field.
     Section~\ref{subsec::state_of_the_art::mlpr::classifiers} start off with a brief description of utilized supervised classifiers in .
-    Second (section~\ref{subsec::state_of_the_art::mlpr::feature_extraction}) comes a presentation of computer vision concepts on which our method is based.
+    Second (Section~\ref{subsec::state_of_the_art::mlpr::feature_extraction}) comes a presentation of computer vision concepts on which our method is based.
     Last is discussed graph classification that was also instrumental in this work.
 
     \subsection{\textsc{Supervised classifiers}}
@@ -295,7 +295,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         In this case, associating features with each label \(\left(\left(\bm{x^i}, y^i_l\right)\right)_{i=1,2,\dots,n}\) can be seen as an independent binary classification problem.
         This is different from multi-class problems, as for the latter only one class is possible while in the other multiple labels can be detected per instance.\\
 
-        Hereafter, are presented two supervised classifiers: the \gls{acr::svm} algorithm and Random Forests, both of which are used in this work.
+        Hereafter, are presented two supervised classifiers: the \gls{acr::svm} algorithm and \glspl{acr::rf}, both of which are used in this work.
 
         \subsubsection{\textsc{\acrlong*{acr::svm}}}
             \label{subsubsec::state_of_the_art::mlpr::classifiers::svm}
@@ -531,7 +531,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 A solution is to find a transformation $\Phi: \mathbb{R}^d \rightarrow \mathscr{H}$ that maps initial feature vectors into a Hilbert space $(\mathscr{H}, \langle\cdot{,}\cdot\rangle_{\mathscr{H}})$ where distances between instances are meaningful.
                 There is no unique map that satisfy this type of properties.
                 We are particularly intersted in a map which transforms the data into a space where they are hopefully linearly separable~\parencite{boser1992training}.
-                This illustrated in Figure\ref{fig::circles_transformation}.
+                This illustrated in Figure~\ref{fig::circles_transformation}.
                 Using a polar coordinate transformation 
                 \begin{align*}
                     \Phi: \mathbb{R}^2 &\rightarrow \mathbb{R}^2 \\
@@ -634,12 +634,12 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                             Although it is possible to compute scores that are in the unit interval, these are difficult to interpret as probabilities.
                 \end{itemize}
 
-        \subsubsection{\textsc{Random forest}}
+        \subsubsection{\textsc{\acrlong*{acr::rf}}}
             \label{subsubsec::state_of_the_art::mlpr::classifiers::rf}
-            A random forest is an agregation of decision tree classifiers.
+            A \gls{acr::rf} is an agregation of decision tree classifiers.
             First, is explained how the latter works.
             Afterwards, we describe how the aggregation of basic classifiers can be beneficial for classification, especially in the case of decision trees.
-            We end this sub-subsection discussing some random forests properties.
+            We end this sub-subsection discussing some \gls{acr::rf} properties.
 
             \paragraph{Decision tree classifier}
                 \begin{figure}[htbp]
@@ -776,17 +776,17 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/random_forest/circles_rf}
                             }{
                                 \caption{
-                                    \label{subfig::rf_circles} Random forest separator (in purple) with constituing decision trees
+                                    \label{subfig::rf_circles} \gls{acr::rf} separator (in purple) with constituing decision trees
                                 }
                             }
                         \end{subfloatrow}
                     }{
                         \caption[
-                            Difference between a single decision tree and a random forest visualized in feature space for a generated toy data.
+                            Difference between a single decision tree and a \gls{acr::rf} visualized in feature space for a generated toy data.
                         ]{
                             \label{fig::decision_tree_vs_rf}
-                            Difference between a single decision tree and a random forest visualized in feature space for a generated toy data.
-                            We see how a random forest aggregates multiple shallow decision trees in order to achieve a good generalization power instead of overfitting to the sampled data.
+                            Difference between a single decision tree and a \gls{acr::rf} visualized in feature space for a generated toy data.
+                            We see how a \gls{acr::rf} aggregates multiple shallow decision trees in order to achieve a good generalization power instead of overfitting to the sampled data.
                         }
                     }
                 \end{figure}
@@ -819,24 +819,24 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 The idea is that each one of these subsets would exhibit a particular aspect that is crucial for the classification.
                 The aggregation of each classifier knowledge would eventually help generalize at prediction time.\\
 
-                Random forest do not only rely on a simple bagging but also on a second random sampling: this time it is on the feature dimensions.
+                \gls{acr::rf} do not only rely on a simple bagging but also on a second random sampling: this time it is on the feature dimensions.
                 When splitting a node at training time, only a subset of randomly chosen dimensions is considered~\parencite{breiman2001random}.
-                We depict in Figure~\ref{fig::decision_tree_vs_rf} the difference between a random forest and a single decision tree.
+                We depict in Figure~\ref{fig::decision_tree_vs_rf} the difference between a \gls{acr::rf} and a single decision tree.
 
             \paragraph{Properties}
-                Random forests are often used in practice as they offer some advantages.
+                \glspl{acr::rf} are often used in practice as they offer some advantages.
                 Hereafter are listed some of these:
                 \begin{itemize}
-                    \item As decision trees deal with each feature independently, they can natively, as well as Random Forests, handle heterogenous data.
+                    \item As decision trees deal with each feature independently, they can natively, as well as \glspl{acr::rf}, handle heterogenous data.
                         It can handle boolean features along with integer or real ones.
-                    \item Since at each time only a subset of features are considered, Random Forests can scale easily under high dimensionality.
-                    \item The ensemble character of Random Forests allows them to adapt to outliers and hence, provided a large enough trainning dataset, can achieve a good generalization power.
+                    \item Since at each time only a subset of features are considered, \glspl{acr::rf} can scale easily under high dimensionality.
+                    \item The ensemble character of \glspl{acr::rf} allows them to adapt to outliers and hence, provided a large enough trainning dataset, can achieve a good generalization power.
                     \item Prediction relies on simple comparisons and can be computed quickly.
                     \item They inherently yield probabilities that are consistent.
                 \end{itemize}
-                As seen with \glspl{acr::svm}, Random Forests have also some issues:
+                As seen with \glspl{acr::svm}, \glspl{acr::rf} have also some issues:
                 \begin{itemize}
-                    \item It is not simple to interpret results of Random Forests and connect specific trees to recognizable patterns.
+                    \item It is not simple to interpret results of \glspl{acr::rf} and connect specific trees to recognizable patterns.
                     \item They can take up a lot of memory to store all trees.
                             They can also require a lot of computations to train.
                     \item They do not allow the possibility of using kernels to represent the data.
@@ -1013,7 +1013,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         \tilde{\phi}(u, \omega) &= \frac{1}{2\cdot\pi} \cdot \phi_I(u)
                     \end{align}
                     These are separable filters that can help speed up the convolution computations as shown in~\textcite{sifre2013rotation}.
-                    In practice, $\psi$(\textit{resp.} $\bar\psi$) are taken as two (\textit{resp.} one) dimensional Morlet wavelets (\textit{cf.} Subfigure~\ref{subfig::morlet_filters}), while $\phi$ is taken as a Guassian~\parencite{sifre2013rotation,bruna2013invariant,oyallon2015deep}.
+                    In practice, $\psi$(\textit{resp.} $\bar\psi$) are taken as two (\textit{resp.} one) dimensional Morlet wavelets (\textit{cf.} Subfigure~\ref{subfig::morlet_filters}), while $\phi$ is taken as a Gaussian~\parencite{sifre2013rotation,bruna2013invariant,oyallon2015deep}.
                     A finite number $L$ of orientations are possible for angle indices: $\theta \in \left\{\frac{l\cdot\pi}{L}: l=1,2\dots,L\right\}$.
                     In Figure~\ref{fig::morlet_vs_learned}, we can see how the designed filter bank is similar to the ones learned by a \gls{acr::cnn}.
                     \begin{figure}

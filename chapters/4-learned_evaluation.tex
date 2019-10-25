@@ -115,22 +115,22 @@ These are proposed to better model defect predictions.
     \subsection{\textsc{Classifier choice}}
         \label{subsec::learned_evaluation::classification::classifiers}
         The choice of classifiers shoud take into consideration the highly modular nature of the framework with multimodal features involving many parameters.
-        Two classifiers where chosen in this study: Random Forest and \gls{acr::svm}.
+        Two classifiers where chosen in this study: \gls{acr::rf} and \gls{acr::svm}.
         Both were discussed at great length in Section~\ref{sec::state_of_the_art::mlpr}.
         Hereafter, we explain how each one is used in this setting.\\
 
-        \paragraph{Random Forest}
-            Random Forest classifiers is a natural choice in our case.
+        \paragraph{\acrlong*{acr::rf}}
+            \gls{acr::rf} classifiers is a natural choice in our case.
             As seen in Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::rf}, this type of classifiers can manage a large number of features with different dynamics and coming from multiple modalities.
             In fact, the computed features could be geometric, image based or height based.
             Each one of these modalities can also be heterogeneous in terms of extracted value types, as will be discussed later in Section~\ref{sec::learned_evaluation::baseline}.
             Relying on their bagging property, a high number of trees is required to cover most of the feature space, while a limited tree depth is needed to avoid overfitting during training.
-            While the multi-class case is natively taken into account by the Random Forest classifier, the multi-label one requires adopting a one-vs-all approach so as to address each label separately.
+            While the multi-class case is natively taken into account by the \gls{acr::rf} classifier, the multi-label one requires adopting a one-vs-all approach so as to address each label separately.
 
         \paragraph{\acrshort*{acr::svm}}
             \glspl{acr::svm} do not manage well enough heterogeneity in feature vectors.
             Moreover, only binary classification is inherently handled.
-            However, it offers other advantages that are not met by Random Forest.
+            However, it offers other advantages that are not met by \gls{acr::rf}.
             In fact, \glspl{acr::svm} can be useful when labels are not equally distributed in the training set.
             This is actually the case of some errors that are rare in our dataset: specifically the inaccurate topology ones (\textit{cf.} Subsection~\ref{subsec::experiments::datasets::stats}).
             This type of classifiers naturally encorporates kernels such as the ones presented later in Subsection~\ref{subsec::learned_evaluation::richer_features::graph}.

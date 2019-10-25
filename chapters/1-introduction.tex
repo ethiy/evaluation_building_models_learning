@@ -19,7 +19,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
     Objects present in such scenes usually obey some specific rules which constrain their shape.
     In this section, we dicuss applications of \index{urban!\gls{acr::3d}!model}urban \gls{acr::3d} models (cf. Subsection~\ref{subsec::introduction::urban_3d_reconstruction::applications}).
     We afterwards tackle the subject of \index{building!\gls{acr::3d}!model} building \gls{acr::3d} modeling and the issues it raises(cf. Subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}).
-    This section ends in subsection ~\ref{subsec::introduction::urban_3d_reconstruction::challenges} with a list of some of the important technical challenges that are still to be overcome in this domain.
+    This section ends in Subsection~\ref{subsec::introduction::urban_3d_reconstruction::challenges} with a list of some of the important technical challenges that are still to be overcome in this domain.
 
     \subsection{\textsc{Applications of urban \texorpdfstring{\gls*{acr::3d}}{3D} models}}
         \label{subsec::introduction::urban_3d_reconstruction::applications}
@@ -34,7 +34,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             Cadastral records are produced and maintained to define fiscal policies.
             Cadastral data, since conception, came in the form of \index{\gls{acr::2d}!maps}\gls{acr::2d} maps~\parencite{billen20033d}.
             Although many urban planning norms were always formulated taking into account height or depth information \parencite{brasebin20183d}, the need for a \index{\gls{acr::3d}!cadastre}\gls{acr::3d} cadastral management was made relevant with the advent of complex architectural features~\parencite{biljecki2015applications}.
-            To illustrate this case, we show, in figure~\ref{fig::3d_cadastre_need_example}, how \gls{acr::2d} cadastral maps are insufficient when it comes to modeling overhangs.\\
+            To illustrate this case, we show, in Figure~\ref{fig::3d_cadastre_need_example}, how \gls{acr::2d} cadastral maps are insufficient when it comes to modeling overhangs.\\
             \begin{figure}[!htpb]
                 \centering
                 \includegraphics[width=.9\textwidth]{images/introduction/3d_model_applications/3d_cadastre}
@@ -530,12 +530,12 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
 
         \subsubsection{\textsc{Modeling automation}}
             The most accurate approach to produce semantically aware and geometrically accurate representations of a building is a manual one.
-            It can be either based on high accuracy \textit{in situ} geodetic measurements (errors are of the order of \SI{5}{\cm}~\parencite{kaartinen2005accuracy}).
+            It can be either based on high accuracy \textit{in situ} geodetic measurements (errors are of the order of \SI{0.05}{\m}~\parencite{kaartinen2005accuracy}).
             Although, it is the most accurate representation possible, it is an arduous and expensive process.
             Stereo-plotting consists on using couples of overlapping images in order to manually determine the \gls{acr::3d} geometry of lines.
             It can be used in building modeling to manually plot building edges in \gls{acr::3d} and hence extract its surface.
             This reduces the complexity of the manual modeling process.
-            It produces, however, lower precision models as errors are of the order of \SI{50}{\cm}~\parencite{jamet1995building}.
+            It produces, however, lower precision models as errors are of the order of \SI{0.5}{\m}~\parencite{jamet1995building}.
             This is still a slow process that is highly demanding in terms of operator expertise~\parencite{ruther2002application}.\\
             The manual labour can be alleviated, partially, by automating some parts of the \gls{acr::3d} surface aquisition pipeline~\parencite{musialski2013survey}.
             Some interactive approaches have been proposed to model building.
@@ -560,7 +560,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                     Depending on the final use of the model, a compromise is chosen between the model compaction and its geometric accuracy.
                 }
             \end{figure}
-            The compromise, between compaction and geometric precision, relies on an \textit{a prioiri} knowledge of the modeled urban scene.
+            The compromise, between compaction and geometric precision, relies on an \textit{a priori} knowledge of the modeled urban scene.
             Such hypotheses does not naturally hold at large-scales.
             Multiple factors play a role in architectural styles of buildings that do not always go hand in hand:
             a geographic proximity does not imply always a temporal or architectural closeness for buildings as depicted in Figure~\ref{subfig::xiiith_paris_haussmann_tower}.
