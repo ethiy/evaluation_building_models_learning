@@ -416,9 +416,134 @@
         As a consequence, we do not report the rest of previously conducted experiments for this \texttt{finesse} level.
         Indeed, it is senseless to compare detection transferability, generalization or representativeness if we hardly detect them at all on the same training scene.
 
-
 \section{\textsc{Classifier analysis}}
-
+    \subsection{\textsc{\acrshort*{acr::svm} compared to \acrshort*{acr::rf}}}
+        \begin{table}[htpb]
+            \small
+            \begin{center}
+                \begin{tabular}{| c | c c | c c | c c | c c |}
+                    \hline
+                    \multicolumn{9}{|c|}{\textbf{Elancourt}}\\
+                    \hline
+                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                    \cline{2-9}
+                    & $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ \\
+                    \hline
+                    \texttt{BOS} & \textbf{93.96} & 76.15 & 91.43 & \textbf{77.76} & 91.51 & 76.08 & 90.83 & 76.14 \\
+                    \hline
+                    \texttt{BUS} & 32.98 & \textbf{76.47} & \textbf{41.86} & 75.57 & 40.38 & 71.00 & 39.32 & 71.81 \\
+                    \hline
+                    \texttt{BIB} & 12.32 & 67.57 & 12.81 & \textbf{68.42} & 16.26 & 67.35 & \textbf{16.75} & 68.0 \\
+                    \hline
+                    \texttt{BIT} & \textbf{25.25} & 92.59 & 20.20 & 90.91 & 20.20 & \textbf{95.24} & 11.11 & 91.67 \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & 98.91 & 99.07 & 98.91 & \textbf{99.30} & \textbf{98.99} & 98.84 & 98.91 & 98.84 \\
+                    \hline
+                    \texttt{FUS} & \textbf{1.90} & 54.55 & 0.63 & \textbf{66.67} & 1.61 & 50 & 1.27 & \textbf{66.67} \\
+                    \hline
+                    \texttt{FIB} & \textbf{9.17} & 87.5 & 0 & --- & 8.30 & 82.61 & 7.42 & \textbf{100} \\
+                    \hline
+                    \texttt{FIT} & 6.67 & \textbf{100} & \textbf{8.73} & 95.24 & 3.33 & \textbf{100} & 3.33 & \textbf{100} \\
+                    \hline
+                    \texttt{FIG} & \textbf{80.54} & 73.14 & 80.45 & \textbf{72.62} & 78.69 & 72.12 & 79.02 & 71.82 \\
+                    \hline
+                    \hline
+                    \multicolumn{9}{|c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
+                    \hline
+                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                    \cline{2-9}
+                    & $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ \\
+                    \hline
+                    \texttt{BOS} & \textbf{38.14} & 61.67 & 36.43 & 60.23 & 36.77 & \textbf{62.21} & 34.71 & 60.48 \\
+                    \hline
+                    \texttt{BUS} & 7.35 & 62.5 & 7.35 & 55.56 & \textbf{29.41} & \textbf{66.67} & 26.47 & 64.29 \\
+                    \hline
+                    \texttt{BIB} & 0 & --- & 0 & --- & \textbf{1.01} & \textbf{50.0} & \textbf{1.01} & \textbf{50.0} \\
+                    \hline
+                    \texttt{BIT} & 1.77 & 22.22 & \textbf{3.54} & 44.44 & 0 & 0 & 2.65 & \textbf{50.0} \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & \textbf{98.54} & \textbf{98.13} & \textbf{98.54} & \textbf{98.13} & 98.33 & 97.92 & 98.12 & 97.91 \\
+                    \hline
+                    \texttt{FUS} & 27.62 & 55.24 & \textbf{27.62} & \textbf{59.18} & 24.76 & 54.74 & 23.33 & 53.85 \\
+                    \hline
+                    \texttt{FIB} & 37.80 & 62.0 & 36.59 & \textbf{63.16} & \textbf{49.39} & 60.90 & 46.39 & 60.90 \\
+                    \hline
+                    \texttt{FIT} & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
+                    \hline
+                    \texttt{FIG} & 86.32 & 78.09 & \textbf{86.77} & 78.02 & 84.53 & \textbf{78.71} & 83.86 & 78.08 \\
+                    \hline
+                \end{tabular}
+            \end{center}
+            \caption{
+                \label{tab::rf_f3}
+                \gls{acr::rf} results on the two areas at \texttt{finesse} level 3.
+                Test results are expressed in percentage.
+                All \texttt{atomic} errors are considered over all possible configurations.
+            }
+        \end{table}
+        \begin{table}[htpb]
+            \small
+            \begin{center}
+                \begin{tabular}{| c | c c | c c | c c | c c |}
+                    \hline
+                    \multicolumn{9}{|c|}{\textbf{Elancourt}}\\
+                    \hline
+                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                    \cline{2-9}
+                    & $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ \\
+                    \hline
+                    \texttt{BOS} & \textbf{93.96} & 76.15 & 91.43 & \textbf{77.76} & 91.51 & 76.08 & 90.83 & 76.14 \\
+                    \hline
+                    \texttt{BUS} & 32.98 & \textbf{76.47} & \textbf{41.86} & 75.57 & 40.38 & 71.00 & 39.32 & 71.81 \\
+                    \hline
+                    \texttt{BIB} & 12.32 & 67.57 & 12.81 & \textbf{68.42} & 16.26 & 67.35 & \textbf{16.75} & 68.0 \\
+                    \hline
+                    \texttt{BIT} & \textbf{25.25} & 92.59 & 20.20 & 90.91 & 20.20 & \textbf{95.24} & 11.11 & 91.67 \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & 98.91 & 99.07 & 98.91 & \textbf{99.30} & \textbf{98.99} & 98.84 & 98.91 & 98.84 \\
+                    \hline
+                    \texttt{FUS} & \textbf{1.90} & 54.55 & 0.63 & \textbf{66.67} & 1.61 & 50 & 1.27 & \textbf{66.67} \\
+                    \hline
+                    \texttt{FIB} & \textbf{9.17} & 87.5 & 0 & --- & 8.30 & 82.61 & 7.42 & \textbf{100} \\
+                    \hline
+                    \texttt{FIT} & 6.67 & \textbf{100} & \textbf{8.73} & 95.24 & 3.33 & \textbf{100} & 3.33 & \textbf{100} \\
+                    \hline
+                    \texttt{FIG} & \textbf{80.54} & 73.14 & 80.45 & \textbf{72.62} & 78.69 & 72.12 & 79.02 & 71.82 \\
+                    \hline
+                    \hline
+                    \multicolumn{9}{|c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
+                    \hline
+                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                    \cline{2-9}
+                    & $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ \\
+                    \hline
+                    \texttt{BOS} & \textbf{38.14} & 61.67 & 36.43 & 60.23 & 36.77 & \textbf{62.21} & 34.71 & 60.48 \\
+                    \hline
+                    \texttt{BUS} & 7.35 & 62.5 & 7.35 & 55.56 & \textbf{29.41} & \textbf{66.67} & 26.47 & 64.29 \\
+                    \hline
+                    \texttt{BIB} & 0 & --- & 0 & --- & \textbf{1.01} & \textbf{50.0} & \textbf{1.01} & \textbf{50.0} \\
+                    \hline
+                    \texttt{BIT} & 1.77 & 22.22 & \textbf{3.54} & 44.44 & 0 & 0 & 2.65 & \textbf{50.0} \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & \textbf{98.54} & \textbf{98.13} & \textbf{98.54} & \textbf{98.13} & 98.33 & 97.92 & 98.12 & 97.91 \\
+                    \hline
+                    \texttt{FUS} & 27.62 & 55.24 & \textbf{27.62} & \textbf{59.18} & 24.76 & 54.74 & 23.33 & 53.85 \\
+                    \hline
+                    \texttt{FIB} & 37.80 & 62.0 & 36.59 & \textbf{63.16} & \textbf{49.39} & 60.90 & 46.39 & 60.90 \\
+                    \hline
+                    \texttt{FIT} & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
+                    \hline
+                    \texttt{FIG} & 86.32 & 78.09 & \textbf{86.77} & 78.02 & 84.53 & \textbf{78.71} & 83.86 & 78.08 \\
+                    \hline
+                \end{tabular}
+            \end{center}
+            \caption{
+                \label{tab::svm_f3}
+                \gls{acr::svm} results on the two areas at \texttt{finesse} level 3.
+            }
+        \end{table}
+    \subsection{\textsc{Feature importances using \acrshort*{acr::mkl}}}
+    
 \section{\textsc{Richer features contributions}}
     \subsection{\textsc{\acrshort*{acr::scatnet} to baseline comparison}}
     \subsection{\textsc{Graph kernels to baseline comparison}}
