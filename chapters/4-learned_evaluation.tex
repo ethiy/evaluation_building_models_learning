@@ -348,6 +348,11 @@ These are proposed to better model defect predictions.
         None of these kernels takes into account edge attributes.
         This is actually not an issue as both the edge attributes of the facet graph (\textit{cf.} Equation~\ref{eq::model_graph}) are in fact a function of node attributes: centroid \(f \mapsto \mathscr{G}\left(f\right)\) and normal \(f \mapsto \vec{n}\left(f\right)\).
         Some of these kernels do not utilize the node attributes either as they take only account of the structure of the graph.
+
+        Face normals are unit vectors with coefficients in the interval \([0, 1]\) while centroids are free to be roam in \(\mathbb{R}^3\).
+        From a global standpoint, each one of the face attributes have a specific dynammic.
+        One solution, normalized
+        alternative, mixture of kernels.
         
         - different node modalities -> different kernels
         - linear combination -> MKL
