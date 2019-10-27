@@ -347,15 +347,40 @@ These are proposed to better model defect predictions.
         That is why we propose to use the other kernels that are presented in Subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}.
         None of these kernels takes into account edge attributes.
         This is actually not an issue as both the edge attributes of the facet graph (\textit{cf.} Equation~\ref{eq::model_graph}) are in fact a function of node attributes: centroid \(f \mapsto \mathscr{G}\left(f\right)\) and normal \(f \mapsto \vec{n}\left(f\right)\).
-        Some of these kernels do not utilize the node attributes either as they take only account of the structure of the graph.
+        Some of these kernels do not utilize the node attributes either as they take only account of the structure of the graph.\\
 
-        Face normals are unit vectors with coefficients in the interval \([0, 1]\) while centroids are free to be roam in \(\mathbb{R}^3\).
-        From a global standpoint, each one of the face attributes have a specific dynammic.
-        One solution, normalized
-        alternative, mixture of kernels.
+        Face normals are unit vectors with coefficients in the interval \([0, 1]\), while centroids are free to be roam in \(\mathbb{R}^3\).
+        From a global standpoint, each one of the face geometric features have a specific dynammic.
+        As a consequence, taking all these attributes into account by one graph kernel is going to raise some issues.
+        One possible solution is to normalize all geometric features, concatenate them and associate the resulting node attribute vectors to one graph.
+        We preferred instead to isolate each geometric feature in a specific graph.
+        All graphs would share the same structure but each one takes as node attributes a type of geometric features.
+        This results in three graphs.
+        The first takes the face normals \(f \mapsto \vec{n}\left(f\right)\) as node attributes.
+        The second graph has its nodes assigned face centroids \(f \mapsto \mathscr{G}\left(f\right)\).
+        The last one has a composite vector \(f \mapsto \begin{bmatrix}
+            d\left(f\right)\\
+            \mathscr{A}\left(f\right)\\
+            \mathscr{C}\left(f\right)            
+        \end{bmatrix}\) as node attributes.
+        The degree, area and circumference, contrarily to the normal and centroid, of facets where inconsequential in error predictions according to the feature importances that were computed when training \glspl{acr::rf}.
+        This explains why these were grouped into one vector in contrast with the other two features.\\
+
+        Each graph can take multiple types of kernels.
+        In Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}, we presented some kernels which were used in our experiments.
+        Since all graphs share the same structure, kernels that ignore node attributes would yield the same results, no matter which node attribute is used.
+        There are two such kernels: the random walk kernel and the \gls{acr::svm} \(\vartheta\) kernel.
+        We also experimented with three other types of kernels: the Multiscale Laplacian kernel, the propagation kernel and the graph hopper kernel.
+        The latter depends on the choice of the base kernel which compares node attributes.
+        The \gls{acr::rbf} was briefly experimented and did not yield desirable results.
+        Two alternatives were utilized:
+        \begin{description}
+            \item[Linear kernel:] As shown in Equation~\ref{eq::linear_kernel}, this is the most simple choice;
+            \item[Brownian bridge kernel:] This base kernel was originally proposed for the Shortest Path kernel~\parencite{borgwardt2005shortest} and is remains valid for its scalable derivation.
+        \end{description}
+        This results, in total, in \(2 + 3 \times \left(2 + 1 \times 2\right) = 11\) graph kernel.
+        A linear combination is porposed in order to add up these ouputs together.
+        This is possible thanks to \gls{acr::mkl} as explained earlier in Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.
         
-        - different node modalities -> different kernels
-        - linear combination -> MKL
-
     \subsection{\textsc{Image classification}}
         \label{subsec::learned_evaluation::richer_features::image}
