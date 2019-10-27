@@ -29,18 +29,18 @@
     }
     \begin{3dtikzpicture}{45}{45}[scale=1]
         \begin{scope}[canvas is zy plane at x=3]
-            \path[face, fill=yellow, dashed] (0,0) -- (2,0) -- (2.5,2) -- (2,4) -- (0,4) -- cycle;
+            \path[face, fill=orange, dashed] (0,0) -- (2,0) -- (2.5,2) -- (2,4) -- (0,4) -- cycle;
 		\end{scope}
         \begin{scope}[canvas is zx plane at y=4]
           	\path[face, dashed] (0,0) rectangle (2,3);
         \end{scope}
-        \path[face, fill=yellow] (0,0,2) -- (0,2,2.5) -- (3,2,2.5) -- (3,0,2) -- cycle;
+        \path[face, fill=orange] (0,0,2) -- (0,2,2.5) -- (3,2,2.5) -- (3,0,2) -- cycle;
         \path[face] (0,4,2)-- (3,4,2) -- (3,2,2.5) -- (0,2,2.5) -- cycle;
         \begin{scope}[canvas is zy plane at x=0]
           	\path[face, shade] (0,0) -- (2,0) -- (2.5,2) -- (2,4) -- (0,4) -- cycle;
         \end{scope}
         \begin{scope}[canvas is zx plane at y=0]
-  			\path[face, right color=yellow, left color=yellow!20] (0,0) rectangle (2,3);
+  			\path[face, right color=orange, left color=orange!20] (0,0) rectangle (2,3);
 		\end{scope}
     \end{3dtikzpicture}
 \end{document}

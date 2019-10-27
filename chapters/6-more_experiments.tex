@@ -83,11 +83,11 @@
         Secondly, we investigate how an urban scene composition helps predicting defects in an unseen one.
         This is called the \texttt{projectivity} comparison.
         For a given test scene $Z_j$ in couples $(Z_i, Z_j)_{\forall i \neq j}$, we compare results from Figure~\ref{fig::f_score_transferability_f3} with Table~\ref{tab::ablation_f3}/Figure~\ref{fig::f_score_ablation_f3}.
-        All these comparisons are provided in Table~\ref{tab::comparison}.
+        All these comparisons are provided in Table~\ref{tab::transferability_comparison}.
         In both settings, if a feature type appears, it means it is, by a large margin, the most decisive one.
         A color scheme was devised to encode the amplitude of change.
         All various feature configurations are tested these experiments.
-        If a modality stands out, in terms of the F-score, it is mentioned in the corresponding cell in Table~\ref{tab::comparison}.\\
+        If a modality stands out, in terms of the F-score, it is mentioned in the corresponding cell in Table~\ref{tab::transferability_comparison}.\\
 
         \begin{table}[htbp]
             \footnotesize 
@@ -95,30 +95,26 @@
             \renewcommand{\arraystretch}{1.5}
             \begin{tabular}{c c c | c c c c c |c c c c c}
                 \hline
-                &&&\texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
+                &&\texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
                 \hline
-                \multirow{12}{*}{\rotatebox{90}{\textbf{Transferability}}}&\multirow{6}{*}{\rotatebox{90}{\texttt{Coherence}}}&\textbf{Elancourt} $\rightarrow$ \textbf{Nantes} &\cellcolor{LOSS2535} & \cellcolor{LOSS1525}&\cellcolor{LOSS1525}& \cellcolor{LOSS1525}& \cellcolor{STBL}& \cellcolor{GAIN0515} \textbf{Im.}&\cellcolor{GAIN15} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.}&\cellcolor{GAIN0515}\\
-                && \textbf{Elancourt} $\rightarrow$ \textbf{Paris-13}  & \cellcolor{LOSS2535}& \cellcolor{LOSS1525}& \cellcolor{LOSS1525}& \cellcolor{LOSS1525}& \cellcolor{STBL}& \cellcolor{GAIN0515}\textbf{Im.}& \cellcolor{GAIN15}\textbf{Im.}& \cellcolor{LOSS0515}&\cellcolor{GAIN15}\\
-                && \textbf{Nantes} $\rightarrow$ \textbf{Paris-13}  & \cellcolor{LOSS0515}& \cellcolor{LOSS1525}& & \cellcolor{GAIN0515} \textbf{Geom.}& \cellcolor{STBL}& \cellcolor{GAIN15}& \cellcolor{GAIN0515}& &\cellcolor{STBL} \textbf{Hei.}\\
-                && \textbf{Nantes} $\rightarrow$ \textbf{Elancourt}  &\cellcolor{GAIN15} & \cellcolor{STBL}& \cellcolor{GAIN15}&\cellcolor{GAIN0515} \textbf{Geom.} & \cellcolor{STBL}& \cellcolor{LOSS1525}&\cellcolor{LOSS1525}&\cellcolor{GAIN0515}&\cellcolor{LOSS0515}\\
-                && \textbf{Paris-13} $\rightarrow$ \textbf{Nantes}  &\cellcolor{LOSS0515} & \cellcolor{LOSS0515}& & \cellcolor{GAIN15} \textbf{Geom.}&\cellcolor{STBL} & \cellcolor{LOSS2535}& \cellcolor{LOSS1525}& & \cellcolor{LOSS1525}\\
-                && \textbf{Paris-13} $\rightarrow$ \textbf{Elancourt}  &\cellcolor{GAIN15} &\cellcolor{GAIN0515} & \cellcolor{GAIN15}& \cellcolor{GAIN0515} \textbf{Geom.}& \cellcolor{STBL}& \cellcolor{LOSS3545}& \cellcolor{STBL} &\cellcolor{GAIN0515} & \cellcolor{LOSS0515}\\
+                \multirow{6}{*}{\rotatebox{90}{\texttt{Coherence}}}&\textbf{Elancourt} $\rightarrow$ \textbf{Nantes} &\cellcolor{LOSS2535} & \cellcolor{LOSS1525}&\cellcolor{LOSS1525}& \cellcolor{LOSS1525}& \cellcolor{STBL}& \cellcolor{GAIN0515} \textbf{Im.}&\cellcolor{GAIN15} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.}&\cellcolor{GAIN0515}\\
+                & \textbf{Elancourt} $\rightarrow$ \textbf{Paris-13}  & \cellcolor{LOSS2535}& \cellcolor{LOSS1525}& \cellcolor{LOSS1525}& \cellcolor{LOSS1525}& \cellcolor{STBL}& \cellcolor{GAIN0515}\textbf{Im.}& \cellcolor{GAIN15}\textbf{Im.}& \cellcolor{LOSS0515}&\cellcolor{GAIN15}\\
+                & \textbf{Nantes} $\rightarrow$ \textbf{Paris-13}  & \cellcolor{LOSS0515}& \cellcolor{LOSS1525}& & \cellcolor{GAIN0515} \textbf{Geom.}& \cellcolor{STBL}& \cellcolor{GAIN15}& \cellcolor{GAIN0515}& &\cellcolor{STBL} \textbf{Hei.}\\
+                & \textbf{Nantes} $\rightarrow$ \textbf{Elancourt}  &\cellcolor{GAIN15} & \cellcolor{STBL}& \cellcolor{GAIN15}&\cellcolor{GAIN0515} \textbf{Geom.} & \cellcolor{STBL}& \cellcolor{LOSS1525}&\cellcolor{LOSS1525}&\cellcolor{GAIN0515}&\cellcolor{LOSS0515}\\
+                & \textbf{Paris-13} $\rightarrow$ \textbf{Nantes}  &\cellcolor{LOSS0515} & \cellcolor{LOSS0515}& & \cellcolor{GAIN15} \textbf{Geom.}&\cellcolor{STBL} & \cellcolor{LOSS2535}& \cellcolor{LOSS1525}& & \cellcolor{LOSS1525}\\
+                & \textbf{Paris-13} $\rightarrow$ \textbf{Elancourt}  &\cellcolor{GAIN15} &\cellcolor{GAIN0515} & \cellcolor{GAIN15}& \cellcolor{GAIN0515} \textbf{Geom.}& \cellcolor{STBL}& \cellcolor{LOSS3545}& \cellcolor{STBL} &\cellcolor{GAIN0515} & \cellcolor{LOSS0515}\\
                 \cline{2-12}
                 &\multirow{6}{*}{\rotatebox{90}{\texttt{Projectivity}}}&\textbf{Elancourt} $\rightarrow$ \textbf{Nantes} &\cellcolor{LOSS0515} & \cellcolor{LOSS1525}&\cellcolor{LOSS0515}& \cellcolor{LOSS1525}& \cellcolor{STBL}& \cellcolor{STBL}&\cellcolor{GAIN15} \textbf{Im.} & \cellcolor{LOSS0515}&\cellcolor{STBL}\\
-                && \textbf{Elancourt} $\rightarrow$ \textbf{Paris-13}  & \cellcolor{LOSS0515}& \cellcolor{LOSS1525}& \cellcolor{STBL}& \cellcolor{LOSS1525}& \cellcolor{STBL}& \cellcolor{GAIN0515}\textbf{Im.}& \cellcolor{GAIN0515}\textbf{Im.}& \cellcolor{LOSS0515}&\cellcolor{STBL}\\
-                && \textbf{Nantes} $\rightarrow$ \textbf{Paris-13}  & \cellcolor{LOSS0515}& \cellcolor{LOSS1525}& & \cellcolor{GAIN15}& \cellcolor{STBL}& \cellcolor{GAIN0515}& \cellcolor{GAIN0515}& &\cellcolor{STBL}\\
-                && \textbf{Nantes} $\rightarrow$ \textbf{Elancourt}  &\cellcolor{GAIN0515} & \cellcolor{LOSS0515}& \cellcolor{LOSS0515}&\cellcolor{GAIN0515}All & \cellcolor{STBL}& \cellcolor{LOSS1525}&\cellcolor{LOSS0515}\textbf{Im.} &\cellcolor{GAIN0515}\textbf{Im.} &\cellcolor{STBL}\\
-                && \textbf{Paris-13} $\rightarrow$ \textbf{Nantes}  &\cellcolor{LOSS1525} & \cellcolor{LOSS0515}& & \cellcolor{GAIN0515}&\cellcolor{STBL} & \cellcolor{LOSS2535}& \cellcolor{STBL}& & \cellcolor{LOSS0515} \textbf{Hei.}\\
-                && \textbf{Paris-13} $\rightarrow$ \textbf{Elancourt}  &\cellcolor{STBL} &\cellcolor{LOSS0515} & \cellcolor{GAIN0515}\textbf{Im.} & \cellcolor{STBL}& \cellcolor{STBL}& \cellcolor{LOSS3545}& \cellcolor{LOSS1525}\textbf{Im.} & & \cellcolor{STBL}\\
+                & \textbf{Elancourt} $\rightarrow$ \textbf{Paris-13}  & \cellcolor{LOSS0515}& \cellcolor{LOSS1525}& \cellcolor{STBL}& \cellcolor{LOSS1525}& \cellcolor{STBL}& \cellcolor{GAIN0515}\textbf{Im.}& \cellcolor{GAIN0515}\textbf{Im.}& \cellcolor{LOSS0515}&\cellcolor{STBL}\\
+                & \textbf{Nantes} $\rightarrow$ \textbf{Paris-13}  & \cellcolor{LOSS0515}& \cellcolor{LOSS1525}& & \cellcolor{GAIN15}& \cellcolor{STBL}& \cellcolor{GAIN0515}& \cellcolor{GAIN0515}& &\cellcolor{STBL}\\
+                & \textbf{Nantes} $\rightarrow$ \textbf{Elancourt}  &\cellcolor{GAIN0515} & \cellcolor{LOSS0515}& \cellcolor{LOSS0515}&\cellcolor{GAIN0515}All & \cellcolor{STBL}& \cellcolor{LOSS1525}&\cellcolor{LOSS0515}\textbf{Im.} &\cellcolor{GAIN0515}\textbf{Im.} &\cellcolor{STBL}\\
+                & \textbf{Paris-13} $\rightarrow$ \textbf{Nantes}  &\cellcolor{LOSS1525} & \cellcolor{LOSS0515}& & \cellcolor{GAIN0515}&\cellcolor{STBL} & \cellcolor{LOSS2535}& \cellcolor{STBL}& & \cellcolor{LOSS0515} \textbf{Hei.}\\
+                & \textbf{Paris-13} $\rightarrow$ \textbf{Elancourt}  &\cellcolor{STBL} &\cellcolor{LOSS0515} & \cellcolor{GAIN0515}\textbf{Im.} & \cellcolor{STBL}& \cellcolor{STBL}& \cellcolor{LOSS3545}& \cellcolor{LOSS1525}\textbf{Im.} & & \cellcolor{STBL}\\
                 \hline                                            
-                \multirow{3}{*}{\rotatebox{90}{\textbf{General}.}  }&& \textbf{Elancourt}   & \cellcolor{LOSS1525}& \cellcolor{LOSS1525}\textbf{Im.}& \cellcolor{LOSS1525}&\cellcolor{LOSS1525} &\cellcolor{STBL} &\cellcolor{GAIN0515}\textbf{Im.} &\cellcolor{GAIN15}\textbf{Im.} &\cellcolor{LOSS0515}\textbf{Geom.} & \cellcolor{LOSS0515} Hei\\
-                && \textbf{Nantes}   & \cellcolor{STBL}All& \cellcolor{LOSS1525}\textbf{Im.}&\cellcolor{LOSS0515}\textbf{Im.} &\cellcolor{GAIN15} &\cellcolor{STBL} & \cellcolor{STBL}& \cellcolor{LOSS1525}\textbf{Im.}& &\cellcolor{STBL}\\
-                && \textbf{Paris-13}   &\cellcolor{LOSS1525}All &\cellcolor{LOSS1525} & &\cellcolor{GAIN0515}\textbf{Hei.} &\cellcolor{STBL} &\cellcolor{LOSS3545} &\cellcolor{LOSS1525}\textbf{Im.} & &\cellcolor{LOSS0515}\\
-                \hline
             \end{tabular}
             \renewcommand{\arraystretch}{1}
             \caption{
-                \label{tab::comparison} Evolution of the F-score value, for each error, between each tested configuration and the best result per area (\t{cf.} Section~\ref{subsubsec::experiments::evaluation::baseline_feature_analysis::ablation}).
+                \label{tab::transferability_comparison} Evolution of the F-score value, for each error, between each tested configuration and the best result per area (\textit{cf.} Sub-subsection~\ref{subsubsec::experiments::evaluation::baseline_feature_analysis::ablation}).
                 Feature sets having a significant impact on the classification results are mentioned.
                 Otherwise, \textbf{Geom.} \textbf{Im.}, and \textbf{Hei.} contribute equally.
                 The color indicates the magnitude: \textcolor{LOSS3545}{$\blacksquare$}: $[-45,-35\%[$-- \textcolor{LOSS2535}{$\blacksquare$}: $[-35,-25\%[$ -- \textcolor{LOSS1525}{$\blacksquare$}: $[-25,15\%[$-- \textcolor{LOSS0515}{$\blacksquare$}: $[-15, 5\%[$ -- \textcolor{STBL}{$\blacksquare$}: $[-5,5\%[$-- \textcolor{GAIN0515}{$\blacksquare$}: $[5,15\%[$ -- \textcolor{GAIN15}{$\blacksquare$}: $[15,25\%]$ -- $\square$: statistics cannot be computed.
@@ -133,9 +129,9 @@
         As mentioned earlier, additional modalities play a important role in prediction accuracy.
         We start with image-based attributes.
         In some cases, they were pivotal in obtaining better results for geometric errors (\texttt{FIB}, \texttt{BIB}), as well as for topological ones (\texttt{FUS}, \texttt{FIT}).
-        These features have a significant \texttt{coherence} power when trained over \textbf{Elancourt} (\texttt{FIB} and \texttt{FUS}), and projects very well to other scenes (\texttt{FIB}, \texttt{FUS}, \texttt{BIB} and \texttt{FIT}, Table~\ref{tab::comparison}).
-        On the other hand, as expected, geometric features alone are best for topological errors, when trained on dense areas, especially \texttt{BIT} (Table~\ref{tab::comparison}).
-        Finally, although sticking out for \texttt{FIG} in a minor capacity (\t{cf.} Table~\ref{tab::comparison}), height-based features proved to be less transferable.
+        These features have a significant \texttt{coherence} power when trained over \textbf{Elancourt} (\texttt{FIB} and \texttt{FUS}), and projects very well to other scenes (\texttt{FIB}, \texttt{FUS}, \texttt{BIB} and \texttt{FIT}, Table~\ref{tab::transferability_comparison}).
+        On the other hand, as expected, geometric features alone are best for topological errors, when trained on dense areas, especially \texttt{BIT} (Table~\ref{tab::transferability_comparison}).
+        Finally, although sticking out for \texttt{FIG} in a minor capacity (\t{cf.} Table~\ref{tab::transferability_comparison}), height-based features proved to be less transferable.
         In fact, adding height-based features leads, in most cases, to a small decrease in accuracy ($\approx 2\%$) for \texttt{atomic} errors.
         All these previous findings further justify why we did not leave out any modality, as they are more frequently critical for transferability than in the ablation study (Table~\ref{tab::ablation_f3}).\\
 
@@ -182,8 +178,30 @@
                 \caption{\label{fig::f_score_generalization_f3} Mean F-score and standard deviation for the generalization study per test zone.}
             }
         \end{figure}
+
+        \begin{table}[htbp]
+            \footnotesize 
+            \centering
+            \renewcommand{\arraystretch}{1.5}
+            \begin{tabular}{c | c c c c c |c c c c c}
+                \hline
+                & \texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
+                \hline
+                \textbf{Elancourt} & \cellcolor{LOSS1525}& \cellcolor{LOSS1525}\textbf{Im.}& \cellcolor{LOSS1525}&\cellcolor{LOSS1525} &\cellcolor{STBL} &\cellcolor{GAIN0515}\textbf{Im.} &\cellcolor{GAIN15}\textbf{Im.} &\cellcolor{LOSS0515}\textbf{Geom.} & \cellcolor{LOSS0515} Hei\\
+                \textbf{Nantes} & \cellcolor{STBL}All& \cellcolor{LOSS1525}\textbf{Im.}&\cellcolor{LOSS0515}\textbf{Im.} &\cellcolor{GAIN15} &\cellcolor{STBL} & \cellcolor{STBL}& \cellcolor{LOSS1525}\textbf{Im.}& &\cellcolor{STBL}\\
+                \textbf{Paris-13} &\cellcolor{LOSS1525}All &\cellcolor{LOSS1525} & &\cellcolor{GAIN0515}\textbf{Hei.} &\cellcolor{STBL} &\cellcolor{LOSS3545} &\cellcolor{LOSS1525}\textbf{Im.} & &\cellcolor{LOSS0515}\\
+                \hline
+            \end{tabular}
+            \renewcommand{\arraystretch}{1}
+            \caption{
+                \label{tab::generalization_comparison} Evolution of the F-score value, for each error, between each tested configuration and the best result per area (\textit{cf.} Sub-subsection~\ref{subsubsec::experiments::evaluation::baseline_feature_analysis::ablation}).
+                Feature sets having a significant impact on the classification results are mentioned.
+                Otherwise, \textbf{Geom.} \textbf{Im.}, and \textbf{Hei.} contribute equally.
+                The color indicates the magnitude: \textcolor{LOSS3545}{$\blacksquare$}: $[-45,-35\%[$-- \textcolor{LOSS2535}{$\blacksquare$}: $[-35,-25\%[$ -- \textcolor{LOSS1525}{$\blacksquare$}: $[-25,15\%[$-- \textcolor{LOSS0515}{$\blacksquare$}: $[-15, 5\%[$ -- \textcolor{STBL}{$\blacksquare$}: $[-5,5\%[$-- \textcolor{GAIN0515}{$\blacksquare$}: $[5,15\%[$ -- \textcolor{GAIN15}{$\blacksquare$}: $[15,25\%]$ -- $\square$: statistics cannot be computed.
+            }
+        \end{table}
             
-        We compare these experiments with the ablation study on the same area (\t{cf.} Table~\ref{tab::comparison}).
+        We compare these experiments with the ablation study on the same area (\t{cf.} Table~\ref{tab::generalization_comparison}).
         We analyse result along the same criteria as the transferability study.\\
     
         We start again with a comparison depending on error families.
@@ -194,7 +212,7 @@
         It only evens out the best (\t{resp.} worst) performances by including the best (\t{resp.} worst) urban scene in the training set.\\
         
         Similarly to the previous study, image and height modalities play a major role in error detection.
-        Image-based features are crucial for \texttt{FIB}, \texttt{BIB}, \texttt{FUS} and \texttt{BUS} detection (Table~\ref{tab::comparison}).
+        Image-based features are crucial for \texttt{FIB}, \texttt{BIB}, \texttt{FUS} and \texttt{BUS} detection (Table~\ref{tab::generalization_comparison}).
         Height-based attributes, however, induce a larger improvement in predicting \texttt{FIG} and \texttt{BIT}, while geometric ones are relegated to playing a minor role.
         Otherwise, a curiosity can be noticed: only when fusing all modalities together, in \textbf{Paris-13} and \textbf{Nantes}, does predictions improve for \texttt{BOS}.\\
         
@@ -404,6 +422,7 @@
                 \texttt{Erroneous} & 99.77 & $\frac{3}{21}$ & 99.77 & $\frac{3}{21}$ & 99.77 & $\frac{3}{21}$ & 99.77 & $\frac{3}{21}$ \\
                 \hline
             \end{tabular}
+            \renewcommand{\arraystretch}{1}
             \caption{\label{tab::ablation_f1}Test results expressed in percentage for the \texttt{finesse}$ =1$ case. All four configurations are compared across both family errors.}
         \end{table}
         
