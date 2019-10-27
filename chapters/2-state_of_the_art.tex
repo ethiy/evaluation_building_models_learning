@@ -584,7 +584,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         \item the \gls{acr::rbf} kernel: for some parameter $(\gamma) \in \mathbb{R}$
                         \begin{equation}
                             \label{eq::rbf_kernel}
-                            k_{\gamma}(\bm{x}, \bm{y}) = \exp{-\gamma \cdot \Vert \bm{x} - \bm{y} \Vert^2};
+                            k_{\gamma}(\bm{x}, \bm{y}) = \exp\left(-\gamma \cdot \left\lVert \bm{x} - \bm{y} \right\rVert^2\right);
                         \end{equation}
                         \item the polynomial kernel: for some parameters $(c, d) \in \mathbb{R}_+ \times \mathbb{N} \setminus \left\{0\right\} $
                         \begin{equation}
@@ -1309,7 +1309,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     It is defined as:
                     \begin{equation}
                         \label{eq::random_walk_kernel}
-                        k_{rw}(G, G') \triangleq \sum_{k=0}^\infty \lambda_k \cdot q_{\times}^T\cdot P_{\times}\cdot p_{\times}.
+                        k_{rw}(G, G') \triangleq \sum_{k=0}^\infty \lambda_k \cdot q_{\times}^\intercal\cdot P_{\times}\cdot p_{\times}.
                     \end{equation}
                     The choice of the series $\left(\lambda_k\right)_{k\in \mathbb{N}}$ is critical, as the kernel defined in Equation~\ref{eq::random_walk_kernel} can diverge.
                     It is taken to be non-negative in order in ensure the positive semi-definite of the kernel.\\
@@ -1361,20 +1361,20 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 For each vertex $v \in V$, we can assign a unit vector \(\bm{w}_v \in \left\{u \in \mathbb{R}^d: \left\lVert u \right\rVert = 1 \right\}\).
                 The set of vectors \(W(G) \triangleq \left(\bm{w}_v\right)_{v \in V}\) is said to be an orthonormal representation of a graph $G$ is a set of such vectors if and only if:
                 \begin{equation*}
-                    \forall \left\{u,v\right\} \notin E \Rightarrow \bm{w}_u^T\cdot \bm{w}_v=0.
+                    \forall \left\{u,v\right\} \notin E \Rightarrow \bm{w}_u^\intercal\cdot \bm{w}_v=0.
                 \end{equation*}
 
                 \subparagraph{Lov\'asz $\vartheta$ kernel}
                     The Lov\'asz number~\parencite{lovasz1979shannon} is defined as:
                     \begin{equation}
                         \label{eq::lovazs_number}
-                        \vartheta(G) \triangleq \min_{\substack{\bm{c} \in \mathbb{R}^d\\W(G)}}\max_{v\in V} \left(\frac{1}{\bm{c}^T\cdot \bm{w}_v}\right)^2
+                        \vartheta(G) \triangleq \min_{\substack{\bm{c} \in \mathbb{R}^d\\W(G)}}\max_{v\in V} \left(\frac{1}{\bm{c}^\intercal\cdot \bm{w}_v}\right)^2
                     \end{equation}
                     Which can be interpreted as the smallest cone enclosing a valid orthonormal representation of graph $G$.\\
                     Equally, we define the Lov\'asz number over a subset of vertices $B \in V$ as follows:
                     \begin{equation}
                         \label{eq::lovazs_number_subset}
-                        \vartheta_B(G) \triangleq \min_{\bm{c} \in \mathbb{R}^d}\max_{\bm{w}_v\in W_B^*(G)} \left(\frac{1}{\bm{c}^T\cdot \bm{w}_v}\right)^2
+                        \vartheta_B(G) \triangleq \min_{\bm{c} \in \mathbb{R}^d}\max_{\bm{w}_v\in W_B^*(G)} \left(\frac{1}{\bm{c}^\intercal\cdot \bm{w}_v}\right)^2
                     \end{equation}
                     where:
                     \begin{conditions}
@@ -1481,7 +1481,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         \label{eq::feature_laplacian_kernel}
                         k_{fl}(G, G') \triangleq \frac{\left\lvert \left(\frac{1}{2} \cdot S^{-1} + \frac{1}{2} \cdot S^{\prime -1} \right)^{-1} \right\rvert^{\frac{1}{2}}}{\left\lvert S\right\rvert^{\frac{1}{4}}\cdot\left\lvert S' \right\rvert^{\frac{1}{4}}}
                     \end{equation}
-                    where $S = U\cdot L^{-1}\cdot U^T + \gamma \cdot I$ and $S' = U\cdot L^{\prime -1}\cdot U^T + \gamma \cdot I$.\\
+                    where $S = U\cdot L^{-1}\cdot U^\intercal + \gamma \cdot I$ and $S' = U\cdot L^{\prime -1}\cdot U^\intercal + \gamma \cdot I$.\\
 
                 \subparagraph{Node attribute aware Laplacian comparison}
                     Up to now, only the structure of the graph is taken into account.
@@ -1499,7 +1499,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     For graph \(G\) (\textit{resp.} \(G'\)), the first $\vert V \vert$ (\textit{resp.} the last $\vert V' \vert$) rows of $\widetilde{Q}$ are taken from $Q$ (\textit{resp.} $Q'$).
                     Both these matrices are needed to define 
                     \begin{align*}
-                        \bar{S} = Q^T\cdot L ^{-1}\cdot Q + \gamma \cdot I\\
+                        \bar{S} = Q^\intercal\cdot L ^{-1}\cdot Q + \gamma \cdot I\\
                         \bar{S}' = Q^{\prime T}\cdot L^{\prime -1}\cdot Q' + \gamma \cdot I.
                     \end{align*}
                     The generalized feature space Laplacian graph kernel is hence defined as:
@@ -1560,7 +1560,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     By binning values $h(u)$ in a graph $G$ and encoding the results in a vector $\phi_s(G) = b_h(G)$, the simple graph kernel can be expressed as:
                     \begin{equation}
                         \label{eq::simple_kernel_binning}
-                        k_s(G, G') \triangleq b_h(G)^T\cdot b_h(G').
+                        k_s(G, G') \triangleq b_h(G)^\intercal\cdot b_h(G').
                     \end{equation}
                     The used hash function is the Locality sensitivity hashing~\parencite{neumann2016propagation}.\\
 
@@ -1576,7 +1576,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         \Sigma & is the $d_V \times d_V$ covariance matrix based on attributes $\left(a(v)\right)_{v\in V}$.
                     \end{conditions}
                     To propagate these distributions at the next iteration, the mixture coefficients are diffused using the already predefined $T$: $W_{t+1} = T\cdot W_t$.
-                    At initialization, $W_0 = I$ and hence $W_t= T^t$.
+                    At initialization, $W_0 = I$ and hence $W_t= T^\intercal$.
 
             \paragraph{Graph hopper kernel}
                 Random walk kernels, just as the basic kernels defined in Equations~\ref{eq::feature_graph_kernel_nodes} and~\ref{eq::feature_graph_kernel_edges} and propagation kernels, are instances of R-convolution kernels~\parencite{haussler1999convolution}: \textit{i.e.} they can be written as a sum of kernels of substructures of graphs.
