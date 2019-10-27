@@ -75,6 +75,11 @@
     style=authoryear,
     sorting=nty,
     maxbibnames=5,
+    minbibnames=5,
+    maxcitenames=2,
+    mincitenames=2,
+    uniquelist=false,
+    uniquename=false,
     hyperref=true,
     backref=true,
     backrefstyle=all+,
@@ -156,7 +161,7 @@
     \chapter{\textsc{Introduction}}
         \label{chap::introduction}
         \input{chapters/1-introduction}
-   
+    
     \chapter{\textsc{State-of-the-art}}
         \label{chap::state_of_the_art}
         \input{chapters/2-state_of_the_art}
@@ -180,14 +185,14 @@
     \chapter{\textsc{Conclusion}}
         \label{chap::conclusion}
         \input{chapters/7-conclusion}
-    
+
+    \printindex
+    \printbibliography[heading=bibintoc]
+
     \appendix
     \chapter{\textsc{List of publications}}
         \input{chapters/a1-publications}
         \chapter{\textsc{Experimental details}}
         \input{chapters/a2-details}
 
-    \printindex
-
-    \printbibliography[heading=bibintoc]
 \end{document}
