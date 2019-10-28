@@ -13,21 +13,21 @@
 	\begin{tikzpicture}
 		\node (dsm_1) at (0,0) {\includegraphics[width=3cm]{images/features/height/dsm-292034}};
         \path (dsm_1.south) node[anchor=north] (dsm_2) {\includegraphics[width=3cm]{images/features/height/dsm-61215}};
-        \path (dsm_2.south) node[anchor=north, text width=3cm] (dsm_legend) {(a) \gls{acr::dsm}};
+        \path (dsm_2.south) node[anchor=north, text width=3cm] (dsm_legend) {\subcaption{\gls{acr::dsm} \label{subfig::dsm}}};
 
         \path (dsm_1.east) node[anchor=west] (minus_1) {\Large --};
         \path (dsm_2.east) node[anchor=west] (minus_2) {\Large --};
 
 		\path (minus_1.east) node[anchor=west] (model_1) {\includegraphics[width=3cm]{images/features/height/heightmap-292034}};
         \path (model_1.south) node[anchor=north] (model_2) {\includegraphics[width=3cm]{images/features/height/heightmap-61215}};
-        \path (model_2.south) node[anchor=north, text width=3cm] (model_legend) {(b) Model height};
+        \path (model_2.south) node[anchor=north, text width=3cm] (model_legend) {\subcaption{Model height \label{subfig::height_map}}};
 
         \path (model_1.east) node[anchor=west] (equals_1) {\Large =};
         \path (model_2.east) node[anchor=west] (equals_2) {\Large =};
 
         \path (equals_1.east) node[anchor=west] (residual_1) {\includegraphics[width=3cm]{images/features/height/residual-292034}};
         \path (residual_1.south) node[anchor=north] (residual_2) {\includegraphics[width=3cm]{images/features/height/residual-61215}};
-        \path (residual_2.south) node[anchor=north, text width=3cm] (residual_legend) {(c) Residual};
+        \path (residual_2.south) node[anchor=north, text width=3cm] (residual_legend) {\subcaption{Residual \label{subfig::residuals}}};
 
         \path (residual_1.east) + (0, .2) node[anchor=west] (top_dash_mapsto_1) {};
         \path (residual_1.east) + (0, -.2) node[anchor=west] (down_dash_mapsto_1) {};
@@ -43,7 +43,7 @@
 
         \path (end_mapsto_1.east) + (0, -1) node[anchor=west] (hist_1) {};
         \path (end_mapsto_2) + (0, -1) node[anchor=west] (hist_2) {};
-        \path (hist_1 |- dsm_legend) + (1.25, 0) node[text width=3cm] (hist_legend) {(d) Histogram};
+        \path (hist_1 |- dsm_legend) + (1.25, 0) node[text width=3cm] (hist_legend) {\subcaption{Histogram \label{subfig::histogram}}};
         \begin{axis}[
             at={(hist_1)},
             width=4cm,

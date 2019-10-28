@@ -73,6 +73,7 @@
 \usepackage[
     backend=biber,
     style=authoryear,
+    dashed=false,
     sorting=nty,
     maxbibnames=5,
     minbibnames=5,
@@ -108,6 +109,9 @@
     pdfstartview={FitH},
     unicode=true
 }
+
+\usepackage{cleveref}
+\crefformat{footnote}{#2\footnotemark[#1]#3}
 
 \usepackage[
     colorinlistoftodos,

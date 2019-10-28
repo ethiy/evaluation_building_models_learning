@@ -175,16 +175,16 @@ These are proposed to better model defect predictions.
         For each facet $f \in \mathsf{F}$, we compute its degree (\textit{i.e.}, number of vertices; $f \mapsto d\left(f\right) \triangleq \left\lvert\left\{v : v\text{ is a vertex of }f\right\}\right\rvert$), its area $f \mapsto \mathscr{A}\left(f\right)$ and its circumference $f \mapsto \mathscr{C}\left(f\right)$.
         These are all geometric invariants with respect to $\mathbb{R}^3$ isometries, contrarily to facet centroids $\mathscr{G}\left(f\right)$ and normals $\vec{n}\left(f\right)$.
         This is countersteped by looking, for each graph edge $e=\left\{f, g\right\} \in \mathsf{E}$, for the distance between facet centroids $\left\{f, g\right\} \mapsto \left\lVert \mathscr{G}\left(f\right) - \mathscr{G}\left(g\right) \right\rVert$ and the angle formed by their normals $\left\{f, g\right\} \mapsto \arccos\left(\vec{n}\left(f\right) \cdot \vec{n}\left(g\right)\right)$.
-        Statistical characteristics are then computed over building model facets using specific functions $S$, like a histogram:        
+        Statistical characteristics are then computed over building model facets using specific functions \(\chi\), like a histogram:        
 
         \begin{equation}
             \label{eq::histogram_extractor}
-        	S = S^p_{\text{histogram}}: l \mapsto \operatorname{histogram}(l, p),
+        	\chi = \chi^p_{\operatorname{histogram}}: l \mapsto \operatorname{histogram}(l, p),
         \end{equation}
         with $p$ standing for histogram parameters. A simpler option could be:
         \begin{equation}
-            \label{eq::statistical_extractor}
-            S = S_{\text{manual}}: l \mapsto \begin{bmatrix}
+            \label{eq::max_min_mean_med_extractor}
+            \chi = \chi_{\max,\min,\operatorname{mean},\operatorname{med}}: l \mapsto \begin{bmatrix}
                 \max(l)\\
                 \min(l)\\
                 \operatorname{mean}(l)\\
@@ -202,11 +202,11 @@ These are proposed to better model defect predictions.
         \begin{equation}
         	\label{eq::geometric_features}
             v_{\text{geometry}}(\mathsf{M}) = \begin{bmatrix}
-            	S \left(\left(d\left(f\right)\right)_{f \in \mathsf{F}}\right)\\
-                S \left(\left(\mathscr{A}\left(f\right)\right)_{f \in \mathsf{F}}\right)\\
-                S \left(\left(\mathscr{C}\left(f\right)\right)_{f \in \mathsf{F}}\right)\\
-                S \left(\left( \left\lVert \mathscr{G}\left(f\right) - \mathscr{G}\left(g\right) \right\rVert \right)_{\left\{f, g\right\} \in \mathsf{E}}\right)\\
-                S\left(\left( \arccos\left(\vec{n}\left(f\right) \cdot \vec{n}\left(g\right)\right) \right)_{\left\{f, g\right\} \in \mathsf{E}}\right)
+            	\chi \left(\left(d\left(f\right)\right)_{f \in \mathsf{F}}\right)\\
+                \chi \left(\left(\mathscr{A}\left(f\right)\right)_{f \in \mathsf{F}}\right)\\
+                \chi \left(\left(\mathscr{C}\left(f\right)\right)_{f \in \mathsf{F}}\right)\\
+                \chi \left(\left( \left\lVert \mathscr{G}\left(f\right) - \mathscr{G}\left(g\right) \right\rVert \right)_{\left\{f, g\right\} \in \mathsf{E}}\right)\\
+                \chi \left(\left( \arccos\left(\vec{n}\left(f\right) \cdot \vec{n}\left(g\right)\right) \right)_{\left\{f, g\right\} \in \mathsf{E}}\right)
             \end{bmatrix}.
         \end{equation}
 
@@ -217,19 +217,19 @@ These are proposed to better model defect predictions.
 
     \subsection{\textsc{Height based features}}
         \label{subsec::learned_evaluation::baseline::height}
-        For this modality, raw depth information is provided by a \gls{acr::dsm} as a \gls{acr::2d} height grid: $dsm \in \mathbb{R}^{w\times h}$\footnote{$w$ (\textit{resp.} $h$) is the grid width (\textit{resp.} height).}.
+        For this modality, raw depth information is provided by a \gls{acr::dsm} as a \gls{acr::2d} height grid: $dsm \in \mathbb{R}^{w\times h}$\footnote{\label{note::w_h}$w$ (\textit{resp.} $h$) is the grid width (\textit{resp.} height).}.
         This type of reference data must date back to the same time where the building models where produced.
         Otherwise a lot of defects will result simply from change in the scenery.\\
 
         The \gls{acr::dsm} is compared to the model height~\parencite{bredif20073d,zebedin2008fusion}.
         The latter is inferred from its facets plane equations.
         It is rasterized into an grid structure $alt \in \mathbb{R}^{w\times h}$ using the same spatial resolution as $dsm$.
-        The difference between the two height grids provides a discrepancy map (Figure~\ref{fig::height_based_features}.c).
-        A baseline approach is herein proposed relying on the statistics of pixel values computed using the $S$ functions (Figure~\ref{fig::height_based_features}).\\
+        The difference between the two height grids provides a discrepancy map (Figure~\ref{fig::residuals}).
+        A baseline approach is herein proposed relying on the statistics of pixel values computed using the $S$ functions (\textit{cf.} Figure~\ref{fig::height_based_features}).\\
 
         \begin{equation}
             \label{eq::height_based_features}
-            v_{\text{height}}\left(\mathsf{M}\right) = S\left( dsm - alt \right).
+            v_{\text{height}}\left(\mathsf{M}\right) = \chi \left( dsm - alt \right).
         \end{equation}
 
         The histogram could actually be computed for the building alone without taking into account the terrain arround it.
@@ -274,7 +274,7 @@ These are proposed to better model defect predictions.
         
         \begin{equation}
             \label{eq::corr_seg}
-            \mathsf{D}_S(s, I) \triangleq S \left( \left(\frac{\nabla I\left(g\right) \cdot \vec{n}(s)}{\left\rVert \nabla I\left(g\right)\right\rVert}\right)_{\substack{g \in I \\ g \cap s \neq \emptyset}} \right).
+            \mathsf{D}_S(s, I) \triangleq \chi \left( \left(\frac{\nabla I\left(g\right) \cdot \vec{n}(s)}{\left\rVert \nabla I\left(g\right)\right\rVert}\right)_{\substack{g \in I \\ g \cap s \neq \emptyset}} \right).
         \end{equation}
 
         \begin{figure}[htpb]
@@ -304,12 +304,12 @@ These are proposed to better model defect predictions.
         \end{figure}
 
         Once the distribution is computed over a segment, it is stacked over all facet edges to define the distribution over projected facets.
-        In the case of histograms $S^p_{\text{histogram}}$ with the same parameters (and thus the same bins), it is equivalent to summing out the previous vectors $\mathsf{D}_{S^p_{\text{histogram}}}(s, I)$ over edges $s$ from the projection $q\left(f\right)$ of the facet $f$.
+        In the case of histograms $\chi^p_{\operatorname{histogram}}$ with the same parameters (and thus the same bins), it is equivalent to summing out the previous vectors $\mathsf{D}_{\chi^p_{\operatorname{histogram}}}(s, I)$ over edges $s$ from the projection $q\left(f\right)$ of the facet $f$.
         In order to take into account the variability of segment dimensions, this sum is normalized by segment lengths.
 
         \begin{equation}
             \label{eq::corr_fac}
-            D_{S^p_{\text{histogram}}}\left(f, I\right) \triangleq \sum_{s \in q\left(f\right)} \left\rVert s \right\lVert \cdot \mathsf{D}_{S^p_{\text{histogram}}}(s, I).
+            D_{\chi^p_{\operatorname{histogram}}}\left(f, I\right) \triangleq \sum_{s \in q\left(f\right)} \left\rVert s \right\lVert \cdot \mathsf{D}_{\chi^p_{\operatorname{histogram}}}(s, I).
         \end{equation}
 
         The same can be done over all facets of a building $\mathsf{M}$ (Equation~\ref{eq::corr_bul}).
@@ -319,7 +319,7 @@ These are proposed to better model defect predictions.
 
         \begin{equation}
             \label{eq::corr_bul}
-            v_{\text{image}}\left(\mathsf{M}\right) = D_{S^p_{\text{histogram}}}\left(\mathsf{M}, I\right) \triangleq \sum_{f \in \mathsf{F}} \mathscr{A}\left(q\left(f\right)\right) \cdot \mathsf{D}_{S^p_{\text{histogram}}}(f, I).
+            v_{\text{image}}\left(\mathsf{M}\right) = D_{\chi^p_{\operatorname{histogram}}}\left(\mathsf{M}, I\right) \triangleq \sum_{f \in \mathsf{F}} \mathscr{A}\left(q\left(f\right)\right) \cdot \mathsf{D}_{\chi^p_{\operatorname{histogram}}}(f, I).
         \end{equation}
         
         These image-based attributes are helpful for precision error detection.
@@ -337,7 +337,7 @@ These are proposed to better model defect predictions.
     Richer graph based feature are proposed in Subsection~\ref{subsec::learned_evaluation::richer_features::graph}.
     For images, better attributes are also presented in the next Subsection~\ref{subsec::learned_evaluation::richer_features::image}.
 
-    \subsection{\textsc{Graph classification}}
+    \subsection{\textsc{Graph-like classification}}
         \label{subsec::learned_evaluation::richer_features::graph}
         In Subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}, were discussed some kernels that can describe adequately graphs.
         The geometric baseline features we provided in Subsection~\ref{subsec::learned_evaluation::baseline::geometric}, more precisely in Equation~\ref{eq::geometric_features}, could actually be seen as a concatenation of the basic feature maps from Equations~\ref{eq::feature_node_graph} and~\ref{eq::feature_edge_graph}.
@@ -358,16 +358,19 @@ These are proposed to better model defect predictions.
         This results in three graphs.
         The first takes the face normals \(f \mapsto \vec{n}\left(f\right)\) as node attributes.
         The second graph has its nodes assigned face centroids \(f \mapsto \mathscr{G}\left(f\right)\).
-        The last one has a composite vector \(f \mapsto \begin{bmatrix}
-            d\left(f\right)\\
-            \mathscr{A}\left(f\right)\\
-            \mathscr{C}\left(f\right)            
-        \end{bmatrix}\) as node attributes.
+        The last one has a composite vector
+        \begin{equation*}
+            f \mapsto \begin{bmatrix}
+                d\left(f\right)\\
+                \mathscr{A}\left(f\right)\\
+                \mathscr{C}\left(f\right)            
+            \end{bmatrix}
+        \end{equation*} as node attributes.
         The degree, area and circumference, contrarily to the normal and centroid, of facets where inconsequential in error predictions according to the feature importances that were computed when training \glspl{acr::rf}.
         This explains why these were grouped into one vector in contrast with the other two features.\\
 
         Each graph can take multiple types of kernels.
-        In Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}, we presented some kernels which were used in our experiments.
+        We use the kernels described in Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}.
         Since all graphs share the same structure, kernels that ignore node attributes would yield the same results, no matter which node attribute is used.
         There are two such kernels: the random walk kernel and the \gls{acr::svm} \(\vartheta\) kernel.
         We also experimented with three other types of kernels: the Multiscale Laplacian kernel, the propagation kernel and the graph hopper kernel.
@@ -376,28 +379,92 @@ These are proposed to better model defect predictions.
         Two alternatives were utilized:
         \begin{description}
             \item[Linear kernel:] As shown in Equation~\ref{eq::linear_kernel}, this is the most simple choice;
-            \item[Brownian bridge kernel:] This base kernel was originally proposed for the Shortest Path kernel~\parencite{borgwardt2005shortest} and is remains valid for its scalable derivation.
+            \item[Brownian bridge kernel:] This base kernel was originally proposed for the Shortest Path kernel~\parencite{borgwardt2005shortest} and is also valid for its scalable derivation.
         \end{description}
-        This results, in total, in \(2 + 3 \times \left(2 + 1 \times 2\right) = 11\) graph kernel.
-        A linear combination is porposed in order to add up these ouputs together.
+        This results, in total, in \begin{equation*}
+            \underbrace{2}_{\substack{\text{kernels ignoring}\\\text{ node attributes}}} + \underbrace{3}_{\substack{\text{attributed}\\\text{graphs}}} \times \left(\underbrace{2}_{\substack{\text{Multiscale Laplacian \&}\\\text{Propagation}}} + \underbrace{1}_{\text{Graph hopper}} \times \underbrace{2}_{\substack{\text{base}\\\text{kernels}}}\right) = 14
+        \end{equation*} graph kernels.
+        These are aggregated into one kernel using a linear combination.
         This is possible thanks to \gls{acr::mkl} as explained earlier in Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.
         
-    \subsection{\textsc{Image classification}}
+    \subsection{\textsc{Image-like classification}}
         \label{subsec::learned_evaluation::richer_features::image}
-        Not a lot of images to learn representations.
-        scatnet -> unlearned.
+        \glspl{acr::cnn} have proven to be the standard feature extractors in image classification.
+        However, they require a great load of images in order to learn good enough representations.
+        This is not our case as explained later in Subsection~\ref{subsec::experiments::datasets::stats}.
+        As a consequence, we choose instead to use \glspl{acr::scatnet} which mimic classical \glspl{acr::cnn} and can yield good image representations in an unlearned manner as shown in Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::scatnet}.
 
-        good with textures.
-        finds discrepancy related textures in residuals.
-        does not need normalization beforehand.
-        resize is worst experimentally.
-        different sizes -> vzrying feature vector sizes.
-        + a lot of coefficients
-        pooling
-        S(max, min, median, mean, std)
+        \subsubsection{\textsc{Height based features}}
+            Discrepancies between the \gls{acr::3d} model extracted height map and the \gls{acr::dsm} manifest in textures in computed residuals (\textit{cf.} Figure~\ref{subfig::residuals}).
+            As a matter of fact, \glspl{acr::scatnet} can handle very well texture discrimination as proven theoretically by~\textcite{mallat2012group} and experimentally by~\textcite{bruna2013invariant,sifre2013rotation}.
+            In addition, theoretically the height data can be fed directly to a \gls{acr::scatnet} without requiring any normalization or preprocessing since, by construction, they can admit any type of \gls{acr::2d} signal\footnote{There are other versions of \glspl{acr::scatnet} taking one dimensional signals~\parencite{anden2014deep} or even graphs~\parencite{eickenberg2018solid}.}.
+            This explains why \glspl{acr::scatnet} were chosen as a height based feature extractor.\\
 
-        morlet : good edge filters
-        rasterize nadir projection
-        either deletion (early) or as channel(late) fusion
-        same as with depth.
+            From a practical standpoint, the residuals computed as in Subsection~\ref{subsec::learned_evaluation::baseline::height} come as images in different sizes \(w \times h\)\cref{note::w_h} depending on the input model.
+            Consequently, concatenating \gls{acr::scatnet} coefficients into a single vector is going to result in variable feature vector dimensions.
+            One solution is to resize all images to a certain fixed size beforehand.
+            However, this solution was quickly ruled out based on few experiments.
+            In fact, aside from the fact that this process either looses valuable structural informations or adds undesired blur, it completly deforms the input signal as the \(\frac{w}{h}\) ratio is not guaranteed to constant for all inputs resulting in squashed or elongated image.
+            Moreover, since \glspl{acr::scatnet} yields a great deal of coefficients that can easily surpass the number of training instances which hinders the learning ability of any classifier.
+            As a consequence, we propose to add a function to help extract meaningful feature vectors with the same length.\\
 
+            Suppose we have a function \(\chi: \mathbb{R}^{w_1 \times d_1} \rightarrow \mathbb{R}^d\) such as the ones presented in Equations~\ref{eq::histogram_extractor}and~\ref{eq::max_min_mean_med_extractor} which has the same output dimension no matter the input size \(w_1 \times d_1\).
+            It can be applied on the output of each scattering output \(S_l[dsm - alt](\bullet, p)\):
+            \begin{equation}
+                \label{eq::reduced_scattering}
+                \chi \left(S_m[dsm - alt]\left(\bullet, p_m\right)\right) \in \mathbb{R}^d.
+            \end{equation}
+            where:
+            \begin{description}
+                \item[\(l\)] is the scattering output layer;
+                \item[\(p_m\)] is a valid path at layer \(l\) (\textit{cf.} Equation~\ref{eq::scatter_second}). 
+            \end{description}
+            
+            The resulting coefficients defined in Equation~\ref{eq::reduced_scattering} can be concatenated for all \(n_{\text{scatter}}\) computed scattering coefficients to form a feature vector:
+            \begin{equation}
+                \label{eq::scatnet_height_based_features}
+                v_{\text{scattered height}}\left(\mathsf{M}\right) = \begin{bmatrix}
+                    \chi \left(S_0[dsm - alt]\left(\bullet\right)\right)\\
+                    \vdots\\
+                    \chi \left(S_1[dsm - alt]\left(\bullet, i_1, \theta_1\right)\right)\\
+                    \vdots\\
+                    \chi \left(S_2[dsm - alt]\left(\bullet, i_1, \theta_1, i_2, \theta_2, \xi_2\right)\right)\\
+                    \vdots\\
+                    \chi \left(S_m[dsm - alt]\left(\bullet, p_m\right)\right)
+                \end{bmatrix}_{
+                    \substack{
+                        i1=1, 2 \dots, I \\
+                        \theta_1 \in \left\{\frac{l_1\cdot\pi}{L}: l_1=1,2\dots,L\right\}\\
+                        i_1 \leq i2 \leq I\\
+                        \theta_2 \in \left\{\frac{l_2\cdot\pi}{L}: l_2=1,2\dots,L\right\}\\
+                        \xi_2=1,2\dots,\lfloor\log_2(L)\rfloor\\
+                        \vdots\\
+                        p_m
+                    }
+                } \in \mathbb{R}^{d \cdot n_{\text{scatter}}}.
+            \end{equation}
+            Regarding the \(\chi\) function it is taken herein as follows:
+            \begin{equation}
+                \label{eq::max_min_mean_med_std_extractor}
+                \chi = \chi_{\max,\min,\operatorname{mean},\operatorname{med},\operatorname{std}}: l \mapsto \begin{bmatrix}
+                    \max(l)\\
+                    \min(l)\\
+                    \operatorname{mean}(l)\\
+                    \operatorname{median}(l)\\
+                    \operatorname{std}(l)
+                \end{bmatrix}.
+            \end{equation}
+            where:
+            \begin{description}
+                \item[\(\operatorname{std}(l)\)] computes the standard deviation over the tuple \(l\).
+            \end{description}
+
+        \subsubsection{\textsc{Height based features}}
+            \glspl{acr::scatnets} seem then to be good choice for image based feature extractors.
+            In fact, as shown in Subfigure~\ref{subfig::bus_2d}, image textures could be also useful for error detection.
+            More importantly, as shown with baseline image based features (\textit{cf.} Subsection~\ref{subsec::learned_evaluation::baseline::image}), edges are key image attributes for comparing building models to orthoimages.
+            
+            morlet : good edge filters
+            rasterize nadir projection
+            either deletion (early) or as channel(late) fusion
+            same as with depth.
