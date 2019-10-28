@@ -206,9 +206,9 @@
                 The geometric features are always available.
                 As a consequence, we tested four feature configurations: ``geometric features'' (\textbf{Geom.}) only, ``geometric and height features''(\textbf{Geom.} $\cup$ \textbf{Hei.}), ``geometric and image features''(\textbf{Geom.} $\cup$ \textbf{Im.}) as well as ``geometric, height and image features''(\textbf{All.}).
                 In order to have a better compare the important of each modality, the feature vectors they produce are of the same size.
-                Actually, using the function \(S_{\text{manual}}\) defined in Equation~\ref{eq::statistical_extractor}, the geometric feature vector in Equation~\ref{eq::geometric_features} is of dimension
+                Actually, using the function \(\chi_{\max,\min,\operatorname{mean},\operatorname{median}}\) defined in Equation~\ref{eq::statistical_extractor}, the geometric feature vector in Equation~\ref{eq::geometric_features} is of dimension
                 \begin{equation*}
-                    \underbrace{4}_{\substack{\text{the output dimension}\\\text{of the function } S_{\text{manual}} }} \times \underbrace{5}_{\substack{\text{the number of the facet}\\\text{graph attributes}}} = 20.
+                    \underbrace{4}_{\substack{\text{the output dimension}\\\text{of the function } \chi_{\max,\min,\operatorname{mean},\operatorname{median}} }} \times \underbrace{5}_{\substack{\text{the number of the facet}\\\text{graph attributes}}} = 20.
                 \end{equation*}
                 Regarding height based feature vectors their dimension depend on the histogram parameters.
                 Since we compute differences between observed and model height at terrain level also (\textit{cf.} Subsection~\ref{subsec::learned_evaluation::baseline::height}), and because these are virtually unbounded and can differ from one scene to another, the maximum possible discrepancy is limited to \SI{\pm 50}{\m} for all scenes.
@@ -221,7 +221,7 @@
 
             \paragraph{Richer features}
                 scatnet J 3 L 8 kymatio
-                # features = ?
+                % # features = ?
                 random walk grakel
                 graph hopper
                 propagation

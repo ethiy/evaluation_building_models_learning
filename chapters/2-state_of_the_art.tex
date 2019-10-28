@@ -1144,11 +1144,11 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     This can be reapplied further giving cascaded scattering coefficients at level $m$:
                     \begin{equation}
                         \label{eq::scatter_second}
-                        S_m[x](u, p) \triangleq \widetilde{U}_{\lambda_m} \circ \widetilde{U}_{\lambda_{m-1}} \dots \circ \widetilde{U}_{\lambda_2} \circ U_{i_1, \bullet} \ostar_{SE(2)} \tilde{\phi}_I(u, \theta_1).
+                        S_m[x](u, p_m) \triangleq \widetilde{U}_{\lambda_m} \circ \widetilde{U}_{\lambda_{m-1}} \dots \circ \widetilde{U}_{\lambda_2} \circ U_{i_1, \bullet} \ostar_{SE(2)} \tilde{\phi}_I(u, \theta_1).
                     \end{equation}
                     where:
                     \begin{conditions}
-                        p & $i_1, \theta_1, \lambda_2 \dots, \lambda_{m-1}, \lambda_m$ and is called a path;\\
+                        p_m & $i_1, \theta_1, \lambda_2 \dots, \lambda_{m-1}, \lambda_m$ and is called a path;\\
                         \lambda_k & $i_k, \theta_k, \xi_k$.
                     \end{conditions}
 
@@ -1172,7 +1172,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
                     \begin{figure}
                         \centering
-                        \includestandalone[mode=buildnew, width=\textwidth]{figures/scattering_network}
+                        \includestandalone[mode=buildnew, height=.5\textheight]{figures/scattering_network}
                         \caption[
                             Illustration of a \acrshort*{acr::scatnet}.
                         ]{
