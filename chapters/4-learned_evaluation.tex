@@ -328,12 +328,12 @@ These are proposed to better model defect predictions.
 
 \section{\textsc{Richer features}}
     \label{sec::learned_evaluation::richer_features}
-    The features presented in the previous section are by construction a simple first iteration.
-    Their goal is to test the feasibility of the learned quality evaluation approach.
-    This is actually discussed in details in Chapters~\ref{chap::experiments} and~\ref{chap::more_experiments}.\\
+    The last section presented features that are by construction taken to be as simple as possible.
+    The goal was to test the feasibility of the learned quality evaluation approach.
+    This is discussed in length in Sections~\ref{sec::experiments::baseline_feature_analysis},~\ref{sec::more_experiments::finesse} and~\ref{sec::more_experiments::scalability}.\\
 
-    This section presents features that better exploits structural information of the input models.
-    In the last section, we identifed two types of observations from which features are extacted: graph-like and image-like data.
+    This section presents features that better exploits structural information of the input models that were missed by the baseline.
+    In the previous section, we identifed two types of instances from which features are extacted: graph-like and image-like data.
     Richer graph based feature are proposed in Subsection~\ref{subsec::learned_evaluation::richer_features::graph}.
     For images, better attributes are also presented in the next Subsection~\ref{subsec::learned_evaluation::richer_features::image}.
 
@@ -384,3 +384,20 @@ These are proposed to better model defect predictions.
         
     \subsection{\textsc{Image classification}}
         \label{subsec::learned_evaluation::richer_features::image}
+        Not a lot of images to learn representations.
+        scatnet -> unlearned.
+
+        good with textures.
+        finds discrepancy related textures in residuals.
+        does not need normalization beforehand.
+        resize is worst experimentally.
+        different sizes -> vzrying feature vector sizes.
+        + a lot of coefficients
+        pooling
+        S(max, min, median, mean, std)
+
+        morlet : good edge filters
+        rasterize nadir projection
+        either deletion (early) or as channel(late) fusion
+        same as with depth.
+
