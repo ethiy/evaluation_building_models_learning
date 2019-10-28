@@ -217,7 +217,18 @@
                 This interval is consequently divided evenly into \(20\) bins for the histogram computation.
                 The \glspl{acr::dsm} and orthorectified images used to derive height and image features have the same spatial resolution as the reconstruction input data.\\
 
+                time= ??
+
             \paragraph{Richer features}
+                scatnet J 3 L 8 kymatio
+                # features = ?
+                random walk grakel
+                graph hopper
+                propagation
+                multilaplacian= ?
+
+                times
+
 
         \subsubsection{\textsc{Considered labels}}
             All \textbf{\gls{acr::efin}} levels were tested.
@@ -237,12 +248,12 @@
                     4
                     Kernel PCA
                     20: same dimensions
-                    50: better results?
 
                 \subparagraph{\acrshort*{acr::svm}}
                     Kernels for graphs are up
                     Kernels for feature vectors : rbf gamma .001 to not over fit
-                    C 10 not to overpenalize
+                    C .01 not to overpenalize
+                    MKL easymkl
 
             \paragraph{Used metrics}
                 The overall accuracy is not interesting due to the highly unbalanced label distribution.
@@ -290,18 +301,18 @@
                     \toprule
                     & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG} \\
                     \midrule
-                    $\bm{Rec}$ & 99.55 & 0.21 & 0 & 0 & 98.68 & 0.63 & 0 & 0 & 98.15 \\
+                    \(\bm{Rec}\) & 99.55 & 0.21 & 0 & 0 & 98.68 & 0.63 & 0 & 0 & 98.15 \\
                     \midrule
-                    $\bm{Prec}$ & 68.78 & 33.33 & --- & 0 & 66.60 & 0.25 & --- & 0 & 61.15 \\
+                    \(\bm{Prec}\) & 68.78 & 33.33 & --- & 0 & 66.60 & 0.25 & --- & 0 & 61.15 \\
                     \midrule
-                    $\bm{F_{score}}$ & 81.35 & 0.42 & 0 & 0 & 79.52 & 1.24 & 0 & 0 & 75.36 \\
+                    \(\bm{F_{score}}\) & 81.35 & 0.42 & 0 & 0 & 79.52 & 1.24 & 0 & 0 & 75.36 \\
                     \midrule
-                    $\bm{Acc}$ & 68.46 & 75.65 & 89.57 & 94.66 & 66.36 & 83.62 & 88.24 & 98.36 & 60.86 \\
+                    \(\bm{Acc}\) & 68.46 & 75.65 & 89.57 & 94.66 & 66.36 & 83.62 & 88.24 & 98.36 & 60.86 \\
                     \bottomrule
                 \end{tabular}
                 \caption{
                     \label{tab::rmse_results} \texttt{Finesse} 3 experiment results using \gls{acr::rmse} on Elancourt.
-                    $\bm{Acc}$ expresses the overall accuracy ratio.
+                    \(\bm{Acc}\) expresses the overall accuracy ratio.
                 }
             \end{table}
 
@@ -331,7 +342,7 @@
                         \hline
                         &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
                         \cline{2-9}
-                        & $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ \\
+                        & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
                         \hline
                         \texttt{BOS} & \textbf{93.96} & 76.15 & 91.43 & \textbf{77.76} & 91.51 & 76.08 & 90.83 & 76.14 \\
                         \hline
@@ -356,7 +367,7 @@
                         \hline
                         &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
                         \cline{2-9}
-                        & $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ \\
+                        & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
                         \hline
                         \texttt{BOS} & \textbf{38.14} & 61.67 & 36.43 & 60.23 & 36.77 & \textbf{62.21} & 34.71 & 60.48 \\
                         \hline
@@ -381,7 +392,7 @@
                         \hline
                         &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
                         \cline{2-9}
-                        & $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ \\
+                        & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
                         \hline
                         \texttt{BOS} & 45.54 & 65.25 & 46.53 & 68.61 & \textbf{50.0} & 68.24 & 46.53 & \textbf{70.15} \\
                         \hline
