@@ -117,7 +117,7 @@
                 \label{tab::transferability_comparison} Evolution of the F-score value, for each error, between each tested configuration and the best result per area (\textit{cf.} Sub-subsection~\ref{subsubsec::experiments::evaluation::baseline_feature_analysis::ablation}).
                 Feature sets having a significant impact on the classification results are mentioned.
                 Otherwise, \textbf{Geom.} \textbf{Im.}, and \textbf{Hei.} contribute equally.
-                The color indicates the magnitude: \textcolor{LOSS3545}{$\blacksquare$}: $[-45,-35\%[$-- \textcolor{LOSS2535}{$\blacksquare$}: $[-35,-25\%[$ -- \textcolor{LOSS1525}{$\blacksquare$}: $[-25,15\%[$-- \textcolor{LOSS0515}{$\blacksquare$}: $[-15, 5\%[$ -- \textcolor{STBL}{$\blacksquare$}: $[-5,5\%[$-- \textcolor{GAIN0515}{$\blacksquare$}: $[5,15\%[$ -- \textcolor{GAIN15}{$\blacksquare$}: $[15,25\%]$ -- $\square$: statistics cannot be computed.
+                The color indicates the magnitude: \textcolor{LOSS3545}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-45}{-35}{\percent})-- \textcolor{LOSS2535}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) -- \textcolor{LOSS1525}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent})-- \textcolor{LOSS0515}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) -- \textcolor{STBL}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-5}{5}{\percent})-- \textcolor{GAIN0515}{$\blacksquare$}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) -- \textcolor{GAIN15}{$\blacksquare$}: [\SIrange[range-phrase={, }]{15}{25}{\percent}] -- $\square$: statistics cannot be computed.
             }
         \end{table}
 
@@ -132,7 +132,7 @@
         These features have a significant \texttt{coherence} power when trained over \textbf{Elancourt} (\texttt{FIB} and \texttt{FUS}), and projects very well to other scenes (\texttt{FIB}, \texttt{FUS}, \texttt{BIB} and \texttt{FIT}, Table~\ref{tab::transferability_comparison}).
         On the other hand, as expected, geometric features alone are best for topological errors, when trained on dense areas, especially \texttt{BIT} (Table~\ref{tab::transferability_comparison}).
         Finally, although sticking out for \texttt{FIG} in a minor capacity (\t{cf.} Table~\ref{tab::transferability_comparison}), height-based features proved to be less transferable.
-        In fact, adding height-based features leads, in most cases, to a small decrease in accuracy ($\approx 2\%$) for \texttt{atomic} errors.
+        In fact, adding height-based features leads, in most cases, to a small decrease in accuracy ($\approx$ \SI{2}{\percent}) for \texttt{atomic} errors.
         All these previous findings further justify why we did not leave out any modality, as they are more frequently critical for transferability than in the ablation study (Table~\ref{tab::ablation_f3}).\\
 
         An analysis can also be drawn for \texttt{atomic} errors with respect to the best training scene.
@@ -197,7 +197,7 @@
                 \label{tab::generalization_comparison} Evolution of the F-score value, for each error, between each tested configuration and the best result per area (\textit{cf.} Sub-subsection~\ref{subsubsec::experiments::evaluation::baseline_feature_analysis::ablation}).
                 Feature sets having a significant impact on the classification results are mentioned.
                 Otherwise, \textbf{Geom.} \textbf{Im.}, and \textbf{Hei.} contribute equally.
-                The color indicates the magnitude: \textcolor{LOSS3545}{$\blacksquare$}: $[-45,-35\%[$-- \textcolor{LOSS2535}{$\blacksquare$}: $[-35,-25\%[$ -- \textcolor{LOSS1525}{$\blacksquare$}: $[-25,15\%[$-- \textcolor{LOSS0515}{$\blacksquare$}: $[-15, 5\%[$ -- \textcolor{STBL}{$\blacksquare$}: $[-5,5\%[$-- \textcolor{GAIN0515}{$\blacksquare$}: $[5,15\%[$ -- \textcolor{GAIN15}{$\blacksquare$}: $[15,25\%]$ -- $\square$: statistics cannot be computed.
+                The color indicates the magnitude: \textcolor{LOSS3545}{$\blacksquare$}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})-- \textcolor{LOSS2535}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) -- \textcolor{LOSS1525}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent})-- \textcolor{LOSS0515}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) -- \textcolor{STBL}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-5}{5}{\percent})-- \textcolor{GAIN0515}{$\blacksquare$}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) -- \textcolor{GAIN15}{$\blacksquare$}: [\SIrange[range-phrase={, }]{15}{25}{\percent}] -- $\square$: statistics cannot be computed.
             }
         \end{table}
             
@@ -227,7 +227,7 @@
         \label{subsec::more_experiments::scalability::representativeness}
         The objective is to find out, after merging all training samples from all datasets, what is the minimal amount of data that can guaranty stable predictions.
         We can, thereafter, understand how much learning on one scene typology can affect results compared to a mixed training set.
-        Figure~\ref{fig::f_score_representativeness_f3} depicts F-score as a function of training ratios (between 20-70\%) and \texttt{atomic} errors.\\
+        Figure~\ref{fig::f_score_representativeness_f3} depicts F-score as a function of training ratios (between \SIrange[range-phrase={ and }]{20}{70}{\percent}) and \texttt{atomic} errors.\\
                 
         \thisfloatsetup{subfloatrowsep=none}
         \begin{figure}[htbp]
@@ -257,11 +257,11 @@
             
         We note the high stability of the F-score.
         This indicates that having a small heterogeneous dataset is not detrimental to the learning capacity and can be even the most suitable solution.
-        \texttt{BOS}, \texttt{FOS}, and \texttt{FIG} have a standard deviation under 2\%, as opposed to \texttt{FIB}, \texttt{BIT} and \texttt{FIT}.
+        \texttt{BOS}, \texttt{FOS}, and \texttt{FIG} have a standard deviation under \SI{2}{\percent}, as opposed to \texttt{FIB}, \texttt{BIT} and \texttt{FIT}.
         Indeed, they have large variance, and even a larger standard deviation than mean value.
         Scalability is, hence, ensured with a limited training set.
         No standard logarithmic behavior can be found at the studied scales.
-        20\% of the full label set is sufficient so as to retrieve results with a performance similar to the initial ablation study.
+        \SI{20}{\percent} of the full label set is sufficient so as to retrieve results with a performance similar to the initial ablation study.
         The best results are observed for \texttt{BOS}, \texttt{BUS}, and \texttt{FUS}.
         These errors are topological defects of building roof facets which require a high diversity of training samples for their detection.
         More sophisticated features are however still required to help predicting less frequent and more semantic labels.
@@ -367,25 +367,25 @@
         In the higher \texttt{finesse} level, only \texttt{BUS}, from all \texttt{atomic} errors, was highly impacted by a change in the feature configuration.
         This may explain the observed low variability.
         Moreover, we can note the prevalence of \texttt{FOS}\footnote{
-            Between 60\% and 85\% of building models, in all areas, have this defect.
+            Between \SIrange[range-phrase={ and }]{60}{85}{\percent} of building models, in all areas, have this defect.
         } and \texttt{FIG}\footnote{
-            They affect between 70\% and 95\% of building models, depending on the urban scene.
+            They affect between \SIrange[range-phrase={ and }]{70}{95}{\percent} of building models, depending on the urban scene.
         } in the \texttt{Facet errors} family.
         This, added to the fact that they are, in a large capacity, easily detected individually\footnote{
-            \texttt{FOS} (\textit{resp.} \texttt{FIG}) achieves more than 90\% (\textit{resp.} 80\%) in F-score, as depicted in Subfigure~\ref{subfig::f_score_ablation_f3_facet}
-        } helps understanding why the F-score reaches at least 90\% for this family (Subfigure~\ref{subfig::f_score_ablation_f2}).
+            \texttt{FOS} (\textit{resp.} \texttt{FIG}) achieves more than \SI{90}{\percent} (\textit{resp.} \SI{80}{\percent}) in F-score, as depicted in Subfigure~\ref{subfig::f_score_ablation_f3_facet}
+        } helps understanding why the F-score reaches at least \SI{90}{\percent} for this family (Subfigure~\ref{subfig::f_score_ablation_f2}).
         As with \texttt{finesse} level 3 experiments, \texttt{Facet errors} yields higher prediction scores than on \texttt{Building errors}.
-        Indeed, we can see a smaller discrepancy, that is below 5\%, between F-scores on different scenes for \texttt{Facet errors} than for \texttt{Building errors} with 15\%.\\
+        Indeed, we can see a smaller discrepancy, that is below \SI{5}{\percent}, between F-scores on different scenes for \texttt{Facet errors} than for \texttt{Building errors} with \SI{15}{\percent}.\\
 
         The transferability study (Subfigure~\ref{subfig::f_score_transferability_f2}) compares the F-scores with the ablation study provided in Subfigure~\ref{subfig::f_score_ablation_f2}.
         Out of all 12 possible comparisons, only 2 exhibit a decrease in error discrimination.
         Both affect the \texttt{Building errors} family when trained on \textbf{Nantes}.
-        \texttt{Facet errors}, on the other hand, confirms, its transferability and stability, with less than 5\% of discrepancy between the two extremal values.
+        \texttt{Facet errors}, on the other hand, confirms, its transferability and stability, with less than \SI{5}{\percent} of discrepancy between the two extremal values.
         For this reason, we skip the generalization study, all together, at this section.\\
 
         The representativeness study conducted for the \texttt{finesse} level 2 results in the F-scores that are illustrated in Subfigure~\ref{subfig::f_score_representativeness_f2}.
         Family detection scores are very stable across all different tested split ratios.
-        Moreover, in contrast to \texttt{atomic} errors results (cf. Figure~\ref{fig::f_score_representativeness_f3}), F-scores do not vary by more than 1\% in mean and standard deviation.
+        Moreover, in contrast to \texttt{atomic} errors results (cf. Figure~\ref{fig::f_score_representativeness_f3}), F-scores do not vary by more than \SI{1}{\percent} in mean and standard deviation.
         This proves that at \texttt{finesse} level 2, error family prediction is evened out independent of different split ratios, as opposed to higher order errors.
         Again, it benefits from the higher heterogeneity of the training set with multiple areas.
     

@@ -166,17 +166,17 @@
         \end{figure}
 
         These statistics are first analysed depending on the family errors at the \texttt{finesse} = 2 level (\textit{cf.} Figure~\ref{fig::family_errors}).
-        Due to the fact that geometrically inconsistent \gls{acr::3d} models were filtered out in a preprocessing (nadir projection) step, \texttt{Unqualifiable} buildings represent a small fraction of the dataset ($<$ 7.5\%).
+        Due to the fact that geometrically inconsistent \gls{acr::3d} models were filtered out in a preprocessing (nadir projection) step, \texttt{Unqualifiable} buildings represent a small fraction of the dataset (less than \SI{7.5}{\percent}).
         Actually, this latter corresponds to the, partially or completly, occluded buildings that could not be qualified.
         Moreover, only a small fraction of buildings are \texttt{Valid}:
-        57 (2.84\%) in \textbf{Elancourt}, 55 (7.35\%) for \textbf{Nantes} and 21 (4.39\%) in \textbf{Paris-13}.
-        Most buildings are affected by the \texttt{Building Errors} family ($>$ 58.16\%) and the \texttt{Facet Errors} one ($>$ 75.94\%).\\
+        57 (\SI{2.84}{\percent}) in \textbf{Elancourt}, 55 (\SI{7.35}{\percent}) for \textbf{Nantes} and 21 (\SI{4.39}{\percent}) in \textbf{Paris-13}.
+        Most buildings are affected by the \texttt{Building Errors} family (over \SI{58.16}{\percent}) and the \texttt{Facet Errors} one (over \SI{75.94}{\percent}).\\
 
         At the \texttt{finesse} level 3, two axes of analysis are possible.
         First, we group errors that are very frequent in the dataset.
-        Over-segmentation errors (\texttt{FOS} and \texttt{BOS}), in both error families, are well represented ranging from 38.9\% up to 66.8\%.
-        The same is true for \texttt{FIG} (59.8-80\%).
-        \texttt{FIT}, on the other hand, are very rare in all the areas with ratios a little less than 1.5\%.
+        Over-segmentation errors (\texttt{FOS} and \texttt{BOS}), in both error families, are well represented ranging from \SIrange{38.9}{66.8}{\percent}.
+        The same is true for \texttt{FIG} with a frequency from \SIrange{59.8}{80}{\percent}.
+        \texttt{FIT}, on the other hand, are very rare in all the areas with ratios a little less than \SI{1.5}{\percent}.
         The rest have a presence ratio within the percentage interval of [10, 30].
         The errors that are rare are understandably going to impact negatively the learning process.\\
         
@@ -483,8 +483,8 @@
             First, we can point out that fact that geometric features alone are generally sufficient.
             It is actually the best alternative for topological error detection as shown for \texttt{BOS}, \texttt{FOS}, \texttt{FUS}, \texttt{FIT} and \texttt{BIT} in Table~\ref{tab::ablation_f3}.
             This is confirmed also by the low variance observed in Subfigure~\ref{subfig::f_score_f3_building}.
-            An exception is noticed with \texttt{BUS} in \textbf{Elancourt}, where height-based features allow an increase of around 9\% in recall without, practically, any loss in precision.
-            Similar behaviour is noticed for \textbf{Nantes} and \textbf{Paris-13} with image-based features (+20\% in recall).
+            An exception is noticed with \texttt{BUS} in \textbf{Elancourt}, where height-based features allow an increase of around \SI{9}{\percent} in recall without, practically, any loss in precision.
+            Similar behaviour is noticed for \textbf{Nantes} and \textbf{Paris-13} with image-based features (+\SI{20}{\percent} in recall).
             The first case can be explained by the discrepancy in height that can be observed between under-segmented buildings.
             The second is made clear by the difference in roof colors, in dense uniform settings (Figure~\ref{subfig::bus_2d}).
             This helps identifying different instances of buildings.\\
