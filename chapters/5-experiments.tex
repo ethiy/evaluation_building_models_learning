@@ -2,6 +2,11 @@
 
 \vfill
 
+In Chapters~\ref{chap::semantic_evaluation} and~\ref{chap::learned_evaluation}, we proposed a semantic quality evaluation of building \gls{acr::3d} models employing a learning formulation.
+Herein, we aim at puting our pipeline to the test using the obtained dataset.
+First, in Section~\ref{sec::experiments::datasets}, we delineate how the building models were obtained.
+Second and last, Section~\ref{sec::experiments::evaluation} experimentally provides a first outlook of the capacity of our approach to detect errors affecting building \gls{acr::3d} models.
+
 \clearpage
 
 \section{\textsc{Datasets}}
@@ -196,10 +201,10 @@
 
 \section{\textsc{Pipeline evaluation}}
     \label{sec::experiments::evaluation}
-    In Chapters~\ref{chap::semantic_evaluation} and~\ref{chap::learned_evaluation}, we proposed a semantic quality evaluation of building \gls{acr::3d} models through classification.
-    In the last section, we explained how we acquired our dataset, in addition to analysing the effect of the urban scene on error statistics.\\
+    In the last section, we also explained how we acquired our dataset, in addition to analysing the effect of the urban scene on error statistics.
+    Beforehand, all the ingredients needed in the proposed methodology were presented.
+    This section aims at specifying how each bloc of the pipeline is implemented.\\
 
-    Herein, we aim at puting our pipeline to the test using the obtained dataset.
     In Subsection~\ref{subsec::experiments::evaluation::setup} provides all details about our experimental approach.
     Next in Subsection~\ref{subsec::experiments::evaluation::baseline_feature_analysis}, we report some first results using the baseline features we developped.
 
@@ -233,6 +238,21 @@
                 time= ??
 
             \paragraph{Richer features}
+                Baseline features are replaced by more enhanced ones as shown in Section~\ref{sec::learned_evaluation::richer_features}.
+                We lay out herein how their parameters are determined.
+
+                \subparagraph{Graph kernels}
+                    In Subsection~\ref{subsec::learned_evaluation::richer_features::graph}, we have seen how 14 graph kernels are aggregated to describe graphs.
+                    We provide herein the parameters of each kernel type.
+                    \begin{description}
+                        \item[Random walk] The exponential version did not seem to converge and was left out.
+                                    After a grid search \(\lambda\) was set to be \num{1e-3}, for the geometric random walk.
+                        \item[\gls{acr::svm} \(\vartheta\)] This kernel takes no parameters.
+                        \item[] 
+                    \end{description}
+
+                \subparagraph{\gls*{acr::scatnet}}
+                    
                 scatnet J 3 L 8 kymatio
                 % # features = ?
                 random walk grakel
@@ -486,7 +506,7 @@
             An exception is noticed with \texttt{BUS} in \textbf{Elancourt}, where height-based features allow an increase of around \SI{9}{\percent} in recall without, practically, any loss in precision.
             Similar behaviour is noticed for \textbf{Nantes} and \textbf{Paris-13} with image-based features (+\SI{20}{\percent} in recall).
             The first case can be explained by the discrepancy in height that can be observed between under-segmented buildings.
-            The second is made clear by the difference in roof colors, in dense uniform settings (Figure~\ref{subfig::bus_2d}).
+            The second is made clear by the difference in roof colors, in dense uniform settings (Subfigure~\ref{subfig::bus_2d}).
             This helps identifying different instances of buildings.\\
 
             Figure~\ref{fig::f_score_ablation_f3} shows that all \texttt{Building errors} labels are better detected in \textbf{Elancourt}.
