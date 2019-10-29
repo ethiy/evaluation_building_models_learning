@@ -152,13 +152,13 @@ These are proposed to better model defect predictions.
 
     \subsection{\textsc{Geometric features}}
         \label{subsec::learned_evaluation::baseline::geometric}
-        The model facet set is denoted by $\mathsf{F}$.
-        $\forall (f, g) \in \mathsf{F} \times \mathsf{F} \; f \sim g$ correspond to facets $f$ and $g$ being adjacent: 
+        Given a building model \(\mathsf{M}\), the facet set is denoted by $\mathsf{F_M}$.
+        $\forall (f, g) \in \mathsf{F_M} \times \mathsf{F_M} \; f \sim g$ correspond to facets $f$ and $g$ being adjacent: 
         \textit{i.e.}, they share a common edge. As the roof topology graph in~\parencite{verma20063d}, the input building model $\mathsf{M}$ can be seen as a facet (dual) graph:
 
         \begin{equation}
         	\label{eq::model_graph}
-        	\mathsf{M} \triangleq \left(\mathsf{F}, \mathsf{E} \triangleq \left\{ \left\{f, g\right\} \subset \mathsf{F} : f \sim g \right\} \right).
+        	\mathsf{M} \triangleq \left(\mathsf{F_M}, \mathsf{E_M} \triangleq \left\{ \left\{f, g\right\} \subset \mathsf{F_M} : f \sim g \right\} \right).
         \end{equation}
 
         \begin{figure}[htbp]
@@ -172,9 +172,9 @@ These are proposed to better model defect predictions.
         \end{figure}
 
         The dual graph is illustrated in Figure~\ref{fig::geometric_features}.
-        For each facet $f \in \mathsf{F}$, we compute its degree (\textit{i.e.}, number of vertices; $f \mapsto d\left(f\right) \triangleq \left\lvert\left\{v : v\text{ is a vertex of }f\right\}\right\rvert$), its area $f \mapsto \mathscr{A}\left(f\right)$ and its circumference $f \mapsto \mathscr{C}\left(f\right)$.
+        For each facet $f \in \mathsf{F_M}$, we compute its degree (\textit{i.e.}, number of vertices; $f \mapsto d\left(f\right) \triangleq \left\lvert\left\{v : v\text{ is a vertex of }f\right\}\right\rvert$), its area $f \mapsto \mathscr{A}\left(f\right)$ and its circumference $f \mapsto \mathscr{C}\left(f\right)$.
         These are all geometric invariants with respect to $\mathbb{R}^3$ isometries, contrarily to facet centroids $\mathscr{G}\left(f\right)$ and normals $\vec{n}\left(f\right)$.
-        This is countersteped by looking, for each graph edge $e=\left\{f, g\right\} \in \mathsf{E}$, for the distance between facet centroids $\left\{f, g\right\} \mapsto \left\lVert \mathscr{G}\left(f\right) - \mathscr{G}\left(g\right) \right\rVert$ and the angle formed by their normals $\left\{f, g\right\} \mapsto \arccos\left(\vec{n}\left(f\right) \cdot \vec{n}\left(g\right)\right)$.
+        This is countersteped by looking, for each graph edge $e=\left\{f, g\right\} \in \mathsf{E_M}$, for the distance between facet centroids $\left\{f, g\right\} \mapsto \left\lVert \mathscr{G}\left(f\right) - \mathscr{G}\left(g\right) \right\rVert$ and the angle formed by their normals $\left\{f, g\right\} \mapsto \arccos\left(\vec{n}\left(f\right) \cdot \vec{n}\left(g\right)\right)$.
         Statistical characteristics are then computed over building model facets using specific functions \(\chi\), like a histogram:        
 
         \begin{equation}
@@ -202,11 +202,11 @@ These are proposed to better model defect predictions.
         \begin{equation}
         	\label{eq::geometric_features}
             v_{\text{geometry}}(\mathsf{M}) = \begin{bmatrix}
-            	\chi \left(\left(d\left(f\right)\right)_{f \in \mathsf{F}}\right)\\
-                \chi \left(\left(\mathscr{A}\left(f\right)\right)_{f \in \mathsf{F}}\right)\\
-                \chi \left(\left(\mathscr{C}\left(f\right)\right)_{f \in \mathsf{F}}\right)\\
-                \chi \left(\left( \left\lVert \mathscr{G}\left(f\right) - \mathscr{G}\left(g\right) \right\rVert \right)_{\left\{f, g\right\} \in \mathsf{E}}\right)\\
-                \chi \left(\left( \arccos\left(\vec{n}\left(f\right) \cdot \vec{n}\left(g\right)\right) \right)_{\left\{f, g\right\} \in \mathsf{E}}\right)
+            	\chi \left(\left(d\left(f\right)\right)_{f \in \mathsf{F_M}}\right)\\
+                \chi \left(\left(\mathscr{A}\left(f\right)\right)_{f \in \mathsf{F_M}}\right)\\
+                \chi \left(\left(\mathscr{C}\left(f\right)\right)_{f \in \mathsf{F_M}}\right)\\
+                \chi \left(\left( \left\lVert \mathscr{G}\left(f\right) - \mathscr{G}\left(g\right) \right\rVert \right)_{\left\{f, g\right\} \in \mathsf{E_M}}\right)\\
+                \chi \left(\left( \arccos\left(\vec{n}\left(f\right) \cdot \vec{n}\left(g\right)\right) \right)_{\left\{f, g\right\} \in \mathsf{E_M}}\right)
             \end{bmatrix}.
         \end{equation}
 
@@ -217,19 +217,19 @@ These are proposed to better model defect predictions.
 
     \subsection{\textsc{Height based features}}
         \label{subsec::learned_evaluation::baseline::height}
-        For this modality, raw depth information is provided by a \gls{acr::dsm} as a \gls{acr::2d} height grid: $dsm \in \mathbb{R}^{w\times h}$\footnote{\label{note::w_h}$w$ (\textit{resp.} $h$) is the grid width (\textit{resp.} height).}.
+        Regarding this modality, raw depth information is provided, for a building model \(\mathsf{M}\), by a \gls{acr::dsm} as a \gls{acr::2d} height grid that is cropped to fit the building footprint: $dsm \in \mathbb{R}^{w_{\mathsf{M}} \times h_{\mathsf{M}}}$\footnote{\label{note::w_h}\(w_{\mathsf{M}}\) (\textit{resp.} \(h_{\mathsf{M}}\)) is the grid width (\textit{resp.} height) and is determined by the size of the building and the resolution of the \gls{acr::dsm}.}.
         This type of reference data must date back to the same time where the building models where produced.
         Otherwise a lot of defects will result simply from change in the scenery.\\
 
         The \gls{acr::dsm} is compared to the model height~\parencite{bredif20073d,zebedin2008fusion}.
         The latter is inferred from its facets plane equations.
-        It is rasterized into an grid structure $alt \in \mathbb{R}^{w\times h}$ using the same spatial resolution as $dsm$.
-        The difference between the two height grids provides a discrepancy map (Figure~\ref{fig::residuals}).
+        It is rasterized into an grid structure $alt_{\mathsf{M}} \in \mathbb{R}^{w_{\mathsf{M}} \times h_{\mathsf{M}}}$ using the same spatial resolution as $dsm_{\mathsf{M}}$.
+        The difference between the two height grids provides a discrepancy map as shown in Subfigure~\ref{subfig::residuals}).
         A baseline approach is herein proposed relying on the statistics of pixel values computed using the $S$ functions (\textit{cf.} Figure~\ref{fig::height_based_features}).\\
 
         \begin{equation}
             \label{eq::height_based_features}
-            v_{\text{height}}\left(\mathsf{M}\right) = \chi \left( dsm - alt \right).
+            v_{\text{height}}\left(\mathsf{M}\right) = \chi \left( dsm_{\mathsf{M}} - alt_{\mathsf{M}} \right).
         \end{equation}
 
         The histogram could actually be computed for the building alone without taking into account the terrain arround it.
@@ -265,16 +265,32 @@ These are proposed to better model defect predictions.
         Indeed, classic Computer Vision techniques rely on gradient based features:~\textcite{lowe2004distinctive,dalal2005histograms}.
         This is adequate to our case where models and images are part of large heterogeneous datasets.\\
         
+        We apply this to our context by comparing building model edges to local image gradients.
+        We start by projecting building models in the nadir direction.
+        For each facet \(f \in \mathsf{F_M}\), this operation takes into account occlusions and results in:
+        \begin{description}
+            \item[A \gls{acr::2d} polygon:] If the facet is not vertical (\textit{i.e.} \(\vec{n}(f) \cdot \vec{z} \neq 0\)) and not completly occluded by other facets;
+            \item[A segment:] If the facet is vertical (\textit{i.e.} \(\vec{n}(f) \cdot \vec{z} = 0\));
+            \item[An empty polygon:] If the facet is completly occluded by other facets.
+        \end{description}
+        The last two cases are filtered out and the final projection consists in a set of polygons forming a partition of the building footprint denoted:
+        \begin{equation}
+            \label{eq::facet_projections}
+            \mathsf{F_M}^q \triangleq \{q(f): f \in \mathsf{F_M}\}
+        \end{equation}
+        where:
+        \begin{description}
+            \item[\(q\)] is the function that yields the projection of a facet if it is a polygon or an empty polygon othewise.
+        \end{description}
 
-        We apply this to our context by comparing these edges to local gradients.
-        We start by projecting building models on the orthorectified image $I$ (Figure~\ref{subfig::model_nadir_projection}).
-        For each facet, we isolate an edge $s$ (Figure~\ref{subfig::segment_gradient_collinearity}).
-        In an ideal setting, gradients computed at pixels $g$ that intersect $s$ need to be almost be collinear with its normal $\vec{n}(s)$.
-        In consequence, applying the same statistics functions $S$, we compute the distribution of the cosine similarity between the local gradient and the normal all along that $s$:
+        This projection is compared with a corresponding orthorectified image \(I_{\mathsf{M}} \in \mathbb{R}^{w_{\mathsf{M}} \times h_{\mathsf{M}} \times 3}\) as shown in Subfigure~\ref{subfig::model_nadir_projection}.
+        For each facet projection, we isolate an edge \(s\) (Figure~\ref{subfig::segment_gradient_collinearity}).
+        In an ideal setting, gradients computed at pixels $g \in I_{\mathsf{M}}$ that intersect $s$ need to be collinear with its normal $\vec{n}(s)$.
+        In consequence, applying the one of the statistics functions $\chi$ defined in Equations~\ref{eq::max_min_mean_med_extractor} or~\ref{eq::histogram_extractor}, we compute the distribution of the cosine similarity between the local gradient and the normal all along that $s$:
         
         \begin{equation}
             \label{eq::corr_seg}
-            \mathsf{D}_S(s, I) \triangleq \chi \left( \left(\frac{\nabla I\left(g\right) \cdot \vec{n}(s)}{\left\rVert \nabla I\left(g\right)\right\rVert}\right)_{\substack{g \in I \\ g \cap s \neq \emptyset}} \right).
+            \mathsf{D}_{\chi}(s, I_{\mathsf{M}}) \triangleq \chi \left( \left(\frac{\nabla I_{\mathsf{M}}\left(g\right) \cdot \vec{n}(s)}{\left\rVert \nabla I_{\mathsf{M}}\left(g\right)\right\rVert}\right)_{\substack{g \in I_{\mathsf{M}} \\ g \cap s \neq \emptyset}} \right).
         \end{equation}
 
         \begin{figure}[htpb]
@@ -303,23 +319,22 @@ These are proposed to better model defect predictions.
             \end{center}
         \end{figure}
 
-        Once the distribution is computed over a segment, it is stacked over all facet edges to define the distribution over projected facets.
-        In the case of histograms $\chi^p_{\operatorname{histogram}}$ with the same parameters (and thus the same bins), it is equivalent to summing out the previous vectors $\mathsf{D}_{\chi^p_{\operatorname{histogram}}}(s, I)$ over edges $s$ from the projection $q\left(f\right)$ of the facet $f$.
-        In order to take into account the variability of segment dimensions, this sum is normalized by segment lengths.
-
+        For each polygon \(f^q \in \mathsf{F_M}^q\), the distributions over all its edges\footnote{The empty polygons are ignored as they have no edges.} \(s \in f^q\)\footnote{This is abuse of notation.} are stacked to yield a distribution over the whole projected facet.
+        In the case of histograms $\chi^p_{\operatorname{histogram}}$ with the same parameters \(p\) (and thus the same bins), it is equivalent to summing out the previous vectors $\mathsf{D}_{\chi^p_{\operatorname{histogram}}}(s, I_{\mathsf{M}})$.
+        In order to take into account the variability of segment dimensions, this sum is normalized by segment lengths.\\
         \begin{equation}
             \label{eq::corr_fac}
-            D_{\chi^p_{\operatorname{histogram}}}\left(f, I\right) \triangleq \sum_{s \in q\left(f\right)} \left\rVert s \right\lVert \cdot \mathsf{D}_{\chi^p_{\operatorname{histogram}}}(s, I).
+            D_{\chi^p_{\operatorname{histogram}}}\left(f^q, I_{\mathsf{M}}\right) \triangleq \sum_{s \in q\left(f\right)} \left\rVert s \right\lVert \cdot \mathsf{D}_{\chi^p_{\operatorname{histogram}}}(s, I_{\mathsf{M}}).
         \end{equation}
 
-        The same can be done over all facets of a building $\mathsf{M}$ (Equation~\ref{eq::corr_bul}).
+        The same can be done over all facets of a building $\mathsf{M}$.
         The weights are added in order to take into account the geometry heterogeneity.
         The gradient to normal comparison is similar to the \gls{acr::3d} data fitting term formulated in~\parencite{li2016manhattan}.
         Once again, the model structure is partially lost when simply summing histograms over all segments.
 
         \begin{equation}
             \label{eq::corr_bul}
-            v_{\text{image}}\left(\mathsf{M}\right) = D_{\chi^p_{\operatorname{histogram}}}\left(\mathsf{M}, I\right) \triangleq \sum_{f \in \mathsf{F}} \mathscr{A}\left(q\left(f\right)\right) \cdot \mathsf{D}_{\chi^p_{\operatorname{histogram}}}(f, I).
+            v_{\text{image}}\left(\mathsf{M}\right) = D_{\chi^p_{\operatorname{histogram}}}\left(\mathsf{M}, I_{\mathsf{M}}\right) \triangleq \sum_{f^q \in \mathsf{F_M}^q} \mathscr{A}\left(f^q\right) \cdot \mathsf{D}_{\chi^p_{\operatorname{histogram}}}(f^q, I_{\mathsf{M}}).
         \end{equation}
         
         These image-based attributes are helpful for precision error detection.
@@ -400,7 +415,7 @@ These are proposed to better model defect predictions.
             In addition, theoretically the height data can be fed directly to a \gls{acr::scatnet} without requiring any normalization or preprocessing since, by construction, they can admit any type of \gls{acr::2d} signal\footnote{There are other versions of \glspl{acr::scatnet} taking one dimensional signals~\parencite{anden2014deep} or even graphs~\parencite{eickenberg2018solid}.}.
             This explains why \glspl{acr::scatnet} were chosen as a height based feature extractor.\\
 
-            From a practical standpoint, the residuals computed as in Subsection~\ref{subsec::learned_evaluation::baseline::height} come as images in different sizes \(w \times h\)\cref{note::w_h} depending on the input model.
+            From a practical standpoint, the residuals computed as in Subsection~\ref{subsec::learned_evaluation::baseline::height} come as images in different sizes \(w_{\mathsf{M}} \times h_{\mathsf{M}}\)\cref{note::w_h} depending on the input model.
             Consequently, concatenating \gls{acr::scatnet} coefficients into a single vector is going to result in variable feature vector dimensions.
             One solution is to resize all images to a certain fixed size beforehand.
             However, this solution was quickly ruled out based on few experiments.
@@ -408,11 +423,11 @@ These are proposed to better model defect predictions.
             Moreover, since \glspl{acr::scatnet} yields a great deal of coefficients that can easily surpass the number of training instances which hinders the learning ability of any classifier.
             As a consequence, we propose to add a function to help extract meaningful feature vectors with the same length.\\
 
-            Suppose we have a function \(\chi: \mathbb{R}^{w_1 \times d_1} \rightarrow \mathbb{R}^d\) such as the ones presented in Equations~\ref{eq::histogram_extractor}and~\ref{eq::max_min_mean_med_extractor} which has the same output dimension no matter the input size \(w_1 \times d_1\).
+            Suppose we have a function \(\chi: \mathbb{R}^{w_1 \times d_1} \rightarrow \mathbb{R}^d\) such as the ones presented in Equations~\ref{eq::histogram_extractor} and~\ref{eq::max_min_mean_med_extractor} which has the same output dimension no matter the input size \(w_1 \times d_1\).
             It can be applied on the output of each scattering output \(S_l[dsm - alt](\bullet, p)\):
             \begin{equation}
                 \label{eq::reduced_scattering}
-                \chi \left(S_m[dsm - alt]\left(\bullet, p_m\right)\right) \in \mathbb{R}^d.
+                \chi \left(S_m[dsm_{\mathsf{M}} - alt_{\mathsf{M}}]\left(\bullet, p_m\right)\right) \in \mathbb{R}^d.
             \end{equation}
             where:
             \begin{description}
@@ -420,29 +435,34 @@ These are proposed to better model defect predictions.
                 \item[\(p_m\)] is a valid path at layer \(l\) (\textit{cf.} Equation~\ref{eq::scatter_second}). 
             \end{description}
             
-            The resulting coefficients defined in Equation~\ref{eq::reduced_scattering} can be concatenated for all \(n_{\text{scatter}}\) computed scattering coefficients to form a feature vector:
+            The resulting coefficients defined in Equation~\ref{eq::reduced_scattering} can be concatenated for all \(n_S\) computed scattering coefficients to form a feature vector:
             \begin{equation}
                 \label{eq::scatnet_height_based_features}
                 v_{\text{scattered height}}\left(\mathsf{M}\right) = \begin{bmatrix}
-                    \chi \left(S_0[dsm - alt]\left(\bullet\right)\right)\\
+                    \chi \left(S_0[dsm_{\mathsf{M}} - alt_{\mathsf{M}}]\left(\bullet\right)\right)\\
                     \vdots\\
-                    \chi \left(S_1[dsm - alt]\left(\bullet, i_1, \theta_1\right)\right)\\
+                    \chi \left(S_1[dsm_{\mathsf{M}} - alt_{\mathsf{M}}]\left(\bullet, i_1, \theta_1\right)\right)\\
                     \vdots\\
-                    \chi \left(S_2[dsm - alt]\left(\bullet, i_1, \theta_1, i_2, \theta_2, \xi_2\right)\right)\\
+                    \chi \left(S_2[dsm_{\mathsf{M}} - alt_{\mathsf{M}}]\left(\bullet, i_1, \theta_1, i_2, \theta_2, \xi_2\right)\right)\\
                     \vdots\\
-                    \chi \left(S_m[dsm - alt]\left(\bullet, p_m\right)\right)
+                    \chi \left(S_m[dsm_{\mathsf{M}} - alt_{\mathsf{M}}]\left(\bullet, p_m\right)\right)
                 \end{bmatrix}_{
                     \substack{
-                        i1=1, 2 \dots, I \\
-                        \theta_1 \in \left\{\frac{l_1\cdot\pi}{L}: l_1=1,2\dots,L\right\}\\
-                        i_1 \leq i2 \leq I\\
-                        \theta_2 \in \left\{\frac{l_2\cdot\pi}{L}: l_2=1,2\dots,L\right\}\\
-                        \xi_2=1,2\dots,\lfloor\log_2(L)\rfloor\\
+                        i_1 \in \llbracket 1, I \rrbracket\\
+                        \theta_1 \in \frac{\pi}{L} \cdot \llbracket 1, L \rrbracket\\
+                        i_2 \in \llbracket i_1, I \rrbracket\\
+                        \theta_2 \in \frac{\pi}{L} \cdot \llbracket 1, L \rrbracket\\
+                        \xi_2 \in \llbracket 1, \lfloor\log_2(L)\rfloor \rrbracket\\
                         \vdots\\
-                        p_m
+                        \lambda_m \in \Lambda_m
                     }
-                } \in \mathbb{R}^{d \cdot n_{\text{scatter}}}.
+                } \in \mathbb{R}^{d \cdot n_S}.
             \end{equation}
+            where:
+            \begin{description}
+                \item[\(\Lambda_m\)] is the space of all possible values of parameter \(\lambda_m\) at layer \(m\).
+            \end{description}
+
             Regarding the \(\chi\) function it is taken herein as follows:
             \begin{equation}
                 \label{eq::max_min_mean_med_std_extractor}
@@ -460,11 +480,96 @@ These are proposed to better model defect predictions.
             \end{description}
 
         \subsubsection{\textsc{Height based features}}
-            \glspl{acr::scatnets} seem then to be good choice for image based feature extractors.
+            \glspl{acr::scatnet} seem then to be good choice for image based feature extractors.
             In fact, as shown in Subfigure~\ref{subfig::bus_2d}, image textures could be also useful for error detection.
             More importantly, as shown with baseline image based features (\textit{cf.} Subsection~\ref{subsec::learned_evaluation::baseline::image}), edges are key image attributes for comparing building models to orthoimages.
-            
-            morlet : good edge filters
-            rasterize nadir projection
-            either deletion (early) or as channel(late) fusion
-            same as with depth.
+            Actually, \glspl{acr::scatnet} are well suited for edge detection as they use Morlet wavelets for convolution operations (\textit{cf.} Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::scatnet}).
+            These filters are adapted to edge detection~\parencite{zhang2007radon}, as depicted in Subfigure~\ref{subfig::morlet_filters}.\\
+
+            In order to draw features comparing orthoimages to buildings models, we start first by rasterizing the borders of polygons \(f^q \in \mathsf{F_M}\) of the model into a grid structure mask:
+            \begin{equation}
+                \label{eq::borders_mask}
+                Q_{\mathsf{M}} \triangleq \left(\mathbb{1}_{g_{i,j} \cap \left(\bigcup_{f^q \in \mathsf{F_M}}f^q\right)}\right)_{\substack{i \in \llbracket 1, w_\mathsf{M} \rrbracket\\j \in \llbracket 1, w_\mathsf{M} \rrbracket}}
+            \end{equation}
+            where:
+            \begin{description}
+                \item[\(g_{i,j}\):] is the rectangle\footnote{It is usually a square as both dimensions are equal.} representing the pixel at row \(i\) and column \(j\).
+            \end{description}
+
+            Two options are possible:
+            \begin{description}
+                \item[Deletion:] Pixels \(g\) in the corresponding orthoimage which are part of a polygon border (\textit{i.e.} \(Q_{\mathsf{M}}(g) = 1\)) are made black:
+                        \begin{equation}
+                            \label{eq::deletion_orthoimage}
+                            I^{\text{dl}}_{\mathsf{M}} \triangleq I_{\mathsf{M}} \odot \left(\begin{bmatrix}
+                                1 & 1 & \dots & 1\\
+                                1 & 1 & \dots & 1\\
+                                \vdots & \vdots & \ddots & 1\\
+                                1 & 1 & \dots & 1\\
+                            \end{bmatrix} - Q_{\mathsf{M}}^{\otimes 3}\right),
+                        \end{equation}
+                        where:
+                        \begin{description}
+                            \item[\(Q_{\mathsf{M}}^{\otimes 3} = Q_{\mathsf{M}} \otimes Q_{\mathsf{M}} \otimes Q_{\mathsf{M}}\)] is the tensor obtained by stacking in depth thee copies of the same matrix \(Q_{\mathsf{M}}\);
+                            \item[\(A \odot B  = \left(A_{ij} \cdot B_{ij} \right)_{ij}\)] denotes the Hadamard/Schur product of any two matrices \(A\) and \(B\).
+                        \end{description}
+                \item[Channel:] The mask \(Q_{\mathsf{M}}\) is simply added to the orthoimage as a fourth channel:
+                        \begin{equation}
+                            \label{eq::channel_orthoimage}
+                            I^{\text{ch}}_{\mathsf{M}} \triangleq I_{\mathsf{M}} \otimes Q_{\mathsf{M}}.
+                        \end{equation}
+            \end{description}
+            The first situation corresponds to an early fusion scheme while the second represent a late fusion case.
+            Both settings are experimented with and compared later in Subsection~\ref{subsec::more_experiments::richer_features}.\\
+
+            Now we can apply the \gls{acr::scatnet} on any of the previously defined images.
+            We apply then the same post-processing to yield feature vectors with the same dimensions \(d \cdot n_S\):
+
+            \begin{description}
+                \item[Deletion:]
+                        \begin{equation}
+                            \label{eq::deletion_scanetg_image_based_features}
+                            v^{\text{dl}}_{\text{scattered image}}\left(\mathsf{M}\right) \triangleq \begin{bmatrix}
+                                \chi \left(S_0[I^{\text{dl}}_{\mathsf{M}}]\left(\bullet\right)\right)\\
+                                \vdots\\
+                                \chi \left(S_1[I^{\text{dl}}_{\mathsf{M}}]\left(\bullet, i_1, \theta_1\right)\right)\\
+                                \vdots\\
+                                \chi \left(S_2[I^{\text{dl}}_{\mathsf{M}}]\left(\bullet, i_1, \theta_1, i_2, \theta_2, \xi_2\right)\right)\\
+                                \vdots\\
+                                \chi \left(S_m[I^{\text{dl}}_{\mathsf{M}}]\left(\bullet, p_m\right)\right)
+                            \end{bmatrix}_{
+                                \substack{
+                                    i_1 \in \llbracket 1, I \rrbracket\\
+                                    \theta_1 \in \frac{\pi}{L} \cdot \llbracket 1, L \rrbracket\\
+                                    i_2 \in \llbracket i_1, I \rrbracket\\
+                                    \theta_2 \in \frac{\pi}{L} \cdot \llbracket 1, L \rrbracket\\
+                                    \xi_2 \in \llbracket 1, \lfloor\log_2(L)\rfloor \rrbracket\\
+                                    \vdots\\
+                                    \lambda_m \in \Lambda_m
+                                }
+                            }.
+                        \end{equation}
+                \item[Channel:]
+                        \begin{equation}
+                            \label{eq::channel_scatnet_image_based_features}
+                            v^{\text{ch}}_{\text{scattered image}}\left(\mathsf{M}\right) \triangleq \begin{bmatrix}
+                                \chi \left(S_0[I^{\text{ch}}_{\mathsf{M}}]\left(\bullet\right)\right)\\
+                                \vdots\\
+                                \chi \left(S_1[I^{\text{ch}}_{\mathsf{M}}]\left(\bullet, i_1, \theta_1\right)\right)\\
+                                \vdots\\
+                                \chi \left(S_2[I^{\text{ch}}_{\mathsf{M}}]\left(\bullet, i_1, \theta_1, i_2, \theta_2, \xi_2\right)\right)\\
+                                \vdots\\
+                                \chi \left(S_m[I^{\text{ch}}_{\mathsf{M}}]\left(\bullet, p_m\right)\right)
+                            \end{bmatrix}_{
+                                \substack{
+                                    i_1 \in \llbracket 1, I \rrbracket\\
+                                    \theta_1 \in \frac{\pi}{L} \cdot \llbracket 1, L \rrbracket\\
+                                    i_2 \in \llbracket i_1, I \rrbracket\\
+                                    \theta_2 \in \frac{\pi}{L} \cdot \llbracket 1, L \rrbracket\\
+                                    \xi_2 \in \llbracket 1, \lfloor\log_2(L)\rfloor \rrbracket\\
+                                    \vdots\\
+                                    \lambda_m \in \Lambda_m
+                                }
+                            }.
+                        \end{equation}
+            \end{description}
