@@ -152,14 +152,15 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             Some evaluation methods, in an effort to alleviate these issues, yield semantic labels that describe the errors of an evaluated model.
             Hereafter, are described the different types of labels that were proposed in the literature.\\
 
-            \parencite{boudet2006supervised} was the first ever work, that we are aware of, which tackles semantic labels as outputs of the evaluation .
+            \parencite{boudet2006supervised} was the first ever work, that we are aware of, which tackles semantic labels as outputs of the evaluation.
             This approach has four classes which indicate how much valid can the modeling be: ``acceptable'' and ``correct'' portray valid buildings while ``false"``and ``generalized"``are refused.
             It can be seen as a four grade based score system expressing the confidence in a building model.
             The main limitation of this method is the fact that the proposed labels do not specify what defects a model presents if it is not valid.
             It is, therefore, hard to use for model correction.
             Besides, the acceptable defect definitions depend also on each use case.
             For instance, a comunications company would be more adament on the accuracy of roof parts, which would affect wave propagation, rather than an insurance company interested in flood damage estimation.
-            This means that each use case implies a relabeling that could be potentially different from other one.\\
+            This means that each use case implies a relabeling that could be potentially different from other one.
+            \textcite{durupt2006automatic} used also the same labels to evaluate their reconstruction.\\
             
             The first hints of a fine grained semantic labeling of building model errors lay in the work of~\textcite{rottensteiner2014results}.
             This work was the first to report segmentation issues, at facet level, in labels instead of a global ratio.
@@ -260,7 +261,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
     \label{sec::state_of_the_art::mlpr}
     In this section are presented notions from statistic learning and computer vision domains that were useful for this work.
     This constitutes a simple reminder and is not a thorough survey of the field.
-    Section~\ref{subsec::state_of_the_art::mlpr::classifiers} start off with a brief description of utilized supervised classifiers in .
+    Section~\ref{subsec::state_of_the_art::mlpr::classifiers} start off with a brief description of utilized supervised classifiers.
     Second (Section~\ref{subsec::state_of_the_art::mlpr::feature_extraction}) comes a presentation of computer vision concepts on which our method is based.
     Last is discussed graph classification that was also instrumental in this work.
 
