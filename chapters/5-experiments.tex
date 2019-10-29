@@ -196,20 +196,33 @@
 
 \section{\textsc{Pipeline evaluation}}
     \label{sec::experiments::evaluation}
+    In Chapters~\ref{chap::semantic_evaluation} and~\ref{chap::learned_evaluation}, we proposed a semantic quality evaluation of building \gls{acr::3d} models through classification.
+    In the last section, we explained how we acquired our dataset, in addition to analysing the effect of the urban scene on error statistics.\\
+
+    Herein, we aim at puting our pipeline to the test using the obtained dataset.
+    In Subsection~\ref{subsec::experiments::evaluation::setup} provides all details about our experimental approach.
+    Next in Subsection~\ref{subsec::experiments::evaluation::baseline_feature_analysis}, we report some first results using the baseline features we developped.
 
     \subsection{\textsc{Experimental set-up}}
         \label{subsec::experiments::evaluation::setup}
+        In this subsection, we give detailed account of how every building block of our pipeline is parameterized.
+        We first start by discussing feature configurations, before defining the taxonomy parameters of interest and endin with a thorough description of the classification process.
 
-        \subsubsection{\textsc{Feature configuration}}
+        \subsubsection{\textsc{Feature configurations}}
             \label{subsubsec::experiments::evaluation::setup::feature_configurations}
+            We present herein the features that were used in experiments.
+            First, as we tried to prove the efficiency of the proposed learning framework, we made use different configurations using the baseline features.
+            Second, as richer features were used, new combinations were possible and are discussed hereafter.
+
             \paragraph{Baseline features}
                 The geometric features are always available.
                 As a consequence, we tested four feature configurations: ``geometric features'' (\textbf{Geom.}) only, ``geometric and height features''(\textbf{Geom.} $\cup$ \textbf{Hei.}), ``geometric and image features''(\textbf{Geom.} $\cup$ \textbf{Im.}) as well as ``geometric, height and image features''(\textbf{All.}).
                 In order to have a better compare the important of each modality, the feature vectors they produce are of the same size.
-                Actually, using the function \(\chi_{\max,\min,\operatorname{mean},\operatorname{median}}\) defined in Equation~\ref{eq::statistical_extractor}, the geometric feature vector in Equation~\ref{eq::geometric_features} is of dimension
+                Actually, using the function \(\chi_{\max,\min,\operatorname{mean},\operatorname{med}}\) defined in Equation~\ref{eq::max_min_mean_med_extractor}, the geometric feature vector in Equation~\ref{eq::geometric_features} is of dimension
                 \begin{equation*}
-                    \underbrace{4}_{\substack{\text{the output dimension}\\\text{of the function } \chi_{\max,\min,\operatorname{mean},\operatorname{median}} }} \times \underbrace{5}_{\substack{\text{the number of the facet}\\\text{graph attributes}}} = 20.
+                    \underbrace{4}_{\substack{\text{the output dimension}\\\text{of the function } \chi_{\max,\min,\operatorname{mean},\operatorname{med}} }} \times \underbrace{5}_{\substack{\text{the number of the facet}\\\text{graph attributes}}} = 20.
                 \end{equation*}
+
                 Regarding height based feature vectors their dimension depend on the histogram parameters.
                 Since we compute differences between observed and model height at terrain level also (\textit{cf.} Subsection~\ref{subsec::learned_evaluation::baseline::height}), and because these are virtually unbounded and can differ from one scene to another, the maximum possible discrepancy is limited to \SI{\pm 50}{\m} for all scenes.
                 In order to have the same feature vector dimension for this modality, the number of bins is fixed manually to \(20\).
@@ -236,28 +249,44 @@
             As a consequence, we chose \textbf{\gls{acr::elod}} = \gls{acr::lod}-2.
             If the \textbf{exclusivity} is \textsc{on}, at \textbf{\gls{acr::efin}} level 3, the second stage classification results depends on the first one.
             We are, at this stage, trying to prove the feasability, in the first place, of the proposed approach.
-            As proven in the latter experiments (\textit{cf.} Section~\ref{sec::more_experiments::finesse}), the first stage results are not good enough to test this configuration.
+            As proven in the latter experiments (\textit{cf.} Section~\ref{sec::more_experiments::finesse}), the first stage results are not good enough in order to test this configuration.
             That is why we limited the experiments to the case where the \textbf{exclusivity} is set to be \textsc{off}.
 
         \subsubsection{\textsc{Classification settings}}
+            Herein, are given extensive details how the considered classifiers (\textit{cf.} Subsection~\ref{subsec::learned_evaluation::classification::classifiers}) are applied.
+            We also provide the metrics that will help measure the accuracy of predictions.
 
             \paragraph{Classifiers}
-                As discussed in , two 
+                As discussed in Subsection~\ref{subsec::learned_evaluation::classification::classifiers}, two classifier types were considered in the experimental study.
+                As already explained beforehand in Subsection~\ref{subsec::learned_evaluation::classification::classifiers}, a one-vs-all approach is used to adapt \glspl{acr::rf} to multi-label settings.
+                The same approach was choosen to accommodate \glspl{acr::svm} to both the multi-class and the multi-label possibilities.
+                We relied upon the already available and ubequitous implementation in Python~\parencite{scikit-learn}.
+                Below we detail quantitavely the used parameters.
+                
+                \sisetup{
+                    scientific-notation = true
+                }
                 \subparagraph{\acrshort*{acr::rf}}
-                    1,000
-                    4
-                    Kernel PCA
-                    20: same dimensions
+                    A brief grid search involving a smaller set of building models and only baseline geometric features~\parencite{ennafii2018qualificationunannotated} yielded comparable results for the number of trees set in the range \numrange{850}{1000} and a maximum tree depth from \numrange{3}{5}.
+                    Given the already immense parameter search space involving all possible feature configurations, feature extraction parameters and label possibilities, the \gls{acr::rf} parameters are set to \num{1000} for the tree number and 4 for the maximum tree depth for all other experiments without performing any grid search.
+                    Regarding \gls{acr::scatnet} based features, in Subsection~\ref{subsec::more_experiments::richer_features::scatnet_baseline} were reduced using \gls{acr::pca} and Kernel\footnote{The used kernel is that same the one used with the \gls{acr::svm} classifier.} \gls{acr::pca} in order to not overwhelm the geometric features.
+                    To that end, these rich features are reduced to 20 in length to equal the dimension of baseline geometric feature vectors.
 
                 \subparagraph{\acrshort*{acr::svm}}
-                    Kernels for graphs are up
-                    Kernels for feature vectors : rbf gamma .001 to not over fit
-                    C .01 not to overpenalize
-                    MKL easymkl
-
+                    The linear \gls{acr::svm} is not well suited for the type of features that we use, even for baseline features as experiments do not yield any resuslts in time.
+                    As a consequence, the latter was left out and we experimented only with the kernel \gls{acr::svm} using the standard \gls{acr::rbf} kernel (\textit{cf.} Equation~\ref{eq::rbf_kernel}) when instances are vectors not graphs.
+                    Just as with the \gls{acr::rf} classifier, we conducted a grid search using baseline geometric features only in order to determine both parameters \(C\) and \(\gamma\) by limiting the range between \numrange[range-phrase={ and }]{1e1}{1e-3} for both.
+                    All values yielded sensibly the same scores.
+                    As a result we set these parameters as follows: \(C = \num{1e-1}\) to not overpenalize nor underfit during learning and \(\gamma = \num{1e-3}\) to avoid overfitting.
+                    Regarding \gls{acr::mkl}, we made use of the already implemented EasyMKL~\parencite{aiolli2015easymkl} approach.
+                    It was the only method, to our knowledge that was readily available library to use with Python\footnote{\href{https://github.com/IvanoLauriola/MKLpy}{MKLpy}}.
+                    \sisetup{
+                        scientific-notation = false
+                    }
+    
             \paragraph{Used metrics}
                 The overall accuracy is not interesting due to the highly unbalanced label distribution.
-                We prefer reporting recall ($Rec$) and precision ($Prec$) ratios.
+                We prefer reporting recall \(\bm{Rec}\) and precision \(\bm{Prec}\) ratios.
                 As a reminder these metrics are defined as follows:
                 \begin{align}
                     \label{eq::recall_precision}
@@ -275,7 +304,7 @@
                 We also summarize these two ratios with their harmonic mean, the F-score:
                 \begin{equation}
                     \label{eq::f_score}
-                    F_{score} \triangleq \frac{2}{\frac{1}{Rec} + \frac{1}{Prec}}.
+                    \bm{F_{score}} \triangleq \frac{2}{\frac{1}{\bm{Rec}} + \frac{1}{\bm{Prec}}}.
                 \end{equation}
                 Unless said otherwise, all experiments were conducted performing a 10-fold cross validation to avoid overfitting or underfitting issues.
                 Only test results are reported.

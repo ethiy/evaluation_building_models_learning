@@ -119,7 +119,7 @@ These are proposed to better model defect predictions.
         Both were discussed at great length in Section~\ref{sec::state_of_the_art::mlpr}.
         Hereafter, we explain how each one is used in this setting.\\
 
-        \paragraph{\acrlong*{acr::rf}}
+        \subsubsection{\acrlong*{acr::rf}}
             \gls{acr::rf} classifiers is a natural choice in our case.
             As seen in Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::rf}, this type of classifiers can manage a large number of features with different dynamics and coming from multiple modalities.
             In fact, the computed features could be geometric, image based or height based.
@@ -127,7 +127,7 @@ These are proposed to better model defect predictions.
             Relying on their bagging property, a high number of trees is required to cover most of the feature space, while a limited tree depth is needed to avoid overfitting during training.
             While the multi-class case is natively taken into account by the \gls{acr::rf} classifier, the multi-label one requires adopting a one-vs-all approach so as to address each label separately.
 
-        \paragraph{\acrshort*{acr::svm}}
+        \subsubsection{\acrshort*{acr::svm}}
             \glspl{acr::svm} do not manage well enough heterogeneity in feature vectors.
             Moreover, only binary classification is inherently handled.
             However, it offers other advantages that are not met by \gls{acr::rf}.
@@ -520,7 +520,7 @@ These are proposed to better model defect predictions.
                         \end{equation}
             \end{description}
             The first situation corresponds to an early fusion scheme while the second represent a late fusion case.
-            Both settings are experimented with and compared later in Subsection~\ref{subsec::more_experiments::richer_features}.\\
+            Both settings are experimented with and compared later in Subsection~\ref{subsec::more_experiments::richer_features::scatnet_baseline}.\\
 
             Now we can apply the \gls{acr::scatnet} on any of the previously defined images.
             We apply then the same post-processing to yield feature vectors with the same dimensions \(d \cdot n_S\):
