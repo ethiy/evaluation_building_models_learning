@@ -45,7 +45,7 @@
 
     \pgfplotsset{
         percentage plot/.style={
-            yticklabel=\pgfmathprintnumber{\tick}\,$\%$,
+            yticklabel=\(\),
         },
         percentage series/.style={
             table/y expr=(\thisrow{#1}/\thisrow{sum}*100),table/meta=#1
@@ -54,7 +54,7 @@
 
     \begin{tikzpicture}
         \begin{axis}[
-            ylabel={Feature importance},
+            yticklabels={,,},
             ybar stacked,
             bar width=8pt,
             percentage plot,
@@ -126,6 +126,9 @@
         \begin{axis}[
             xticklabels={,,},
             yticklabels={,,},
+            xtick align=outside,
+            xtick pos=left,
+            ytick pos=left,
             xmax=4.5,
             xmin=.5,
             ymax=100,
