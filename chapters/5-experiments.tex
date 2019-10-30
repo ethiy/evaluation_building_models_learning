@@ -556,21 +556,18 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
 
             \begin{figure}[htpb]
                 \centering
-                \ffigbox[\textwidth]{
+                \ffigbox[\FBwidth]{
                     \begin{subfloatrow}
-                        \ffigbox[\textwidth]{
-                            \includestandalone[mode=buildnew, width=.8\textwidth]{figures/results/feature_importance/building}
+                        \ffigbox[\FBwidth]{
+                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/feature_importance/building}
                         }{
                             \caption{
                                 \label{subfig::feature_importances_building}
                                 \texttt{Building errors.}
                             }
                         }
-                    \end{subfloatrow}
-                    \vskip1em
-                    \begin{subfloatrow}
-                        \ffigbox[\textwidth]{
-                            \includestandalone[mode=buildnew, width=\textwidth]{figures/results/feature_importance/facet}
+                        \ffigbox[\FBwidth]{
+                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/feature_importance/facet}
                         }{
                             \caption{
                                 \label{subfig::feature_importances_facet}
