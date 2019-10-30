@@ -5,11 +5,11 @@
 
 \begin{document}
     \pgfplotstableread[col sep=comma, header=false]{
-        1, 32.6, 33.3, 34.1
-        3, 32.6, 34.1, 33.3
-        5, 32.5, 34.9, 32.6
-        7, 32.6, 31.7, 35.7
-        9, 33.4, 33.4, 33.2
+        1, 46.00, 26.90, 27.09
+        2, 33.94, 33.02, 33.04
+        3, 32.38, 33.81, 33.81
+        4, 31.43, 34.27, 34.30
+        5, 32.83, 33.58, 33.59
     }\facetEl
     \pgfplotstablecreatecol[
         create col/expr={
@@ -18,30 +18,17 @@
     ]{sum}{\facetEl}
 
     \pgfplotstableread[col sep=comma, header=false]{
-        1, 35.3, 33.7, 30.9
-        3, 31.6, 33.2, 35.2
-        5, 33.3, 33.7, 33.1
-        7, 33.5, 32.0, 34.4
-        9, 33.4, 35.1, 31.5
-    }\facetNa
+        1, 42.48, 28.68, 28.85
+        2, 32.02, 34.0, 33.98
+        3, 31.81, 34.10, 34.09
+        4, 32.31, 33.87, 33.82
+        5, 30.59, 34.67, 34.74
+    }\facetNaPa
     \pgfplotstablecreatecol[
         create col/expr={
             \thisrow{1} + \thisrow{2} + \thisrow{3}
         }
-    ]{sum}{\facetNa}
-
-    \pgfplotstableread[col sep=comma, header=false]{
-        1, 32.6, 33.3, 34.1
-        3, 32.6, 34.1, 33.3
-        5, 32.5, 34.9, 32.6
-        7, 32.6, 31.7, 35.7
-        9, 33.4, 33.4, 32.2
-    }\facetPa
-    \pgfplotstablecreatecol[
-        create col/expr={
-            \thisrow{1} + \thisrow{2} + \thisrow{3}
-        }
-    ]{sum}{\facetPa}
+    ]{sum}{\facetNaPa}
 
     \pgfplotsset{
         percentage plot/.style={
@@ -57,6 +44,7 @@
             ylabel={Feature importance},
             ybar stacked,
             bar width=8pt,
+            bar shift=-4pt,
             percentage plot,
             xtick align=outside,
             xtick pos=left,
@@ -64,8 +52,8 @@
             xtick=data,
             xticklabels={FOS, FUS, FIB, FIT, FIG},
             x tick label style={font=\ttfamily},
-            xmax=9.9,
-            xmin=0.1,
+            xmax=5.5,
+            xmin=.5,
             ymax=100,
             ymin=0,
             legend style={
@@ -86,7 +74,7 @@
         \begin{axis}[
             ybar stacked,
             bar width=8pt,
-            bar shift=-8pt,
+            bar shift=4pt,
             percentage plot,
             yticklabels={,,},
             xtick align=outside,
@@ -94,34 +82,14 @@
             ytick pos=left,
             xtick=data,
             xticklabels={,,},
-            xmax=9.9,
-            xmin=0.1,
+            xmax=5.5,
+            xmin=.5,
             ymax=100,
             ymin=0
         ]
-            \addplot+ table [percentage series=1] {\facetNa};
-            \addplot+ table [percentage series=2] {\facetNa};
-            \addplot+ table [percentage series=3] {\facetNa};
-        \end{axis}
-        \begin{axis}[
-            ybar stacked,
-            bar width=8pt,
-            bar shift=8pt,
-            percentage plot,
-            yticklabels={,,},
-            xtick align=outside,
-            xtick pos=left,
-            ytick pos=left,
-            xtick=data,
-            xticklabels={,,},
-            xmax=9.9,
-            xmin=0.1,
-            ymax=100,
-            ymin=0
-        ]
-            \addplot+ table [percentage series=1] {\facetPa};
-            \addplot+ table [percentage series=2] {\facetPa};
-            \addplot+ table [percentage series=3] {\facetPa};
+            \addplot+ table [percentage series=1] {\facetNaPa};
+            \addplot+ table [percentage series=2] {\facetNaPa};
+            \addplot+ table [percentage series=3] {\facetNaPa};
         \end{axis}
         \begin{axis}[
             xticklabels={,,},
