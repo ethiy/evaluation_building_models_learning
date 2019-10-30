@@ -1160,7 +1160,12 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     The energy of the signal is concentrated along increasing scale paths: \textit{i.e.} $\forall k=1,2,\dots,m-1 \; i_{k+1} > i_k$.
                     This implies that computing coefficients along these paths is sufficient~\parencite{bruna2013invariant,sifre2013rotation,oyallon2015deep}.
                     Furthermore, only the first two layers are computed as they concentrate most the energy of the signal~\parencite{bruna2013invariant,sifre2013rotation,oyallon2015deep}.
-                    This yields an efficient way of computing a scattering transform as discussed by~\textcite{sifre2013rotation,oyallon2015deep}.\\
+                    This yields an efficient way of computing a scattering transform as discussed by~\textcite{sifre2013rotation,oyallon2015deep}.
+                    This means that total number of the possible paths is in practice:
+                    \begin{equation}
+                        \label{eq::scatnet_number_paths}
+                        n_S = \underbrace{1}_{\substack{\text{layer}\\l = 0}} + \underbrace{L \cdot I}_{\substack{\text{layer}\\l = 1}} + \underbrace{\frac{L^2\cdot I \cdot \left(I - 1\right)}{2}}_{\substack{\text{layer}\\l = 2}}.
+                    \end{equation}
 
                     \textcite{sifre2013rotation} goes on to propose a way to make the scattering invariant to scale effects also.
                     This is done by introducing a logarithm that linearizes the dependency of scattering coefficients to scales $i_1$ and $i_2$~\parencite{sifre2013rotation,oyallon2015deep}.
@@ -1331,7 +1336,12 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                                         1
                                     \end{bmatrix}.
                                 \end{equation}
-                                For this kernel to be valid, $\lambda$ should be less than the largest eigenvalue of $A_{\times}$.
+                                Let \(\lambda_{\times}\) the largest eigenvalue of \(A_{\times}\).
+                                For this kernel to be valid, the following condition must be valid:
+                                \begin{equation}
+                                    \label{eq::condition_geometric_kernel_convergence}
+                                    \lambda < \frac{1}{\lambda_{\times}}
+                                \end{equation}
                         \item $\forall k\in \mathbb{N} \; \lambda_k = \frac{\lambda^k}{k!}$: this yields the so called exponential random kernel:
                                 \begin{equation}
                                     \label{eq::geometric_random_kernel}
@@ -1454,7 +1464,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 It is defined as:
                 \begin{equation}
                     \label{eq::laplacian_graph}
-                    L \triangleq D - A
+                    \widetilde{L} \triangleq D - A
                 \end{equation}
 
                 \subparagraph{Comparing same size Laplacians}
@@ -1471,7 +1481,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         \label{eq::laplacian_kernel}
                         k_{l}(G, G') \triangleq \frac{\left\lvert \left(\frac{1}{2} \cdot \left(L^{-1}+\gamma\cdot I\right)^{-1} + \frac{1}{2} \cdot \left(L^{\prime -1}+\gamma\cdot I\right)^{-1} \right)^{-1} \right\rvert^{\frac{1}{2}}}{\left\lvert L^{-1} + \gamma \cdot I\right\rvert^{\frac{1}{4}}\cdot\left\lvert L^{\prime -1} + \gamma \cdot I\right\rvert^{\frac{1}{4}}}.
                     \end{equation}
-                    The added regulizer term is added in so as to avoid numerical issues when the one of the Laplacians has eigenvalues equal or close to zero.
+                    The \(\gamma\) regulizer term is added in so as to avoid numerical issues when the one of the Laplacians has eigenvalues equal or close to zero.
                     The Laplacian is not invariant to permutations as the graph as described in~\textcite{kondor2016multiscale}.
                     Moreover, both graphs are required to be of the same size.\\
 
@@ -1482,7 +1492,12 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         \label{eq::feature_laplacian_kernel}
                         k_{fl}(G, G') \triangleq \frac{\left\lvert \left(\frac{1}{2} \cdot S^{-1} + \frac{1}{2} \cdot S^{\prime -1} \right)^{-1} \right\rvert^{\frac{1}{2}}}{\left\lvert S\right\rvert^{\frac{1}{4}}\cdot\left\lvert S' \right\rvert^{\frac{1}{4}}}
                     \end{equation}
-                    where $S = U\cdot L^{-1}\cdot U^\intercal + \gamma \cdot I$ and $S' = U\cdot L^{\prime -1}\cdot U^\intercal + \gamma \cdot I$.\\
+                    where 
+                    \begin{description}
+                        \item[\(S =\)] \(U\cdot L^{-1}\cdot U^\intercal + \gamma \cdot I\);
+                        \item[\(S' =\)] \(U\cdot L^{\prime -1}\cdot U^\intercal + \gamma \cdot I\);
+                        \item[\(L = \)] \(\widetilde{L} + \eta \cdot I\).
+                    \end{description}
 
                 \subparagraph{Node attribute aware Laplacian comparison}
                     Up to now, only the structure of the graph is taken into account.
@@ -1547,10 +1562,10 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 In order to take advantage of the structure of the graph, attributes are propagated using a matrix $T$ giving a new graph $G_t$ at each time $t$, where $G_0 = G$.
                 If not given by the user, \(T\) is taken to be the normalized adjacency matrix $P$ (\textit{cf.} Equation~\ref{eq::normalized_adjacency_matrix}).
                 Once the attributes are propagated, the kernel from Equation~\ref{eq::simple_kernel} is computed for the new graphs.
-                At time $t_{max}$, we compute the propagation kernel:
+                At time $t_{\max}$, we compute the propagation kernel:
                 \begin{equation}
                     \label{eq::propagation_kernel}
-                    k_p(G, G') = \sum_{t=1}^{t_{max}} k_s(G_t, G_t').
+                    k_p(G, G') = \sum_{t=1}^{t_{\max}} k_s(G_t, G_t').
                 \end{equation}
                 Two points are still to be precised.
                 First, the type of base kernels to use and second, the attribute propagation scheme.\\
@@ -1577,7 +1592,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         \Sigma & is the $d_V \times d_V$ covariance matrix based on attributes $\left(a(v)\right)_{v\in V}$.
                     \end{conditions}
                     To propagate these distributions at the next iteration, the mixture coefficients are diffused using the already predefined $T$: $W_{t+1} = T\cdot W_t$.
-                    At initialization, $W_0 = I$ and hence $W_t= T^\intercal$.
+                    At initialization, $W_0 = I$ and hence $W_t= T^t$.
 
             \paragraph{Graph hopper kernel}
                 Random walk kernels, just as the basic kernels defined in Equations~\ref{eq::feature_graph_kernel_nodes} and~\ref{eq::feature_graph_kernel_edges} and propagation kernels, are instances of R-convolution kernels~\parencite{haussler1999convolution}: \textit{i.e.} they can be written as a sum of kernels of substructures of graphs.

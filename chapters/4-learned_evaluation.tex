@@ -401,6 +401,8 @@ These are proposed to better model defect predictions.
         \end{equation*} graph kernels.
         These are aggregated into one kernel using a linear combination.
         This is possible thanks to \gls{acr::mkl} as explained earlier in Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.
+        Other types of kernels were briefly experimented with, namely the Lov\'asz \(\vartheta\), Graphlet Sampling, Subgraph Matching and Shortest Path kernels.
+        However, they did not yield any valuable results and most of the time failed numerically.
         
     \subsection{\textsc{Image-like classification}}
         \label{subsec::learned_evaluation::richer_features::image}
@@ -435,7 +437,7 @@ These are proposed to better model defect predictions.
                 \item[\(p_m\)] is a valid path at layer \(l\) (\textit{cf.} Equation~\ref{eq::scatter_second}). 
             \end{description}
             
-            The resulting coefficients defined in Equation~\ref{eq::reduced_scattering} can be concatenated for all \(n_S\) computed scattering coefficients to form a feature vector:
+            The resulting coefficients defined in Equation~\ref{eq::reduced_scattering} can be concatenated for all \(n_S\) scattering paths to form a feature vector:
             \begin{equation}
                 \label{eq::scatnet_height_based_features}
                 v_{\text{scattered height}}\left(\mathsf{M}\right) = \begin{bmatrix}
@@ -450,7 +452,7 @@ These are proposed to better model defect predictions.
                     \substack{
                         i_1 \in \llbracket 1, I \rrbracket\\
                         \theta_1 \in \frac{\pi}{L} \cdot \llbracket 1, L \rrbracket\\
-                        i_2 \in \llbracket i_1, I \rrbracket\\
+                        i_2 \in \llbracket i_1 + 1, I \rrbracket\\
                         \theta_2 \in \frac{\pi}{L} \cdot \llbracket 1, L \rrbracket\\
                         \xi_2 \in \llbracket 1, \lfloor\log_2(L)\rfloor \rrbracket\\
                         \vdots\\
@@ -541,7 +543,7 @@ These are proposed to better model defect predictions.
                                 \substack{
                                     i_1 \in \llbracket 1, I \rrbracket\\
                                     \theta_1 \in \frac{\pi}{L} \cdot \llbracket 1, L \rrbracket\\
-                                    i_2 \in \llbracket i_1, I \rrbracket\\
+                                    i_2 \in \llbracket i_1 + 1, I \rrbracket\\
                                     \theta_2 \in \frac{\pi}{L} \cdot \llbracket 1, L \rrbracket\\
                                     \xi_2 \in \llbracket 1, \lfloor\log_2(L)\rfloor \rrbracket\\
                                     \vdots\\
@@ -564,7 +566,7 @@ These are proposed to better model defect predictions.
                                 \substack{
                                     i_1 \in \llbracket 1, I \rrbracket\\
                                     \theta_1 \in \frac{\pi}{L} \cdot \llbracket 1, L \rrbracket\\
-                                    i_2 \in \llbracket i_1, I \rrbracket\\
+                                    i_2 \in \llbracket i_1 + 1, I \rrbracket\\
                                     \theta_2 \in \frac{\pi}{L} \cdot \llbracket 1, L \rrbracket\\
                                     \xi_2 \in \llbracket 1, \lfloor\log_2(L)\rfloor \rrbracket\\
                                     \vdots\\
