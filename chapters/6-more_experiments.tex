@@ -329,6 +329,7 @@
                 \label{tab::ablation_f2}
                 Feature ablation study on the three datasets for the \textbf{\gls{acr::efin}} = 2 case.
                 Results are expressed in percentage.
+                All four modality configurations are compared across both family errors.
             }
         \end{table}
     
@@ -369,7 +370,7 @@
             }{
                 \caption{
                     \label{fig::f_score_f2}
-                    F-score mean and standard deviation for the feature ablation study outcomes per zone for \texttt{finesse} level 2.
+                    F-score mean and standard deviation for the feature ablation study outcomes per zone for \textbf{\gls{acr::efin}} level 2.
                 }
             }
         \end{figure}
@@ -377,8 +378,8 @@
         We start by the ablation study.
         Table~\ref{tab::ablation_f2} reveals that inserting more remote sensing modalities do not change the prediction results dramatically.
         This is perfectly illustrated, in Figure~\ref{fig::f_score_f2}, by the low variance of F-scores for the three areas of interest.
-        These results are in line with the conclusions at the \texttt{finesse} level 3.
-        In the higher \texttt{finesse} level, only \texttt{BUS}, from all \texttt{atomic} errors, was highly impacted by a change in the feature configuration.
+        These results are in line with the conclusions at the \textbf{\gls{acr::efin}} level 3.
+        In the latter, only \texttt{BUS}, from all \texttt{atomic} errors, was highly impacted by a change in the feature configuration.
         This may explain the observed low variability.
         Moreover, we can note the prevalence of \texttt{FOS}\footnote{
             Between \SIrange[range-phrase={ and }]{60}{85}{\percent} of building models, in all areas, have this defect.
@@ -386,9 +387,9 @@
             They affect between \SIrange[range-phrase={ and }]{70}{95}{\percent} of building models, depending on the urban scene.
         } in the \texttt{Facet errors} family.
         This, added to the fact that they are, in a large capacity, easily detected individually\footnote{
-            \texttt{FOS} (\textit{resp.} \texttt{FIG}) achieves more than \SI{90}{\percent} (\textit{resp.} \SI{80}{\percent}) in F-score, as depicted in Subfigure~\ref{subfig::f_score_ablation_f3_facet}
+            \texttt{FOS} (\textit{resp.} \texttt{FIG}) achieves more than \SI{90}{\percent} (\textit{resp.} \SI{80}{\percent}) in F-score, as depicted in Subfigure~\ref{subfig::f_score_ablation_f3_facet}.
         } helps understanding why the F-score reaches at least \SI{90}{\percent} for this family (Subfigure~\ref{subfig::f_score_ablation_f2}).
-        As with \texttt{finesse} level 3 experiments, \texttt{Facet errors} yields higher prediction scores than on \texttt{Building errors}.
+        As with \textbf{\gls{acr::efin}} level 3 experiments, \texttt{Facet errors} yields higher prediction scores than on \texttt{Building errors}.
         Indeed, we can see a smaller discrepancy, that is below \SI{5}{\percent}, between F-scores on different scenes for \texttt{Facet errors} than for \texttt{Building errors} with \SI{15}{\percent}.\\
 
         The transferability study (Subfigure~\ref{subfig::f_score_transferability_f2}) compares the F-scores with the ablation study provided in Subfigure~\ref{subfig::f_score_ablation_f2}.
@@ -397,10 +398,10 @@
         \texttt{Facet errors}, on the other hand, confirms, its transferability and stability, with less than \SI{5}{\percent} of discrepancy between the two extremal values.
         For this reason, we skip the generalization study, all together, at this section.\\
 
-        The representativeness study conducted for the \texttt{finesse} level 2 results in the F-scores that are illustrated in Subfigure~\ref{subfig::f_score_representativeness_f2}.
+        The representativeness study conducted for the \textbf{\gls{acr::efin}} level 2 results in the F-scores that are illustrated in Subfigure~\ref{subfig::f_score_representativeness_f2}.
         Family detection scores are very stable across all different tested split ratios.
         Moreover, in contrast to \texttt{atomic} errors results (cf. Figure~\ref{fig::f_score_representativeness_f3}), F-scores do not vary by more than \SI{1}{\percent} in mean and standard deviation.
-        This proves that at \texttt{finesse} level 2, error family prediction is evened out independent of different split ratios, as opposed to higher order errors.
+        This proves that at \textbf{\gls{acr::efin}} level 2, error family prediction is evened out independent of different split ratios, as opposed to higher order errors.
         Again, it benefits from the higher heterogeneity of the training set with multiple areas.
     
     \subsection{\textsc{Detection of erroneous models}}
@@ -437,16 +438,20 @@
                 \hline
             \end{tabular}
             \renewcommand{\arraystretch}{1}
-            \caption{\label{tab::ablation_f1}Test results expressed in percentage for the \texttt{finesse}$ =1$ case. All four configurations are compared across both family errors.}
+            \caption{
+                \label{tab::ablation_f1}
+                Test results expressed in percentage for the \textbf{\gls{acr::efin}} = 1 case.
+                All four modality configurations are compared across both family errors.
+            }
         \end{table}
         
-        For the level 1 in \texttt{finesse}, we start with the feature ablation experiments.
+        For the level 1 in \textbf{\gls{acr::efin}}, we start with the feature ablation experiments.
         Since valid samples are very rare in our case, it is expected that it will be very difficult to detect these instances.
         In consequence, in Table~\ref{tab::ablation_f1}, we choose to report correctly \texttt{Valid} buildings instead of computing the precision score in percentage.\\
             
         At this level, even more that the error family semantic degree, feature configurations have virtually no impact on test results: \textbf{Elancourt} was the only exception when image features are added to geometric ones.
         Furthermore, we confirm expectations as, at most, only 1 out of 57 (\textit{resp.} 0 out of 55 and 3 out of 21) valid instances are detected for \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
-        As a consequence, we do not report the rest of previously conducted experiments for this \texttt{finesse} level.
+        As a consequence, we do not report the rest of previously conducted experiments for this \textbf{\gls{acr::efin}} level.
         Indeed, it is senseless to compare detection transferability, generalization or representativeness if we hardly detect them at all on the same training scene.
 
 \section{\textsc{Classifier analysis}}
@@ -474,8 +479,7 @@
                     \hline
                     \texttt{FUS} & \textbf{1.90} & 54.55 & 0.63 & \textbf{66.67} & 1.61 & 50 & 1.27 & \textbf{66.67} \\
                     \hline
-                    \texttt{FIB} & \textbf{9.17} & 87.5 & 0 & ---
-                    & 8.30 & 82.61 & 7.42 & \textbf{100} \\
+                    \texttt{FIB} & \textbf{9.17} & 87.5 & 0 & --- & 8.30 & 82.61 & 7.42 & \textbf{100} \\
                     \hline
                     \texttt{FIT} & 6.67 & \textbf{100} & \textbf{8.73} & 95.24 & 3.33 & \textbf{100} & 3.33 & \textbf{100} \\
                     \hline
@@ -512,9 +516,9 @@
             \end{center}
             \caption{
                 \label{tab::rf_f3}
-                \gls{acr::rf} results on the two areas at \texttt{finesse} level 3.
+                \gls{acr::rf} results on the two areas of interest at \textbf{\gls{acr::efin}} level 3.
                 Test results are expressed in percentage.
-                All \texttt{atomic} errors are considered over all possible configurations.
+                All possible modality configurations are tested using baseline features.
             }
         \end{table}
         \begin{table}[htpb]
@@ -575,7 +579,7 @@
             \end{center}
             \caption{
                 \label{tab::svm_f3}
-                \gls{acr::svm} results on the two areas at \texttt{finesse} level 3.
+                \gls{acr::svm} results on the two areas at \textbf{\gls{acr::efin}} level 3.
             }
         \end{table}
 
@@ -650,5 +654,131 @@
 
     \subsection{\textsc{\acrshort*{acr::scatnet} to baseline comparison}}
         \label{subsec::more_experiments::richer_features::scatnet_baseline}
+        \begin{table}[htpb]
+            \small
+            \begin{center}
+                \begin{tabular}{| c | c c | c c | c c | c c |}
+                    \hline
+                    \multicolumn{9}{|c|}{\textbf{Elancourt}}\\
+                    \hline
+                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                    \cline{2-9}
+                    & $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ \\
+                    \hline
+                    \texttt{BOS} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{BUS} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{BIB} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{BIT} &  &  &  &  &  &  &  &  \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{FUS} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{FIB} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{FIT} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{FIG} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \hline
+                    \multicolumn{9}{|c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
+                    \hline
+                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                    \cline{2-9}
+                    & $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ \\
+                    \hline
+                    \texttt{BOS} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{BUS} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{BIB} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{BIT} &  &  &  &  &  &  &  &  \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{FUS} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{FIB} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{FIT} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{FIG} &  &  &  &  &  &  &  &  \\
+                    \hline
+                \end{tabular}
+            \end{center}
+            \caption{
+                \label{tab::stats_scat_rf_f3}
+                \gls{acr::rf} results on the two areas at \textbf{\gls{acr::efin}} level 3.
+                Test results are expressed in percentage.
+                All \texttt{atomic} errors are considered over all possible configurations.
+            }
+        \end{table}
+        \begin{table}[htpb]
+            \small
+            \begin{center}
+                \begin{tabular}{| c | c c | c c | c c | c c |}
+                    \hline
+                    \multicolumn{9}{|c|}{\textbf{Elancourt}}\\
+                    \hline
+                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                    \cline{2-9}
+                    & $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ \\
+                    \hline
+                    \texttt{BOS} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{BUS} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{BIB} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{BIT} &  &  &  &  &  &  &  &  \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{FUS} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{FIB} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{FIT} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{FIG} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \hline
+                    \multicolumn{9}{|c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
+                    \hline
+                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                    \cline{2-9}
+                    & $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ \\
+                    \hline
+                    \texttt{BOS} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{BUS} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{BIB} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{BIT} &  &  &  &  &  &  &  &  \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{FUS} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{FIB} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{FIT} &  &  &  &  &  &  &  &  \\
+                    \hline
+                    \texttt{FIG} &  &  &  &  &  &  &  &  \\
+                    \hline
+                \end{tabular}
+            \end{center}
+            \caption{
+                \label{tab::stats_scat_svm_f3}
+                \gls{acr::svm} results on the two areas at \textbf{\gls{acr::efin}} level 3.
+            }
+        \end{table}
+
+        
     \subsection{\textsc{Graph kernels to baseline comparison}}
     \subsection{\textsc{Graph kernels and \acrshort*{acr::scatnet} to baseline comparison}}
