@@ -583,6 +583,64 @@
             }
         \end{table}
 
+        \begin{figure}[htpb]
+            \centering
+            \ffigbox[\FBwidth]{
+                \begin{subfloatrow}[2]
+                    \ffigbox[\FBwidth]{
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/svm_rf/rf/building}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_rf_bl_building}
+                            \texttt{Building errors.}
+                        }
+                    }
+                    \ffigbox[\FBwidth]{
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/svm_rf/rf/facet}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_rf_bl_facet}
+                            \texttt{Facet errors.}
+                        }
+                    }
+                \end{subfloatrow}
+            }{
+                \caption{
+                    \label{fig::f_score_rf_bl}
+                    Mean F-score and standard deviation obtained with an \gls{acr::rf} using baseline features.
+                }
+            }
+        \end{figure}
+
+        \begin{figure}[htpb]
+            \centering
+            \ffigbox[\FBwidth]{
+                \begin{subfloatrow}[2]
+                    \ffigbox[\FBwidth]{
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/svm_rf/svm/building}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_svm_bl_building}
+                            \texttt{Building errors.}
+                        }
+                    }
+                    \ffigbox[\FBwidth]{
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/svm_rf/svm/facet}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_svm_bl_facet}
+                            \texttt{Facet errors.}
+                        }
+                    }
+                \end{subfloatrow}
+            }{
+                \caption{
+                    \label{fig::f_score_svm_bl}
+                    Mean F-score and standard deviation obtained with an \gls{acr::svm} using baseline features.
+                }
+            }
+        \end{figure}
+
         \begin{table}[htbp]
             \footnotesize 
             \centering
@@ -622,7 +680,7 @@
                         \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/svm_rf/feature_importance/building}
                     }{
                         \caption{
-                            \label{subfig::feature_importances_building}
+                            \label{subfig::feature_importances_svm_bl_building}
                             \texttt{Building errors.}
                         }
                     }
@@ -630,14 +688,14 @@
                         \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/svm_rf/feature_importance/facet}
                     }{
                         \caption{
-                            \label{subfig::feature_importances_facet}
+                            \label{subfig::feature_importances_svm_bl_facet}
                             \texttt{Facet errors.}
                         }
                     }
                 \end{subfloatrow}
             }{
                 \caption{
-                    \label{fig::feature_importances} Modality contribution for the \gls{acr::svm} classifier based on the coefficients computed by EasyMKL.
+                    \label{fig::feature_importances_svm_bl} Modality contribution for the \gls{acr::svm} classifier based on the coefficients computed by EasyMKL.
                     The first (\textit{resp.} second) column represents \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} \(\cup\) \textbf{Paris-13}).
                 }
             }

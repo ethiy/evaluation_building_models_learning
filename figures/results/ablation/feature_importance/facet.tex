@@ -5,47 +5,47 @@
 
 \begin{document}
     \pgfplotstableread[col sep=comma, header=false]{
-        1, 31.0, 34.9, 34.1
-        3, 33.0, 33.8, 33.2
-        5, 32.9, 33.8, 33.3
-        7, 32.7, 33.4, 33.8
-    }\buildingEl
-
+        1, 32.6, 33.3, 34.1
+        3, 32.6, 34.1, 33.3
+        5, 32.5, 34.9, 32.6
+        7, 32.6, 31.7, 35.7
+        9, 33.4, 33.4, 33.2
+    }\facetEl
     \pgfplotstablecreatecol[
         create col/expr={
             \thisrow{1} + \thisrow{2} + \thisrow{3}
         }
-    ]{sum}{\buildingEl}
-    
+    ]{sum}{\facetEl}
+
     \pgfplotstableread[col sep=comma, header=false]{
-        1, 33.6, 31.6, 34.8
-        3, 32.9, 34.2, 32.9
-        5, 32.2, 33.9, 33.9
-        7, 33.7, 33.5, 32.8
-    }\buildingNa
-
+        1, 35.3, 33.7, 30.9
+        3, 31.6, 33.2, 35.2
+        5, 33.3, 33.7, 33.1
+        7, 33.5, 32.0, 34.4
+        9, 33.4, 35.1, 31.5
+    }\facetNa
     \pgfplotstablecreatecol[
         create col/expr={
             \thisrow{1} + \thisrow{2} + \thisrow{3}
         }
-    ]{sum}{\buildingNa}
-    
+    ]{sum}{\facetNa}
+
     \pgfplotstableread[col sep=comma, header=false]{
-        1, 31.0, 34.9, 34.1
-        3, 33.0, 33.8, 33.2
-        5, 32.9, 33.8, 33.3
-        7, 32.7, 33.4, 33.8
-    }\buildingPa
-
+        1, 32.6, 33.3, 34.1
+        3, 32.6, 34.1, 33.3
+        5, 32.5, 34.9, 32.6
+        7, 32.6, 31.7, 35.7
+        9, 33.4, 33.4, 32.2
+    }\facetPa
     \pgfplotstablecreatecol[
         create col/expr={
             \thisrow{1} + \thisrow{2} + \thisrow{3}
         }
-    ]{sum}{\buildingPa}
+    ]{sum}{\facetPa}
 
     \pgfplotsset{
         percentage plot/.style={
-            yticklabel=\pgfmathprintnumber{\tick}\,$\%$,
+            yticklabel=\(\),
         },
         percentage series/.style={
             table/y expr=(\thisrow{#1}/\thisrow{sum}*100),table/meta=#1
@@ -54,18 +54,19 @@
 
     \begin{tikzpicture}
         \begin{axis}[
-            ylabel={Feature importance},
+            yticklabels={,,},
             ybar stacked,
             bar width=8pt,
             percentage plot,
-            xtick=data,
-            xticklabels={BOS, BUS, BIB, BIT},
-            x tick label style={font=\ttfamily},
             xtick align=outside,
             xtick pos=left,
             ytick pos=left,
-            xmax=7.9,
-            xmin=.1,
+            every axis plot/.append style={thick},
+            xtick=data,
+            xticklabels={FOS, FUS, FIB, FIT, FIG},
+            x tick label style={font=\ttfamily},
+            xmax=9.9,
+            xmin=0.1,
             ymax=100,
             ymin=0,
             legend style={
@@ -74,9 +75,9 @@
                 anchor=south
             }
         ]
-            \addplot table [percentage series=1] {\buildingEl};
-            \addplot table [percentage series=2] {\buildingEl};
-            \addplot table [percentage series=3] {\buildingEl};
+            \addplot table [percentage series=1] {\facetEl};
+            \addplot table [percentage series=2] {\facetEl};
+            \addplot table [percentage series=3] {\facetEl};
             \legend{
                 \footnotesize \strut Geometry,
                 \footnotesize \strut Height,
@@ -88,40 +89,42 @@
             bar width=8pt,
             bar shift=-8pt,
             percentage plot,
+            yticklabels={,,},
             xtick align=outside,
             xtick pos=left,
             ytick pos=left,
+            every axis plot/.append style={thick},
             xtick=data,
             xticklabels={,,},
-            yticklabels={,,},
-            xmax=7.9,
-            xmin=.1,
+            xmax=9.9,
+            xmin=0.1,
             ymax=100,
             ymin=0
         ]
-            \addplot+ table [percentage series=1] {\buildingNa};
-            \addplot+ table [percentage series=2] {\buildingNa};
-            \addplot+ table [percentage series=3] {\buildingNa};
+            \addplot+ table [percentage series=1] {\facetNa};
+            \addplot+ table [percentage series=2] {\facetNa};
+            \addplot+ table [percentage series=3] {\facetNa};
         \end{axis}
         \begin{axis}[
             ybar stacked,
             bar width=8pt,
             bar shift=8pt,
             percentage plot,
+            yticklabels={,,},
             xtick align=outside,
             xtick pos=left,
             ytick pos=left,
+            every axis plot/.append style={thick},
             xtick=data,
             xticklabels={,,},
-            yticklabels={,,},
-            xmax=7.9,
-            xmin=.1,
+            xmax=9.9,
+            xmin=0.1,
             ymax=100,
             ymin=0
         ]
-            \addplot+ table [percentage series=1] {\buildingPa};
-            \addplot+ table [percentage series=2] {\buildingPa};
-            \addplot+ table [percentage series=3] {\buildingPa};
+            \addplot+ table [percentage series=1] {\facetPa};
+            \addplot+ table [percentage series=2] {\facetPa};
+            \addplot+ table [percentage series=3] {\facetPa};
         \end{axis}
         \begin{axis}[
             xticklabels={,,},
@@ -129,6 +132,7 @@
             xtick align=outside,
             xtick pos=left,
             ytick pos=left,
+            every axis plot/.append style={thick},
             xmax=4.5,
             xmin=.5,
             ymax=100,
