@@ -5,60 +5,104 @@
 \begin{document}
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 98.97, 0.10
-        Nantes, 98.20, 0.16
-        Paris-13, 97.39, 0.40
+        1, 98.97, 0.10
+        2, 98.20, 0.16
+        3, 97.39, 0.40
     }\FOS
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 2.63, 1.04
-        Nantes, 35.29, 2.37
-        Paris-13, 79.25, 0.41
+        1, 2.63, 1.04
+        2, 35.29, 2.37
+        3, 79.25, 0.41
     }\FUS
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 11.37, 7.67
-        Nantes, 50.13, 4.10
-        Paris-13, 57.09, 0.79
+        1, 11.37, 7.67
+        2, 50.13, 4.10
+        3, 57.09, 0.79
     }\FIB
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 10.35, 4.73
-        Nantes, 0, 0
-        Paris-13, 0, 0
+        1, 10.35, 4.73
+        2, 0, 0
+        3, 0, 0
     }\FIT
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 75.88, 0.73
-        Nantes, 81.64, 0.58
-        Paris-13, 91.00, 0.38
+        1, 75.88, 0.73
+        2, 81.64, 0.58
+        3, 91.00, 0.38
     }\FIG
 
     \begin{tikzpicture} 
         \begin{axis}[
             yticklabels={,,},
-            symbolic x coords={{Elancourt}, {Nantes}, {Paris-13}},
-            xtick=data,
+            ybar,
+            xtick={data},
+            xticklabels={Elancourt, Nantes, Paris-13},
             x tick label style={rotate=60, anchor=east, yshift=-2mm, font=\bfseries},
             xtick align=outside,
-            ymax=100,
-            ymin=0,
             xtick pos=left,
             ytick pos=left,
-            every axis plot/.append style={very thick, dashed},
-            /pgfplots/error bars/error bar style={very thick},
-            /pgfplots/error bars/error mark options={very thick, rotate=90, solid},
+            ymax=100,
+            ymin=0,
+            xmin=0.5,
+            xmax=3.5,
             legend style={
                 legend columns=-2,
                 at={(.5,1.05)},
                 anchor=south
             }
         ]
-            \addplot+[no markers, green, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FOS};
-            \addplot+[no markers, cyan, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FUS};
-            \addplot+[no markers, red, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FIB};
-            \addplot+[no markers, orange, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FIT};
-            \addplot+[no markers, violet, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FIG};
+            \addplot+[
+                bar shift = -20pt,
+                fill=green!40,
+                draw=green,
+                error bars/.cd,
+                error bar style={green},
+                error mark options={green, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\FOS};
+            \addplot+[
+                bar shift = -10pt,
+                fill=cyan!40,
+                draw=cyan,
+                error bars/.cd,
+                error bar style={cyan},
+                error mark options={cyan, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\FUS};
+            \addplot+[
+                fill=red!40,
+                draw=red,
+                error bars/.cd,
+                error bar style={red},
+                error mark options={red, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\FIB};
+            \addplot+[
+                bar shift = 10pt,
+                fill=orange!40,
+                draw=orange,
+                error bars/.cd,
+                error bar style={orange},
+                error mark options={orange, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\FIT};
+            \addplot+[
+                bar shift = 20pt,
+                fill=violet!40,
+                draw=violet,
+                error bars/.cd,
+                error bar style={violet},
+                error mark options={violet, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\FIG};
             \legend{
                 \footnotesize \strut \texttt{FOS},
                 \footnotesize \strut \texttt{FUS},

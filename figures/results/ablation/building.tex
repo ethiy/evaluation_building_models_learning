@@ -5,53 +5,89 @@
 \begin{document}
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 83.52, 0.66
-        Nantes, 45.71, 1.28
-        Paris-13, 55.13, 4.10
+        1, 83.52, 0.66
+        2, 45.71, 1.28
+        3, 55.13, 4.10
     }\BOS
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 50.56, 3.26
-        Nantes, 26.11, 15.12
-        Paris-13, 18.64, 10.69
+        1, 50.56, 3.26
+        2, 26.11, 15.12
+        3, 18.64, 10.69
     }\BUS
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 23.87, 3.10
-        Nantes, 0.99, 1.14
-        Paris-13, 0, 0
+        1, 23.87, 3.10
+        2, 0.99, 1.14
+        3, 0, 0
     }\BIB
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 31.47, 8.35
-        Nantes, 3.72, 2.82
-        Paris-13, 1.89, 2.40
+        1, 31.47, 8.35
+        2, 3.72, 2.82
+        3, 1.89, 2.40
     }\BIT
 
     \begin{tikzpicture} 
         \begin{axis}[
             ylabel={F-score},
-            symbolic x coords={{Elancourt}, {Nantes}, {Paris-13}},
-            xtick=data,
+            ybar,
+            xtick={data},
+            xticklabels={Elancourt, Nantes, Paris-13},
             x tick label style={rotate=60, anchor=east, yshift=-2mm, font=\bfseries},
             xtick align=outside,
             xtick pos=left,
             ytick pos=left,
             ymax=100,
             ymin=0,
-            every axis plot/.append style={very thick},
-            /pgfplots/error bars/error bar style={very thick},
-            /pgfplots/error bars/error mark options={very thick, rotate=90},
+            xmin=0.5,
+            xmax=3.5,
             legend style={
                 legend columns=-2,
                 at={(.5,1.05)},
                 anchor=south
             }
         ]
-            \addplot+[no markers, green, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BOS};
-            \addplot+[no markers, cyan, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BUS};
-            \addplot+[no markers, red, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BIB};
-            \addplot+[no markers, orange, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BIT};
+            \addplot+[
+                bar shift = -15pt,
+                fill=green!40,
+                draw=green,
+                error bars/.cd,
+                error bar style={green},
+                error mark options={green, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\BOS};
+            \addplot+[
+                bar shift = -5pt,
+                fill=cyan!40,
+                draw=cyan,
+                error bars/.cd,
+                error bar style={cyan},
+                error mark options={cyan, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\BUS};
+            \addplot+[
+                bar shift = 5pt,
+                fill=red!40,
+                draw=red,
+                error bars/.cd,
+                error bar style={red},
+                error mark options={red, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\BIB};
+            \addplot+[
+                bar shift = 15pt,
+                fill=orange!40,
+                draw=orange,
+                error bars/.cd,
+                error bar style={orange},
+                error mark options={orange, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\BIT};
             \legend{
                 \footnotesize \strut \texttt{BOS},
                 \footnotesize \strut \texttt{BUS},
