@@ -5,45 +5,45 @@
 \begin{document}
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        20\%, 75.14, 0.53
-        30\%, 75.37, 0.74
-        40\%, 75.62, 0.93
-        50\%, 74.92, 0.26
-        60\%, 74.89, 0.48
-        70\%, 75.10, 1.04
+        2, 75.14, 0.53
+        3, 75.37, 0.74
+        4, 75.62, 0.93
+        5, 74.92, 0.26
+        6, 74.89, 0.48
+        7, 75.10, 1.04
     }\BOS
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        20\%, 46.42, 4.45
-        30\%, 46.98, 1.31
-        40\%, 47.36, 4.06
-        50\%, 42.42, 4.23
-        60\%, 47.73, 3.13
-        70\%, 46.45, 3.08
+        2, 46.42, 4.45
+        3, 46.98, 1.31
+        4, 47.36, 4.06
+        5, 42.42, 4.23
+        6, 47.73, 3.13
+        7, 46.45, 3.08
     }\BUS
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        20\%, 11.23, 7.13
-        30\%, 10.02, 3.70
-        40\%, 12.47, 3.64
-        50\%, 12.0, 1.39
-        60\%, 16.43, 4.67
-        70\%, 11.60, 3.53
+        2, 11.23, 7.13
+        3, 10.02, 3.70
+        4, 12.47, 3.64
+        5, 12.0, 1.39
+        6, 16.43, 4.67
+        7, 11.60, 3.53
     }\BIB
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        20\%, 10.75, 5.47
-        30\%, 14.67, 5.63
-        40\%, 6.09, 2.52
-        50\%, 10.00, 6.08
-        60\%, 9.77, 3.87
-        70\%, 11.22, 8.49
+        2, 10.75, 5.47
+        3, 14.67, 5.63
+        4, 6.09, 2.52
+        5, 10.00, 6.08
+        6, 9.77, 3.87
+        7, 11.22, 8.49
     }\BIT
 
     \begin{tikzpicture} 
         \begin{axis}[
             ylabel={F-score},
-            symbolic x coords={
+            xticklabels={
                 {20\%},
                 {30\%},
                 {40\%},
@@ -55,8 +55,11 @@
             xtick=data,
             ymax=100,
             ymin=0,
+            xmax=7.5,
+            xmin=1.5,
             xtick pos=left,
             ytick pos=left,
+            every axis plot/.append style={thick},
             every axis plot/.append style={very thick},
             /pgfplots/error bars/error bar style={very thick},
             /pgfplots/error bars/error mark options={very thick, rotate=90},

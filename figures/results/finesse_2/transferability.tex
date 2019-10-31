@@ -5,56 +5,75 @@
 \begin{document}
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        El. \(\rightarrow\) Na., 77.23, 0.07
-        El. \(\rightarrow\) P13, 79.79, 0.13
-        Na. \(\rightarrow\) P13, 75.76, 0.33
-        Na. \(\rightarrow\) El., 87.44, 0.27
-        P13 \(\rightarrow\) Na., 76.88, 0.62
-        P13 \(\rightarrow\) El., 89.38, 0.09
+        1, 77.23, 0.07
+        2, 79.79, 0.13
+        3, 75.76, 0.33
+        4, 87.44, 0.27
+        5, 76.88, 0.62
+        6, 89.38, 0.09
     }\BuildingTr
 
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        El. \(\rightarrow\) Na., 91.37, 0.64
-        El. \(\rightarrow\) P13, 93.47, 0.97
-        Na. \(\rightarrow\) P13, 90.76, 0.43
-        Na. \(\rightarrow\) El., 90.26, 0.20
-        P13 \(\rightarrow\) Na., 91.03, 0.24
-        P13 \(\rightarrow\) El., 91.33, 0.22
+        1, 91.37, 0.64
+        2, 93.47, 0.97
+        3, 90.76, 0.43
+        4, 90.26, 0.20
+        5, 91.03, 0.24
+        6, 91.33, 0.22
     }\FacetTr
 
     \begin{tikzpicture} 
         \begin{axis}[
             ylabel={F-score},
-            symbolic x coords={
+            ybar,
+            xticklabels={
                 {El. \(\rightarrow\) Na.},
-                {El. \(\rightarrow\) P13},
-                {Na. \(\rightarrow\) P13},
+                {El. \(\rightarrow\) P13.},
+                {Na. \(\rightarrow\) P13.},
                 {Na. \(\rightarrow\) El.},
-                {P13 \(\rightarrow\) Na.},
-                {P13 \(\rightarrow\) El.}
+                {P13.\(\rightarrow\) Na.},
+                {P13.\(\rightarrow\) El.}
             },
             xtick=data,
             x tick label style={rotate=60, anchor=east, yshift=-2mm, font=\bfseries},
             xtick align=outside,
-            ymax=100,
-            ymin=70,
             xtick pos=left,
             ytick pos=left,
-            every axis plot/.append style={very thick},
-            /pgfplots/error bars/error bar style={very thick},
-            /pgfplots/error bars/error mark options={very thick, rotate=90, solid},
+            every axis plot/.append style={thick},
+            ymax=100,
+            ymin=70,
+            xmin=0.5,
+            xmax=6.5,
             legend style={
                 legend columns=-2,
                 at={(.5,1.05)},
                 anchor=south
             }
         ]
-            \addplot+[no markers, magenta, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BuildingTr};
-            \addplot+[no markers, magenta, dashed, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\FacetTr};
+            \addplot+[
+                bar shift = -5pt,
+                fill=teal!40,
+                draw=teal,
+                error bars/.cd,
+                error bar style={teal},
+                error mark options={teal, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\BuildingTr};
+            \addplot+[
+                bar shift = 5pt,
+                fill=magenta!40,
+                draw=magenta,
+                error bars/.cd,
+                error bar style={magenta},
+                error mark options={magenta, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\FacetTr};
             \legend{
-                \footnotesize \strut \texttt{Building error},
-                \footnotesize \strut \texttt{Facet error}
+                \footnotesize \strut \texttt{Building errors},
+                \footnotesize \strut \texttt{Facet errors}
             }
         \end{axis} 
     \end{tikzpicture}

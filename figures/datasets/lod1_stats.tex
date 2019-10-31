@@ -5,10 +5,10 @@
 
 \begin{document}
     \pgfplotstableread[col sep=comma, header=false]{
-        BOS, 1342, 667
-        BUS, 473, 1536
-        BIB, 203, 1806
-        BIT, 99, 1910
+        1, 1342, 667
+        2, 473, 1536
+        3, 203, 1806
+        4, 99, 1910
     }\buildingEl
     \pgfplotstablecreatecol[
         create col/expr={
@@ -17,10 +17,10 @@
     ]{sum}{\buildingEl}
 
     \pgfplotstableread[col sep=comma, header=false]{
-        BOS, 291, 457
-        BUS, 68, 680
-        BIB, 99, 649
-        BIT, 113, 635
+        1, 291, 457
+        2, 68, 680
+        3, 99, 649
+        4, 113, 635
     }\buildingNa
     \pgfplotstablecreatecol[
         create col/expr={
@@ -29,10 +29,10 @@
     ]{sum}{\buildingNa}
 
     \pgfplotstableread[col sep=comma, header=false]{
-        BOS, 202, 276
-        BUS, 63, 415
-        BIB, 55, 423
-        BIT, 76, 402
+        1, 202, 276
+        2, 63, 415
+        3, 55, 423
+        4, 76, 402
     }\buildingPa
     \pgfplotstablecreatecol[
         create col/expr={
@@ -44,13 +44,9 @@
         percentage plot/.style={
             point meta=explicit,
             every node near coord/.append style={
-                xshift=14pt,
-                yshift=8pt,
-                anchor=east,
                 color=black,
                 align=center,
                 font=\footnotesize,
-                text width=.85cm
             },
             nodes near coords={
                 \pgfmathtruncatemacro\iszero{\originalvalue==0}
@@ -59,11 +55,11 @@
                 \fi
             },
             nodes near coords align={vertical},
-            yticklabel=\pgfmathprintnumber{\tick}\,$\%$,
             visualization depends on={y \as \originalvalue}
         },
         percentage series/.style={
-            table/y expr=(\thisrow{#1}/\thisrow{sum}*100),table/meta=#1
+            table/y expr=(\thisrow{#1} / \thisrow{sum} * 100),
+            table/meta=#1
         }
     }
 
@@ -71,28 +67,31 @@
         \begin{axis}[
             ylabel={Ratio},
             ybar,
-            height=8cm,
-            width=14cm,
-            enlarge x limits=0.2,
             percentage plot,
-            bar width=.7cm,
-            symbolic x coords={BOS, BUS, BIB, BIT},
+            bar width=10pt,
+            xticklabels={BOS, BUS, BIB, BIT},
             xtick=data,
             xtick pos=left,
             ytick pos=left,
             x tick label style={font=\ttfamily},
             ymax=100,
             ymin=0,
+            xmax=4.6,
+            xmin=.4,
             legend style={
                 legend columns=-2,
-                at={(0.5,.99)},
-                anchor=north
+                at={(.5,1.05)},
+                anchor=south
             }
         ]
             \addplot table [percentage series=1] {\buildingEl};
             \addplot table [percentage series=1] {\buildingNa};
             \addplot table [percentage series=1] {\buildingPa};
-            \legend{\strut Elancourt, \strut Nantes, \strut Paris-13}
+            \legend{
+                \strut \textbf{Elancourt},
+                \strut \textbf{Nantes},
+                \strut \textbf{Paris-13}
+            }
         \end{axis}
     \end{tikzpicture}
 \end{document}

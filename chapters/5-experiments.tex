@@ -559,25 +559,25 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                 \ffigbox[\FBwidth]{
                     \begin{subfloatrow}
                         \ffigbox[\FBwidth]{
-                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/feature_importance/building}
+                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/ablation/feature_importance/building}
                         }{
                             \caption{
-                                \label{subfig::feature_importances_building}
+                                \label{subfig::feature_importances_rf_bl_building}
                                 \texttt{Building errors.}
                             }
                         }
                         \ffigbox[\FBwidth]{
-                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/feature_importance/facet}
+                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/ablation/feature_importance/facet}
                         }{
                             \caption{
-                                \label{subfig::feature_importances_facet}
+                                \label{subfig::feature_importances_rf_bl_facet}
                                 \texttt{Facet errors.}
                             }
                         }
                     \end{subfloatrow}
                 }{
                     \caption{
-                        \label{fig::feature_importances} Modality importance computed by stacking single feature importances retrieved from the \gls{acr::rf} classifier.
+                        \label{fig::feature_importances_rf_bl} Modality importance computed by stacking single feature importances retrieved from the \gls{acr::rf} classifier.
                         The first (\textit{resp.} second and third) column represents \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
                     }
                 }

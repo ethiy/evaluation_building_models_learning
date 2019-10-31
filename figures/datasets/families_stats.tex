@@ -5,9 +5,9 @@
 
 \begin{document}
     \pgfplotstableread[col sep=comma,header=false]{
-        Unqualifiable, 62, 1947
-        Building errors, 1420, 589
-        Facet errors, 1648, 361
+        1, 62, 1947
+        2, 1420, 589
+        3, 1648, 361
     }\foneEl
     \pgfplotstablecreatecol[
         create col/expr={
@@ -16,9 +16,9 @@
     ]{sum}{\foneEl}
     
     \pgfplotstableread[col sep=comma,header=false]{
-        Unqualifiable, 56, 692
-        Building errors, 435, 313
-        Facet errors, 568, 180
+        1, 56, 692
+        2, 435, 313
+        3, 568, 180
     }\foneNa
     \pgfplotstablecreatecol[
         create col/expr={
@@ -27,9 +27,9 @@
     ]{sum}{\foneNa}
 
     \pgfplotstableread[col sep=comma,header=false]{
-        Unqualifiable, 23, 455
-        Building errors, 303, 175
-        Facet errors, 411, 67
+        1, 23, 455
+        2, 303, 175
+        3, 411, 67
     }\fonePa
     \pgfplotstablecreatecol[
         create col/expr={
@@ -41,13 +41,9 @@
         percentage plot/.style={
             point meta=explicit,
             every node near coord/.append style={
-                xshift=14pt,
-                yshift=8pt,
-                anchor=east,
                 color=black,
                 align=center,
                 font=\footnotesize,
-                text width=.85cm
             },
             nodes near coords={
                 \pgfmathtruncatemacro\iszero{\originalvalue==0}
@@ -56,7 +52,6 @@
                 \fi
             },
             nodes near coords align={vertical},
-            yticklabel=\pgfmathprintnumber{\tick}\,$\%$,
             visualization depends on={y \as \originalvalue}
         },
         percentage series/.style={
@@ -69,28 +64,31 @@
         \begin{axis}[
             ylabel={Ratio},
             ybar,
-            height=8cm,
-            width=14cm,
-            enlarge x limits=0.2,
             percentage plot,
-            bar width=.7cm,
-            symbolic x coords={Unqualifiable, Building errors, Facet errors},
+            bar width=10pt,
+            xticklabels={{Unquali-\\fiable}, Building errors, Facet errors},
             xtick=data,
             xtick pos=left,
             ytick pos=left,
             x tick label style={font=\ttfamily, text width=2cm, align=center},
             ymax=100,
             ymin=0,
+            xmax=3.5,
+            xmin=.5,
             legend style={
                 legend columns=-2,
-                at={(0.5,.99)},
-                anchor=north
+                at={(.5,1.05)},
+                anchor=south
             }
         ]
             \addplot table [percentage series=1] {\foneEl};
             \addplot table [percentage series=1] {\foneNa};
             \addplot table [percentage series=1] {\fonePa};
-            \legend{\strut Elancourt, \strut Nantes, \strut Paris-13}
+            \legend{
+                \strut \textbf{Elancourt},
+                \strut \textbf{Nantes},
+                \strut \textbf{Paris-13}
+            }
         \end{axis}
     \end{tikzpicture}
 \end{document}

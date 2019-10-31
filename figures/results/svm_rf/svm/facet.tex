@@ -5,75 +5,45 @@
 \begin{document}
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        1, 94.18, 8.17
-        3, 97.40, 0.16
-        5, 98.87, 0.02
-        7, 96.35, 1.16
-        9, 96.99, 0.92
-        11, 98.51, 0.29
+        1, 70.49, 3.45
+        2, 86.42, 2.23
     }\FOS
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        1, 14.54, 13.22
-        3, 25.57, 17.69
-        5, 4.02, 2.81
-        7, 58.33, 3.08
-        9, 49.17, 3.53
-        11, 7.84, 1.35
+        1, 42.03, 17.49
+        2, 45.75, 19.24
     }\FUS
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        1, 43.62, 16.83
-        3, 34.46, 17.46
-        5, 27.16, 11.96
-        7, 58.22, 3.16
-        9, 55.58, 3.01
-        11, 20.37, 12.16
+        1, 46.59, 24.56
+        2, 43.56, 7.50
     }\FIB
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        1, 7.74, 8.99
-        3, 0, 0
-        5, 6.78, 0.13
-        7, 0, 0
-        9, 0, 0
-        11, 6.71, 0.65
+        1, 98.44, 3.12
+        2, 98.61, 2.78
     }\FIT
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        1, 80.58, 1.53
-        3, 87.64, 0.55
-        5, 76.26, 0.20
-        7, 84.61, 5.94
-        9, 81.86, 0.92
-        11, 78.32, 0.79
+        1, 72.58, 12.03
+        2, 75.20, 8.15
     }\FIG
 
     \begin{tikzpicture} 
         \begin{axis}[
             yticklabels={,,},
             ybar,
-            width=\textwidth,
-            height=.7\textwidth,
-            xticklabels={
-                {El. \(\rightarrow\) Na.},
-                {El. \(\rightarrow\) P13.},
-                {Na. \(\rightarrow\) P13.},
-                {Na. \(\rightarrow\) El.},
-                {P13.\(\rightarrow\) Na.},
-                {P13.\(\rightarrow\) El.}
-            },
-            xtick=data,
+            xtick={data},
+            xticklabels={Elancourt, {Nantes \(\cup\) Paris-13}},
             x tick label style={rotate=60, anchor=east, yshift=-2mm, font=\bfseries},
             xtick align=outside,
-            bar width=6pt,
-            ymax=100,
-            ymin=0,
-            xmax=12,
-            xmin=0,
             xtick pos=left,
             ytick pos=left,
             every axis plot/.append style={thick},
+            ymax=100,
+            ymin=0,
+            xmin=0.7,
+            xmax=2.3,
             legend style={
                 legend columns=-2,
                 at={(.5,1.05)},
@@ -81,7 +51,7 @@
             }
         ]
             \addplot+[
-                bar shift = -12pt,
+                bar shift = -20pt,
                 fill=green!40,
                 draw=green,
                 error bars/.cd,
@@ -91,7 +61,7 @@
                 y explicit
             ] table[x=x, y=y, y error=ey] {\FOS};
             \addplot+[
-                bar shift = -6pt,
+                bar shift = -10pt,
                 fill=cyan!40,
                 draw=cyan,
                 error bars/.cd,
@@ -110,7 +80,7 @@
                 y explicit
             ] table[x=x, y=y, y error=ey] {\FIB};
             \addplot+[
-                bar shift = 6pt,
+                bar shift = 10pt,
                 fill=orange!40,
                 draw=orange,
                 error bars/.cd,
@@ -120,7 +90,7 @@
                 y explicit
             ] table[x=x, y=y, y error=ey] {\FIT};
             \addplot+[
-                bar shift = 12pt,
+                bar shift = 20pt,
                 fill=violet!40,
                 draw=violet,
                 error bars/.cd,

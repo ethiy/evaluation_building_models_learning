@@ -5,72 +5,112 @@
 \begin{document}
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        El. \(\rightarrow\) Na., 59.12, 0.13
-        El. \(\rightarrow\) P13, 57.98, 2.87
-        Na. \(\rightarrow\) P13, 74.36, 0.68
-        Na. \(\rightarrow\) El., 27.97, 2.10
-        P13 \(\rightarrow\) Na., 35.14, 1.55
-        P13 \(\rightarrow\) El., 76.53, 0.93
+        1, 59.12, 0.13
+        3, 57.98, 2.87
+        5, 74.36, 0.68
+        7, 27.97, 2.10
+        9, 35.14, 1.55
+        11, 76.53, 0.93
     }\BOS
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        El. \(\rightarrow\) Na., 12.06, 14.33
-        El. \(\rightarrow\) P13, 10.44, 15.94
-        Na. \(\rightarrow\) P13, 27.37, 7.36
-        Na. \(\rightarrow\) El., 7.08, 5.38
-        P13 \(\rightarrow\) Na., 8.29, 5.14
-        P13 \(\rightarrow\) El., 27.60, 3.92
+        1, 12.06, 14.33
+        3, 10.44, 15.94
+        5, 27.37, 7.36
+        7, 7.08, 5.38
+        9, 8.29, 5.14
+        11, 27.60, 3.92
     }\BUS
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        El. \(\rightarrow\) Na., 0, 0
-        El. \(\rightarrow\) P13, 1.75, 2.02
-        Na. \(\rightarrow\) P13, 17.68, 6.34
-        Na. \(\rightarrow\) El., 0, 0
-        P13 \(\rightarrow\) Na., 0, 0
-        P13 \(\rightarrow\) El., 27.28, 4.37
+        1, 0, 0
+        3, 1.75, 2.02
+        5, 17.68, 6.34
+        7, 0, 0
+        9, 0, 0
+        11, 27.28, 4.37
     }\BIB
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        El. \(\rightarrow\) Na., 8.26, 8.59
-        El. \(\rightarrow\) P13, 3.73, 3.15
-        Na. \(\rightarrow\) P13, 10.66, 3.12
-        Na. \(\rightarrow\) El., 17.96, 3.48
-        P13 \(\rightarrow\) Na., 23.75, 4.81
-        P13 \(\rightarrow\) El., 12.09, 4.86
+        1, 8.26, 8.59
+        3, 3.73, 3.15
+        5, 10.66, 3.12
+        7, 17.96, 3.48
+        9, 23.75, 4.81
+        11, 12.09, 4.86
     }\BIT
 
     \begin{tikzpicture} 
         \begin{axis}[
             ylabel={F-score},
-            symbolic x coords={
+            ybar,
+            width=\textwidth,
+            height=.8\textwidth,
+            xticklabels={
                 {El. \(\rightarrow\) Na.},
-                {El. \(\rightarrow\) P13},
-                {Na. \(\rightarrow\) P13},
+                {El. \(\rightarrow\) P13.},
+                {Na. \(\rightarrow\) P13.},
                 {Na. \(\rightarrow\) El.},
-                {P13 \(\rightarrow\) Na.},
-                {P13 \(\rightarrow\) El.}
+                {P13.\(\rightarrow\) Na.},
+                {P13.\(\rightarrow\) El.}
             },
             xtick=data,
             x tick label style={rotate=60, anchor=east, yshift=-2mm, font=\bfseries},
             xtick align=outside,
+            bar width=8pt,
             ymax=100,
             ymin=0,
+            xmax=12,
+            xmin=0,
             xtick pos=left,
             ytick pos=left,
-            every axis plot/.append style={very thick},
-            /pgfplots/error bars/error bar style={very thick},
-            /pgfplots/error bars/error mark options={very thick, rotate=90},
+            every axis plot/.append style={thick},
             legend style={
                 legend columns=-2,
                 at={(.5,1.05)},
                 anchor=south
             }
         ]
-            \addplot+[no markers, green, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BOS};
-            \addplot+[no markers, cyan, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BUS};
-            \addplot+[no markers, red, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BIB};
-            \addplot+[no markers, orange, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\BIT};
+            \addplot+[
+                bar shift = -12pt,
+                fill=green!40,
+                draw=green,
+                error bars/.cd,
+                error bar style={green},
+                error mark options={green, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\BOS};
+            \addplot+[
+                bar shift = -4pt,
+                fill=cyan!40,
+                draw=cyan,
+                error bars/.cd,
+                error bar style={cyan},
+                error mark options={cyan, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\BUS};
+            \addplot+[
+                bar shift = 4pt,
+                fill=red!40,
+                draw=red,
+                error bars/.cd,
+                error bar style={red},
+                error mark options={red, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\BIB};
+            \addplot+[
+                bar shift = 12pt,
+                fill=orange!40,
+                draw=orange,
+                error bars/.cd,
+                error bar style={orange},
+                error mark options={orange, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\BIT};
             \legend{
                 \footnotesize \strut \texttt{BOS},
                 \footnotesize \strut \texttt{BUS},

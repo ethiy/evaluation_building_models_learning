@@ -5,41 +5,31 @@
 \begin{document}
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        1, 98.27, 0.18
-        2, 97.58, 0.57
-        3, 97.06, 0.54
-    }\FOS
+        1, 83.52, 0.66
+        2, 58.27, 4.95
+    }\BOS
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        1, 7.31, 7.46
-        2, 38.19, 2.15
-        3, 47.39, 1.13
-    }\FUS
+        1, 50.56, 3.26
+        2, 33.81, 14.99
+    }\BUS
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        1, 34.04, 20.18
-        2, 35.82, 14.33
-        3, 36.36, 14.41
-    }\FIB
+        1, 23.87, 3.10
+        2, 1.93, 1.66
+    }\BIB
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        1, 5.97, 0.10
-        2, 0, 0
-        3, 0, 0
-    }\FIT
-    \pgfplotstableread[col sep=comma]{
-        x, y, ey
-        1, 80.77, 0.15
-        2, 82.47, 0.36
-        3, 81.65, 0.89
-    }\FIG
+        1, 31.47, 8.35
+        2, 4.60, 4.48
+    }\BIT
 
     \begin{tikzpicture} 
         \begin{axis}[
-            yticklabels={,,},
+            ylabel={F-score},
             ybar,
-            xticklabels={{Elancourt}, {Nantes}, {Paris-13}},
-            xtick=data,
+            xtick={data},
+            xticklabels={Elancourt, {Nantes \(\cup\) Paris-13}},
             x tick label style={rotate=60, anchor=east, yshift=-2mm, font=\bfseries},
             xtick align=outside,
             xtick pos=left,
@@ -47,8 +37,8 @@
             every axis plot/.append style={thick},
             ymax=100,
             ymin=0,
-            xmin=0.55,
-            xmax=3.45,
+            xmin=0.7,
+            xmax=2.3,
             legend style={
                 legend columns=-2,
                 at={(.5,1.05)},
@@ -56,7 +46,7 @@
             }
         ]
             \addplot+[
-                bar shift = -20pt,
+                bar shift = -15pt,
                 fill=green!40,
                 draw=green,
                 error bars/.cd,
@@ -64,9 +54,9 @@
                 error mark options={green, rotate=90},
                 y dir=both,
                 y explicit
-            ] table[x=x, y=y, y error=ey] {\FOS};
+            ] table[x=x, y=y, y error=ey] {\BOS};
             \addplot+[
-                bar shift = -10pt,
+                bar shift = -5pt,
                 fill=cyan!40,
                 draw=cyan,
                 error bars/.cd,
@@ -74,8 +64,9 @@
                 error mark options={cyan, rotate=90},
                 y dir=both,
                 y explicit
-            ] table[x=x, y=y, y error=ey] {\FUS};
+            ] table[x=x, y=y, y error=ey] {\BUS};
             \addplot+[
+                bar shift = 5pt,
                 fill=red!40,
                 draw=red,
                 error bars/.cd,
@@ -83,9 +74,9 @@
                 error mark options={red, rotate=90},
                 y dir=both,
                 y explicit
-            ] table[x=x, y=y, y error=ey] {\FIB};
+            ] table[x=x, y=y, y error=ey] {\BIB};
             \addplot+[
-                bar shift = 10pt,
+                bar shift = 15pt,
                 fill=orange!40,
                 draw=orange,
                 error bars/.cd,
@@ -93,23 +84,12 @@
                 error mark options={orange, rotate=90},
                 y dir=both,
                 y explicit
-            ] table[x=x, y=y, y error=ey] {\FIT};
-            \addplot+[
-                bar shift = 20pt,
-                fill=violet!40,
-                draw=violet,
-                error bars/.cd,
-                error bar style={violet},
-                error mark options={violet, rotate=90},
-                y dir=both,
-                y explicit
-            ] table[x=x, y=y, y error=ey] {\FIG};
+            ] table[x=x, y=y, y error=ey] {\BIT};
             \legend{
-                \footnotesize \strut \texttt{FOS},
-                \footnotesize \strut \texttt{FUS},
-                \footnotesize \strut \texttt{FIB},
-                \footnotesize \strut \texttt{FIT},
-                \footnotesize \strut \texttt{FIG}
+                \footnotesize \strut \texttt{BOS},
+                \footnotesize \strut \texttt{BUS},
+                \footnotesize \strut \texttt{BIB},
+                \footnotesize \strut \texttt{BIT}
             }
         \end{axis} 
     \end{tikzpicture}

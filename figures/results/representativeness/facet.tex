@@ -5,54 +5,54 @@
 \begin{document}
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        20\%, 98.55, 0.13
-        30\%, 98.57, 0.19
-        40\%, 98.52, 0.22
-        50\%, 98.62, 0.19
-        60\%, 98.41, 0.47
-        70\%, 98.73, 0.09
+        2, 98.55, 0.13
+        3, 98.57, 0.19
+        4, 98.52, 0.22
+        5, 98.62, 0.19
+        6, 98.41, 0.47
+        7, 98.73, 0.09
     }\FOS
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        20\%, 44.38, 5.50
-        30\%, 45.30, 4.73
-        40\%, 46.15, 0.97
-        50\%, 50.05, 2.38
-        60\%, 48.27, 3.36
-        70\%, 44.65, 2.02
+        2, 44.38, 5.50
+        3, 45.30, 4.73
+        4, 46.15, 0.97
+        5, 50.05, 2.38
+        6, 48.27, 3.36
+        7, 44.65, 2.02
     }\FUS
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        20\%, 25.55, 10.93
-        30\%, 33.95, 6.39
-        40\%, 38.99, 3.76
-        50\%, 37.53, 5.89
-        60\%, 37.03, 10.57
-        70\%, 34.98, 10.44
+        2, 25.55, 10.93
+        3, 33.95, 6.39
+        4, 38.99, 3.76
+        5, 37.53, 5.89
+        6, 37.03, 10.57
+        7, 34.98, 10.44
     }\FIB
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        20\%, 2.40, 2.80
-        30\%, 5.96, 5.13
-        40\%, 1.72, 3.45
-        50\%, 2.17, 4.35
-        60\%, 2.27, 4.54
-        70\%, 5.00, 5.77
+        2, 2.40, 2.80
+        3, 5.96, 5.13
+        4, 1.72, 3.45
+        5, 2.17, 4.35
+        6, 2.27, 4.54
+        7, 5.00, 5.77
     }\FIT
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        20\%, 79.49, 0.37
-        30\%, 80.20, 0.74
-        40\%, 80.03, 1.11
-        50\%, 80.52, 0.74
-        60\%, 80.17, 1.84
-        70\%, 79.45, 1.37
+        2, 79.49, 0.37
+        3, 80.20, 0.74
+        4, 80.03, 1.11
+        5, 80.52, 0.74
+        6, 80.17, 1.84
+        7, 79.45, 1.37
     }\FIG
 
     \begin{tikzpicture} 
         \begin{axis}[
             yticklabels={,,},
-            symbolic x coords={
+            xticklabels={
                 {20\%},
                 {30\%},
                 {40\%},
@@ -64,8 +64,11 @@
             xtick align=outside,
             ymax=100,
             ymin=0,
+            xmax=7.5,
+            xmin=1.5,
             xtick pos=left,
             ytick pos=left,
+            every axis plot/.append style={thick},
             every axis plot/.append style={very thick, dashed},
             /pgfplots/error bars/error bar style={very thick},
             /pgfplots/error bars/error mark options={very thick, rotate=90, solid},

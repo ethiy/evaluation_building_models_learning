@@ -5,42 +5,62 @@
 \begin{document}
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 92.26, 0.09
-        Nantes, 76.26, 0.66
-        Paris-13, 80.60, 0.0
+        1, 92.26, 0.09
+        2, 76.26, 0.66
+        3, 80.60, 0.0
     }\Building
 
     \pgfplotstableread[col sep=comma]{
         x, y, ey
-        Elancourt, 91.08, 0.24
-        Nantes, 92.78, 0.16
-        Paris-13, 94.99, 0.0
+        1, 91.08, 0.24
+        2, 92.78, 0.16
+        3, 94.99, 0.0
     }\Facet
+
     \begin{tikzpicture} 
         \begin{axis}[
             ylabel={F-score},
-            symbolic x coords={{Elancourt}, {Nantes}, {Paris-13}},
+            ybar,
+            xticklabels={{Elancourt}, {Nantes}, {Paris-13}},
             xtick=data,
             x tick label style={rotate=60, anchor=east, yshift=-2mm, font=\bfseries},
             xtick align=outside,
-            ymax=100,
-            ymin=70,
             xtick pos=left,
             ytick pos=left,
-            every axis plot/.append style={very thick},
-            /pgfplots/error bars/error bar style={very thick},
-            /pgfplots/error bars/error mark options={very thick, rotate=90, solid},
+            every axis plot/.append style={thick},
+            ymax=100,
+            ymin=70,
+            xmin=0.5,
+            xmax=3.5,
             legend style={
                 legend columns=-2,
                 at={(.5,1.05)},
                 anchor=south
             }
         ]
-            \addplot+[no markers, magenta, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\Building};
-            \addplot+[no markers, magenta, dashed, error bars/.cd, y dir=both, y explicit] table[x=x, y=y, y error=ey] {\Facet};
+            \addplot+[
+                bar shift = -5pt,
+                fill=teal!40,
+                draw=teal,
+                error bars/.cd,
+                error bar style={teal},
+                error mark options={teal, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\Building};
+            \addplot+[
+                bar shift = 5pt,
+                fill=magenta!40,
+                draw=magenta,
+                error bars/.cd,
+                error bar style={magenta},
+                error mark options={magenta, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\Facet};
             \legend{
-                \footnotesize \strut \texttt{Building error},
-                \footnotesize \strut \texttt{Facet error}
+                \footnotesize \strut \texttt{Building errors},
+                \footnotesize \strut \texttt{Facet errors}
             }
         \end{axis} 
     \end{tikzpicture}

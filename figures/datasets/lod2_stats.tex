@@ -5,11 +5,11 @@
 
 \begin{document}
     \pgfplotstableread[col sep=comma, header=false]{
-        FOS, 1648, 361
-        FUS, 315, 1694
-        FIB, 229, 1780
-        FIT, 30, 1979
-        FIG, 1187, 822
+        1, 1648, 361
+        2, 315, 1694
+        3, 229, 1780
+        4, 30, 1979
+        5, 1187, 822
     }\facetEl
     \pgfplotstablecreatecol[
         create col/expr={
@@ -18,11 +18,11 @@
     ]{sum}{\facetEl}
 
     \pgfplotstableread[col sep=comma, header=false]{
-        FOS, 478, 270
-        FUS, 210, 538
-        FIB, 164, 584
-        FIT, 11, 737
-        FIG, 446, 302
+        1, 478, 270
+        2, 210, 538
+        3, 164, 584
+        4, 11, 737
+        5, 446, 302
     }\facetNa
     \pgfplotstablecreatecol[
         create col/expr={
@@ -31,11 +31,11 @@
     ]{sum}{\facetNa}
     
     \pgfplotstableread[col sep=comma, header=false]{
-        FOS, 249, 229
-        FUS, 275, 203
-        FIB, 144, 334
-        FIT, 6, 472
-        FIG, 383, 95
+        1, 249, 229
+        2, 275, 203
+        3, 144, 334
+        4, 6, 472
+        5, 383, 95
     }\facetPa
     \pgfplotstablecreatecol[
         create col/expr={
@@ -47,13 +47,11 @@
         percentage plot/.style={
             point meta=explicit,
             every node near coord/.append style={
-                xshift=14pt,
-                yshift=8pt,
-                anchor=east,
+                yshift=-2pt,
+                anchor=south,
                 color=black,
                 align=center,
-                font=\footnotesize,
-                text width=.85cm
+                font=\scriptsize,
             },
             nodes near coords={
                 \pgfmathtruncatemacro\iszero{\originalvalue==0}
@@ -62,11 +60,11 @@
                 \fi
             },
             nodes near coords align={vertical},
-            yticklabel=\pgfmathprintnumber{\tick}\,$\%$,
             visualization depends on={y \as \originalvalue}
         },
         percentage series/.style={
-            table/y expr=(\thisrow{#1}/\thisrow{sum}*100),table/meta=#1
+            table/y expr=(\thisrow{#1} / \thisrow{sum} * 100),
+            table/meta=#1
         }
     }
 
@@ -74,28 +72,33 @@
         \begin{axis}[
             ylabel={Ratio},
             ybar,
-            height=8cm,
-            width=14cm,
-            enlarge x limits=0.2,
             percentage plot,
-            bar width=.5cm,
-            symbolic x coords={FOS, FUS, FIB, FIT, FIG},
+            width=\textwidth,
+            height=.8\textwidth,
+            bar width=14pt,
+            xticklabels={FOS, FUS, FIB, FIT, FIG},
             xtick=data,
             xtick pos=left,
             ytick pos=left,
             x tick label style={font=\ttfamily},
             ymax=100,
             ymin=0,
+            xmax=5.5,
+            xmin=0.5,
             legend style={
                 legend columns=-2,
-                at={(0.5,.99)},
-                anchor=north
+                at={(.5,1.05)},
+                anchor=south
             }
         ]
-            \addplot table [percentage series=1] {\facetEl};
-            \addplot table [percentage series=1] {\facetNa};
-            \addplot table [percentage series=1] {\facetPa};
-            \legend{\strut Elancourt, \strut Nantes, \strut Paris-13}
+            \addplot+ table [percentage series=1] {\facetEl};
+            \addplot+ table [percentage series=1] {\facetNa};
+            \addplot+ table [percentage series=1] {\facetPa};
+            \legend{
+                \strut \textbf{Elancourt},
+                \strut \textbf{Nantes},
+                \strut \textbf{Paris-13}
+            }
         \end{axis}
     \end{tikzpicture}
 \end{document}
