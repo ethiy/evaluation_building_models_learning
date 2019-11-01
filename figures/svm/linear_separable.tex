@@ -9,6 +9,19 @@
 
 
 \begin{document}
+    \tikzset{
+        external/system call={
+            pdflatex -save-size=80000 
+            -pool-size=10000000 
+            -extra-mem-top=50000000 
+            -extra-mem-bot=10000000 
+            -main-memory=90000000 
+            \tikzexternalcheckshellescape 
+            -halt-on-error 
+            -interaction=batchmode
+            -jobname "\image" "\texsource"
+        }
+    } 
     \pgfplotsset{every axis/.append style={
         font=\footnotesize,
         line width=1pt,
