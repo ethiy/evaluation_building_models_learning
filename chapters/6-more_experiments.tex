@@ -789,23 +789,23 @@
                         \cline{2-13}
                         & $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ &  $\bm{Rec}$ & $\bm{Prec}$ \\
                         \hline
-                        \texttt{BOS} & 97.67 & 86.44 &  &  &  &  &  &  &  &  &  &  \\
+                        \texttt{BOS} & 97.67 & 86.44 & 97.07 & 81.99 & 95.12 & 86.43 & 97.15 & 83.16 & 91.67 & 89.71 & \textbf{99.25} & \textbf{100} \\
                         \hline
-                        \texttt{BUS} & 32.27 & 86.85 &  &  &  &  &  &  &  &  &  &  \\
+                        \texttt{BUS} & 32.27 & 86.85 & 89.81 & 46.48 & 60.08 & 92.18 & 89.60 & 47.42 & 30.79 & 90.63 & \textbf{100} & \textbf{96.71}\\
                         \hline
-                        \texttt{BIB} & 97.02 & 52.27 &  &  &  &  &  &  &  &  &  &  \\
+                        \texttt{BIB} & 97.02 & 52.27 & 89.60 & 44.80 & 98.51 & 25.68 & 97.03 & 30.53 & 91.13 & 90.69 & \textbf{100} & \textbf{100} \\
                         \hline
-                        \texttt{BIT} & 100 & 73.88 &  &  &  &  &  &  &  &  &  &  \\
+                        \texttt{BIT} & 100 & 73.88 & 91.84 & 38.96 & 98.98 & 82.20 & 94.90 & 46.5 & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} \\
                         \specialrule{.2em}{.1em}{.1em}
-                        \texttt{FOS} & 53.88 & 99.71 &  &  &  &  &  &  &  &  &  &  \\
+                        \texttt{FOS} & 53.88 & 99.71 & 70.22 & 87.42 & 94.17 & 97.04 & 78.46 & 88.05 & 54.59 & 99.72 & \textbf{99.92} & \textbf{99.92} \\
                         \hline
-                        \texttt{FUS} & 96.49 & 52.24 &  &  &  &  &  &  &  &  &  &  \\
+                        \texttt{FUS} & 96.49 & 52.24 & 96.82 & 40.92 & 95.59 & 62.26 & 94.27 & 58.85 & 98.09 & 51.85 & \textbf{100} & \textbf{99.68} \\
                         \hline
-                        \texttt{FIB} & 33.77 & 74.03 &  &  &  &  &  &  &  &  &  &  \\
+                        \texttt{FIB} & 33.77 & 74.03 & 31.58 & 74.23 & 89.04 & 81.53 & 87.72 & 81.97 & 17.98 & 89.13 & \textbf{100} & \textbf{98.28} \\
                         \hline
-                        \texttt{FIT} & 100 & 88.24 &  &  &  &  &  &  &  &  &  &  \\
+                        \texttt{FIT} & 100 & 88.24 & 100 & 88.24 & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} \\
                         \hline
-                        \texttt{FIG} & 84.57 & 88.47 &  &  &  &  &  &  &  &  &  &  \\
+                        \texttt{FIG} & 84.57 & 88.47 & 86.28 & 85.56 & 64.92 & 91.30 & 68.31 & 91.49 & 68.56 & 83.75 & \textbf{99.32} & \textbf{99.66} \\
                         \hline
                         \hline
                         \multicolumn{9}{|c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
@@ -837,7 +837,6 @@
                 \caption{
                     \label{tab::stats_scat_svm_f3}
                     \gls{acr::svm} results, expressed in percentage, on the two areas at \textbf{\gls{acr::efin}} level 3.
-                    For \textbf{S-Hei.} and \textbf{Im.}, we replaced the baseline features with \gls{acr::scatnet} based ones.
                 }
             \end{table}
 
@@ -851,24 +850,24 @@
                     \hline
                     & Deletion & Channel & Deletion & Channel & Deletion & Channel & Deletion & Channel\\
                     \hline
-                    \texttt{BOS} & 85.06 \(\pm\) 0.74 & 85.12 \(\pm\) 0.82 & 57.97 \(\pm\) 6.02 & 60.65 \(\pm\) 1.66 &  &  &  &  \\
+                    \texttt{BOS} & 84.88 \(\pm\) 0.71 & 85.28 \(\pm\) 0.89 & 57.42 \(\pm\) 3.46 & 59.24 \(\pm\) 3.44 & 90.20 \(\pm\) 1.22 & 92.73 \(\pm\) 4.74 &  &  \\
                     \hline
-                    \texttt{BUS} & 54.26 \(\pm\) 9.56 & 56.74 \(\pm\) 10.34 & 28.22 \(\pm\) 12.25 & 40.32 \(\pm\) 9.11 &  &  &  &  \\
+                    \texttt{BUS} & 54.87 \(\pm\) 10.93 & 56.74 \(\pm\) 9.29 & 29.80 \(\pm\) 19.37 & 29.87 \(\pm\) 19.42 & 60.77 \(\pm\) 10.54 & 63.15 \(\pm\) 24.46 &  &  \\
                     \hline
-                    \texttt{BIB} & 17.11 \(\pm\) 6.30 & 17.41 \(\pm\) 6.71 & 1.71 \(\pm\) 1.96 & 2.57 \(\pm\) 1.28 &  &  &  &  \\
+                    \texttt{BIB} & 15.49 \(\pm\) 5.95 & 22.49 \(\pm\) 2.24 & 2.23 \(\pm\) 2.63 & 4.46 \(\pm\) 0.71 & 53.71 \(\pm\) 12.38 & 79.65 \(\pm\) 18.93 &  &  \\
                     \hline
-                    \texttt{BIT} & 48.41 \(\pm\) 11.22 & 48.85 \(\pm\) 11.41 & 5.43 \(\pm\) 5.09 & 6.13 \(\pm\) 4.00 &  &  &  &  \\
+                    \texttt{BIT} & 47.63 \(\pm\) 12.80 & 51.23 \(\pm\) 8.50 & 9.68 \(\pm\) 6.84 & 8.72 \(\pm\) 6.03 & 72.98 \(\pm\) 17.06 & 84.92 \(\pm\) 21.35 &  &  \\
                     \hline
                     \hline
-                    \texttt{FOS} & 98.79 \(\pm\) 0.57 & 98.80 \(\pm\) 0.58 & 94.10 \(\pm\) 7.48 & 98.51 \(\pm\) 0.16 &  &  &  &  \\
+                    \texttt{FOS} & 98.63 \(\pm\) 0.51 & 99.25 \(\pm\) 0.23 & 97.22 \(\pm\) 1.09 & 98.32 \(\pm\) 0.52 & 81.60 \(\pm\) 10.75 & 79.58 \(\pm\) 14.03 &  &  \\
                     \hline
-                    \texttt{FUS} & 8.01 \(\pm\) 3.02 & 10.38 \(\pm\) 7.10 & 60.53 \(\pm\) 20.93 & 72.62 \(\pm\) 0.25 &  &  &  &  \\
+                    \texttt{FUS} & 7.45 \(\pm\) 3.17 & 10.55 \(\pm\) 8.16 & 71.95 \(\pm\) 1.33 & 73.17 \(\pm\) 0.21 & 68.29 \(\pm\) 7.83 & 73.25 \(\pm\) 18.38 &  &  \\
                     \hline
-                    \texttt{FIB} & 8.22 \(\pm\) 10.25 & 8.07 \(\pm\) 10.02 & 52.84 \(\pm\) 19.82 & 66.08 \(\pm\) 3.17 &  &  &  &  \\
+                    \texttt{FIB} & 4.80 \(\pm\) 7.90 & 15.34 \(\pm\) 9.38 & 57.09 \(\pm\) 10.40 & 64.88 \(\pm\) 16.29 & 65.14 \(\pm\) 22.87 & 54.94 \(\pm\) 30.36 &  &  \\
                     \hline
-                    \texttt{FIT} & 28.61 \(\pm\) 12.60 & 27.45 \(\pm\) 13.94 & 11.55 \(\pm\) 0.38 &  14.86 \(\pm\) 5.36 &  &  &  &  \\
+                    \texttt{FIT} & 31.08 \(\pm\) 13.08 & 19.61 \(\pm\) 10.19 & 16.99 \(\pm\) 6.04 & 25.88 \(\pm\) 16.30 & 96.88 \(\pm\) 3.61 & 96.88 \(\pm\) 3.61 &  &  \\
                     \hline
-                    \texttt{FIG} & 82.15 \(\pm\) 3.10 & 82.32 \(\pm\) 3.17 & 87.01 \(\pm\) 2.27 & 88.55 \(\pm\) 0.43 &  &  &  &  \\
+                    \texttt{FIG} & 81.95 \(\pm\) 3.54 & 81.77 \(\pm\) 3.43 & 89.77 \(\pm\) 1.09 & 90.09 \(\pm\) 1.34 & 81.62 \(\pm\) 5.37 & 86.82 \(\pm\) 9.86 &  &  \\
                     \hline
                 \end{tabular}
                 \caption{\label{tab::f_score_rf_vs_svm_f3} Mean F-score and standard deviation using \gls{acr::rf} and \gls{acr::svm}.}
