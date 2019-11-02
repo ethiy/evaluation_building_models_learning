@@ -1,0 +1,112 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
+\begin{document}
+    \pgfplotstableread[col sep=comma, header=false]{
+        1, 50.29, 7.82, 41.90
+        2, 51.81, 1.96, 46.23
+        3, 45.65, 6.03, 48.32
+        4, 47.16, 1.92, 50.72
+        5, 48.65, 49.07, 2.30
+    }\facetEl
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2} + \thisrow{3}
+        }
+    ]{sum}{\facetEl}
+
+    \pgfplotstableread[col sep=comma, header=false]{
+        1, 51.94, 4.45, 43.60
+        2, 42.60, 3.63, 53.77
+        3, 47.85, 1.70, 50.44
+        4, 44.23, 2.47, 53.30
+        5, 42.10, 2.34, 55.55
+    }\facetNaPa
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2} + \thisrow{3}
+        }
+    ]{sum}{\facetNaPa}
+
+    \pgfplotsset{
+        percentage plot/.style={
+            yticklabel=\(\),
+        },
+        percentage series/.style={
+            table/y expr=(\thisrow{#1}/\thisrow{sum}*100),table/meta=#1
+        }
+    }
+
+    \begin{tikzpicture}
+        \begin{axis}[
+            yticklabels={,,},
+            ybar stacked,
+            bar width=8pt,
+            bar shift=-4pt,
+            percentage plot,
+            xtick align=outside,
+            xtick pos=left,
+            ytick pos=left,
+            every axis plot/.append style={thick},
+            xtick=data,
+            xticklabels={FOS, FUS, FIB, FIT, FIG},
+            x tick label style={font=\ttfamily},
+            xmax=5.5,
+            xmin=.5,
+            ymax=100,
+            ymin=0,
+            legend style={
+                legend columns=-2,
+                at={(.5,1.05)},
+                anchor=south
+            }
+        ]
+            \addplot table [percentage series=1] {\facetEl};
+            \addplot table [percentage series=2] {\facetEl};
+            \addplot table [percentage series=3] {\facetEl};
+            \legend{
+                \footnotesize \strut Geometry,
+                \footnotesize \strut Height,
+                \footnotesize \strut Image
+            }
+        \end{axis}
+        \begin{axis}[
+            ybar stacked,
+            bar width=8pt,
+            bar shift=4pt,
+            percentage plot,
+            yticklabels={,,},
+            xtick align=outside,
+            xtick pos=left,
+            ytick pos=left,
+            every axis plot/.append style={thick},
+            xtick=data,
+            xticklabels={,,},
+            xmax=5.5,
+            xmin=.5,
+            ymax=100,
+            ymin=0
+        ]
+            \addplot+ table [percentage series=1] {\facetNaPa};
+            \addplot+ table [percentage series=2] {\facetNaPa};
+            \addplot+ table [percentage series=3] {\facetNaPa};
+        \end{axis}
+        \begin{axis}[
+            xticklabels={,,},
+            yticklabels={,,},
+            xtick align=outside,
+            xtick pos=left,
+            ytick pos=left,
+            every axis plot/.append style={thick},
+            xmax=4.5,
+            xmin=.5,
+            ymax=100,
+            ymin=0
+        ]
+            \addplot+[mark=none, black, sharp plot, dashed] coordinates {(0,33.33333) (5, 33.33333)};
+            \addplot+[mark=none, black, sharp plot, dashed] coordinates {(0,66.66666) (5, 66.66666)};
+        \end{axis}
+    \end{tikzpicture}
+\end{document}
