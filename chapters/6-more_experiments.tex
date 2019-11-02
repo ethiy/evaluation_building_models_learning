@@ -873,6 +873,65 @@
                 \caption{\label{tab::f_score_rf_vs_svm_f3} Mean F-score and standard deviation using \gls{acr::rf} and \gls{acr::svm}.}
             \end{table}
 
+            \begin{figure}[htpb]
+                \centering
+                \ffigbox[\FBwidth]{
+                    \begin{subfloatrow}[2]
+                        \ffigbox[\FBwidth]{
+                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/scat_bl/svm/deletion/feature_importance/building}
+                        }{
+                            \caption{
+                                \label{subfig::feature_importances_scat_del_svm_building}
+                                \texttt{Building errors.}
+                            }
+                        }
+                        \ffigbox[\FBwidth]{
+                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/scat_bl/svm/deletion/feature_importance/facet}
+                        }{
+                            \caption{
+                                \label{subfig::feature_importances_scat_del_svm_facet}
+                                \texttt{Facet errors.}
+                            }
+                        }
+                    \end{subfloatrow}
+                }{
+                    \caption{
+                        \label{fig::feature_importances_scat_del_svm} Modality contribution for the \gls{acr::svm} classifier based on the coefficients computed by EasyMKL.
+                        Height and Image based features use the \gls{acr::scatnet} with deletion.
+                        The first (\textit{resp.} second) column represents \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} \(\cup\) \textbf{Paris-13}).
+                    }
+                }
+            \end{figure}
+            \begin{figure}[htpb]
+                \centering
+                \ffigbox[\FBwidth]{
+                    \begin{subfloatrow}[2]
+                        \ffigbox[\FBwidth]{
+                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/scat_bl/svm/channel/feature_importance/building}
+                        }{
+                            \caption{
+                                \label{subfig::feature_importances_scat_channel_svm_building}
+                                \texttt{Building errors.}
+                            }
+                        }
+                        \ffigbox[\FBwidth]{
+                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/scat_bl/svm/channel/feature_importance/facet}
+                        }{
+                            \caption{
+                                \label{subfig::feature_importances_scat_channel_svm_facet}
+                                \texttt{Facet errors.}
+                            }
+                        }
+                    \end{subfloatrow}
+                }{
+                    \caption{
+                        \label{fig::feature_importances_scat_channel_svm} Modality contribution for the \gls{acr::svm} classifier based on the coefficients computed by EasyMKL.
+                        Height and Image based features use the \gls{acr::scatnet} with channel.
+                        The first (\textit{resp.} second) column represents \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} \(\cup\) \textbf{Paris-13}).
+                    }
+                }
+            \end{figure}
+
 
         \subsubsection{\textsc{Reduced features with \gls*{acr::pca}}}
             \label{subsubsec::more_experiments::richer_features::scatnet_baseline::pca}
