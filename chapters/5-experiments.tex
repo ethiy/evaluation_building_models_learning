@@ -375,6 +375,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             Mean test results are shown in Table~\ref{tab::rmse_results}.\\
 
             \begin{table}[htpb]
+                \small
                 \begin{tabular}{c c c c c c c c c c}
                     \toprule
                     & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG} \\
@@ -418,7 +419,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                         \hline
                         \multicolumn{9}{|c|}{\textbf{Elancourt}}\\
                         \hline
-                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
                         \cline{2-9}
                         & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
                         \hline
@@ -443,7 +444,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                         \hline
                         \multicolumn{9}{|c|}{\textbf{Nantes}}\\
                         \hline
-                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
                         \cline{2-9}
                         & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
                         \hline
@@ -468,7 +469,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                         \hline
                         \multicolumn{9}{|c|}{\textbf{Paris-13}}\\
                         \hline
-                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
                         \cline{2-9}
                         & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
                         \hline
@@ -499,7 +500,6 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                 }
             \end{table}
 
-            \thisfloatsetup{subfloatrowsep=none}
             \begin{figure}[htpb]
                 \centering
                 \ffigbox[\FBwidth]{
@@ -531,11 +531,11 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
 
             First, we can point out that fact that geometric features alone are generally sufficient.
             It is actually the best alternative for topological error detection as shown for \texttt{BOS}, \texttt{FOS}, \texttt{FUS}, \texttt{FIT} and \texttt{BIT} in Table~\ref{tab::ablation_f3}.
-            This is confirmed also by the low variance observed in Subfigure~\ref{subfig::f_score_f3_building}.
+            This is confirmed also by the low variance observed in Subfigure~\ref{subfig::f_score_ablation_f3_building}.
             An exception is noticed with \texttt{BUS} in \textbf{Elancourt}, where height-based features allow an increase of around \SI{9}{\percent} in recall without, practically, any loss in precision.
             Similar behaviour is noticed for \textbf{Nantes} and \textbf{Paris-13} with image-based features (+\SI{20}{\percent} in recall).
             The first case can be explained by the discrepancy in height that can be observed between under-segmented buildings.
-            The second is made clear by the difference in roof colors, in dense uniform settings (Subfigure~\ref{subfig::bus_2d}).
+            The second is made clear by the difference in roof colors, in dense uniform settings (\textit{cf.} Subfigure~\ref{subfig::bus_2d}).
             This helps identifying different instances of buildings.\\
 
             Figure~\ref{fig::f_score_ablation_f3} shows that all \texttt{Building errors} labels are better detected in \textbf{Elancourt}.
