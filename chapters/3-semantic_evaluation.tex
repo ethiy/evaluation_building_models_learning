@@ -129,8 +129,8 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                             \ffigbox[0.5\textwidth]{
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/building/bos}
                             }{
-                                \label{subfig::gt_bus_3d}
                                 \caption{
+                                    \label{subfig::gt_bus_3d}
                                     Ground truth \gls{acr::3d} models.
                                     The different buildings are in different colors: blue and green.
                                 }
@@ -180,8 +180,8 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                     \ffigbox[\textwidth]{
                         \includegraphics[width=.45\textwidth]{images/errors/building/over_segmentation}
                     }{
-                        \label{subfig::bos_2d}
                         \caption{
+                            \label{subfig::bos_2d}
                             This a nadir projection of a single building that was modeled into three different ones depicted here in three different colors.
                         }
                     }
@@ -206,16 +206,16 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                             \ffigbox[0.5\textwidth]{
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/building/correct_bib}
                             }{
-                                \label{subfig::gt_bib_3d}
                                 \caption{
+                                    \label{subfig::gt_bib_3d}
                                     Ground truth \gls{acr::3d} model.
                                 }
                             }
                             \ffigbox[0.5\textwidth]{
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/building/bib}
                             }{
-                                \label{subfig::bib_3d}
                                 \caption{
+                                    \label{subfig::bib_3d}
                                     \gls{acr::3d} models with an imprecise border (in yellow).
                                 }
                             }
@@ -226,8 +226,8 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                                 \ffigbox[.75\textwidth]{
                                     \includegraphics[width=.5\textwidth]{images/errors/building/border}
                                 }{
-                                    \label{subfig::bib_2d}
                                     \caption{
+                                        \label{subfig::bib_2d}
                                         In red is the reconstructed model border that is misestimated, as can be checked ibing the orthoimage.
                                         We can distinguish in green the actual edge using a Nadir projection.
                                     }
@@ -267,16 +267,16 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                             \ffigbox[0.5\textwidth]{
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/building/correct_bit}
                             }{
-                                \label{subfig::gt_bit_3d}
                                 \caption{
+                                    \label{subfig::gt_bit_3d}
                                     Ground truth \gls{acr::3d} model.
                                 }
                             }
                             \ffigbox[0.5\textwidth]{
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/building/bit}
                             }{
-                                \label{subfig::bit_3d}
                                 \caption{
+                                    \label{subfig::bit_3d}
                                     \gls{acr::3d} models with an inaccurate topology.
                                     The conscerned borders are in yellow.
                                 }
@@ -288,8 +288,8 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                                 \ffigbox[.75\textwidth]{
                                     \includegraphics[width=.5\textwidth]{images/errors/building/topology}
                                 }{
-                                    \label{subfig::big_2d}
                                     \caption{
+                                        \label{subfig::big_2d}
                                         The nadir projection comparison with the corresponding orthoimage gives away (in green) the correct footprint shape compared to the one that was reconstructed (in red).
                                     }
                                 }
@@ -316,16 +316,16 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                             \ffigbox[0.5\textwidth]{
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/building/correct_big}
                             }{
-                                \label{subfig::gt_big_3d}
                                 \caption{
+                                    \label{subfig::gt_big_3d}
                                     Ground truth \gls{acr::3d} model.
                                 }
                             }
                             \ffigbox[0.5\textwidth]{
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/building/big}
                             }{
-                                \label{subfig::big_3d}
                                 \caption{
+                                    \label{subfig::big_3d}
                                     \gls{acr::3d} models with an imprecise height estimation.
                                 }
                             }
@@ -359,14 +359,13 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                             \ffigbox[0.5\textwidth]{
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/correct_fos_fus_fib_fig}
                             }{
-                                \label{subfig::gt_fus_3d}
-                                \caption{Ground truth \gls{acr::3d} model.}
+                                \caption{\label{subfig::gt_fus_3d} Ground truth \gls{acr::3d} model.}
                             }
                             \ffigbox[0.5\textwidth]{
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/fus}
                             }{
-                                \label{subfig::fus_3d}
                                 \caption{
+                                    \label{subfig::fus_3d}
                                     \gls{acr::3d} model with a \texttt{\gls{acr::fus}} error.
                                     The erroneous facet is colored in orange.
                                 }
@@ -378,8 +377,8 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                                 \ffigbox[.75\textwidth]{
                                         \includegraphics[width=.5\textwidth, angle=270]{images/errors/facet/under_segmentation}
                                 }{
-                                    \label{subfig::fus_2d}
                                     \caption{
+                                        \label{subfig::fus_2d}
                                         Nadir projection of an erroneous building superposed on the corresponding orthoimage.
                                         It shows how a higher neighbooring building part can drive a misestimation of both facet planes which end up confused in one flat roof.
                                         The line segment highlighted in green gives away the fact that the roof was undersegmented.
@@ -419,14 +418,13 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                             \ffigbox[0.5\textwidth]{
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/correct_fos_fus_fib_fig}
                             }{
-                                \label{subfig::gt_fos_3d}
-                                \caption{Ground truth \gls{acr::3d} model.}
+                                \caption{\label{subfig::gt_fos_3d} Ground truth \gls{acr::3d} model.}
                             }
                             \ffigbox[0.5\textwidth]{
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/fos}
                             }{
-                                \label{subfig::fos_3d}
                                 \caption{
+                                    \label{subfig::fos_3d}
                                     \gls{acr::3d} model with a \texttt{\gls{acr::fos}} error.
                                     In blue are colored the erroneous edges.
                                 }
@@ -438,8 +436,8 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                                 \ffigbox[.75\textwidth]{
                                     \includegraphics[height=.5\textwidth, angle=270]{images/errors/facet/over_segmentation}
                                 }{
-                                    \label{subfig::fos_2d}
                                     \caption{
+                                        \label{subfig::fos_2d}
                                         A slim chimney in the below corner of the ridge results in a defect ladden \gls{acr::dsm} which translates into an oversegmentation.
                                         The erroneous edges are colored in red.
                                         One can check using the orthoimage that these are not real.
@@ -479,14 +477,13 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                             \ffigbox[0.5\textwidth]{
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/correct_fos_fus_fib_fig}
                             }{
-                                \label{subfig::gt_fib_3d}
-                                \caption{Ground truth \gls{acr::3d} model.}
+                                \caption{\label{subfig::gt_fib_3d} Ground truth \gls{acr::3d} model.}
                             }
                             \ffigbox[0.5\textwidth]{
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/fib}
                             }{
-                                \label{subfig::fib_3d}
                                 \caption{
+                                    \label{subfig::fib_3d}
                                     \gls{acr::3d} model with a \texttt{\gls{acr::fib}} error.
                                     The misplaced edge is colored in red.
                                 }
@@ -498,8 +495,8 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                                 \ffigbox[.75\textwidth]{
                                     \includegraphics[width=.5\textwidth]{images/errors/facet/border}
                                 }{
-                                    \label{subfig::fib_2d}
                                     \caption{
+                                        \label{subfig::fib_2d}
                                         The nadir projection of the model on the orthoimage provides the real location (in green) of the edge.
                                     }
                                 }
@@ -587,14 +584,13 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                             \ffigbox[0.5\textwidth]{
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/correct_fos_fus_fib_fig}
                             }{
-                                \label{subfig::gt_fig_3d}
-                                \caption{Ground truth \gls{acr::3d} model.}
+                                \caption{\label{subfig::gt_fig_3d} Ground truth \gls{acr::3d} model.}
                             }
                             \ffigbox[0.5\textwidth]{
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/fig}
                             }{
-                                \label{subfig::fig_3d}
                                 \caption{
+                                    \label{subfig::fig_3d}
                                     \gls{acr::3d} model with a \texttt{\gls{acr::fig}} error.
                                     The facet in purple has a wrong slope: It is flat instead of being sloped.
                                 }
@@ -606,8 +602,8 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                                 \ffigbox[.75\textwidth]{
                                     \includegraphics[width=.5\textwidth]{images/errors/facet/geometry}
                             }{
-                                \label{subfig::fig_2d}
                                 \caption{
+                                    \label{subfig::fig_2d}
                                     This kind of error is impossible is vizualize on the orthoimage.
                                     Projected on the \gls{acr::dsm}, we can reveal the sloped character of the face.
                                 }
@@ -655,16 +651,16 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                         \ffigbox[\FBwidth]{
                             \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/holes/building}
                         }{
-                            \label{subfig::building_hole}
                             \caption{
+                                \label{subfig::building_hole}
                                 A hole at building (viewed from the top) level (\gls{acr::lod}-1) corresponds to an internal court.
                             }
                         }
                         \ffigbox[\FBwidth]{
                             \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/holes/facet}
                         }{
-                            \label{subfig::facet_hole}
                             \caption{
+                                \label{subfig::facet_hole}
                                 Example of a facet (\gls{acr::lod}-2) with a rectangular hole corresponding to a balcony.
                             }
                         }

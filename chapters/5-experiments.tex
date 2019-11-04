@@ -12,18 +12,11 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
 \section{\textsc{Datasets}}
     \label{sec::experiments::datasets}
     
-    \subsection{\textsc{Data preprocesing}}
-        \label{subsec::experiments::datasets::preprocessing}
+    % \subsection{\textsc{Data preprocesing}}
+    %     \label{subsec::experiments::datasets::preprocessing}
 
     \subsection{\textsc{Urban scenes and modeling techniques}}
         \label{subsec::experiments::datasets::scenes}
-        \gls{acr::3d} models from three different cities of France are selected in order to assess the performance of our framework: \textbf{Elancourt}, \textbf{Nantes}, and the XIII\textsuperscript{th} district of Paris (\textbf{Paris-13}) (\textit{cf.} Figure~\ref{fig::france_map}).
-        Figure~\ref{fig::elancourt_ortho} depicts the small city of \textbf{Elancourt} which contains diverse of building types: residential areas with gable and hip roof buildings and large industrial flat roof building based districts (\textit{cf.} Subfigure~\ref{subfig::elancourt_samples}).
-        \textbf{Nantes}, as shown in Figure~\ref{fig::nantes_ortho}, represents a denser urban setting but with a lower building diversity (\textit{cf.} Subfigure~\ref{subfig::nantes_samples}).
-        In Figure~\ref{fig::paris-13_ortho}, one can see how \textbf{Paris-13} consists of mostly flat roof high towers which coexist with Haussmann style buildings that typically exhibit highly fragmented roofs (\textit{cf.} Subfigure~\ref{subfig::paris-13_samples}).
-        The \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}) scene contains 2,009 (\textit{resp.} 748 and 478) annotated building models.
-        The \gls{acr::dsm} as well as the orthorectified image resolution is \SI{0.06}{\m} for the first area while it is \SI{0.1}{\m} for the other ones.
-
         \begin{figure}[htpb]
             \ffigbox[\textwidth]{
                 \includegraphics[width=.75\textwidth]{images/datasets/france_map}
@@ -105,6 +98,13 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                 }
             }
         \end{figure}
+        
+        \gls{acr::3d} models from three different cities of France are selected in order to assess the performance of our framework: \textbf{Elancourt}, \textbf{Nantes}, and the XIII\textsuperscript{th} district of Paris (\textbf{Paris-13}) (\textit{cf.} Figure~\ref{fig::france_map}).
+        Figure~\ref{fig::elancourt_ortho} depicts the small city of \textbf{Elancourt} which contains diverse of building types: residential areas with gable and hip roof buildings and large industrial flat roof building based districts (\textit{cf.} Subfigure~\ref{subfig::elancourt_samples}).
+        \textbf{Nantes}, as shown in Figure~\ref{fig::nantes_ortho}, represents a denser urban setting but with a lower building diversity (\textit{cf.} Subfigure~\ref{subfig::nantes_samples}).
+        In Figure~\ref{fig::paris-13_ortho}, one can see how \textbf{Paris-13} consists of mostly flat roof high towers which coexist with Haussmann style buildings that typically exhibit highly fragmented roofs (\textit{cf.} Subfigure~\ref{subfig::paris-13_samples}).
+        The \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}) scene contains 2,009 (\textit{resp.} 748 and 478) annotated building models.
+        The \gls{acr::dsm} as well as the orthorectified image resolution is \SI{0.06}{\m} for the first area while it is \SI{0.1}{\m} for the other ones.\\
 
         \gls{acr::3d} models were generated using the algorithm described in~\parencite{durupt2006automatic}, out of existing building footprints and aerial VHR multi-view \glspl{acr::dsm}.
         The modeling algorithm simulates possible roof structures with facets satisfying some geometric constraints.
@@ -118,20 +118,14 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
 
     \subsection{\textsc{Error statistics}}
         \label{subsec::experiments::datasets::stats}
-
-        Some of the models obtained using the previous datasets were annotated manually in order to build training datasets.
-        To annotate a building model, the manual operator compares the nadir projection of the model to the corresponding orthoimage and \gls{acr::dsm}.
-        This was possible thanks to the work\footnote{\href{https://github.com/CHUPClem/sGrISner.git}{GIS Graphical interface for annotation.}} of Clémence Chupin, who was a Master student at \gls{acr::ensg}.
-        Figure~\ref{fig::error_statistics} reports modeling errors statistics over the annotated buildings.
-
         \begin{figure}[htpb]
             \centering
             \ffigbox[\textwidth]{
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/datasets/families_stats}
+                \includestandalone[mode=buildnew, height=7.5cm]{figures/datasets/families_stats}
             }{
                 \caption{
                     \label{fig::family_errors}
-                    Occurence statistics for error families computed for each area: \texttt{finesse} = 2.
+                    Occurence statistics for error families and the \texttt{Unqualified} class computed for each area.
                 }
             }
         \end{figure}
@@ -141,11 +135,11 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                 \begin{subfloatrow}
                     \centering
                     \ffigbox[\textwidth]{
-                        \includestandalone[mode=buildnew, width=\textwidth]{figures/datasets/lod1_stats}
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/datasets/lod1_stats}
                     }{
                         \caption{
                             \label{subfig::lod1_errors}
-                            Occurence statistics for Building errors depending each area.
+                            Occurence statistics for \texttt{Building errors} depending each area.
                         }
                     }
                 \end{subfloatrow}
@@ -153,22 +147,27 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                 \begin{subfloatrow}
                     \centering
                     \ffigbox[\textwidth]{
-                        \includestandalone[mode=buildnew, width=\textwidth]{figures/datasets/lod2_stats}
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/datasets/lod2_stats}
                     }{
                         \caption{
                             \label{subfig::lod2_errors}
-                            Occurence statistics for Facet errors depending each area.
+                            Occurence statistics for \texttt{Facet errors} depending each area.
                         }
                     }
                 \end{subfloatrow}
             }{
                 \label{fig::error_statistics}
                 \caption{
-                    Error statistics depending on the \texttt{finesse} level.
+                    Error statistics depending at \texttt{finesse} level 3.
                     The height of bars indicates the frequency of each errors while the number of occurences is displayed over.
                 }
             }
         \end{figure}
+
+        Some of the models obtained using the previous datasets were annotated manually in order to build training datasets.
+        To annotate a building model, the manual operator compares the nadir projection of the model to the corresponding orthoimage and \gls{acr::dsm}.
+        This was possible thanks to the work\footnote{\href{https://github.com/CHUPClem/sGrISner.git}{GIS Graphical interface for annotation.}} of Clémence Chupin, who was a Master student at \gls{acr::ensg}.
+        Figures~\ref{fig::family_errors} and ~\ref{fig::error_statistics} reports modeling errors statistics over the annotated buildings.\\
 
         These statistics are first analysed depending on the family errors at the \texttt{finesse} = 2 level (\textit{cf.} Figure~\ref{fig::family_errors}).
         Due to the fact that geometrically inconsistent \gls{acr::3d} models were filtered out in a preprocessing (nadir projection) step, \texttt{Unqualifiable} buildings represent a small fraction of the dataset (less than \SI{7.5}{\percent}).
@@ -551,9 +550,6 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
         
         \subsubsection{\textsc{Feature importance}}
             \label{subsubsec::experiments::evaluation::baseline_feature_analysis::feature_importance}
-            \gls{acr::rf} classifiers can easily infer feature importances at training time.
-            These were here computed and aggregated by modality in all urban scenes (\textit{cf.} Figure~\ref{fig::feature_importances}).\\
-
             \begin{figure}[htpb]
                 \centering
                 \ffigbox[\FBwidth]{
@@ -583,6 +579,9 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                 }
             \end{figure}
             
+            \gls{acr::rf} classifiers can easily infer feature importances at training time.
+            These were here computed and aggregated by modality in all urban scenes (\textit{cf.} Figure~\ref{fig::feature_importances_rf_bl}).\\
+
             At first, we observe how much individual attributes are important before being gathered.
             For geometric features, all attributes are equally important.
             However, concerning image and height-based features, only a few are relevant (higher feature importance ratio).
