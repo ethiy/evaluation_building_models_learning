@@ -882,3 +882,26 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
 
 \section{\textsc{Structure of the Thesis}}
     \label{sec::introduction::structure_of_thesis}
+    The remainder of the thesis is organized in five main chapters.\\
+    \begin{itemize}[label=\(\blacktriangleright\)]
+        \item Chapter~\ref{chap::state_of_the_art} provides a global overview on state-of-the-art techniques in fields related to our main subject.
+                In fact, in order to have a general idea on the \gls{acr::3d} building modeling domain, we provide a summary and a broad categorization of techniques that can be found in the litterature.
+                We also provide a detailed account of all quality evaluation methods that are used by the community.
+                Afterwhat, we present a global view of methods from the litterature on supervized classification as well as feature extraction which were instrumental in our approach.
+        \item In Chapter~\ref{chap::semantic_evaluation}, we introduce the first leg of our approach.
+                It consists in defining a general layout of a \textbf{large-scale} adapted error taxonomy.
+                Applyed to the overhead setting, and based on observations of automatically modeled buildings, we implement this layout by defining semantic errors to populate the taxonomy.
+        \item \textbf{Automation}, which is the second and remaining constraint defined in Subsection~\ref{subsec::introduction::contributions::positioning}, is handled in Chapter~\ref{chap::learned_evaluation}.
+                Actually, aiming to automate a semantic task, we introduce a learning based approach where errors are treated as labels which are predicted using a trained supervized classifier.
+                Features are extracted based on the intrinsic properties of building models as well as extrinsic attributes making use of external optical or depth based data.
+        \item This proposed approach is then tested on multiple urban scenes as shown in Chapter~\ref{chap::experiments}.
+                The latter provides in depth details about the origin of the evaluated building models as well as the used algorithms.
+                The different baseline features are tested on all urban areas yielding mitigated results which depend on the combination of defined errors and urban scenes.
+        \item Chapter~\ref{chap::more_experiments} compiles results from multiple experiments that further tests the pipeline.
+                To satisfy the already stated \textbf{large-scale} need (\textit{cf.} Subsection~\ref{subsec::introduction::contributions::positioning}), a scalability analysis is drawn based on various experiments involving the presented urban zones.
+                Next, the framework is tested at a lower specificity level (\textit{cf.} Section~\ref{sec::semantic_evaluation::general_framework}).
+                The choice of classifiers is also discussed based on exhaustive experiments.
+                Finally, a thorough testing of richer features, which take into account the structural information that was missed by the baseline, yielded results that were profusely analysed.
+        \item The final Chapter~\ref{chap::conclusion} concludes the thesis by presenting a summary of the proposed approach as well as experimental results to support it.
+                Final thoughts on underdiscussed perspectives of research are also adressed.
+    \end{itemize}
