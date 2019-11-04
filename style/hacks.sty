@@ -32,12 +32,14 @@
 \makeatother
 
 % Bold names in references
-\renewcommand*{\mkbibnamegiven}[1]{%
-  \ifitemannotation{highlight}
-    {\textbf{#1}}
-    {#1}}
+\renewcommand*{\mkbibnamegiven}[1]{
+    \ifitemannotation{highlight}{
+        \textbf{#1}
+    }{#1}
+}
 
-\renewcommand*{\mkbibnamefamily}[1]{%
-  \ifitemannotation{highlight}
-    {\textbf{#1}}
-    {#1}}
+\renewcommand*{\mkbibnamefamily}[1]{
+    \ifitemannotation{highlight}{
+        \textbf{#1}
+    }{#1}
+}
