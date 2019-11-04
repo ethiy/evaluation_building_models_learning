@@ -21,8 +21,8 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             \ffigbox[\textwidth]{
                 \includegraphics[width=.75\textwidth]{images/datasets/france_map}
             }{
-                \label{fig::france_map}
                 \caption{
+                    \label{fig::france_map}
                     Map of France showing the studied urban scenes.
                     Each square corresponds to a city:
                     \textcolor[rgb]{.84,.1,.11}{\(\blacksquare\)} \textbf{Paris-13}, \textcolor[rgb]{1,.79,.5}{\(\blacksquare\)} \textbf{Elancourt}, \textcolor[rgb]{.17,.51,.73}{\(\blacksquare\)} \textbf{Nantes}.
@@ -34,8 +34,8 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             \ffigbox[\FBwidth]{
                 \includegraphics[width=\textwidth]{images/datasets/elancourt_global}
             }{
-                \label{fig::elancourt_ortho}
                 \caption{
+                    \label{fig::elancourt_ortho}
                     Orthoimage showing the diversity of buildings in Elancourt.
                 }
             }
@@ -45,8 +45,8 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             \ffigbox[\FBwidth]{
                 \includegraphics[width=\textwidth]{images/datasets/nantes_global}
             }{
-                \label{fig::nantes_ortho}
                 \caption{
+                    \label{fig::nantes_ortho}
                     Orthoimage depicting the dense city center of Nantes.
                 }
             }
@@ -56,8 +56,8 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             \ffigbox[\FBwidth]{
                 \includegraphics[width=\textwidth]{images/datasets/paris-13_global}
             }{
-                \label{fig::paris-13_ortho}
                 \caption{
+                    \label{fig::paris-13_ortho}
                     Orthoimage showing the heterogeneous of the XIII\textsuperscript{th} district of Paris.
                 }
             }
@@ -69,31 +69,31 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                     \ffigbox[\FBwidth]{
                         \includegraphics[width=.3\textwidth]{images/datasets/elancourt_samples}
                     }{
-                        \label{subfig::elancourt_samples}
                         \caption{
+                            \label{subfig::elancourt_samples}
                             Elancourt contains flat roof buildings (top) as well as gable roof ones (bottom).
                         }
                     }
                     \ffigbox[\FBwidth]{
                         \includegraphics[width=.3\textwidth]{images/datasets/nantes_samples}
                     }{
-                        \label{subfig::nantes_samples}
                         \caption{
+                            \label{subfig::nantes_samples}
                             Nantes exhibits high rising towers (top) along side densely packed fragmented roof buildings (bottom).
                         }
                     }
                     \ffigbox[\FBwidth]{
                         \includegraphics[width=.3\textwidth]{images/datasets/paris-13_samples}
                     }{
-                        \label{subfig::paris-13_samples}
                         \caption{
+                            \label{subfig::paris-13_samples}
                             The XIII\textsuperscript{th} district of Paris is made of Haussmannian buildings (top) and high rising towers bottom).
                         }
                     }
                 \end{subfloatrow}
             }{
-                \label{fig::france_map}
                 \caption{
+                    \label{fig::france_map}
                     Samples of building types per region.
                 }
             }
@@ -132,42 +132,30 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
         \begin{figure}[htpb]
             \centering
             \ffigbox[\textwidth]{
-                \begin{subfloatrow}
-                    \centering
-                    \ffigbox[\textwidth]{
-                        \includestandalone[mode=buildnew, height=7.5cm]{figures/datasets/lod1_stats}
-                    }{
-                        \caption{
-                            \label{subfig::lod1_errors}
-                            Occurence statistics for \texttt{Building errors} depending each area.
-                        }
-                    }
-                \end{subfloatrow}
-                \vskip1em
-                \begin{subfloatrow}
-                    \centering
-                    \ffigbox[\textwidth]{
-                        \includestandalone[mode=buildnew, height=7.5cm]{figures/datasets/lod2_stats}
-                    }{
-                        \caption{
-                            \label{subfig::lod2_errors}
-                            Occurence statistics for \texttt{Facet errors} depending each area.
-                        }
-                    }
-                \end{subfloatrow}
+                \includestandalone[mode=buildnew, height=7.5cm]{figures/datasets/families_stats}
             }{
-                \label{fig::error_statistics}
                 \caption{
-                    Error statistics depending at \texttt{finesse} level 3.
-                    The height of bars indicates the frequency of each errors while the number of occurences is displayed over.
+                    \label{fig::lod1_errors}
+                    Occurence statistics for \texttt{Building errors} depending on the studied area.
                 }
             }
         \end{figure}
+        \begin{sidewaysfigure}[htpb]
+            \centering
+            \ffigbox[\textwidth]{
+                \includestandalone[mode=buildnew, height=.7\textheight]{figures/datasets/families_stats}
+            }{
+                \caption{
+                    \label{fig::lod2_errors}
+                    Occurence statistics for \texttt{Facet errors} depending on the studied area.
+                }
+            }
+        \end{sidewaysfigure}
 
         Some of the models obtained using the previous datasets were annotated manually in order to build training datasets.
         To annotate a building model, the manual operator compares the nadir projection of the model to the corresponding orthoimage and \gls{acr::dsm}.
         This was possible thanks to the work\footnote{\href{https://github.com/CHUPClem/sGrISner.git}{GIS Graphical interface for annotation.}} of Clémence Chupin, who was a Master student at \gls{acr::ensg}.
-        Figures~\ref{fig::family_errors} and ~\ref{fig::error_statistics} reports modeling errors statistics over the annotated buildings.\\
+        Figures~\ref{fig::family_errors},~\ref{~\ref{fig::lod1_errors}} and~\ref{fig::lod2_errors} reports modeling errors statistics over the annotated buildings.\\
 
         These statistics are first analysed depending on the family errors at the \texttt{finesse} = 2 level (\textit{cf.} Figure~\ref{fig::family_errors}).
         Due to the fact that geometrically inconsistent \gls{acr::3d} models were filtered out in a preprocessing (nadir projection) step, \texttt{Unqualifiable} buildings represent a small fraction of the dataset (less than \SI{7.5}{\percent}).
@@ -317,7 +305,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                 \subparagraph{\acrshort*{acr::rf}}
                     A brief grid search involving a smaller set of building models and only baseline geometric features~\parencite{ennafii2018qualificationunannotated} yielded comparable results for the number of trees set in the range \numrange{850}{1000} and a maximum tree depth from \numrange{3}{5}.
                     Given the already immense parameter search space involving all possible feature configurations, feature extraction parameters and label possibilities, the \gls{acr::rf} parameters are set to \num{1000} for the tree number and 4 for the maximum tree depth for all other experiments without performing any grid search.
-                    Regarding \gls{acr::scatnet} based features, in Subsection~\ref{subsec::more_experiments::richer_features::scatnet_baseline} were reduced using \gls{acr::pca} and Kernel\footnote{The used kernel is that same the one used with the \gls{acr::svm} classifier.} \gls{acr::pca} in order to not overwhelm the geometric features.
+                    Regarding \gls{acr::scatnet} based features, they were reduced using \gls{acr::pca} and Kernel\footnote{The used kernel is that same the one used with the \gls{acr::svm} classifier.} \gls{acr::pca} in order to not overwhelm the geometric features.
                     To that end, these rich features are reduced to 20 in length to equal the dimension of baseline geometric feature vectors.
 
                 \subparagraph{\acrshort*{acr::svm}}

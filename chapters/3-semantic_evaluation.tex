@@ -181,7 +181,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                         \includegraphics[width=.45\textwidth]{images/errors/building/over_segmentation}
                     }{
                         \caption{
-                            \label{subfig::bos_2d}
+                            \label{fig::bos_2d}
                             This a nadir projection of a single building that was modeled into three different ones depicted here in three different colors.
                         }
                     }
@@ -254,9 +254,9 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 \texttt{\gls{acr::bit}} corresponds to the case where the building footprint suffers from topological defects.
                 Modeled as a \gls{acr::2d} flat surface, the cases that fall into this label are:
                 \begin{description}
-                    \item[missing inner court:] It corresponds to a missing hole (\textit{cf.} Subfigure~\ref{subfig::building_hole});
-                    \item[inaccurate border shape:] It is due to a wrong primitive fitting: the shape of the footprint can be better described by a different geometrical shape.
-                            Subfigure~\ref{fig::bit_2d} gives an example where the polygon has a wrong number of sides.
+                    \item[Missing inner court:] It corresponds to a missing hole (\textit{cf.} Subfigure~\ref{subfig::building_hole});
+                    \item[Inaccurate border shape:] It is due to a wrong primitive fitting: the shape of the footprint can be better described by a different geometrical shape.
+                            Subfigure~\ref{subfig::bit_2d} gives an example where the polygon has a wrong number of sides.
                             Another case is where a circular footprint can be approximated by a polygon.
                 \end{description}
 
@@ -467,7 +467,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
 
             \paragraph{\texttt{\acrlong*{acr::fib}}}
                 \texttt{\gls{acr::fib}} corresponds to the case where at least one facet border is incorrectly located.
-                As en example, Subfigure~\ref{fig::fib_2d} shows that the central edge that links the two main roof sides does not correspond to the one on the image position.
+                As an example, Subfigure~\ref{subfig::fib_2d} shows that the central edge that links the two main roof sides does not correspond to the one on the image position.
                 This is a purely geometrical error similarly to \texttt{\gls{acr::bib}}.\\
 
                 \begin{figure}[htbp]
@@ -526,14 +526,13 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                             \ffigbox[0.5\textwidth]{
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/correct_fit}
                             }{
-                                \label{subfig::gt_fit_3d}
-                                \caption{Ground truth \gls{acr::3d} model.}
+                                \caption{\label{subfig::gt_fit_3d}Ground truth \gls{acr::3d} model.}
                             }
                             \ffigbox[0.5\textwidth]{
                                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/facet/fit}
                             }{
-                                \label{subfig::fit_3d}
                                 \caption{
+                                    \label{subfig::fit_3d}
                                     \gls{acr::3d} model with a \texttt{\gls{acr::fit}} error.
                                     The facet in teal has a missing hole.
                                 }
@@ -545,8 +544,8 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                                 \ffigbox[.75\textwidth]{
                                     \includegraphics[width=.5\textwidth]{images/errors/facet/topology}
                                 }{
-                                    \label{subfig::fit_2d}
                                     \caption{
+                                        \label{subfig::fit_2d}
                                         The nadir projection reveals the true form (in green) of the towers that were completly misrepresented (in red).
                                     }
                                 }
@@ -575,7 +574,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
             \paragraph{\texttt{\acrlong*{acr::fig}}}
                 \texttt{\gls{acr::fig}} corresponds to the case of inaccurate facet geometric estimation.
                 In mathematical terms, this means that the surface primitive parameters are misestimated.
-                In Subfigure~\ref{fig::fig_3d}, the planar surface slope was miscalculated as flat while it was of \textit{ca.} \SI{25}{\degree}.\\
+                In Subfigure~\ref{subfig::fig_3d}, the planar surface slope was miscalculated as flat while it was of \textit{ca.} \SI{25}{\degree}.\\
 
                 \begin{figure}[htbp]
                     \centering
