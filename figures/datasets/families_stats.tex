@@ -43,7 +43,7 @@
             every node near coord/.append style={
                 color=black,
                 align=center,
-                font=\footnotesize,
+                font=\scriptsize,
             },
             nodes near coords={
                 \pgfmathtruncatemacro\iszero{\originalvalue==0}
@@ -85,9 +85,9 @@
             \addplot table [percentage series=1] {\foneNa};
             \addplot table [percentage series=1] {\fonePa};
             \legend{
-                \strut \textbf{Elancourt},
-                \strut \textbf{Nantes},
-                \strut \textbf{Paris-13}
+                \footnotesize \strut \textbf{Elancourt},
+                \footnotesize \strut \textbf{Nantes},
+                \footnotesize \strut \textbf{Paris-13}
             }
         \end{axis}
     \end{tikzpicture}

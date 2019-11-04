@@ -144,7 +144,7 @@ These are proposed to better model defect predictions.
     In addition of being very costly, these features are methodologically redundant with the \gls{acr::3d} modeling techniques.
     They are, hence, vulnerable to the same defects.
     Conversely, evaluation metrics used in the \gls{acr::3d} building reconstruction literature (\textit{e.g.}, \gls{acr::rmse}) are too weak for such a complex task.
-    This will be proven later on in Section~\ref{subsec::experiments::evaluation::feature_analysis}.
+    This will be proven later on in Section~\ref{subsec::experiments::evaluation::baseline_feature_analysis}.
 
     In Subsection~\ref{subsec::learned_evaluation::baseline::geometric}, we describe the used baseline for geometric features.
     Next, in Subsection~\ref{subsec::learned_evaluation::baseline::height}, height based features extraction is explained.
@@ -220,21 +220,6 @@ These are proposed to better model defect predictions.
         Regarding this modality, raw depth information is provided, for a building model \(\mathsf{M}\), by a \gls{acr::dsm} as a \gls{acr::2d} height grid that is cropped to fit the building footprint: $dsm \in \mathbb{R}^{w_{\mathsf{M}} \times h_{\mathsf{M}}}$\footnote{\label{note::w_h}\(w_{\mathsf{M}}\) (\textit{resp.} \(h_{\mathsf{M}}\)) is the grid width (\textit{resp.} height) and is determined by the size of the building and the resolution of the \gls{acr::dsm}.}.
         This type of reference data must date back to the same time where the building models where produced.
         Otherwise a lot of defects will result simply from change in the scenery.\\
-
-        The \gls{acr::dsm} is compared to the model height~\parencite{bredif20073d,zebedin2008fusion}.
-        The latter is inferred from its facets plane equations.
-        It is rasterized into an grid structure $alt_{\mathsf{M}} \in \mathbb{R}^{w_{\mathsf{M}} \times h_{\mathsf{M}}}$ using the same spatial resolution as $dsm_{\mathsf{M}}$.
-        The difference between the two height grids provides a discrepancy map as shown in Subfigure~\ref{subfig::residuals}).
-        A baseline approach is herein proposed relying on the statistics of pixel values computed using the $S$ functions (\textit{cf.} Figure~\ref{fig::height_based_features}).\\
-
-        \begin{equation}
-            \label{eq::height_based_features}
-            v_{\text{height}}\left(\mathsf{M}\right) = \chi \left( dsm_{\mathsf{M}} - alt_{\mathsf{M}} \right).
-        \end{equation}
-
-        The histogram could actually be computed for the building alone without taking into account the terrain arround it.
-        However, since reference data is unavailable, cropping out the terrain height values implies that the building model footrpint is flawless, which is not the case.
-        As a consequence, the heigth discrepancies around the building model are also computed in order to provide some information on the footprint shape, and hence detect \texttt{BIT} or \texttt{BIB} errors.\\
         
         \begin{figure}[htpb]
             \centering
@@ -244,6 +229,21 @@ These are proposed to better model defect predictions.
                 Height-based features computed from the \gls{acr::dsm} residuals using histograms.
             }
         \end{figure}
+
+        The \gls{acr::dsm} is compared to the model height~\parencite{bredif20073d,zebedin2008fusion}.
+        The latter is inferred from its facets plane equations.
+        It is rasterized into an grid structure $alt_{\mathsf{M}} \in \mathbb{R}^{w_{\mathsf{M}} \times h_{\mathsf{M}}}$ using the same spatial resolution as $dsm_{\mathsf{M}}$.
+        The difference between the two height grids provides a discrepancy map as shown in Subfigure~\ref{subfig::residuals}).
+        A baseline approach is herein proposed relying on the statistics of pixel values computed using the $\chi$ functions (\textit{cf.} Figure~\ref{fig::height_based_features}).\\
+
+        \begin{equation}
+            \label{eq::height_based_features}
+            v_{\text{height}}\left(\mathsf{M}\right) = \chi \left( dsm_{\mathsf{M}} - alt_{\mathsf{M}} \right).
+        \end{equation}
+
+        The histogram could actually be computed for the building alone without taking into account the terrain arround it.
+        However, since reference data is unavailable, cropping out the terrain height values implies that the building model footrpint is flawless, which is not the case.
+        As a consequence, the heigth discrepancies around the building model are also computed in order to provide some information on the footprint shape, and hence detect \texttt{BIT} or \texttt{BIB} errors.\\
 
         Equation~\ref{eq::height_based_features} summarizes how building height-based features are computed.
         Different from a \gls{acr::rmse}~\parencite{lafarge2012creating,poullis2013framework}, the histogram captures the discrepancy distribution, which is particularly helpful in detecting undersegmentation defects or geometric imprecision.
@@ -345,7 +345,7 @@ These are proposed to better model defect predictions.
     \label{sec::learned_evaluation::richer_features}
     The last section presented features that are by construction taken to be as simple as possible.
     The goal was to test the feasibility of the learned quality evaluation approach.
-    This is discussed in length in Sections~\ref{sec::experiments::baseline_feature_analysis},~\ref{sec::more_experiments::finesse} and~\ref{sec::more_experiments::scalability}.\\
+    This is discussed in length in Subsection~\ref{subsec::experiments::evaluation::baseline_feature_analysis} and Sections~\ref{sec::more_experiments::finesse} and~\ref{sec::more_experiments::scalability}.\\
 
     This section presents features that better exploits structural information of the input models that were missed by the baseline.
     In the previous section, we identifed two types of instances from which features are extacted: graph-like and image-like data.
