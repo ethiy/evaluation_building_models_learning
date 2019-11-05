@@ -12,7 +12,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
 \clearpage
 
-\section{\textsc{Automatic Building \texorpdfstring{\gls*{acr::3d}}{3D} modeling}}
+\section{Automatic Building \texorpdfstring{\gls*{acr::3d}}{3D} modeling}
     \label{sec::state_of_the_art::building_modeling}
     In this work, we study large-scale urban modeling quality evaluation.
     Building models, at this scale, cannot be obtained manually.
@@ -23,7 +23,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
     Subsection~\ref{subsec::state_of_the_art::building_modeling::building_extraction} presents the different approaches used for building delineation.
     Afterwards, we present, in Subsection~\ref{subsec::state_of_the_art::building_modeling::modeling_strategies}, a general categorization of modeling strategies for buildings.
 
-    \subsection{\textsc{Building extraction}}
+    \subsection{Building extraction}
         \label{subsec::state_of_the_art::building_modeling::building_extraction}
         In automatic building modeling, in order to model the building surface out of the input sensor data, the building location must first be determined.
         There are actually two ways to approach this problem.
@@ -50,7 +50,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         These are needed to retrieve outlines of buildings efficiently.
         However, they can also fail to represent faithfully the ground truth and results in wrong building footprint extraction.
 
-    \subsection{\textsc{Modeling strategies}}
+    \subsection{Modeling strategies}
         \label{subsec::state_of_the_art::building_modeling::modeling_strategies}
         Once the building footprint is extracted, the goal is to generalize its \gls{acr::3d} surface out of the input data.
         Several strategies are conducted.
@@ -82,7 +82,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         This has not been widely studied~\parencite{lafarge2012creating,bao2013generating}, as buildings are moslty modeled one by one.
         All these issues and more induce defects that should be characterized and classified for a better understanding of the field.
 
-\section{\textsc{Quality evaluation of \texorpdfstring{\gls*{acr::3d}}{3D} building models}}
+\section{Quality evaluation of \texorpdfstring{\gls*{acr::3d}}{3D} building models}
     \label{sec::state_of_the_art::quality}
     We have seen previously the various methods used to automatically model buildings.
     The goal of this section is to describe the available approaches that evaluate the quality of such models.
@@ -91,14 +91,14 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
     An alternative perspective to charecterize quality evaluation methods relies upon the type of reference data (\textit{cf.} Subsection~\ref{subsec::state_of_the_art::quality::reference}).
     Based on this survey, we state in details, in Subsection~\ref{subsec::state_of_the_art::quality::novelty}, how the approach presented in this thesis is different from what was already proposed in the literature.
 
-    \subsection{\textsc{Output types}}
+    \subsection{Output types}
         \label{subsec::state_of_the_art::quality::output}
         We distinguish herein quality evaluation methods based on the kind of output they produce.
         Fidelity metrics is a first instance of output types.
         The second is semantic labels.
         In what follows, we explain, in details, these differences between the two method types.
 
-        \subsubsection{\textsc{Fidelity metrics based methods}}
+        \subsubsection{Fidelity metrics based methods}
             One way to characterize the quality of a building model is to compute indices or metrics reporting its accuracy.\\
 
             Most metrics provide information on the geometric precision of the model.
@@ -144,7 +144,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             As a consequence, it was used as an index to evaluate reconstructions\footnote{It is sometimes called by its antonym: complexity.}: the more a model was compact the better it was.
             This is reflected, for instance, in the work of~\textcite{lafarge2012creating,duan_eccv16,zhang2017deep,zeng2018neural,zhu2018large}, where this metric is never used alone but always alongside geometric ones.
 
-        \subsubsection{\textsc{Semantic labels based methods}}
+        \subsubsection{Semantic labels based methods}
             \label{subsec::state_of_the_art::quality::output::semantic}
             In a drive to provide a quantitative assessment of building models, the previously defined metrics fail to convey specific and localized information about a predetermined building model.
             These indices are usually used to give a general idea of the quality of models produced by some modeling method.
@@ -184,7 +184,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             In fact, the first error class relates to the fact that the used building modeling approach~\parencite{durupt2006automatic} relies on footprints given as input.
             The second category corresponds to the actual step of building roof structure inference.
 
-    \subsection{\textsc{Reference data types}}
+    \subsection{Reference data types}
         \label{subsec::state_of_the_art::quality::reference}
         In order to evaluate models, reference data are utilized for comparison.
         Based on the latter, another way to discriminate among modeling methods is possible.
@@ -193,7 +193,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         Neither of these two choices do influence the type of output the evaluation method produces.
         Hereafter, is explained the difference between the two categories.
 
-        \subsubsection{\textsc{High resolution ground truth}}
+        \subsubsection{High resolution ground truth}
             Ground truth building models are mainly acquired manually.
             Herein, are listed the different ground truth measurement techniques, in descending order of accuracy.\\
 
@@ -205,7 +205,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             ~\textcite{zebedin2008fusion} uses such a method to produce their reference data from aerial images with accuracy up to the order of \SI{\pm 0.15}{\m}.
             The same procedure was used also by~\textcite{jaynes2003recognition} producing models with inaccuraccies bounded by \SI[fraction-function = \sfrac]{\pm 1/3}{\m}.
 
-        \subsubsection{\textsc{Remote sensing data}}
+        \subsubsection{Remote sensing data}
             Reference ground truth models are not easy to come by~\parencite{schuster2003new}.
             The previous choice is hard to scale up to district or city levels.
             In fact, they are more suitable to evaluate few building models: \textit{e.g.} in order to validate a reconstruction method.
@@ -239,7 +239,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             In fact, \gls{acr::dsm}, being a result of oblique images, can be used as proxy, to help extracting \gls{acr::3d} geometric features instead of recomputing correlation scores like in~\parencite{boudet2006supervised}.
             It can also be valuable for missing court detection by calculating sky viewshed angle scores~\parencite{michelin2013quality}.
 
-    \subsection{\textsc{Novelty of the proposed method}}
+    \subsection{Novelty of the proposed method}
         \label{subsec::state_of_the_art::quality::novelty}
         Quality evaluation approaches presented hereinabove are mostly unsuitable for the stated objectives in Subsection~\ref{subsec::introduction::contributions::positioning}.\\
 
@@ -257,7 +257,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         It also offers a new taxonomy of errors that is intended to be exhaustive and generalizable.
         These latter notions are developped in details in Chapter~\ref{chap::semantic_evaluation}, while Chapter~\ref{chap::learned_evaluation} presents how features are chosen to represent building models and the learning process.
 
-\section{\textsc{Supervised learning and pattern recognition}}
+\section{Supervised learning and pattern recognition}
     \label{sec::state_of_the_art::mlpr}
     In this section are presented notions from statistic learning and computer vision domains that were useful for this work.
     This constitutes a simple reminder and is not a thorough survey of the field.
@@ -265,7 +265,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
     Second (Section~\ref{subsec::state_of_the_art::mlpr::feature_extraction}) comes a presentation of computer vision concepts on which our method is based.
     Last is discussed graph classification that was also instrumental in this work.
 
-    \subsection{\textsc{Supervised classifiers}}
+    \subsection{Supervised classifiers}
         \label{subsec::state_of_the_art::mlpr::classifiers}
         In this subsection, we denote a family of observations and their classes by
         \begin{equation*}
@@ -298,7 +298,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
         Hereafter, are presented two supervised classifiers: the \gls{acr::svm} algorithm and \glspl{acr::rf}, both of which are used in this work.
 
-        \subsubsection{\textsc{\acrlong*{acr::svm}}}
+        \subsubsection{\acrlong*{acr::svm}}
             \label{subsubsec::state_of_the_art::mlpr::classifiers::svm}
             \glspl{acr::svm} are a special type of linear classifiers.
             The initial classes $\left(y^k\right)_{k=1, 2, \dots, n}$ are transformed into $\left(\tilde{y}^k\right)_{k=1, 2, \dots, n}$, using the map: $y \mapsto \tilde{y} = 2\cdot y - 1$.
@@ -635,7 +635,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                             Although it is possible to compute scores that are in the unit interval, these are difficult to interpret as probabilities.
                 \end{itemize}
 
-        \subsubsection{\textsc{\acrlong*{acr::rf}}}
+        \subsubsection{\acrlong*{acr::rf}}
             \label{subsubsec::state_of_the_art::mlpr::classifiers::rf}
             A \gls{acr::rf} is an agregation of decision tree classifiers.
             First, is explained how the latter works.
@@ -844,7 +844,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \item They do not handle well imbalanced datasets and must be adapted accordingly.
                 \end{itemize}
                 
-    \subsection{\textsc{Feature extraction}}
+    \subsection{Feature extraction}
         \label{subsec::state_of_the_art::mlpr::feature_extraction}
             Before feeding observations to classifiers, representative features are extracted.
             These are usually vectors from a finite dimensional space called feature space.
@@ -858,7 +858,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             In the same sense, features can be extracted from graphs.
             We will describe hence how to describe graphs for classification.
 
-        \subsubsection{\textsc{\acrlong*{acr::scatnet} for image classification}}
+        \subsubsection{\acrlong*{acr::scatnet} for image classification}
             \label{subsubsec::state_of_the_art::mlpr::feature_extraction::scatnet}
             \glspl{acr::scatnet} can be seen as a reverse engineered convolutional network.
             They are built mainly relying on wavelet filters which are used to imitate filters from \glspl{acr::cnn}.
@@ -1189,7 +1189,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         }
                     \end{figure}
 
-        \subsubsection{\textsc{Kernels for graph classification}}
+        \subsubsection{Kernels for graph classification}
             \label{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}
             Standard machine learning practice usually assumes that the observed instances live in a finite dimensional space.
             This is not always the case.

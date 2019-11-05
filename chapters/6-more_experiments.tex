@@ -4,7 +4,7 @@
 
 \clearpage
 
-\section{\textsc{Scalabilitys analysis}}
+\section{Scalability analysis}
     \label{sec::more_experiments::scalability}
     In the previous chapter, error detection was proven to be dependent on the scene composition
     This fact motivates studying training the classifier and testing prediction on different scenes.
@@ -39,7 +39,7 @@
     Image-based features will demonstrate to be the most valuable compared to height-based ones.
     Eventually, we will review each \texttt{atomic} error prediction sensitivity provided the training set.
 
-    \subsection{\textsc{Transferability study}}
+    \subsection{Transferability study}
         \label{subsec::more_experiments::scalability::transferability}
         In this configuration, we test how transferable are the learned classifiers from one urban scene to another.
         We train on a zone $Z_i$ and test on another one $Z_j$.
@@ -53,7 +53,7 @@
                 \begin{subfloatrow}
                     \centering
                     \ffigbox[\textwidth]{
-                        \includestandalone[mode=buildnew, width=.8\textwidth]{figures/results/transferability/building}
+                        \includestandalone[mode=buildnew, width=\textwidth]{figures/results/transferability/building}
                     }{
                         \caption{
                             \label{subfig::f_score_transferability_f3_building}
@@ -63,7 +63,7 @@
                 \end{subfloatrow}
                 \begin{subfloatrow}
                     \ffigbox[\textwidth]{
-                        \includestandalone[mode=buildnew, width=.8\textwidth]{figures/results/transferability/facet}
+                        \includestandalone[mode=buildnew, width=\textwidth]{figures/results/transferability/facet}
                     }{
                         \caption{
                             \label{subfig::f_score_transferability_f3_facet}
@@ -116,7 +116,7 @@
             \end{tabular}
             \renewcommand{\arraystretch}{1}
             \caption{
-                \label{tab::transferability_comparison} Evolution of the F-score value, for each error, between each tested configuration and the best result per area (\textit{cf.} Sub-subsection~\ref{subsubsec::experiments::evaluation::baseline_feature_analysis::ablation}).
+                \label{tab::transferability_comparison} Evolution of the F-score value, for each error, between each tested configuration and the best result per area (\textit{cf.} Sub-subsection~\ref{subsec::experiments::baseline_feature_analysis::ablation}).
                 Feature sets having a significant impact on the classification results are mentioned.
                 Otherwise, \textbf{Geom.} \textbf{Im.}, and \textbf{Hei.} contribute equally.
                 The color indicates the magnitude: \textcolor{LOSS3545}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-45}{-35}{\percent})--
@@ -152,7 +152,7 @@
         As a consequence, it is the best training zone for \texttt{FUS}, \texttt{FIB} and \texttt{FIG}.
         Finally, as one can obviously suspect, \texttt{FOS} learning is evenly transferable, as it is well detected when training on any scene.
 
-    \subsection{\textsc{Generalization study}}
+    \subsection{Generalization study}
         \label{subsec::more_experiments::scalability::generalization}
         We try to find out how omitting one urban zone from the training dataset affects the test results on that same area.
         An other way to look at it is, from an operational point of view, to find out how much learning on a union of many urban scenes is helpful when testing on an unseen one.
@@ -206,7 +206,7 @@
             \end{tabular}
             \renewcommand{\arraystretch}{1}
             \caption{
-                \label{tab::generalization_comparison} Evolution of the F-score value, for each error, between each tested configuration and the best result per area (\textit{cf.} Sub-subsection~\ref{subsubsec::experiments::evaluation::baseline_feature_analysis::ablation}).
+                \label{tab::generalization_comparison} Evolution of the F-score value, for each error, between each tested configuration and the best result per area (\textit{cf.} Sub-subsection~\ref{subsec::experiments::baseline_feature_analysis::ablation}).
                 Feature sets having a significant impact on the classification results are mentioned.
                 Otherwise, \textbf{Geom.} \textbf{Im.}, and \textbf{Hei.} contribute equally.
                 The color indicates the magnitude: \textcolor{LOSS3545}{$\blacksquare$}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
@@ -242,7 +242,7 @@
         Indeed, for most labels, \textbf{Nantes} and \textbf{Paris-13} reach the same scores.
         However, the discrepancy in F-scores proves the added value for each dataset.
     
-    \subsection{\textsc{Representativeness study}}
+    \subsection{Representativeness study}
         \label{subsec::more_experiments::scalability::representativeness}
         The objective is to find out, after merging all training samples from all datasets, what is the minimal amount of data that can guaranty stable predictions.
         We can, thereafter, understand how much learning on one scene typology can affect results compared to a mixed training set.
@@ -285,13 +285,13 @@
         These errors are topological defects of building roof facets which require a high diversity of training samples for their detection.
         More sophisticated features are however still required to help predicting less frequent and more semantic labels.
     
-\section{\textsc{\acrlong*{acr::efin} study}}
+\section{The \acrlong*{acr::efin} impact on predictions}
     \label{sec::more_experiments::finesse}
-    In this section, we reproduce the experimental settings described in Subsection~\ref{subsec::experiments::evaluation::baseline_feature_analysis} and Section~\ref{sec::more_experiments::scalability}.
+    In this section, we reproduce the experimental settings described in Subsection~\ref{sec::experiments::baseline_feature_analysis} and Section~\ref{sec::more_experiments::scalability}.
     Once the \textbf{\gls{acr::efin}} is set to be 2, the goal is to find out how good, transferable and stable are the predictions of modeling error families: \texttt{Building errors} and \texttt{Facet errors}.
     Otherwise, if \textbf{\gls{acr::efin}} is fixed at level 1, the idea is to observe the predictability of defectuous model compared to \texttt{Valid} ones.
     
-    \subsection{\textsc{Error family detection}}
+    \subsection{Error family detection}
         \label{subsec::more_experiments::finesse::2}
         \begin{table}[htbp]
             \footnotesize
@@ -410,7 +410,7 @@
         This proves that at \textbf{\gls{acr::efin}} level 2, error family prediction is evened out independent of different split ratios, as opposed to higher order errors.
         Again, it benefits from the higher heterogeneity of the training set with multiple areas.
     
-    \subsection{\textsc{Detection of erroneous models}}
+    \subsection{Detection of erroneous models}
         \label{subsec::more_experiments::finesse::1}
         \begin{table}
             \footnotesize
@@ -461,8 +461,8 @@
         As a consequence, we do not report the rest of previously conducted experiments for this \textbf{\gls{acr::efin}} level.
         Indeed, it is senseless to compare detection transferability, generalization or representativeness if we hardly detect them at all on the same training scene.
 
-\section{\textsc{Classifier analysis}}
-    \subsection{\textsc{\acrshort*{acr::svm} compared to \acrshort*{acr::rf}}}
+\section{Classifier choice analysis}
+    \subsection{\acrshort*{acr::svm} compared to \acrshort*{acr::rf}}
         \begin{table}[htpb]
             \footnotesize
             \begin{center}
@@ -679,6 +679,7 @@
             }
         \end{table}
 
+    \subsection{Feature contributions using \acrshort*{acr::mkl}}
         \begin{figure}[htpb]
             \centering
             \ffigbox[\FBwidth]{
@@ -707,20 +708,18 @@
                 }
             }
         \end{figure}
-
-    \subsection{\textsc{Feature importances using \acrshort*{acr::mkl}}}
     
-\section{\textsc{Richer features contributions}}
+\section{Advanced features contributions}
     \label{sec::more_experiments::richer_features}
     Three possibilities are investigated.
     First, we keep the baseline geometric features and replace the basic image and height based feature extractors by the \gls{acr::scatnet} derived ones as explained in Subsection~\ref{subsec::learned_evaluation::richer_features::image}.
     The ensuring results are compared to 
     Second, in order to assess the added value of graph kernels, we ignore extrinsic madalities and only 
 
-    \subsection{\textsc{\acrshort*{acr::scatnet} to baseline comparison}}
+    \subsection{\acrshort*{acr::scatnet} to baseline comparison}
         \label{subsec::more_experiments::richer_features::scatnet_baseline}
 
-        \subsubsection{\textsc{Raw features}}
+        \subsubsection{Raw \acrshort*{acr::scatnet} features}
             \label{subsubsec::more_experiments::richer_features::scatnet_baseline::raw}
             \begin{sidewaystable}[htpb]
                 \footnotesize
@@ -966,7 +965,7 @@
             \end{figure}
 
 
-        \subsubsection{\textsc{Reduced features with \gls*{acr::pca}}}
+        \subsubsection{Reduced features with \gls*{acr::pca}}
             \label{subsubsec::more_experiments::richer_features::scatnet_baseline::pca}
             \begin{sidewaystable}[htpb]
                 \footnotesize
@@ -1065,7 +1064,7 @@
                 }
             \end{table}
 
-        \subsubsection{\textsc{Reduced features with Kernel \gls*{acr::pca}}}
+        \subsubsection{Reduced features with Kernel \gls*{acr::pca}}
             \label{subsubsec::more_experiments::richer_features::scatnet_baseline::kpca}
             \begin{sidewaystable}[htpb]
                 \footnotesize
@@ -1164,7 +1163,7 @@
                 }
             \end{table}
 
-    \subsection{\textsc{Graph kernels to baseline comparison}}
+    \subsection{Graph kernels to baseline comparison}
         \begin{table}[htpb]
             \footnotesize
             \centering
@@ -1227,7 +1226,7 @@
             }
         \end{table}
 
-    \subsection{\textsc{Graph kernels and \acrshort*{acr::scatnet} to baseline comparison}}
+    \subsection{Graph kernels and \acrshort*{acr::scatnet} to baseline comparison}
         \begin{sidewaystable}[htpb]
             \footnotesize
             \begin{tabular}{| c | c c | c c | c c | c c | c c | c c |}

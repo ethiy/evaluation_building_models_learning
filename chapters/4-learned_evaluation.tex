@@ -8,12 +8,12 @@ In this chapter, we present the second part of our proposed approach.
 It is based on formulating the problem as a supervized classification one.
 Issues related to the latter are detailed in Section~\ref{sec::learned_evaluation::classification}.
 Next, Section~\ref{sec::learned_evaluation::baseline} presents in details the baseline of features extracted out of building \gls{acr::3d} models.
-Third and last, richer features are discussed in Section~\ref{sec::learned_evaluation::richer_features}.
+Third and last, advanced features are discussed in Section~\ref{sec::learned_evaluation::richer_features}.
 These are proposed to better model defect predictions.
 
 \clearpage
 
-\section{\textsc{Quality evaluation as classification}}
+\section{Quality evaluation as classification}
     \label{sec::learned_evaluation::classification}
     In order to satisfy the \textbf{large-scale} condition imposed at Subsection~\ref{subsec::introduction::contributions::positioning}, we propose to formulate the problem as a supervized learning one.
     Errors are considered as labels while features are computed so as to describe the observed buildings.
@@ -36,7 +36,7 @@ These are proposed to better model defect predictions.
     Third, the classifier should be able to handle the heterogeneity of the feature vector and must adapt to different input vectors types and sizes.
     The choice of classifiers is, hence, discussed in Subsection~\ref{subsec::learned_evaluation::classification::classifiers}.
 
-    \subsection{\textsc{Different classification problems}}
+    \subsection{Different classification problems}
         \label{subsec::learned_evaluation::classification::different_porblems}
         The nature of the different classification problems are presented in Table~\ref{tab::classification_problems} depending on the three evaluation parameters defined in Subsection~\ref{sec::semantic_evaluation::label_extraction}.\\
 
@@ -89,7 +89,7 @@ These are proposed to better model defect predictions.
         predicts the error family, after which a second multi-label problem decides between the predicted error family children.
         If the \textbf{exclusivity} is off, it turns into one stage multi-label problem that predicts the existence of each atomic error corresponding to the chosen \gls{acr::elod}.
     
-    \subsection{\textsc{Feature extraction}}
+    \subsection{Feature extraction}
         \label{subsec::learned_evaluation::classification::feature_extraction}
         The proposed quality evaluation approach, being formulated as a supervized classification problem, requires extracting feature vectors describing characteristics of the evaluated model.
         This is possible through the use of the intrinsic properties of the building model, as well as comparisons with external data.\\
@@ -112,7 +112,7 @@ These are proposed to better model defect predictions.
         These provide complementary information such as edges (high frequencies, in general) and textures which are suited for inner defect detection as an example (\textit{cf.} Subfigure~\ref{subfig::fus_2d}).
         This type of data comes usually in two different shapes: oblique images or orthoimages.
     
-    \subsection{\textsc{Classifier choice}}
+    \subsection{Classifier choice}
         \label{subsec::learned_evaluation::classification::classifiers}
         The choice of classifiers shoud take into consideration the highly modular nature of the framework with multimodal features involving many parameters.
         Two classifiers where chosen in this study: \gls{acr::rf} and \gls{acr::svm}.
@@ -136,7 +136,7 @@ These are proposed to better model defect predictions.
             This type of classifiers naturally encorporates kernels such as the ones presented later in Subsection~\ref{subsec::learned_evaluation::richer_features::graph}.
             Finally, it is also preferred when dealing with high dimensional feature vectors like those produced by \glspl{acr::scatnet} (\textit{cf.} Subsection~\ref{subsec::learned_evaluation::richer_features::image}).
 
-\section{\textsc{Feature baseline}}
+\section{Feature baseline}
     \label{sec::learned_evaluation::baseline}
     Since there is no comparable work that studied the learned detection of errors defined in Chapter~\ref{chap::semantic_evaluation}, we propose a baseline for each one of the three modalities: geometric, height based and image based features.
     Attributes are kept simple so as to be used in most situations relying on generally available data.
@@ -144,13 +144,13 @@ These are proposed to better model defect predictions.
     In addition of being very costly, these features are methodologically redundant with the \gls{acr::3d} modeling techniques.
     They are, hence, vulnerable to the same defects.
     Conversely, evaluation metrics used in the \gls{acr::3d} building reconstruction literature (\textit{e.g.}, \gls{acr::rmse}) are too weak for such a complex task.
-    This will be proven later on in Section~\ref{subsec::experiments::evaluation::baseline_feature_analysis}.
+    This will be proven later on in Section~\ref{sec::experiments::baseline_feature_analysis}.
 
     In Subsection~\ref{subsec::learned_evaluation::baseline::geometric}, we describe the used baseline for geometric features.
     Next, in Subsection~\ref{subsec::learned_evaluation::baseline::height}, height based features extraction is explained.
     We end with image based features in Subsection~\ref{subsec::learned_evaluation::baseline::image}.
 
-    \subsection{\textsc{Geometric features}}
+    \subsection{Geometric features}
         \label{subsec::learned_evaluation::baseline::geometric}
         Given a building model \(\mathsf{M}\), the facet set is denoted by $\mathsf{F_M}$.
         $\forall (f, g) \in \mathsf{F_M} \times \mathsf{F_M} \; f \sim g$ correspond to facets $f$ and $g$ being adjacent: 
@@ -215,7 +215,7 @@ These are proposed to better model defect predictions.
         Dealing with this type of information implies graph comparisons which are not a genuinely simple task to achieve.
         Since our objective is to build a baseline, this approach has not yet been considered.
 
-    \subsection{\textsc{Height based features}}
+    \subsection{Height based features}
         \label{subsec::learned_evaluation::baseline::height}
         Regarding this modality, raw depth information is provided, for a building model \(\mathsf{M}\), by a \gls{acr::dsm} as a \gls{acr::2d} height grid that is cropped to fit the building footprint: $dsm \in \mathbb{R}^{w_{\mathsf{M}} \times h_{\mathsf{M}}}$\footnote{\label{note::w_h}\(w_{\mathsf{M}}\) (\textit{resp.} \(h_{\mathsf{M}}\)) is the grid width (\textit{resp.} height) and is determined by the size of the building and the resolution of the \gls{acr::dsm}.}.
         This type of reference data must date back to the same time where the building models where produced.
@@ -250,7 +250,7 @@ These are proposed to better model defect predictions.
         However, as for the previous geometric attributes, the grid structure information coming from the model is lost.
         Errors cannot be spatialized and linked to a specific facet.
 
-    \subsection{\textsc{Image based features}}
+    \subsection{Image based features}
         \label{subsec::learned_evaluation::baseline::image}
         The framework is general enough to encompass both orthorectified images and oblique ones.
         For now, we rely only on more accessible orthorectified images, eventhough they can be riddled with artifacts.
@@ -341,18 +341,18 @@ These are proposed to better model defect predictions.
         As example, facet imprecise borders can be detected as local gradients direction will be expected to differ greatly from the inaccurate edge.
         It can also be detrimental in under-segmentation detection as colors can change considerably from one facet or one building to another inducing an gradient orthogonal to edge normals.
 
-\section{\textsc{Richer features}}
+\section{Advanced features}
     \label{sec::learned_evaluation::richer_features}
     The last section presented features that are by construction taken to be as simple as possible.
     The goal was to test the feasibility of the learned quality evaluation approach.
-    This is discussed in length in Subsection~\ref{subsec::experiments::evaluation::baseline_feature_analysis} and Sections~\ref{sec::more_experiments::finesse} and~\ref{sec::more_experiments::scalability}.\\
+    This is discussed in length in Subsection~\ref{sec::experiments::baseline_feature_analysis} and Sections~\ref{sec::more_experiments::finesse} and~\ref{sec::more_experiments::scalability}.\\
 
     This section presents features that better exploits structural information of the input models that were missed by the baseline.
     In the previous section, we identifed two types of instances from which features are extacted: graph-like and image-like data.
-    Richer graph based feature are proposed in Subsection~\ref{subsec::learned_evaluation::richer_features::graph}.
-    For images, better attributes are also presented in the next Subsection~\ref{subsec::learned_evaluation::richer_features::image}.
+    Advanced graph based feature extractors are proposed in Subsection~\ref{subsec::learned_evaluation::richer_features::graph}.
+    For images-like structures, better attributes are also presented in the next Subsection~\ref{subsec::learned_evaluation::richer_features::image}.
 
-    \subsection{\textsc{Graph-like classification}}
+    \subsection{Graph kernels}
         \label{subsec::learned_evaluation::richer_features::graph}
         In Subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}, were discussed some kernels that can describe adequately graphs.
         The geometric baseline features we provided in Subsection~\ref{subsec::learned_evaluation::baseline::geometric}, more precisely in Equation~\ref{eq::geometric_features}, could actually be seen as a concatenation of the basic feature maps from Equations~\ref{eq::feature_node_graph} and~\ref{eq::feature_edge_graph}.
@@ -404,14 +404,14 @@ These are proposed to better model defect predictions.
         Other types of kernels were briefly experimented with, namely the Lov\'asz \(\vartheta\), Graphlet Sampling, Subgraph Matching and Shortest Path kernels.
         However, they did not yield any valuable results and most of the time failed numerically.
         
-    \subsection{\textsc{Image-like classification}}
+    \subsection{\acrshort*{acr::scatnet} feature extractor}
         \label{subsec::learned_evaluation::richer_features::image}
         \glspl{acr::cnn} have proven to be the standard feature extractors in image classification.
         However, they require a great load of images in order to learn good enough representations.
         This is not our case as explained later in Subsection~\ref{subsec::experiments::datasets::stats}.
         As a consequence, we choose instead to use \glspl{acr::scatnet} which mimic classical \glspl{acr::cnn} and can yield good image representations in an unlearned manner as shown in Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::scatnet}.
 
-        \subsubsection{\textsc{Height based features}}
+        \subsubsection{Height based features}
             Discrepancies between the \gls{acr::3d} model extracted height map and the \gls{acr::dsm} manifest in textures in computed residuals (\textit{cf.} Figure~\ref{subfig::residuals}).
             As a matter of fact, \glspl{acr::scatnet} can handle very well texture discrimination as proven theoretically by~\textcite{mallat2012group} and experimentally by~\textcite{bruna2013invariant,sifre2013rotation}.
             In addition, theoretically the height data can be fed directly to a \gls{acr::scatnet} without requiring any normalization or preprocessing since, by construction, they can admit any type of \gls{acr::2d} signal\footnote{There are other versions of \glspl{acr::scatnet} taking one dimensional signals~\parencite{anden2014deep} or even graphs~\parencite{eickenberg2018solid}.}.
@@ -481,7 +481,7 @@ These are proposed to better model defect predictions.
                 \item[\(\operatorname{std}(l)\)] computes the standard deviation over the tuple \(l\).
             \end{description}
 
-        \subsubsection{\textsc{Height based features}}
+        \subsubsection{Height based features}
             \glspl{acr::scatnet} seem then to be good choice for image based feature extractors.
             In fact, as shown in Subfigure~\ref{subfig::bus_2d}, image textures could be also useful for error detection.
             More importantly, as shown with baseline image based features (\textit{cf.} Subsection~\ref{subsec::learned_evaluation::baseline::image}), edges are key image attributes for comparing building models to orthoimages.
