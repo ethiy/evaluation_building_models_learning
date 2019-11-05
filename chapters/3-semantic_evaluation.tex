@@ -11,21 +11,21 @@ After discussing some properties of the chosen error defnitions, we explain, in 
 
 \clearpage
 
-\section{\textsc{The general framework}}
+\section{The general framework}
     \label{sec::semantic_evaluation::general_framework}
     As stated previously in Subsection~\ref{subsec::introduction::contributions::positioning}, a semantic evaluation implies a categorization of errors affecting building models.
     In the same subsection, we discussed the desired properties in order to achieve a \textbf{large-scale} and \textbf{automatic} semantic evaluation.
     Before delving into details, we first examine the implications of such properties on error definitions in Subsection~\ref{subsec::semantic_evaluation::general_framework::hierarchization_moderularity}.
     Next, Subsection~\ref{subsec::semantic_evaluation::general_framework::error_classification} presents a general layout of the proposed error taxonomy.
 
-    \subsection{\textsc{Hierarchization and modularity}}
+    \subsection{Hierarchization and modularity}
         \label{subsec::semantic_evaluation::general_framework::hierarchization_moderularity}
         The goal of this subsection is to state the desired characteristics in the categorization of building model defects based on the discussion in Subsection~\ref{subsec::introduction::contributions::positioning}.
         We introduce first two notions: generalizability and exhaustivity.
         These are directly linked to the \textbf{large-scale} aspect of the evaluation approach.
         These are implemented in the error categorization based on two principles: hierarchization and modularity.
 
-        \subsubsection{\textsc{The generalizability \textit{vs.} exhaustivity compromise}}
+        \subsubsection{The generalizability \textit{vs.} exhaustivity compromise}
             In Subsection~\ref{subsec::introduction::contributions::positioning}, we have seen how the \textbf{large-scale} constraint on the quality evaluation approach entails the method robustness to changes in the urban scene as well as to the pipeline behind the evaluated model.
             The first condition implies the proposed error categorization capacity to be generalizable: the ability to describe defects of building models unhindered by the specificities of one scene or another.
             The second conveys the exhaustivity of the evaluation: the power to take into account all possible errors that a building model can be affected by, free of any consideration of its origin.\\
@@ -42,7 +42,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
             However, this has the disadvantage of not covering all the instances specific one input method or another.
             A compromise have to be reached in the definition of errors between generalizability and exhaustivity.
         
-        \subsubsection{\textsc{General structure}}
+        \subsubsection{General structure}
             We introduce a hierarchical structure to categorize errors in order to mitigate the last point.
             The higher in the ladder the error is, the more generalizability (and less exhaustivity) is achieved.
             At the same hierarchical level, to avoid having to exhaustively list all possible errors, the identified defects are described modularly based on some predefined independent errors.
@@ -58,7 +58,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
             Errors with maximal \texttt{finesse} are called \texttt{atomic} errors.
             \texttt{Atomic} errors are to be intuitively correlated to independent actions needed by an operator or an algorithm so as to correct the model.
 
-    \subsection{\textsc{A general classification of errors}}
+    \subsection{A general classification of errors}
         \label{subsec::semantic_evaluation::general_framework::error_classification}
         Herein, based on the previous discussion, a general layout is detailed for building model evaluation.
 
@@ -102,20 +102,20 @@ After discussing some properties of the chosen error defnitions, we explain, in 
             \end{center}
         \end{figure}
 
-\section{\textsc{Application to the geospatial overhead case}}
+\section{Application to the geospatial overhead case}
     \label{sec::semantic_evaluation::overhead}
     Our observations were based on large datasets of \gls{acr::3d} models of buildings reconstructed automatically out of \gls{acr::vhr} geospatial images or, if available, \gls{acr::lidar} point clouds.
     The framework introduced in the previous subsection was applied to our special case.
     To do so, let us define the \texttt{atomic} errors before discussing their properties.
 
-    \subsection{\textsc{Atomic error definitions}}
+    \subsection{Atomic error definitions}
         \label{subsec::semantic_evaluation::overhead::atomic}
         In the template structure presented in Section~\ref{subsec::semantic_evaluation::general_framework::error_classification}, were left out the \texttt{atomic} error definitions.
         Indeed, since they represent the most specific level, their choice is critical to guaranty both the desired exhaustivity and generalizability.
         We conducted a thourough inspection of all defects that we detected in our datasets and came up with the following definitions (\textit{cf.} Figures~\ref{fig::taxonomy}).
         Eventhough these errors were defined based on models of buildings computed out of overhead acquired data at large scales, we think they are exhaustive enough to describe the quality of models in other settings (fa\c{c}ade modeling, manually plotted \gls{acr::3d} models).
 
-        \subsubsection{\texttt{Building Errors} \textsc{family}}
+        \subsubsection{\texttt{Building Errors} family}
             Herein are presented the \texttt{atomic} errors regarding the \gls{acr::lod}-0 and \gls{acr::lod}-1 aspects.
 
             \paragraph{\texttt{\acrlong*{acr::bus}}}
@@ -345,7 +345,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 In case of evaluating at higher than \gls{acr::lod}-2, this error is not reported as it becomes redundant with below delineated errors.
                 In fact, if a geometric error is detected at the facet level then it will naturally impact negatively on the geometry of the model as a whole.
             
-        \subsubsection{\texttt{Facet Errors} \textsc{family}}
+        \subsubsection{\texttt{Facet Errors} family}
             In this sub-subsection, \gls{acr::lod}-2 and \gls{acr::lod}-3 corresponding \texttt{atomic} errors are presented.
 
             \paragraph{\texttt{\acrlong*{acr::fus}}}
@@ -634,7 +634,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 For correction, as the corruption in the data resulting from the modeling limits could be filtered out using semantics, one can reestimate the parameters of the primitives.
                 Failing that, this correction step is usually conducted by human operators.
 
-    \subsection{\textsc{Discussion}}
+    \subsection{Discussion}
         \label{subsec::semantic_evaluation::overhead::discussion}
 
         In the previous subsection, we defined \texttt{atomic} errors based on our observations related to automatic overhead modeling of urban scenes.
@@ -642,7 +642,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
         Herein, we explore the properties of the ensuing taxonomy of errors.
         In addition, we also discuss the relation between this taxonomy and the ones existing in the litterature.
 
-        \subsubsection{\textsc{Error taxonomy properties}}
+        \subsubsection{Error taxonomy properties}
             The similarity of the \texttt{Building Errors} and \texttt{Facet Errors} is striking.
             Indeed, this is what was intended.
             The idea came after observing that segmentation issues can occur both at building and facet errors.
@@ -696,7 +696,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
             These discussed properties does not only help the generalizability and exhaustivity in the overhead case, but can also be applied to terrestrial based fa\c{c}ade modeling.
             In fact, the same \texttt{atomic} errors can describe perfectly the possible errors that can affect facets on a fa\c{c}ade, owing always to the effect of \textit{implicit} semantics on building models.
         
-        \subsubsection{\textsc{Related taxonomies}}
+        \subsubsection{Related taxonomies}
             This sub-subsection discusses the semantic error defnitions in the state-of-the-art.
             As mentioned in Subsection~\ref{subsec::state_of_the_art::quality::output::semantic},~\textcite{rottensteiner2012isprs} proposed two semantic errors ``over segmentation'' and ``under segmentation''.
             These, however, relate only to facets.
@@ -716,13 +716,13 @@ After discussing some properties of the chosen error defnitions, we explain, in 
             Consequently, such a taxonomy cannot directly fit with our labels.
             The acceptability dimension can be incorporated into our framework by attributing a confidence score to each error: for example, a prediction probability.        
 
-\section{\textsc{Parametric label extraction}}
+\section{Parametric label extraction}
     \label{sec::semantic_evaluation::label_extraction}
     When evaluating building models, not all errors are taken into account depending on the end user needs.
     In fact, labels are extracted according to the taxonomy based on the evaluation settings.
     We will see in this subsection how this is possible and what are the consequences of this choice.
 
-    \subsection{\textsc{Evaluation parameters}}
+    \subsection{Evaluation parameters}
         At evaluation time, three parameters play a role in determining which error labels to consider.
         We determine hereafter these parameters and their role.\\
 
@@ -742,7 +742,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
         This stems from the fact that dealing whith low \gls{acr::lod} errors would probably impact the shape of higher \gls{acr::lod} features.
         As a consequence, detecting and correcting the latter rather than prioritizing the low \gls{acr::lod} ones is going to be virtually wasteful in ressources.
 
-    \subsection{\textsc{Evaluation labels}}
+    \subsection{Evaluation labels}
         Depending on the previously defined parameters, the considered labels that will be used for the evaluation would differ.
         We will visit herein all the possible cases based on the defined taxonomy for the overhead reconstruction case (\textit{cf.} Figure~\ref{fig::taxonomy}).
         For this purpose we must first define the function $\operatorname{children}$ that gives the children of a non-leaf node in the taxonomy tree and outputs the same node if it is a leaf:

@@ -9,13 +9,13 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
 
 \clearpage
 
-\section{\textsc{Datasets}}
+\section{Datasets}
     \label{sec::experiments::datasets}
     
-    \subsection{\textsc{Data preprocesing}}
+    \subsection{Data preprocesing}
         \label{subsec::experiments::datasets::preprocessing}
 
-    \subsection{\textsc{Urban scenes and modeling techniques}}
+    \subsection{Urban scenes and modeling techniques}
         \label{subsec::experiments::datasets::scenes}        
         \gls{acr::3d} models from three different cities of France are selected in order to assess the performance of our framework: \textbf{Elancourt}, \textbf{Nantes}, and the XIII\textsuperscript{th} district of Paris (\textbf{Paris-13}) (\textit{cf.} Figure~\ref{fig::france_map}).
         Figure~\ref{fig::elancourt_ortho} depicts the small city of \textbf{Elancourt} which contains diverse of building types: residential areas with gable and hip roof buildings and large industrial flat roof building based districts (\textit{cf.} Subfigure~\ref{subfig::elancourt_samples}).
@@ -116,7 +116,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
         3,235 buildings in total are considered.
         They were annotated according to the atomic errors list provided by our taxonomy.
 
-    \subsection{\textsc{Error statistics}}
+    \subsection{Error statistics}
         \label{subsec::experiments::datasets::stats}
         \begin{figure}[htpb]
             \centering
@@ -144,7 +144,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                 \begin{subfloatrow}
                     \centering
                     \ffigbox[\textwidth]{
-                        \includestandalone[mode=buildnew, height=7.5cm]{figures/datasets/lod2_stats}
+                        \includestandalone[mode=buildnew, width=.7\textwidth]{figures/datasets/lod2_stats}
                     }{
                         \caption{
                             \label{subfig::lod2_errors}
@@ -197,107 +197,102 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
         \texttt{FIG} does not keep the same dynamic as its frequency keeps stable from \textbf{Elancourt} and \textbf{Nantes} but jumps considerably in \textbf{Paris-13}.
         This may be explained by the fact that the gap in \texttt{FUS} error ratios between \textbf{Paris-13} and \textbf{Nantes} is more important than that of \texttt{FOS} errors, contrarily to the same gaps for the same errors between \textbf{Nantes} and \textbf{Elancourt} which compensate each other.
 
-\section{\textsc{Evaluation of the learned approach}}
-    \label{sec::experiments::evaluation}
-    In the last section, we also explained how we acquired our dataset, in addition to analysing the effect of the urban scene on error statistics.
-    Beforehand, all the ingredients needed in the proposed methodology were presented.
-    This section aims at specifying how each bloc of the pipeline is implemented.\\
+\section{The experimental set-up}
+    \label{sec::experiments::setup}
+    In this section, we give detailed account of how every building block of our pipeline is parameterized.
+    We first start by discussing feature configurations, before defining the taxonomy parameters of interest and endin with a thorough description of the classification process.
 
-    In Subsection~\ref{subsec::experiments::evaluation::setup} provides all details about our experimental approach.
-    Next in Subsection~\ref{subsec::experiments::evaluation::baseline_feature_analysis}, we report some first results using the baseline features we developped.
+    \subsection{Feature configurations}
+        \label{subsec::experiments::setup::feature_configurations}
+        We present herein the features that were used in experiments.
+        First, as we tried to prove the efficiency of the proposed learning framework, we made use different configurations using the baseline features.
+        Second, as advanced features were used, new combinations were possible and are discussed hereafter.
 
-    \subsection{\textsc{Experimental set-up}}
-        \label{subsec::experiments::evaluation::setup}
-        In this subsection, we give detailed account of how every building block of our pipeline is parameterized.
-        We first start by discussing feature configurations, before defining the taxonomy parameters of interest and endin with a thorough description of the classification process.
+        \subsubsection{Baseline features}
+            The geometric features are always available.
+            As a consequence, we tested four feature configurations: ``geometric features'' (\textbf{Geom.}) only, ``geometric and height features''(\textbf{Geom. \(\oplus\) Hei.}), ``geometric and image features''(\textbf{Geom. \(\oplus\) Im.}) as well as ``geometric, height and image features''(\textbf{All}).
+            In order to have a better compare the important of each modality, the feature vectors they produce are of the same size.
+            Actually, using the function \(\chi_{\max,\min,\operatorname{mean},\operatorname{med}}\) defined in Equation~\ref{eq::max_min_mean_med_extractor}, the geometric feature vector in Equation~\ref{eq::geometric_features} is of dimension
+            \begin{equation*}
+                \underbrace{4}_{\substack{\text{the output dimension}\\\text{of the function } \chi_{\max,\min,\operatorname{mean},\operatorname{med}} }} \times \underbrace{5}_{\substack{\text{the number of the facet}\\\text{graph attributes}}} = 20.
+            \end{equation*}
 
-        \subsubsection{\textsc{Feature configurations}}
-            \label{subsubsec::experiments::evaluation::setup::feature_configurations}
-            We present herein the features that were used in experiments.
-            First, as we tried to prove the efficiency of the proposed learning framework, we made use different configurations using the baseline features.
-            Second, as richer features were used, new combinations were possible and are discussed hereafter.
+            Regarding height based feature vectors their dimension depend on the histogram parameters.
+            Since we compute differences between observed and model height at terrain level also (\textit{cf.} Subsection~\ref{subsec::learned_evaluation::baseline::height}), and because these are virtually unbounded and can differ from one scene to another, the maximum possible discrepancy is limited to \SI{\pm 50}{\m} for all scenes.
+            In order to have the same feature vector dimension for this modality, the number of bins is fixed manually to \(20\).
+            For image based features, the cosine similarity between normal vectors, used in Equation~\ref{eq::corr_fac}, is by definition bounded in the interval [-1, 1].
+            This interval is consequently divided evenly into \(20\) bins for the histogram computation.
+            The \glspl{acr::dsm} and orthorectified images used to derive height and image features have the same spatial resolution as the reconstruction input data.\\
 
-            \paragraph{Baseline features}
-                The geometric features are always available.
-                As a consequence, we tested four feature configurations: ``geometric features'' (\textbf{Geom.}) only, ``geometric and height features''(\textbf{Geom. \(\oplus\) Hei.}), ``geometric and image features''(\textbf{Geom. \(\oplus\) Im.}) as well as ``geometric, height and image features''(\textbf{All}).
-                In order to have a better compare the important of each modality, the feature vectors they produce are of the same size.
-                Actually, using the function \(\chi_{\max,\min,\operatorname{mean},\operatorname{med}}\) defined in Equation~\ref{eq::max_min_mean_med_extractor}, the geometric feature vector in Equation~\ref{eq::geometric_features} is of dimension
-                \begin{equation*}
-                    \underbrace{4}_{\substack{\text{the output dimension}\\\text{of the function } \chi_{\max,\min,\operatorname{mean},\operatorname{med}} }} \times \underbrace{5}_{\substack{\text{the number of the facet}\\\text{graph attributes}}} = 20.
-                \end{equation*}
+            \sisetup{
+                scientific-notation = true
+            }
+            These features implementation is conducted in Python and is not thoroughly.
+            Geometric features are computed in average in \SI{0.05}{\s \per \building}, height based ones take in average \SI{1.4}{\s \per \building} and finally image based ones need more than \SI{16}{\s \per \building}.
+            In order to reduce the runtime of each experiment, the last two types of features are cached once computed for a building model and retrieved latter for tests.
 
-                Regarding height based feature vectors their dimension depend on the histogram parameters.
-                Since we compute differences between observed and model height at terrain level also (\textit{cf.} Subsection~\ref{subsec::learned_evaluation::baseline::height}), and because these are virtually unbounded and can differ from one scene to another, the maximum possible discrepancy is limited to \SI{\pm 50}{\m} for all scenes.
-                In order to have the same feature vector dimension for this modality, the number of bins is fixed manually to \(20\).
-                For image based features, the cosine similarity between normal vectors, used in Equation~\ref{eq::corr_fac}, is by definition bounded in the interval [-1, 1].
-                This interval is consequently divided evenly into \(20\) bins for the histogram computation.
-                The \glspl{acr::dsm} and orthorectified images used to derive height and image features have the same spatial resolution as the reconstruction input data.\\
+        \subsubsection{Advanced features}
+            Baseline features are replaced by more enhanced ones as shown in Section~\ref{sec::learned_evaluation::richer_features}.
+            These are denoted as follows:
+            \begin{itemize}[label=\(\blacktriangleright\)]
+                \item \textbf{S-Hei.} refer to \gls{acr::scatnet} height based features;
+                \item \textbf{S(D)-Im.} (\textit{resp.} \textbf{S(C)-Im.}) correspond to \gls{acr::scatnet} image based features with deletion (\textit{resp.} channel) option;
+                \item \textbf{S(D)-All} (\textit{resp.} \textbf{S(C)-All}) \(\equiv\) \textbf{Geom.} + \textbf{S-Hei.} + \textbf{S(D)-Im.} (\textit{resp.} \textbf{S(C)-Im.});
+                \item \textbf{K-S(D)-All} (\textit{resp.} \textbf{K-S(C)-All}) \(\equiv\) \textbf{K-Geom.} + \textbf{S-Hei.} + \textbf{S(D)-Im.} (\textit{resp.} \textbf{S(C)-Im.});
+            \end{itemize}
+            We lay out herein how their parameters were determined.
 
+            \paragraph{Graph kernels}
+                In Subsection~\ref{subsec::learned_evaluation::richer_features::graph}, we have seen how 14 graph kernels are aggregated to describe graphs.
+                We relied, in experiments, on an available Python module called GraKel~\parencite{siglidis2018grakel}.
+                We provide herein the parameters of each kernel type.
+                \begin{description}
+                    \item[\(\blacktriangleright\) Random walk] The exponential version fails numerically and was left out.
+                                After a grid search \(\lambda\) was set to be \num{1e-3}, for the geometric random walk.
+                                This is actually a very low value as \(\lambda\) has to verify the condition stated in Equation~\ref{eq::condition_geometric_kernel_convergence} for all pairs of graphs in the training dataset.
+                                One case where the largest eigenvalue of the direct product of the adjacency matrix of two graphs in the dataset suffices to considerably lower the maximal value \(\lambda\) can take.
+                                To compute such a kernel it takes approximatly \SI{1.14}{\s\per\building\squared}.
+                    \item[\(\blacktriangleright\) \gls{acr::svm} \(\vartheta\)] This kernel takes no parameters.
+                                It takes on average \SI{0.0000201}{\s\per\building\squared} to compute a kernel comparison.
+                    \item[\(\blacktriangleright\) Multiscale Laplacian] Our building models have a varying number of nodes from 4 up to 20 facets in some cases.
+                                That is why we choose to keep the same radius size\footnote{The neighboorhoods \(N_l(v)\) are taken as balls around vertex \(v\)~\parencite{kondor2016multiscale}.} and depth level \(L\) set to 3 as in the original paper~\parencite{kondor2016multiscale}.
+                                The same goes for the regularization terms fixed at a value of \num{1e-2}.
+                                Computing one kernel comparison requires around \SI{10.6}{\s\per\building\squared}.
+                    \item[\(\blacktriangleright\) Propagation] The choice of the transition matrix, as explained in Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}, is set by default to be the normalized adjacency matrix.
+                                The maximal iteration number \(t_{\max}\) is similar to the height parameter of the Weisfeler-Lehman kernel and is set to 5.
+                                Other parameters regarding the hashing and binning processed are kept at their default values.
+                                Comparing two instances takes around \SI{0.0812}{\s\per\building\squared}.
+                    \item[\(\blacktriangleright\) Graph hopper] This kernel takes no other parameter than the choice of base kernels.
+                                Comparisons between takes on average \SI{34.5}{\s\per\building\squared}.
+                \end{description}
+
+            \paragraph{\gls*{acr::scatnet}}
+                For \glspl{acr::scatnet}, we rely on a modern and vestatile Python module: Kymatio~\parencite{andreux2018kymatio}.
+                The parameterization of the \gls{acr::scatnet} does not depend on the signal content as much as it relates to the size of input images.
+                This is true because the filter banks, which parameterization is the most related to the signal dynamics, were set beforehand.
+                As a consequence, the same parameters were applied for image and height based features.\\
+
+                The number of possible orientations \(L\) is fixed at its default value 8 as it was the optimal choice corresponding to the already defined Morlet filter banks.
+                \(I\) the scale of the \gls{acr::scatnet} pooling operator was set to 3.
+                This corresponds to models \(\mathsf{M}\) verifying: \(w_{\mathsf{M}} \geq 2^3 = 8\) and \(h_{\mathsf{M}} \geq 8\).
+                In \textbf{Elancourt}, it implies that building models have to be at least larger in length and width than \SI{8 x 0.06}{\m} = \SI{0.48}{\m}, while in \textbf{Paris-13} and \textbf{Nantes} the minimal dimensions of a building are \SI{8 x 0.10}{\m} = \SI{0.80}{\m}.
+                This is reasonable and fails only for some rare cases were the building is obviously over segmented an can be detected as such by simply applying a building model size threshold.\\
+                The maximal number of layers \(m\) is 2.
+                As a consequence, the total number, according to Equation~\ref{eq::scatnet_number_paths} of scattering outputs is \(n_S = 217\).
+                This implies that the length of \gls{acr::scatnet} based features is \(d \times n_S\) = \num{5 x 217} = 1085.\\
+
+                The Kymatio implementation of \gls{acr::scatnet} uses GPU to accelerate computations.
+                Using an NVIDIA GeForce GTX 750 Ti graphics card, it takes around \SI{14.06}{\s \per \building} on average to compute a height based features and \SI{20.86}{\s \per \building}.
+                As with previous features onces they are calculated they are cached for latter use.
                 \sisetup{
-                    scientific-notation = true
+                    scientific-notation = false
                 }
-                These features implementation is conducted in Python and is not thoroughly.
-                Geometric features are computed in average in \SI{0.05}{\s \per \building}, height based ones take in average \SI{1.4}{\s \per \building} and finally image based ones need more than \SI{16}{\s \per \building}.
-                In order to reduce the runtime of each experiment, the last two types of features are cached once computed for a building model and retrieved latter for tests.
 
-            \paragraph{Richer features}
-                Baseline features are replaced by more enhanced ones as shown in Section~\ref{sec::learned_evaluation::richer_features}.
-                These are denoted as follows:
-                \begin{itemize}[label=\(\blacktriangleright\)]
-                    \item \textbf{S-Hei.} refer to \gls{acr::scatnet} height based features;
-                    \item \textbf{S(D)-Im.} (\textit{resp.} \textbf{S(C)-Im.}) correspond to \gls{acr::scatnet} image based features with deletion (\textit{resp.} channel) option;
-                    \item \textbf{S(D)-All} (\textit{resp.} \textbf{S(C)-All}) \(\equiv\) \textbf{Geom.} + \textbf{S-Hei.} + \textbf{S(D)-Im.} (\textit{resp.} \textbf{S(C)-Im.});
-                    \item \textbf{K-S(D)-All} (\textit{resp.} \textbf{K-S(C)-All}) \(\equiv\) \textbf{K-Geom.} + \textbf{S-Hei.} + \textbf{S(D)-Im.} (\textit{resp.} \textbf{S(C)-Im.});
-                \end{itemize}
-                We lay out herein how their parameters were determined.
+    \subsection{Classification settings}
+            Herein, are given extensive details how the considered classifiers (\textit{cf.} Subsection~\ref{subsec::learned_evaluation::classification::classifiers}) are applied.
+            We also provide the metrics that will help measure the accuracy of predictions.
 
-                \subparagraph{Graph kernels}
-                    In Subsection~\ref{subsec::learned_evaluation::richer_features::graph}, we have seen how 14 graph kernels are aggregated to describe graphs.
-                    We relied, in experiments, on an available Python module called GraKel~\parencite{siglidis2018grakel}.
-                    We provide herein the parameters of each kernel type.
-                    \begin{description}
-                        \item[\(\blacktriangleright\) Random walk] The exponential version fails numerically and was left out.
-                                    After a grid search \(\lambda\) was set to be \num{1e-3}, for the geometric random walk.
-                                    This is actually a very low value as \(\lambda\) has to verify the condition stated in Equation~\ref{eq::condition_geometric_kernel_convergence} for all pairs of graphs in the training dataset.
-                                    One case where the largest eigenvalue of the direct product of the adjacency matrix of two graphs in the dataset suffices to considerably lower the maximal value \(\lambda\) can take.
-                                    To compute such a kernel it takes approximatly \SI{1.14}{\s\per\building\squared}.
-                        \item[\(\blacktriangleright\) \gls{acr::svm} \(\vartheta\)] This kernel takes no parameters.
-                                    It takes on average \SI{0.0000201}{\s\per\building\squared} to compute a kernel comparison.
-                        \item[\(\blacktriangleright\) Multiscale Laplacian] Our building models have a varying number of nodes from 4 up to 20 facets in some cases.
-                                    That is why we choose to keep the same radius size\footnote{The neighboorhoods \(N_l(v)\) are taken as balls around vertex \(v\)~\parencite{kondor2016multiscale}.} and depth level \(L\) set to 3 as in the original paper~\parencite{kondor2016multiscale}.
-                                    The same goes for the regularization terms fixed at a value of \num{1e-2}.
-                                    Computing one kernel comparison requires around \SI{10.6}{\s\per\building\squared}.
-                        \item[\(\blacktriangleright\) Propagation] The choice of the transition matrix, as explained in Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}, is set by default to be the normalized adjacency matrix.
-                                    The maximal iteration number \(t_{\max}\) is similar to the height parameter of the Weisfeler-Lehman kernel and is set to 5.
-                                    Other parameters regarding the hashing and binning processed are kept at their default values.
-                                    Comparing two instances takes around \SI{0.0812}{\s\per\building\squared}.
-                        \item[\(\blacktriangleright\) Graph hopper] This kernel takes no other parameter than the choice of base kernels.
-                                    Comparisons between takes on average \SI{34.5}{\s\per\building\squared}.
-                    \end{description}
-
-                \subparagraph{\gls*{acr::scatnet}}
-                    For \glspl{acr::scatnet}, we rely on a modern and vestatile Python module: Kymatio~\parencite{andreux2018kymatio}.
-                    The parameterization of the \gls{acr::scatnet} does not depend on the signal content as much as it relates to the size of input images.
-                    This is true because the filter banks, which parameterization is the most related to the signal dynamics, were set beforehand.
-                    As a consequence, the same parameters were applied for image and height based features.\\
-
-                    The number of possible orientations \(L\) is fixed at its default value 8 as it was the optimal choice corresponding to the already defined Morlet filter banks.
-                    \(I\) the scale of the \gls{acr::scatnet} pooling operator was set to 3.
-                    This corresponds to models \(\mathsf{M}\) verifying: \(w_{\mathsf{M}} \geq 2^3 = 8\) and \(h_{\mathsf{M}} \geq 8\).
-                    In \textbf{Elancourt}, it implies that building models have to be at least larger in length and width than \SI{8 x 0.06}{\m} = \SI{0.48}{\m}, while in \textbf{Paris-13} and \textbf{Nantes} the minimal dimensions of a building are \SI{8 x 0.10}{\m} = \SI{0.80}{\m}.
-                    This is reasonable and fails only for some rare cases were the building is obviously over segmented an can be detected as such by simply applying a building model size threshold.\\
-                    The maximal number of layers \(m\) is 2.
-                    As a consequence, the total number, according to Equation~\ref{eq::scatnet_number_paths} of scattering outputs is \(n_S = 217\).
-                    This implies that the length of \gls{acr::scatnet} based features is \(d \times n_S\) = \num{5 x 217} = 1085.\\
-
-                    The Kymatio implementation of \gls{acr::scatnet} uses GPU to accelerate computations.
-                    Using an NVIDIA GeForce GTX 750 Ti graphics card, it takes around \SI{14.06}{\s \per \building} on average to compute a height based features and \SI{20.86}{\s \per \building}.
-                    As with previous features onces they are calculated they are cached for latter use.
-                    \sisetup{
-                        scientific-notation = false
-                    }
-    
-        \subsubsection{\textsc{Considered labels}}
+        \subsubsection{Considered labels}
             All \textbf{\gls{acr::efin}} levels were tested.
             The input models are generalized to \gls{acr::lod}-2.
             As a consequence, we chose \textbf{\gls{acr::elod}} = \gls{acr::lod}-2.
@@ -306,298 +301,304 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             As proven in the latter experiments (\textit{cf.} Section~\ref{sec::more_experiments::finesse}), the first stage results are not good enough in order to test this configuration.
             That is why we limited the experiments to the case where the \textbf{exclusivity} is set to be \textsc{off}.
 
-        \subsubsection{\textsc{Classification settings}}
-            Herein, are given extensive details how the considered classifiers (\textit{cf.} Subsection~\ref{subsec::learned_evaluation::classification::classifiers}) are applied.
-            We also provide the metrics that will help measure the accuracy of predictions.
+        \subsubsection{Classifiers}
+            As discussed in Subsection~\ref{subsec::learned_evaluation::classification::classifiers}, two classifier types were considered in the experimental study.
+            As already explained beforehand in Subsection~\ref{subsec::learned_evaluation::classification::classifiers}, a one-vs-all approach is used to adapt \glspl{acr::rf} to multi-label settings.
+            The same approach was choosen to accommodate \glspl{acr::svm} to both the multi-class and the multi-label possibilities.
+            We relied upon the already available and ubequitous implementation in Python~\parencite{scikit-learn}.
+            Below we detail quantitavely the used parameters.
+            
+            \sisetup{
+                scientific-notation = true
+            }
+            \paragraph{\acrshort*{acr::rf}}
+                A brief grid search involving a smaller set of building models and only baseline geometric features~\parencite{ennafii2018qualificationunannotated} yielded comparable results for the number of trees set in the range \numrange{850}{1000} and a maximum tree depth from \numrange{3}{5}.
+                Given the already immense parameter search space involving all possible feature configurations, feature extraction parameters and label possibilities, the \gls{acr::rf} parameters are set to \num{1000} for the tree number and 4 for the maximum tree depth for all other experiments without performing any grid search.
+                Regarding \gls{acr::scatnet} based features, in Subsection~\ref{subsec::more_experiments::richer_features::scatnet_baseline} were reduced using \gls{acr::pca} and Kernel\footnote{The used kernel is that same the one used with the \gls{acr::svm} classifier.} \gls{acr::pca} in order to not overwhelm the geometric features.
+                To that end, these rich features are reduced to 20 in length to equal the dimension of baseline geometric feature vectors.
 
-            \paragraph{Classifiers}
-                As discussed in Subsection~\ref{subsec::learned_evaluation::classification::classifiers}, two classifier types were considered in the experimental study.
-                As already explained beforehand in Subsection~\ref{subsec::learned_evaluation::classification::classifiers}, a one-vs-all approach is used to adapt \glspl{acr::rf} to multi-label settings.
-                The same approach was choosen to accommodate \glspl{acr::svm} to both the multi-class and the multi-label possibilities.
-                We relied upon the already available and ubequitous implementation in Python~\parencite{scikit-learn}.
-                Below we detail quantitavely the used parameters.
-                
+            \paragraph{\acrshort*{acr::svm}}
+                The linear \gls{acr::svm} is not well suited for the type of features that we use, even for baseline features as experiments do not yield any resuslts in time.
+                As a consequence, the latter was left out and we experimented only with the kernel \gls{acr::svm} using the standard \gls{acr::rbf} kernel (\textit{cf.} Equation~\ref{eq::rbf_kernel}) when instances are vectors not graphs.
+                Just as with the \gls{acr::rf} classifier, we conducted a grid search using baseline geometric features only in order to determine both parameters \(C\) and \(\gamma\) by limiting the range between \numrange[range-phrase={ and }]{1e1}{1e-3} for both.
+                All values yielded sensibly the same scores.
+                As a result we set these parameters as follows: \(C = \num{1e-1}\) to not overpenalize nor underfit during learning and \(\gamma = \num{1e-3}\) to avoid overfitting.
+                Regarding \gls{acr::mkl}, we made use of the already implemented EasyMKL~\parencite{aiolli2015easymkl} approach.
+                It was the only method, to our knowledge that was readily available library to use with Python\footnote{\href{https://github.com/IvanoLauriola/MKLpy}{MKLpy}}.
                 \sisetup{
-                    scientific-notation = true
+                    scientific-notation = false
                 }
-                \subparagraph{\acrshort*{acr::rf}}
-                    A brief grid search involving a smaller set of building models and only baseline geometric features~\parencite{ennafii2018qualificationunannotated} yielded comparable results for the number of trees set in the range \numrange{850}{1000} and a maximum tree depth from \numrange{3}{5}.
-                    Given the already immense parameter search space involving all possible feature configurations, feature extraction parameters and label possibilities, the \gls{acr::rf} parameters are set to \num{1000} for the tree number and 4 for the maximum tree depth for all other experiments without performing any grid search.
-                    Regarding \gls{acr::scatnet} based features, in Subsection~\ref{subsec::more_experiments::richer_features::scatnet_baseline} were reduced using \gls{acr::pca} and Kernel\footnote{The used kernel is that same the one used with the \gls{acr::svm} classifier.} \gls{acr::pca} in order to not overwhelm the geometric features.
-                    To that end, these rich features are reduced to 20 in length to equal the dimension of baseline geometric feature vectors.
-
-                \subparagraph{\acrshort*{acr::svm}}
-                    The linear \gls{acr::svm} is not well suited for the type of features that we use, even for baseline features as experiments do not yield any resuslts in time.
-                    As a consequence, the latter was left out and we experimented only with the kernel \gls{acr::svm} using the standard \gls{acr::rbf} kernel (\textit{cf.} Equation~\ref{eq::rbf_kernel}) when instances are vectors not graphs.
-                    Just as with the \gls{acr::rf} classifier, we conducted a grid search using baseline geometric features only in order to determine both parameters \(C\) and \(\gamma\) by limiting the range between \numrange[range-phrase={ and }]{1e1}{1e-3} for both.
-                    All values yielded sensibly the same scores.
-                    As a result we set these parameters as follows: \(C = \num{1e-1}\) to not overpenalize nor underfit during learning and \(\gamma = \num{1e-3}\) to avoid overfitting.
-                    Regarding \gls{acr::mkl}, we made use of the already implemented EasyMKL~\parencite{aiolli2015easymkl} approach.
-                    It was the only method, to our knowledge that was readily available library to use with Python\footnote{\href{https://github.com/IvanoLauriola/MKLpy}{MKLpy}}.
-                    \sisetup{
-                        scientific-notation = false
-                    }
     
-            \paragraph{Used metrics}
-                The overall accuracy is not interesting due to the highly unbalanced label distribution.
-                We prefer reporting recall \(\bm{Rec}\) and precision \(\bm{Prec}\) ratios.
-                As a reminder these metrics are defined as follows:
-                \begin{align}
-                    \label{eq::recall_precision}
-                    \bm{Rec} &\triangleq \frac{tp}{tp + fp}\\
-                    \bm{Prec} &\triangleq \frac{tp}{tp + fn},
-                \end{align}
-                where:
-                \begin{conditions}
-                    tp & the number of instances predicted positive that are positive in reality;\\
-                    fp & the number of instances predicted positive that are negative in reality;\\
-                    fn & the number of instances predicted negative that are positive in reality.
-                \end{conditions}
-                Recall expresses, from a number of samples of a given class, the proportion that was rightfully detected as such.
-                Precision indicates how much samples, amongst the detected ones, were, in truth, part of the studied class~\parencite{powers2011evaluation}.
-                We also summarize these two ratios with their harmonic mean, the F-score:
-                \begin{equation}
-                    \label{eq::f_score}
-                    \bm{F_{score}} \triangleq \frac{2}{\frac{1}{\bm{Rec}} + \frac{1}{\bm{Prec}}}.
-                \end{equation}
-                Unless said otherwise, all experiments were conducted performing a 10-fold cross validation to avoid overfitting or underfitting issues.
-                Only test results are reported.
+        \subsubsection{Used metrics}
+            The overall accuracy is not interesting due to the highly unbalanced label distribution.
+            We prefer reporting recall \(\bm{Rec}\) and precision \(\bm{Prec}\) ratios.
+            As a reminder these metrics are defined as follows:
+            \begin{align}
+                \label{eq::recall_precision}
+                \bm{Rec} &\triangleq \frac{tp}{tp + fp}\\
+                \bm{Prec} &\triangleq \frac{tp}{tp + fn},
+            \end{align}
+            where:
+            \begin{conditions}
+                tp & the number of instances predicted positive that are positive in reality;\\
+                fp & the number of instances predicted positive that are negative in reality;\\
+                fn & the number of instances predicted negative that are positive in reality.
+            \end{conditions}
+            Recall expresses, from a number of samples of a given class, the proportion that was rightfully detected as such.
+            Precision indicates how much samples, amongst the detected ones, were, in truth, part of the studied class~\parencite{powers2011evaluation}.
+            We also summarize these two ratios with their harmonic mean, the F-score:
+            \begin{equation}
+                \label{eq::f_score}
+                \bm{F_{score}} \triangleq \frac{2}{\frac{1}{\bm{Rec}} + \frac{1}{\bm{Prec}}}.
+            \end{equation}
+            Unless said otherwise, all experiments were conducted performing a 10-fold cross validation to avoid overfitting or underfitting issues.
+            Only test results are reported.
 
-    \subsection{\textsc{Baseline feature analysis}}
-        \label{subsec::experiments::evaluation::baseline_feature_analysis}
-        At this stage, we study only the baseline features proposed in Section~\ref{sec::learned_evaluation::baseline}.
-        The goal is to assess the added value of each modality.
-        First, the \gls{acr::rmse} is proven to be inadequate for detecting errors in our taxonomy.
-        Second, prediction results from all possible feature configurations are compared in Subsubsection~\ref{subsubsec::experiments::evaluation::setup::feature_configurations}.
-        Third and last, we conclude the analysis by studying the feature importance, for all training zones.
 
-        \subsubsection{\textsc{\acrshort*{acr::rmse} predictive capacity}}
-            \label{subsubsec::experiments::evaluation::baseline_feature_analysis::rmse}
-            The \gls{acr::rmse} is the standard measure in most of \gls{acr::3d} reconstruction methods.
-            As a consequence, we use it herein as a reference that our baseline is to be compared to.
-            We train the classifier on Elancourt with the one dimensional feature vector containing the \gls{acr::rmse}.
-            This scene was sufficient enough for our analysis.
-            Mean test results are shown in Table~\ref{tab::rmse_results}.\\
+% \section{}
+%     \label{sec::experiments::evaluation}
+%     In the last section, we also explained how we acquired our dataset, in addition to analysing the effect of the urban scene on error statistics.
+%     Beforehand, all the ingredients needed in the proposed methodology were presented.
+%     This section aims at specifying how each bloc of the pipeline is implemented.\\
 
-            \begin{table}[htpb]
-                \small
-                \begin{tabular}{c c c c c c c c c c}
-                    \toprule
-                    & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG} \\
-                    \midrule
-                    \(\bm{Rec}\) & 99.55 & 0.21 & 0 & 0 & 98.68 & 0.63 & 0 & 0 & 98.15 \\
-                    \midrule
-                    \(\bm{Prec}\) & 68.78 & 33.33 & --- & 0 & 66.60 & 0.25 & --- & 0 & 61.15 \\
-                    \midrule
-                    \(\bm{F_{score}}\) & 81.35 & 0.42 & 0 & 0 & 79.52 & 1.24 & 0 & 0 & 75.36 \\
-                    \midrule
-                    \(\bm{Acc}\) & 68.46 & 75.65 & 89.57 & 94.66 & 66.36 & 83.62 & 88.24 & 98.36 & 60.86 \\
-                    \bottomrule
+%     In Subsection~\ref{sec::experiments::setup} provides all details about our experimental approach.
+%     Next in Subsection~\ref{sec::experiments::baseline_feature_analysis}, we report some first results using the baseline features we developped.
+
+\section{Baseline feature analysis}
+    \label{sec::experiments::baseline_feature_analysis}
+    At this stage, we study only the baseline features proposed in Section~\ref{sec::learned_evaluation::baseline}.
+    The goal is to assess the added value of each modality.
+    First, the \gls{acr::rmse} is proven to be inadequate for detecting errors in our taxonomy.
+    Second, prediction results from all possible feature configurations are compared in Subsection~\ref{subsec::experiments::setup::feature_configurations}.
+    Third and last, we conclude the analysis by studying the feature importance, for all training zones.
+
+    \subsection{\acrshort*{acr::rmse} predictive capacity}
+        \label{subsec::experiments::baseline_feature_analysis::rmse}
+        The \gls{acr::rmse} is the standard measure in most of \gls{acr::3d} reconstruction methods.
+        As a consequence, we use it herein as a reference that our baseline is to be compared to.
+        We train the classifier on Elancourt with the one dimensional feature vector containing the \gls{acr::rmse}.
+        This scene was sufficient enough for our analysis.
+        Mean test results are shown in Table~\ref{tab::rmse_results}.\\
+
+        \begin{table}[htpb]
+            \footnotesize
+            \begin{tabular}{c c c c c c c c c c}
+                \toprule
+                & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG} \\
+                \midrule
+                \(\bm{Rec}\) & 99.55 & 0.21 & 0 & 0 & 98.68 & 0.63 & 0 & 0 & 98.15 \\
+                \midrule
+                \(\bm{Prec}\) & 68.78 & 33.33 & --- & 0 & 66.60 & 0.25 & --- & 0 & 61.15 \\
+                \midrule
+                \(\bm{F_{score}}\) & 81.35 & 0.42 & 0 & 0 & 79.52 & 1.24 & 0 & 0 & 75.36 \\
+                \midrule
+                \(\bm{Acc}\) & 68.46 & 75.65 & 89.57 & 94.66 & 66.36 & 83.62 & 88.24 & 98.36 & 60.86 \\
+                \bottomrule
+            \end{tabular}
+            \caption{
+                \label{tab::rmse_results} \texttt{Finesse} 3 experiment results using \gls{acr::rmse} on Elancourt.
+                \(\bm{Acc}\) expresses the overall accuracy ratio.
+            }
+        \end{table}
+
+        We can distinguish two groups of errors: 
+        \begin{itemize}[label=\(\blacktriangleright\)]
+            \item \texttt{BOS}, \texttt{FOS} and \texttt{FIG}: these have a high recall and a low precision and overall accuracy;
+            \item \texttt{BUS}, \texttt{BIB}, \texttt{BIT}, \texttt{FUS}, \texttt{FIB} and \texttt{FIT}: these have low recall and precision ratios.
+        \end{itemize}
+        The first (\textit{resp.} second) group coincides exactly with errors that affect more (\textit{resp.} less) than half of the buildings.
+        For this kind of errors, the classifier assigns to almost all samples the positive class.
+        In fact, we end up with a high ratio of false positives (false alarms) and hence a high recall ratio that is coupled with a weak precision and overall accuracy.
+        Exactly the inverse happens with the rest of the errors as we obtain a high percentage of false negative.
+        We can safely conclude that the \gls{acr::rmse} is not able to detect errors defined in our taxonomy.
+
+    \subsection{Feature ablation study}
+        \label{subsec::experiments::baseline_feature_analysis::ablation}
+        We tested the different feature configurations, at \texttt{finesse} level 3 and in all urban zones.
+        Mean precision and recall test results are reported in Table~\ref{tab::ablation_f3}.
+        F-scores are averaged across all feature configurations and represented in Figure~\ref{fig::f_score_ablation_f3}.\\
+
+        \begin{table}[htpb]
+            \footnotesize
+            \begin{center}
+                \begin{tabular}{| c | c c | c c | c c | c c |}
+                    \hline
+                    \multicolumn{9}{|c|}{\textbf{Elancourt}}\\
+                    \hline
+                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                    \cline{2-9}
+                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                    \hline
+                    \texttt{BOS} & \textbf{93.96} & 76.15 & 91.43 & \textbf{77.76} & 91.51 & 76.08 & 90.83 & 76.14 \\
+                    \hline
+                    \texttt{BUS} & 32.98 & \textbf{76.47} & \textbf{41.86} & 75.57 & 40.38 & 71.00 & 39.32 & 71.81 \\
+                    \hline
+                    \texttt{BIB} & 12.32 & 67.57 & 12.81 & \textbf{68.42} & 16.26 & 67.35 & \textbf{16.75} & 68.0 \\
+                    \hline
+                    \texttt{BIT} & \textbf{25.25} & 92.59 & 20.20 & 90.91 & 20.20 & \textbf{95.24} & 11.11 & 91.67 \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & 98.91 & 99.07 & 98.91 & \textbf{99.30} & \textbf{98.99} & 98.84 & 98.91 & 98.84 \\
+                    \hline
+                    \texttt{FUS} & \textbf{1.90} & 54.55 & 0.63 & \textbf{66.67} & 1.61 & 50 & 1.27 & \textbf{66.67} \\
+                    \hline
+                    \texttt{FIB} & \textbf{9.17} & 87.5 & 0 & --- & 8.30 & 82.61 & 7.42 & \textbf{100} \\
+                    \hline
+                    \texttt{FIT} & 6.67 & \textbf{100} & \textbf{8.73} & 95.24 & 3.33 & \textbf{100} & 3.33 & \textbf{100} \\
+                    \hline
+                    \texttt{FIG} & \textbf{80.54} & 73.14 & 80.45 & \textbf{72.62} & 78.69 & 72.12 & 79.02 & 71.82 \\
+                    \hline
+                    \hline
+                    \multicolumn{9}{|c|}{\textbf{Nantes}}\\
+                    \hline
+                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                    \cline{2-9}
+                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                    \hline
+                    \texttt{BOS} & \textbf{38.14} & 61.67 & 36.43 & 60.23 & 36.77 & \textbf{62.21} & 34.71 & 60.48 \\
+                    \hline
+                    \texttt{BUS} & 7.35 & 62.5 & 7.35 & 55.56 & \textbf{29.41} & \textbf{66.67} & 26.47 & 64.29 \\
+                    \hline
+                    \texttt{BIB} & 0 & --- & 0 & --- & \textbf{1.01} & \textbf{50.0} & \textbf{1.01} & \textbf{50.0} \\
+                    \hline
+                    \texttt{BIT} & 1.77 & 22.22 & \textbf{3.54} & 44.44 & 0 & 0 & 2.65 & \textbf{50.0} \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & \textbf{98.54} & \textbf{98.13} & \textbf{98.54} & \textbf{98.13} & 98.33 & 97.92 & 98.12 & 97.91 \\
+                    \hline
+                    \texttt{FUS} & 27.62 & 55.24 & \textbf{27.62} & \textbf{59.18} & 24.76 & 54.74 & 23.33 & 53.85 \\
+                    \hline
+                    \texttt{FIB} & 37.80 & 62.0 & 36.59 & \textbf{63.16} & \textbf{49.39} & 60.90 & 46.39 & 60.90 \\
+                    \hline
+                    \texttt{FIT} & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
+                    \hline
+                    \texttt{FIG} & 86.32 & 78.09 & \textbf{86.77} & 78.02 & 84.53 & \textbf{78.71} & 83.86 & 78.08 \\
+                    \hline
+                    \hline
+                    \multicolumn{9}{|c|}{\textbf{Paris-13}}\\
+                    \hline
+                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                    \cline{2-9}
+                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                    \hline
+                    \texttt{BOS} & 45.54 & 65.25 & 46.53 & 68.61 & \textbf{50.0} & 68.24 & 46.53 & \textbf{70.15} \\
+                    \hline
+                    \texttt{BUS} & 6.35 & 66.67 & 7.94 & 71.43 & \textbf{22.22} & \textbf{77.78} & 7.94 & 62.5 \\
+                    \hline
+                    \texttt{BIB} & 0 & --- & 0 & --- & 0 & 0 & 0 & --- \\
+                    \hline
+                    \texttt{BIT} & \textbf{2.63} & \textbf{50.0} & 0 & --- & 1.32 & 50.0 & 0 & 0 \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & 97.19 & 97.19 & 97.19 & 97.19 & \textbf{97.59} & \textbf{98.38} & 97.19 & 97.19 \\
+                    \hline
+                    \texttt{FUS} & \textbf{85.09} & \textbf{75.0} & 84.36 & 74.12 & 85.09 & 74.52 & 84.36 & 74.12 \\
+                    \hline
+                    \texttt{FIB} & 53.47 & 62.10 & 51.39 & 61.67 & \textbf{53.47} & \textbf{63.11} & 52.78 & 61.79 \\
+                    \hline
+                    \texttt{FIT} & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
+                    \hline
+                    \texttt{FIG} & 97.65 & 84.62 & \textbf{98.96} & \textbf{84.79} & 97.65 & 84.62 & \textbf{98.96} & \textbf{84.79} \\
+                    \hline
                 \end{tabular}
-                \caption{
-                    \label{tab::rmse_results} \texttt{Finesse} 3 experiment results using \gls{acr::rmse} on Elancourt.
-                    \(\bm{Acc}\) expresses the overall accuracy ratio.
-                }
-            \end{table}
+            \end{center}
+            \caption{
+                \label{tab::ablation_f3} Feature ablation study preformed on the three areas at \textbf{\gls{acr::efin}} level 3.
+                Test results are expressed in percentage.
+                All \texttt{atomic} errors are considered over all possible configurations.
+            }
+        \end{table}
 
-            We can distinguish two groups of errors: 
-            \begin{itemize}[label=\(\blacktriangleright\)]
-                \item \texttt{BOS}, \texttt{FOS} and \texttt{FIG}: these have a high recall and a low precision and overall accuracy;
-                \item \texttt{BUS}, \texttt{BIB}, \texttt{BIT}, \texttt{FUS}, \texttt{FIB} and \texttt{FIT}: these have low recall and precision ratios.
-            \end{itemize}
-            The first (\textit{resp.} second) group coincides exactly with errors that affect more (\textit{resp.} less) than half of the buildings.
-            For this kind of errors, the classifier assigns to almost all samples the positive class.
-            In fact, we end up with a high ratio of false positives (false alarms) and hence a high recall ratio that is coupled with a weak precision and overall accuracy.
-            Exactly the inverse happens with the rest of the errors as we obtain a high percentage of false negative.
-            We can safely conclude that the \gls{acr::rmse} is not able to detect errors defined in our taxonomy.
-
-        \subsubsection{\textsc{Feature ablation study}}
-            \label{subsubsec::experiments::evaluation::baseline_feature_analysis::ablation}
-            We tested the different feature configurations, at \texttt{finesse} level 3 and in all urban zones.
-            Mean precision and recall test results are reported in Table~\ref{tab::ablation_f3}.
-            F-scores are averaged across all feature configurations and represented in Figure~\ref{fig::f_score_ablation_f3}.\\
-
-            \begin{table}[htpb]
-                \small
-                \begin{center}
-                    \begin{tabular}{| c | c c | c c | c c | c c |}
-                        \hline
-                        \multicolumn{9}{|c|}{\textbf{Elancourt}}\\
-                        \hline
-                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
-                        \cline{2-9}
-                        & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                        \hline
-                        \texttt{BOS} & \textbf{93.96} & 76.15 & 91.43 & \textbf{77.76} & 91.51 & 76.08 & 90.83 & 76.14 \\
-                        \hline
-                        \texttt{BUS} & 32.98 & \textbf{76.47} & \textbf{41.86} & 75.57 & 40.38 & 71.00 & 39.32 & 71.81 \\
-                        \hline
-                        \texttt{BIB} & 12.32 & 67.57 & 12.81 & \textbf{68.42} & 16.26 & 67.35 & \textbf{16.75} & 68.0 \\
-                        \hline
-                        \texttt{BIT} & \textbf{25.25} & 92.59 & 20.20 & 90.91 & 20.20 & \textbf{95.24} & 11.11 & 91.67 \\
-                        \specialrule{.2em}{.1em}{.1em}
-                        \texttt{FOS} & 98.91 & 99.07 & 98.91 & \textbf{99.30} & \textbf{98.99} & 98.84 & 98.91 & 98.84 \\
-                        \hline
-                        \texttt{FUS} & \textbf{1.90} & 54.55 & 0.63 & \textbf{66.67} & 1.61 & 50 & 1.27 & \textbf{66.67} \\
-                        \hline
-                        \texttt{FIB} & \textbf{9.17} & 87.5 & 0 & --- & 8.30 & 82.61 & 7.42 & \textbf{100} \\
-                        \hline
-                        \texttt{FIT} & 6.67 & \textbf{100} & \textbf{8.73} & 95.24 & 3.33 & \textbf{100} & 3.33 & \textbf{100} \\
-                        \hline
-                        \texttt{FIG} & \textbf{80.54} & 73.14 & 80.45 & \textbf{72.62} & 78.69 & 72.12 & 79.02 & 71.82 \\
-                        \hline
-                        \hline
-                        \multicolumn{9}{|c|}{\textbf{Nantes}}\\
-                        \hline
-                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
-                        \cline{2-9}
-                        & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                        \hline
-                        \texttt{BOS} & \textbf{38.14} & 61.67 & 36.43 & 60.23 & 36.77 & \textbf{62.21} & 34.71 & 60.48 \\
-                        \hline
-                        \texttt{BUS} & 7.35 & 62.5 & 7.35 & 55.56 & \textbf{29.41} & \textbf{66.67} & 26.47 & 64.29 \\
-                        \hline
-                        \texttt{BIB} & 0 & --- & 0 & --- & \textbf{1.01} & \textbf{50.0} & \textbf{1.01} & \textbf{50.0} \\
-                        \hline
-                        \texttt{BIT} & 1.77 & 22.22 & \textbf{3.54} & 44.44 & 0 & 0 & 2.65 & \textbf{50.0} \\
-                        \specialrule{.2em}{.1em}{.1em}
-                        \texttt{FOS} & \textbf{98.54} & \textbf{98.13} & \textbf{98.54} & \textbf{98.13} & 98.33 & 97.92 & 98.12 & 97.91 \\
-                        \hline
-                        \texttt{FUS} & 27.62 & 55.24 & \textbf{27.62} & \textbf{59.18} & 24.76 & 54.74 & 23.33 & 53.85 \\
-                        \hline
-                        \texttt{FIB} & 37.80 & 62.0 & 36.59 & \textbf{63.16} & \textbf{49.39} & 60.90 & 46.39 & 60.90 \\
-                        \hline
-                        \texttt{FIT} & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
-                        \hline
-                        \texttt{FIG} & 86.32 & 78.09 & \textbf{86.77} & 78.02 & 84.53 & \textbf{78.71} & 83.86 & 78.08 \\
-                        \hline
-                        \hline
-                        \multicolumn{9}{|c|}{\textbf{Paris-13}}\\
-                        \hline
-                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
-                        \cline{2-9}
-                        & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                        \hline
-                        \texttt{BOS} & 45.54 & 65.25 & 46.53 & 68.61 & \textbf{50.0} & 68.24 & 46.53 & \textbf{70.15} \\
-                        \hline
-                        \texttt{BUS} & 6.35 & 66.67 & 7.94 & 71.43 & \textbf{22.22} & \textbf{77.78} & 7.94 & 62.5 \\
-                        \hline
-                        \texttt{BIB} & 0 & --- & 0 & --- & 0 & 0 & 0 & --- \\
-                        \hline
-                        \texttt{BIT} & \textbf{2.63} & \textbf{50.0} & 0 & --- & 1.32 & 50.0 & 0 & 0 \\
-                        \specialrule{.2em}{.1em}{.1em}
-                        \texttt{FOS} & 97.19 & 97.19 & 97.19 & 97.19 & \textbf{97.59} & \textbf{98.38} & 97.19 & 97.19 \\
-                        \hline
-                        \texttt{FUS} & \textbf{85.09} & \textbf{75.0} & 84.36 & 74.12 & 85.09 & 74.52 & 84.36 & 74.12 \\
-                        \hline
-                        \texttt{FIB} & 53.47 & 62.10 & 51.39 & 61.67 & \textbf{53.47} & \textbf{63.11} & 52.78 & 61.79 \\
-                        \hline
-                        \texttt{FIT} & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
-                        \hline
-                        \texttt{FIG} & 97.65 & 84.62 & \textbf{98.96} & \textbf{84.79} & 97.65 & 84.62 & \textbf{98.96} & \textbf{84.79} \\
-                        \hline
-                    \end{tabular}
-                \end{center}
-                \caption{
-                    \label{tab::ablation_f3} Feature ablation study preformed on the three areas at \textbf{\gls{acr::efin}} level 3.
-                    Test results are expressed in percentage.
-                    All \texttt{atomic} errors are considered over all possible configurations.
-                }
-            \end{table}
-
-            \begin{figure}[htpb]
-                \centering
-                \ffigbox[\FBwidth]{
-                    \begin{subfloatrow}[2]
-                        \ffigbox[\FBwidth]{
-                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/ablation/building}
-                        }{
-                            \caption{
-                                \label{subfig::f_score_ablation_f3_building}
-                                \texttt{Building errors.}
-                            }
+        \begin{figure}[htpb]
+            \centering
+            \ffigbox[\FBwidth]{
+                \begin{subfloatrow}[2]
+                    \ffigbox[\FBwidth]{
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/ablation/building}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_ablation_f3_building}
+                            \texttt{Building errors.}
                         }
-                        \ffigbox[\FBwidth]{
-                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/ablation/facet}
-                        }{
-                            \caption{
-                                \label{subfig::f_score_ablation_f3_facet}
-                                \texttt{Facet errors.}
-                            }
-                        }
-                    \end{subfloatrow}
-                }{
-                    \caption{
-                        \label{fig::f_score_ablation_f3}
-                        Mean F-score and standard deviation for the feature ablation study.
                     }
+                    \ffigbox[\FBwidth]{
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/ablation/facet}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_ablation_f3_facet}
+                            \texttt{Facet errors.}
+                        }
+                    }
+                \end{subfloatrow}
+            }{
+                \caption{
+                    \label{fig::f_score_ablation_f3}
+                    Mean F-score and standard deviation for the feature ablation study.
                 }
-            \end{figure}
+            }
+        \end{figure}
 
-            First, we can point out that fact that geometric features alone are generally sufficient.
-            It is actually the best alternative for topological error detection as shown for \texttt{BOS}, \texttt{FOS}, \texttt{FUS}, \texttt{FIT} and \texttt{BIT} in Table~\ref{tab::ablation_f3}.
-            This is confirmed also by the low variance observed in Subfigure~\ref{subfig::f_score_ablation_f3_building}.
-            An exception is noticed with \texttt{BUS} in \textbf{Elancourt}, where height-based features allow an increase of around \SI{9}{\percent} in recall without, practically, any loss in precision.
-            Similar behaviour is noticed for \textbf{Nantes} and \textbf{Paris-13} with image-based features (+\SI{20}{\percent} in recall).
-            The first case can be explained by the discrepancy in height that can be observed between under-segmented buildings.
-            The second is made clear by the difference in roof colors, in dense uniform settings (\textit{cf.} Subfigure~\ref{subfig::bus_2d}).
-            This helps identifying different instances of buildings.\\
+        First, we can point out that fact that geometric features alone are generally sufficient.
+        It is actually the best alternative for topological error detection as shown for \texttt{BOS}, \texttt{FOS}, \texttt{FUS}, \texttt{FIT} and \texttt{BIT} in Table~\ref{tab::ablation_f3}.
+        This is confirmed also by the low variance observed in Subfigure~\ref{subfig::f_score_ablation_f3_building}.
+        An exception is noticed with \texttt{BUS} in \textbf{Elancourt}, where height-based features allow an increase of around \SI{9}{\percent} in recall without, practically, any loss in precision.
+        Similar behaviour is noticed for \textbf{Nantes} and \textbf{Paris-13} with image-based features (+\SI{20}{\percent} in recall).
+        The first case can be explained by the discrepancy in height that can be observed between under-segmented buildings.
+        The second is made clear by the difference in roof colors, in dense uniform settings (\textit{cf.} Subfigure~\ref{subfig::bus_2d}).
+        This helps identifying different instances of buildings.\\
 
-            Figure~\ref{fig::f_score_ablation_f3} shows that all \texttt{Building errors} labels are better detected in \textbf{Elancourt}.
-            It is also the case of \texttt{FOS} and \texttt{FIT}.
-            A certain monotony can be noticed, at the exception of \texttt{BOS}.
-            Better resultas are obtained for \textbf{Paris-13} than for \textbf{Nantes}, while having around half the number of models to train on.
-            This means that \texttt{BOS} cannot be easily learnt in \textbf{Nantes}.
-            It is coherent with the fact that the dataset represents a part of the dense downtown of the city.
-            The same monotony is observed, this time in reverse, with the rest of \texttt{Facet errors} defects. \textbf{Paris-13} is much better with less training samples.
-            For geometric defects (\texttt{FIG} and \texttt{FIB}), \textbf{Nantes} is comparable to \textbf{Paris-13}, but, with \texttt{FUS}, it is way much worse.
-            This may result from the highly heterogeneous aspect of this dataset that encompasses high tower buildings with a densely populated city district.
-            Finally, well represented errors are more easily detected than the less frequent ones, especially the rare ones like \texttt{FIT} in \textbf{Nantes} and \textbf{Paris-13}.
+        Figure~\ref{fig::f_score_ablation_f3} shows that all \texttt{Building errors} labels are better detected in \textbf{Elancourt}.
+        It is also the case of \texttt{FOS} and \texttt{FIT}.
+        A certain monotony can be noticed, at the exception of \texttt{BOS}.
+        Better resultas are obtained for \textbf{Paris-13} than for \textbf{Nantes}, while having around half the number of models to train on.
+        This means that \texttt{BOS} cannot be easily learnt in \textbf{Nantes}.
+        It is coherent with the fact that the dataset represents a part of the dense downtown of the city.
+        The same monotony is observed, this time in reverse, with the rest of \texttt{Facet errors} defects. \textbf{Paris-13} is much better with less training samples.
+        For geometric defects (\texttt{FIG} and \texttt{FIB}), \textbf{Nantes} is comparable to \textbf{Paris-13}, but, with \texttt{FUS}, it is way much worse.
+        This may result from the highly heterogeneous aspect of this dataset that encompasses high tower buildings with a densely populated city district.
+        Finally, well represented errors are more easily detected than the less frequent ones, especially the rare ones like \texttt{FIT} in \textbf{Nantes} and \textbf{Paris-13}.
         
-        \subsubsection{\textsc{Feature importance}}
-            \label{subsubsec::experiments::evaluation::baseline_feature_analysis::feature_importance}
-            \begin{figure}[htpb]
-                \centering
-                \ffigbox[\FBwidth]{
-                    \begin{subfloatrow}
-                        \ffigbox[\FBwidth]{
-                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/ablation/feature_importance/building}
-                        }{
-                            \caption{
-                                \label{subfig::feature_importances_rf_bl_building}
-                                \texttt{Building errors.}
-                            }
+    \subsection{Feature importance}
+        \label{subsec::experiments::baseline_feature_analysis::feature_importance}
+        \begin{figure}[htpb]
+            \centering
+            \ffigbox[\FBwidth]{
+                \begin{subfloatrow}
+                    \ffigbox[\FBwidth]{
+                        \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/ablation/feature_importance/building}
+                    }{
+                        \caption{
+                            \label{subfig::feature_importances_rf_bl_building}
+                            \texttt{Building errors.}
                         }
-                        \ffigbox[\FBwidth]{
-                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/ablation/feature_importance/facet}
-                        }{
-                            \caption{
-                                \label{subfig::feature_importances_rf_bl_facet}
-                                \texttt{Facet errors.}
-                            }
-                        }
-                    \end{subfloatrow}
-                }{
-                    \caption{
-                        \label{fig::feature_importances_rf_bl} Modality importance computed by stacking single feature importances retrieved from the \gls{acr::rf} classifier.
-                        The first (\textit{resp.} second and third) column represents \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
                     }
+                    \ffigbox[\FBwidth]{
+                        \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/ablation/feature_importance/facet}
+                    }{
+                        \caption{
+                            \label{subfig::feature_importances_rf_bl_facet}
+                            \texttt{Facet errors.}
+                        }
+                    }
+                \end{subfloatrow}
+            }{
+                \caption{
+                    \label{fig::feature_importances_rf_bl} Modality importance computed by stacking single feature importances retrieved from the \gls{acr::rf} classifier.
+                    The first (\textit{resp.} second and third) column represents \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
                 }
-            \end{figure}
-            
-            \gls{acr::rf} classifiers can easily infer feature importances at training time.
-            These were here computed and aggregated by modality in all urban scenes (\textit{cf.} Figure~\ref{fig::feature_importances_rf_bl}).\\
+            }
+        \end{figure}
+        
+        \gls{acr::rf} classifiers can easily infer feature importances at training time.
+        These were here computed and aggregated by modality in all urban scenes (\textit{cf.} Figure~\ref{fig::feature_importances_rf_bl}).\\
 
-            At first, we observe how much individual attributes are important before being gathered.
-            For geometric features, all attributes are equally important.
-            However, concerning image and height-based features, only a few are relevant (higher feature importance ratio).
-            Indeed, these few attributes correspond to the highest and lowest values of the histograms.
-            As described earlier, image and height features consist of a histogram of distances between the model and the real measured signals:
-            vector cosine similarity, for the first, and the \(L_2\) norm for the last.
-            It is clear that the presence of errors would result in saturating the high values in the histogram, while an absence of defects would imply a big number of low values.
-            This intuitively explains the observed phenomenon.
-            
-            In a second time, we notice that no modality is more important than the others, contrarily to what was observed in Table~\ref{tab::ablation_f3}.
-            In fact, for most atomic errors, test results using geometric features are comparable to those obtained with more modalities.
-            However, during training, all modalities are relevant with the importance ratios approximating 1/3 as shown in Figure~\ref{fig::feature_importances_rf_bl}.
-            This explains why all configurations are kept for subsequent analysis.
+        At first, we observe how much individual attributes are important before being gathered.
+        For geometric features, all attributes are equally important.
+        However, concerning image and height-based features, only a few are relevant (higher feature importance ratio).
+        Indeed, these few attributes correspond to the highest and lowest values of the histograms.
+        As described earlier, image and height features consist of a histogram of distances between the model and the real measured signals:
+        vector cosine similarity, for the first, and the \(L_2\) norm for the last.
+        It is clear that the presence of errors would result in saturating the high values in the histogram, while an absence of defects would imply a big number of low values.
+        This intuitively explains the observed phenomenon.
+        
+        In a second time, we notice that no modality is more important than the others, contrarily to what was observed in Table~\ref{tab::ablation_f3}.
+        In fact, for most atomic errors, test results using geometric features are comparable to those obtained with more modalities.
+        However, during training, all modalities are relevant with the importance ratios approximating 1/3 as shown in Figure~\ref{fig::feature_importances_rf_bl}.
+        This explains why all configurations are kept for subsequent analysis.
