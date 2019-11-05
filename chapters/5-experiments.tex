@@ -200,26 +200,26 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
 \section{The experimental set-up}
     \label{sec::experiments::setup}
     In this section, we give detailed account of how every building block of our pipeline is parameterized.
-    We first start by discussing feature configurations, before defining the taxonomy parameters of interest and endin with a thorough description of the classification process.
+    We first start, in Subsection~\ref{subsec::experiments::setup::feature_configurations}, by specifying the different feature configurations that are used in the experimental study and how there were implemented.
+    Next, in Subsection~\ref{subsec::experiments::setup::classification}, we discuss in great detail how the classification process was conducted.
 
     \subsection{Feature configurations}
         \label{subsec::experiments::setup::feature_configurations}
         We present herein the features that were used in experiments.
         First, as we tried to prove the efficiency of the proposed learning framework, we made use different configurations using the baseline features.
-        Second, as advanced features were used, new combinations were possible and are discussed hereafter.
+        Second, as advanced features were used, new possible combinations are discussed.
 
         \subsubsection{Baseline features}
-            The geometric features are always available.
+            The geometric features are intrinsic and are always available.
             As a consequence, we tested four feature configurations: ``geometric features'' (\textbf{Geom.}) only, ``geometric and height features''(\textbf{Geom. \(\oplus\) Hei.}), ``geometric and image features''(\textbf{Geom. \(\oplus\) Im.}) as well as ``geometric, height and image features''(\textbf{All}).
-            In order to have a better compare the important of each modality, the feature vectors they produce are of the same size.
+            In order to have a better understanding of how much each modality is important, their feature vectors are by design drawn to be of the same size: 20.\\
             Actually, using the function \(\chi_{\max,\min,\operatorname{mean},\operatorname{med}}\) defined in Equation~\ref{eq::max_min_mean_med_extractor}, the geometric feature vector in Equation~\ref{eq::geometric_features} is of dimension
             \begin{equation*}
                 \underbrace{4}_{\substack{\text{the output dimension}\\\text{of the function } \chi_{\max,\min,\operatorname{mean},\operatorname{med}} }} \times \underbrace{5}_{\substack{\text{the number of the facet}\\\text{graph attributes}}} = 20.
             \end{equation*}
-
             Regarding height based feature vectors their dimension depend on the histogram parameters.
             Since we compute differences between observed and model height at terrain level also (\textit{cf.} Subsection~\ref{subsec::learned_evaluation::baseline::height}), and because these are virtually unbounded and can differ from one scene to another, the maximum possible discrepancy is limited to \SI{\pm 50}{\m} for all scenes.
-            In order to have the same feature vector dimension for this modality, the number of bins is fixed manually to \(20\).
+            In order to have the same feature vector dimension for this modality as for the geometric one, the number of bins is fixed manually to \(20\).\\
             For image based features, the cosine similarity between normal vectors, used in Equation~\ref{eq::corr_fac}, is by definition bounded in the interval [-1, 1].
             This interval is consequently divided evenly into \(20\) bins for the histogram computation.
             The \glspl{acr::dsm} and orthorectified images used to derive height and image features have the same spatial resolution as the reconstruction input data.\\
@@ -235,10 +235,10 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             Baseline features are replaced by more enhanced ones as shown in Section~\ref{sec::learned_evaluation::richer_features}.
             These are denoted as follows:
             \begin{itemize}[label=\(\blacktriangleright\)]
-                \item \textbf{S-Hei.} refer to \gls{acr::scatnet} height based features;
-                \item \textbf{S(D)-Im.} (\textit{resp.} \textbf{S(C)-Im.}) correspond to \gls{acr::scatnet} image based features with deletion (\textit{resp.} channel) option;
-                \item \textbf{S(D)-All} (\textit{resp.} \textbf{S(C)-All}) \(\equiv\) \textbf{Geom.} + \textbf{S-Hei.} + \textbf{S(D)-Im.} (\textit{resp.} \textbf{S(C)-Im.});
-                \item \textbf{K-S(D)-All} (\textit{resp.} \textbf{K-S(C)-All}) \(\equiv\) \textbf{K-Geom.} + \textbf{S-Hei.} + \textbf{S(D)-Im.} (\textit{resp.} \textbf{S(C)-Im.});
+                \item \textbf{S-Hei.} refers to \gls{acr::scatnet} height based features;
+                \item \textbf{S(d)-Im.} (\textit{resp.} \textbf{S(c)-Im.}) corresponds to \gls{acr::scatnet} image based features with deletion (\textit{resp.} channel) option;
+                \item \textbf{S(d)-All} (\textit{resp.} \textbf{S(c)-All}) \(\equiv\) \textbf{Geom.} + \textbf{S-Hei.} + \textbf{S(d)-Im.} (\textit{resp.} \textbf{S(c)-Im.});
+                \item \textbf{K-S(d)-All} (\textit{resp.} \textbf{K-S(c)-All}) \(\equiv\) \textbf{K-Geom.} + \textbf{S-Hei.} + \textbf{S(d)-Im.} (\textit{resp.} \textbf{S(c)-Im.});
             \end{itemize}
             We lay out herein how their parameters were determined.
 
@@ -289,6 +289,8 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                 }
 
     \subsection{Classification settings}
+        \label{subsec::experiments::setup::classification}
+            Feature extractors were defined in the previous subsection 
             Herein, are given extensive details how the considered classifiers (\textit{cf.} Subsection~\ref{subsec::learned_evaluation::classification::classifiers}) are applied.
             We also provide the metrics that will help measure the accuracy of predictions.
 
