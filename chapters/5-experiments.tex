@@ -12,17 +12,24 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
 \section{\textsc{Datasets}}
     \label{sec::experiments::datasets}
     
-    % \subsection{\textsc{Data preprocesing}}
-    %     \label{subsec::experiments::datasets::preprocessing}
+    \subsection{\textsc{Data preprocesing}}
+        \label{subsec::experiments::datasets::preprocessing}
 
     \subsection{\textsc{Urban scenes and modeling techniques}}
-        \label{subsec::experiments::datasets::scenes}
+        \label{subsec::experiments::datasets::scenes}        
+        \gls{acr::3d} models from three different cities of France are selected in order to assess the performance of our framework: \textbf{Elancourt}, \textbf{Nantes}, and the XIII\textsuperscript{th} district of Paris (\textbf{Paris-13}) (\textit{cf.} Figure~\ref{fig::france_map}).
+        Figure~\ref{fig::elancourt_ortho} depicts the small city of \textbf{Elancourt} which contains diverse of building types: residential areas with gable and hip roof buildings and large industrial flat roof building based districts (\textit{cf.} Subfigure~\ref{subfig::elancourt_samples}).
+        \textbf{Nantes}, as shown in Figure~\ref{fig::nantes_ortho}, represents a denser urban setting but with a lower building diversity (\textit{cf.} Subfigure~\ref{subfig::nantes_samples}).
+        In Figure~\ref{fig::paris-13_ortho}, one can see how \textbf{Paris-13} consists of mostly flat roof high towers which coexist with Haussmann style buildings that typically exhibit highly fragmented roofs (\textit{cf.} Subfigure~\ref{subfig::paris-13_samples}).
+        The \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}) scene contains 2,009 (\textit{resp.} 748 and 478) annotated building models.
+        The \gls{acr::dsm} as well as the orthorectified image resolution is \SI{0.06}{\m} for the first area while it is \SI{0.1}{\m} for the other ones.\\
+
         \begin{figure}[htpb]
             \ffigbox[\textwidth]{
                 \includegraphics[width=.75\textwidth]{images/datasets/france_map}
             }{
-                \label{fig::france_map}
                 \caption{
+                    \label{fig::france_map}
                     Map of France showing the studied urban scenes.
                     Each square corresponds to a city:
                     \textcolor[rgb]{.84,.1,.11}{\(\blacksquare\)} \textbf{Paris-13}, \textcolor[rgb]{1,.79,.5}{\(\blacksquare\)} \textbf{Elancourt}, \textcolor[rgb]{.17,.51,.73}{\(\blacksquare\)} \textbf{Nantes}.
@@ -34,8 +41,8 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             \ffigbox[\FBwidth]{
                 \includegraphics[width=\textwidth]{images/datasets/elancourt_global}
             }{
-                \label{fig::elancourt_ortho}
                 \caption{
+                    \label{fig::elancourt_ortho}
                     Orthoimage showing the diversity of buildings in Elancourt.
                 }
             }
@@ -45,8 +52,8 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             \ffigbox[\FBwidth]{
                 \includegraphics[width=\textwidth]{images/datasets/nantes_global}
             }{
-                \label{fig::nantes_ortho}
                 \caption{
+                    \label{fig::nantes_ortho}
                     Orthoimage depicting the dense city center of Nantes.
                 }
             }
@@ -56,8 +63,8 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             \ffigbox[\FBwidth]{
                 \includegraphics[width=\textwidth]{images/datasets/paris-13_global}
             }{
-                \label{fig::paris-13_ortho}
                 \caption{
+                    \label{fig::paris-13_ortho}
                     Orthoimage showing the heterogeneous of the XIII\textsuperscript{th} district of Paris.
                 }
             }
@@ -69,42 +76,35 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                     \ffigbox[\FBwidth]{
                         \includegraphics[width=.3\textwidth]{images/datasets/elancourt_samples}
                     }{
-                        \label{subfig::elancourt_samples}
                         \caption{
+                            \label{subfig::elancourt_samples}
                             Elancourt contains flat roof buildings (top) as well as gable roof ones (bottom).
                         }
                     }
                     \ffigbox[\FBwidth]{
                         \includegraphics[width=.3\textwidth]{images/datasets/nantes_samples}
                     }{
-                        \label{subfig::nantes_samples}
                         \caption{
+                            \label{subfig::nantes_samples}
                             Nantes exhibits high rising towers (top) along side densely packed fragmented roof buildings (bottom).
                         }
                     }
                     \ffigbox[\FBwidth]{
                         \includegraphics[width=.3\textwidth]{images/datasets/paris-13_samples}
                     }{
-                        \label{subfig::paris-13_samples}
                         \caption{
+                            \label{subfig::paris-13_samples}
                             The XIII\textsuperscript{th} district of Paris is made of Haussmannian buildings (top) and high rising towers bottom).
                         }
                     }
                 \end{subfloatrow}
             }{
-                \label{fig::france_map}
                 \caption{
+                    \label{fig::france_map}
                     Samples of building types per region.
                 }
             }
         \end{figure}
-        
-        \gls{acr::3d} models from three different cities of France are selected in order to assess the performance of our framework: \textbf{Elancourt}, \textbf{Nantes}, and the XIII\textsuperscript{th} district of Paris (\textbf{Paris-13}) (\textit{cf.} Figure~\ref{fig::france_map}).
-        Figure~\ref{fig::elancourt_ortho} depicts the small city of \textbf{Elancourt} which contains diverse of building types: residential areas with gable and hip roof buildings and large industrial flat roof building based districts (\textit{cf.} Subfigure~\ref{subfig::elancourt_samples}).
-        \textbf{Nantes}, as shown in Figure~\ref{fig::nantes_ortho}, represents a denser urban setting but with a lower building diversity (\textit{cf.} Subfigure~\ref{subfig::nantes_samples}).
-        In Figure~\ref{fig::paris-13_ortho}, one can see how \textbf{Paris-13} consists of mostly flat roof high towers which coexist with Haussmann style buildings that typically exhibit highly fragmented roofs (\textit{cf.} Subfigure~\ref{subfig::paris-13_samples}).
-        The \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}) scene contains 2,009 (\textit{resp.} 748 and 478) annotated building models.
-        The \gls{acr::dsm} as well as the orthorectified image resolution is \SI{0.06}{\m} for the first area while it is \SI{0.1}{\m} for the other ones.\\
 
         \gls{acr::3d} models were generated using the algorithm described in~\parencite{durupt2006automatic}, out of existing building footprints and aerial VHR multi-view \glspl{acr::dsm}.
         The modeling algorithm simulates possible roof structures with facets satisfying some geometric constraints.
@@ -121,25 +121,22 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
         \begin{figure}[htpb]
             \centering
             \ffigbox[\textwidth]{
-                \includestandalone[mode=buildnew, height=7.5cm]{figures/datasets/families_stats}
-            }{
-                \caption{
-                    \label{fig::family_errors}
-                    Occurence statistics for error families and the \texttt{Unqualified} class computed for each area.
-                }
-            }
-        \end{figure}
-        \begin{figure}[htpb]
-            \centering
-            \ffigbox[\textwidth]{
-                \begin{subfloatrow}
+                \begin{subfloatrow}[2]
                     \centering
-                    \ffigbox[\textwidth]{
+                    \ffigbox[.5\textwidth]{
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/datasets/families_stats}
+                    }{
+                        \caption{
+                            \label{fig::family_errors}
+                            Occurence statistics for error families and the \texttt{Unqualified} class computed for each area.
+                        }
+                    }
+                    \ffigbox[.5\textwidth]{
                         \includestandalone[mode=buildnew, height=7.5cm]{figures/datasets/lod1_stats}
                     }{
                         \caption{
                             \label{subfig::lod1_errors}
-                            Occurence statistics for \texttt{Building errors} depending each area.
+                            Occurence statistics for \texttt{Building errors} depending on the area of study.
                         }
                     }
                 \end{subfloatrow}
@@ -151,14 +148,16 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                     }{
                         \caption{
                             \label{subfig::lod2_errors}
-                            Occurence statistics for \texttt{Facet errors} depending each area.
+                            Occurence statistics for \texttt{Facet errors} depending on the area of interest.
                         }
                     }
                 \end{subfloatrow}
             }{
-                \label{fig::error_statistics}
-                \caption{
-                    Error statistics depending at \texttt{finesse} level 3.
+                \caption[
+                    Detailed error statistics depending on the urban scenes.
+                ]{
+                    \label{fig::error_statistics}
+                    Detailed error statistics depending on the urban scenes.
                     The height of bars indicates the frequency of each errors while the number of occurences is displayed over.
                 }
             }
@@ -167,7 +166,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
         Some of the models obtained using the previous datasets were annotated manually in order to build training datasets.
         To annotate a building model, the manual operator compares the nadir projection of the model to the corresponding orthoimage and \gls{acr::dsm}.
         This was possible thanks to the work\footnote{\href{https://github.com/CHUPClem/sGrISner.git}{GIS Graphical interface for annotation.}} of Clémence Chupin, who was a Master student at \gls{acr::ensg}.
-        Figures~\ref{fig::family_errors} and ~\ref{fig::error_statistics} reports modeling errors statistics over the annotated buildings.\\
+        Figure~\ref{fig::error_statistics} reports modeling errors statistics over the annotated buildings.\\
 
         These statistics are first analysed depending on the family errors at the \texttt{finesse} = 2 level (\textit{cf.} Figure~\ref{fig::family_errors}).
         Due to the fact that geometrically inconsistent \gls{acr::3d} models were filtered out in a preprocessing (nadir projection) step, \texttt{Unqualifiable} buildings represent a small fraction of the dataset (less than \SI{7.5}{\percent}).
@@ -198,7 +197,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
         \texttt{FIG} does not keep the same dynamic as its frequency keeps stable from \textbf{Elancourt} and \textbf{Nantes} but jumps considerably in \textbf{Paris-13}.
         This may be explained by the fact that the gap in \texttt{FUS} error ratios between \textbf{Paris-13} and \textbf{Nantes} is more important than that of \texttt{FOS} errors, contrarily to the same gaps for the same errors between \textbf{Nantes} and \textbf{Elancourt} which compensate each other.
 
-\section{\textsc{Pipeline evaluation}}
+\section{\textsc{Evaluation of the learned approach}}
     \label{sec::experiments::evaluation}
     In the last section, we also explained how we acquired our dataset, in addition to analysing the effect of the urban scene on error statistics.
     Beforehand, all the ingredients needed in the proposed methodology were presented.
@@ -220,7 +219,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
 
             \paragraph{Baseline features}
                 The geometric features are always available.
-                As a consequence, we tested four feature configurations: ``geometric features'' (\textbf{Geom.}) only, ``geometric and height features''(\textbf{Geom.} $\cup$ \textbf{Hei.}), ``geometric and image features''(\textbf{Geom.} $\cup$ \textbf{Im.}) as well as ``geometric, height and image features''(\textbf{All.}).
+                As a consequence, we tested four feature configurations: ``geometric features'' (\textbf{Geom.}) only, ``geometric and height features''(\textbf{Geom. \(\oplus\) Hei.}), ``geometric and image features''(\textbf{Geom. \(\oplus\) Im.}) as well as ``geometric, height and image features''(\textbf{All}).
                 In order to have a better compare the important of each modality, the feature vectors they produce are of the same size.
                 Actually, using the function \(\chi_{\max,\min,\operatorname{mean},\operatorname{med}}\) defined in Equation~\ref{eq::max_min_mean_med_extractor}, the geometric feature vector in Equation~\ref{eq::geometric_features} is of dimension
                 \begin{equation*}
@@ -243,7 +242,14 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
 
             \paragraph{Richer features}
                 Baseline features are replaced by more enhanced ones as shown in Section~\ref{sec::learned_evaluation::richer_features}.
-                We lay out herein how their parameters are determined.
+                These are denoted as follows:
+                \begin{itemize}[label=\(\blacktriangleright\)]
+                    \item \textbf{S-Hei.} refer to \gls{acr::scatnet} height based features;
+                    \item \textbf{S(D)-Im.} (\textit{resp.} \textbf{S(C)-Im.}) correspond to \gls{acr::scatnet} image based features with deletion (\textit{resp.} channel) option;
+                    \item \textbf{S(D)-All} (\textit{resp.} \textbf{S(C)-All}) \(\equiv\) \textbf{Geom.} + \textbf{S-Hei.} + \textbf{S(D)-Im.} (\textit{resp.} \textbf{S(C)-Im.});
+                    \item \textbf{K-S(D)-All} (\textit{resp.} \textbf{K-S(C)-All}) \(\equiv\) \textbf{K-Geom.} + \textbf{S-Hei.} + \textbf{S(D)-Im.} (\textit{resp.} \textbf{S(C)-Im.});
+                \end{itemize}
+                We lay out herein how their parameters were determined.
 
                 \subparagraph{Graph kernels}
                     In Subsection~\ref{subsec::learned_evaluation::richer_features::graph}, we have seen how 14 graph kernels are aggregated to describe graphs.
@@ -395,10 +401,10 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             \end{table}
 
             We can distinguish two groups of errors: 
-            \begin{description}
-                \item[\texttt{BOS}, \texttt{FOS} and \texttt{FIG}:] These have a high recall and a low precision and overall accuracy;
-                \item[\texttt{BUS}, \texttt{BIB}, \texttt{BIT}, \texttt{FUS}, \texttt{FIB} and \texttt{FIT}:] These have low recall and precision ratios.
-            \end{description}
+            \begin{itemize}[label=\(\blacktriangleright\)]
+                \item \texttt{BOS}, \texttt{FOS} and \texttt{FIG}: these have a high recall and a low precision and overall accuracy;
+                \item \texttt{BUS}, \texttt{BIB}, \texttt{BIT}, \texttt{FUS}, \texttt{FIB} and \texttt{FIT}: these have low recall and precision ratios.
+            \end{itemize}
             The first (\textit{resp.} second) group coincides exactly with errors that affect more (\textit{resp.} less) than half of the buildings.
             For this kind of errors, the classifier assigns to almost all samples the positive class.
             In fact, we end up with a high ratio of false positives (false alarms) and hence a high recall ratio that is coupled with a weak precision and overall accuracy.
