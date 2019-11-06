@@ -901,9 +901,105 @@
                 \end{tabular}
                 \caption{
                     \label{tab::f_score_rf_vs_svm_f3}
-                    Mean F-score and standard deviation using \gls{acr::rf} and \gls{acr::svm} and \gls{acr::scatnet} based features.
+                    Mean F-score and standard deviation using \gls{acr::rf} and \gls{acr::svm} based on \gls{acr::scatnet} features.
                 }
             \end{table}
+
+            \begin{figure}[htpb]
+                \centering
+                \ffigbox[\textwidth]{
+                    \begin{subfloatrow}[2]
+                        \ffigbox[\textwidth]{
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_bl/rf/deletion/building}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_rf_scat_del_bl_building}
+                                \texttt{Building errors (\gls{acr::scatnet} with deletion).}
+                            }
+                        }
+                        \ffigbox[\FBwidth]{
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_bl/rf/deletion/facet}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_rf_scat_del_bl_facet}
+                                \texttt{Facet errors (\gls{acr::scatnet} with deletion).}
+                            }
+                        }
+                    \end{subfloatrow}
+                    \vskip1em
+                    \begin{subfloatrow}[2]
+                        \ffigbox[\textwidth]{
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_bl/rf/channel/building}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_rf_scat_chan_bl_building}
+                                \texttt{Building errors (\gls{acr::scatnet} with channel).}
+                            }
+                        }
+                        \ffigbox[\FBwidth]{
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_bl/rf/channel/facet}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_rf_scat_chan_bl_facet}
+                                \texttt{Facet errors (\gls{acr::scatnet} with channel).}
+                            }
+                        }
+                    \end{subfloatrow}
+                }{
+                    \caption{
+                        \label{fig::f_score_rf_scat_bl}
+                        Mean F-score and standard deviation obtained with an \gls{acr::rf} based on \gls{acr::scatnet} features.
+                    }
+                }
+            \end{figure}
+    
+            \begin{figure}[htpb]
+                \centering
+                \ffigbox[\textwidth]{
+                    \begin{subfloatrow}[2]
+                        \ffigbox[\textwidth]{
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_bl/svm/deletion/building}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_svm_scat_del_bl_building}
+                                \texttt{Building errors (\gls{acr::scatnet} with deletion).}
+                            }
+                        }
+                        \ffigbox[\FBwidth]{
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_bl/svm/deletion/facet}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_svm_scat_del_bl_facet}
+                                \texttt{Facet errors (\gls{acr::scatnet} with deletion).}
+                            }
+                        }
+                    \end{subfloatrow}
+                    \vskip1em
+                    \begin{subfloatrow}[2]
+                        \ffigbox[\textwidth]{
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_bl/svm/channel/building}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_svm_scat_chan_bl_building}
+                                \texttt{Building errors (\gls{acr::scatnet} with channel).}
+                            }
+                        }
+                        \ffigbox[\FBwidth]{
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_bl/svm/channel/facet}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_svm_scat_chan_bl_facet}
+                                \texttt{Facet errors (\gls{acr::scatnet} with channel).}
+                            }
+                        }
+                    \end{subfloatrow}
+                }{
+                    \caption{
+                        \label{fig::f_score_svm_bl}
+                        Mean F-score and standard deviation obtained with an \gls{acr::svm} based on \gls{acr::scatnet} features.
+                    }
+                }
+            \end{figure}
 
             \begin{figure}[htpb]
                 \centering
