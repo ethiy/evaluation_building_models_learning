@@ -1,0 +1,96 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{pgfplots}
+
+\begin{document}
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        1, 90.27, 1.20
+        2, 42.06, 7.90
+    }\BOS
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        1, 53.41, 8.01
+        2, 36.02, 10.47
+    }\BUS
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        1, 74.94, 13.84
+        2, 25.36, 3.10
+    }\BIB
+    \pgfplotstableread[col sep=comma]{
+        x, y, ey
+        1, 76.12, 20.29
+        2, 35.83, 12.47
+    }\BIT
+
+    \begin{tikzpicture} 
+        \begin{axis}[
+            ylabel={F-score},
+            ybar,
+            xtick={data},
+            xticklabels={Elancourt, {Nantes \(\cup\) Paris-13}},
+            x tick label style={rotate=60, anchor=east, yshift=-2mm, font=\bfseries},
+            xtick align=outside,
+            xtick pos=left,
+            ytick pos=left,
+            every axis plot/.append style={thick},
+            ymax=100,
+            ymin=0,
+            xmin=0.7,
+            xmax=2.3,
+            legend style={
+                legend columns=-2,
+                at={(.5,1.05)},
+                anchor=south
+            }
+        ]
+            \addplot+[
+                bar shift = -15pt,
+                fill=green!40,
+                draw=green,
+                error bars/.cd,
+                error bar style={green},
+                error mark options={green, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\BOS};
+            \addplot+[
+                bar shift = -5pt,
+                fill=cyan!40,
+                draw=cyan,
+                error bars/.cd,
+                error bar style={cyan},
+                error mark options={cyan, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\BUS};
+            \addplot+[
+                bar shift = 5pt,
+                fill=red!40,
+                draw=red,
+                error bars/.cd,
+                error bar style={red},
+                error mark options={red, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\BIB};
+            \addplot+[
+                bar shift = 15pt,
+                fill=olive!40,
+                draw=olive,
+                error bars/.cd,
+                error bar style={olive},
+                error mark options={olive, rotate=90},
+                y dir=both,
+                y explicit
+            ] table[x=x, y=y, y error=ey] {\BIT};
+            \legend{
+                \footnotesize \strut \texttt{BOS},
+                \footnotesize \strut \texttt{BUS},
+                \footnotesize \strut \texttt{BIB},
+                \footnotesize \strut \texttt{BIT}
+            }
+        \end{axis} 
+    \end{tikzpicture}
+\end{document}
