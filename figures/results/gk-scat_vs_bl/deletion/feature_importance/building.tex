@@ -1,0 +1,113 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
+\begin{document}
+    \pgfplotstableread[col sep=comma, header=false]{
+        1, 80.74, 1.18, 18.07
+        2, 81.70, 1.52, 16.78
+        3, 80.68, 1.10, 18.22
+        4, 82.31, 2.06, 15.63
+    }\buildingEl
+    
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2} + \thisrow{3}
+        }
+    ]{sum}{\buildingEl}
+    
+    \pgfplotstableread[col sep=comma, header=false]{
+        1, 75.07, 0.69, 24.24
+        2, 76.01, 1.68, 22.31
+        3, 75.69, 0.52, 23.79
+        4, 76.05, 0.89, 23.06
+    }\buildingNaPa
+
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2} + \thisrow{3}
+        }
+    ]{sum}{\buildingNaPa}
+
+    \pgfplotsset{
+        percentage plot/.style={
+            yticklabel=\pgfmathprintnumber{\tick}\,$\%$,
+        },
+        percentage series/.style={
+            table/y expr=(\thisrow{#1}/\thisrow{sum}*100),table/meta=#1
+        }
+    }
+
+    \begin{tikzpicture}
+        \begin{axis}[
+            ylabel={Feature importance},
+            ybar stacked,
+            bar width=8pt,
+            bar shift=-4pt,
+            percentage plot,
+            xtick=data,
+            xticklabels={BOS, BUS, BIB, BIT},
+            x tick label style={font=\ttfamily},
+            xtick align=outside,
+            xtick pos=left,
+            ytick pos=left,
+            every axis plot/.append style={thick},
+            xmax=4.5,
+            xmin=.5,
+            ymax=100,
+            ymin=0,
+            legend style={
+                legend columns=-2,
+                at={(.5,1.05)},
+                anchor=south
+            }
+        ]
+            \addplot table [percentage series=1] {\buildingEl};
+            \addplot table [percentage series=2] {\buildingEl};
+            \addplot table [percentage series=3] {\buildingEl};
+            \legend{
+                \footnotesize \strut Geometry,
+                \footnotesize \strut Height,
+                \footnotesize \strut Image
+            }
+        \end{axis}
+        \begin{axis}[
+            ybar stacked,
+            bar width=8pt,
+            bar shift=4pt,
+            percentage plot,
+            xtick align=outside,
+            xtick pos=left,
+            ytick pos=left,
+            every axis plot/.append style={thick},
+            xtick=data,
+            xticklabels={,,},
+            yticklabels={,,},
+            xmax=4.5,
+            xmin=.5,
+            ymax=100,
+            ymin=0
+        ]
+            \addplot+ table [percentage series=1] {\buildingNaPa};
+            \addplot+ table [percentage series=2] {\buildingNaPa};
+            \addplot+ table [percentage series=3] {\buildingNaPa};
+            \addplot+[mark=none, sharp plot, dashed] coordinates {(0,33.33333) (5, 33.33333)};
+        \end{axis}
+        \begin{axis}[
+            xticklabels={,,},
+            yticklabels={,,},
+            xtick align=outside,
+            xtick pos=left,
+            ytick pos=left,
+            every axis plot/.append style={thick},
+            xmax=4.5,
+            xmin=.5,
+            ymax=100,
+            ymin=0
+        ]
+            \addplot+[mark=none, black, sharp plot, dashed] coordinates {(0,33.33333) (5, 33.33333)};
+            \addplot+[mark=none, black, sharp plot, dashed] coordinates {(0,66.66666) (5, 66.66666)};
+        \end{axis}
+    \end{tikzpicture}
+\end{document}
