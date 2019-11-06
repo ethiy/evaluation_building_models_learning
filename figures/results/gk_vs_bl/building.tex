@@ -1,0 +1,76 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{pgfplots}
+
+\begin{document}
+    \pgfplotstableread[col sep=comma]{
+        x, y
+        1, 87.04
+        2, 50.85
+    }\BOS
+    \pgfplotstableread[col sep=comma]{
+        x, y
+        1, 66.11
+        2, 46.38
+    }\BUS
+    \pgfplotstableread[col sep=comma]{
+        x, y
+        1, 65.62
+        2, 44.83
+    }\BIB
+    \pgfplotstableread[col sep=comma]{
+        x, y
+        1, 58.29
+        2, 47.54
+    }\BIT
+
+    \begin{tikzpicture} 
+        \begin{axis}[
+            ylabel={F-score},
+            ybar,
+            xtick={data},
+            xticklabels={Elancourt, {Nantes \(\cup\) Paris-13}},
+            x tick label style={rotate=60, anchor=east, yshift=-2mm, font=\bfseries},
+            xtick align=outside,
+            xtick pos=left,
+            ytick pos=left,
+            every axis plot/.append style={thick},
+            ymax=100,
+            ymin=0,
+            xmin=0.7,
+            xmax=2.3,
+            legend style={
+                legend columns=-2,
+                at={(.5,1.05)},
+                anchor=south
+            }
+        ]
+            \addplot+[
+                bar shift = -15pt,
+                fill=green!40,
+                draw=green
+            ] table[x=x, y=y] {\BOS};
+            \addplot+[
+                bar shift = -5pt,
+                fill=cyan!40,
+                draw=cyan
+            ] table[x=x, y=y] {\BUS};
+            \addplot+[
+                bar shift = 5pt,
+                fill=red!40,
+                draw=red
+            ] table[x=x, y=y] {\BIB};
+            \addplot+[
+                bar shift = 15pt,
+                fill=olive!40,
+                draw=olive
+            ] table[x=x, y=y] {\BIT};
+            \legend{
+                \footnotesize \strut \texttt{BOS},
+                \footnotesize \strut \texttt{BUS},
+                \footnotesize \strut \texttt{BIB},
+                \footnotesize \strut \texttt{BIT}
+            }
+        \end{axis} 
+    \end{tikzpicture}
+\end{document}

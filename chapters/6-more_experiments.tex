@@ -1061,6 +1061,34 @@
                 Results, expressed in percentage, on the two datasets at \textbf{\gls{acr::efin}} level 3.
             }
         \end{table}
+        \begin{figure}[htpb]
+            \centering
+            \ffigbox[\FBwidth]{
+                \begin{subfloatrow}[2]
+                    \ffigbox[\FBwidth]{
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/gk_vs_bl/building}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_svm_gk_building}
+                            \texttt{Building errors.}
+                        }
+                    }
+                    \ffigbox[\FBwidth]{
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/gk_vs_bl/facet}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_svm_gk_facet}
+                            \texttt{Facet errors.}
+                        }
+                    }
+                \end{subfloatrow}
+            }{
+                \caption{
+                    \label{fig::f_score_svm_gk}
+                    F-score obtained with an \gls{acr::svm} using graph kernels features.
+                }
+            }
+        \end{figure}
 
     \subsection{Graph kernels and \texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} to baseline comparison}
         \begin{sidewaystable}[htpb]
