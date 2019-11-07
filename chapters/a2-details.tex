@@ -4,7 +4,7 @@
 
 \clearpage
 
-\section{\textsc{Dataset statistics}}
+\section{Dataset statistics}
     \begin{table}
         \footnotesize
         \centering
@@ -88,9 +88,10 @@
         \caption{\label{tab::data_stats} Ground truth detailed statistics over the annotated datasets.}
     \end{table}
 
-\section{\textsc{Experimental results}}
-    \subsection{\textsc{Ablation study}}
+\section{Experimental results}
+    \subsection{Baseline ablation study}
         \begin{table}[htbp]
+            \centering
             \footnotesize
             \begin{tabular}{c c c c}
                 \toprule
@@ -119,92 +120,93 @@
         \end{table}
     
         \FloatBarrier
-    \subsection{\textsc{Transferability study}}
+    \subsection{Transferability study}
         \begin{sidewaystable}[htbp]
             \footnotesize
-            \begin{center}
-                \begin{tabular}{|c | c c | c c | c c | c c || c c | c c | c c | c c |}
-                    \hline
-                    & \multicolumn{8}{c||}{\textbf{Elancourt \(\rightarrow\) Nantes}} & \multicolumn{8}{c|}{\textbf{Elancourt \(\rightarrow\) Paris-13}}\\
-                    \hline
-                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c||}{\textbf{All}} & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.5cm}|}{\textbf{All}}\\
-                    \cline{2-17}
-                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                    \hline
-                    \texttt{BOS} & 99.66 & 42.03 & \textbf{100} & 42.05 & 90.72 & \textbf{43.64} & \textbf{100} & 42.05 & 96.53 & 43.82 & \textbf{96.53} & \textbf{44.22} & 74.75 & 44.02 & 78.71 & 42.97 \\
-                    \hline
-                    \texttt{BUS} & 0 & 0 & 0 & --- & 11.76 & \textbf{66.67} & \textbf{19.12} & 54.17 & 0 & --- & 0 & --- & \textbf{26.98} & \textbf{44.74} & 4.76 & 27.27 \\
-                    \hline
-                    \texttt{BIB} & 0 & --- & 0 & --- & 0 & --- & 0 & --- & 0 & --- & 0 & --- & \textbf{1.85} & \textbf{33.33} & \textbf{1.85} & \textbf{33.33} \\
-                    \hline
-                    \texttt{BIT} & 2.65 & 50.0 & 1.77 & \textbf{66.67} & 1.77 & \textbf{66.67} & \textbf{14.24} & 40.71 & \textbf{3.95} & 50.0 & 2.63 & 50.0 & 1.32 & \textbf{100} & 0 & --- \\
-                    \specialrule{.2em}{.1em}{.1em}
-                    \texttt{FOS} & 98.33 & 98.12 & 98.33 & 98.12 & 98.54 & \textbf{98.13} & \textbf{100} & 69.38 & 97.19 & \textbf{97.58} & 97.17 & \textbf{97.58} & \textbf{98.80} & 95.72 & \textbf{98.80} & 96.47 \\
-                    \hline
-                    \texttt{FUS} & 2.38 & 38.46 & 0.95 & 33.33 & \textbf{17.62} & \textbf{59.68} & 15.71 & 56.90 & 8.36 & \textbf{95.83} & 3.63 & 90.91 & \textbf{30.95} & 90.28 & 20.73 & 91.94 \\
-                    \hline
+            \centering
+            \begin{tabular}{|c | c c | c c | c c | c c || c c | c c | c c | c c |}
+                \hline
+                & \multicolumn{8}{c||}{\textbf{Elancourt \(\rightarrow\) Nantes}} & \multicolumn{8}{c|}{\textbf{Elancourt \(\rightarrow\) Paris-13}}\\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c||}{\textbf{All}} & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.5cm}|}{\textbf{All}}\\
+                \cline{2-17}
+                & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                \hline
+                \texttt{BOS} & 99.66 & 42.03 & \textbf{100} & 42.05 & 90.72 & \textbf{43.64} & \textbf{100} & 42.05 & 96.53 & 43.82 & \textbf{96.53} & \textbf{44.22} & 74.75 & 44.02 & 78.71 & 42.97 \\
+                \hline
+                \texttt{BUS} & 0 & 0 & 0 & --- & 11.76 & \textbf{66.67} & \textbf{19.12} & 54.17 & 0 & --- & 0 & --- & \textbf{26.98} & \textbf{44.74} & 4.76 & 27.27 \\
+                \hline
+                \texttt{BIB} & 0 & --- & 0 & --- & 0 & --- & 0 & --- & 0 & --- & 0 & --- & \textbf{1.85} & \textbf{33.33} & \textbf{1.85} & \textbf{33.33} \\
+                \hline
+                \texttt{BIT} & 2.65 & 50.0 & 1.77 & \textbf{66.67} & 1.77 & \textbf{66.67} & \textbf{14.24} & 40.71 & \textbf{3.95} & 50.0 & 2.63 & 50.0 & 1.32 & \textbf{100} & 0 & --- \\
+                \specialrule{.2em}{.1em}{.1em}
+                \texttt{FOS} & 98.33 & 98.12 & 98.33 & 98.12 & 98.54 & \textbf{98.13} & \textbf{100} & 69.38 & 97.19 & \textbf{97.58} & 97.17 & \textbf{97.58} & \textbf{98.80} & 95.72 & \textbf{98.80} & 96.47 \\
+                \hline
+                \texttt{FUS} & 2.38 & 38.46 & 0.95 & 33.33 & \textbf{17.62} & \textbf{59.68} & 15.71 & 56.90 & 8.36 & \textbf{95.83} & 3.63 & 90.91 & \textbf{30.95} & 90.28 & 20.73 & 91.94 \\
+                \hline
+                \texttt{FIB} & 18.90 & 81.58 & 16.46 & \textbf{84.38} & 54.88 & 64.75 & \textbf{83.54} & 43.08 & 11.80 & 60.71 & 11.11 & 64.0 & \textbf{42.36} & 61.62 & 39.58 & \textbf{64.04} \\ 
                     \texttt{FIB} & 18.90 & 81.58 & 16.46 & \textbf{84.38} & 54.88 & 64.75 & \textbf{83.54} & 43.08 & 11.80 & 60.71 & 11.11 & 64.0 & \textbf{42.36} & 61.62 & 39.58 & \textbf{64.04} \\ 
-                    \hline
-                    \texttt{FIT} & 0 & --- & 0 & --- & \textbf{9.09} & \textbf{100} & 9.09 & 33.33 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-                    \hline
-                    \texttt{FIG} & 93.05 & \textbf{72.81} & 94.39 & 70.52 & 93.05 & 72.55 & \textbf{100} & 64.45 & 86.16 & \textbf{88.47} & 87.73 & 86.82 & 87.21 & 87.89 & \textbf{90.86} & 86.14 \\
-                    \hline
-                    \hline
-                    & \multicolumn{8}{c||}{\textbf{Nantes \(\rightarrow\) Elancourt}} & \multicolumn{8}{c|}{\textbf{Nantes \(\rightarrow\) Paris-13}}\\
-                    \hline
-                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c||}{\textbf{All}} & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.5cm}|}{\textbf{All}}\\
-                    \cline{2-17}
-                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                    \hline
-                    \texttt{BOS} & \textbf{91.76} & 61.48 & 90.72 & 62.97 & 86.90 & \textbf{66.40} & 86.47 & 64.99 & 15.84 & 66.67 & \textbf{19.31} & \textbf{75.0} & 17.33 & 70.0 & 17.33 & 70.0 \\
-                    \hline
-                    \texttt{BUS} & 11.40 & 77.19 & 12.83 & \textbf{83.08} & \textbf{24.70} & 53.33 & 23.75 & 57.47 & 0 & 0 & 3.17 & 33.33 & \textbf{6.35} & \textbf{50.0} & \textbf{6.35} & \textbf{50.0} \\
-                    \hline
-                    \texttt{BIB} & 6.52 & \textbf{65.22} & 6.96 & 64.0 & 15.22 & 46.05 & \textbf{15.65} & 46.75 & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
-                    \hline
-                    \texttt{BIT} & \textbf{8.14} & 87.5 & 5.81 & \textbf{100} & 4.07 & 87.5 & 4.70 & \textbf{100} & \textbf{17.11} & \textbf{34.21} & 13.16 & 26.32 & 13.16 & 23.81 & 10.53 & 23.53 \\
-                    \specialrule{.2em}{.1em}{.1em}
-                    \texttt{FOS} & 98.76 & \textbf{98.99} & 98.76 & \textbf{98.99} & \textbf{98.84} & 98.92 & 98.76 & 98.92 & 97.59 & \textbf{97.2} & 97.59 & 96.81 & \textbf{97.99} & 93.85 & \textbf{97.99} & 92.08 \\
-                    \hline
-                    \texttt{FUS} & 1.44 & 37.5 & 0.96 & 44.44 & \textbf{4.32} & 72.0 & 1.68 & \textbf{77.78} & \textbf{51.27} & 81.03 & 43.27 & 82.64 & 44.36 & \textbf{82.99} & 42.18 & 82.86 \\
-                    \hline
-                    \texttt{FIB} & 10.03 & 81.08 & 8.70 & \textbf{92.86} & \textbf{27.09} & 69.23 & 23.75 & 73.96 & 53.47 & \textbf{66.96} & 45.14 & 65.66 & \textbf{54.86} & 66.39 & \textbf{54.86} & 65.83 \\
-                    \hline
-                    \texttt{FIT} & 3.57 & 50.0 & \textbf{3.57} & \textbf{100} & 3.57 & 50.0 & \textbf{3.57} & \textbf{100} & 0 & 0 & 0 & --- & 0 & --- & 0 & --- \\
-                    \hline
-                    \texttt{FIG} & 86.10 & 68.78 & \textbf{86.69} & 67.83 & 85.76 & \textbf{68.88} & 86.35 & 67.97 & 71.10 & 95.10 & \textbf{91.64} & \textbf{95.47} & 72.06 & 94.20 & 72.06 & 94.85 \\
-                    \hline
-                    \hline
-                    & \multicolumn{8}{c||}{\textbf{Paris-13 \(\rightarrow\) Nantes}} & \multicolumn{8}{c|}{\textbf{Paris-13 \(\rightarrow\) Elancourt}}\\
-                    \hline
-                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c||}{\textbf{All}} & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.5cm}|}{\textbf{All}}\\
-                    \cline{2-17}
-                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                    \hline
-                    \texttt{BOS} & 23.30 & 60.0 & 23.30 & 64.29 & \textbf{25.57} & \textbf{66.95} & 24.60 & 65.52 & \textbf{88.68} & 66.89 & 88.11 & 68.52 & 82.74 & \textbf{72.78} & 82.14 & 69.59 \\
-                    \hline
-                    \texttt{BUS} & 2.30 & 25.0 & 2.30 & 28.57 & \textbf{9.20} & \textbf{40.0} & 5.75 & 31.25 & 15.49 & 76.92 & 15.49 & \textbf{82.35} & 15.04 & 75.56 & \textbf{25.0} & 50.49 \\
-                    \hline
-                    \texttt{BIB} & 0 & --- & 0 & --- & 0 & --- & 0 & --- & 14.78 & 66.67 & 14.29 & \textbf{69.05} & \textbf{26.60} & 43.90 & 19.89 & 48.05 \\
-                    \hline
-                    \texttt{BIT} & \textbf{30.48} & \textbf{30.77} & 20.19 & 25.93 & 19.23 & 26.32 & 16.35 & 23.94 & 10.88 & 84.21 & 5.44 & 88.89 & \textbf{5.44} & \textbf{100} & 4.44 & \textbf{100} \\
-                    \specialrule{.2em}{.1em}{.1em}
-                    \texttt{FOS} & 97.77 & 97.53 & 98.02 & \textbf{97.54} & 98.51 & 94.99 & \textbf{98.76} & 93.01 & 98.71 & 98.63 & 98.71 & \textbf{98.71} & 98.87 & 98.31 & \textbf{99.06} & 97.14 \\
-                    \hline
-                    \texttt{FUS} & \textbf{40.12} & 77.97 & 38.08 & 76.61 & 34.59 & \textbf{78.29} & 31.69 & 76.76 & \textbf{4.86} & 51.02 & 3.50 & 54.55 & \textbf{4.86} & 75.76 & 3.53 & \textbf{89.47} \\
-                    \hline
-                    \texttt{FIB} & 47.42 & 63.89 & 43.30 & \textbf{64.62} & \textbf{53.61} & 63.41 & \textbf{53.61} & 63.03 & 7.32 & 69.70 & 3.82 & \textbf{70.59} & 17.52 & 65.48 & \textbf{21.86} & 70.11 \\
-                    \hline
-                    \texttt{FIT} & 0 & 0 & 0 & 0 & 0 & --- & 0 & --- & 3.45 & \textbf{50.0} & 3.45 & \textbf{50.0} & 3.45 & 33.33 & \textbf{4.34} & 33.33 \\
-                    \hline
-                    \texttt{FIG} & 80.35 & \textbf{84.80} & \textbf{80.93} & 84.55 & 77.82 & 83.86 & 79.18 & 83.92 & 83.40 & \textbf{74.46} & \textbf{85.19} & 74.05 & 82.93 & 73.48 & 82.38 & 73.08 \\
-                    \hline
-                \end{tabular}
-                \caption{
-                    \label{tab::transferability_f3}
-                    Transferability results of all six configurations reported, in percentage, at \texttt{finesse} level 3.
-                }
-            \end{center}
+                \texttt{FIB} & 18.90 & 81.58 & 16.46 & \textbf{84.38} & 54.88 & 64.75 & \textbf{83.54} & 43.08 & 11.80 & 60.71 & 11.11 & 64.0 & \textbf{42.36} & 61.62 & 39.58 & \textbf{64.04} \\ 
+                \hline
+                \texttt{FIT} & 0 & --- & 0 & --- & \textbf{9.09} & \textbf{100} & 9.09 & 33.33 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                \hline
+                \texttt{FIG} & 93.05 & \textbf{72.81} & 94.39 & 70.52 & 93.05 & 72.55 & \textbf{100} & 64.45 & 86.16 & \textbf{88.47} & 87.73 & 86.82 & 87.21 & 87.89 & \textbf{90.86} & 86.14 \\
+                \hline
+                \hline
+                & \multicolumn{8}{c||}{\textbf{Nantes \(\rightarrow\) Elancourt}} & \multicolumn{8}{c|}{\textbf{Nantes \(\rightarrow\) Paris-13}}\\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c||}{\textbf{All}} & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.5cm}|}{\textbf{All}}\\
+                \cline{2-17}
+                & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                \hline
+                \texttt{BOS} & \textbf{91.76} & 61.48 & 90.72 & 62.97 & 86.90 & \textbf{66.40} & 86.47 & 64.99 & 15.84 & 66.67 & \textbf{19.31} & \textbf{75.0} & 17.33 & 70.0 & 17.33 & 70.0 \\
+                \hline
+                \texttt{BUS} & 11.40 & 77.19 & 12.83 & \textbf{83.08} & \textbf{24.70} & 53.33 & 23.75 & 57.47 & 0 & 0 & 3.17 & 33.33 & \textbf{6.35} & \textbf{50.0} & \textbf{6.35} & \textbf{50.0} \\
+                \hline
+                \texttt{BIB} & 6.52 & \textbf{65.22} & 6.96 & 64.0 & 15.22 & 46.05 & \textbf{15.65} & 46.75 & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
+                \hline
+                \texttt{BIT} & \textbf{8.14} & 87.5 & 5.81 & \textbf{100} & 4.07 & 87.5 & 4.70 & \textbf{100} & \textbf{17.11} & \textbf{34.21} & 13.16 & 26.32 & 13.16 & 23.81 & 10.53 & 23.53 \\
+                \specialrule{.2em}{.1em}{.1em}
+                \texttt{FOS} & 98.76 & \textbf{98.99} & 98.76 & \textbf{98.99} & \textbf{98.84} & 98.92 & 98.76 & 98.92 & 97.59 & \textbf{97.2} & 97.59 & 96.81 & \textbf{97.99} & 93.85 & \textbf{97.99} & 92.08 \\
+                \hline
+                \texttt{FUS} & 1.44 & 37.5 & 0.96 & 44.44 & \textbf{4.32} & 72.0 & 1.68 & \textbf{77.78} & \textbf{51.27} & 81.03 & 43.27 & 82.64 & 44.36 & \textbf{82.99} & 42.18 & 82.86 \\
+                \hline
+                \texttt{FIB} & 10.03 & 81.08 & 8.70 & \textbf{92.86} & \textbf{27.09} & 69.23 & 23.75 & 73.96 & 53.47 & \textbf{66.96} & 45.14 & 65.66 & \textbf{54.86} & 66.39 & \textbf{54.86} & 65.83 \\
+                \hline
+                \texttt{FIT} & 3.57 & 50.0 & \textbf{3.57} & \textbf{100} & 3.57 & 50.0 & \textbf{3.57} & \textbf{100} & 0 & 0 & 0 & --- & 0 & --- & 0 & --- \\
+                \hline
+                \texttt{FIG} & 86.10 & 68.78 & \textbf{86.69} & 67.83 & 85.76 & \textbf{68.88} & 86.35 & 67.97 & 71.10 & 95.10 & \textbf{91.64} & \textbf{95.47} & 72.06 & 94.20 & 72.06 & 94.85 \\
+                \hline
+                \hline
+                & \multicolumn{8}{c||}{\textbf{Paris-13 \(\rightarrow\) Nantes}} & \multicolumn{8}{c|}{\textbf{Paris-13 \(\rightarrow\) Elancourt}}\\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c||}{\textbf{All}} & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.5cm}|}{\textbf{All}}\\
+                \cline{2-17}
+                & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                \hline
+                \texttt{BOS} & 23.30 & 60.0 & 23.30 & 64.29 & \textbf{25.57} & \textbf{66.95} & 24.60 & 65.52 & \textbf{88.68} & 66.89 & 88.11 & 68.52 & 82.74 & \textbf{72.78} & 82.14 & 69.59 \\
+                \hline
+                \texttt{BUS} & 2.30 & 25.0 & 2.30 & 28.57 & \textbf{9.20} & \textbf{40.0} & 5.75 & 31.25 & 15.49 & 76.92 & 15.49 & \textbf{82.35} & 15.04 & 75.56 & \textbf{25.0} & 50.49 \\
+                \hline
+                \texttt{BIB} & 0 & --- & 0 & --- & 0 & --- & 0 & --- & 14.78 & 66.67 & 14.29 & \textbf{69.05} & \textbf{26.60} & 43.90 & 19.89 & 48.05 \\
+                \hline
+                \texttt{BIT} & \textbf{30.48} & \textbf{30.77} & 20.19 & 25.93 & 19.23 & 26.32 & 16.35 & 23.94 & 10.88 & 84.21 & 5.44 & 88.89 & \textbf{5.44} & \textbf{100} & 4.44 & \textbf{100} \\
+                \specialrule{.2em}{.1em}{.1em}
+                \texttt{FOS} & 97.77 & 97.53 & 98.02 & \textbf{97.54} & 98.51 & 94.99 & \textbf{98.76} & 93.01 & 98.71 & 98.63 & 98.71 & \textbf{98.71} & 98.87 & 98.31 & \textbf{99.06} & 97.14 \\
+                \hline
+                \texttt{FUS} & \textbf{40.12} & 77.97 & 38.08 & 76.61 & 34.59 & \textbf{78.29} & 31.69 & 76.76 & \textbf{4.86} & 51.02 & 3.50 & 54.55 & \textbf{4.86} & 75.76 & 3.53 & \textbf{89.47} \\
+                \hline
+                \texttt{FIB} & 47.42 & 63.89 & 43.30 & \textbf{64.62} & \textbf{53.61} & 63.41 & \textbf{53.61} & 63.03 & 7.32 & 69.70 & 3.82 & \textbf{70.59} & 17.52 & 65.48 & \textbf{21.86} & 70.11 \\
+                \hline
+                \texttt{FIT} & 0 & 0 & 0 & 0 & 0 & --- & 0 & --- & 3.45 & \textbf{50.0} & 3.45 & \textbf{50.0} & 3.45 & 33.33 & \textbf{4.34} & 33.33 \\
+                \hline
+                \texttt{FIG} & 80.35 & \textbf{84.80} & \textbf{80.93} & 84.55 & 77.82 & 83.86 & 79.18 & 83.92 & 83.40 & \textbf{74.46} & \textbf{85.19} & 74.05 & 82.93 & 73.48 & 82.38 & 73.08 \\
+                \hline
+            \end{tabular}
+            \caption{
+                \label{tab::transferability_f3}
+                Transferability results of all six configurations reported, in percentage, at \textbf{\gls{acr::efin}} level 3.
+            }
         \end{sidewaystable}
         \begin{table}[htbp]
             \footnotesize
@@ -259,93 +261,91 @@
         \end{table}
     
         \FloatBarrier
-    \subsection{\textsc{Generalization study}}
+    \subsection{Generalization study}
         \begin{table}[htbp]
             \footnotesize
-            \begin{center}
-                \begin{tabular}{|c | c c | c c | c c | c c |}
-                    \hline
-                    \multicolumn{9}{|c|}{\textbf{Elancourt $\cup$ Nantes \(\rightarrow\) Paris-13}}\\
-                    \hline
-                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
-                    \cline{2-9}
-                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                    \hline
-                    \texttt{BOS} & 26.73 & 50.47 & 26.73 & 62.07 & 31.68 & 69.57 & \textbf{32.18} & \textbf{69.89} \\
-                    \hline
-                    \texttt{BUS} & 0 & --- & 0 & --- & \textbf{7.94} & \textbf{35.71} & 3.17 & 33.33 \\
-                    \hline
-                    \texttt{BIB} & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
-                    \hline
-                    \texttt{BIT} & 6.58 & 50.0 & 9.21 & 53.85 & 2.63 & 100 & 0 & --- \\
-                    \specialrule{.2em}{.1em}{.1em}
-                    \texttt{FOS} & 97.19 & 97.19 & 97.59 & \textbf{97.2} & 97.99 & 96.83 & \textbf{98.39} & 94.23 \\
-                    \hline
-                    \texttt{FUS} & \textbf{34.18} & 85.45 & 32.0 & 84.62 & 33.09 & 85.85 & 31.64 & \textbf{87.88} \\
-                    \hline
-                    \texttt{FIB} & 15.97 & 62.16 & 13.89 & 58.82 & 37.5 & \textbf{66.67} & \textbf{39.58} & 66.28 \\
-                    \hline
-                    \texttt{FIT} & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
-                    \hline
-                    \texttt{FIG} & 69.97 & 94.37 & 73.37 & 93.36 & 72.06 & \textbf{94.52} & \textbf{74.15} & 92.50 \\
-                    \hline
-                    \hline
-                    \multicolumn{9}{|c|}{\textbf{Elancourt $\cup$ Paris-13 \(\rightarrow\) Nantes}}\\
-                    \hline
-                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
-                    \cline{2-9}
-                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                    \hline
-                    \texttt{BOS} & 33.66 & 52.26 & 30.10 & 56.71 & 37.86 & 61.58 & \textbf{38.19} & \textbf{62.43} \\
-                    \hline
-                    \texttt{BUS} & 0 & --- & 0 & --- & \textbf{10.34} & \textbf{40.91} & 5.75 & 35.71 \\
-                    \hline
-                    \texttt{BIB} & 0 & --- & 0 & --- & 0 & 0 & 0 & 0 \\
-                    \hline
-                    \texttt{BIT} & \textbf{17.31} & 33.33 & 14.42 & 28.30 & 10.58 & \textbf{34.38} & 11.54 & 34.29 \\
-                    \specialrule{.2em}{.1em}{.1em}
-                    \texttt{FOS} & 97.77 & 97.77 & 98.02 & \textbf{97.78} & 98.51 & 97.31 & \textbf{98.76} & 94.77 \\
-                    \hline
-                    \texttt{FUS} & \textbf{26.16} & 81.08 & 22.09 & 85.39 & 25.87 & 85.58 & 24.71 & \textbf{85.86} \\
-                    \hline
-                    \texttt{FIB} & 14.95 & 63.04 & 13.91 & 61.36 & \textbf{39.18} & 63.87 & 37.63 & \textbf{65.77} \\
-                    \hline
-                    \texttt{FIT} & 0 & --- & 0 & --- & 0 & 0 & 0 & --- \\
-                    \hline
-                    \texttt{FIG} & 82.10 & \textbf{83.40} & 82.30 & 83.27 & 81.32 & 82.77 & \textbf{81.91} & 82.71 \\
-                    \hline
-                    \hline
-                    \multicolumn{9}{|c|}{\textbf{Nantes $\cup$ Paris-13 \(\rightarrow\) Elancourt}}\\
-                    \hline
-                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
-                    \cline{2-9}
-                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                    \hline
-                    \texttt{BOS} & \textbf{96.76} & 55.49 & 96.09 & 55.66 & 87.80 & \textbf{58.14} & 88.37 & 57.19 \\
-                    \hline
-                    \texttt{BUS} & 17.42 & 80.56 & 17.12 & \textbf{89.06} & \textbf{22.82} & 79.17 & 21.62 & 81.82 \\
-                    \hline
-                    \texttt{BIB} & 3.70 & \textbf{60.0} & 3.70 & \textbf{60.0} & \textbf{7.82} & 57.58 & 7.41 & 54.55 \\
-                    \hline
-                    \texttt{BIT} & \textbf{8.62} & 64.52 & 6.47 & 68.18 & 4.31 & 83.33 & 3.02 & \textbf{100} \\
-                    \specialrule{.2em}{.1em}{.1em}
-                    \texttt{FOS} & 98.33 & 98.49 & 98.33 & \textbf{98.56} & \textbf{98.73} & 97.64 & 98.65 & 97.48 \\
-                    \hline
-                    \texttt{FUS} & 1.76 & 47.83 & 0.80 & 71.43 & \textbf{10.22} & \textbf{81.01} & 3.19 & 76.92 \\
-                    \hline
-                    \texttt{FIB} & 12.02 & 70.15 & 7.16 & \textbf{75.68} & \textbf{46.29} & 61.99 & 40.92 & 62.75 \\
-                    \hline
-                    \texttt{FIT} & 3.33 & 25.0 & \textbf{3.33} & \textbf{33.33} & \textbf{3.33} & \textbf{33.33} & 3.33 & 25.0 \\
-                    \hline
-                    \texttt{FIG} & 88.95 & \textbf{74.23} & \textbf{90.92} & 72.79 & 89.02 & 73.78 & 89.70 & 73.19 \\
-                    \hline
-                \end{tabular}
-                \caption{
-                    \label{tab::generalization_f3}
-                    Results of generalization study, reported in percentage at the \texttt{finesse} level $3$.
+            \begin{tabular}{|c | c c | c c | c c | c c |}
+                \hline
+                \multicolumn{9}{|c|}{\textbf{Elancourt $\cup$ Nantes \(\rightarrow\) Paris-13}}\\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                \cline{2-9}
+                & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                \hline
+                \texttt{BOS} & 26.73 & 50.47 & 26.73 & 62.07 & 31.68 & 69.57 & \textbf{32.18} & \textbf{69.89} \\
+                \hline
+                \texttt{BUS} & 0 & --- & 0 & --- & \textbf{7.94} & \textbf{35.71} & 3.17 & 33.33 \\
+                \hline
+                \texttt{BIB} & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
+                \hline
+                \texttt{BIT} & 6.58 & 50.0 & 9.21 & 53.85 & 2.63 & 100 & 0 & --- \\
+                \specialrule{.2em}{.1em}{.1em}
+                \texttt{FOS} & 97.19 & 97.19 & 97.59 & \textbf{97.2} & 97.99 & 96.83 & \textbf{98.39} & 94.23 \\
+                \hline
+                \texttt{FUS} & \textbf{34.18} & 85.45 & 32.0 & 84.62 & 33.09 & 85.85 & 31.64 & \textbf{87.88} \\
+                \hline
+                \texttt{FIB} & 15.97 & 62.16 & 13.89 & 58.82 & 37.5 & \textbf{66.67} & \textbf{39.58} & 66.28 \\
+                \hline
+                \texttt{FIT} & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
+                \hline
+                \texttt{FIG} & 69.97 & 94.37 & 73.37 & 93.36 & 72.06 & \textbf{94.52} & \textbf{74.15} & 92.50 \\
+                \hline
+                \hline
+                \multicolumn{9}{|c|}{\textbf{Elancourt $\cup$ Paris-13 \(\rightarrow\) Nantes}}\\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                \cline{2-9}
+                & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                \hline
+                \texttt{BOS} & 33.66 & 52.26 & 30.10 & 56.71 & 37.86 & 61.58 & \textbf{38.19} & \textbf{62.43} \\
+                \hline
+                \texttt{BUS} & 0 & --- & 0 & --- & \textbf{10.34} & \textbf{40.91} & 5.75 & 35.71 \\
+                \hline
+                \texttt{BIB} & 0 & --- & 0 & --- & 0 & 0 & 0 & 0 \\
+                \hline
+                \texttt{BIT} & \textbf{17.31} & 33.33 & 14.42 & 28.30 & 10.58 & \textbf{34.38} & 11.54 & 34.29 \\
+                \specialrule{.2em}{.1em}{.1em}
+                \texttt{FOS} & 97.77 & 97.77 & 98.02 & \textbf{97.78} & 98.51 & 97.31 & \textbf{98.76} & 94.77 \\
+                \hline
+                \texttt{FUS} & \textbf{26.16} & 81.08 & 22.09 & 85.39 & 25.87 & 85.58 & 24.71 & \textbf{85.86} \\
+                \hline
+                \texttt{FIB} & 14.95 & 63.04 & 13.91 & 61.36 & \textbf{39.18} & 63.87 & 37.63 & \textbf{65.77} \\
+                \hline
+                \texttt{FIT} & 0 & --- & 0 & --- & 0 & 0 & 0 & --- \\
+                \hline
+                \texttt{FIG} & 82.10 & \textbf{83.40} & 82.30 & 83.27 & 81.32 & 82.77 & \textbf{81.91} & 82.71 \\
+                \hline
+                \hline
+                \multicolumn{9}{|c|}{\textbf{Nantes $\cup$ Paris-13 \(\rightarrow\) Elancourt}}\\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                \cline{2-9}
+                & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                \hline
+                \texttt{BOS} & \textbf{96.76} & 55.49 & 96.09 & 55.66 & 87.80 & \textbf{58.14} & 88.37 & 57.19 \\
+                \hline
+                \texttt{BUS} & 17.42 & 80.56 & 17.12 & \textbf{89.06} & \textbf{22.82} & 79.17 & 21.62 & 81.82 \\
+                \hline
+                \texttt{BIB} & 3.70 & \textbf{60.0} & 3.70 & \textbf{60.0} & \textbf{7.82} & 57.58 & 7.41 & 54.55 \\
+                \hline
+                \texttt{BIT} & \textbf{8.62} & 64.52 & 6.47 & 68.18 & 4.31 & 83.33 & 3.02 & \textbf{100} \\
+                \specialrule{.2em}{.1em}{.1em}
+                \texttt{FOS} & 98.33 & 98.49 & 98.33 & \textbf{98.56} & \textbf{98.73} & 97.64 & 98.65 & 97.48 \\
+                \hline
+                \texttt{FUS} & 1.76 & 47.83 & 0.80 & 71.43 & \textbf{10.22} & \textbf{81.01} & 3.19 & 76.92 \\
+                \hline
+                \texttt{FIB} & 12.02 & 70.15 & 7.16 & \textbf{75.68} & \textbf{46.29} & 61.99 & 40.92 & 62.75 \\
+                \hline
+                \texttt{FIT} & 3.33 & 25.0 & \textbf{3.33} & \textbf{33.33} & \textbf{3.33} & \textbf{33.33} & 3.33 & 25.0 \\
+                \hline
+                \texttt{FIG} & 88.95 & \textbf{74.23} & \textbf{90.92} & 72.79 & 89.02 & 73.78 & 89.70 & 73.19 \\
+                \hline
+            \end{tabular}
+            \caption{
+                \label{tab::generalization_f3}
+                Results of generalization study, reported in percentage at the \textbf{\gls{acr::efin}} level 3.
                 Classifiers are trained on two zones and tested on the one that was left out.
-                }
-            \end{center}
+            }
         \end{table}
 
         \begin{table}[htbp]
@@ -379,7 +379,7 @@
         \end{table}
     
         \FloatBarrier
-    \subsection{\textsc{Representativeness study}}
+    \subsection{Representativeness study}
         \begin{sidewaystable}[htbp]
             \footnotesize
             \begin{center}
@@ -495,8 +495,9 @@
         \end{table}
 
         \FloatBarrier
-    \subsection{\textsc{\texttt{Finesse} study}}
+    \subsection{\texttt{Finesse} study}
         \begin{table}[htbp]
+            \centering
             \footnotesize
             \begin{tabular}{c c c c}
                 \toprule
@@ -509,83 +510,82 @@
             \end{tabular}
             \caption{
                 \label{tab::f_score_ablation_f2}
-                F-score mean and standard deviation for the feature ablation study results per zone for \texttt{finesse} level 2.
+                F-score mean and standard deviation for the feature ablation study results per zone for \textbf{\gls{acr::efin}} level 2.
             }
         \end{table}
 
         \begin{table}[htbp]
             \footnotesize
-            \begin{center}
-                \begin{tabular}{|x{2cm} | c c | c c | c c | c c |}
-                    \hline
-                    & \multicolumn{8}{c|}{\textbf{Elancourt \(\rightarrow\) Nantes}} \\
-                    \hline
-                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c|}{\textbf{All}} \\
-                    \cline{2-9}
-                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                    \hline
-                    \texttt{Building errors} & \textbf{100} & \textbf{63.04} & 100 & 62.86 & 100 & 62.86 & 100 & 62.86 \\
-                    \hline
-                    \texttt{Facet errors} & 95.25 & \textbf{89.42} & \textbf{97.18} & 85.05 & 95.42 & 87.56 & 95.95 & 86.92 \\
-                    \hline
-                    \hline
-                    & \multicolumn{8}{c|}{\textbf{Elancourt \(\rightarrow\) Paris-13}} \\
-                    \hline
-                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c|}{\textbf{All}} \\
-                    \cline{2-9}
-                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                    \hline
-                    \texttt{Building errors} & 99.34 & 66.45 & 99.67 & 66.52 & 99.67 & 66.52 & \textbf{100} & \textbf{66.59} \\
-                    \texttt{Facet errors} & 92.94 & 91.17 & \textbf{97.81} & 90.74 & 96.35 & 91.24 & 96.84 & \textbf{91.28} \\
-                    \hline
-                    \hline
-                    & \multicolumn{8}{c|}{\textbf{Nantes \(\rightarrow\) Elancourt}} \\
-                    \hline
-                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c|}{\textbf{All}} \\
-                    \cline{2-9}
-                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                    \hline
-                    \texttt{Building errors} & 95.25 & \textbf{80.26} & 97.56 & 79.08 & \textbf{99.60} & 78.07 & 99.41 & 78.56 \\
-                    \hline
-                    \texttt{Facet errors} & 89.78 & 90.45 & 90.90 & 89.23 & \textbf{91.21} & 89.70 & 90.34 & \textbf{90.51} \\
-                    \hline
-                    \hline
-                    & \multicolumn{8}{c|}{\textbf{Nantes \(\rightarrow\) Paris-13}} \\
-                    \hline
-                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c|}{\textbf{All}} \\
-                    \cline{2-9}
-                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                    \hline
-                    \texttt{Building errors} & \textbf{85.15} & 68.62 & 84.16 & 68.55 & 84.49 & \textbf{69.19} & 83.50 & 68.75 \\
-                    \hline
-                    \texttt{Facet errors} & 88.56 & 93.33 & \textbf{89.29} & 93.38 & 87.10 & 93.72 & 87.59 & \textbf{93.75} \\
-                    \hline
-                    \hline
-                    & \multicolumn{8}{c|}{\textbf{Paris-13 \(\rightarrow\) Nantes}} \\
-                    \hline
-                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c|}{\textbf{All}} \\
-                    \cline{2-9}
-                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                    \hline
-                    \texttt{Building errors} & 87.14 & 67.88 & 87.58 & 67.99 & 88.03 & 68.33 & \textbf{89.36} & \textbf{68.77} \\
-                    \hline
-                    \texttt{Facet errors} & \textbf{90.25} & 91.64 & 89.75 & 91.75 & 89.92 & 92.72 & 90.08 & \textbf{92.25} \\
-                    \hline
-                    \hline
-                    & \multicolumn{8}{c|}{\textbf{Paris-13 \(\rightarrow\) Elancourt}}\\
-                    \hline
-                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c|}{\textbf{All}} \\
-                    \cline{2-9}
-                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                    \hline
-                    \texttt{Building errors} & 99.24 & 81.19 & \textbf{99.56} & \textbf{81.29} & 99.24 & 81.19 & 99.49 & 81.15 \\
-                    \hline
-                    \texttt{Facet errors} & 93.02 & \textbf{89.39} & 93.57 & 88.98 & 94.42 & 88.36 & \textbf{95.63} & 88.00 \\
-                    \hline
-                    \hline
-                \end{tabular}
-                \caption{\label{tab::transferability_f2} Transferability study on \texttt{finesse} level 2.}
-            \end{center}
+            \centering
+            \begin{tabular}{|x{2cm} | c c | c c | c c | c c |}
+                \hline
+                & \multicolumn{8}{c|}{\textbf{Elancourt \(\rightarrow\) Nantes}} \\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c|}{\textbf{All}} \\
+                \cline{2-9}
+                & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                \hline
+                \texttt{Building errors} & \textbf{100} & \textbf{63.04} & 100 & 62.86 & 100 & 62.86 & 100 & 62.86 \\
+                \hline
+                \texttt{Facet errors} & 95.25 & \textbf{89.42} & \textbf{97.18} & 85.05 & 95.42 & 87.56 & 95.95 & 86.92 \\
+                \hline
+                \hline
+                & \multicolumn{8}{c|}{\textbf{Elancourt \(\rightarrow\) Paris-13}} \\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c|}{\textbf{All}} \\
+                \cline{2-9}
+                & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                \hline
+                \texttt{Building errors} & 99.34 & 66.45 & 99.67 & 66.52 & 99.67 & 66.52 & \textbf{100} & \textbf{66.59} \\
+                \texttt{Facet errors} & 92.94 & 91.17 & \textbf{97.81} & 90.74 & 96.35 & 91.24 & 96.84 & \textbf{91.28} \\
+                \hline
+                \hline
+                & \multicolumn{8}{c|}{\textbf{Nantes \(\rightarrow\) Elancourt}} \\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c|}{\textbf{All}} \\
+                \cline{2-9}
+                & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                \hline
+                \texttt{Building errors} & 95.25 & \textbf{80.26} & 97.56 & 79.08 & \textbf{99.60} & 78.07 & 99.41 & 78.56 \\
+                \hline
+                \texttt{Facet errors} & 89.78 & 90.45 & 90.90 & 89.23 & \textbf{91.21} & 89.70 & 90.34 & \textbf{90.51} \\
+                \hline
+                \hline
+                & \multicolumn{8}{c|}{\textbf{Nantes \(\rightarrow\) Paris-13}} \\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c|}{\textbf{All}} \\
+                \cline{2-9}
+                & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                \hline
+                \texttt{Building errors} & \textbf{85.15} & 68.62 & 84.16 & 68.55 & 84.49 & \textbf{69.19} & 83.50 & 68.75 \\
+                \hline
+                \texttt{Facet errors} & 88.56 & 93.33 & \textbf{89.29} & 93.38 & 87.10 & 93.72 & 87.59 & \textbf{93.75} \\
+                \hline
+                \hline
+                & \multicolumn{8}{c|}{\textbf{Paris-13 \(\rightarrow\) Nantes}} \\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c|}{\textbf{All}} \\
+                \cline{2-9}
+                & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                \hline
+                \texttt{Building errors} & 87.14 & 67.88 & 87.58 & 67.99 & 88.03 & 68.33 & \textbf{89.36} & \textbf{68.77} \\
+                \hline
+                \texttt{Facet errors} & \textbf{90.25} & 91.64 & 89.75 & 91.75 & 89.92 & 92.72 & 90.08 & \textbf{92.25} \\
+                \hline
+                \hline
+                & \multicolumn{8}{c|}{\textbf{Paris-13 \(\rightarrow\) Elancourt}}\\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c|}{\textbf{All}} \\
+                \cline{2-9}
+                & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                \hline
+                \texttt{Building errors} & 99.24 & 81.19 & \textbf{99.56} & \textbf{81.29} & 99.24 & 81.19 & 99.49 & 81.15 \\
+                \hline
+                \texttt{Facet errors} & 93.02 & \textbf{89.39} & 93.57 & 88.98 & 94.42 & 88.36 & \textbf{95.63} & 88.00 \\
+                \hline
+                \hline
+            \end{tabular}
+            \caption{\label{tab::transferability_f2} Transferability study on \textbf{\gls{acr::efin}} level 2.}
         \end{table}
 
         \begin{table}[htbp]
@@ -614,50 +614,49 @@
             \end{tabular}
             \caption{
                 \label{tab::f_score_transferability_f2}
-                Mean F-score and standard deviation in each zone on \texttt{finesse} level 2.
+                Mean F-score and standard deviation in each zone on \textbf{\gls{acr::efin}} level 2.
             }
         \end{table}
         
         \begin{sidewaystable}[htbp]
             \footnotesize
-            \begin{center}
-                \begin{tabular}{|x{2cm} | c c | c c | c c | c c || c c | c c | c c | c c |}
-                    \hline
-                    & \multicolumn{8}{c||}{\textbf{\SI{20}{\percent}}} & \multicolumn{8}{c|}{\textbf{\SI{30}{\percent}}}\\
-                    \hline
-                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c||}{\textbf{All}} & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.5cm}|}{\textbf{All}}\\
-                    \cline{2-17}
-                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                    \hline
-                    \texttt{Building errors} & 94.62 & \textbf{80.26} & 97.16 & 79.24 & 99.06 & 77.38 & \textbf{99.38} & 78.15 & 99.59 & 78.52 & 96.90 & \textbf{79.09} & 99.65 & 78.59 & \textbf{99.76} & 77.65 \\
-                    \hline
-                    \texttt{Facet errors} & 92.53 & \textbf{90.40} & 95.29 & 87.74 & \textbf{95.68} & 88.81 & 93.18 & 89.86 & 93.32 & 91.07 & \textbf{97.57} & 86.89 & 91.04 & \textbf{91.85} & 94.22 & 89.17 \\
-                    \hline
-                    \hline
-                    & \multicolumn{8}{c||}{\textbf{\SI{40}{\percent}}} & \multicolumn{8}{c|}{\textbf{\SI{50}{\percent}}}\\
-                    \hline
-                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c||}{\textbf{All}} & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.5cm}|}{\textbf{All}}\\
-                    \cline{2-17}
-                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                    \hline
-                    \texttt{Building errors} & 98.54 & 78.28 & 99.52 & \textbf{78.44} & \textbf{99.86} & 77.70 & 99.86 & 77.21 & \textbf{100} & 76.81 & 99.75 & \textbf{77.59} & 99.75 & 77.55 & 99.83 & 77.12 \\
-                    \hline
-                    \texttt{Facet errors} & 92.65 & 90.22 & 88.96 & \textbf{92.79} & \textbf{93.81} & 90.07 & 93.59 & 90.23 & 95.03 & 88.07 & \textbf{96.12} & 87.31 & 93.78 & \textbf{90.05} & 95.97 & 88.49 \\
-                    \hline
-                    \hline
-                    & \multicolumn{8}{c||}{\textbf{\SI{60}{\percent}}} & \multicolumn{8}{c|}{\textbf{\SI{70}{\percent}}}\\
-                    \hline
-                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c||}{\textbf{All}} & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.5cm}|}{\textbf{All}}\\
-                    \cline{2-17}
-                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                    \hline
-                    \texttt{Building errors} & 99.28 & \textbf{79.05} & 99.69 & 77.93 & 99.28 & 78.94 & \textbf{100} & 78.19 & 99.31 & \textbf{78.51} & 99.59 & 78.40 & \textbf{100} & 77.72 & 99.86 & 78.02 \\
-                    \hline
-                    \texttt{Facet errors} & 92.02 & 90.37 & \textbf{97.20} & 87.96 & 93.72 & 90.32 & 92.67 & \textbf{90.94} & 94.72 & 88.77 & \textbf{96.08} & 86.67 & 94.55 & 89.00 & 94.09 & \textbf{89.94} \\
-                    \hline
-                \end{tabular}
-                \caption{\label{tab::representativeness_f2} Representativeness study on \texttt{finesse} level 2.}
-            \end{center}
+            \centering
+            \begin{tabular}{|x{2cm} | c c | c c | c c | c c || c c | c c | c c | c c |}
+                \hline
+                & \multicolumn{8}{c||}{\textbf{\SI{20}{\percent}}} & \multicolumn{8}{c|}{\textbf{\SI{30}{\percent}}}\\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c||}{\textbf{All}} & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.5cm}|}{\textbf{All}}\\
+                \cline{2-17}
+                & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                \hline
+                \texttt{Building errors} & 94.62 & \textbf{80.26} & 97.16 & 79.24 & 99.06 & 77.38 & \textbf{99.38} & 78.15 & 99.59 & 78.52 & 96.90 & \textbf{79.09} & 99.65 & 78.59 & \textbf{99.76} & 77.65 \\
+                \hline
+                \texttt{Facet errors} & 92.53 & \textbf{90.40} & 95.29 & 87.74 & \textbf{95.68} & 88.81 & 93.18 & 89.86 & 93.32 & 91.07 & \textbf{97.57} & 86.89 & 91.04 & \textbf{91.85} & 94.22 & 89.17 \\
+                \hline
+                \hline
+                & \multicolumn{8}{c||}{\textbf{\SI{40}{\percent}}} & \multicolumn{8}{c|}{\textbf{\SI{50}{\percent}}}\\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c||}{\textbf{All}} & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.5cm}|}{\textbf{All}}\\
+                \cline{2-17}
+                & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                \hline
+                \texttt{Building errors} & 98.54 & 78.28 & 99.52 & \textbf{78.44} & \textbf{99.86} & 77.70 & 99.86 & 77.21 & \textbf{100} & 76.81 & 99.75 & \textbf{77.59} & 99.75 & 77.55 & 99.83 & 77.12 \\
+                \hline
+                \texttt{Facet errors} & 92.65 & 90.22 & 88.96 & \textbf{92.79} & \textbf{93.81} & 90.07 & 93.59 & 90.23 & 95.03 & 88.07 & \textbf{96.12} & 87.31 & 93.78 & \textbf{90.05} & 95.97 & 88.49 \\
+                \hline
+                \hline
+                & \multicolumn{8}{c||}{\textbf{\SI{60}{\percent}}} & \multicolumn{8}{c|}{\textbf{\SI{70}{\percent}}}\\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{c||}{\textbf{All}} & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.5cm}|}{\textbf{All}}\\
+                \cline{2-17}
+                & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                \hline
+                \texttt{Building errors} & 99.28 & \textbf{79.05} & 99.69 & 77.93 & 99.28 & 78.94 & \textbf{100} & 78.19 & 99.31 & \textbf{78.51} & 99.59 & 78.40 & \textbf{100} & 77.72 & 99.86 & 78.02 \\
+                \hline
+                \texttt{Facet errors} & 92.02 & 90.37 & \textbf{97.20} & 87.96 & 93.72 & 90.32 & 92.67 & \textbf{90.94} & 94.72 & 88.77 & \textbf{96.08} & 86.67 & 94.55 & 89.00 & 94.09 & \textbf{89.94} \\
+                \hline
+            \end{tabular}
+            \caption{\label{tab::representativeness_f2} Representativeness study on \textbf{\gls{acr::efin}} level 2.}
         \end{sidewaystable}
         \begin{table}[htbp]
             \footnotesize
@@ -678,13 +677,14 @@
                 \texttt{Facet errors} & 91.72 $\pm$ 0.31 & \textbf{91.83 $\pm$ 0.49} & 91.61 $\pm$ 0.35 \\
                 \bottomrule
             \end{tabular}
-            \caption{\label{tab::f_score_representativeness_f2} F-score mean and standard deviation for the representativeness experiments on \texttt{finesse} level 2.}
+            \caption{\label{tab::f_score_representativeness_f2} F-score mean and standard deviation for the representativeness experiments on \textbf{\gls{acr::efin}} level 2.}
         \end{table}
     
         \FloatBarrier
-    \subsection{\textsc{\texorpdfstring{\acrshort*{acr::svm}}{SVM} to \texorpdfstring{\acrshort*{acr::rf}}{RF} comparison}}
+    \subsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} to \texorpdfstring{\acrshort*{acr::rf}}{RF} comparison}
         \begin{table}[htbp]
             \footnotesize
+            \centering
             \begin{tabular}{| c | c c | c c |}
                 \hline
                 & \multicolumn{2}{c |}{\gls{acr::rf}} & \multicolumn{2}{c |}{\gls{acr::svm}}\\
@@ -776,65 +776,64 @@
                     Mean F-score and standard deviation using \gls{acr::rf} and \gls{acr::svm} based on \gls{acr::scatnet} features.
                 }
             \end{table}
-            
+
         \subsubsection{Reduced features with \gls*{acr::pca}}
             \label{subsubsec::more_experiments::richer_features::scatnet_baseline::pca}
             \begin{sidewaystable}[htpb]
                 \footnotesize
-                \begin{center}
-                    \begin{tabular}{| c | c c | c c | c c | c c | c c | c c |}
-                        \hline
-                        \multicolumn{13}{|c|}{\textbf{Elancourt}}\\
-                        \hline
-                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S-Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S(d)-Im.}} & \multicolumn{2}{c|}{\textbf{S(d)-All}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S(c)-Im.}} & \multicolumn{2}{c|}{\textbf{S(c)-All}}\\
-                        \cline{2-13}
-                        & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                        \hline
-                        \texttt{BOS} & 93.96 & \textbf{76.15} & 99.77 & 71.15 & 99.77 & 71.22 & 99.77 & 71.72 & \textbf{100} & 70.55 & 99.92 & 71.41 \\
-                        \hline
-                        \texttt{BUS} & \textbf{32.98} & 76.47 & 17.83 & 96.55 & 9.77 & \textbf{100} & 20.17 & \textbf{100} & 15.25 & \textbf{100} & 24.63 & \textbf{100} \\
-                        \hline
-                        \texttt{BIB} & \textbf{12.32} & 67.57 & 0 & --- & 0 & --- & 0.99 & \textbf{100} & 5.94 & \textbf{100} & 5.45 & \textbf{100} \\
-                        \hline
-                        \texttt{BIT} & \textbf{25.25} & 92.59 & 19.39 & \textbf{100} & 2.04 & \textbf{100} & 14.29 & \textbf{100} & 13.27 & \textbf{100} & 16.33 & \textbf{100} \\
-                        \specialrule{.2em}{.1em}{.1em}
-                        \texttt{FOS} & 98.91 & \textbf{99.07} & 97.90 & 78.54 & 98.60 & 80.10 & 99.07 & 81.77 & 99.38 & 93.01 & \textbf{99.53} & 93.50 \\
-                        \hline
-                        \texttt{FUS} & \textbf{1.90} & \textbf{54.55} & 0 & --- & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
-                        \hline
-                        \texttt{FIB} & \textbf{9.17} & \textbf{87.5} & 0 & --- & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
-                        \hline
-                        \texttt{FIT} & 6.67 & 100 & 13.33 & 100 & \textbf{24.14} & \textbf{100} & 14.24 & 100 & 13.79 & 100 & 13.79 & 100 \\
-                        \hline
-                        \texttt{FIG} & 80.54 & \textbf{73.14} & \textbf{99.24} & 67.57 & 96.10 & 71.38 & 97.54 & 70.87 & 94.24 & 71.70 & 97.29 & 71.62 \\
-                        \hline
-                        \hline
-                        \multicolumn{13}{|c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
-                        \hline
-                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S-Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S(d)-Im.}} & \multicolumn{2}{c|}{\textbf{S(d)-All}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S(c)-Im.}} & \multicolumn{2}{c|}{\textbf{S(c)-All}}\\
-                        \cline{2-13}
-                        & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                        \hline
-                        \texttt{BOS} & \textbf{51.65} & 78.93 & 32.51 & 94.05 & 32.30 & 98.13 & 32.51 & \textbf{98.14} & 37.65 & 95.81 & 38.07 & 96.35 \\
-                        \hline
-                        \texttt{BUS} & \textbf{19.85} & \textbf{100} & 5.38 & 100 & 6.15 & 100 & 6.92 & 100 & 4.58 & 100 & 6.92 & 100 \\
-                        \hline
-                        \texttt{BIB} & \textbf{1.96} & \textbf{100} & 0.65 & 100 & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
-                        \hline
-                        \texttt{BIT} & \textbf{5.32} & \textbf{100} & 0 & --- & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
-                        \specialrule{.2em}{.1em}{.1em}
-                        \texttt{FOS} & 98.62 & \textbf{98.22} & \textbf{99.31} & 73.35 & 97.79 & 79.13 & 99.03 & 78.64 & 96.28 & 95.23 & 97.38 & 94.77 \\
-                        \hline
-                        \texttt{FUS} & \textbf{68.80} & 77.44 & 57.85 & 84.08 & 52.27 & 81.61 & 57.85 & 83.33 & 55.58 & 82.77 & 59.30 & \textbf{84.66} \\
-                        \hline
-                        \texttt{FIB} & \textbf{55.23} & 78.60 & 1.63 & \textbf{100} & 8.17 & \textbf{100} & 5.56 & \textbf{100} & 43.65 & 90.54 & 34.31 & 97.22 \\
-                        \hline
-                        \texttt{FIT} & 6.25 & 100 & \textbf{11.76} & \textbf{100} & \textbf{11.76} & \textbf{100} & \textbf{11.76} & \textbf{100} & 0 & --- & 6.25 & 100 \\
-                        \hline
-                        \texttt{FIG} & 94.55 & \textbf{82.54} & \textbf{99.76} & 75.09 & 99.15 & 76.88 & 99.52 & 76.66 & 98.42 & 78.83 & 99.27 & 78.52 \\
-                        \hline
-                    \end{tabular}
-                \end{center}
+                \centering
+                \begin{tabular}{| c | c c | c c | c c | c c | c c | c c |}
+                    \hline
+                    \multicolumn{13}{|c|}{\textbf{Elancourt}}\\
+                    \hline
+                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S-Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S(d)-Im.}} & \multicolumn{2}{c|}{\textbf{S(d)-All}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S(c)-Im.}} & \multicolumn{2}{c|}{\textbf{S(c)-All}}\\
+                    \cline{2-13}
+                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                    \hline
+                    \texttt{BOS} & 93.96 & \textbf{76.15} & 99.77 & 71.15 & 99.77 & 71.22 & 99.77 & 71.72 & \textbf{100} & 70.55 & 99.92 & 71.41 \\
+                    \hline
+                    \texttt{BUS} & \textbf{32.98} & 76.47 & 17.83 & 96.55 & 9.77 & \textbf{100} & 20.17 & \textbf{100} & 15.25 & \textbf{100} & 24.63 & \textbf{100} \\
+                    \hline
+                    \texttt{BIB} & \textbf{12.32} & 67.57 & 0 & --- & 0 & --- & 0.99 & \textbf{100} & 5.94 & \textbf{100} & 5.45 & \textbf{100} \\
+                    \hline
+                    \texttt{BIT} & \textbf{25.25} & 92.59 & 19.39 & \textbf{100} & 2.04 & \textbf{100} & 14.29 & \textbf{100} & 13.27 & \textbf{100} & 16.33 & \textbf{100} \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & 98.91 & \textbf{99.07} & 97.90 & 78.54 & 98.60 & 80.10 & 99.07 & 81.77 & 99.38 & 93.01 & \textbf{99.53} & 93.50 \\
+                    \hline
+                    \texttt{FUS} & \textbf{1.90} & \textbf{54.55} & 0 & --- & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
+                    \hline
+                    \texttt{FIB} & \textbf{9.17} & \textbf{87.5} & 0 & --- & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
+                    \hline
+                    \texttt{FIT} & 6.67 & 100 & 13.33 & 100 & \textbf{24.14} & \textbf{100} & 14.24 & 100 & 13.79 & 100 & 13.79 & 100 \\
+                    \hline
+                    \texttt{FIG} & 80.54 & \textbf{73.14} & \textbf{99.24} & 67.57 & 96.10 & 71.38 & 97.54 & 70.87 & 94.24 & 71.70 & 97.29 & 71.62 \\
+                    \hline
+                    \hline
+                    \multicolumn{13}{|c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
+                    \hline
+                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S-Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S(d)-Im.}} & \multicolumn{2}{c|}{\textbf{S(d)-All}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S(c)-Im.}} & \multicolumn{2}{c|}{\textbf{S(c)-All}}\\
+                    \cline{2-13}
+                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                    \hline
+                    \texttt{BOS} & \textbf{51.65} & 78.93 & 32.51 & 94.05 & 32.30 & 98.13 & 32.51 & \textbf{98.14} & 37.65 & 95.81 & 38.07 & 96.35 \\
+                    \hline
+                    \texttt{BUS} & \textbf{19.85} & \textbf{100} & 5.38 & 100 & 6.15 & 100 & 6.92 & 100 & 4.58 & 100 & 6.92 & 100 \\
+                    \hline
+                    \texttt{BIB} & \textbf{1.96} & \textbf{100} & 0.65 & 100 & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
+                    \hline
+                    \texttt{BIT} & \textbf{5.32} & \textbf{100} & 0 & --- & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & 98.62 & \textbf{98.22} & \textbf{99.31} & 73.35 & 97.79 & 79.13 & 99.03 & 78.64 & 96.28 & 95.23 & 97.38 & 94.77 \\
+                    \hline
+                    \texttt{FUS} & \textbf{68.80} & 77.44 & 57.85 & 84.08 & 52.27 & 81.61 & 57.85 & 83.33 & 55.58 & 82.77 & 59.30 & \textbf{84.66} \\
+                    \hline
+                    \texttt{FIB} & \textbf{55.23} & 78.60 & 1.63 & \textbf{100} & 8.17 & \textbf{100} & 5.56 & \textbf{100} & 43.65 & 90.54 & 34.31 & 97.22 \\
+                    \hline
+                    \texttt{FIT} & 6.25 & 100 & \textbf{11.76} & \textbf{100} & \textbf{11.76} & \textbf{100} & \textbf{11.76} & \textbf{100} & 0 & --- & 6.25 & 100 \\
+                    \hline
+                    \texttt{FIG} & 94.55 & \textbf{82.54} & \textbf{99.76} & 75.09 & 99.15 & 76.88 & 99.52 & 76.66 & 98.42 & 78.83 & 99.27 & 78.52 \\
+                    \hline
+                \end{tabular}
                 \caption{
                     \label{tab::stats_scat_pca_rf_f3}
                     \gls{acr::rf} results using \gls{acr::pca} reduced \gls{acr::scatnet} features, on the two datasets, at \textbf{\gls{acr::efin}} level 3.
@@ -844,6 +843,7 @@
 
             \begin{table}[htbp]
                 \footnotesize
+                \centering
                 \begin{tabular}{| c | c c | c c |}
                     \hline
                     & \multicolumn{2}{c |}{\textbf{Elancourt}} & \multicolumn{2}{ c |}{\textbf{Nantes} \(\cup\) \textbf{Paris-13}} \\
@@ -880,60 +880,59 @@
             \label{subsubsec::more_experiments::richer_features::scatnet_baseline::kpca}
             \begin{sidewaystable}[htpb]
                 \footnotesize
-                \begin{center}
-                    \begin{tabular}{| c | c c | c c | c c | c c | c c | c c |}
-                        \hline
-                        \multicolumn{13}{|c|}{\textbf{Elancourt}}\\
-                        \hline
-                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S-Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S(d)-Im.}} & \multicolumn{2}{c|}{\textbf{S(d)-All}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S(c)-Im.}} & \multicolumn{2}{c|}{\textbf{S(c)-All}}\\
-                        \cline{2-13}
-                        & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                        \hline
-                        \texttt{BOS} & 93.96 & 76.15 & 99.92 & 70.57 & 98.27 & 70.83 & 100 & 70.05 & 100 & 69.59 & 100 & 70.07 \\
-                        \hline
-                        \texttt{BUS} & 32.98 & 76.47 & 17.83 & 95.45 & 0 & --- & 11.68 & 96.49 & 7.01 & 91.67 & 10.62 & 96.15 \\
-                        \hline
-                        \texttt{BIB} & 12.32 & 67.57 & 0.50 & 100 & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
-                        \hline
-                        \texttt{BIT} & 25.25 & 92.59 & 18.37 & 100 & 0 & --- & 16.16 & 100 & 0 & --- & 16.33 & 100 \\
-                        \specialrule{.2em}{.1em}{.1em}
-                        \texttt{FOS} & 98.91 & 99.07 & 98.06 & 77.89 & 91.52 & 80.23 & 97.75 & 79.37 & 99.14 & 77.04 & 99.61 & 78.73 \\
-                        \hline
-                        \texttt{FUS} & 1.90 & 54.55 & 0.64 & 100 & 1.59 & 100 & 0.32 & 100 & 11.46 & 97.30 & 8.28 & 100 \\
-                        \hline
-                        \texttt{FIB} & 9.17 & 87.5 & 0 & --- & 0.44 & 100 & 0 & --- & 0 & --- & 0 & --- \\
-                        \hline
-                        \texttt{FIT} & 6.67 & 100 & 17.24 & 100 & 0 & --- & 13.79 & 100 & 0 & --- & 13.79 & 100 \\
-                        \hline
-                        \texttt{FIG} & 80.54 & 73.14 & 98.73 & 66.19 & 88.22 & 68.17 & 95.34 & 68.39 & 98.47 & 64.12 & 98.98 & 66.59 \\
-                        \hline
-                        \hline
-                        \multicolumn{13}{|c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
-                        \hline
-                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S-Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S(d)-Im.}} & \multicolumn{2}{c|}{\textbf{S(d)-All}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S(c)-Im.}} & \multicolumn{2}{c|}{\textbf{S(c)-All}}\\
-                        \cline{2-13}
-                        & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                        \hline
-                        \texttt{BOS} & 51.65 & 78.93 & 25.72 & 93.28 & 44.44 & 69.01 & 44.44 & 73.22 & 10.91 & 98.15 & 44.44 & 81.51 \\
-                        \hline
-                        \texttt{BUS} & 19.85 & 100 & 5.38 & 100 & 0 & --- & 0.77 & 100 & 0 & --- & 1.54 & 100 \\
-                        \hline
-                        \texttt{BIB} & 1.96 & 100 & 0.65 & 100 & 1.30 & 100 & 0 & --- & 0.65 & 100 & 0 & --- \\
-                        \hline
-                        \texttt{BIT} & 5.32 & 100 & 0 & --- &  6.38 & 100 & 4.79 & 100 & 1.59 & 100 & 0 & --- \\
-                        \specialrule{.2em}{.1em}{.1em}
-                        \texttt{FOS} & 98.62 & 98.22 & 98.21 & 74.95 & 92.42 & 74.39 & 98.34 & 77.16 & 97.24 & 74.13 & 98.76 & 76.99 \\
-                        \hline
-                        \texttt{FUS} & 68.80 & 77.44 & 59.92 & 78.17 & 62.19 & 67.79 & 63.43 & 72.92 & 14.05 & 70.83 & 58.68 & 79.33 \\
-                        \hline
-                        \texttt{FIB} & 55.23 & 78.60 & 3.27 & 100 & 10.46 & 100 & 2.94 & 100 & 0 & --- & 0 & --- \\
-                        \hline
-                        \texttt{FIT} & 6.25 & 100 & 6.25 & 100 & 18.75 & 100 & 12.5 & 100 & 6.25 & 100 & 5.88 & 100 \\
-                        \hline
-                        \texttt{FIG} & 94.55 & 82.54 & 93.28 & 78.09 & 98.42 & 80.32 & 98.79 & 80.16 & 98.06 & 79.63 & 99.15 & 79.82 \\
-                        \hline
-                    \end{tabular}
-                \end{center}
+                \centering
+                \begin{tabular}{| c | c c | c c | c c | c c | c c | c c |}
+                    \hline
+                    \multicolumn{13}{|c|}{\textbf{Elancourt}}\\
+                    \hline
+                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S-Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S(d)-Im.}} & \multicolumn{2}{c|}{\textbf{S(d)-All}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S(c)-Im.}} & \multicolumn{2}{c|}{\textbf{S(c)-All}}\\
+                    \cline{2-13}
+                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                    \hline
+                    \texttt{BOS} & 93.96 & 76.15 & 99.92 & 70.57 & 98.27 & 70.83 & 100 & 70.05 & 100 & 69.59 & 100 & 70.07 \\
+                    \hline
+                    \texttt{BUS} & 32.98 & 76.47 & 17.83 & 95.45 & 0 & --- & 11.68 & 96.49 & 7.01 & 91.67 & 10.62 & 96.15 \\
+                    \hline
+                    \texttt{BIB} & 12.32 & 67.57 & 0.50 & 100 & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
+                    \hline
+                    \texttt{BIT} & 25.25 & 92.59 & 18.37 & 100 & 0 & --- & 16.16 & 100 & 0 & --- & 16.33 & 100 \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & 98.91 & 99.07 & 98.06 & 77.89 & 91.52 & 80.23 & 97.75 & 79.37 & 99.14 & 77.04 & 99.61 & 78.73 \\
+                    \hline
+                    \texttt{FUS} & 1.90 & 54.55 & 0.64 & 100 & 1.59 & 100 & 0.32 & 100 & 11.46 & 97.30 & 8.28 & 100 \\
+                    \hline
+                    \texttt{FIB} & 9.17 & 87.5 & 0 & --- & 0.44 & 100 & 0 & --- & 0 & --- & 0 & --- \\
+                    \hline
+                    \texttt{FIT} & 6.67 & 100 & 17.24 & 100 & 0 & --- & 13.79 & 100 & 0 & --- & 13.79 & 100 \\
+                    \hline
+                    \texttt{FIG} & 80.54 & 73.14 & 98.73 & 66.19 & 88.22 & 68.17 & 95.34 & 68.39 & 98.47 & 64.12 & 98.98 & 66.59 \\
+                    \hline
+                    \hline
+                    \multicolumn{13}{|c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
+                    \hline
+                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S-Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S(d)-Im.}} & \multicolumn{2}{c|}{\textbf{S(d)-All}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S(c)-Im.}} & \multicolumn{2}{c|}{\textbf{S(c)-All}}\\
+                    \cline{2-13}
+                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                    \hline
+                    \texttt{BOS} & 51.65 & 78.93 & 25.72 & 93.28 & 44.44 & 69.01 & 44.44 & 73.22 & 10.91 & 98.15 & 44.44 & 81.51 \\
+                    \hline
+                    \texttt{BUS} & 19.85 & 100 & 5.38 & 100 & 0 & --- & 0.77 & 100 & 0 & --- & 1.54 & 100 \\
+                    \hline
+                    \texttt{BIB} & 1.96 & 100 & 0.65 & 100 & 1.30 & 100 & 0 & --- & 0.65 & 100 & 0 & --- \\
+                    \hline
+                    \texttt{BIT} & 5.32 & 100 & 0 & --- &  6.38 & 100 & 4.79 & 100 & 1.59 & 100 & 0 & --- \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & 98.62 & 98.22 & 98.21 & 74.95 & 92.42 & 74.39 & 98.34 & 77.16 & 97.24 & 74.13 & 98.76 & 76.99 \\
+                    \hline
+                    \texttt{FUS} & 68.80 & 77.44 & 59.92 & 78.17 & 62.19 & 67.79 & 63.43 & 72.92 & 14.05 & 70.83 & 58.68 & 79.33 \\
+                    \hline
+                    \texttt{FIB} & 55.23 & 78.60 & 3.27 & 100 & 10.46 & 100 & 2.94 & 100 & 0 & --- & 0 & --- \\
+                    \hline
+                    \texttt{FIT} & 6.25 & 100 & 6.25 & 100 & 18.75 & 100 & 12.5 & 100 & 6.25 & 100 & 5.88 & 100 \\
+                    \hline
+                    \texttt{FIG} & 94.55 & 82.54 & 93.28 & 78.09 & 98.42 & 80.32 & 98.79 & 80.16 & 98.06 & 79.63 & 99.15 & 79.82 \\
+                    \hline
+                \end{tabular}
                 \caption{
                     \label{tab::stats_scat_kpca_rf_f3}
                     \gls{acr::rf} results using Kernel \gls{acr::pca} reduced \gls{acr::scatnet} features, on the two datasets, at \textbf{\gls{acr::efin}} level 3.
@@ -974,4 +973,40 @@
                     Mean F-score and standard deviation using \gls{acr::rf} based on Kernel \gls{acr::pca} reduced \gls{acr::scatnet} features.
                 }
             \end{table}
-    
+
+
+    \subsection{Graph kernels and \texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} to baseline comparison}
+        \begin{table}[htbp]
+            \footnotesize
+            \centering
+            \begin{tabular}{| c | c c | c c |}
+                \hline
+                & \multicolumn{2}{c |}{\textbf{Elancourt}} & \multicolumn{2}{ c |}{\textbf{Nantes} \(\cup\) \textbf{Paris-13}} \\
+                \hline
+                & Deletion & Channel & Deletion & Channel \\
+                \hline
+                \texttt{BOS} & 87.15 \(\pm\) 0.38 & 87.18 \(\pm\) 0.41 & 48.43 \(\pm\) 2.69 & 48.46 \(\pm\) 2.66 \\
+                \hline
+                \texttt{BUS} & 66.20 \(\pm\) 1.25 & 66.29 \(\pm\) 1.13 & 46.57 \(\pm\) 0.55 & 46.62 \(\pm\) 0.61 \\
+                \hline
+                \texttt{BIB} & 65.99 \(\pm\) 0.49 & 66.30 \(\pm\) 0.81 & 46.13 \(\pm\) 1.55 & 46.16 \(\pm\) 1.58 \\
+                \hline
+                \texttt{BIT} & 58.85 \(\pm\) 0.67 & 58.55 \(\pm\) 0.31 & 48.07 \(\pm\) 0.74 & 48.10 \(\pm\) 0.78 \\
+                \hline
+                \hline
+                \texttt{FOS} & 98.34 \(\pm\) 0.00 & 98.33 \(\pm\) 0.02 & 97.38 \(\pm\) 0.24 & 97.34 \(\pm\) 0.26 \\
+                \hline
+                \texttt{FUS} & 44.80 \(\pm\) 0.46 & 44.69 \(\pm\) 0.33 & 72.82 \(\pm\) 0.25 & 72.87 \(\pm\) 0.32 \\
+                \hline
+                \texttt{FIB} & 48.19 \(\pm\) 0.16 & 48.21 \(\pm\) 0.12 & 67.70 \(\pm\) 0.12 & 67.74 \(\pm\) 0.11 \\
+                \hline
+                \texttt{FIT} & 100.00 \(\pm\) 0.00 & 100.00 \(\pm\) 0.00 & 100.00 \(\pm\) 0.00 & 100.00 \(\pm\) 0.00 \\
+                \hline
+                \texttt{FIG} & 75.30 \(\pm\) 0.36 & 75.43 \(\pm\) 0.50 & 85.50 \(\pm\) 0.59 & 85.35 \(\pm\) 0.49 \\
+                \hline
+            \end{tabular}
+            \caption{
+                \label{tab::f_score_rf_scat_kpca_f3}
+                Mean F-score and standard deviation using \gls{acr::svm} with graph kernels and \gls{acr::scatnet} based features.
+            }
+        \end{table}
