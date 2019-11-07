@@ -9,14 +9,15 @@
     In the previous chapter, error detection was proven to be dependent on the scene composition
     This fact motivates studying training the classifier and testing prediction on different scenes.
     The goal is to prove the resilience of the prediction to unseen urban scenes.
-    As the annotation process requires a lot of effort, this trait is crucial to guarantee the scalability of this method under the \textbf{large-scale} constraint.
+    As the annotation process requires a lot of effort, this trait is crucial to guarantee the scalability of this method under the \textbf{large-scale} constraint.\\
+
     Different configurations are possible, as depicted in Figure~\ref{fig::scalability_study}.
     In the first type of experiments, we train on one urban scene and test on another one.
     The goal is to examine the \texttt{transferability} of the classifier model.
     Experimental results are reported and analyzed in Subsection~\ref{subsec::more_experiments::scalability::transferability}.
     In a second configuration, the classifier is trained on two scenes and tested on the last one: the objective is to investigate the classifier \texttt{generalization}.
     The results of such experiments are shown in Subsection~\ref{subsec::more_experiments::scalability::generalization}.
-    The last experiment class, whose results are presented in Subsection~\ref{subsec::more_experiments::scalability::representativeness}, targets the \texttt{representativeness} of a single 3-area dataset by trying multiple train-test split sizes.
+    The last experiment class, whose results are presented in Subsection~\ref{subsec::more_experiments::scalability::representativeness}, targets the \texttt{representativeness} of a single 3-area dataset by trying multiple train-test split sizes.\\
 
     \begin{figure}[htbp]
         \ffigbox[\FBwidth]{
@@ -75,6 +76,7 @@
                 \caption{
                     \label{fig::f_score_transferability_f3}
                     Mean F-score and standard deviation for the transferability study.
+                    \textbf{El.} (\textit{resp.} \textbf{Na.} and \textbf{P13.}) corresponds to \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
                 }
             }
         \end{figure}
@@ -983,6 +985,55 @@
                 }{
                     \caption{
                         \label{fig::feature_importances_scat_svm} Modality contribution for the \gls{acr::svm} classifier based on the coefficients computed by EasyMKL.
+                        Height and Image based features use the \gls{acr::scatnet} with both deletion and channel options.
+                        The first (\textit{resp.} second) column represents \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} \(\cup\) \textbf{Paris-13}).
+                    }
+                }
+            \end{figure}
+
+            \begin{figure}[htpb]
+                \centering
+                \ffigbox[\textwidth]{
+                    \begin{subfloatrow}[2]
+                        \ffigbox[.5\textwidth]{
+                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/scat_vs_bl/rf/deletion/feature_importance/building}
+                        }{
+                            \caption{
+                                \label{subfig::feature_importances_scat_del_rf_building}
+                                \texttt{Building errors (with deletion).}
+                            }
+                        }
+                        \ffigbox[.5\textwidth]{
+                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/scat_vs_bl/rf/deletion/feature_importance/facet}
+                        }{
+                            \caption{
+                                \label{subfig::feature_importances_scat_del_rf_facet}
+                                \texttt{Facet errors (with deletion).}
+                            }
+                        }
+                    \end{subfloatrow}
+                    \vskip2em
+                    \begin{subfloatrow}[2]
+                        \ffigbox[.5\textwidth]{
+                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/scat_vs_bl/rf/channel/feature_importance/building}
+                        }{
+                            \caption{
+                                \label{subfig::feature_importances_scat_channel_rf_building}
+                                \texttt{Building errors (with channel).}
+                            }
+                        }
+                        \ffigbox[.5\textwidth]{
+                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/scat_vs_bl/rf/channel/feature_importance/facet}
+                        }{
+                            \caption{
+                                \label{subfig::feature_importances_scat_channel_rf_facet}
+                                \texttt{Facet errors (with channel).}
+                            }
+                        }
+                    \end{subfloatrow}
+                }{
+                    \caption{
+                        \label{fig::feature_importances_scat_rf} Modality importance using the \gls{acr::rf} classifier.
                         Height and Image based features use the \gls{acr::scatnet} with both deletion and channel options.
                         The first (\textit{resp.} second) column represents \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} \(\cup\) \textbf{Paris-13}).
                     }
