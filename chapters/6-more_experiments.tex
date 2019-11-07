@@ -934,7 +934,7 @@
                     \end{subfloatrow}
                 }{
                     \caption{
-                        \label{fig::f_score_svm_bl}
+                        \label{fig::f_score_svm_scat}
                         Mean F-score and standard deviation obtained with an \gls{acr::svm} based on \gls{acr::scatnet} features.
                     }
                 }
@@ -1141,39 +1141,54 @@
             }
         \end{sidewaystable}
 
-        \begin{table}[htbp]
-            \footnotesize
-            \begin{tabular}{| c | c c | c c |}
-                \hline
-                & \multicolumn{2}{c |}{\textbf{Elancourt}} & \multicolumn{2}{ c |}{\textbf{Nantes} \(\cup\) \textbf{Paris-13}} \\
-                \hline
-                & Deletion & Channel & Deletion & Channel \\
-                \hline
-                \texttt{BOS} & 87.15 \(\pm\) 0.38 & 87.18 \(\pm\) 0.41 & 48.43 \(\pm\) 2.69 & 48.46 \(\pm\) 2.66 \\
-                \hline
-                \texttt{BUS} & 66.20 \(\pm\) 1.25 & 66.29 \(\pm\) 1.13 & 46.57 \(\pm\) 0.55 & 46.62 \(\pm\) 0.61 \\
-                \hline
-                \texttt{BIB} & 65.99 \(\pm\) 0.49 & 66.30 \(\pm\) 0.81 & 46.13 \(\pm\) 1.55 & 46.16 \(\pm\) 1.58 \\
-                \hline
-                \texttt{BIT} & 58.85 \(\pm\) 0.67 & 58.55 \(\pm\) 0.31 & 48.07 \(\pm\) 0.74 & 48.10 \(\pm\) 0.78 \\
-                \hline
-                \hline
-                \texttt{FOS} & 98.34 \(\pm\) 0.00 & 98.33 \(\pm\) 0.02 & 97.38 \(\pm\) 0.24 & 97.34 \(\pm\) 0.26 \\
-                \hline
-                \texttt{FUS} & 44.80 \(\pm\) 0.46 & 44.69 \(\pm\) 0.33 & 72.82 \(\pm\) 0.25 & 72.87 \(\pm\) 0.32 \\
-                \hline
-                \texttt{FIB} & 48.19 \(\pm\) 0.16 & 48.21 \(\pm\) 0.12 & 67.70 \(\pm\) 0.12 & 67.74 \(\pm\) 0.11 \\
-                \hline
-                \texttt{FIT} & 100.00 \(\pm\) 0.00 & 100.00 \(\pm\) 0.00 & 100.00 \(\pm\) 0.00 & 100.00 \(\pm\) 0.00 \\
-                \hline
-                \texttt{FIG} & 75.30 \(\pm\) 0.36 & 75.43 \(\pm\) 0.50 & 85.50 \(\pm\) 0.59 & 85.35 \(\pm\) 0.49 \\
-                \hline
-            \end{tabular}
-            \caption{
-                \label{tab::f_score_rf_scat_kpca_f3}
-                Mean F-score and standard deviation using \gls{acr::svm} with graph kernels and \gls{acr::scatnet} based features.
+        \begin{figure}[htpb]
+            \centering
+            \ffigbox[\textwidth]{
+                \begin{subfloatrow}[2]
+                    \ffigbox[.5\textwidth]{
+                        \includestandalone[mode=buildnew, height=8cm]{figures/results/gk-scat_vs_bl/deletion/building}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_svm_gk_scat_del_bl_building}
+                            \texttt{Building errors (with deletion).}
+                        }
+                    }
+                    \ffigbox[.5\textwidth]{
+                        \includestandalone[mode=buildnew, height=8cm]{figures/results/gk-scat_vs_bl/deletion/facet}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_svm_gk_scat_del_bl_facet}
+                            \texttt{Facet errors (with deletion).}
+                        }
+                    }
+                \end{subfloatrow}
+                \vskip1em
+                \begin{subfloatrow}[2]
+                    \ffigbox[.5\textwidth]{
+                        \includestandalone[mode=buildnew, height=8cm]{figures/results/gk-scat_vs_bl/channel/building}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_svm_gk_scat_chan_bl_building}
+                            \texttt{Building errors (with channel).}
+                        }
+                    }
+                    \ffigbox[.5\textwidth]{
+                        \includestandalone[mode=buildnew, height=8cm]{figures/results/gk-scat_vs_bl/channel/facet}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_svm_gk_scat_chan_bl_facet}
+                            \texttt{Facet errors (with channel).}
+                        }
+                    }
+                \end{subfloatrow}
+            }{
+                \caption{
+                    \label{fig::f_score_svm_gk_scat}
+                    Mean F-score and standard deviation obtained with an \gls{acr::svm}.
+                    The geometric modality is based on graph kernels while height and image based features use the \gls{acr::scatnet} with deletion and channel options.
+                }
             }
-        \end{table}
+        \end{figure}
 
         \begin{figure}[htpb]
             \centering
