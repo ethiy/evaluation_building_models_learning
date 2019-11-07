@@ -175,7 +175,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
         57 (\SI{2.84}{\percent}) in \textbf{Elancourt}, 55 (\SI{7.35}{\percent}) for \textbf{Nantes} and 21 (\SI{4.39}{\percent}) in \textbf{Paris-13}.
         Most buildings are affected by the \texttt{Building Errors} family (over \SI{58.16}{\percent}) and the \texttt{Facet Errors} one (over \SI{75.94}{\percent}).\\
 
-        At the \texttt{finesse} level 3, two axes of analysis are possible.
+        At the \textbf{\gls{acr::efin}} level 3, two axes of analysis are possible.
         First, we group errors that are very frequent in the dataset.
         Over-segmentation errors (\texttt{FOS} and \texttt{BOS}), in both error families, are well represented ranging from \SIrange{38.9}{66.8}{\percent}.
         The same is true for \texttt{FIG} with a frequency from \SIrange{59.8}{80}{\percent}.
@@ -359,24 +359,25 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
 
 % \section{}
 %     \label{sec::experiments::evaluation}
-%     In the last section, we also explained how we acquired our dataset, in addition to analysing the effect of the urban scene on error statistics.
-%     Beforehand, all the ingredients needed in the proposed methodology were presented.
-%     This section aims at specifying how each bloc of the pipeline is implemented.\\
+    
 
 %     In Subsection~\ref{sec::experiments::setup} provides all details about our experimental approach.
 %     Next in Subsection~\ref{sec::experiments::baseline_feature_analysis}, we report some first results using the baseline features we developped.
 
 \section{Baseline feature analysis}
     \label{sec::experiments::baseline_feature_analysis}
-    At this stage, we study only the baseline features proposed in Section~\ref{sec::learned_evaluation::baseline}.
-    The goal is to assess the added value of each modality.
-    First, the \gls{acr::rmse} is proven to be inadequate for detecting errors in our taxonomy.
-    Second, prediction results from all possible feature configurations are compared in Subsection~\ref{subsec::experiments::setup::feature_configurations}.
-    Third and last, we conclude the analysis by studying the feature importance, for all training zones.
+    In the previous sections, we have shown how our dataset of building models was assembled and how the urban scene composition influences modeling error statistics.
+    We also specified in details how each bloc of the pipeline was set up.
+    At this stage, our aime is to prove the feasablity of the approach proposed in Chapter~\ref{chap::learned_evaluation}.
+    As a consequence, for now, we limit ourselves to using the baseline features.\\
 
-    \subsection{\acrshort*{acr::rmse} predictive capacity}
+    First, in Section~\ref{subsec::experiments::baseline_feature_analysis::rmse}, the \gls{acr::rmse} is proven to be inadequate for detecting errors in our taxonomy.
+    Second, prediction results from all possible configurations of baseline features are compared in Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}.
+    Third and last, Section~\ref{subsec::experiments::baseline_feature_analysis::feature_importance} concludes the analysis by studying the feature importance, for all training zones.
+
+    \subsection{\texorpdfstring{\acrlong*{acr::rmse}}{RMSE} predictive capacity}
         \label{subsec::experiments::baseline_feature_analysis::rmse}
-        The \gls{acr::rmse} is the standard measure in most of \gls{acr::3d} reconstruction methods.
+        The \gls{acr::rmse} is the standard measure in most of \gls{acr::3d} modeling methods.
         As a consequence, we use it herein as a reference that our baseline is to be compared to.
         We train the classifier on Elancourt with the one dimensional feature vector containing the \gls{acr::rmse}.
         This scene was sufficient enough for our analysis.
@@ -398,7 +399,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                 \bottomrule
             \end{tabular}
             \caption{
-                \label{tab::rmse_results} \texttt{Finesse} 3 experiment results using \gls{acr::rmse} on Elancourt.
+                \label{tab::rmse_results} \textbf{\gls{acr::efin}} 3 error prediction results using the \gls{acr::rmse} on \textbf{Elancourt}.
                 \(\bm{Acc}\) expresses the overall accuracy ratio.
             }
         \end{table}
@@ -416,7 +417,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
 
     \subsection{Feature ablation study}
         \label{subsec::experiments::baseline_feature_analysis::ablation}
-        We tested the different feature configurations, at \texttt{finesse} level 3 and in all urban zones.
+        We tested the different feature configurations, at \textbf{\gls{acr::efin}} level 3 and in all urban zones.
         Mean precision and recall test results are reported in Table~\ref{tab::ablation_f3}.
         F-scores are averaged across all feature configurations and represented in Figure~\ref{fig::f_score_ablation_f3}.\\
 
@@ -431,23 +432,23 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                     \cline{2-9}
                     & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
                     \hline
-                    \texttt{BOS} & \textbf{93.96} & 76.15 & 91.43 & \textbf{77.76} & 91.51 & 76.08 & 90.83 & 76.14 \\
+                    \texttt{BOS} & \textbf{93.96} & \textbf{76.15} & 91.43 & 77.76 & 91.51 & 76.08 & 90.83 & 76.14 \\
                     \hline
-                    \texttt{BUS} & 32.98 & \textbf{76.47} & \textbf{41.86} & 75.57 & 40.38 & 71.00 & 39.32 & 71.81 \\
+                    \texttt{BUS} & 32.98 & 76.47 & \textbf{41.86} & \textbf{75.57} & 40.38 & 71.00 & 39.32 & 71.81 \\
                     \hline
-                    \texttt{BIB} & 12.32 & 67.57 & 12.81 & \textbf{68.42} & 16.26 & 67.35 & \textbf{16.75} & 68.0 \\
+                    \texttt{BIB} & 12.32 & 67.57 & 12.81 & 68.42 & \textbf{16.26} & \textbf{67.35} & 16.75 & 68.0 \\
                     \hline
-                    \texttt{BIT} & \textbf{25.25} & 92.59 & 20.20 & 90.91 & 20.20 & \textbf{95.24} & 11.11 & 91.67 \\
+                    \texttt{BIT} & \textbf{25.25} & \textbf{92.59} & 20.20 & 90.91 & 20.20 & 95.24 & 11.11 & 91.67 \\
                     \specialrule{.2em}{.1em}{.1em}
-                    \texttt{FOS} & 98.91 & 99.07 & 98.91 & \textbf{99.30} & \textbf{98.99} & 98.84 & 98.91 & 98.84 \\
+                    \texttt{FOS} & 98.91 & 99.07 & \textbf{98.91} & \textbf{99.30} & 98.99 & 98.84 & 98.91 & 98.84 \\
                     \hline
-                    \texttt{FUS} & \textbf{1.90} & 54.55 & 0.63 & \textbf{66.67} & 1.61 & 50 & 1.27 & \textbf{66.67} \\
+                    \texttt{FUS} & \textbf{1.90} & \textbf{54.55} & 0.63 & 66.67 & 1.61 & 50 & 1.27 & 66.67 \\
                     \hline
-                    \texttt{FIB} & \textbf{9.17} & 87.5 & 0 & --- & 8.30 & 82.61 & 7.42 & \textbf{100} \\
+                    \texttt{FIB} & \textbf{9.17} & \textbf{87.5} & 0 & --- & 8.30 & 82.61 & 7.42 & 100 \\
                     \hline
-                    \texttt{FIT} & 6.67 & \textbf{100} & \textbf{8.73} & 95.24 & 3.33 & \textbf{100} & 3.33 & \textbf{100} \\
+                    \texttt{FIT} & 6.67 & 100 & \textbf{8.73} & \textbf{95.24} & 3.33 & 100 & 3.33 & 100 \\
                     \hline
-                    \texttt{FIG} & \textbf{80.54} & 73.14 & 80.45 & \textbf{72.62} & 78.69 & 72.12 & 79.02 & 71.82 \\
+                    \texttt{FIG} & \textbf{80.54} & \textbf{73.14} & 80.45 & 72.62 & 78.69 & 72.12 & 79.02 & 71.82 \\
                     \hline
                     \hline
                     \multicolumn{9}{|c|}{\textbf{Nantes}}\\
@@ -456,23 +457,23 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                     \cline{2-9}
                     & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
                     \hline
-                    \texttt{BOS} & \textbf{38.14} & 61.67 & 36.43 & 60.23 & 36.77 & \textbf{62.21} & 34.71 & 60.48 \\
+                    \texttt{BOS} & \textbf{38.14} & \textbf{61.67} & 36.43 & 60.23 & 36.77 & 62.21 & 34.71 & 60.48 \\
                     \hline
                     \texttt{BUS} & 7.35 & 62.5 & 7.35 & 55.56 & \textbf{29.41} & \textbf{66.67} & 26.47 & 64.29 \\
                     \hline
                     \texttt{BIB} & 0 & --- & 0 & --- & \textbf{1.01} & \textbf{50.0} & \textbf{1.01} & \textbf{50.0} \\
                     \hline
-                    \texttt{BIT} & 1.77 & 22.22 & \textbf{3.54} & 44.44 & 0 & 0 & 2.65 & \textbf{50.0} \\
+                    \texttt{BIT} & 1.77 & 22.22 & \textbf{3.54} & \textbf{44.44} & 0 & 0 & 2.65 & 50.0 \\
                     \specialrule{.2em}{.1em}{.1em}
                     \texttt{FOS} & \textbf{98.54} & \textbf{98.13} & \textbf{98.54} & \textbf{98.13} & 98.33 & 97.92 & 98.12 & 97.91 \\
                     \hline
                     \texttt{FUS} & 27.62 & 55.24 & \textbf{27.62} & \textbf{59.18} & 24.76 & 54.74 & 23.33 & 53.85 \\
                     \hline
-                    \texttt{FIB} & 37.80 & 62.0 & 36.59 & \textbf{63.16} & \textbf{49.39} & 60.90 & 46.39 & 60.90 \\
+                    \texttt{FIB} & 37.80 & 62.0 & 36.59 & 63.16 & \textbf{49.39} & \textbf{60.90} & 46.39 & 60.90 \\
                     \hline
                     \texttt{FIT} & 0 & --- & 0 & --- & 0 & --- & 0 & --- \\
                     \hline
-                    \texttt{FIG} & 86.32 & 78.09 & \textbf{86.77} & 78.02 & 84.53 & \textbf{78.71} & 83.86 & 78.08 \\
+                    \texttt{FIG} & 86.32 & 78.09 & \textbf{86.77} & \textbf{78.02} & 84.53 & 78.71 & 83.86 & 78.08 \\
                     \hline
                     \hline
                     \multicolumn{9}{|c|}{\textbf{Paris-13}}\\
@@ -481,7 +482,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                     \cline{2-9}
                     & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
                     \hline
-                    \texttt{BOS} & 45.54 & 65.25 & 46.53 & 68.61 & \textbf{50.0} & 68.24 & 46.53 & \textbf{70.15} \\
+                    \texttt{BOS} & 45.54 & 65.25 & 46.53 & 68.61 & \textbf{50.0} & \textbf{68.24} & 46.53 & 70.15 \\
                     \hline
                     \texttt{BUS} & 6.35 & 66.67 & 7.94 & 71.43 & \textbf{22.22} & \textbf{77.78} & 7.94 & 62.5 \\
                     \hline
@@ -502,9 +503,10 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                 \end{tabular}
             \end{center}
             \caption{
-                \label{tab::ablation_f3} Feature ablation study preformed on the three areas at \textbf{\gls{acr::efin}} level 3.
+                \label{tab::ablation_f3} Feature ablation study results preformed on the three areas at \textbf{\gls{acr::efin}} level 3.
                 Test results are expressed in percentage.
                 All \texttt{atomic} errors are considered over all possible configurations.
+                Results in bold indicate the feature configuration with the highest F-score.
             }
         \end{table}
 
@@ -538,13 +540,21 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
         \end{figure}
 
         First, we can point out that fact that geometric features alone are generally sufficient.
-        It is actually the best alternative for topological error detection as shown for \texttt{BOS}, \texttt{FOS}, \texttt{FUS}, \texttt{FIT} and \texttt{BIT} in Table~\ref{tab::ablation_f3}.
-        This is confirmed also by the low variance observed in Subfigure~\ref{subfig::f_score_ablation_f3_building}.
-        An exception is noticed with \texttt{BUS} in \textbf{Elancourt}, where height-based features allow an increase of around \SI{9}{\percent} in recall without, practically, any loss in precision.
-        Similar behaviour is noticed for \textbf{Nantes} and \textbf{Paris-13} with image-based features (+\SI{20}{\percent} in recall).
+        It is actually the best alternative for the detection of topological errors as shown for \texttt{BOS}, \texttt{FOS}, \texttt{FUS}, \texttt{FIT} and \texttt{BIT} in Table~\ref{tab::ablation_f3}.
+        This is also confirmed by the low variance observed in Subfigure~\ref{subfig::f_score_ablation_f3_building}.
+        An exception is noticed with \texttt{BUS} in \textbf{Elancourt}, where height and image based features allow an increase of around \SI{9}{\percent} in recall without, practically, any loss in precision.
+        Similar behaviour is noticed for \textbf{Nantes} and \textbf{Paris-13} with only image based features contributing in a jump of around \SI{20}{\percent} in recall.
         The first case can be explained by the discrepancy in height that can be observed between under-segmented buildings.
         The second is made clear by the difference in roof colors, in dense uniform settings (\textit{cf.} Subfigure~\ref{subfig::bus_2d}).
         This helps identifying different instances of buildings.\\
+
+        Geometric features take into account intrinsic attributes of building models and could be intuitively related to building types.
+        As a consequence, the fact that this type of features plays a big role in detecting errors implies that the existence of a defect depends highly on the type of model it affects.
+        This is actually expected for errors of topological nature where the geometric structure of the model is assessed.
+        Extrinsic features act more as clues in predictionsin this case.
+        On the contrary, the latter are expected to yield at least as good results as the intrinsic features alone for fidelity defects.
+        In fact, in Table~\ref{tab::ablation_f3}, \texttt{BIB} as well as \texttt{FIB} \texttt{FIG} are better detected, in terms of F-score, when adding height or image based modalities.
+        The exception was \texttt{FIB} on \textbf{Elancourt} where only geometric features yielded better results.\\
 
         Figure~\ref{fig::f_score_ablation_f3} shows that all \texttt{Building errors} labels are better detected in \textbf{Elancourt}.
         It is also the case of \texttt{FOS} and \texttt{FIT}.
@@ -593,12 +603,12 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
 
         At first, we observe how much individual attributes are important before being gathered.
         For geometric features, all attributes are equally important.
-        However, concerning image and height-based features, only a few are relevant (higher feature importance ratio).
+        However, concerning image and height based features, only a few are relevant (higher feature importance ratio).
         Indeed, these few attributes correspond to the highest and lowest values of the histograms.
         As described earlier, image and height features consist of a histogram of distances between the model and the real measured signals:
         vector cosine similarity, for the first, and the \(L_2\) norm for the last.
         It is clear that the presence of errors would result in saturating the high values in the histogram, while an absence of defects would imply a big number of low values.
-        This intuitively explains the observed phenomenon.
+        This intuitively explains the observed phenomenon.\\
         
         In a second time, we notice that no modality is more important than the others, contrarily to what was observed in Table~\ref{tab::ablation_f3}.
         In fact, for most atomic errors, test results using geometric features are comparable to those obtained with more modalities.
