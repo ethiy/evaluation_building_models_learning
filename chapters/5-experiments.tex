@@ -540,34 +540,36 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             }
         \end{figure}
 
-        First, we can point out that fact that geometric features alone are generally sufficient.
-        It is actually the best alternative for the detection of topological errors as shown for \texttt{BOS}, \texttt{FOS}, \texttt{FUS}, \texttt{FIT} and \texttt{BIT} in Table~\ref{tab::ablation_f3}.
-        This is also confirmed by the low variance observed in Subfigure~\ref{subfig::f_score_ablation_f3_building}.
-        An exception is noticed with \texttt{BUS} in \textbf{Elancourt}, where height and image based features allow an increase of around \SI{9}{\percent} in recall without, practically, any loss in precision.
-        Similar behaviour is noticed for \textbf{Nantes} and \textbf{Paris-13} with only image based features contributing in a jump of around \SI{20}{\percent} in recall.
-        The first case can be explained by the discrepancy in height that can be observed between under-segmented buildings.
-        The second is made clear by the difference in roof colors, in dense uniform settings (\textit{cf.} Subfigure~\ref{subfig::bus_2d}).
-        This helps identifying different instances of buildings.\\
+        The first thing we can observe is the fact that geometric features alone give comparable results to ones where extrinsic modalities are added.
+        This was the case for most errors as confirmed by the low variance in F-score shown in Figure~\ref{subfig::f_score_ablation_f3_building}.
+        The only exception can be noticed with \texttt{BUS}.
+        On \textbf{Elancourt}, height and image based features both contribute to an increase of around \SI{9}{\percent} in recall without, practically, any loss in precision.
+        This can be explained by the fact that a lot of under-segmented building models have different heights which reflects easily on height based features.
+        Similar behaviour occurs for \textbf{Nantes} and \textbf{Paris-13} with image based features driving a \SI{20}{\percent} jump in recall.
+        In fact, buildings could be identified by their roof texture or color, as depicted in Figure~\ref{subfig::bus_2d}.
+        As a consequence, image based features are instrumental in detecting the discrepancy between two under-segmented buildings, especially in dense uniform settings.
 
-        Geometric features take into account intrinsic attributes of building models and could be intuitively related to building types.
-        As a consequence, the fact that this type of features plays a big role in detecting errors implies that the existence of a defect depends highly on the type of model it affects.
-        This is actually expected for errors of topological nature where the geometric structure of the model is assessed.
-        Extrinsic features act more as clues in predictionsin this case.
-        On the contrary, the latter are expected to yield at least as good results as the intrinsic features alone for fidelity defects.
-        In fact, in Table~\ref{tab::ablation_f3}, \texttt{BIB} as well as \texttt{FIB} \texttt{FIG} are better detected, in terms of F-score, when adding height or image based modalities.
-        The exception was \texttt{FIB} on \textbf{Elancourt} where only geometric features yielded better results.\\
+        This can be actually interpreted by the fact that geometric features, take into account intrinsic attributes of a building model.
+        These features could, in turn, be intuitively related to the type of building they describe.
+        Consequently, the big role that this kind of features plays in detecting errors implies that the existence of a defect is highly correlated to the type of model it affects.\\
+        This is, in fact, expected for errors of topological nature as the geometric structure of the model is assessed.
+        As an example, we can see how \texttt{BOS} is better detected on \textbf{Elancourt} and \textbf{Nantes} based only on geometric features.
+        Extrinsic features, on the other hand, act more as clues in predicting these types of errors as discussed with \texttt{BUS} in the previous paragraph.\\
 
-        Figure~\ref{fig::f_score_ablation_f3} shows that all \texttt{Building errors} labels are better detected in \textbf{Elancourt}.
-        It is also the case of \texttt{FOS} and \texttt{FIT}.
-        A certain monotony can be noticed, at the exception of \texttt{BOS}.
-        Better resultas are obtained for \textbf{Paris-13} than for \textbf{Nantes}, while having around half the number of models to train on.
-        This means that \texttt{BOS} cannot be easily learnt in \textbf{Nantes}.
-        It is coherent with the fact that the dataset represents a part of the dense downtown of the city.
-        The same monotony is observed, this time in reverse, with the rest of \texttt{Facet errors} defects. \textbf{Paris-13} is much better with less training samples.
-        For geometric defects (\texttt{FIG} and \texttt{FIB}), \textbf{Nantes} is comparable to \textbf{Paris-13}, but, with \texttt{FUS}, it is way much worse.
-        This may result from the highly heterogeneous aspect of this dataset that encompasses high tower buildings with a densely populated city district.
-        Finally, well represented errors are more easily detected than the less frequent ones, especially the rare ones like \texttt{FIT} in \textbf{Nantes} and \textbf{Paris-13}.
-        
+        Conversely, the image and height based features are expected to yield at least as good results as the intrinsic features alone for fidelity defects.
+        In fact, in Table~\ref{tab::ablation_f3}, \texttt{BIB} as well as \texttt{FIB} and \texttt{FIG} are better detected, in terms of F-score, when adding height or image based modalities.
+        The exception is \texttt{FIB} and \texttt{FIG} on \textbf{Elancourt} where only geometric features yielded better results.
+        This may be explained by the fact that the baseline features are not rich enough and the shear number of training instances in \textbf{Elancourt} was sufficient to link building model types to the occurence of such errors.\\
+
+        Figure~\ref{fig::f_score_ablation_f3} shows that all \texttt{Building errors} labels are better detected on \textbf{Elancourt}.
+        Moreover, we can even establish that the more the urban scene is dense the more difficult \gls{acr::lod}-0 \(\cup\) \gls{acr::lod}-1 errors detection becomes.
+        There is one exception where \texttt{BOS} existence is slightly better predicted on \textbf{Paris-13} than on \textbf{Nantes}.
+        This may be attributed to the low number of training samples on both these zones, as they are not sufficiently representative of the actual scenes.
+        On the other hand, \texttt{Facet errors} F-scores are proportional to the density of the studied urban scene, minding two exceptions.
+        \texttt{FOS} and \texttt{FIT} F-scores are actually stable across the different urban areas suffering only from slight decreases that can be attributed to noise.
+        This can be due to the fact that \texttt{FOS} is highly frequent in all urban scenes and so easily predictable that F-scores cannot get any better. 
+        Conversely, \texttt{FIT} are so rare (\textit{cf.} Figure~\ref{subfig::lod2_errors}) their existance is barely predictable.
+
     \subsection{Feature importance}
         \label{subsec::experiments::baseline_feature_analysis::feature_importance}
         \begin{figure}[htpb]
@@ -604,14 +606,14 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
 
         At first, we observe how much individual attributes are important before being gathered.
         For geometric features, all attributes are equally important.
-        However, concerning image and height based features, only a few are relevant (higher feature importance ratio).
+        However, concerning image and height based features, only a few are relevant (\textit{i.e.} they have a higher feature importance ratio).
         Indeed, these few attributes correspond to the highest and lowest values of the histograms.
         As described earlier, image and height features consist of a histogram of distances between the model and the real measured signals:
         vector cosine similarity, for the first, and the \(L_2\) norm for the last.
         It is clear that the presence of errors would result in saturating the high values in the histogram, while an absence of defects would imply a big number of low values.
-        This intuitively explains the observed phenomenon.\\
+        This is one intuitive explaination of this observed phenomenon.\\
         
         In a second time, we notice that no modality is more important than the others, contrarily to what was observed in Table~\ref{tab::ablation_f3}.
-        In fact, for most atomic errors, test results using geometric features are comparable to those obtained with more modalities.
-        However, during training, all modalities are relevant with the importance ratios approximating 1/3 as shown in Figure~\ref{fig::feature_importances_rf_bl}.
-        This explains why all configurations are kept for subsequent analysis.
+        In fact, as shown in Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}, for most \texttt{atomic} errors, test results using geometric features are comparable to those obtained with more modalities.
+        However, during training, all modalities are relevant with importance ratios approximating 1/3 as shown in Figure~\ref{fig::feature_importances_rf_bl}.
+        As a consequence, for subsequent experimentations all configurations are taken into consideration.
