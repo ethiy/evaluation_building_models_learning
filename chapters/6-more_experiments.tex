@@ -85,7 +85,8 @@
 
         First, a \texttt{coherence} analysis is performed.
         We compare the results of the transferability experiments to the ablation results with the same training scene.
-        This is achieved by looking, for a given area $Z_i$ in all couples $(Z_i, Z_j)_{\forall j \neq i}$, at the differences between Figure~\ref{fig::f_score_transferability_f3} and Table~\ref{tab::ablation_f3}/Figure~\ref{fig::f_score_ablation_f3}.\\
+        This is achieved by looking, for a given area $Z_i$ in all couples $(Z_i, Z_j)_{\forall j \neq i}$, at the differences between Figure~\ref{fig::f_score_transferability_f3} and Table~\ref{tab::ablation_f3}/Figure~\ref{fig::f_score_ablation_f3}.
+        The goal is to see to which extent the test zone looks like the training one.\\
         Secondly, we investigate how an urban scene composition helps predicting defects in an unseen one.
         This is called the \texttt{projectivity} comparison.
         For a given test scene $Z_j$ in couples $(Z_i, Z_j)_{\forall i \neq j}$, we compare results from Figure~\ref{fig::f_score_transferability_f3} with Table~\ref{tab::ablation_f3}/Figure~\ref{fig::f_score_ablation_f3}.\\
@@ -95,6 +96,8 @@
         All various feature configurations are tested these experiments.
         If a modality stands out, in terms of the F-score, it is mentioned in the corresponding cell in Table~\ref{tab::transferability_comparison}.\\
 
+        coherence how close 
+
         \begin{table}[htbp]
             \footnotesize 
             \centering
@@ -103,19 +106,21 @@
                 \hline
                 &&\texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
                 \hline
-                \multirow{6}{*}{\rotatebox{90}{\texttt{Coherence}}}&\textbf{Elancourt} \(\rightarrow\) \textbf{Nantes} &\cellcolor{LOSS2535} & \cellcolor{LOSS1525}&\cellcolor{LOSS1525}& \cellcolor{LOSS1525}& \cellcolor{STBL}& \cellcolor{GAIN0515} \textbf{Im.}&\cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.}&\cellcolor{GAIN0515}\\
-                & \textbf{Elancourt} \(\rightarrow\) \textbf{Paris-13}  & \cellcolor{LOSS2535}& \cellcolor{LOSS1525}& \cellcolor{LOSS1525}& \cellcolor{LOSS1525}& \cellcolor{STBL}& \cellcolor{GAIN0515}\textbf{Im.}& \cellcolor{GAIN1525}\textbf{Im.}& \cellcolor{LOSS0515}&\cellcolor{GAIN1525}\\
-                & \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13}  & \cellcolor{LOSS0515}& \cellcolor{LOSS1525}& & \cellcolor{GAIN0515} \textbf{Geom.}& \cellcolor{STBL}& \cellcolor{GAIN1525}& \cellcolor{GAIN0515}& &\cellcolor{STBL} \textbf{Hei.}\\
-                & \textbf{Nantes} \(\rightarrow\) \textbf{Elancourt}  &\cellcolor{GAIN1525} & \cellcolor{STBL}& \cellcolor{GAIN1525}&\cellcolor{GAIN0515} \textbf{Geom.} & \cellcolor{STBL}& \cellcolor{LOSS1525}&\cellcolor{LOSS1525}&\cellcolor{GAIN0515}&\cellcolor{LOSS0515}\\
-                & \textbf{Paris-13} \(\rightarrow\) \textbf{Nantes}  &\cellcolor{LOSS0515} & \cellcolor{LOSS0515}& & \cellcolor{GAIN1525} \textbf{Geom.}&\cellcolor{STBL} & \cellcolor{LOSS2535}& \cellcolor{LOSS1525}& & \cellcolor{LOSS1525}\\
-                & \textbf{Paris-13} \(\rightarrow\) \textbf{Elancourt}  &\cellcolor{GAIN1525} &\cellcolor{GAIN0515} & \cellcolor{GAIN1525}& \cellcolor{GAIN0515} \textbf{Geom.}& \cellcolor{STBL}& \cellcolor{LOSS3545}& \cellcolor{STBL} &\cellcolor{GAIN0515} & \cellcolor{LOSS0515}\\
+                \multirow{6}{*}{\rotatebox{90}{\texttt{Coherence}}} 
+                & \textbf{Elancourt} \(\rightarrow\) \textbf{Nantes} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{STBL} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN3545} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{GAIN0515} \\
+                & \textbf{Elancourt} \(\rightarrow\) \textbf{Paris-13} & \cellcolor{LOSS1525} \textbf{Geom.}, \textbf{Hei.} & \cellcolor{LOSS1525} \textbf{Im.} & \cellcolor{LOSS1525} & \cellcolor{LOSS2535} & \cellcolor{STBL} & \cellcolor{GAIN3545} \textbf{Im.} & \cellcolor{GAIN2535} \textbf{Im.} & \cellcolor{LOSS1525} & \cellcolor{GAIN0515} \\
+                & \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13} & \cellcolor{LOSS1525} & \cellcolor{LOSS2535} \textbf{Im.} &  & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{GAIN2535} \textbf{Geom.} & \cellcolor{GAIN0515} &  & \cellcolor{GAIN0515} \textbf{Hei.} \\
+                & \textbf{Nantes} \(\rightarrow\) \textbf{Elancourt} & \cellcolor{GAIN2535} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS2535} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{GAIN0515} & \cellcolor{LOSS0515} \\
+                & \textbf{Paris-13} \(\rightarrow\) \textbf{Nantes} & \cellcolor{LOSS1525} & \cellcolor{LOSS1525} \textbf{Im.} &  & \cellcolor{GAIN2535} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS2535} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{LOSS1525} \\
+                & \textbf{Paris-13} \(\rightarrow\) \textbf{Elancourt} & \cellcolor{GAIN1525} & \cellcolor{GAIN0515} \textbf{All} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS3545} & \cellcolor{STBL} \textbf{All} &\cellcolor{GAIN0515} & \cellcolor{LOSS0515}\\
                 \hline
-                \multirow{6}{*}{\rotatebox{90}{\texttt{Projectivity}}}&\textbf{Elancourt} \(\rightarrow\) \textbf{Nantes} &\cellcolor{LOSS0515} & \cellcolor{LOSS1525}&\cellcolor{LOSS0515}& \cellcolor{LOSS1525}& \cellcolor{STBL}& \cellcolor{STBL}&\cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{LOSS0515}&\cellcolor{STBL}\\
-                & \textbf{Elancourt} \(\rightarrow\) \textbf{Paris-13}  & \cellcolor{LOSS0515}& \cellcolor{LOSS1525}& \cellcolor{STBL}& \cellcolor{LOSS1525}& \cellcolor{STBL}& \cellcolor{GAIN0515}\textbf{Im.}& \cellcolor{GAIN0515}\textbf{Im.}& \cellcolor{LOSS0515}&\cellcolor{STBL}\\
-                & \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13}  & \cellcolor{LOSS0515}& \cellcolor{LOSS1525}& & \cellcolor{GAIN1525}& \cellcolor{STBL}& \cellcolor{GAIN0515}& \cellcolor{GAIN0515}& &\cellcolor{STBL}\\
-                & \textbf{Nantes} \(\rightarrow\) \textbf{Elancourt}  &\cellcolor{GAIN0515} & \cellcolor{LOSS0515}& \cellcolor{LOSS0515}&\cellcolor{GAIN0515}All & \cellcolor{STBL}& \cellcolor{LOSS1525}&\cellcolor{LOSS0515}\textbf{Im.} &\cellcolor{GAIN0515}\textbf{Im.} &\cellcolor{STBL}\\
-                & \textbf{Paris-13} \(\rightarrow\) \textbf{Nantes}  &\cellcolor{LOSS1525} & \cellcolor{LOSS0515}& & \cellcolor{GAIN0515}&\cellcolor{STBL} & \cellcolor{LOSS2535}& \cellcolor{STBL}& & \cellcolor{LOSS0515} \textbf{Hei.}\\
-                & \textbf{Paris-13} \(\rightarrow\) \textbf{Elancourt}  &\cellcolor{STBL} &\cellcolor{LOSS0515} & \cellcolor{GAIN0515}\textbf{Im.} & \cellcolor{STBL}& \cellcolor{STBL}& \cellcolor{LOSS3545}& \cellcolor{LOSS1525}\textbf{Im.} & & \cellcolor{STBL}\\
+                \multirow{6}{*}{\rotatebox{90}{\texttt{Projectivity}}}
+                & \textbf{Elancourt} \(\rightarrow\) \textbf{Nantes} & \cellcolor{LOSS1525} & \cellcolor{LOSS1525} \textbf{All} &  & \cellcolor{LOSS0515} \textbf{All} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{STBL} \\
+                & \textbf{Elancourt} \(\rightarrow\) \textbf{Paris-13} & \cellcolor{STBL} \textbf{Geom.}, \textbf{Hei.} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{LOSS2535} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} &  & \cellcolor{STBL} \\
+                & \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{Im.} &  & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{STBL} &  & \cellcolor{STBL} \textbf{Hei.} \\
+                & \textbf{Nantes} \(\rightarrow\) \textbf{Elancourt} & \cellcolor{LOSS0515} & \cellcolor{LOSS1525} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{LOSS0515} & \cellcolor{STBL} \\
+                & \textbf{Paris-13} \(\rightarrow\) \textbf{Nantes} & \cellcolor{LOSS0515} & \cellcolor{LOSS2535} \textbf{Im.} &  & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS1525} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} \\
+                & \textbf{Paris-13} \(\rightarrow\) \textbf{Elancourt} & \cellcolor{LOSS0515} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{GAIN0515} & \cellcolor{GAIN1525} \textbf{All} & \cellcolor{LOSS0515} & \cellcolor{STBL}\\
                 \hline                                            
             \end{tabular}
             \renewcommand{\arraystretch}{1}
@@ -125,7 +130,7 @@
                 Otherwise, \textbf{Geom.} \textbf{Im.}, and \textbf{Hei.} contribute equally.
                 The color indicates the magnitude: \textcolor{LOSS3545}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-45}{-35}{\percent})--
                 \textcolor{LOSS2535}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                \textcolor{LOSS1525}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent})--
+                \textcolor{LOSS1525}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-25}{-15}{\percent})--
                 \textcolor{LOSS0515}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) --
                 \textcolor{STBL}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-5}{5}{\percent})--
                 \textcolor{GAIN0515}{$\blacksquare$}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) --
