@@ -90,7 +90,7 @@
 
 \section{Experimental results}
     \subsection{Baseline ablation study}
-    \begin{table}[htpb]
+        \begin{table}[htpb]
             \footnotesize
             \begin{center}
                 \begin{tabular}{| c | c c | c c | c c | c c |}
@@ -507,6 +507,89 @@
                 \label{tab::generalization_f3}
                 Results of generalization study, reported in percentage at the \textbf{\gls{acr::efin}} level 3.
                 Classifiers are trained on two zones and tested on the one that was left out.
+            }
+        \end{table}
+
+        \begin{table}[htpb]
+            \footnotesize
+            \begin{center}
+                \begin{tabular}{| c | c c | c c | c c | c c |}
+                    \hline
+                    & \multicolumn{4}{c|}{\textbf{Elancourt}}\\
+                    \hline
+                    &\textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All}\\
+                    \hline
+                    \texttt{BOS} & 34.95 & 37.37 & \textbf{43.54} & \textbf{44.07} \\
+                    \hline
+                    \texttt{BUS} & 0.00 & 0.00 & \textbf{12.99} & 5.79 \\
+                    \hline
+                    \texttt{BIB} & 0.00 & 0.00 & 0.00 & 0.00 \\
+                    \hline
+                    \texttt{BIT} & 11.63 & \textbf{15.73} & 5.13 & 0.00 \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & 97.19 & 97.39 & 97.41 & 96.27 \\
+                    \hline
+                    \texttt{FUS} & 48.83 & 46.44 & 47.77 & 46.53 \\
+                    \hline
+                    \texttt{FIB} & 25.41 & 22.47 & \textbf{48.00} & \textbf{49.56} \\
+                    \hline
+                    \texttt{FIT} & 0.00 & 0.00 & 0.00 & 0.00 \\
+                    \hline
+                    \texttt{FIG} & 80.36 & 82.17 & 81.78 & 82.31 \\
+                    \hline
+                    \hline
+                    & \multicolumn{4}{c|}{\textbf{Nantes}}\\
+                    \hline
+                    &\textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All}\\
+                    \hline
+                    \texttt{BOS} & 40.95 & 39.33 & \textbf{46.89} & \textbf{47.39} \\
+                    \hline
+                    \texttt{BUS} & 0.00 & 0.00 & \textbf{16.51} & 9.91 \\
+                    \hline
+                    \texttt{BIB} & 0.00 & 0.00 & 0.00 & 0.00 \\
+                    \hline
+                    \texttt{BIT} & 22.79 & 19.11 & 16.18 & 17.27 \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & 97.77 & 97.90 & 97.91 & 96.72 \\
+                    \hline
+                    \texttt{FUS} & 39.56 & 35.10 & 39.73 & 38.38 \\
+                    \hline
+                    \texttt{FIB} & 24.17 & 22.68 & \textbf{48.57} & \textbf{47.87} \\
+                    \hline
+                    \texttt{FIT} & 0.00 & 0.00 & 0.00 & 0.00 \\
+                    \hline
+                    \texttt{FIG} & 82.74 & 82.78 & 82.04 & 82.31 \\
+                    \hline
+                    \hline
+                    & \multicolumn{4}{c|}{\textbf{Paris-13}}\\
+                    \hline
+                    &\textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All}\\
+                    \hline
+                    \texttt{BOS} & 70.53 & 70.49 & 69.96 & 69.44 \\
+                    \hline
+                    \texttt{BUS} & 28.65 & 28.72 & \textbf{35.43} & \textbf{34.20} \\
+                    \hline
+                    \texttt{BIB} & 6.97 & 6.97 & \textbf{13.77} & \textbf{13.05} \\
+                    \hline
+                    \texttt{BIT} & \textbf{15.21} & 11.82 & 8.20 & 5.86 \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & 98.41 & 98.44 & 98.18 & 98.06 \\
+                    \hline
+                    \texttt{FUS} & 3.40 & 1.58 & \textbf{18.15} & 6.13 \\
+                    \hline
+                    \texttt{FIB} & 20.52 & 13.08 & \textbf{53.00} & \textbf{49.54} \\
+                    \hline
+                    \texttt{FIT} & 5.88 & 6.06 & 6.06 & 5.88 \\
+                    \hline
+                    \texttt{FIG} & 80.93 & 80.85 & 80.69 & 80.61 \\
+                    \hline
+                \end{tabular}
+            \end{center}
+            \caption{
+                \label{tab::all_f-scores_generalization_f3}
+                F-scores for the generalization experiments at \textbf{\gls{acr::efin}} level 3.
+                These are deduced from Table~\ref{tab::generalization_f3}.
+                Modalities that drives jumps of more than a \SI{4.5}{\percent} in F-score are distinguished in bold.
             }
         \end{table}
 
