@@ -6,9 +6,9 @@
 
 \section{Scalability analysis}
     \label{sec::more_experiments::scalability}
-    In the previous chapter, error detection was proven to be dependent on the scene composition
+    In the previous chapter, error detection was proven to depend on the scene composition.
     This fact motivates studying training the classifier and testing prediction on different scenes.
-    The goal is to prove the resilience of the prediction to unseen urban scenes.
+    The goal is to prove the resilience of error detection to unseen urban scenes.
     As the annotation process requires a lot of effort, this trait is crucial to guarantee the scalability of this method under the \textbf{large-scale} constraint.\\
 
     Different configurations are possible, as depicted in Figure~\ref{fig::scalability_study}.
@@ -46,7 +46,8 @@
         We train on a zone $Z_i$ and test on another one $Z_j$.
         We will denote each transferability experiment by the couple $(Z_i, Z_j)$ or by $Z_i \rightarrow Z_j$.
         Six transferability couples are possible.
-        F-scores are shown, per label, and per experiment, in Figure~\ref{fig::f_score_transferability_f3}.\\
+        F-scores are shown, per label, and per experiment, in Figure~\ref{fig::f_score_transferability_f3}.
+        For more details, refer to Table~\ref{tab::transferability_f3} which compiles all mean precision and recall test results.\\
         
         \thisfloatsetup{subfloatrowsep=none}
         \begin{figure}[htbp]
@@ -77,18 +78,19 @@
                     \label{fig::f_score_transferability_f3}
                     Mean F-score and standard deviation for the transferability study.
                     \textbf{El.} (\textit{resp.} \textbf{Na.} and \textbf{P13.}) corresponds to \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
+                    All details are reported in Table~\ref{tab::f_score_transferability_f3}.
                 }
             }
         \end{figure}
 
         First, a \texttt{coherence} analysis is performed.
         We compare the results of the transferability experiments to the ablation results with the same training scene.
-        This is achieved by looking, for a given area $Z_i$ in all couples $(Z_i, Z_j)_{\forall j \neq i}$, at the differences between Figure~\ref{fig::f_score_transferability_f3} and Table~\ref{tab::ablation_f3}/Figure~\ref{fig::f_score_ablation_f3}.
+        This is achieved by looking, for a given area $Z_i$ in all couples $(Z_i, Z_j)_{\forall j \neq i}$, at the differences between Figure~\ref{fig::f_score_transferability_f3} and Table~\ref{tab::ablation_f3}/Figure~\ref{fig::f_score_ablation_f3}.\\
         Secondly, we investigate how an urban scene composition helps predicting defects in an unseen one.
         This is called the \texttt{projectivity} comparison.
-        For a given test scene $Z_j$ in couples $(Z_i, Z_j)_{\forall i \neq j}$, we compare results from Figure~\ref{fig::f_score_transferability_f3} with Table~\ref{tab::ablation_f3}/Figure~\ref{fig::f_score_ablation_f3}.
+        For a given test scene $Z_j$ in couples $(Z_i, Z_j)_{\forall i \neq j}$, we compare results from Figure~\ref{fig::f_score_transferability_f3} with Table~\ref{tab::ablation_f3}/Figure~\ref{fig::f_score_ablation_f3}.\\
+
         All these comparisons are provided in Table~\ref{tab::transferability_comparison}.
-        In both settings, if a feature type appears, it means it is, by a large margin, the most decisive one.
         A color scheme was devised to encode the amplitude of change.
         All various feature configurations are tested these experiments.
         If a modality stands out, in terms of the F-score, it is mentioned in the corresponding cell in Table~\ref{tab::transferability_comparison}.\\

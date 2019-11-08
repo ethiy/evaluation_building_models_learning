@@ -90,6 +90,88 @@
 
 \section{Experimental results}
     \subsection{Baseline ablation study}
+    \begin{table}[htpb]
+            \footnotesize
+            \begin{center}
+                \begin{tabular}{| c | c c | c c | c c | c c |}
+                    \hline
+                    & \multicolumn{4}{c|}{\textbf{Elancourt}}\\
+                    \hline
+                    &\textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All}\\
+                    \hline
+                    \texttt{BOS} & 84.12 & 84.04 & 83.08 & 82.84 \\
+                    \hline
+                    \texttt{BUS} & 46.08 & 53.88 & 51.48 & 50.82 \\
+                    \hline
+                    \texttt{BIB} & 20.84 & 21.58 & \textbf{26.20} & \textbf{26.88} \\
+                    \hline
+                    \texttt{BIT} & \textbf{39.68} & 33.06 & 33.33 & 19.82 \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & 98.99 & 99.10 & 98.91 & 98.87 \\
+                    \hline
+                    \texttt{FUS} & 3.67 & 1.25 & 3.12 & 2.49 \\
+                    \hline
+                    \texttt{FIB} & 16.60 & 0.00 & 15.08 & 13.81 \\
+                    \hline
+                    \texttt{FIT} & 12.51 & 15.99 & 6.45 & 6.45 \\
+                    \hline
+                    \texttt{FIG} & 76.66 & 76.33 & 75.26 & 75.25 \\
+                    \hline
+                    \hline
+                    & \multicolumn{4}{c|}{\textbf{Nantes}}\\
+                    \hline
+                    &\textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All}\\
+                    \hline
+                    \texttt{BOS} & 47.13 & 45.40 & 46.22 & 44.11 \\
+                    \hline
+                    \texttt{BUS} & 13.15 & 12.98 & \textbf{40.82} & \textbf{37.50} \\
+                    \hline
+                    \texttt{BIB} & 0.00 & 0.00 & 1.98 & 1.98 \\
+                    \hline
+                    \texttt{BIT} & 3.28 & 6.56 & 0.00 & 5.03 \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & 98.33 & 98.33 & 98.12 & 98.01 \\
+                    \hline
+                    \texttt{FUS} & 36.83 & 37.66 & 34.10 & 32.56 \\
+                    \hline
+                    \texttt{FIB} & 46.97 & 46.34 & \textbf{54.54} & \textbf{52.66} \\
+                    \hline
+                    \texttt{FIT} & 0.00 & 0.00 & 0.00 & 0.00 \\
+                    \hline
+                    \texttt{FIG} & 82.00 & 82.16 & 81.52 & 80.87 \\
+                    \hline
+                    \hline
+                    & \multicolumn{4}{c|}{\textbf{Paris-13}}\\
+                    \hline
+                    &\textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All}\\
+                    \hline
+                    \texttt{BOS} & 53.64 & 55.45 & 57.71 & 55.95 \\
+                    \hline
+                    \texttt{BUS} & 11.60 & 14.29 & 34.57 & 14.09 \\
+                    \hline
+                    \texttt{BIB} & 0.00 & 0.00 & 0.00 & 0.00 \\
+                    \hline
+                    \texttt{BIT} & 5.00 & 0.00 & 2.57 & 0.00 \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & 97.19 & 97.19 & 97.98 & 97.19 \\
+                    \hline
+                    \texttt{FUS} & 79.73 & 78.91 & 79.46 & 78.91 \\
+                    \hline
+                    \texttt{FIB} & 57.46 & 56.06 & 57.89 & 56.93 \\
+                    \hline
+                    \texttt{FIT} & 0.00 & 0.00 & 0.00 & 0.00 \\
+                    \hline
+                    \texttt{FIG} & 90.67 & 91.33 & 90.67 & 91.33 \\
+                    \hline
+                \end{tabular}
+            \end{center}
+            \caption{
+                \label{tab::all_f-scores_ablation_f3}
+                F-scores for ablation results at \textbf{\gls{acr::efin}} level 3.
+                These are deduced from Table~\ref{tab::ablation_f3}.
+                Modalities that drives jumps of more than a \SI{4.5}{\percent} in F-score are distinguished in bold.
+            }
+        \end{table}
         \begin{table}[htbp]
             \centering
             \footnotesize
@@ -203,10 +285,91 @@
             \end{tabular}
             \caption{
                 \label{tab::transferability_f3}
-                Transferability results of all six configurations reported, in percentage, at \textbf{\gls{acr::efin}} level 3.
+                Transferability results of all six combinations reported, in percentage, at \textbf{\gls{acr::efin}} level 3.
                 Bold indicates the best performing feature configuration in terms of F-score.
             }
         \end{sidewaystable}
+        \begin{table}[htbp]
+            \footnotesize
+            \centering
+            \begin{tabular}{|c | c | c | c | c || c | c | c | c |}
+                \hline
+                & \multicolumn{4}{c||}{\textbf{Elancourt \(\rightarrow\) Nantes}} & \multicolumn{4}{c|}{\textbf{Elancourt \(\rightarrow\) Paris-13}}\\
+                \hline
+                &\textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All} & \textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All}\\
+                \hline
+                \texttt{BOS} & 59.12 & 59.20 & 58.93 & 59.20 & 60.28 & 60.65 & 55.41 & 55.59 \\
+                \hline
+                \texttt{BUS} & 0.00 & 0.00 & 19.99 & \textbf{28.26} & 0.00 & 0.00 & \textbf{33.66} & 8.11 \\
+                \hline
+                \texttt{BIB} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 3.51 & 3.51 \\
+                \hline
+                \texttt{BIT} & 5.03 & 3.45 & 3.45 & \textbf{21.10} & 7.32 & 5.00 & 2.61 & 0.00 \\
+                \specialrule{.2em}{.1em}{.1em}
+                \texttt{FOS} & 98.22 & 98.22 & 98.33 & 81.92 & 97.38 & 97.37 & 97.24 & 97.62 \\
+                \hline
+                \texttt{FUS} & 4.48 & 1.85 & \textbf{27.21} & \textbf{24.62} & 15.38 & 6.98 & \textbf{46.10} & 33.83 \\
+                \hline
+                \texttt{FIB} & 30.69 & 27.55 & \textbf{59.41} & \textbf{56.85} & 19.76 & 18.93 & \textbf{50.21} & \textbf{48.92} \\
+                \hline
+                \texttt{FIT} & 0.00 & 0.00 & \textbf{16.67} & \textbf{14.28} & 0.00 & 0.00 & 0.00 & 0.00 \\
+                \hline
+                \texttt{FIG} & 81.70 & 80.73 & 81.53 & 78.38 & 87.30 & 87.27 & 87.55 & 88.44 \\
+                \hline
+                \hline
+                & \multicolumn{4}{c||}{\textbf{Nantes \(\rightarrow\) Elancourt}} & \multicolumn{4}{c|}{\textbf{Nantes \(\rightarrow\) Paris-13}}\\
+                \hline
+                &\textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All} & \textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All}\\
+                \hline
+                \texttt{BOS} & 73.63 & 74.34 & 75.28 & 74.21 & 25.60 & 30.71 & 27.78 & 27.78 \\
+                \hline
+                \texttt{BUS} & 19.87 & 22.23 & \textbf{33.76} & \textbf{33.61} & 0.00 & 5.79 & \textbf{11.27} & \textbf{11.27} \\
+                \hline
+                \texttt{BIB} & 11.85 & 12.55 & \textbf{22.88} & \textbf{23.45} & 0.00 & 0.00 & 0.00 & 0.00 \\
+                \hline
+                \texttt{BIT} & \textbf{14.89} & 10.98 & 7.78 & 8.98 & \textbf{22.81} & 17.55 & 16.95 & 14.55 \\
+                \specialrule{.2em}{.1em}{.1em}
+                \texttt{FOS} & 98.87 & 98.87 & 98.88 & 98.84 & 97.39 & 97.20 & 95.88 & 94.94 \\
+                \hline
+                \texttt{FUS} & 2.77 & 1.88 & \textbf{8.15} & 3.29 & \textbf{62.80} & 56.80 & 57.82 & 55.90 \\
+                \hline
+                \texttt{FIB} & 17.85 & 15.91 & \textbf{38.94} & \textbf{35.95} & 59.46 & 53.50 & 60.08 & 59.85 \\
+                \hline
+                \texttt{FIT} & 6.66 & 6.89 & 6.66 & 6.89 & 0.00 & 0.00 & 0.00 & 0.00 \\
+                \hline
+                \texttt{FIG} & 76.47 & 76.11 & 76.40 & 76.07 & 81.37 & \textbf{93.52} & 81.66 & 81.90 \\
+                \hline
+                \hline
+                & \multicolumn{4}{c||}{\textbf{Paris-13 \(\rightarrow\) Nantes}} & \multicolumn{4}{c|}{\textbf{Paris-13 \(\rightarrow\) Elancourt}}\\
+                \hline
+                &\textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All} & \textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All}\\
+                \hline
+                \texttt{BOS} & 33.57 & 34.20 & 37.01 & 35.77 & 76.26 & 77.09 & 77.44 & 75.35 \\
+                \hline
+                \texttt{BUS} & 4.21 & 4.26 & \textbf{14.96} & 9.71 & 25.79 & 26.08 & 25.09 & \textbf{33.44} \\
+                \hline
+                \texttt{BIB} & 0.00 & 0.00 & 0.00 & 0.00 & 24.20 & 23.68 & \textbf{33.13} & 28.13 \\
+                \hline
+                \texttt{BIT} & \textbf{30.62} & 22.70 & 22.22 & 19.43 & \textbf{19.27} & 10.25 & 10.32 & 8.50 \\
+                \specialrule{.2em}{.1em}{.1em}
+                \texttt{FOS} & 97.65 & 97.78 & 96.72 & 95.80 & 98.67 & 98.71 & 98.59 & 98.09 \\
+                \hline
+                \texttt{FUS} & 52.98 & 50.87 & 47.98 & 44.86 & 8.87 & 6.58 & 9.13 & 6.79 \\
+                \hline
+                \texttt{FIB} & 54.44 & 51.85 & \textbf{58.10} & \textbf{57.94} & 13.25 & 7.25 & 27.64 & \textbf{33.33} \\
+                \hline
+                \texttt{FIT} & 0.00 & 0.00 & 0.00 & 0.00 & 6.45 & 6.45 & 6.25 & 7.68 \\
+                \hline
+                \texttt{FIG} & 82.52 & 82.70 & 80.73 & 81.48 & 78.68 & 79.23 & 77.92 & 77.45 \\
+                \hline
+            \end{tabular}
+            \caption{
+                \label{tab::all_f-scores_transferability_f3}
+                F-scores for transferability results at \textbf{\gls{acr::efin}} level 3.
+                These are deduced from Table~\ref{tab::transferability_f3}.
+                Modalities that drives jumps of more than a \SI{4.5}{\percent} in F-score are distinguished in bold.
+            }
+        \end{table}
         \begin{table}[htbp]
             \footnotesize
             \begin{tabular}{c c c c}
