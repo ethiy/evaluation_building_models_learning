@@ -209,11 +209,11 @@
             \renewcommand{\arraystretch}{1.5}
             \begin{tabular}{| c | c c c c |c c c c c|}
                 \hline
-                & \texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
+                & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG} \\
                 \hline
-                \textbf{Elancourt} & \cellcolor{LOSS1525}& \cellcolor{LOSS1525}\textbf{Im.}& \cellcolor{LOSS1525}&\cellcolor{LOSS1525} &\cellcolor{STBL} &\cellcolor{GAIN0515}\textbf{Im.} &\cellcolor{GAIN1525}\textbf{Im.} &\cellcolor{LOSS0515}\textbf{Geom.} & \cellcolor{LOSS0515} \textbf{Hei.}\\
-                \textbf{Nantes} & \cellcolor{STBL}\textbf{All}& \cellcolor{LOSS1525}\textbf{Im.}&\cellcolor{LOSS0515}\textbf{Im.} &\cellcolor{GAIN1525} &\cellcolor{STBL} & \cellcolor{STBL}& \cellcolor{LOSS1525}\textbf{Im.}& &\cellcolor{STBL}\\
-                \textbf{Paris-13} &\cellcolor{LOSS1525}All &\cellcolor{LOSS1525} & &\cellcolor{GAIN0515}\textbf{Hei.} &\cellcolor{STBL} &\cellcolor{LOSS3545} &\cellcolor{LOSS1525}\textbf{Im.} & &\cellcolor{LOSS0515}\\
+                \textbf{Elancourt} & \cellcolor{LOSS3545} \textbf{Im.} & \cellcolor{LOSS3545} \textbf{Im.} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{Hei.} & \cellcolor{STBL} & \cellcolor{GAIN45} & \cellcolor{GAIN2535} \textbf{Im.} & \cellcolor{LOSS1525} & \cellcolor{GAIN0515} \\
+                \textbf{Nantes} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{LOSS1525} \textbf{Im.} &  & \cellcolor{GAIN1525} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{Im.} & & \cellcolor{STBL} \\
+                \textbf{Paris-13} & \cellcolor{LOSS0515} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS45} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{GAIN0515} & \cellcolor{LOSS0515} \\
                 \hline
             \end{tabular}
             \renewcommand{\arraystretch}{1}
@@ -221,7 +221,9 @@
                 \label{tab::generalization_comparison} Evolution of the F-score value, for each error, between each tested configuration and the best result per area (\textit{cf.} Sub-subsection~\ref{subsec::experiments::baseline_feature_analysis::ablation}).
                 Feature sets having a significant impact on the classification results are mentioned.
                 Otherwise, \textbf{Geom.} \textbf{Im.}, and \textbf{Hei.} contribute equally.
-                The color indicates the magnitude: \textcolor{LOSS3545}{$\blacksquare$}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
+                The color indicates the magnitude:
+                \textcolor{LOSS45}{$\blacksquare$}: (\SIrange[range-phrase={,  }, parse-numbers=false]{-\infty}{-45}{\percent}]--
+                \textcolor{LOSS3545}{$\blacksquare$}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
                 \textcolor{LOSS2535}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
                 \textcolor{LOSS1525}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent})--
                 \textcolor{LOSS0515}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) --
