@@ -83,129 +83,82 @@
             }
         \end{figure}
 
-        \subsubsection{\texttt{Coherence} comparisons}
-            Herein, a \texttt{coherence} analysis is performed.
-            We compare the results of the transferability experiments to the ablation results with the same training scene.
-            This is achieved by looking, for a given area $Z_i$ in all couples $(Z_i, Z_j)_{\forall j \neq i}$, at the differences between Figure~\ref{fig::f_score_transferability_f3} and Table~\ref{tab::ablation_f3}/Figure~\ref{fig::f_score_ablation_f3}.
-            The goal is to see to which extent the test zone looks like the training one.\\
+        First, a \texttt{coherence} analysis is performed.
+        We compare the results of the transferability experiments to the ablation results with the same training scene.
+        This is achieved by looking, for a given area $Z_i$ in all couples $(Z_i, Z_j)_{\forall j \neq i}$, at the differences between Figure~\ref{fig::f_score_transferability_f3} and Table~\ref{tab::ablation_f3}/Figure~\ref{fig::f_score_ablation_f3}.
+        The goal is to see to which extent the test zone looks like the training one.\\
 
-            All these comparisons are provided in Table~\ref{tab::coherence_comparison}.
-            A color scheme was devised to encode the amplitude of change.
-            The resemblance between \textbf{Paris-13} and \textbf{Nantes} are stricking in from this table.
-            In fact, when training on one of the two zones and testing on \textbf{Elacnourt}, out of the nine labels only two are different.
-            \texttt{BUS} has a gain between \SIrange[range-phrase={and }]{5}{15}{\percent} when trained on \textbf{Paris-13} while its F-score records a drop in the range \SIrange{-15}{-5}{\percent} if trained on \textbf{Nantes}.
-            \texttt{FUS}, however, looses between [\SIrange[range-phrase={, }]{-45}{-35}{\percent}) when trained on \textbf{Paris-13} and [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) for \textbf{Nantes}.
-            Conversely when training on \textbf{Elancourt} and testing on the other two areas, the comparisons are not identical.
-            However, from a general standpoint, we can see how the \texttt{building errors} are always recording losses when testing on both \textbf{Paris-13} and \textbf{Nantes}.
-            Except for \texttt{FIT}, the inverse situation is obseved for \texttt{Facet errors} where labels are either better detected or stable.
-            Out of these four comparisons, we can already see how it is difficult to learn \texttt{building errors} on \textbf{Elancourt}.
-            This is understandable as the other zones are densely populated compared to the latter.
-            On the contrary, \texttt{Facet errors} are easily trained on \textbf{Elancourt}.
-            Actually, \textbf{Paris-13} and \textbf{Nantes} are very homogeneous in terms of building types containning mainly towers and Haussman style buildings.
-            \textbf{Elancourt}, on the other side, contains more diverse building shapes which allows classifiers to better learn how facet defects are distributed.
-            Although \textbf{Paris-13} and \textbf{Nantes} are similar compared to the latter, difference could be spotted when training on one and testing on the other.
-            Indeed, \textbf{Nantes} containning more samples allows for better learning of \texttt{Facet errors}.
-            Regarding \texttt{Building errors}, with the exception of \texttt{BIT}, no zone allows to have gains in performance.
+        All these comparisons are provided in Table~\ref{tab::transferability_comparison}.
+        A color scheme was devised to encode the amplitude of change.
+        The resemblance between \textbf{Paris-13} and \textbf{Nantes} are stricking in from this table.
+        In fact, when training on one of the two zones and testing on \textbf{Elancourt}, out of the nine labels only two are different.
+        \texttt{BUS} has a gain between \SIrange[range-phrase={and }]{5}{15}{\percent} when trained on \textbf{Paris-13} while its F-score records a drop in the range \SIrange{-15}{-5}{\percent} if trained on \textbf{Nantes}.
+        \texttt{FUS}, however, looses between [\SIrange[range-phrase={, }]{-45}{-35}{\percent}) when trained on \textbf{Paris-13} and [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) for \textbf{Nantes}.
+        Conversely when training on \textbf{Elancourt} and testing on the other two areas, the comparisons are not identical.
+        However, from a general standpoint, we can see how the \texttt{building errors} are always recording losses when testing on both \textbf{Paris-13} and \textbf{Nantes}.
+        Except for \texttt{FIT}, the inverse situation is obseved for \texttt{Facet errors} where labels are either better detected or stable.
 
-            \begin{sidewaystable}[htbp]
-                \footnotesize 
-                \centering
-                \renewcommand{\arraystretch}{2}
-                \begin{tabular}{| c | x{1.5cm} | x{1.5cm} | x{1.5cm} | x{1.5cm} || x{1.5cm} | x{1.5cm} | x{1.5cm} | x{1.5cm} | x{1.5cm}|}
-                    \hline
-                    &\texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
-                    \hline
-                    \textbf{El.} \(\rightarrow\) \textbf{Nantes} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{STBL} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN3545} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{GAIN0515} \\
-                    \hline
-                    \textbf{El.} \(\rightarrow\) \textbf{P13} & \cellcolor{LOSS1525} \textbf{Geom.}, \textbf{Hei.} & \cellcolor{LOSS1525} \textbf{Im.} & \cellcolor{LOSS1525} & \cellcolor{LOSS2535} & \cellcolor{STBL} & \cellcolor{GAIN3545} \textbf{Im.} & \cellcolor{GAIN2535} \textbf{Im.} & \cellcolor{LOSS1525} & \cellcolor{GAIN0515} \\
-                    \hline
-                    \textbf{Na.} \(\rightarrow\) \textbf{P13} & \cellcolor{LOSS1525} & \cellcolor{LOSS2535} \textbf{Im.} &  & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{GAIN2535} \textbf{Geom.} & \cellcolor{GAIN0515} &  & \cellcolor{GAIN0515} \textbf{Hei.} \\
-                    \hline
-                    \textbf{Na.} \(\rightarrow\) \textbf{El.} & \cellcolor{GAIN2535} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS2535} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{GAIN0515} & \cellcolor{LOSS0515} \\
-                    \hline
-                    \textbf{P13} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS1525} & \cellcolor{LOSS1525} \textbf{Im.} &  & \cellcolor{GAIN2535} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS2535} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{LOSS1525} \\
-                    \hline
-                    \textbf{P13} \(\rightarrow\) \textbf{El.} & \cellcolor{GAIN1525} & \cellcolor{GAIN0515} \textbf{All} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS3545} & \cellcolor{STBL} \textbf{All} &\cellcolor{GAIN0515} & \cellcolor{LOSS0515}\\
-                    \hline                                            
-                \end{tabular}
-                \renewcommand{\arraystretch}{1}
-                \caption[
-                    \texttt{Coherence} comparison of the F-score values for each error.
-                    Feature sets having a significant impact on the classification results are mentioned.
-                ]{
-                    \label{tab::coherence_comparison}
-                    \texttt{Coherence} comparison of the F-score values for each error.
-                    Feature sets having a significant impact on the classification results are mentioned.
-                    Otherwise, \textbf{Geom.} \textbf{Im.}, and \textbf{Hei.} contribute equally.
-                    The color indicates the magnitude: \textcolor{LOSS3545}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-45}{-35}{\percent})--
-                    \textcolor{LOSS2535}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                    \textcolor{LOSS1525}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-25}{-15}{\percent})--
-                    \textcolor{LOSS0515}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) --
-                    \textcolor{STBL}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-5}{5}{\percent})--
-                    \textcolor{GAIN0515}{$\blacksquare$}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) --
-                    \textcolor{GAIN1525}{$\blacksquare$}: [\SIrange[range-phrase={, }]{15}{25}{\percent}] --
-                    $\square$: statistics cannot be computed.
-                }
-            \end{sidewaystable}
+        \begin{table}[htbp]
+            \footnotesize 
+            \centering
+            \renewcommand{\arraystretch}{2}
+            \begin{tabular}{| c | c | x{1.5cm} c c c |c c c c c|}
+                \hline
+                &&\texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
+                \hline
+                \multirow{6}{*}{\rotatebox{90}{\texttt{Coherence}}} 
+                & \textbf{El.} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{STBL} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN3545} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{GAIN0515} \\
+                & \textbf{El.} \(\rightarrow\) \textbf{P13} & \cellcolor{LOSS1525} & \cellcolor{LOSS1525} \textbf{Im.} & \cellcolor{LOSS1525} & \cellcolor{LOSS2535} & \cellcolor{STBL} & \cellcolor{GAIN3545} \textbf{Im.} & \cellcolor{GAIN2535} \textbf{Im.} & \cellcolor{LOSS1525} & \cellcolor{GAIN0515} \\
+                & \textbf{Na.} \(\rightarrow\) \textbf{P13} & \cellcolor{LOSS1525} & \cellcolor{LOSS2535} \textbf{Im.} &  & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{GAIN2535} \textbf{Geom.} & \cellcolor{GAIN0515} &  & \cellcolor{GAIN0515} \textbf{Hei.} \\
+                & \textbf{Na.} \(\rightarrow\) \textbf{El.} & \cellcolor{GAIN2535} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS2535} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{GAIN0515} & \cellcolor{LOSS0515} \\
+                & \textbf{P13} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS1525} & \cellcolor{LOSS1525} \textbf{Im.} &  & \cellcolor{GAIN2535} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS2535} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{LOSS1525} \\
+                & \textbf{P13} \(\rightarrow\) \textbf{El.} & \cellcolor{GAIN1525} & \cellcolor{GAIN0515} \textbf{All} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS3545} & \cellcolor{STBL} \textbf{All} &\cellcolor{GAIN0515} & \cellcolor{LOSS0515}\\
+                \hline
+                \multirow{6}{*}{\rotatebox{90}{\texttt{Projectivity}}}
+                & \textbf{El.} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS1525} & \cellcolor{LOSS1525} \textbf{All} &  & \cellcolor{LOSS0515} \textbf{All} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{STBL} \\
+                & \textbf{El.} \(\rightarrow\) \textbf{P13} & \cellcolor{STBL} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{LOSS2535} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} &  & \cellcolor{STBL} \\
+                & \textbf{Na.} \(\rightarrow\) \textbf{P13} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{Im.} &  & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{STBL} &  & \cellcolor{STBL} \textbf{Hei.} \\
+                & \textbf{Na.} \(\rightarrow\) \textbf{El.} & \cellcolor{LOSS0515} & \cellcolor{LOSS1525} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{LOSS0515} & \cellcolor{STBL} \\
+                & \textbf{P13} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS0515} & \cellcolor{LOSS2535} \textbf{Im.} &  & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS1525} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} \\
+                & \textbf{P13} \(\rightarrow\) \textbf{El.} & \cellcolor{LOSS0515} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{GAIN0515} & \cellcolor{GAIN1525} \textbf{All} & \cellcolor{LOSS0515} & \cellcolor{STBL}\\
+                \hline
+            \end{tabular}
+            \renewcommand{\arraystretch}{1}
+            \caption{
+                \label{tab::transferability_comparison} Evolution of the F-score value, for each error, between each tested configuration and the best result per area (\textit{cf.} Sub-subsection~\ref{subsec::experiments::baseline_feature_analysis::ablation}).
+                Feature sets having a significant impact on the classification results are mentioned.
+                Otherwise, \textbf{Geom.} \textbf{Im.}, and \textbf{Hei.} contribute equally.
+                The color indicates the magnitude: \textcolor{LOSS3545}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-45}{-35}{\percent})--
+                \textcolor{LOSS2535}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
+                \textcolor{LOSS1525}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-25}{-15}{\percent})--
+                \textcolor{LOSS0515}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) --
+                \textcolor{STBL}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-5}{5}{\percent})--
+                \textcolor{GAIN0515}{$\blacksquare$}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) --
+                \textcolor{GAIN1525}{$\blacksquare$}: [\SIrange[range-phrase={, }]{15}{25}{\percent}] --
+                $\square$: statistics cannot be computed.
+            }
+        \end{table}
 
-        \subsubsection{\texttt{Projectivity} comparisons}
-            We investigate, here, how the urban scene composition helps predicting defects in an unseen one.
-            This is called the \texttt{projectivity} comparison.
-            For a given test scene $Z_j$ in couples $(Z_i, Z_j)_{\forall i \neq j}$, we compare results from Figure~\ref{fig::f_score_transferability_f3} with Table~\ref{tab::ablation_f3}/Figure~\ref{fig::f_score_ablation_f3}.
-            A gain in performance for a label can be interpreted by its transferability power.\\
+        Second, we investigate how the urban scene composition helps predicting defects in an unseen one.
+        This is called the \texttt{projectivity} comparison.
+        For a given test scene $Z_j$ in couples $(Z_i, Z_j)_{\forall i \neq j}$, we compare results from Figure~\ref{fig::f_score_transferability_f3} with Table~\ref{tab::ablation_f3}/Figure~\ref{fig::f_score_ablation_f3}.
+        A gain in performance for a label can be interpreted by its transferability power.\\
 
-            \begin{sidewaystable}[htbp]
-                \footnotesize 
-                \centering
-                \renewcommand{\arraystretch}{2}
-                \begin{tabular}{| c | x{1.5cm} | x{1.5cm} | x{1.5cm} | x{1.5cm} || x{1.5cm} | x{1.5cm} | x{1.5cm} | x{1.5cm} | x{1.5cm}|}
-                    \hline
-                    &\texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
-                    \hline
-                    \textbf{El.} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS1525} & \cellcolor{LOSS1525} \textbf{All} &  & \cellcolor{LOSS0515} \textbf{All} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{STBL} \\
-                    \textbf{El.} \(\rightarrow\) \textbf{P13} & \cellcolor{STBL} \textbf{Geom.}, \textbf{Hei.} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{LOSS2535} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} &  & \cellcolor{STBL} \\
-                    \textbf{Na.} \(\rightarrow\) \textbf{P13} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{Im.} &  & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{STBL} &  & \cellcolor{STBL} \textbf{Hei.} \\
-                    \textbf{Na.} \(\rightarrow\) \textbf{El.} & \cellcolor{LOSS0515} & \cellcolor{LOSS1525} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{LOSS0515} & \cellcolor{STBL} \\
-                    \textbf{P13} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS0515} & \cellcolor{LOSS2535} \textbf{Im.} &  & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS1525} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} \\
-                    \textbf{P13} \(\rightarrow\) \textbf{El.} & \cellcolor{LOSS0515} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{GAIN0515} & \cellcolor{GAIN1525} \textbf{All} & \cellcolor{LOSS0515} & \cellcolor{STBL}\\
-                    \hline                                            
-                \end{tabular}
-                \renewcommand{\arraystretch}{1}
-                \caption[
-                    \texttt{Projectivity} comparison of the F-score values for each error.
-                    Feature sets having a significant impact on the classification results are mentioned.
-                ]{
-                    \label{tab::projectivity_comparison}
-                    \texttt{Projectivity} comparison of the F-score values for each error.
-                    Feature sets having a significant impact on the classification results are mentioned.
-                    Otherwise, \textbf{Geom.} \textbf{Im.}, and \textbf{Hei.} contribute equally.
-                    The color indicates the magnitude: \textcolor{LOSS3545}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-45}{-35}{\percent})--
-                    \textcolor{LOSS2535}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                    \textcolor{LOSS1525}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-25}{-15}{\percent})--
-                    \textcolor{LOSS0515}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) --
-                    \textcolor{STBL}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-5}{5}{\percent})--
-                    \textcolor{GAIN0515}{$\blacksquare$}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) --
-                    \textcolor{GAIN1525}{$\blacksquare$}: [\SIrange[range-phrase={, }]{15}{25}{\percent}] --
-                    $\square$: statistics cannot be computed.
-                }
-            \end{sidewaystable}
+        Comparisons are detailed in Table~\ref{tab::transferability_comparison} with the same color scheme as for \texttt{coherence} comparisons.
+        To summarize, error family wise, out of 20 \texttt{Building errors} possible \texttt{projectivity} comparisons, 13 yield negative results.
+        This proves how hard it is to transfer learned for this error family.
+        Conversely, \texttt{Facet errors}, only 7 out of 27 \texttt{projectivity} scores are worse compared to training and testing on the same test area.
+        One notable pattern is the stability of \texttt{FOS} and \texttt{FIB} errors no matter the chosen transferability couple.\\
 
-            Comparisons are detailed in Table~\ref{tab::projectivity_comparison} with the same color scheme as for \texttt{coherence} comparisons.
-            To summarize, error family wise, out of 20 \texttt{Building errors} possible \texttt{projectivity} comparisons, 13 yield negative results.
-            This proves how hard it is to transfer learned for this error family.
-            Conversely, \texttt{Facet errors}, only 7 out of 27 \texttt{projectivity} scores are worse compared to training and testing on the same test area.
-            One notable pattern is the stability of \texttt{FOS} and \texttt{FIB} errors no matter the chosen transferability couple.\\
-        
-        \subsubsection{Modality importance}
-            As we can suspect from looking at the large standard deviations illustrated in Figure~\ref{fig::f_score_transferability_f3}, modalities play an instrumental role in insuring a better transferability.
-            If a modality stands out, in terms of the F-score, it was mentioned in the corresponding cell in both Tables~\ref{tab::coherence_comparison} and~\ref{tab::projectivity_comparison}.\\
 
-            As intended (\textit{cf.} Section~\ref{subsec::learned_evaluation::baseline::image}), image based features are instrumental in transferability for \texttt{FUS}, \texttt{BUS}, \texttt{FIB} and \texttt{BIB}.
-            Geometric features, on the other side, play a lesser role helping with \texttt{BIT} transferability when training on dense urban scenes as well as \texttt{FUS} for the (\textbf{Nantes}, \textbf{Paris-13}) experiment.
-            In fact, \texttt{BIT} is a purely topological error that can be learned with the help of these structural errors while adding more modalities would only confuse the classifier as observed in the ablation study in Table~\ref{tab::ablation_f3}.
-            Height based errors alone are not crucial for the transferability interfering only once in the case of \texttt{FIB} in the (\textbf{Nantes}, \textbf{Paris-13}) experiment.
-            However, it has a bigger impact when added to image based ones (\textit{cf.} cells with \textbf{All} in Tables~\ref{tab::coherence_comparison} and~\ref{tab::projectivity_comparison}).
-            All these previous findings further justify why we did not leave out any modality, as they are more frequently critical for transferability than in the ablation study (Table~\ref{tab::ablation_f3}).\\
+        As we can suspect from looking at the large standard deviations illustrated in Figure~\ref{fig::f_score_transferability_f3}, modalities play an instrumental role in insuring a better transferability.
+        If a modality stands out, in terms of the F-score, it was mentioned in the corresponding cell in both Table~\ref{tab::transferability_comparison}.
+        As intended (\textit{cf.} Section~\ref{subsec::learned_evaluation::baseline::image}), image based features are instrumental in transferability for \texttt{FUS}, \texttt{BUS}, \texttt{FIB} and \texttt{BIB}.
+        Geometric features, on the other side, play a lesser role helping with \texttt{BIT} transferability when training on dense urban scenes as well as \texttt{FUS} for the (\textbf{Nantes}, \textbf{Paris-13}) experiment.
+        In fact, \texttt{BIT} is a purely topological error that can be learned with the help of these structural errors while adding more modalities would only confuse the classifier as observed in the ablation study in Table~\ref{tab::ablation_f3}.
+        Height based errors alone are not crucial for the transferability interfering only once in the case of \texttt{FIB} in the (\textbf{Nantes}, \textbf{Paris-13}) experiment.
+        However, it has a bigger impact when added to image based ones (\textit{cf.} cells with \textbf{All} in Table~\ref{tab::transferability_comparison}).
+        All these previous findings further justify why we did not leave out any modality, as they are more frequently critical for transferability than in the ablation study (Table~\ref{tab::ablation_f3}).\\
 
     \subsection{Generalization study}
         \label{subsec::more_experiments::scalability::generalization}
@@ -280,23 +233,30 @@
         We compare these experiments with the ablation study on the same area (\textit{cf.} Table~\ref{tab::generalization_comparison}).
     
         We start again with a comparison depending on error families.
-        Out of the 11 possibilities for the \texttt{Building errors} family, 8 yield worse results.
-        For the \texttt{Facet errors} family, 6 out of 13 comparisons exhibit the same trend.
-        This is worst than the transferability comparisons in ratio.
-        This results from the fact that fusing more datasets, that are not tailored for a specific error detection, does not help alleviating the problem.
-        It only evens out the best (\textit{resp.} worst) performances by including the best (\textit{resp.} worst) urban scene in the training set.\\
+        Out of the 11 possibilities for the \texttt{Building errors} family, 6\footnote{This over the half of possibilities.} yield worse results.
+        For the \texttt{Facet errors} family, 4 out of 14 comparisons exhibit the same trend.
+        These are arround the same, in terms of ratio, to the transferability comparisons.
+        This confirms again how difficult \texttt{Building errors} are to learn compared to \texttt{Facet errors}.\\
         
         Similarly to the previous study, image and height modalities play a major role in error detection.
-        Image-based features are crucial for \texttt{FIB}, \texttt{BIB}, \texttt{FUS} and \texttt{BUS} detection (Table~\ref{tab::generalization_comparison}).
-        Height-based attributes, however, induce a larger improvement in predicting \texttt{FIG} and \texttt{BIT}, while geometric ones are relegated to playing a minor role.
-        Otherwise, a curiosity can be noticed: only when fusing all modalities together, in \textbf{Paris-13} and \textbf{Nantes}, does predictions improve for \texttt{BOS}.\\
+        Image based features are crucial for \texttt{FIB}, \texttt{FUS}, \texttt{BOS}, \texttt{BIB} and \texttt{BUS} detection (Table~\ref{tab::generalization_comparison}).
+        Height based attributes has always a minor role contributing only once for \texttt{BIT} as well as geometric features.
+        Image based errors proves again how instrumental they are in learning errors even for topological ones.\\
         
-        We also confirm the observations about the best urban scene for error prediction training.
-        In this case, the best zone should always give the worst scores.
-        It is mostly the case with all atomic errors, with the exception of \texttt{BIT}.
-        This outlier can be explained by the resemblance of the \textbf{Paris-13} \gls{acr::3d} models to \textbf{Nantes} (which were established to be the best) samples.
-        Indeed, for most labels, \textbf{Nantes} and \textbf{Paris-13} reach the same scores.
-        However, the discrepancy in F-scores proves the added value for each dataset.
+        Based on the generalization study we can deduce the best zone to train an error label on.
+        In fact, if a zone yields the worst scores it means that it has the hardest instances.
+        Conversely, if taken into account it will help the classifier yield better results when testing on other scenes.\\
+
+        \textbf{Elancourt} when left out suffers the most.
+        In fact, as \textbf{Nantes} and \textbf{Paris-13} are very dense, buildings are homogeneous in terms of shape with moslty Haussman style or parallelepiped shaped buildings.
+        On the other hand, \textbf{Elancourt} has more heterogeneous buildings allowing a better learning.\\
+        
+        Regarding \texttt{Facet errors}, we can start by setting aside \texttt{FOS} as it is always well learned over all sets.
+        For \texttt{FUS} it is \textbf{Paris-13} that suffers the most when left out.
+        This is understandable as Haussman style buildings are usually under-segmented and hence allow for a better learning than other sets, especially \textbf{Elancourt}.
+        \textbf{Paris-13} is also the better alternative for \texttt{FIG}.
+        \texttt{FIB}, this time, is better learned on \textbf{Nantes} which presents also compact buildings with a lot of small facets that are easily misestimated.
+        The exception is \texttt{FIT} as \textbf{Elancourt} offers the better alternative, as it comprises various building types that are not always easily modelizable.
     
     \subsection{Representativeness study}
         \label{subsec::more_experiments::scalability::representativeness}
