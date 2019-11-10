@@ -319,7 +319,7 @@ These are proposed to better model defect predictions.
             \end{center}
         \end{figure}
 
-        For each polygon \(f^q \in \mathsf{F_M}^q\), the distributions over all its edges\footnote{The empty polygons are ignored as they have no edges.} \(s \in f^q\)\footnote{This is abuse of notation.} are stacked to yield a distribution over the whole projected facet.
+        For each polygon \(f^q \in \mathsf{F_M}^q\), the distributions over all its edges\footnote{The empty polygons are ignored as they have no edges.} \(s \in f^q\)\footnote{Abuse of notation.} are stacked to yield a distribution over the whole projected facet.
         In the case of histograms $\chi^p_{\operatorname{histogram}}$ with the same parameters \(p\) (and thus the same bins), it is equivalent to summing out the previous vectors $\mathsf{D}_{\chi^p_{\operatorname{histogram}}}(s, I_{\mathsf{M}})$.
         In order to take into account the variability of segment dimensions, this sum is normalized by segment lengths.\\
         \begin{equation}
@@ -339,7 +339,7 @@ These are proposed to better model defect predictions.
         
         These image-based attributes are helpful for precision error detection.
         As example, facet imprecise borders can be detected as local gradients direction will be expected to differ greatly from the inaccurate edge.
-        It can also be detrimental in under-segmentation detection as colors can change considerably from one facet or one building to another inducing an gradient orthogonal to edge normals.
+        It can also be instrumental in under-segmentation detection as colors can change considerably from one facet or one building to another inducing an gradient orthogonal to edge normals.
 
 \section{Advanced features}
     \label{sec::learned_evaluation::richer_features}
