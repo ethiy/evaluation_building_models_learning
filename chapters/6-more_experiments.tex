@@ -47,7 +47,7 @@
         We will denote each transferability experiment by the couple $(Z_i, Z_j)$ or by $Z_i \rightarrow Z_j$.
         Six transferability couples are possible.
         F-scores are shown, per label, and per experiment, in Figure~\ref{fig::f_score_transferability_f3}.
-        For more details, refer to Table~\ref{tab::transferability_f3} which compiles all mean precision and recall test results.\\
+        For more details, refer to Table~\ref{tab::transferability_f3} which compiles all precision and recall test results.\\
         
         \thisfloatsetup{subfloatrowsep=none}
         \begin{figure}[htbp]
@@ -87,6 +87,43 @@
         We compare the results of the transferability experiments to the ablation results with the same training scene.
         This is achieved by looking, for a given area $Z_i$ in all couples $(Z_i, Z_j)_{\forall j \neq i}$, at the differences between Figure~\ref{fig::f_score_transferability_f3} and Table~\ref{tab::ablation_f3}/Figure~\ref{fig::f_score_ablation_f3}.
         The goal is to see to which extent the test zone looks like the training one.\\
+
+        \begin{table}[htbp]
+            \footnotesize 
+            \centering
+            \renewcommand{\arraystretch}{2}
+            \begin{tabular}{| c | x{1.5cm} x{1.5cm} x{1.5cm} x{1.5cm} |x{1.5cm} x{1.5cm} x{1.5cm} x{1.5cm} x{1.5cm}|}
+                \hline
+                &\texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
+                \hline
+                \textbf{El.} \(\rightarrow\) \textbf{Nantes} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{STBL} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN3545} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{GAIN0515} \\
+                \textbf{El.} \(\rightarrow\) \textbf{P13} & \cellcolor{LOSS1525} \textbf{Geom.}, \textbf{Hei.} & \cellcolor{LOSS1525} \textbf{Im.} & \cellcolor{LOSS1525} & \cellcolor{LOSS2535} & \cellcolor{STBL} & \cellcolor{GAIN3545} \textbf{Im.} & \cellcolor{GAIN2535} \textbf{Im.} & \cellcolor{LOSS1525} & \cellcolor{GAIN0515} \\
+                \textbf{Na.} \(\rightarrow\) \textbf{P13} & \cellcolor{LOSS1525} & \cellcolor{LOSS2535} \textbf{Im.} &  & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{GAIN2535} \textbf{Geom.} & \cellcolor{GAIN0515} &  & \cellcolor{GAIN0515} \textbf{Hei.} \\
+                \textbf{Na.} \(\rightarrow\) \textbf{El.} & \cellcolor{GAIN2535} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS2535} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{GAIN0515} & \cellcolor{LOSS0515} \\
+                \textbf{P13} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS1525} & \cellcolor{LOSS1525} \textbf{Im.} &  & \cellcolor{GAIN2535} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS2535} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{LOSS1525} \\
+                \textbf{P13} \(\rightarrow\) \textbf{El.} & \cellcolor{GAIN1525} & \cellcolor{GAIN0515} \textbf{All} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS3545} & \cellcolor{STBL} \textbf{All} &\cellcolor{GAIN0515} & \cellcolor{LOSS0515}\\
+                \hline                                            
+            \end{tabular}
+            \renewcommand{\arraystretch}{1}
+            \caption[
+                \texttt{Coherence} comparison of the F-score values for each error.
+                Feature sets having a significant impact on the classification results are mentioned.
+            ]{
+                \label{tab::transferability_comparison}
+                \texttt{Coherence} comparison of the F-score values for each error.
+                Feature sets having a significant impact on the classification results are mentioned.
+                Otherwise, \textbf{Geom.} \textbf{Im.}, and \textbf{Hei.} contribute equally.
+                The color indicates the magnitude: \textcolor{LOSS3545}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-45}{-35}{\percent})--
+                \textcolor{LOSS2535}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
+                \textcolor{LOSS1525}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-25}{-15}{\percent})--
+                \textcolor{LOSS0515}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) --
+                \textcolor{STBL}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-5}{5}{\percent})--
+                \textcolor{GAIN0515}{$\blacksquare$}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) --
+                \textcolor{GAIN1525}{$\blacksquare$}: [\SIrange[range-phrase={, }]{15}{25}{\percent}] --
+                $\square$: statistics cannot be computed.
+            }
+        \end{table}
+
         Secondly, we investigate how an urban scene composition helps predicting defects in an unseen one.
         This is called the \texttt{projectivity} comparison.
         For a given test scene $Z_j$ in couples $(Z_i, Z_j)_{\forall i \neq j}$, we compare results from Figure~\ref{fig::f_score_transferability_f3} with Table~\ref{tab::ablation_f3}/Figure~\ref{fig::f_score_ablation_f3}.\\
@@ -105,30 +142,25 @@
             \footnotesize 
             \centering
             \renewcommand{\arraystretch}{2}
-            \begin{tabular}{| c | c | x{1.5cm} c c c |c c c c c|}
+            \begin{tabular}{| c | x{1.5cm} x{1.5cm} x{1.5cm} x{1.5cm} |x{1.5cm} x{1.5cm} x{1.5cm} x{1.5cm} x{1.5cm}|}
                 \hline
-                &&\texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
+                &\texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
                 \hline
-                \multirow{6}{*}{\rotatebox{90}{\texttt{Coherence}}} 
-                & \textbf{Elancourt} \(\rightarrow\) \textbf{Nantes} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{STBL} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN3545} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{GAIN0515} \\
-                & \textbf{Elancourt} \(\rightarrow\) \textbf{Paris-13} & \cellcolor{LOSS1525} \textbf{Geom.}, \textbf{Hei.} & \cellcolor{LOSS1525} \textbf{Im.} & \cellcolor{LOSS1525} & \cellcolor{LOSS2535} & \cellcolor{STBL} & \cellcolor{GAIN3545} \textbf{Im.} & \cellcolor{GAIN2535} \textbf{Im.} & \cellcolor{LOSS1525} & \cellcolor{GAIN0515} \\
-                & \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13} & \cellcolor{LOSS1525} & \cellcolor{LOSS2535} \textbf{Im.} &  & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{GAIN2535} \textbf{Geom.} & \cellcolor{GAIN0515} &  & \cellcolor{GAIN0515} \textbf{Hei.} \\
-                & \textbf{Nantes} \(\rightarrow\) \textbf{Elancourt} & \cellcolor{GAIN2535} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS2535} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{GAIN0515} & \cellcolor{LOSS0515} \\
-                & \textbf{Paris-13} \(\rightarrow\) \textbf{Nantes} & \cellcolor{LOSS1525} & \cellcolor{LOSS1525} \textbf{Im.} &  & \cellcolor{GAIN2535} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS2535} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{LOSS1525} \\
-                & \textbf{Paris-13} \(\rightarrow\) \textbf{Elancourt} & \cellcolor{GAIN1525} & \cellcolor{GAIN0515} \textbf{All} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS3545} & \cellcolor{STBL} \textbf{All} &\cellcolor{GAIN0515} & \cellcolor{LOSS0515}\\
-                \hline
-                \multirow{6}{*}{\rotatebox{90}{\texttt{Projectivity}}}
-                & \textbf{Elancourt} \(\rightarrow\) \textbf{Nantes} & \cellcolor{LOSS1525} & \cellcolor{LOSS1525} \textbf{All} &  & \cellcolor{LOSS0515} \textbf{All} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{STBL} \\
-                & \textbf{Elancourt} \(\rightarrow\) \textbf{Paris-13} & \cellcolor{STBL} \textbf{Geom.}, \textbf{Hei.} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{LOSS2535} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} &  & \cellcolor{STBL} \\
-                & \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{Im.} &  & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{STBL} &  & \cellcolor{STBL} \textbf{Hei.} \\
-                & \textbf{Nantes} \(\rightarrow\) \textbf{Elancourt} & \cellcolor{LOSS0515} & \cellcolor{LOSS1525} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{LOSS0515} & \cellcolor{STBL} \\
-                & \textbf{Paris-13} \(\rightarrow\) \textbf{Nantes} & \cellcolor{LOSS0515} & \cellcolor{LOSS2535} \textbf{Im.} &  & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS1525} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} \\
-                & \textbf{Paris-13} \(\rightarrow\) \textbf{Elancourt} & \cellcolor{LOSS0515} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{GAIN0515} & \cellcolor{GAIN1525} \textbf{All} & \cellcolor{LOSS0515} & \cellcolor{STBL}\\
+                \textbf{El.} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS1525} & \cellcolor{LOSS1525} \textbf{All} &  & \cellcolor{LOSS0515} \textbf{All} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{STBL} \\
+                \textbf{El.} \(\rightarrow\) \textbf{P13} & \cellcolor{STBL} \textbf{Geom.}, \textbf{Hei.} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{LOSS2535} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} &  & \cellcolor{STBL} \\
+                \textbf{Na.} \(\rightarrow\) \textbf{P13} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{Im.} &  & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{STBL} &  & \cellcolor{STBL} \textbf{Hei.} \\
+                \textbf{Na.} \(\rightarrow\) \textbf{El.} & \cellcolor{LOSS0515} & \cellcolor{LOSS1525} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{LOSS0515} & \cellcolor{STBL} \\
+                \textbf{P13} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS0515} & \cellcolor{LOSS2535} \textbf{Im.} &  & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS1525} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} \\
+                \textbf{P13} \(\rightarrow\) \textbf{El.} & \cellcolor{LOSS0515} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{GAIN0515} & \cellcolor{GAIN1525} \textbf{All} & \cellcolor{LOSS0515} & \cellcolor{STBL}\\
                 \hline                                            
             \end{tabular}
             \renewcommand{\arraystretch}{1}
-            \caption{
-                \label{tab::transferability_comparison} Evolution of the F-score value, for each error, between each tested configuration and the best result per area (\textit{cf.} Sub-subsection~\ref{subsec::experiments::baseline_feature_analysis::ablation}).
+            \caption[
+                \texttt{Projectivity} comparison of the F-score values for each error.
+                Feature sets having a significant impact on the classification results are mentioned.
+            ]{
+                \label{tab::transferability_comparison}
+                \texttt{Projectivity} comparison of the F-score values for each error.
                 Feature sets having a significant impact on the classification results are mentioned.
                 Otherwise, \textbf{Geom.} \textbf{Im.}, and \textbf{Hei.} contribute equally.
                 The color indicates the magnitude: \textcolor{LOSS3545}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-45}{-35}{\percent})--
@@ -141,7 +173,6 @@
                 $\square$: statistics cannot be computed.
             }
         \end{table}
-
 
         To summarize the comparisons, error family wise, out of 22 \texttt{Building errors} possible \texttt{projectivity} comparisons, 14 yield worse results.
         This proves how hard it is, for this error family, to transfer learned classifiers.
@@ -222,7 +253,7 @@
                 Feature sets having a significant impact on the classification results are mentioned.
                 Otherwise, \textbf{Geom.} \textbf{Im.}, and \textbf{Hei.} contribute equally.
                 The color indicates the magnitude:
-                \textcolor{LOSS45}{$\blacksquare$}: (\SIrange[range-phrase={,  }, parse-numbers=false]{-\infty}{-45}{\percent}]--
+                \textcolor{LOSS45}{$\blacksquare$}: (\SIrange[range-phrase={,  }]{-100}{-45}{\percent}]--
                 \textcolor{LOSS3545}{$\blacksquare$}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
                 \textcolor{LOSS2535}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
                 \textcolor{LOSS1525}{$\blacksquare$}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent})--
