@@ -516,9 +516,9 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
         Understandably, rare errors are difficult to detect as shown by \texttt{FIT} on the three zones for instance.
 
         \begin{table}[htpb]
-            \scriptsize
+            \footnotesize
             \centering
-            \renewcommand{\arraystretch}{1.5}
+            \renewcommand{\arraystretch}{2}
             \begin{center}
                 \begin{tabular}{| c | x{1cm} x{1cm} x{1cm} x{1cm} |}
                     \hline
@@ -639,19 +639,22 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
 
         F-scores are averaged across all feature configurations and represented in Figure~\ref{fig::f_score_ablation_f3}.
         The first thing we can observe is the fact that geometric features alone give comparable results to ones where extrinsic modalities are added.
-        This was the case for most errors as confirmed by the low variance in F-score shown in Figure~\ref{subfig::f_score_ablation_f3_building}.
-        The only exception can be noticed with \texttt{BUS}.
-        On \textbf{Elancourt}, height and image based features both contribute to an increase of around \SI{9}{\percent} in recall without, practically, any loss in precision.
+        This was the case for most errors as confirmed by the low variance in F-score.
+        However, in some exceptional cases, adding more modalities impacts greatly the results as shown in Table~\ref{tab::all_f-scores_ablation_f3}.
+        The first case regards \texttt{BUS}.
+        In fact, on \textbf{Elancourt}, height and image based features both contribute to an increase of around \SI{6}{\percent} in F-score.
         This can be explained by the fact that a lot of under-segmented building models have different heights which reflects easily on height based features.
-        Similar behaviour occurs for \textbf{Nantes} and \textbf{Paris-13} with image based features driving a \SI{20}{\percent} jump in recall.
+        Similar behaviour occurs for \textbf{Nantes} and \textbf{Paris-13} with image based features driving at least a \SI{20}{\percent} jump in F-score.
         In fact, buildings could be identified by their roof texture or color, as depicted in Figure~\ref{subfig::bus_2d}.
         As a consequence, image based features are instrumental in detecting the discrepancy between two under-segmented buildings, especially in dense uniform settings.
+        The second and less important example is \texttt{FIB} on \textbf{Nantes} where image based features adds around \SI{10}{\percent} in F-score as designed in Section~\ref{subsec::learned_evaluation::baseline::image}.
+        Last comes the case of \texttt{BIT}, on \textbf{Elancourt}, which performs at least \SI{6}{\percent} worse when adding more modalities.
 
         This can be actually interpreted by the fact that geometric features, take into account intrinsic attributes of a building model.
         These features could, in turn, be intuitively related to the type of building they describe.
         Consequently, the big role that this kind of features plays in detecting errors implies that the existence of a defect is highly correlated to the type of model it affects.\\
         This is, in fact, expected for errors of topological nature as the geometric structure of the model is assessed.
-        As an example, we can see how \texttt{BOS} is better detected on \textbf{Elancourt} and \textbf{Nantes} based only on geometric features.
+        As an example, we can see how \texttt{BOS} is better detected on \textbf{Elancourt} and \textbf{Nantes} based on geometric features only.
         Extrinsic features, on the other hand, act more as clues in predicting these types of errors as discussed with \texttt{BUS} in the previous paragraph.\\
 
         Conversely, the image and height based features are expected to yield at least as good results as the intrinsic features alone for fidelity defects.
