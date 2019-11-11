@@ -353,9 +353,9 @@
                 \cline{2-9}
                 & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
                 \hline
-                Building errors & \textbf{99.76} & \textbf{85.96} & 99.82 & 85.88 & 99.88 & 85.57 & \textbf{100} & 85.55 \\
+                \texttt{Building errors} & \textbf{99.76} & \textbf{85.96} & 99.82 & 85.88 & 99.88 & 85.57 & \textbf{100} & 85.55 \\
                 \hline
-                Facet errors & 91.79 & 89.79 & 92.65 & 89.40 & \textbf{93.21} & \textbf{89.45} & 93.46 & 89.16 \\
+                \texttt{Facet errors} & 91.79 & 89.79 & 92.65 & 89.40 & \textbf{93.21} & \textbf{89.45} & 93.46 & 89.16 \\
                 \hline
                 \hline
                 & \multicolumn{8}{|c|}{\textbf{Nantes}}\\
@@ -364,9 +364,9 @@
                 \cline{2-9}
                 & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
                 \hline
-                Building errors & 85.98 & 67.27 & 87.59 & 67.79 & 85.75 & 68.32 & \textbf{86.90} & \textbf{69.23} \\
+                \texttt{Building errors} & 85.98 & 67.27 & 87.59 & 67.79 & 85.75 & 68.32 & \textbf{86.90} & \textbf{69.23} \\
                 \hline
-                Facet errors & 91.20 & 94.01 & 91.37 & 94.36 & 91.20 & 94.35 & \textbf{91.73} & \textbf{94.21}\\
+                \texttt{Facet errors} & 91.20 & 94.01 & 91.37 & 94.36 & 91.20 & 94.35 & \textbf{91.73} & \textbf{94.21}\\
                 \hline
                 \hline
                 & \multicolumn{8}{|c|}{\textbf{Paris-13}}\\
@@ -375,9 +375,9 @@
                 \cline{2-9}
                 & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
                 \hline
-                Building errors & 97.36 & 68.76 & 97.36 & 68.76 & 97.36 & 68.76 & 97.36 & 68.76 \\
+                \texttt{Building errors} & 97.36 & 68.76 & 97.36 & 68.76 & 97.36 & 68.76 & 97.36 & 68.76 \\
                 \hline
-                Facet errors & 99.03 & 91.26 & 99.03 & 91.26 & 99.03 & 91.26 & 99.03 & 91.26 \\
+                \texttt{Facet errors} & 99.03 & 91.26 & 99.03 & 91.26 & 99.03 & 91.26 & 99.03 & 91.26 \\
                 \hline
             \end{tabular}
             \caption{
@@ -431,32 +431,31 @@
         \end{figure}
     
         We start by the ablation study.
-        Table~\ref{tab::ablation_f2} reveals that inserting more remote sensing modalities do not change the prediction results dramatically.
+        Table~\ref{tab::ablation_f2} reveals that adding more remote sensing modalities do not change the prediction results dramatically.
         This is perfectly illustrated, in Figure~\ref{fig::f_score_f2}, by the low variance of F-scores for the three areas of interest.
-        These results are in line with the conclusions at the \textbf{\gls{acr::efin}} level 3.
-        In the latter, only \texttt{BUS}, from all \texttt{atomic} errors, was highly impacted by a change in the feature configuration.
-        This may explain the observed low variability.
-        Moreover, we can note the prevalence of \texttt{FOS}\footnote{
-            Between \SIrange[range-phrase={ and }]{60}{85}{\percent} of building models, in all areas, have this defect.
-        } and \texttt{FIG}\footnote{
-            They affect between \SIrange[range-phrase={ and }]{70}{95}{\percent} of building models, depending on the urban scene.
-        } in the \texttt{Facet errors} family.
-        This, added to the fact that they are, in a large capacity, easily detected individually\footnote{
+        We can explain this by referring to the analysis at the \textbf{\gls{acr::efin}} level 3 in Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}.
+        Two main reasons could be noticed:
+        \begin{itemize}[label=\(\blacktriangleright\)]
+            \item Out of all \texttt{atomic} errors, only \texttt{BUS} and \texttt{FIB} on \textbf{Elancourt}, have been greatly impacted by a change in feature configurations.
+                    Both occur under \SI{40}{\percent} and \SI{20}{\percent} respectively.
+            \item On the other hand, all the other errors are unaffected, especially, \texttt{FOS} and \texttt{FIG} which are prevalent on all datasets.
+        \end{itemize}
+        The last observation added to the fact that these labels are, in a large capacity, easily detected individually\footnote{
             \texttt{FOS} (\textit{resp.} \texttt{FIG}) achieves more than \SI{90}{\percent} (\textit{resp.} \SI{80}{\percent}) in F-score, as depicted in Figure~\ref{subfig::f_score_ablation_f3_facet}.
-        } helps understanding why the F-score reaches at least \SI{90}{\percent} for this family (Figure~\ref{subfig::f_score_ablation_f2}).
-        As with \textbf{\gls{acr::efin}} level 3 experiments, \texttt{Facet errors} yields higher prediction scores than on \texttt{Building errors}.
-        Moreover, we can see a smaller discrepancy, that is below \SI{5}{\percent}, between F-scores on different scenes for \texttt{Facet errors} than for \texttt{Building errors} with \SI{15}{\percent}.\\
+        } helps understanding why the F-score reaches at least \SI{90}{\percent} for the \texttt{Facet errors} family (Figure~\ref{subfig::f_score_ablation_f2}) in constrast with \texttt{Building errors}.
+        Moreover, we can see a smaller discrepancy (below \SI{5}{\percent}) between F-scores on different scenes for \texttt{Facet errors} compared to \texttt{Building errors} with \SI{15}{\percent}.\\
 
         The transferability study (Figure~\ref{subfig::f_score_transferability_f2}) compares the F-scores with the ablation study provided in Figure~\ref{subfig::f_score_ablation_f2}.
-        Out of all 12 possible comparisons, only 2 exhibit a decrease in error discrimination.
-        Both affect the \texttt{Building errors} family when trained on \textbf{Nantes}.
-        \texttt{Facet errors}, on the other hand, confirms, its transferability and stability, with less than \SI{5}{\percent} of discrepancy between the two extremal values.
+        Out of all 12 possible \texttt{projectivity} comparisons, only 2 exhibit a decrease in error discrimination.
+        Both happen when training \texttt{Building errors} on \textbf{Nantes} and \textbf{Paris-13} and testing on \textbf{Elancourt} with approximatly \SI{-4}{\percent} and \SI{-3}{\percent} respectively.
+        This confirms the fact that \textbf{Elancourt} was best for training \texttt{Building errors} as established in Section~\ref{subsec::more_experiments::scalability::generalization}.
+        Same as with the ablation study we can see how the stability in \texttt{FOS} and \texttt{FIG} is reflected by a stability of \texttt{Facet errors}.
         For this reason, we skip the generalization study, all together, at this section.\\
 
         The representativeness study conducted for the \textbf{\gls{acr::efin}} level 2 results in the F-scores that are illustrated in Figure~\ref{subfig::f_score_representativeness_f2}.
         Family detection scores are very stable across all different tested split ratios.
         Moreover, in contrast to \texttt{atomic} errors results (cf. Figure~\ref{fig::f_score_representativeness_f3}), F-scores do not vary by more than \SI{1}{\percent} in mean and standard deviation.
-        This proves that at \textbf{\gls{acr::efin}} level 2, error family prediction is evened out independent of different split ratios, as opposed to higher order errors.
+        This further proves that at \textbf{\gls{acr::efin}} level 2, error family prediction is evened out independent of different split ratios, as opposed to higher \texttt{finesse} errors.
         Again, it benefits from the higher heterogeneity of the training set with multiple areas.
     
     \subsection{Detection of erroneous models}
@@ -508,7 +507,7 @@
         At this level, even more that the error family semantic degree, feature configurations have virtually no impact on test results: \textbf{Elancourt} was the only exception when image features are added to geometric ones.
         Furthermore, we confirm expectations as, at most, only 1 out of 57 (\textit{resp.} 0 out of 55 and 3 out of 21) valid instances are detected for \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
         As a consequence, we do not report the rest of previously conducted experiments for this \textbf{\gls{acr::efin}} level.
-        Indeed, it is senseless to compare detection transferability, generalization or representativeness if we hardly detect them at all on the same training scene.
+        Indeed, There is no interest in comparing prediction transferability, generalization or representativeness if we hardly detect them at all on the same training scene.
 
 \section{Classifier choice analysis}
     \subsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} compared to \texorpdfstring{\acrshort*{acr::rf}}{RF}}
