@@ -436,8 +436,8 @@
         We can explain this by referring to the analysis at the \textbf{\gls{acr::efin}} level 3 in Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}.
         Two main reasons could be noticed:
         \begin{itemize}[label=\(\blacktriangleright\)]
-            \item Out of all \texttt{atomic} errors, only \texttt{BUS} and \texttt{FIB} on \textbf{Elancourt}, have been greatly impacted by a change in feature configurations.
-                    Both occur under \SI{40}{\percent} and \SI{20}{\percent} respectively.
+            \item Out of all \texttt{atomic} errors, only \texttt{BUS}, on all datasets, and both, \texttt{BIT} and \texttt{FIB}, on \textbf{Elancourt}, have been greatly impacted by a change in feature configurations.
+                    Both occur under \SI{25}{\percent}, \SI{5}{\percent} and \SI{12}{\percent} respectively.
             \item On the other hand, all the other errors are unaffected, especially, \texttt{FOS} and \texttt{FIG} which are prevalent on all datasets.
         \end{itemize}
         The last observation added to the fact that these labels are, in a large capacity, easily detected individually\footnote{
@@ -465,7 +465,7 @@
             \renewcommand{\arraystretch}{1.5}
             \begin{tabular}{|c | c c | c c | c c | c c |}
                 \hline
-                \multicolumn{9}{|c|}{\textbf{Elancourt}}\\
+                & \multicolumn{8}{|c|}{\textbf{Elancourt}}\\
                 \hline
                 &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
                 \cline{2-9}
@@ -474,7 +474,7 @@
                 \texttt{Erroneous} & 99.95 & $\frac{1}{57}$ & 99.95 & $\frac{1}{57}$ & 99.95 & $\frac{0}{57}$ & 99.95 & $\frac{1}{57}$ \\
                 \hline
                 \hline
-                \multicolumn{9}{|c|}{\textbf{Nantes}}\\
+                & \multicolumn{8}{|c|}{\textbf{Nantes}}\\
                 \hline
                 &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
                 \cline{2-9}
@@ -483,7 +483,7 @@
                 \texttt{Erroneous} & 99.84 & $\frac{0}{55}$ & 99.84 & $\frac{0}{55}$ & 100 & $\frac{0}{55}$ & \textbf{100} & $\frac{0}{55}$ \\
                 \hline
                 \hline
-                \multicolumn{9}{|c|}{\textbf{Paris-13}}\\
+                & \multicolumn{8}{|c|}{\textbf{Paris-13}}\\
                 \hline
                 &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
                 \cline{2-9}
@@ -516,7 +516,7 @@
             \begin{center}
                 \begin{tabular}{| c | c c | c c | c c | c c |}
                     \hline
-                    \multicolumn{9}{|c|}{\textbf{Elancourt}}\\
+                    & \multicolumn{8}{|c|}{\textbf{Elancourt}}\\
                     \hline
                     &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
                     \cline{2-9}
@@ -541,7 +541,7 @@
                     \texttt{FIG} & \textbf{80.54} & \textbf{73.14} & 80.45 & 72.62 & 78.69 & 72.12 & 79.02 & 71.82 \\
                     \hline
                     \hline
-                    \multicolumn{9}{|c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
+                    & \multicolumn{8}{|c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
                     \hline
                     &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
                     \cline{2-9}
@@ -579,7 +579,7 @@
             \begin{center}
                 \begin{tabular}{| c | c c | c c | c c | c c |}
                     \hline
-                    \multicolumn{9}{|c|}{\textbf{Elancourt}}\\
+                    & \multicolumn{8}{|c|}{\textbf{Elancourt}}\\
                     \hline
                     &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
                     \cline{2-9}
@@ -604,7 +604,7 @@
                     \texttt{FIG} & \textbf{84.57} & \textbf{88.47} & 65.59 & 83.14 & 65.76 & 83.08 & 52.20 & 62.99 \\
                     \hline
                     \hline
-                    \multicolumn{9}{|c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
+                    & \multicolumn{8}{|c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
                     \hline
                     &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
                     \cline{2-9}
