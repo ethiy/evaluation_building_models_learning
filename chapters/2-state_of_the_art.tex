@@ -20,8 +20,8 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
     As a consequence, there is a need for a overview of automatic building \gls{acr::3d} modeling.
     The aim of this section is not to give a thourough survey of all \gls{acr::3d} modeling techniques, but rather explain the main approaches and how they affect the quality of the final product.
     For a comprehensive study of urban reconstruction methods, we refer the reader to the work of~\textcite{musialski2013survey}.\\
-    Subsection~\ref{subsec::state_of_the_art::building_modeling::building_extraction} presents the different approaches used for building delineation.
-    Afterwards, we present, in Subsection~\ref{subsec::state_of_the_art::building_modeling::modeling_strategies}, a general categorization of modeling strategies for buildings.
+    Section~\ref{subsec::state_of_the_art::building_modeling::building_extraction} presents the different approaches used for building delineation.
+    Afterwards, we present, in Section~\ref{subsec::state_of_the_art::building_modeling::modeling_strategies}, a general categorization of modeling strategies for buildings.
 
     \subsection{Building extraction}
         \label{subsec::state_of_the_art::building_modeling::building_extraction}
@@ -87,9 +87,9 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
     We have seen previously the various methods used to automatically model buildings.
     The goal of this section is to describe the available approaches that evaluate the quality of such models.
     These could be distinguished based on two criteria.\\
-    In Subsection~\ref{subsec::state_of_the_art::quality::output}, are presented the quality evaluation methods based on their output.
-    An alternative perspective to charecterize quality evaluation methods relies upon the type of reference data (\textit{cf.} Subsection~\ref{subsec::state_of_the_art::quality::reference}).
-    Based on this survey, we state in details, in Subsection~\ref{subsec::state_of_the_art::quality::novelty}, how the approach presented in this thesis is different from what was already proposed in the literature.
+    In Section~\ref{subsec::state_of_the_art::quality::output}, are presented the quality evaluation methods based on their output.
+    An alternative perspective to charecterize quality evaluation methods relies upon the type of reference data (\textit{cf.} Section~\ref{subsec::state_of_the_art::quality::reference}).
+    Based on this survey, we state in details, in Section~\ref{subsec::state_of_the_art::quality::novelty}, how the approach presented in this thesis is different from what was already proposed in the literature.
 
     \subsection{Output types}
         \label{subsec::state_of_the_art::quality::output}
@@ -140,7 +140,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             These are the only metrics used for volumes that we are aware of.\\
 
             Regarding \textit{implicit} semantics, as far as we are aware, only one metric is widely used to evaluate its impact.
-            As discussed previously in Subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}, compaction is one byproduct of semantics.
+            As discussed previously in Section~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}, compaction is one byproduct of semantics.
             As a consequence, it was used as an index to evaluate reconstructions\footnote{It is sometimes called by its antonym: complexity.}: the more a model was compact the better it was.
             This is reflected, for instance, in the work of~\textcite{lafarge2012creating,duan_eccv16,zhang2017deep,zeng2018neural,zhu2018large}, where this metric is never used alone but always alongside geometric ones.
 
@@ -225,7 +225,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             Second, are \gls{acr::lidar} point clouds.
             This type of data have the inherent advantage, compared to images, of natively providing depth information.
             \textcite{kaartinen2005accuracy} used data that was acquired multiple times with a guarantied precision up to \SI{0.083}{\m} in plane and \SI{0.035}{\m} in height.
-            Out of the latter were chosen reference points that were compared to equivalents in the evaluated building models (check the previous sub-subsection).
+            Out of the latter were chosen reference points that were compared to equivalents in the evaluated building models (check the previous Section).
             All the points could also be used for comparison by computing metrics such as \gls{acr::rmse}~\parencite{lafarge2012creating,zhu2018large}.
             Original input data is not always accessible.
             One issue arises when using different data: data registration.
@@ -241,12 +241,12 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
     \subsection{Novelty of the proposed method}
         \label{subsec::state_of_the_art::quality::novelty}
-        Quality evaluation approaches presented hereinabove are mostly unsuitable for the stated objectives in Subsection~\ref{subsec::introduction::contributions::positioning}.\\
+        Quality evaluation approaches presented hereinabove are mostly unsuitable for the stated objectives in Section~\ref{subsec::introduction::contributions::positioning}.\\
 
         In fact, the semantic character of the evaluation overrules approaches relying only on geometry based metrics.
-        This represents most of the methods discussed earlier (\textit{cf.} Subsection~\ref{subsec::state_of_the_art::quality::output}).
+        This represents most of the methods discussed earlier (\textit{cf.} Section~\ref{subsec::state_of_the_art::quality::output}).
         Actually, these metrics could be used once a semantic error is identified to help quantify the defect.
-        On the other hand, the need for reasonably available reference data, which is dictated by the \textbf{large-scale} constraint, implies the reliance on remote sensing data based methods (\textit{cf.} Subsection~\ref{subsec::state_of_the_art::quality::reference}).\\
+        On the other hand, the need for reasonably available reference data, which is dictated by the \textbf{large-scale} constraint, implies the reliance on remote sensing data based methods (\textit{cf.} Section~\ref{subsec::state_of_the_art::quality::reference}).\\
 
         Methods that are both semantic and rely only on more readily available remote sensing data are in the number of two:~\parencite{boudet2006supervised,michelin2013quality}.
         Both define semantic errors that are predicted with the help of Oblique images and \glspl{acr::dsm}.
@@ -640,7 +640,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             A \gls{acr::rf} is an agregation of decision tree classifiers.
             First, is explained how the latter works.
             Afterwards, we describe how the aggregation of basic classifiers can be beneficial for classification, especially in the case of decision trees.
-            We end this sub-subsection discussing some \gls{acr::rf} properties.
+            We end this Section discussing some \gls{acr::rf} properties.
 
             \paragraph{Decision tree classifier}
                 \begin{figure}[htbp]
@@ -1014,7 +1014,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         \tilde{\phi}(u, \omega) &= \frac{1}{2\cdot\pi} \cdot \phi_I(u)
                     \end{align}
                     These are separable filters that can help speed up the convolution computations as shown in~\textcite{sifre2013rotation}.
-                    In practice, $\psi$(\textit{resp.} $\bar\psi$) are taken as two (\textit{resp.} one) dimensional Morlet wavelets (\textit{cf.} Subfigure~\ref{subfig::morlet_filters}), while $\phi$ is taken as a Gaussian~\parencite{sifre2013rotation,bruna2013invariant,oyallon2015deep}.
+                    In practice, $\psi$(\textit{resp.} $\bar\psi$) are taken as two (\textit{resp.} one) dimensional Morlet wavelets (\textit{cf.} Figure~\ref{subfig::morlet_filters}), while $\phi$ is taken as a Gaussian~\parencite{sifre2013rotation,bruna2013invariant,oyallon2015deep}.
                     A finite number $L$ of orientations are possible for angle indices: $\theta \in \left\{\frac{l\cdot\pi}{L}: l=1,2\dots,L\right\}$.
                     In Figure~\ref{fig::morlet_vs_learned}, we can see how the designed filter bank is similar to the ones learned by a \gls{acr::cnn}.
                     \begin{figure}
@@ -1196,9 +1196,9 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             In fact, graphs can have varying numbers of nodes and edges.
             Moreover, they can be different while providing the same structural information: we say they are isomorphic.
             A valid representation for graphs should then take care of these two issues: incorporate all possible graph sizes and be invariant to graph isomorphisms.
-            As accustomed in statistical learning, one way to alleviate these issues is to directly compare graphs using kernels as seen previously in Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.\\
+            As accustomed in statistical learning, one way to alleviate these issues is to directly compare graphs using kernels as seen previously in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.\\
             
-            This sub-subsection does not aim at presenting a thourough survey of graph kernels.
+            This Section does not aim at presenting a thourough survey of graph kernels.
             The work of~\textcite{ghosh2018journey} categorizes graph kernels depending on the used methodology.
             A different approach is proposed in~\textcite{kriege2019survey}, where graph kernels are studied based on the underlying graphs.\\
 
@@ -1212,7 +1212,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
                 The most basic graph kernel would correspond to a scalar product of a global hashing vector of all attributes.
                 This is possible through the use of a histogram function for instance.
-                This type of functions is described in details in Subsection~\ref{subsec::learned_evaluation::baseline::geometric}.\\
+                This type of functions is described in details in Section~\ref{subsec::learned_evaluation::baseline::geometric}.\\
 
                 Let $S\left(\left(a(v)_i\right)_{v\in V}\right): \mathbb{R}^{\vert V\vert} \rightarrow \mathbb{R}^l$ (\textit{resp.} $S\left(\left(b(e)_i\right)_{e\in E}\right): \mathbb{R}^{\vert E\vert} \rightarrow \mathbb{R}^{m}$) be a hashing function that describes the distribution of attributes $i$ of all nodes (\textit{resp.} edges) of graph $G$ as a $\mathbb{R}^{l_i}$ (\textit{resp.} $\mathbb{R}^{m_i}$) vector.
                 We can build a node based feature vector for the graph $G$:
@@ -1236,7 +1236,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \end{bmatrix} \in \mathbb{R}^{d_E \cdot m}.
                 \end{equation}
 
-                Based on a base kernel on vectors $\kappa$ (\textit{cf.} Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}), we can compute the similarity between two graphs $G = \left(V, E\right)$ and $G' = \left(V', E'\right)$:
+                Based on a base kernel on vectors $\kappa$ (\textit{cf.} Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}), we can compute the similarity between two graphs $G = \left(V, E\right)$ and $G' = \left(V', E'\right)$:
                 \begin{align}
                     \label{eq::feature_graph_kernel_nodes}
                     k_V(G, G') &\triangleq \kappa(\Phi_V(G), \Phi_V(G'))\\
@@ -1421,7 +1421,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \begin{equation}
                         \omega(K) = \max_{\alpha_v > 0, \forall v \in V} 2\cdot \sum_{v\in V} \alpha_v - \sum_{(u, v) \in V\times V} \alpha_u \cdot \alpha_v \cdot K_{uv}
                     \end{equation}
-                    is dual one-class \gls{acr::svm} (\textit{cf.} Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}).
+                    is dual one-class \gls{acr::svm} (\textit{cf.} Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}).
 
                     If $\lambda_m$ is the minimum eigenvalue of the adjacency matrix $A$ (\textit{cf.} Equation~\ref{eq::adjacency_matrix}), for $\rho\geq-\lambda_m$, the matrix
                     \begin{equation}
