@@ -93,11 +93,11 @@
         A color scheme was devised to encode the amplitude of change.
         The resemblance between \textbf{Paris-13} and \textbf{Nantes} are stricking.
         In fact, when training on one of the two zones and testing on \textbf{Elancourt}, out of the nine labels only two are different.
-        \texttt{BUS} has a gain between \SIrange[range-phrase={and }]{5}{15}{\percent} when trained on \textbf{Paris-13} while its F-score records a drop in the range \SIrange{-15}{-5}{\percent} if trained on \textbf{Nantes}.
-        \texttt{FUS}, however, looses between [\SIrange[range-phrase={, }]{-45}{-35}{\percent}) when trained on \textbf{Paris-13} and [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) for \textbf{Nantes}.
+        \texttt{BUS} has a gain between \SIrange[range-phrase={ and }]{5}{15}{\percent} when trained on \textbf{Paris-13} while its F-score records a drop in the range \SIrange{-15}{-5}{\percent} if trained on \textbf{Nantes}.
+        \texttt{FUS}, however, looses between \SIrange[range-phrase={ and }]{-45}{-35}{\percent} when trained on \textbf{Paris-13} and \SIrange[range-phrase={ and }]{-35}{-25}{\percent} for \textbf{Nantes}.
         Conversely when training on \textbf{Elancourt} and testing on the other two areas, the comparisons are not identical.
         However, from a general standpoint, we can see how the \texttt{building errors} are always recording losses when testing on both \textbf{Paris-13} and \textbf{Nantes}.
-        Except for \texttt{FIT}, the inverse situation is obseved for \texttt{Facet errors} where labels are either better detected or stable.
+        Except for \texttt{FIT}, the inverse situation is obseved for \texttt{Facet errors} where labels are either better detected or stable.\\
 
         \begin{table}[htbp]
             \footnotesize 
@@ -137,7 +137,7 @@
                 \textcolor{STBL}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-5}{5}{\percent})--
                 \textcolor{GAIN0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) --
                 \textcolor{GAIN1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{15}{25}{\percent}].
-                When two zero F-scores are compared, the cell is colored in white \(\square\): neither positive nor negative.
+                When two null F-scores are compared, the cell is colored in white \(\square\): neither positive nor negative.
             }
         \end{table}
 
@@ -158,10 +158,11 @@
         When looking at \texttt{Facet errors} transferability power, we can see how training on \textbf{Nantes} and testing on \textbf{Paris-13} yields the same scores as when the opposite experiment is conducted.
         We can also see how \textbf{Elancourt} is best for learning \texttt{FIT} as it transfers well to \textbf{Nantes} while having no effect on \textbf{Paris-13}.
         In contrast, both comparisons are negative when training of the last two areas.
-        With the exception of this label, training on the latter dense zones proves to be advantageous \texttt{projectivity} wise than learning on \textbf{Elancourt}.
-        In terms of \texttt{Building errors}, clear discernible patterns are hard to find, except for \texttt{BIT} and \texttt{BUS}.
-        For these two labels, training on \textbf{Elancourt} proved to be slightly better than on the other scenes.
-        This agrees with the previous conclusion that this error family is not easy to learn.\\
+        With the exception of this label, training on the latter dense zones proves to be advantageous than learning on \textbf{Elancourt}, \texttt{projectivity} wise.
+        In terms of \texttt{Building errors}, clear discernible patterns are hard to find.
+        This agrees with the previous conclusion that this error family is not easy to learn.
+        The only exceptions were \texttt{BIT} and \texttt{BUS}.
+        For these two labels, training on \textbf{Elancourt} proved to be slightly better than on the other scenes.\\
 
         As we can suspect from looking at the large standard deviations illustrated in Figure~\ref{fig::f_score_transferability_f3}, modalities play an instrumental role in insuring the transferability experiments.
         All modalities that were standing out in terms of the F-score were mentioned in the corresponding cell in Table~\ref{tab::transferability_comparison}.
@@ -179,7 +180,7 @@
         An other way to look at it is, from an operational point of view, to find out how much learning on a union of many urban scenes is helpful when testing on an unseen one.
         Experiments that merge all zones except $Z_i$ ($\underset{\forall j \neq i}{\bigcup} Z_j$) for training and test on $Z_i$ are denoted by the couple $(\underset{\forall j \neq i}{\bigcup} Z_j, Z_i)$ or by $ \underset{\forall j \neq i}{\bigcup} Z_j \rightarrow Z_i$.
         There are three possibilities: \textbf{Elancourt} $\cup$ \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13}, \mbox{\textbf{Paris-13}}\,$\cup$\,\textbf{Nantes}\,\(\rightarrow\)\,\textbf{Elancourt} and \mbox{\textbf{Paris-13}}\,$\cup$\,\textbf{Elancourt}\,\(\rightarrow\)\,\textbf{Nantes}.
-        The F-score evolution per experiment and error is depicted in Figure~\ref{fig::f_score_generalization_f3}.\\
+        The F-score evolution, per experiment and label, is depicted in Figure~\ref{fig::f_score_generalization_f3}.\\
     
         \thisfloatsetup{subfloatrowsep=none}
         \begin{figure}[htbp]
@@ -241,12 +242,12 @@
                 \textcolor{STBL}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-5}{5}{\percent})--
                 \textcolor{GAIN0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) --
                 \textcolor{GAIN1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{15}{25}{\percent}] --
-                When two zero F-scores are compared, the cell is colored in white \(\square\): neither positive nor negative.
+                When two null F-scores are compared, the cell is colored in white \(\square\): neither positive nor negative.
             }
         \end{table}
             
         We compare the F-score ratios of these experiments, shown in Table~\ref{tab::all_f-scores_generalization_f3}, with ones from the ablation study for each test area.
-        These comparisons are compiled in Table~\ref{tab::generalization_comparison}.
+        These comparisons are compiled in Table~\ref{tab::generalization_comparison}.\\
     
         We start again with a comparison with respect to error families:
         \begin{description}
@@ -262,28 +263,30 @@
         Similarly to the previous study, image and height modalities play a major role in error detection.
         Image based features are crucial for \texttt{FIB}, \texttt{FUS}, \texttt{BOS}, \texttt{BIB} and \texttt{BUS} detection (Table~\ref{tab::generalization_comparison}).
         Height based attributes has always a minor role contributing only once for \texttt{BIT} as well as geometric features.
-        Image based errors proves again how instrumental they are in learning even for topological errors.\\
+        Image based errors proves again how instrumental they are in learning, even for topological errors.\\
         
         Based on the generalization study we can deduce the best zones to train each error label on.
         In fact, if a zone yields the worst scores it means that it contains the hardest instances that are beneficial for training.
         Conversely, if taken into account in training, it will help the classifier yield better results when testing on other scenes.\\
 
+        For \texttt{Building errors} a clear pattern can be observed compared to the transferability study.
         \textbf{Elancourt} when left out suffers the most.
         In fact, as \textbf{Nantes} and \textbf{Paris-13} are very dense, buildings are homogeneous in terms of shape with moslty Haussman style or parallelepiped shaped buildings.
-        On the other hand, \textbf{Elancourt} has more heterogeneous buildings allowing a better learning.\\
+        On the other hand, \textbf{Elancourt} has more heterogeneous buildings allowing a better learning.
+        However, the differences are not that big between the latter and \textbf{Nantes} as was proved in the \texttt{projectivity} comparisons.
+        \textbf{Nantes} has some interesting observations to learn on, especially for \texttt{BIB}.\\
 
-        Regarding \texttt{Facet errors}, we can start by setting aside \texttt{FOS} as it is always well learned over all sets.
+        Regarding \texttt{Facet errors}, the differences are sharper if we set aside \texttt{FOS} as it is always well learned over all sets.
         For \texttt{FUS} it is \textbf{Paris-13} that suffers the most when left out.
         This is understandable as Haussman style buildings are usually under-segmented and hence allow for a better learning than other sets, especially \textbf{Elancourt}.
         \textbf{Paris-13} is also the better alternative for \texttt{FIG}.
-        \texttt{FIB}, this time, is better learned on \textbf{Nantes} which presents also compact buildings with a lot of small facets that are easily misestimated.
-        However, \texttt{FIT} is the exception as \textbf{Elancourt} offers the better alternative, as it comprises various building types that are not always easily modelizable.
+        Next, we can observe how \texttt{FIB} is better learned on \textbf{Nantes} as it also presents compact buildings with a lot of small facets that can be easily misestimated.
+        However, \texttt{FIT} is the exception as \textbf{Elancourt} offers the better alternative, as it comprises various building types that cannot be easily modeled.
     
     \subsection{Representativeness study}
         \label{subsec::more_experiments::scalability::representativeness}
         The objective is to find out, after merging all training samples from all datasets, what is the minimal amount of data that can guaranty stable predictions.
-        We can, thereafter, understand how much learning on one scene typology can affect results compared to a mixed training set.
-        Figure~\ref{fig::f_score_representativeness_f3} depicts F-score as a function of training ratios (between \SIrange[range-phrase={ and }]{20}{70}{\percent}) and \texttt{atomic} errors.\\
+        Figure~\ref{fig::f_score_representativeness_f3} depicts the F-score as a function of training ratios (between \SIrange[range-phrase={ and }]{20}{70}{\percent}) and \texttt{atomic} errors.\\
                 
         \thisfloatsetup{subfloatrowsep=none}
         \begin{figure}[htbp]
@@ -312,21 +315,30 @@
         \end{figure}
             
         We note the high stability of the F-score.
-        This indicates that having a small heterogeneous dataset is not instrumental to the learning capacity and can be even the most suitable solution.
+        This indicates that having a small heterogeneous dataset is not detrimental to the learning capacity and can be even the most suitable solution.
         \texttt{BOS}, \texttt{FOS}, and \texttt{FIG} have a standard deviation under \SI{2}{\percent}, as opposed to \texttt{FIB}, \texttt{BIT} and \texttt{FIT}.
-        Indeed, they have large variance, and even a larger standard deviation than mean value.
-        Scalability is, hence, ensured with a limited training set.
-        No standard logarithmic behavior can be found at the studied scales.
-        \SI{20}{\percent} of the full label set is sufficient so as to retrieve results with a performance similar to the initial ablation study.
-        The best results are observed for \texttt{BOS}, \texttt{BUS}, and \texttt{FUS}.
-        These errors are topological defects of building roof facets which require a high diversity of training samples for their detection.
-        More sophisticated features are however still required to help predicting less frequent and more semantic labels.
+        Indeed, the latter vary greatly with respect to the training size, and even a larger standard deviation according to the feature configurations.\\
+
+        However, when looking at the best feature configurations, the variability of the F-scores towards the training size dwindles.
+        Extrinsic modalities play again a big role in these experiments as shown in Table~\ref{tab::all_f-scores_representativeness_f3}.
+        The issue, in this setting, is the lack of consistency when it comes to which modality is the most important.
+        This may be explained by the fact that training samples do not always contain the same instances.\\
+
+        For each error we can then determine the minimum training size needed to achieve stability.
+        As seen \texttt{BOS}, \texttt{FOS}, and \texttt{FIG} are very stable and a \SI{20}{\percent} training set is sufficient to retieve similar performance to the initial ablation study.
+        For \texttt{BUS} (\textit{resp.} \texttt{FUS}), using the best performing features, \SI{20}{\percent} is also enough to achieve stability in the range \SIrange{48}{52}{\percent} (\textit{resp.} \SIrange{47}{53}{\percent}).
+        \texttt{FIB} can also be stabilized between \SIrange[range-phrase={ and }]{42}{46}{\percent} but requires a \SI{30}{\percent} of instances to train on.
+        However, \texttt{BIT}, \texttt{FIT} and \texttt{BIB} prove to be harder to stabilize with mean F-scores around \SI{16}{\percent}, \SI{9}{\percent} and \SI{19}{\percent} respectively.
+        We can hence observe how, understandably, mixing the training sets produces scores that averages out the ones from the ablation study.
+        On the other hand, more sophisticated features are still required to help predicting the less frequent and more semantic labels.
     
 \section{The \texorpdfstring{\acrlong*{acr::efin}}{eFin} impact on predictions}
     \label{sec::more_experiments::finesse}
     In this section, we reproduce the experimental settings described in Section~\ref{sec::experiments::baseline_feature_analysis} and Section~\ref{sec::more_experiments::scalability}.
-    Once the \textbf{\gls{acr::efin}} is set to be 2, the goal is to find out how good, transferable and stable are the predictions of modeling error families: \texttt{Building errors} and \texttt{Facet errors}.
-    Otherwise, if \textbf{\gls{acr::efin}} is fixed at level 1, the idea is to observe the predictability of defectuous model compared to \texttt{Valid} ones.
+    First, the \textbf{\gls{acr::efin}} is set to be 2.
+    The goal is to find out how good, transferable and stable are the predictions of modeling error families: \texttt{Building errors} and \texttt{Facet errors}.
+    Afterwhat, \textbf{\gls{acr::efin}} is fixed at level 1.
+    The idea is to observe the predictability of defectuous model compared to \texttt{Valid} ones.
     
     \subsection{Error family detection}
         \label{subsec::more_experiments::finesse::2}
@@ -335,9 +347,9 @@
             \centering
             \begin{tabular}{|c | c c | c c | c c | c c |}
                 \hline
-                \multicolumn{9}{|c|}{\textbf{Elancourt}}\\
+                & \multicolumn{8}{|c|}{\textbf{Elancourt}}\\
                 \hline
-                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.8cm}|}{\textbf{All}}\\
+                & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.8cm}|}{\textbf{All}}\\
                 \cline{2-9}
                 & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
                 \hline
@@ -346,9 +358,9 @@
                 Facet errors & 91.79 & 89.79 & 92.65 & 89.40 & \textbf{93.21} & \textbf{89.45} & 93.46 & 89.16 \\
                 \hline
                 \hline
-                \multicolumn{9}{|c|}{\textbf{Nantes}}\\
+                & \multicolumn{8}{|c|}{\textbf{Nantes}}\\
                 \hline
-                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.8cm}|}{\textbf{All}}\\
+                & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.8cm}|}{\textbf{All}}\\
                 \cline{2-9}
                 & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
                 \hline
@@ -357,9 +369,9 @@
                 Facet errors & 91.20 & 94.01 & 91.37 & 94.36 & 91.20 & 94.35 & \textbf{91.73} & \textbf{94.21}\\
                 \hline
                 \hline
-                \multicolumn{9}{|c|}{\textbf{Paris-13}}\\
+                & \multicolumn{8}{|c|}{\textbf{Paris-13}}\\
                 \hline
-                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.8cm}|}{\textbf{All}}\\
+                & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.8cm}|}{\textbf{All}}\\
                 \cline{2-9}
                 & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
                 \hline
@@ -433,7 +445,7 @@
             \texttt{FOS} (\textit{resp.} \texttt{FIG}) achieves more than \SI{90}{\percent} (\textit{resp.} \SI{80}{\percent}) in F-score, as depicted in Figure~\ref{subfig::f_score_ablation_f3_facet}.
         } helps understanding why the F-score reaches at least \SI{90}{\percent} for this family (Figure~\ref{subfig::f_score_ablation_f2}).
         As with \textbf{\gls{acr::efin}} level 3 experiments, \texttt{Facet errors} yields higher prediction scores than on \texttt{Building errors}.
-        Indeed, we can see a smaller discrepancy, that is below \SI{5}{\percent}, between F-scores on different scenes for \texttt{Facet errors} than for \texttt{Building errors} with \SI{15}{\percent}.\\
+        Moreover, we can see a smaller discrepancy, that is below \SI{5}{\percent}, between F-scores on different scenes for \texttt{Facet errors} than for \texttt{Building errors} with \SI{15}{\percent}.\\
 
         The transferability study (Figure~\ref{subfig::f_score_transferability_f2}) compares the F-scores with the ablation study provided in Figure~\ref{subfig::f_score_ablation_f2}.
         Out of all 12 possible comparisons, only 2 exhibit a decrease in error discrimination.
@@ -710,7 +722,7 @@
                 \textcolor{GAIN2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{25}{35}{\percent}) --
                 \textcolor{GAIN3545}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{35}{45}{\percent}) --
                 \textcolor{GAIN45}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{45}{100}{\percent}] --
-                When two zero F-scores are compared, the cell is colored in white \(\square\): neither positive nor negative.
+                When two null F-scores are compared, the cell is colored in white \(\square\): neither positive nor negative.
             }
         \end{table}
 
