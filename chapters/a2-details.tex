@@ -147,7 +147,7 @@
                     \hline
                     \texttt{BOS} & 53.64 & 55.45 & 57.71 & 55.95 \\
                     \hline
-                    \texttt{BUS} & 11.60 & 14.29 & 34.57 & 14.09 \\
+                    \texttt{BUS} & 11.60 & 14.29 & \textbf{34.57} & 14.09 \\
                     \hline
                     \texttt{BIB} & 0.00 & 0.00 & 0.00 & 0.00 \\
                     \hline
@@ -1013,6 +1013,124 @@
     
         \FloatBarrier
     \subsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} to \texorpdfstring{\acrshort*{acr::rf}}{RF} comparison}
+        \begin{table}[htpb]
+            \footnotesize
+            \begin{center}
+                \begin{tabular}{| c | c c | c c | c c | c c |}
+                    \hline
+                    & \multicolumn{4}{c|}{\textbf{Elancourt}}\\
+                    \hline
+                    &\textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All}\\
+                    \hline
+                    \texttt{BOS} & 84.12 & 84.04 & 83.08 & 82.84 \\
+                    \hline
+                    \texttt{BUS} & 46.08 & 53.88 & 51.48 & 50.82 \\
+                    \hline
+                    \texttt{BIB} & 20.84 & 21.58 & \textbf{26.20} & \textbf{26.88} \\
+                    \hline
+                    \texttt{BIT} & \textbf{39.68} & 33.06 & 33.33 & 19.82 \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & 98.99 & 99.10 & 98.91 & 98.87 \\
+                    \hline
+                    \texttt{FUS} & 3.67 & 1.25 & 3.12 & 2.49 \\
+                    \hline
+                    \texttt{FIB} & 16.60 & 0.00 & 15.08 & 13.81 \\
+                    \hline
+                    \texttt{FIT} & 12.51 & 15.99 & 6.45 & 6.45 \\
+                    \hline
+                    \texttt{FIG} & 76.66 & 76.33 & 75.26 & 75.25 \\
+                    \hline
+                    \hline
+                    & \multicolumn{4}{c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
+                    \hline
+                    &\textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All}\\
+                    \hline
+                    \texttt{BOS} & 62.44 & 60.36 & 51.13 & 59.15 \\
+                    \hline
+                    \texttt{BUS} & 33.12 & 37.27 & 14.28 & \textbf{50.56} \\
+                    \hline
+                    \texttt{BIB} & 3.84 & 1.29 & 0.00 & 2.59 \\
+                    \hline
+                    \texttt{BIT} & \textbf{10.10} & 6.18 & 0.00 & 2.10 \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & 98.42 & 98.41 & 85.45 & 98.69 \\
+                    \hline
+                    \texttt{FUS} & 72.86 & 72.37 & 36.36 & 72.63 \\
+                    \hline
+                    \texttt{FIB} & 64.87 & 63.69 & 29.97 & \textbf{69.68} \\
+                    \hline
+                    \texttt{FIT} & 11.76 & 11.76 & 11.11 & \textbf{21.05} \\
+                    \hline
+                    \texttt{FIG} & 88.14 & 88.50 & 84.40 & 89.00 \\
+                    \hline
+                \end{tabular}
+            \end{center}
+            \caption{
+                \label{tab::all_f-scores_rf_f3}
+                F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using a \gls{acr::rf}.
+                These are deduced from Table~\ref{tab::rf_f3}.
+                Modalities that drives jumps of more than a \SI{4.5}{\percent} in F-score are distinguished in bold.
+            }
+        \end{table}
+        \begin{table}[htpb]
+            \footnotesize
+            \begin{center}
+                \begin{tabular}{| c | c c | c c | c c | c c |}
+                    \hline
+                    & \multicolumn{4}{c|}{\textbf{Elancourt}}\\
+                    \hline
+                    &\textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All}\\
+                    \hline
+                    \texttt{BOS} & 91.71 & 91.43 & 91.42 & 53.87 \\
+                    \hline
+                    \texttt{BUS} & 47.06 & 45.23 & 45.21 & \textbf{58.64} \\
+                    \hline
+                    \texttt{BIB} & 67.94 & \textbf{90.42} & \textbf{90.41} & 54.23 \\
+                    \hline
+                    \texttt{BIT} & 84.98 & \textbf{100} & \textbf{100} & \textbf{100} \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & 69.96 & 68.24 & 68.24 & \textbf{75.51} \\
+                    \hline
+                    \texttt{FUS} & \textbf{67.78} & 35.79 & 35.81 & 28.72 \\
+                    \hline
+                    \texttt{FIB} & 46.38 & 29.30 & 29.30 & \textbf{81.39} \\
+                    \hline
+                    \texttt{FIT} & 93.75 & \textbf{100} & \textbf{100} & \textbf{100} \\
+                    \hline
+                    \texttt{FIG} & \textbf{86.48} & 73.33 & 73.41 & 57.09 \\
+                    \hline
+                    \hline
+                    & \multicolumn{4}{c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
+                    \hline
+                    &\textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All}\\
+                    \hline
+                    \texttt{BOS} & \textbf{49.04} & 35.22 & 35.22 & 35.22 \\
+                    \hline
+                    \texttt{BUS} & \textbf{42.81} & 19.67 & 22.27 & 16.56 \\
+                    \hline
+                    \texttt{BIB} & \textbf{28.61} & 22.71 & 22.71 & 22.71 \\
+                    \hline
+                    \texttt{BIT} & \textbf{46.76} & 25.04 & 25.04 & 25.04 \\
+                    \specialrule{.2em}{.1em}{.1em}
+                    \texttt{FOS} & 85.36 & 85.31 & 85.26 & \textbf{89.76} \\
+                    \hline
+                    \texttt{FUS} & \textbf{74.61} & 36.13 & 36.13 & 36.13 \\
+                    \hline
+                    \texttt{FIB} & \textbf{54.79} & 40.18 & 40.18 & 39.10 \\
+                    \hline
+                    \texttt{FIT} & 94.44 & \textbf{100} & \textbf{100} & \textbf{100} \\
+                    \hline
+                    \texttt{FIG} & \textbf{85.86} & 74.51 & 74.43 & 66.00 \\
+                    \hline
+                \end{tabular}
+            \end{center}
+            \caption{
+                \label{tab::all_f-scores_svm_f3}
+                F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using a \gls{acr::svm}.
+                These are deduced from Table~\ref{tab::svm_f3}.
+                Modalities that drives jumps of more than a \SI{4.5}{\percent} in F-score are distinguished in bold.
+            }
+        \end{table}
         \begin{table}[htbp]
             \footnotesize
             \centering
