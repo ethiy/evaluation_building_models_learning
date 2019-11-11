@@ -18,9 +18,9 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
     \subsection{Urban scenes and modeling techniques}
         \label{subsec::experiments::datasets::scenes}        
         \gls{acr::3d} models from three different cities of France are selected in order to assess the performance of our framework: \textbf{Elancourt}, \textbf{Nantes}, and the XIII\textsuperscript{th} district of Paris (\textbf{Paris-13}) (\textit{cf.} Figure~\ref{fig::france_map}).
-        Figure~\ref{fig::elancourt_ortho} depicts the small city of \textbf{Elancourt} which contains diverse of building types: residential areas with gable and hip roof buildings and large industrial flat roof building based districts (\textit{cf.} Subfigure~\ref{subfig::elancourt_samples}).
-        \textbf{Nantes}, as shown in Figure~\ref{fig::nantes_ortho}, represents a denser urban setting but with a lower building diversity (\textit{cf.} Subfigure~\ref{subfig::nantes_samples}).
-        In Figure~\ref{fig::paris-13_ortho}, one can see how \textbf{Paris-13} consists of mostly flat roof high towers which coexist with Haussmann style buildings that typically exhibit highly fragmented roofs (\textit{cf.} Subfigure~\ref{subfig::paris-13_samples}).
+        Figure~\ref{fig::elancourt_ortho} depicts the small city of \textbf{Elancourt} which contains diverse of building types: residential areas with gable and hip roof buildings and large industrial flat roof building based districts (\textit{cf.} Figure~\ref{subfig::elancourt_samples}).
+        \textbf{Nantes}, as shown in Figure~\ref{fig::nantes_ortho}, represents a denser urban setting but with a lower building diversity (\textit{cf.} Figure~\ref{subfig::nantes_samples}).
+        In Figure~\ref{fig::paris-13_ortho}, one can see how \textbf{Paris-13} consists of mostly flat roof high towers which coexist with Haussmann style buildings that typically exhibit highly fragmented roofs (\textit{cf.} Figure~\ref{subfig::paris-13_samples}).
         The \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}) scene contains 2,009 (\textit{resp.} 748 and 478) annotated building models.
         The \gls{acr::dsm} as well as the orthorectified image resolution is \SI{0.06}{\m} for the first area while it is \SI{0.1}{\m} for the other ones.\\
 
@@ -200,8 +200,8 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
 \section{The experimental set-up}
     \label{sec::experiments::setup}
     In this section, we give detailed account of how every building block of our pipeline is parameterized.
-    We first start, in Subsection~\ref{subsec::experiments::setup::feature_configurations}, by specifying the different feature configurations that are used in the experimental study and how there were implemented.
-    Next, in Subsection~\ref{subsec::experiments::setup::classification}, we discuss in great detail how the classification process was conducted.
+    We first start, in Section~\ref{subsec::experiments::setup::feature_configurations}, by specifying the different feature configurations that are used in the experimental study and how there were implemented.
+    Next, in Section~\ref{subsec::experiments::setup::classification}, we discuss in great detail how the classification process was conducted.
 
     \subsection{Feature configurations}
         \label{subsec::experiments::setup::feature_configurations}
@@ -218,7 +218,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                 \underbrace{4}_{\substack{\text{the output dimension}\\\text{of the function } \chi_{\max,\min,\operatorname{mean},\operatorname{med}} }} \times \underbrace{5}_{\substack{\text{the number of the facet}\\\text{graph attributes}}} = 20.
             \end{equation*}
             Regarding height based feature vectors their dimension depend on the histogram parameters.
-            Since we compute differences between observed and model height at terrain level also (\textit{cf.} Subsection~\ref{subsec::learned_evaluation::baseline::height}), and because these are virtually unbounded and can differ from one scene to another, the maximum possible discrepancy is limited to \SI{\pm 50}{\m} for all scenes.
+            Since we compute differences between observed and model height at terrain level also (\textit{cf.} Section~\ref{subsec::learned_evaluation::baseline::height}), and because these are virtually unbounded and can differ from one scene to another, the maximum possible discrepancy is limited to \SI{\pm 50}{\m} for all scenes.
             In order to have the same feature vector dimension for this modality as for the geometric one, the number of bins is fixed manually to \(20\).\\
             For image based features, the cosine similarity between normal vectors, used in Equation~\ref{eq::corr_fac}, is by definition bounded in the interval [-1, 1].
             This interval is consequently divided evenly into \(20\) bins for the histogram computation.
@@ -243,7 +243,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             We lay out herein how their parameters were determined.
 
             \paragraph{Graph kernels}
-                In Subsection~\ref{subsec::learned_evaluation::richer_features::graph}, we have seen how 14 graph kernels are aggregated to describe graphs.
+                In Section~\ref{subsec::learned_evaluation::richer_features::graph}, we have seen how 14 graph kernels are aggregated to describe graphs.
                 We relied, in experiments, on an available Python module called GraKel~\parencite{siglidis2018grakel}.
                 We provide herein the parameters of each kernel type.
                 \begin{description}
@@ -258,7 +258,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                                 That is why we choose to keep the same radius size\footnote{The neighboorhoods \(N_l(v)\) are taken as balls around vertex \(v\)~\parencite{kondor2016multiscale}.} and depth level \(L\) set to 3 as in the original paper~\parencite{kondor2016multiscale}.
                                 The same goes for the regularization terms fixed at a value of \num{1e-2}.
                                 Computing one kernel comparison requires around \SI{10.6}{\s\per\building\squared}.
-                    \item[\(\blacktriangleright\) Propagation] The choice of the transition matrix, as explained in Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}, is set by default to be the normalized adjacency matrix.
+                    \item[\(\blacktriangleright\) Propagation] The choice of the transition matrix, as explained in Section~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}, is set by default to be the normalized adjacency matrix.
                                 The maximal iteration number \(t_{\max}\) is similar to the height parameter of the Weisfeler-Lehman kernel and is set to 5.
                                 Other parameters regarding the hashing and binning processed are kept at their default values.
                                 Comparing two instances takes around \SI{0.0812}{\s\per\building\squared}.
@@ -291,7 +291,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
     \subsection{Classification settings}
         \label{subsec::experiments::setup::classification}
             Feature extractors were defined in the previous subsection 
-            Herein, are given extensive details how the considered classifiers (\textit{cf.} Subsection~\ref{subsec::learned_evaluation::classification::classifiers}) are applied.
+            Herein, are given extensive details how the considered classifiers (\textit{cf.} Section~\ref{subsec::learned_evaluation::classification::classifiers}) are applied.
             We also provide the metrics that will help measure the accuracy of predictions.
 
         \subsubsection{Considered labels}
@@ -304,8 +304,8 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             That is why we limited the experiments to the case where the \textbf{exclusivity} is set to be \textsc{off}.
 
         \subsubsection{Classifiers}
-            As discussed in Subsection~\ref{subsec::learned_evaluation::classification::classifiers}, two classifier types were considered in the experimental study.
-            As already explained beforehand in Subsection~\ref{subsec::learned_evaluation::classification::classifiers}, a one-vs-all approach is used to adapt \glspl{acr::rf} to multi-label settings.
+            As discussed in Section~\ref{subsec::learned_evaluation::classification::classifiers}, two classifier types were considered in the experimental study.
+            As already explained beforehand in Section~\ref{subsec::learned_evaluation::classification::classifiers}, a one-vs-all approach is used to adapt \glspl{acr::rf} to multi-label settings.
             The same approach was choosen to accommodate \glspl{acr::svm} to both the multi-class and the multi-label possibilities.
             We relied upon the already available and ubequitous implementation in Python~\parencite{scikit-learn}.
             Below we detail quantitavely the used parameters.
@@ -316,7 +316,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             \paragraph{\acrshort*{acr::rf}}
                 A brief grid search involving a smaller set of building models and only baseline geometric features~\parencite{ennafii2018qualificationunannotated} yielded comparable results for the number of trees set in the range \numrange{850}{1000} and a maximum tree depth from \numrange{3}{5}.
                 Given the already immense parameter search space involving all possible feature configurations, feature extraction parameters and label possibilities, the \gls{acr::rf} parameters are set to \num{1000} for the tree number and 4 for the maximum tree depth for all other experiments without performing any grid search.
-                Regarding \gls{acr::scatnet} based features, in Subsection~\ref{subsec::more_experiments::richer_features::scatnet_baseline} were reduced using \gls{acr::pca} and Kernel\footnote{The used kernel is that same the one used with the \gls{acr::svm} classifier.} \gls{acr::pca} in order to not overwhelm the geometric features.
+                Regarding \gls{acr::scatnet} based features, in Section~\ref{subsec::more_experiments::richer_features::scatnet_baseline} were reduced using \gls{acr::pca} and Kernel\footnote{The used kernel is that same the one used with the \gls{acr::svm} classifier.} \gls{acr::pca} in order to not overwhelm the geometric features.
                 To that end, these rich features are reduced to 20 in length to equal the dimension of baseline geometric feature vectors.
 
             \paragraph{\acrshort*{acr::svm}}
@@ -361,8 +361,8 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
 %     \label{sec::experiments::evaluation}
     
 
-%     In Subsection~\ref{sec::experiments::setup} provides all details about our experimental approach.
-%     Next in Subsection~\ref{sec::experiments::baseline_feature_analysis}, we report some first results using the baseline features we developped.
+%     In Section~\ref{sec::experiments::setup} provides all details about our experimental approach.
+%     Next in Section~\ref{sec::experiments::baseline_feature_analysis}, we report some first results using the baseline features we developped.
 
 \section{Baseline feature analysis}
     \label{sec::experiments::baseline_feature_analysis}
@@ -598,12 +598,12 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                 F-scores vizualization for ablation results at \textbf{\gls{acr::efin}} level 3.
                 These are deduced from Table~\ref{tab::all_f-scores_ablation_f3}.
                 The color indicates the how well detected a label is: 
-                \textcolor{LOSS3545}{$\blacksquare$}: [\SIrange[range-phrase={, }]{0}{15}{\percent})--
-                \textcolor{LOSS2535}{$\blacksquare$}: [\SIrange[range-phrase={, }]{15}{45}{\percent}) --
-                \textcolor{LOSS0515}{$\blacksquare$}: [\SIrange[range-phrase={, }]{45}{55}{\percent}) --
-                \textcolor{GAIN1525}{$\blacksquare$}: [\SIrange[range-phrase={, }]{55}{70}{\percent})--
-                \textcolor{GAIN2535}{$\blacksquare$}: [\SIrange[range-phrase={, }]{70}{85}{\percent})--
-                \textcolor{GAIN45}{$\blacksquare$}: [\SIrange[range-phrase={, }]{85}{100}{\percent}].
+                \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{0}{15}{\percent})--
+                \textcolor{LOSS2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{15}{45}{\percent}) --
+                \textcolor{LOSS0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{45}{55}{\percent}) --
+                \textcolor{GAIN1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{55}{70}{\percent})--
+                \textcolor{GAIN2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{70}{85}{\percent})--
+                \textcolor{GAIN45}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{85}{100}{\percent}].
             }
         \end{table}
 

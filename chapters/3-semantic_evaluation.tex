@@ -13,20 +13,20 @@ After discussing some properties of the chosen error defnitions, we explain, in 
 
 \section{The general framework}
     \label{sec::semantic_evaluation::general_framework}
-    As stated previously in Subsection~\ref{subsec::introduction::contributions::positioning}, a semantic evaluation implies a categorization of errors affecting building models.
+    As stated previously in Section~\ref{subsec::introduction::contributions::positioning}, a semantic evaluation implies a categorization of errors affecting building models.
     In the same subsection, we discussed the desired properties in order to achieve a \textbf{large-scale} and \textbf{automatic} semantic evaluation.
-    Before delving into details, we first examine the implications of such properties on error definitions in Subsection~\ref{subsec::semantic_evaluation::general_framework::hierarchization_moderularity}.
-    Next, Subsection~\ref{subsec::semantic_evaluation::general_framework::error_classification} presents a general layout of the proposed error taxonomy.
+    Before delving into details, we first examine the implications of such properties on error definitions in Section~\ref{subsec::semantic_evaluation::general_framework::hierarchization_moderularity}.
+    Next, Section~\ref{subsec::semantic_evaluation::general_framework::error_classification} presents a general layout of the proposed error taxonomy.
 
     \subsection{Hierarchization and modularity}
         \label{subsec::semantic_evaluation::general_framework::hierarchization_moderularity}
-        The goal of this subsection is to state the desired characteristics in the categorization of building model defects based on the discussion in Subsection~\ref{subsec::introduction::contributions::positioning}.
+        The goal of this subsection is to state the desired characteristics in the categorization of building model defects based on the discussion in Section~\ref{subsec::introduction::contributions::positioning}.
         We introduce first two notions: generalizability and exhaustivity.
         These are directly linked to the \textbf{large-scale} aspect of the evaluation approach.
         These are implemented in the error categorization based on two principles: hierarchization and modularity.
 
         \subsubsection{The generalizability \textit{vs.} exhaustivity compromise}
-            In Subsection~\ref{subsec::introduction::contributions::positioning}, we have seen how the \textbf{large-scale} constraint on the quality evaluation approach entails the method robustness to changes in the urban scene as well as to the pipeline behind the evaluated model.
+            In Section~\ref{subsec::introduction::contributions::positioning}, we have seen how the \textbf{large-scale} constraint on the quality evaluation approach entails the method robustness to changes in the urban scene as well as to the pipeline behind the evaluated model.
             The first condition implies the proposed error categorization capacity to be generalizable: the ability to describe defects of building models unhindered by the specificities of one scene or another.
             The second conveys the exhaustivity of the evaluation: the power to take into account all possible errors that a building model can be affected by, free of any consideration of its origin.\\
 
@@ -168,7 +168,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 This is a very common error which results from a faulty footprint of the building.
                 The latter is either retrieved automatically during the modeling~\parencite{lafarge2012creating}, or is provided as input~\parencite{durupt2006automatic}.
                 The first case is the most error inducing as it relies on extrinsic large-scale remote sensing data that are devoid of semantics.
-                The second is expected to be more close to the reality, but can be unsuitable if outdated or too generalized, as discussed in Subsection~\ref{subsec::state_of_the_art::building_modeling::building_extraction}.
+                The second is expected to be more close to the reality, but can be unsuitable if outdated or too generalized, as discussed in Section~\ref{subsec::state_of_the_art::building_modeling::building_extraction}.
 
             \paragraph{\texttt{\acrlong*{acr::bos}}}
                 \texttt{\gls{acr::bos}} corresponds to the case where one building is subdivided into two or more.
@@ -254,9 +254,9 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 \texttt{\gls{acr::bit}} corresponds to the case where the building footprint suffers from topological defects.
                 Modeled as a \gls{acr::2d} flat surface, the cases that fall into this label are:
                 \begin{description}
-                    \item[Missing inner court:] It corresponds to a missing hole (\textit{cf.} Subfigure~\ref{subfig::building_hole});
+                    \item[Missing inner court:] It corresponds to a missing hole (\textit{cf.} Figure~\ref{subfig::building_hole});
                     \item[Inaccurate border shape:] It is due to a wrong primitive fitting: the shape of the footprint can be better described by a different geometrical shape.
-                            Subfigure~\ref{subfig::bit_2d} gives an example where the polygon has a wrong number of sides.
+                            Figure~\ref{subfig::bit_2d} gives an example where the polygon has a wrong number of sides.
                             Another case is where a circular footprint can be approximated by a polygon.
                 \end{description}
 
@@ -346,7 +346,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 In fact, if a geometric error is detected at the facet level then it will naturally impact negatively on the geometry of the model as a whole.
             
         \subsubsection{\texttt{Facet Errors} family}
-            In this sub-subsection, \gls{acr::lod}-2 and \gls{acr::lod}-3 corresponding \texttt{atomic} errors are presented.
+            In this Section, \gls{acr::lod}-2 and \gls{acr::lod}-3 corresponding \texttt{atomic} errors are presented.
 
             \paragraph{\texttt{\acrlong*{acr::fus}}}
                 \texttt{\gls{acr::fus}} corresponds to the case where one facet is subdivided into two or more facets.
@@ -401,7 +401,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 The accuracy drops even further in some cases.
                 For instance, superstructures like dormer windows can be big enough to be confused with the roof facets.
                 Another setting where surfaces are hard to extract occurs when a building part is shadowed by an other that is higher.
-                This is depicted in Subfigure~\ref{subfig::fus_2d}.
+                This is depicted in Figure~\ref{subfig::fus_2d}.
                 Methods relying only on plane extraction~\parencite{taillandier2004automatic,durupt2006automatic,nan2017polyfit} are particularly vulnerable to this error type.\\
 
                 This defect can be mitigated through the use of \gls{acr::3d} lines as cues to guide the plane extraction~\parencite{zebedin2008fusion,sinha2009piecewise}.
@@ -473,7 +473,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
 
             \paragraph{\texttt{\acrlong*{acr::fib}}}
                 \texttt{\gls{acr::fib}} corresponds to the case where at least one facet border is incorrectly located.
-                As en example, Subfigure~\ref{subfig::fib_2d} shows that the central edge that links the two main roof sides does not correspond to the one on the image position.
+                As en example, Figure~\ref{subfig::fib_2d} shows that the central edge that links the two main roof sides does not correspond to the one on the image position.
                 This is a purely geometrical error similarly to \texttt{\gls{acr::bib}}.\\
 
                 \begin{figure}[htbp]
@@ -519,7 +519,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 \end{figure}
 
                 Line extraction is usually very faithfull to the data and depends mostly on the resolution and quality of the input data used for modeling.
-                The most likely reason usually behind this kind of errors are usually imprecise fitting of primitives that lead to a shifted intersecting edge such as shown in Subfigure~\ref{subfig::fib_2d}.\\
+                The most likely reason usually behind this kind of errors are usually imprecise fitting of primitives that lead to a shifted intersecting edge such as shown in Figure~\ref{subfig::fib_2d}.\\
 
                 Just as with oversegmentation, one way to make lines retrieval more accurate is to rely on redundancy by extracting them from different modalities.
                 An alternative is to rely on symetries \addref to automatically correct surface intersections.
@@ -572,10 +572,10 @@ After discussing some properties of the chosen error defnitions, we explain, in 
 
                 This can be due to various reasons.
                 Most methods rely on the assumption that buildings are piecewise linear~\parencite{nan2017polyfit} or Manhattan-world like~\parencite{li2016manhattan}.
-                This is evidently not always the case (\textit{cf.} Subfigure~\ref{subfig::fit_2d}).
+                This is evidently not always the case (\textit{cf.} Figure~\ref{subfig::fit_2d}).
                 Even with the right assumptions, this specific case cannot have been well modeled.
                 If so it would have at least approximated the circular cylindrical structures with a regular polygon cylinder.
-                This is due to the fact that the quality of the data was poor and was unreliable as explained in the \texttt{\gls{acr::fus}} case in Subfigure~\ref{subfig::fus_2d}.
+                This is due to the fact that the quality of the data was poor and was unreliable as explained in the \texttt{\gls{acr::fus}} case in Figure~\ref{subfig::fus_2d}.
                 The same effect can cause a missing hole being undetected.\\
 
                 Solving this issue is hard besides the obvious change of primitive assumptions.
@@ -586,7 +586,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
             \paragraph{\texttt{\acrlong*{acr::fig}}}
                 \texttt{\gls{acr::fig}} corresponds to the case of inaccurate facet geometric estimation.
                 In mathematical terms, this means that the surface primitive parameters are misestimated.
-                In Subfigure~\ref{fig::fig_3d}, the planar surface slope was miscalculated as flat while it was of \textit{ca.} \SI{25}{\degree}.\\
+                In Figure~\ref{fig::fig_3d}, the planar surface slope was miscalculated as flat while it was of \textit{ca.} \SI{25}{\degree}.\\
 
                 \begin{figure}[htbp]
                     \centering
@@ -629,7 +629,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 \end{figure}
 
                 This is linked in particular to the input sensor data quality.
-                The case of Subfigure~\ref{subfig::fig_2d} illustrates how neighbooring building parts influence the data as it blunts away the slope of the roof.
+                The case of Figure~\ref{subfig::fig_2d} illustrates how neighbooring building parts influence the data as it blunts away the slope of the roof.
                 Semantics play again a role in detecting a purely geometric error.
                 For correction, as the corruption in the data resulting from the modeling limits could be filtered out using semantics, one can reestimate the parameters of the primitives.
                 Failing that, this correction step is usually conducted by human operators.
@@ -646,14 +646,14 @@ After discussing some properties of the chosen error defnitions, we explain, in 
             The similarity of the \texttt{Building Errors} and \texttt{Facet Errors} is striking.
             Indeed, this is what was intended.
             The idea came after observing that segmentation issues can occur both at building and facet errors.
-            It was ruled that both should be separated as they occur at different \glspl{acr::lod} so as to have a fine representation of those defects as discussed in Subsection~\ref{subsec::semantic_evaluation::general_framework::error_classification}.
+            It was ruled that both should be separated as they occur at different \glspl{acr::lod} so as to have a fine representation of those defects as discussed in Section~\ref{subsec::semantic_evaluation::general_framework::error_classification}.
             If \texttt{atomic} errors are defined on particular defects observed only at a certain level, one can expect that these definitions are going to be too specific and not exhaustive enough.
             This was the case of an earlier categorization of errors based only on a smaller subset of our datasets~\parencite{ennafii2018semanticunannotated}.
             For instance, at building level, in our dataset, missing courts are fairly present.
-            However, there are no cases where facets have holes like illustrated in Subfigure~\ref{subfig::facet_hole}.
+            However, there are no cases where facets have holes like illustrated in Figure~\ref{subfig::facet_hole}.
             Both can be grouped in one single label ``missing hole''.
             This example, illustrated in Figure~\ref{fig::holes_levels}, makes the case for using similarity across \glspl{acr::lod} being instrumental for generalizability.\\
-            This will also be an interesting option to use even if the error families were different as was proposed in Subsection~\ref{subsec::semantic_evaluation::general_framework::error_classification}.\\
+            This will also be an interesting option to use even if the error families were different as was proposed in Section~\ref{subsec::semantic_evaluation::general_framework::error_classification}.\\
 
             \begin{figure}[htbp]
                 \centering
@@ -685,7 +685,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
             \end{figure}
 
             Defining errors in \gls{acr::3d} is not an easy task.
-            The \textit{implicit} semantics, discussed in sub-subsection~\ref{subsubsec::introduction::urban_3d_reconstruction::building_3d_modeling::semantics}, implies the fact that each facet of the model is special and has a meaning.
+            The \textit{implicit} semantics, discussed in Section~\ref{subsubsec::introduction::urban_3d_reconstruction::building_3d_modeling::semantics}, implies the fact that each facet of the model is special and has a meaning.
             Each facet contained in the model is, hence, supposed to be unique and persistent: it cannot be replaced by an approximating set of different facets as in a mesh.
             This meant that evaluating a whole building model amounts to evaluating each facet individually.
             This simplifies greatly the issue as one can think about the problem moslty as a \gls{acr::2d} evaluation one.
@@ -697,8 +697,8 @@ After discussing some properties of the chosen error defnitions, we explain, in 
             In fact, the same \texttt{atomic} errors can describe perfectly the possible errors that can affect facets on a fa\c{c}ade, owing always to the effect of \textit{implicit} semantics on building models.
         
         \subsubsection{Related taxonomies}
-            This sub-subsection discusses the semantic error defnitions in the state-of-the-art.
-            As mentioned in Subsection~\ref{subsec::state_of_the_art::quality::output::semantic},~\textcite{rottensteiner2012isprs} proposed two semantic errors ``over segmentation'' and ``under segmentation''.
+            This Section discusses the semantic error defnitions in the state-of-the-art.
+            As mentioned in Section~\ref{subsec::state_of_the_art::quality::output::semantic},~\textcite{rottensteiner2012isprs} proposed two semantic errors ``over segmentation'' and ``under segmentation''.
             These, however, relate only to facets.
             \textcite{xiong2014graph}, although not aiming at evaluating the quality of a model in its entirety, provides some error labels relative to their reconstruction method.
             For instance, ``Missing Node'' (\textit{resp.} ``False Node'', ``Missing Edge'' and ``False Edge'') correspond to, or are included in, the topological \texttt{atomic} errors from the \texttt{Facet Errors} family: \texttt{\gls{acr::fus}} (\textit{resp.} \texttt{\gls{acr::fos}}, \texttt{\gls{acr::fit}}, and \texttt{\gls{acr::fit}}).\\

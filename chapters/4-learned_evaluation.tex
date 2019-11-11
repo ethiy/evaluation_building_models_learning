@@ -15,7 +15,7 @@ These are proposed to better model defect predictions.
 
 \section{Quality evaluation as classification}
     \label{sec::learned_evaluation::classification}
-    In order to satisfy the \textbf{large-scale} condition imposed at Subsection~\ref{subsec::introduction::contributions::positioning}, we propose to formulate the problem as a supervized learning one.
+    In order to satisfy the \textbf{large-scale} condition imposed at Section~\ref{subsec::introduction::contributions::positioning}, we propose to formulate the problem as a supervized learning one.
     Errors are considered as labels while features are computed so as to describe the observed buildings.
     Actually, as a first approach, the existence of all errors is predicted at the building level, even for \texttt{Facet Errors} labels\footnote{These errors are, in fact, by definition more local.}.
     Determining which facet is affected by an error is a much more challenging problem than the previous one.
@@ -25,20 +25,20 @@ These are proposed to better model defect predictions.
     Errors are predicted based on learned statistical characteristics of the evaluated models.
     The learned approach is usually used to take care of highly semantic tasks, such as ours, that are otherwise hard to process using engineered metrics \addref.\\
     Provided an initial manual annotation effort, the prediction phase is fully automatic, as will be proved by experimental results in Chapter~\ref{chap::experiments}.
-    In order for this approach to be scalable at large scales, and hence verify the second constraint in Subsection~\ref{subsec::introduction::contributions::positioning} which is \textbf{automation}, prediction results should be stable enough independently of the urban scene.
+    In order for this approach to be scalable at large scales, and hence verify the second constraint in Section~\ref{subsec::introduction::contributions::positioning} which is \textbf{automation}, prediction results should be stable enough independently of the urban scene.
     This is fully studied in Chapter~\ref{chap::more_experiments}.\\
 
     Two aspects should be discussed to in order to apply this approach to the building \gls{acr::3d} model quality evaluation.
     First, as seen in Section~\ref{sec::semantic_evaluation::label_extraction}, the parametric nature of the taxonomy leads to a varying set of labels.
-    For this purpose, we describe in Subsection~\ref{subsec::learned_evaluation::classification::different_porblems} the different classification problems depending on the evaluation parameters.
+    For this purpose, we describe in Section~\ref{subsec::learned_evaluation::classification::different_porblems} the different classification problems depending on the evaluation parameters.
     Second, the feature extraction procedure should also be compliant with the \textbf{large-scale} objective set beforehand.
     This aspect and more are detailed in Section~\ref{subsec::learned_evaluation::classification::feature_extraction}.
     Third, the classifier should be able to handle the heterogeneity of the feature vector and must adapt to different input vectors types and sizes.
-    The choice of classifiers is, hence, discussed in Subsection~\ref{subsec::learned_evaluation::classification::classifiers}.
+    The choice of classifiers is, hence, discussed in Section~\ref{subsec::learned_evaluation::classification::classifiers}.
 
     \subsection{Different classification problems}
         \label{subsec::learned_evaluation::classification::different_porblems}
-        The nature of the different classification problems are presented in Table~\ref{tab::classification_problems} depending on the three evaluation parameters defined in Subsection~\ref{sec::semantic_evaluation::label_extraction}.\\
+        The nature of the different classification problems are presented in Table~\ref{tab::classification_problems} depending on the three evaluation parameters defined in Section~\ref{sec::semantic_evaluation::label_extraction}.\\
 
         \begin{table}[htbp]
             \small
@@ -109,7 +109,7 @@ These are proposed to better model defect predictions.
         This was illustrated in Figure~\ref{fig::fig}, as comparing the projected model to the orthoimage did not yield anything out of place, contrarily to the \gls{acr::dsm} comparison.
         Depth data can take multiple forms: unstructured point clouds, originating for instance from \gls{acr::lidar} sensors, or dense depth maps such as \gls{acr::dsm} for the overhead case.\\
         Optical images can also be employed in this framework.
-        These provide complementary information such as edges (high frequencies, in general) and textures which are suited for inner defect detection as an example (\textit{cf.} Subfigure~\ref{subfig::fus_2d}).
+        These provide complementary information such as edges (high frequencies, in general) and textures which are suited for inner defect detection as an example (\textit{cf.} Figure~\ref{subfig::fus_2d}).
         This type of data comes usually in two different shapes: oblique images or orthoimages.
     
     \subsection{Classifier choice}
@@ -121,7 +121,7 @@ These are proposed to better model defect predictions.
 
         \subsubsection{\acrlong*{acr::rf}}
             \gls{acr::rf} classifiers is a natural choice in our case.
-            As seen in Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::rf}, this type of classifiers can manage a large number of features with different dynamics and coming from multiple modalities.
+            As seen in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::rf}, this type of classifiers can manage a large number of features with different dynamics and coming from multiple modalities.
             In fact, the computed features could be geometric, image based or height based.
             Each one of these modalities can also be heterogeneous in terms of extracted value types, as will be discussed later in Section~\ref{sec::learned_evaluation::baseline}.
             Relying on their bagging property, a high number of trees is required to cover most of the feature space, while a limited tree depth is needed to avoid overfitting during training.
@@ -132,9 +132,9 @@ These are proposed to better model defect predictions.
             Moreover, only binary classification is inherently handled.
             However, it offers other advantages that are not met by \gls{acr::rf}.
             In fact, \glspl{acr::svm} can be useful when labels are not equally distributed in the training set.
-            This is actually the case of some errors that are rare in our dataset: specifically the inaccurate topology ones (\textit{cf.} Subsection~\ref{subsec::experiments::datasets::stats}).
-            This type of classifiers naturally encorporates kernels such as the ones presented later in Subsection~\ref{subsec::learned_evaluation::richer_features::graph}.
-            Finally, it is also preferred when dealing with high dimensional feature vectors like those produced by \glspl{acr::scatnet} (\textit{cf.} Subsection~\ref{subsec::learned_evaluation::richer_features::image}).
+            This is actually the case of some errors that are rare in our dataset: specifically the inaccurate topology ones (\textit{cf.} Section~\ref{subsec::experiments::datasets::stats}).
+            This type of classifiers naturally encorporates kernels such as the ones presented later in Section~\ref{subsec::learned_evaluation::richer_features::graph}.
+            Finally, it is also preferred when dealing with high dimensional feature vectors like those produced by \glspl{acr::scatnet} (\textit{cf.} Section~\ref{subsec::learned_evaluation::richer_features::image}).
 
 \section{Feature baseline}
     \label{sec::learned_evaluation::baseline}
@@ -146,9 +146,9 @@ These are proposed to better model defect predictions.
     Conversely, evaluation metrics used in the \gls{acr::3d} building reconstruction literature (\textit{e.g.}, \gls{acr::rmse}) are too weak for such a complex task.
     This will be proven later on in Section~\ref{sec::experiments::baseline_feature_analysis}.
 
-    In Subsection~\ref{subsec::learned_evaluation::baseline::geometric}, we describe the used baseline for geometric features.
-    Next, in Subsection~\ref{subsec::learned_evaluation::baseline::height}, height based features extraction is explained.
-    We end with image based features in Subsection~\ref{subsec::learned_evaluation::baseline::image}.
+    In Section~\ref{subsec::learned_evaluation::baseline::geometric}, we describe the used baseline for geometric features.
+    Next, in Section~\ref{subsec::learned_evaluation::baseline::height}, height based features extraction is explained.
+    We end with image based features in Section~\ref{subsec::learned_evaluation::baseline::image}.
 
     \subsection{Geometric features}
         \label{subsec::learned_evaluation::baseline::geometric}
@@ -233,7 +233,7 @@ These are proposed to better model defect predictions.
         The \gls{acr::dsm} is compared to the model height~\parencite{bredif20073d,zebedin2008fusion}.
         The latter is inferred from its facets plane equations.
         It is rasterized into an grid structure $alt_{\mathsf{M}} \in \mathbb{R}^{w_{\mathsf{M}} \times h_{\mathsf{M}}}$ using the same spatial resolution as $dsm_{\mathsf{M}}$.
-        The difference between the two height grids provides a discrepancy map as shown in Subfigure~\ref{subfig::residuals}).
+        The difference between the two height grids provides a discrepancy map as shown in Figure~\ref{subfig::residuals}).
         A baseline approach is herein proposed relying on the statistics of pixel values computed using the $\chi$ functions (\textit{cf.} Figure~\ref{fig::height_based_features}).\\
 
         \begin{equation}
@@ -283,7 +283,7 @@ These are proposed to better model defect predictions.
             \item[\(q\)] is the function that yields the projection of a facet if it is a polygon or an empty polygon othewise.
         \end{description}
 
-        This projection is compared with a corresponding orthorectified image \(I_{\mathsf{M}} \in \mathbb{R}^{w_{\mathsf{M}} \times h_{\mathsf{M}} \times 3}\) as shown in Subfigure~\ref{subfig::model_nadir_projection}.
+        This projection is compared with a corresponding orthorectified image \(I_{\mathsf{M}} \in \mathbb{R}^{w_{\mathsf{M}} \times h_{\mathsf{M}} \times 3}\) as shown in Figure~\ref{subfig::model_nadir_projection}.
         For each facet projection, we isolate an edge \(s\) (Figure~\ref{subfig::segment_gradient_collinearity}).
         In an ideal setting, gradients computed at pixels $g \in I_{\mathsf{M}}$ that intersect $s$ need to be collinear with its normal $\vec{n}(s)$.
         In consequence, applying the one of the statistics functions $\chi$ defined in Equations~\ref{eq::max_min_mean_med_extractor} or~\ref{eq::histogram_extractor}, we compute the distribution of the cosine similarity between the local gradient and the normal all along that $s$:
@@ -345,21 +345,21 @@ These are proposed to better model defect predictions.
     \label{sec::learned_evaluation::richer_features}
     The last section presented features that are by construction taken to be as simple as possible.
     The goal was to test the feasibility of the learned quality evaluation approach.
-    This is discussed in length in Subsection~\ref{sec::experiments::baseline_feature_analysis} and Sections~\ref{sec::more_experiments::finesse} and~\ref{sec::more_experiments::scalability}.\\
+    This is discussed in length in Section~\ref{sec::experiments::baseline_feature_analysis} and Sections~\ref{sec::more_experiments::finesse} and~\ref{sec::more_experiments::scalability}.\\
 
     This section presents features that better exploits structural information of the input models that were missed by the baseline.
     In the previous section, we identifed two types of instances from which features are extacted: graph-like and image-like data.
-    Advanced graph based feature extractors are proposed in Subsection~\ref{subsec::learned_evaluation::richer_features::graph}.
-    For images-like structures, better attributes are also presented in the next Subsection~\ref{subsec::learned_evaluation::richer_features::image}.
+    Advanced graph based feature extractors are proposed in Section~\ref{subsec::learned_evaluation::richer_features::graph}.
+    For images-like structures, better attributes are also presented in the next Section~\ref{subsec::learned_evaluation::richer_features::image}.
 
     \subsection{Graph kernels}
         \label{subsec::learned_evaluation::richer_features::graph}
-        In Subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}, were discussed some kernels that can describe adequately graphs.
-        The geometric baseline features we provided in Subsection~\ref{subsec::learned_evaluation::baseline::geometric}, more precisely in Equation~\ref{eq::geometric_features}, could actually be seen as a concatenation of the basic feature maps from Equations~\ref{eq::feature_node_graph} and~\ref{eq::feature_edge_graph}.
+        In Section~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}, were discussed some kernels that can describe adequately graphs.
+        The geometric baseline features we provided in Section~\ref{subsec::learned_evaluation::baseline::geometric}, more precisely in Equation~\ref{eq::geometric_features}, could actually be seen as a concatenation of the basic feature maps from Equations~\ref{eq::feature_node_graph} and~\ref{eq::feature_edge_graph}.
         This corresponds, in fact, to the basic kernel in Equation~\ref{eq::feature_graph_kernel_sum}.\\
 
         The biggest disadvantage of this basic kernel is its disregard towards the structural information stored in the graph.
-        That is why we propose to use the other kernels that are presented in Subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}.
+        That is why we propose to use the other kernels that are presented in Section~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}.
         None of these kernels takes into account edge attributes.
         This is actually not an issue as both the edge attributes of the facet graph (\textit{cf.} Equation~\ref{eq::model_graph}) are in fact a function of node attributes: centroid \(f \mapsto \mathscr{G}\left(f\right)\) and normal \(f \mapsto \vec{n}\left(f\right)\).
         Some of these kernels do not utilize the node attributes either as they take only account of the structure of the graph.\\
@@ -385,7 +385,7 @@ These are proposed to better model defect predictions.
         This explains why these were grouped into one vector in contrast with the other two features.\\
 
         Each graph can take multiple types of kernels.
-        We use the kernels described in Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}.
+        We use the kernels described in Section~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}.
         Since all graphs share the same structure, kernels that ignore node attributes would yield the same results, no matter which node attribute is used.
         There are two such kernels: the random walk kernel and the \gls{acr::svm} \(\vartheta\) kernel.
         We also experimented with three other types of kernels: the Multiscale Laplacian kernel, the propagation kernel and the graph hopper kernel.
@@ -400,7 +400,7 @@ These are proposed to better model defect predictions.
             \underbrace{2}_{\substack{\text{kernels ignoring}\\\text{ node attributes}}} + \underbrace{3}_{\substack{\text{attributed}\\\text{graphs}}} \times \left(\underbrace{2}_{\substack{\text{Multiscale Laplacian \&}\\\text{Propagation}}} + \underbrace{1}_{\text{Graph hopper}} \times \underbrace{2}_{\substack{\text{base}\\\text{kernels}}}\right) = 14
         \end{equation*} graph kernels.
         These are aggregated into one kernel using a linear combination.
-        This is possible thanks to \gls{acr::mkl} as explained earlier in Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.
+        This is possible thanks to \gls{acr::mkl} as explained earlier in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.
         Other types of kernels were briefly experimented with, namely the Lov\'asz \(\vartheta\), Graphlet Sampling, Subgraph Matching and Shortest Path kernels.
         However, they did not yield any valuable results and most of the time failed numerically.
         
@@ -408,8 +408,8 @@ These are proposed to better model defect predictions.
         \label{subsec::learned_evaluation::richer_features::image}
         \glspl{acr::cnn} have proven to be the standard feature extractors in image classification.
         However, they require a great load of images in order to learn good enough representations.
-        This is not our case as explained later in Subsection~\ref{subsec::experiments::datasets::stats}.
-        As a consequence, we choose instead to use \glspl{acr::scatnet} which mimic classical \glspl{acr::cnn} and can yield good image representations in an unlearned manner as shown in Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::scatnet}.
+        This is not our case as explained later in Section~\ref{subsec::experiments::datasets::stats}.
+        As a consequence, we choose instead to use \glspl{acr::scatnet} which mimic classical \glspl{acr::cnn} and can yield good image representations in an unlearned manner as shown in Section~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::scatnet}.
 
         \subsubsection{Height based features}
             Discrepancies between the \gls{acr::3d} model extracted height map and the \gls{acr::dsm} manifest in textures in computed residuals (\textit{cf.} Figure~\ref{subfig::residuals}).
@@ -417,7 +417,7 @@ These are proposed to better model defect predictions.
             In addition, theoretically the height data can be fed directly to a \gls{acr::scatnet} without requiring any normalization or preprocessing since, by construction, they can admit any type of \gls{acr::2d} signal\footnote{There are other versions of \glspl{acr::scatnet} taking one dimensional signals~\parencite{anden2014deep} or even graphs~\parencite{eickenberg2018solid}.}.
             This explains why \glspl{acr::scatnet} were chosen as a height based feature extractor.\\
 
-            From a practical standpoint, the residuals computed as in Subsection~\ref{subsec::learned_evaluation::baseline::height} come as images in different sizes \(w_{\mathsf{M}} \times h_{\mathsf{M}}\)\cref{note::w_h} depending on the input model.
+            From a practical standpoint, the residuals computed as in Section~\ref{subsec::learned_evaluation::baseline::height} come as images in different sizes \(w_{\mathsf{M}} \times h_{\mathsf{M}}\)\cref{note::w_h} depending on the input model.
             Consequently, concatenating \gls{acr::scatnet} coefficients into a single vector is going to result in variable feature vector dimensions.
             One solution is to resize all images to a certain fixed size beforehand.
             However, this solution was quickly ruled out based on few experiments.
@@ -483,10 +483,10 @@ These are proposed to better model defect predictions.
 
         \subsubsection{Height based features}
             \glspl{acr::scatnet} seem then to be good choice for image based feature extractors.
-            In fact, as shown in Subfigure~\ref{subfig::bus_2d}, image textures could be also useful for error detection.
-            More importantly, as shown with baseline image based features (\textit{cf.} Subsection~\ref{subsec::learned_evaluation::baseline::image}), edges are key image attributes for comparing building models to orthoimages.
-            Actually, \glspl{acr::scatnet} are well suited for edge detection as they use Morlet wavelets for convolution operations (\textit{cf.} Sub-subsection~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::scatnet}).
-            These filters are adapted to edge detection~\parencite{zhang2007radon}, as depicted in Subfigure~\ref{subfig::morlet_filters}.\\
+            In fact, as shown in Figure~\ref{subfig::bus_2d}, image textures could be also useful for error detection.
+            More importantly, as shown with baseline image based features (\textit{cf.} Section~\ref{subsec::learned_evaluation::baseline::image}), edges are key image attributes for comparing building models to orthoimages.
+            Actually, \glspl{acr::scatnet} are well suited for edge detection as they use Morlet wavelets for convolution operations (\textit{cf.} Section~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::scatnet}).
+            These filters are adapted to edge detection~\parencite{zhang2007radon}, as depicted in Figure~\ref{subfig::morlet_filters}.\\
 
             In order to draw features comparing orthoimages to buildings models, we start first by rasterizing the borders of polygons \(f^q \in \mathsf{F_M}\) of the model into a grid structure mask:
             \begin{equation}
@@ -522,7 +522,7 @@ These are proposed to better model defect predictions.
                         \end{equation}
             \end{description}
             The first situation corresponds to an early fusion scheme while the second represent a late fusion case.
-            Both settings are experimented with and compared later in Subsection~\ref{subsec::more_experiments::richer_features::scatnet_baseline}.\\
+            Both settings are experimented with and compared later in Section~\ref{subsec::more_experiments::richer_features::scatnet_baseline}.\\
 
             Now we can apply the \gls{acr::scatnet} on any of the previously defined images.
             We apply then the same post-processing to yield feature vectors with the same dimensions \(d \cdot n_S\):

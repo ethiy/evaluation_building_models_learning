@@ -17,9 +17,9 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
     In \index{\acrshort{acr::gis}}\acrfull{acr::gis}, \gls{acr::3d} data is instrumental to model the Earth surface at different scales.
     In particular, this field takes a special interest in \index{urban!area}urban areas.
     Objects present in such scenes usually obey some specific rules which constrain their shape.
-    In this section, we dicuss applications of \index{urban!\gls{acr::3d}!model}urban \gls{acr::3d} models (cf. Subsection~\ref{subsec::introduction::urban_3d_reconstruction::applications}).
-    We afterwards tackle the subject of \index{building!\gls{acr::3d}!model} building \gls{acr::3d} modeling and the issues it raises(cf. Subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}).
-    This section ends in Subsection~\ref{subsec::introduction::urban_3d_reconstruction::challenges} with a list of some of the important technical challenges that are still to be overcome in this domain.
+    In this section, we dicuss applications of \index{urban!\gls{acr::3d}!model}urban \gls{acr::3d} models (cf. Section~\ref{subsec::introduction::urban_3d_reconstruction::applications}).
+    We afterwards tackle the subject of \index{building!\gls{acr::3d}!model} building \gls{acr::3d} modeling and the issues it raises(cf. Section~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}).
+    This section ends in Section~\ref{subsec::introduction::urban_3d_reconstruction::challenges} with a list of some of the important technical challenges that are still to be overcome in this domain.
 
     \subsection{Applications of urban \texorpdfstring{\gls*{acr::3d}}{3D} models}
         \label{subsec::introduction::urban_3d_reconstruction::applications}
@@ -189,9 +189,9 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                         \label{fig::navigation}
                         Position estimation that relies on urban \gls{acr::2d5} models.
                         The initial pose is derived from a sensor measurement that is not reliable.
-                        In Subfigures~\ref{subfig::init_pose} (\textit{resp.}~\ref{subfig::final_pose} and~\ref{subfig::gt_pose}), the \gls{acr::2d5} model is projected on the image using the initial pose (\textit{resp.} the refined pose and the ground truth one).
+                        In Figures~\ref{subfig::init_pose} (\textit{resp.}~\ref{subfig::final_pose} and~\ref{subfig::gt_pose}), the \gls{acr::2d5} model is projected on the image using the initial pose (\textit{resp.} the refined pose and the ground truth one).
                         The \gls{acr::2d5} model helps refine the camera pose~\parencite{armagan2017semantic}.
-                        It is shown in the last graph (\textit{cf.} Subfigure~\ref{subfig::viz}), where the final estimation (green) is closer to the ground truth (red) than the initial one (blue)~\parencite{armagan2017semantic}.
+                        It is shown in the last graph (\textit{cf.} Figure~\ref{subfig::viz}), where the final estimation (green) is closer to the ground truth (red) than the initial one (blue)~\parencite{armagan2017semantic}.
                         Images taken from~\parencite{armagan2017semantic}.
                     }
                 }
@@ -612,9 +612,9 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
     \label{sec::introduction::building_model_evaluation}
     We have just seen how building model quality evaluation is one the main challenges in the field.
     In this section, we present the different types of quality assessement a building model can undergo.
-    First, in Subsection~\ref{subsec::introduction::building_model_evaluation::topological}, is described how models could be checked for their topological consistency.
+    First, in Section~\ref{subsec::introduction::building_model_evaluation::topological}, is described how models could be checked for their topological consistency.
     On the other hand, the \gls{acr::3d} model geometry has also to be checked against the real building geometry.
-    This issue is visited in Subsection~\ref{subsec::introduction::building_model_evaluation::geometric}.
+    This issue is visited in Section~\ref{subsec::introduction::building_model_evaluation::geometric}.
     Manual geometric inspection is discussed before considering automatic evaluation and its challenges.
 
     \subsection{Topological consistency inspection}
@@ -715,19 +715,19 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
     \label{sec::introduction::contributions}
     Based on all the previous discussions, we adopted a research direction that has rarely been taken up to now, as far as we know.
     Herein is explained the path that led to this subject.
-    To do so, the context of this work is explained in detail in Subsection~\ref{subsec::introduction::contributions::positioning}.
-    Further on, promising and conceivable utilizations are stated in Subsection~\ref{subsec::introduction::contributions::use}.
-    This is before ending with a summary of the main contributions of this work (\textit{cf.} Subsection~\ref{sec::introduction::contributions::contributions}).
+    To do so, the context of this work is explained in detail in Section~\ref{subsec::introduction::contributions::positioning}.
+    Further on, promising and conceivable utilizations are stated in Section~\ref{subsec::introduction::contributions::use}.
+    This is before ending with a summary of the main contributions of this work (\textit{cf.} Section~\ref{sec::introduction::contributions::contributions}).
     
     \subsection{Positioning}
         \label{subsec::introduction::contributions::positioning}
         As seen in the previous section (\textit{ie.} Section~\ref{sec::introduction::building_model_evaluation}), geometric evaluation of building \gls{acr::3d} models remains a field open for investigation.
-        Topologic consistency inspection, in contrast, as discussed in Subsection~\ref{subsec::introduction::building_model_evaluation::topological}, has received ample attention from the \gls{acr::gis} community.
+        Topologic consistency inspection, in contrast, as discussed in Section~\ref{subsec::introduction::building_model_evaluation::topological}, has received ample attention from the \gls{acr::gis} community.
         In consequence, it will not be of the focus in this work.\\
 
-        Building modeling has been shown, earlier (\textit{cf.} Subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}), to be a bottleneck for urban outdoor modeling at large-scales.
+        Building modeling has been shown, earlier (\textit{cf.} Section~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}), to be a bottleneck for urban outdoor modeling at large-scales.
         As a consequence, evaluating building \gls{acr::3d} models is essential for entire scene model inspection.
-        Semantics play a prominent role for building models (\textit{cf.} Subsection~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}).
+        Semantics play a prominent role for building models (\textit{cf.} Section~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}).
         Geometric fidelity metrics are sufficient in order to faithfully capture the structural properties induced by semantics.
         As a consequence, the proposed approach should factor semantics in the evaluation as well.
         As a result, like with \glspl{acr::lod}, errors are exptected to be categorized owing to the semantic character of the evaluation.\\
@@ -747,7 +747,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             Such interventions are always expensive and scale poorly at district, city or country level, let alone the global stage.\\
 
             Quality evaluation involves the use of reference data against which reconstructed building models are compared.
-            In Subsection~\ref{subsec::state_of_the_art::quality::reference}, are discussed the different forms these data can take.
+            In Section~\ref{subsec::state_of_the_art::quality::reference}, are discussed the different forms these data can take.
             A high quality reference usually requires manual labour that is evidently non scalable.
             Actually, the less costly the reference data is, the more adaptive the evaluation method will be at large scales.
             In fact, the best alternative would be, if possible, to avoid using reference data altogether.
@@ -891,14 +891,14 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
         \item In Chapter~\ref{chap::semantic_evaluation}, we introduce the first leg of our approach.
                 It consists in defining a general layout of a \textbf{large-scale} adapted error taxonomy.
                 Applyed to the overhead setting, and based on observations of automatically modeled buildings, we implement this layout by defining semantic errors to populate the taxonomy.
-        \item \textbf{Automation}, which is the second and remaining constraint defined in Subsection~\ref{subsec::introduction::contributions::positioning}, is handled in Chapter~\ref{chap::learned_evaluation}.
+        \item \textbf{Automation}, which is the second and remaining constraint defined in Section~\ref{subsec::introduction::contributions::positioning}, is handled in Chapter~\ref{chap::learned_evaluation}.
                 Actually, aiming to automate a semantic task, we introduce a learning based approach where errors are treated as labels which are predicted using a trained supervized classifier.
                 Features are extracted based on the intrinsic properties of building models as well as extrinsic attributes making use of external optical or depth based data.
         \item This proposed approach is then tested on multiple urban scenes as shown in Chapter~\ref{chap::experiments}.
                 The latter provides in depth details about the origin of the evaluated building models as well as the used algorithms.
                 The different baseline features are tested on all urban areas yielding mitigated results which depend on the combination of defined errors and urban scenes.
         \item Chapter~\ref{chap::more_experiments} compiles results from multiple experiments that further tests the pipeline.
-                To satisfy the already stated \textbf{large-scale} need (\textit{cf.} Subsection~\ref{subsec::introduction::contributions::positioning}), a scalability analysis is drawn based on various experiments involving the presented urban zones.
+                To satisfy the already stated \textbf{large-scale} need (\textit{cf.} Section~\ref{subsec::introduction::contributions::positioning}), a scalability analysis is drawn based on various experiments involving the presented urban zones.
                 Next, the framework is tested at a lower specificity level (\textit{cf.} Section~\ref{sec::semantic_evaluation::general_framework}).
                 The choice of classifiers is also discussed based on exhaustive experiments.
                 Finally, a thorough testing of advanced features, which take into account the structural information that was missed by the baseline, yielded results that were profusely analysed.
