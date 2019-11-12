@@ -1,0 +1,89 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
+\begin{document}
+    \pgfplotstableread[col sep=comma, header=false]{
+        1, 1648, 361
+        2, 315, 1694
+        3, 229, 1780
+        4, 30, 1979
+        5, 1187, 822
+    }\facetEl
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2}
+        }
+    ]{sum}{\facetEl}
+
+    \pgfplotstableread[col sep=comma, header=false]{
+        1, 727, 499
+        2, 485, 741
+        3, 308, 918
+        4, 17, 1209
+        5, 829, 397
+    }\facetNaPa
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2}
+        }
+    ]{sum}{\facetNaPa}
+
+    \pgfplotsset{
+        percentage plot/.style={
+            point meta=explicit,
+            every node near coord/.append style={
+                yshift=-2pt,
+                anchor=south,
+                color=black,
+                align=center,
+                font=\scriptsize,
+            },
+            nodes near coords={
+                \pgfmathtruncatemacro\iszero{\originalvalue==0}
+                \ifnum\iszero=0
+                    \pgfmathprintnumber[fixed zerofill,precision=0]{\pgfplotspointmeta}
+                \fi
+            },
+            nodes near coords align={vertical},
+            visualization depends on={y \as \originalvalue}
+        },
+        percentage series/.style={
+            table/y expr=(\thisrow{#1} / \thisrow{sum} * 100),
+            table/meta=#1
+        }
+    }
+
+    \begin{tikzpicture}
+        \begin{axis}[
+            ylabel={Ratio},
+            ybar,
+            percentage plot,
+            width=\textwidth,
+            height=.6\textwidth,
+            bar width=14pt,
+            xticklabels={FOS, FUS, FIB, FIT, FIG},
+            xtick=data,
+            xtick pos=left,
+            ytick pos=left,
+            x tick label style={font=\ttfamily},
+            ymax=100,
+            ymin=0,
+            xmax=5.5,
+            xmin=0.5,
+            legend style={
+                legend columns=-2,
+                at={(.5,1.05)},
+                anchor=south
+            }
+        ]
+            \addplot+ table [percentage series=1] {\facetEl};
+            \addplot+ table [percentage series=1] {\facetNaPa};
+            \legend{
+                \strut \textbf{Elancourt},
+                \footnotesize \strut \textbf{Na-P13},
+            }
+        \end{axis}
+    \end{tikzpicture}
+\end{document}

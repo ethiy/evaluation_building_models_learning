@@ -55,7 +55,7 @@
                 \begin{subfloatrow}
                     \centering
                     \ffigbox[\textwidth]{
-                        \includestandalone[mode=buildnew, width=.8\textwidth]{figures/results/transferability/building}
+                        \includestandalone[mode=buildnew, width=\textwidth]{figures/results/transferability/building}
                     }{
                         \caption{
                             \label{subfig::f_score_transferability_f3_building}
@@ -130,13 +130,17 @@
                 Evolution of the F-score value, for each error, between transferability experiments and the ablation study (\textit{cf.} Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}).
                 Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (\textit{cf.} Table~\ref{tab::all_f-scores_transferability_f3}).
                 The color indicates the magnitude of change: 
-                \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-45}{-35}{\percent})--
+                \textcolor{LOSS45}{\(\blacksquare\)}: (\SIrange[range-phrase={,  }]{-100}{-45}{\percent}]--
+                \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
                 \textcolor{LOSS2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                \textcolor{LOSS1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-25}{-15}{\percent})--
+                \textcolor{LOSS1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
                 \textcolor{LOSS0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) --
-                \textcolor{STBL}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-5}{5}{\percent})--
+                \textcolor{STBL}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-5}{5}{\percent}) --
                 \textcolor{GAIN0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) --
-                \textcolor{GAIN1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{15}{25}{\percent}].
+                \textcolor{GAIN1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{15}{25}{\percent}) --
+                \textcolor{GAIN2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{25}{35}{\percent}) --
+                \textcolor{GAIN3545}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{35}{45}{\percent}) --
+                \textcolor{GAIN45}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{45}{100}{\percent}] --
                 When two null F-scores are compared, the cell is colored in white \(\square\): neither positive nor negative.
             }
         \end{table}
@@ -216,7 +220,7 @@
         \begin{table}[htbp]
             \footnotesize 
             \centering
-            \renewcommand{\arraystretch}{1.5}
+            \renewcommand{\arraystretch}{2}
             \begin{tabular}{| c | c c c c |c c c c c|}
                 \hline
                 & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG} \\
@@ -232,16 +236,19 @@
             ]{
                 \label{tab::generalization_comparison}
                 Evolution of the F-score value, for each error and test area, between generalization experiments and the ablation study (\textit{cf.} Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}).
-                Feature sets having a significant impact on the classification results are mentioned are mentioned in the corresponding cell (\textit{cf.} Table~\ref{tab::all_f-scores_generalization_f3}).
+                Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (\textit{cf.} Table~\ref{tab::all_f-scores_generalization_f3}).
                 The color indicates the magnitude:
                 \textcolor{LOSS45}{\(\blacksquare\)}: (\SIrange[range-phrase={,  }]{-100}{-45}{\percent}]--
                 \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
                 \textcolor{LOSS2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                \textcolor{LOSS1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent})--
+                \textcolor{LOSS1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
                 \textcolor{LOSS0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) --
-                \textcolor{STBL}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-5}{5}{\percent})--
+                \textcolor{STBL}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-5}{5}{\percent}) --
                 \textcolor{GAIN0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) --
-                \textcolor{GAIN1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{15}{25}{\percent}] --
+                \textcolor{GAIN1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{15}{25}{\percent}) --
+                \textcolor{GAIN2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{25}{35}{\percent}) --
+                \textcolor{GAIN3545}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{35}{45}{\percent}) --
+                \textcolor{GAIN45}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{45}{100}{\percent}] --
                 When two null F-scores are compared, the cell is colored in white \(\square\): neither positive nor negative.
             }
         \end{table}
@@ -258,7 +265,7 @@
         \end{description}
         This confirms again how difficult \texttt{Building errors} are to learn compared to \texttt{Facet errors}.
         However, this time combining urban scenes yielded better results.
-        We can suspect that this is the consequence ofthese studied zones being complementary in terms of learning.\\
+        We can suspect that this is the consequence of these studied zones being complementary in terms of learning.\\
         
         Similarly to the previous study, image and height modalities play a major role in error detection.
         Image based features are crucial for \texttt{FIB}, \texttt{FUS}, \texttt{BOS}, \texttt{BIB} and \texttt{BUS} detection (Table~\ref{tab::generalization_comparison}).
@@ -347,7 +354,7 @@
             \centering
             \begin{tabular}{|c | c c | c c | c c | c c |}
                 \hline
-                & \multicolumn{8}{|c|}{\textbf{Elancourt}}\\
+                & \multicolumn{8}{c|}{\textbf{Elancourt}}\\
                 \hline
                 & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.8cm}|}{\textbf{All}}\\
                 \cline{2-9}
@@ -358,7 +365,7 @@
                 \texttt{Facet errors} & 91.79 & 89.79 & 92.65 & 89.40 & \textbf{93.21} & \textbf{89.45} & 93.46 & 89.16 \\
                 \hline
                 \hline
-                & \multicolumn{8}{|c|}{\textbf{Nantes}}\\
+                & \multicolumn{8}{c|}{\textbf{Nantes}}\\
                 \hline
                 & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.8cm}|}{\textbf{All}}\\
                 \cline{2-9}
@@ -369,7 +376,7 @@
                 \texttt{Facet errors} & 91.20 & 94.01 & 91.37 & 94.36 & 91.20 & 94.35 & \textbf{91.73} & \textbf{94.21}\\
                 \hline
                 \hline
-                & \multicolumn{8}{|c|}{\textbf{Paris-13}}\\
+                & \multicolumn{8}{c|}{\textbf{Paris-13}}\\
                 \hline
                 & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.8cm}|}{\textbf{All}}\\
                 \cline{2-9}
@@ -410,7 +417,7 @@
                         }
                     }
                 \end{subfloatrow}
-                \vskip1em
+                \vskip2em
                 \begin{subfloatrow}
                     \ffigbox[\FBwidth]{
                         \centering
@@ -465,7 +472,7 @@
             \renewcommand{\arraystretch}{1.5}
             \begin{tabular}{|c | c c | c c | c c | c c |}
                 \hline
-                & \multicolumn{8}{|c|}{\textbf{Elancourt}}\\
+                & \multicolumn{8}{c|}{\textbf{Elancourt}}\\
                 \hline
                 &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
                 \cline{2-9}
@@ -474,7 +481,7 @@
                 \texttt{Erroneous} & 99.95 & $\frac{1}{57}$ & 99.95 & $\frac{1}{57}$ & 99.95 & $\frac{0}{57}$ & 99.95 & $\frac{1}{57}$ \\
                 \hline
                 \hline
-                & \multicolumn{8}{|c|}{\textbf{Nantes}}\\
+                & \multicolumn{8}{c|}{\textbf{Nantes}}\\
                 \hline
                 &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
                 \cline{2-9}
@@ -483,7 +490,7 @@
                 \texttt{Erroneous} & 99.84 & $\frac{0}{55}$ & 99.84 & $\frac{0}{55}$ & 100 & $\frac{0}{55}$ & \textbf{100} & $\frac{0}{55}$ \\
                 \hline
                 \hline
-                & \multicolumn{8}{|c|}{\textbf{Paris-13}}\\
+                & \multicolumn{8}{c|}{\textbf{Paris-13}}\\
                 \hline
                 &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
                 \cline{2-9}
@@ -510,220 +517,338 @@
         Indeed, There is no interest in comparing prediction transferability, generalization or representativeness if we hardly detect them at all on the same training scene.
 
 \section{Classifier choice analysis}
+    \label{sec::more_experiments::classifier}
+    The aim of this section is to find out how beneficial the use of \glspl{acr::svm} can be if used instead of \glspl{acr::rf}.
+    Two reasons motivate this experimental comparison:
+    \begin{enumerate}[label=\roman*)]
+        \item \glspl{acr::svm} are more adapted to kernels, as we plan trying graph kernels as feature extractors;
+        \item \glspl{acr::svm} are better suited for unbalanced labels, which is the case of \texttt{BIT} and \texttt{FIT} for instance.
+    \end{enumerate}
+    Hereafter, we first describe the urban scenes that are studied.
+    Next, we compare the results obtained using the \gls{acr::svm} classifier to the ones resulting from the \gls{acr::rf}.
+    We end with a comparison of feature importances computed for the two classifiers.
+
+    \subsection{The studyed urban areas}
+        \label{subsec::more_experiments::classifier::dataset}
+        According to the findings of the previous sections (\textit{cf.} Sections~\ref{subsec::more_experiments::scalability::transferability} and~\ref{subsec::more_experiments::finesse::2}), \textbf{Paris-13} and \textbf{Nantes} are similar compared to \textbf{Elancourt}.
+        Moreover, the latter area contains a lot more instances than the others which is not ideal for comparisons.
+        As a consequence, both \textbf{Paris-13} and \textbf{Nantes} were fused in one set denoted from now by \textbf{Na-P13}.
+        It contains 1226 buildings compared to 2007 instances of \textbf{Elancourt}.
+        In Figure~\ref{fig::error_fused_statistics}, we remind the reader of the \textbf{Elancourt} area error distributions which are compared this time to statistics from the fused set \textbf{Na-P13}.\\
+    
+        \begin{figure}[htpb]
+            \centering
+            \ffigbox[\textwidth]{
+                \begin{subfloatrow}
+                    \ffigbox[\textwidth]{
+                        \includestandalone[mode=buildnew, height=8cm]{figures/datasets/fused/lod1_stats}
+                    }{
+                        \caption{
+                            \label{subfig::lod1_errors_fused}
+                            Occurence statistics for \texttt{Building errors}.
+                        }
+                    }
+                \end{subfloatrow}
+                \vskip2em
+                \begin{subfloatrow}
+                    \ffigbox[\textwidth]{
+                        \includestandalone[mode=buildnew, width=\textwidth]{figures/datasets/fused/lod2_stats}
+                    }{
+                        \caption{
+                            \label{subfig::lod2_errors_fused}
+                            Occurence statistics for \texttt{Facet errors}.
+                        }
+                    }
+                \end{subfloatrow}
+            }{
+                \caption[
+                    Detailed error statistics depending on the urban scenes.
+                ]{
+                    \label{fig::error_fused_statistics}
+                    Detailed error statistics depending on the new experimental sets.
+                    The height of bars indicates the frequency of each errors while the number of occurences is displayed over.
+                }
+            }
+        \end{figure}
+
+        Naturally, as \textbf{Nantes} contains more (around 1.56 times more) instances than \textbf{Paris-13}, \textbf{Na-P13} error statistics profile looks a bit more like the one of \textbf{Nantes} than the other area as shown in Figure~\ref{fig::error_statistics}.
+        According to Sections~\ref{subsec::more_experiments::scalability::transferability} and~\ref{subsec::more_experiments::finesse::2}, we can expect that \textbf{Na-P13} would be better suited to learn \texttt{Facet errors}, with the exception of \texttt{FIT}, compared to \textbf{Elancourt}, while the latter is also the best alternative for \texttt{Building errors}.
+
     \subsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} compared to \texorpdfstring{\acrshort*{acr::rf}}{RF}}
-        \begin{table}[htpb]
-            \footnotesize
-            \begin{center}
-                \begin{tabular}{| c | c c | c c | c c | c c |}
+        \label{subsec::more_experiments::classifier::svm_rf}
+        The two classifiers, \gls{acr::svm} and \gls{acr::rf}, are trained on both sets \textbf{Elancourt} and \textbf{Na-P13} using always the baseline features (\textit{cf.} Section~\ref{sec::learned_evaluation::baseline}).
+
+        \subsubsection{\texorpdfstring{\acrshort*{acr::rf}}{RF} results}
+            \label{subsec::more_experiments::classifier::svm_rf::rf}
+            For \textbf{Elancourt} results remain unchanged using the \gls{acr::rf} classifier and are reported along the newer results on \textbf{Na-P13} in Table~\ref{tab::rf_f3}.\\
+
+            \begin{table}[htpb]
+                \footnotesize
+                \begin{center}
+                    \begin{tabular}{| c | c c | c c | c c | c c |}
+                        \hline
+                        & \multicolumn{8}{c|}{\textbf{Elancourt}}\\
+                        \hline
+                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                        \cline{2-9}
+                        & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                        \hline
+                        \texttt{BOS} & \textbf{93.96} & \textbf{76.15} & 91.43 & 77.76 & 91.51 & 76.08 & 90.83 & 76.14 \\
+                        \hline
+                        \texttt{BUS} & 32.98 & 76.47 & \textbf{41.86} & \textbf{75.57} & 40.38 & 71.00 & 39.32 & 71.81 \\
+                        \hline
+                        \texttt{BIB} & 12.32 & 67.57 & 12.81 & 68.42 & \textbf{16.26} & \textbf{67.35} & 16.75 & 68.0 \\
+                        \hline
+                        \texttt{BIT} & \textbf{25.25} & \textbf{92.59} & 20.20 & 90.91 & 20.20 & 95.24 & 11.11 & 91.67 \\
+                        \specialrule{.2em}{.1em}{.1em}
+                        \texttt{FOS} & 98.91 & 99.07 & \textbf{98.91} & \textbf{99.30} & 98.99 & 98.84 & 98.91 & 98.84 \\
+                        \hline
+                        \texttt{FUS} & \textbf{1.90} & \textbf{54.55} & 0.63 & 66.67 & 1.61 & 50 & 1.27 & 66.67 \\
+                        \hline
+                        \texttt{FIB} & \textbf{9.17} & \textbf{87.5} & 0 & --- & 8.30 & 82.61 & 7.42 & 100 \\
+                        \hline
+                        \texttt{FIT} & 6.67 & 100 & \textbf{8.73} & \textbf{95.24} & 3.33 & 100 & 3.33 & 100 \\
+                        \hline
+                        \texttt{FIG} & \textbf{80.54} & \textbf{73.14} & 80.45 & 72.62 & 78.69 & 72.12 & 79.02 & 71.82 \\
+                        \hline
+                        \hline
+                        & \multicolumn{8}{c|}{\textbf{Na-P13}}\\
+                        \hline
+                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                        \cline{2-9}
+                        & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                        \hline
+                        \texttt{BOS} & \textbf{51.65} & \textbf{78.93} & 47.84 & 81.75 & 39.50 & 72.45 & 47.43 & 78.57 \\
+                        \hline
+                        \texttt{BUS} & 19.85 & 100 & 22.90 & 100 & 7.69 & 100 & \textbf{34.61} & \textbf{93.75} \\
+                        \hline
+                        \texttt{BIB} & \textbf{1.96} & \textbf{100} & 0.65 & 100 & 0 & --- &  1.31 & 100 \\
+                        \hline
+                        \texttt{BIT} & \textbf{5.32} & \textbf{100} & 3.19 & 100 & 0 & --- & 1.06 & 100 \\
+                        \specialrule{.2em}{.1em}{.1em}
+                        \texttt{FOS} & 98.62 & 98.22 & 98.62 & 98.21 & 98.48 & 75.47 & \textbf{98.62} & \textbf{98.76} \\
+                        \hline
+                        \texttt{FUS} & \textbf{68.80} & \textbf{77.44} & 68.18 & 77.10 & 23.14 & 84.85 & 67.83 & 78.15 \\
+                        \hline
+                        \texttt{FIB} & 55.23 & 78.60 & 53.59 & 78.47 & 18.95 & 71.60 & \textbf{65.35} & \textbf{74.63} \\
+                        \hline
+                        \texttt{FIT} & 6.25 & 100 & 6.25 & 100 & 5.88 & 100 & \textbf{11.76} & \textbf{100} \\
+                        \hline
+                        \texttt{FIG} & 94.55 & 82.54 & 95.15 & 82.72 & 100 & 73.01 & \textbf{95.15} & \textbf{83.60} \\
+                        \hline
+                    \end{tabular}
+                \end{center}
+                \caption{
+                    \label{tab::rf_f3}
+                    \gls{acr::rf} results on the two datasets of interest at \textbf{\gls{acr::efin}} level 3.
+                    Test results are expressed in percentage.
+                    All possible modality configurations are tested using baseline features.
+                }
+            \end{table}
+
+            Regarding \textbf{Na-P13}, one natural prediction is that scores would average around the same ratios as seen with the error statistics (\textit{cf.} Figure~\ref{fig::error_fused_statistics}).
+            Accounting for the random nature of the choice in training instances during the cross validation, this could be argued to be true for \texttt{FOS} or \texttt{FIG} and, in a lesser extent, for \texttt{BUS} too.
+            However, it is far from being true for the rest of errors as shown in Table~\ref{tab::all_f-scores_rf_f3}.
+            In fact, for the other siw error labels, F-scores, on the fused set, are better than those on both \textbf{Nantes} and \textbf{Paris-13}.
+            Notably, some instances of \texttt{BIT} and \texttt{FIT} are now detected, in best cases, at arounf \SI{11}{\percent} and \SI{21}{\percent} respectively.
+            On the contrary, they were not detected at all on the separate areas (\textit{cf.} Table~\ref{tab::ablation_f3}).
+            This can be explained by the fact that, although having around the same statistical distribution of errors as \textbf{Nantes} and \textbf{Paris-13} in a lesser extent, the fused set contains enough instances to better learn than before.
+            It can also be the result of the fact that the two areas complement each other, as better shown in Figure~\ref{tab::transferability_comparison}, with \texttt{BIt}, where training on \textbf{Nantes} and testing on the other and vice versa proved to be better than training and testing on the same zone.\\
+
+            \begin{figure}[htpb]
+                \centering
+                \ffigbox[\FBwidth]{
+                    \begin{subfloatrow}[2]
+                        \ffigbox[\FBwidth]{
+                            \includestandalone[mode=buildnew, height=8cm]{figures/results/svm_rf/rf/building}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_rf_bl_building}
+                                \texttt{Building errors.}
+                            }
+                        }
+                        \ffigbox[\FBwidth]{
+                            \includestandalone[mode=buildnew, height=8cm]{figures/results/svm_rf/rf/facet}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_rf_bl_facet}
+                                \texttt{Facet errors.}
+                            }
+                        }
+                    \end{subfloatrow}
+                }{
+                    \caption{
+                        \label{fig::f_score_rf_bl}
+                        Mean F-score and standard deviation obtained with an \gls{acr::rf} using baseline features.
+                    }
+                }
+            \end{figure}
+    
+            Mean and standard deviation F-scores are vizualized in Figure~\ref{f_score_rf_bl}.
+            Obviously, everything remains unchanged for \textbf{Elancourt}.
+            However, we see how the standard deviations on the fused set seem to be greater than what observed previosuly in Figure~\ref{fig::f_score_ablation_f3}.
+            Moreover, added to the same labels \texttt{BUS} and \texttt{FIB} that were already improved by the use of image based features as shown in Table~\ref{tab::all_f-scores_ablation_f3}, \texttt{BIT} and \texttt{FIT} F-scores are also greatly impacted on the new fused set.
+            In fact, the first better performs when only geometric features are used as previosly explained before in Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}.
+            For the second, it was image based features that proved to be better suited.
+            This agrees with the fact that for the \textbf{Elancourt} \(\rightarrow\) \textbf{Nantes} experiment, image based features were instrumental in better detecting \texttt{FIT} than training on \textbf{Nantes} itself (\textit{cf.} Figure~\ref{tab::transferability_comparison}).
+        
+        \subsubsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} results}
+            \label{subsec::more_experiments::classifier::svm_rf::svm}
+            Now that we discussed the \gls{acr::rf} results on the fused set, we can move on to the \gls{acr::svm} experimental results on both identified urban sets: \textbf{Elancourt} and \textbf{Na-P13}.
+            Results are reported in Table~\ref{tab::svm_f3}.\\
+
+            \begin{table}[htpb]
+                \footnotesize
+                \begin{center}
+                    \begin{tabular}{| c | c c | c c | c c | c c |}
+                        \hline
+                        & \multicolumn{8}{c|}{\textbf{Elancourt}}\\
+                        \hline
+                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                        \cline{2-9}
+                        & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                        \hline
+                        \texttt{BOS} & \textbf{97.67} & \textbf{86.44} & 91.29 & 91.57 & 91.29 & 91.56 & 41.51 & 76.70 \\
+                        \hline
+                        \texttt{BUS} & 32.27 & 86.85 & 30.15 & 90.45 & 30.14 & 90.45 & \textbf{42.89} & \textbf{92.66} \\
+                        \hline
+                        \texttt{BIB} & 97.02 & 52.27 & \textbf{91.09} & \textbf{89.75} & 91.08 & 89.75 & 67.98 & 45.10 \\
+                        \hline
+                        \texttt{BIT} & 100 & 73.88 & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} \\
+                        \specialrule{.2em}{.1em}{.1em}
+                        \texttt{FOS} & 53.88 & 99.71 & 51.87 & 99.70 & 51.87 & 99.70 & \textbf{63.06} & \textbf{94.08} \\
+                        \hline
+                        \texttt{FUS} & \textbf{96.49} & \textbf{52.24} & 98.73 & 21.86 & 98.73 & 21.87 & 90.79 & 17.06 \\
+                        \hline
+                        \texttt{FIB} & 33.77 & 74.03 & 17.54 & 88.89 & 17.54 & 88.89 & \textbf{71.93} & \textbf{93.71} \\
+                        \hline
+                        \texttt{FIT} & 100 & 88.24 & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} \\
+                        \hline
+                        \texttt{FIG} & \textbf{84.57} & \textbf{88.47} & 65.59 & 83.14 & 65.76 & 83.08 & 52.20 & 62.99 \\
+                        \hline
+                        \hline
+                        & \multicolumn{8}{c|}{\textbf{Na-P13}}\\
+                        \hline
+                        &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                        \cline{2-9}
+                        & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                        \hline
+                        \texttt{BOS} & \textbf{44.86} & \textbf{54.09} & 29.98 & 42.69 & 29.98 & 42.69 & 29.98 & 42.69 \\
+                        \hline
+                        \texttt{BUS} & \textbf{98.46} & \textbf{27.35} & 36.15 & 13.51 & 41.54 & 15.21 & 30.0 & 11.44 \\
+                        \hline
+                        \texttt{BIB} & \textbf{82.35} & \textbf{17.31} & 70.59 & 13.53 & 70.58 & 13.53 & 70.59 & 13.53 \\
+                        \hline
+                        \texttt{BIT} & \textbf{95.74} & \textbf{30.93} & 50.26 & 16.67 & 50.26 & 16.67 & 50.26 & 16.67 \\
+                        \specialrule{.2em}{.1em}{.1em}
+                        \texttt{FOS} & 98.90 & 75.08 & 99.31 & 74.77 & 99.31 & 74.69 & \textbf{99.17} & \textbf{81.98} \\
+                        \hline
+                        \texttt{FUS} & \textbf{87.40} & \textbf{65.08} & 30.79 & 43.70 & 30.79 & 43.70 & 30.79 & 43.70 \\
+                        \hline
+                        \texttt{FIB} & \textbf{97.06} & \textbf{38.17} & 71.90 & 27.88 & 71.90 & 27.88 & 70.36 & 27.07 \\
+                        \hline
+                        \texttt{FIT} & 100 & 89.47 & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} \\
+                        \hline
+                        \texttt{FIG} & \textbf{95.64} & \textbf{77.89} & 71.39 & 77.91 & 71.27 & 77.88 & 60.36 & 72.81 \\
+                        \hline
+                    \end{tabular}
+                \end{center}
+                \caption{
+                    \label{tab::svm_f3}
+                    \gls{acr::svm} results on the two datasets at \textbf{\gls{acr::efin}} level 3.
+                }
+            \end{table}
+
+            Two observations are worth noting herein:
+            \begin{itemize}[label=\(\blacktriangleright\)]
+                \item First is the fact that constrarily to \gls{acr::rf} results, adding height or image based features only to the intrinsic featurtes seem to produce the same scores.
+                        However, when adding both, it produces different results as can be shown in Table~\ref{tab::all_f-scores_svm_f3} for all errors but \texttt{BIT} and \texttt{FIT} for both sets as well as \texttt{FUS} for \textbf{NA-P13}.
+                        This may be explained by the fact that both features have the same dynamic as they represent, in reality, histogram values as discussed in Section~\ref{sec::learned_evaluation::baseline}.
+                        As a consequence, in this case, the \gls{acr::svm} considers both feature configurations to be similar unless when fed together to the \gls{acr::svm}.
+                \item Second, and more importantly, in some cases, the \gls{acr::svm}, in particular configurations, yields results that exceed the other ones by a large margin.
+                        This was the case of \texttt{FUS} on \textbf{Elancourt} (\textit{resp.} \textbf{Na-P13}) with a jump of around \SI{31}{\percent} with the \textbf{Geom.} configuration (\textit{resp.} \SI{38}{\percent}) in F-score and \SI{35}{\percent} for \texttt{FIB} on \textbf{Na-P13} with the \textbf{All} configuration.
+                        This could be owed to two possible reasons.
+                        Either these feature configurations are actually the best alternatives which is not conflicting with previous findings.
+                        Indeed, the extrinsic features were designed in the first place to detect fidelity errors such as \texttt{FIB} while \texttt{FUS} is a topological error that can be suitably detected using intrinsic features only.
+                        However, these large margins could be also explained by the fact that the \gls{acr::svm} overfitted in these special cases.
+                        The last reason cannot be ruled out either as the \(\gamma\) and \(C\) hyper-parameters were not optimized for this features as seen in Section~\ref{subsec::experiments::setup::classification}, due to the high number of possible combinations.
+            \end{itemize}
+            
+            As with the \gls{acr::rf} classifier, mean and standard deviation F-scores are computed and vizualized in Figure~\ref{fig::f_score_svm_bl}.
+            Further commentary is left for the next sub-subsection as these results are compared to the \gls{acr::rf} ones.
+
+            \begin{figure}[htpb]
+                \centering
+                \ffigbox[\FBwidth]{
+                    \begin{subfloatrow}[2]
+                        \ffigbox[\FBwidth]{
+                            \includestandalone[mode=buildnew, height=8cm]{figures/results/svm_rf/svm/building}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_svm_bl_building}
+                                \texttt{Building errors.}
+                            }
+                        }
+                        \ffigbox[\FBwidth]{
+                            \includestandalone[mode=buildnew, height=8cm]{figures/results/svm_rf/svm/facet}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_svm_bl_facet}
+                                \texttt{Facet errors.}
+                            }
+                        }
+                    \end{subfloatrow}
+                }{
+                    \caption{
+                        \label{fig::f_score_svm_bl}
+                        Mean F-score and standard deviation obtained with an \gls{acr::svm} using baseline features.
+                    }
+                }
+            \end{figure}
+
+        \subsubsection{Results comparison}
+            \label{subsec::more_experiments::classifier::svm_rf::comparison}
+            In Table~\ref{tab::rf_vs_svm_comparison}, are compared the \gls{acr::svm} F-scores (\textit{cf.} Table~\ref{tab::all_f-scores_svm_f3}) to \gls{acr::rf} ones (\textit{cf.} Table~\ref{tab::all_f-scores_rf_f3}).
+            The same color scheme is used as with the Tables~\ref{tab::transferability_comparison} and~\ref{tab::generalization_comparison}.\\
+
+            \begin{table}[htbp]
+                \footnotesize 
+                \centering
+                \renewcommand{\arraystretch}{3}
+                \begin{tabular}{| x{2cm} | c c c c |c c c c c |}
                     \hline
-                    & \multicolumn{8}{|c|}{\textbf{Elancourt}}\\
+                    & \texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
                     \hline
-                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
-                    \cline{2-9}
-                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                    \hline
-                    \texttt{BOS} & \textbf{93.96} & \textbf{76.15} & 91.43 & 77.76 & 91.51 & 76.08 & 90.83 & 76.14 \\
-                    \hline
-                    \texttt{BUS} & 32.98 & 76.47 & \textbf{41.86} & \textbf{75.57} & 40.38 & 71.00 & 39.32 & 71.81 \\
-                    \hline
-                    \texttt{BIB} & 12.32 & 67.57 & 12.81 & 68.42 & \textbf{16.26} & \textbf{67.35} & 16.75 & 68.0 \\
-                    \hline
-                    \texttt{BIT} & \textbf{25.25} & \textbf{92.59} & 20.20 & 90.91 & 20.20 & 95.24 & 11.11 & 91.67 \\
-                    \specialrule{.2em}{.1em}{.1em}
-                    \texttt{FOS} & 98.91 & 99.07 & \textbf{98.91} & \textbf{99.30} & 98.99 & 98.84 & 98.91 & 98.84 \\
-                    \hline
-                    \texttt{FUS} & \textbf{1.90} & \textbf{54.55} & 0.63 & 66.67 & 1.61 & 50 & 1.27 & 66.67 \\
-                    \hline
-                    \texttt{FIB} & \textbf{9.17} & \textbf{87.5} & 0 & --- & 8.30 & 82.61 & 7.42 & 100 \\
-                    \hline
-                    \texttt{FIT} & 6.67 & 100 & \textbf{8.73} & \textbf{95.24} & 3.33 & 100 & 3.33 & 100 \\
-                    \hline
-                    \texttt{FIG} & \textbf{80.54} & \textbf{73.14} & 80.45 & 72.62 & 78.69 & 72.12 & 79.02 & 71.82 \\
-                    \hline
-                    \hline
-                    & \multicolumn{8}{|c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
-                    \hline
-                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
-                    \cline{2-9}
-                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                    \hline
-                    \texttt{BOS} & \textbf{51.65} & \textbf{78.93} & 47.84 & 81.75 & 39.50 & 72.45 & 47.43 & 78.57 \\
-                    \hline
-                    \texttt{BUS} & 19.85 & 100 & 22.90 & 100 & 7.69 & 100 & \textbf{34.61} & \textbf{93.75} \\
-                    \hline
-                    \texttt{BIB} & \textbf{1.96} & \textbf{100} & 0.65 & 100 & 0 & --- &  1.31 & 100 \\
-                    \hline
-                    \texttt{BIT} & \textbf{5.32} & \textbf{100} & 3.19 & 100 & 0 & --- & 1.06 & 100 \\
-                    \specialrule{.2em}{.1em}{.1em}
-                    \texttt{FOS} & 98.62 & 98.22 & 98.62 & 98.21 & 98.48 & 75.47 & \textbf{98.62} & \textbf{98.76} \\
-                    \hline
-                    \texttt{FUS} & \textbf{68.80} & \textbf{77.44} & 68.18 & 77.10 & 23.14 & 84.85 & 67.83 & 78.15 \\
-                    \hline
-                    \texttt{FIB} & 55.23 & 78.60 & 53.59 & 78.47 & 18.95 & 71.60 & \textbf{65.35} & \textbf{74.63} \\
-                    \hline
-                    \texttt{FIT} & 6.25 & 100 & 6.25 & 100 & 5.88 & 100 & \textbf{11.76} & \textbf{100} \\
-                    \hline
-                    \texttt{FIG} & 94.55 & 82.54 & 95.15 & 82.72 & 100 & 73.01 & \textbf{95.15} & \textbf{83.60} \\
+                    \textbf{Elancourt} & \cellcolor{GAIN0515} & \cellcolor{STBL} \textbf{All} & \cellcolor{GAIN45} & \cellcolor{GAIN45} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{GAIN2535} & \cellcolor{GAIN2535}  \textbf{Geom.} & \cellcolor{GAIN45} & \cellcolor{GAIN0515} \textbf{Geom.} \\
+                    \textbf{Nantes} \(\cup\) \textbf{Paris-13} & \cellcolor{LOSS0515} \textbf{Geom.} & \cellcolor{LOSS0515} \textbf{Geom.} & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{GAIN3545} \textbf{Geom.} & \cellcolor{LOSS0515} \textbf{All} & \cellcolor{LOSS3545} & \cellcolor{LOSS0515} \textbf{Geom.} & \cellcolor{GAIN45} & \cellcolor{STBL} \textbf{Geom.} \\
                     \hline
                 \end{tabular}
-            \end{center}
-            \caption{
-                \label{tab::rf_f3}
-                \gls{acr::rf} results on the two datasets of interest at \textbf{\gls{acr::efin}} level 3.
-                Test results are expressed in percentage.
-                All possible modality configurations are tested using baseline features.
-            }
-        \end{table}
-        \begin{table}[htpb]
-            \footnotesize
-            \begin{center}
-                \begin{tabular}{| c | c c | c c | c c | c c |}
-                    \hline
-                    & \multicolumn{8}{|c|}{\textbf{Elancourt}}\\
-                    \hline
-                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
-                    \cline{2-9}
-                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                    \hline
-                    \texttt{BOS} & \textbf{97.67} & \textbf{86.44} & 91.29 & 91.57 & 91.29 & 91.56 & 41.51 & 76.70 \\
-                    \hline
-                    \texttt{BUS} & 32.27 & 86.85 & 30.15 & 90.45 & 30.14 & 90.45 & \textbf{42.89} & \textbf{92.66} \\
-                    \hline
-                    \texttt{BIB} & 97.02 & 52.27 & \textbf{91.09} & \textbf{89.75} & 91.08 & 89.75 & 67.98 & 45.10 \\
-                    \hline
-                    \texttt{BIT} & 100 & 73.88 & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} \\
-                    \specialrule{.2em}{.1em}{.1em}
-                    \texttt{FOS} & 53.88 & 99.71 & 51.87 & 99.70 & 51.87 & 99.70 & \textbf{63.06} & \textbf{94.08} \\
-                    \hline
-                    \texttt{FUS} & \textbf{96.49} & \textbf{52.24} & 98.73 & 21.86 & 98.73 & 21.87 & 90.79 & 17.06 \\
-                    \hline
-                    \texttt{FIB} & 33.77 & 74.03 & 17.54 & 88.89 & 17.54 & 88.89 & \textbf{71.93} & \textbf{93.71} \\
-                    \hline
-                    \texttt{FIT} & 100 & 88.24 & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} \\
-                    \hline
-                    \texttt{FIG} & \textbf{84.57} & \textbf{88.47} & 65.59 & 83.14 & 65.76 & 83.08 & 52.20 & 62.99 \\
-                    \hline
-                    \hline
-                    & \multicolumn{8}{|c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
-                    \hline
-                    &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
-                    \cline{2-9}
-                    & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
-                    \hline
-                    \texttt{BOS} & \textbf{44.86} & \textbf{54.09} & 29.98 & 42.69 & 29.98 & 42.69 & 29.98 & 42.69 \\
-                    \hline
-                    \texttt{BUS} & \textbf{98.46} & \textbf{27.35} & 36.15 & 13.51 & 41.54 & 15.21 & 30.0 & 11.44 \\
-                    \hline
-                    \texttt{BIB} & \textbf{82.35} & \textbf{17.31} & 70.59 & 13.53 & 70.58 & 13.53 & 70.59 & 13.53 \\
-                    \hline
-                    \texttt{BIT} & \textbf{95.74} & \textbf{30.93} & 50.26 & 16.67 & 50.26 & 16.67 & 50.26 & 16.67 \\
-                    \specialrule{.2em}{.1em}{.1em}
-                    \texttt{FOS} & 98.90 & 75.08 & 99.31 & 74.77 & 99.31 & 74.69 & \textbf{99.17} & \textbf{81.98} \\
-                    \hline
-                    \texttt{FUS} & \textbf{87.40} & \textbf{65.08} & 30.79 & 43.70 & 30.79 & 43.70 & 30.79 & 43.70 \\
-                    \hline
-                    \texttt{FIB} & \textbf{97.06} & \textbf{38.17} & 71.90 & 27.88 & 71.90 & 27.88 & 70.36 & 27.07 \\
-                    \hline
-                    \texttt{FIT} & 100 & 89.47 & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} & \textbf{100} \\
-                    \hline
-                    \texttt{FIG} & \textbf{95.64} & \textbf{77.89} & 71.39 & 77.91 & 71.27 & 77.88 & 60.36 & 72.81 \\
-                    \hline
-                \end{tabular}
-            \end{center}
-            \caption{
-                \label{tab::svm_f3}
-                \gls{acr::svm} results on the two datasets at \textbf{\gls{acr::efin}} level 3.
-            }
-        \end{table}
-
-        \begin{figure}[htpb]
-            \centering
-            \ffigbox[\FBwidth]{
-                \begin{subfloatrow}[2]
-                    \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, height=8cm]{figures/results/svm_rf/rf/building}
-                    }{
-                        \caption{
-                            \label{subfig::f_score_rf_bl_building}
-                            \texttt{Building errors.}
-                        }
-                    }
-                    \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, height=8cm]{figures/results/svm_rf/rf/facet}
-                    }{
-                        \caption{
-                            \label{subfig::f_score_rf_bl_facet}
-                            \texttt{Facet errors.}
-                        }
-                    }
-                \end{subfloatrow}
-            }{
+                \renewcommand{\arraystretch}{1}
                 \caption{
-                    \label{fig::f_score_rf_bl}
-                    Mean F-score and standard deviation obtained with an \gls{acr::rf} using baseline features.
+                    \label{tab::rf_vs_svm_comparison} Evolution of the F-score value, for each error, using \gls{acr::svm} compared to \gls{acr::rf}.
+                    Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (\textit{cf.} Table~\ref{tab::all_f-scores_svm_f3}).
+                    The color indicates the magnitude:
+                    \textcolor{LOSS45}{\(\blacksquare\)}: (\SIrange[range-phrase={,  }]{-100}{-45}{\percent}]--
+                    \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
+                    \textcolor{LOSS2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
+                    \textcolor{LOSS1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
+                    \textcolor{LOSS0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) --
+                    \textcolor{STBL}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-5}{5}{\percent}) --
+                    \textcolor{GAIN0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) --
+                    \textcolor{GAIN1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{15}{25}{\percent}) --
+                    \textcolor{GAIN2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{25}{35}{\percent}) --
+                    \textcolor{GAIN3545}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{35}{45}{\percent}) --
+                    \textcolor{GAIN45}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{45}{100}{\percent}] --
+                    When two null F-scores are compared, the cell is colored in white \(\square\): neither positive nor negative.
                 }
-            }
-        \end{figure}
+            \end{table}
 
-        \begin{figure}[htpb]
-            \centering
-            \ffigbox[\FBwidth]{
-                \begin{subfloatrow}[2]
-                    \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, height=8cm]{figures/results/svm_rf/svm/building}
-                    }{
-                        \caption{
-                            \label{subfig::f_score_svm_bl_building}
-                            \texttt{Building errors.}
-                        }
-                    }
-                    \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, height=8cm]{figures/results/svm_rf/svm/facet}
-                    }{
-                        \caption{
-                            \label{subfig::f_score_svm_bl_facet}
-                            \texttt{Facet errors.}
-                        }
-                    }
-                \end{subfloatrow}
-            }{
-                \caption{
-                    \label{fig::f_score_svm_bl}
-                    Mean F-score and standard deviation obtained with an \gls{acr::svm} using baseline features.
-                }
-            }
-        \end{figure}
-
-        \begin{table}[htbp]
-            \footnotesize 
-            \centering
-            \renewcommand{\arraystretch}{2.5}
-            \begin{tabular}{x{2cm} | c c c c |c c c c c}
-                \hline
-                & \texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
-                \hline
-                \textbf{Elancourt} & \cellcolor{GAIN0515} & \cellcolor{STBL} \textbf{All} & \cellcolor{GAIN45} & \cellcolor{GAIN45} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{GAIN2535} & \cellcolor{GAIN2535}  \textbf{Geom.} & \cellcolor{GAIN45} & \cellcolor{GAIN0515} \textbf{Geom.} \\
-                \textbf{Nantes} \(\cup\) \textbf{Paris-13} & \cellcolor{LOSS0515} \textbf{Geom.} & \cellcolor{LOSS0515} \textbf{Geom.} & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{GAIN3545} \textbf{Geom.} & \cellcolor{LOSS0515} \textbf{All} & \cellcolor{LOSS3545} & \cellcolor{LOSS0515} \textbf{Geom.} & \cellcolor{GAIN45} & \cellcolor{STBL} \textbf{Geom.} \\
-                \hline
-            \end{tabular}
-            \renewcommand{\arraystretch}{1}
-            \caption{
-                \label{tab::rf_vs_svm_comparison} Evolution of the F-score value, for each error, using \gls{acr::svm} compared to \gls{acr::rf}.
-                Feature sets having a significant impact on the classification results are mentioned.
-                Otherwise, \textbf{Geom.} \textbf{Im.}, and \textbf{Hei.} contribute equally.
-                The color indicates the magnitude: \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
-                \textcolor{LOSS2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                \textcolor{LOSS1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                \textcolor{LOSS0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) --
-                \textcolor{STBL}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-5}{5}{\percent}) --
-                \textcolor{GAIN0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) --
-                \textcolor{GAIN1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{15}{25}{\percent}) --
-                \textcolor{GAIN2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{25}{35}{\percent}) --
-                \textcolor{GAIN3545}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{35}{45}{\percent}) --
-                \textcolor{GAIN45}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{45}{100}{\percent}] --
-                When two null F-scores are compared, the cell is colored in white \(\square\): neither positive nor negative.
-            }
-        \end{table}
+            As suspected, \gls{acr::svm} yields much better results on very rare labels.
+            In fact, \texttt{BIB} (\textit{resp.} \texttt{BIT} and \texttt{FIT}) with less than \SI{16}{\percent} (\textit{resp.} \SI{16}{\percent} and \SI{1.5}{\percent}) occurence ratio in both sets.
+            In addition, on \textbf{Elancourt} only, \texttt{FUS} (\textit{resp.} \texttt{FIB}) with less than \SI{19}{\percent} (\textit{resp.} \SI{12}{\percent}) frequency also scores better with an \gls{acr::svm} than with an \gls{acr::rf}.
+            Conversly, when the occurence of labels is above \SI{20}{\percent}, it seems that results either looses in F-score with the \gls{acr::svm} or remains stable.
+            This actually the case of \texttt{BUS} and \texttt{FOS} on both sets as well as \texttt{FUS}, \texttt{FIB} and \texttt{FIG} on \textbf{Na-P13}, with the exception of \texttt{BOS} and \texttt{FIG} on \textbf{Elancourt}.
+            This can be explained
 
     \subsection{Feature contributions using \acrshort*{acr::mkl}}
         \begin{figure}[htpb]
@@ -797,7 +922,7 @@
                     \texttt{FIG} & 80.54 & 73.14 & 94.83 & 74.85 & 96.27 & 73.57 & \textbf{97.12} & \textbf{74.13} & 93.98 & 74.23 & 95.17 & 74.87 \\
                     \hline
                     \hline
-                    \multicolumn{13}{|c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
+                    \multicolumn{13}{|c|}{\textbf{Na-P13}}\\
                     \hline
                     &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S-Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S(c)-Im.}} & \multicolumn{2}{c|}{\textbf{S(c)-All}}\\
                     \cline{2-13}
@@ -858,7 +983,7 @@
                     \texttt{FIG} & \textbf{84.57} & \textbf{88.47} & 86.28 & 85.56 & 64.92 & 91.30 & 68.31 & 91.49 & 68.56 & 83.75 & 63.05 & 76.00 \\
                     \hline
                     \hline
-                    \multicolumn{13}{|c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
+                    \multicolumn{13}{|c|}{\textbf{Na-P13}}\\
                     \hline
                     &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S-Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S(d)-Im.}} & \multicolumn{2}{c|}{\textbf{S(d)-All}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) S(c)-Im.}} & \multicolumn{2}{c|}{\textbf{S(c)-All}}\\
                     \cline{2-13}
@@ -1115,7 +1240,7 @@
                 \texttt{FIG} & 84.57 & 88.47 & \textbf{86.48} & 69.66 & 80.91 & 74.86 \\
                 \hline
                 \hline
-                \multicolumn{7}{|c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
+                \multicolumn{7}{|c|}{\textbf{Na-P13}}\\
                 \hline
                 & \multicolumn{3}{c|}{\textbf{Geom.}} & \multicolumn{3}{c|}{\textbf{K-Geom.}} \\
                 \cline{2-7}
@@ -1205,7 +1330,7 @@
                 \texttt{FIG} & 69.66 & 80.91 & 69.92 & 81.28 & 70.93 & 80.64 & 71.10 & 80.91 & 71.19 & 80.92 & \textbf{71.44} & \textbf{81.06} \\
                 \hline
                 \hline
-                \multicolumn{13}{|c|}{\textbf{Paris-13} \(\cup\) \textbf{Nantes}}\\
+                \multicolumn{13}{|c|}{\textbf{Na-P13}}\\
                 \hline
                 &\multicolumn{2}{c|}{\textbf{K-Geom.}} & \multicolumn{2}{c|}{\textbf{K-Geom. \(\oplus\) S-Hei.}} & \multicolumn{2}{c|}{\textbf{K-Geom. \(\oplus\) S(d)-Im.}} & \multicolumn{2}{c|}{\textbf{K-S(d)-All}} & \multicolumn{2}{c|}{\textbf{K-Geom. \(\oplus\) S(c)-Im.}} & \multicolumn{2}{c|}{\textbf{K-S(c)-All}}\\
                 \cline{2-13}
