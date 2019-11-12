@@ -224,9 +224,6 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             This interval is consequently divided evenly into \(20\) bins for the histogram computation.
             The \glspl{acr::dsm} and orthorectified images used to derive height and image features have the same spatial resolution as the reconstruction input data.\\
 
-            \sisetup{
-                scientific-notation = true
-            }
             These features implementation is conducted in Python and is not thoroughly.
             Geometric features are computed in average in \SI{0.05}{\s \per \building}, height based ones take in average \SI{1.4}{\s \per \building} and finally image based ones need more than \SI{16}{\s \per \building}.
             In order to reduce the runtime of each experiment, the last two types of features are cached once computed for a building model and retrieved latter for tests.
@@ -248,20 +245,20 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                 We provide herein the parameters of each kernel type.
                 \begin{description}
                     \item[\(\blacktriangleright\) Random walk] The exponential version fails numerically and was left out.
-                                After a grid search \(\lambda\) was set to be \num{1e-3}, for the geometric random walk.
+                                After a grid search \(\lambda\) was set to be \num[scientific-notation = true]{1e-3}, for the geometric random walk.
                                 This is actually a very low value as \(\lambda\) has to verify the condition stated in Equation~\ref{eq::condition_geometric_kernel_convergence} for all pairs of graphs in the training dataset.
                                 One case where the largest eigenvalue of the direct product of the adjacency matrix of two graphs in the dataset suffices to considerably lower the maximal value \(\lambda\) can take.
                                 To compute such a kernel it takes approximatly \SI{1.14}{\s\per\building\squared}.
                     \item[\(\blacktriangleright\) \gls{acr::svm} \(\vartheta\)] This kernel takes no parameters.
-                                It takes on average \SI{0.0000201}{\s\per\building\squared} to compute a kernel comparison.
-                    \item[\(\blacktriangleright\) Multiscale Laplacian] Our building models have a varying number of nodes from 4 up to 20 facets in some cases.
+                                It takes on average \SI[scientific-notation = true]{0.0000201}{\s\per\building\squared} to compute a kernel comparison.
+                    \item[\(\blacktriangleright\) Multiscale Laplacian] Our building models have a varying number of nodes from 4 up to 20 and more facets in some cases.
                                 That is why we choose to keep the same radius size\footnote{The neighboorhoods \(N_l(v)\) are taken as balls around vertex \(v\)~\parencite{kondor2016multiscale}.} and depth level \(L\) set to 3 as in the original paper~\parencite{kondor2016multiscale}.
-                                The same goes for the regularization terms fixed at a value of \num{1e-2}.
+                                The same goes for the regularization terms fixed at a value of \num[scientific-notation = true]{1e-2}.
                                 Computing one kernel comparison requires around \SI{10.6}{\s\per\building\squared}.
                     \item[\(\blacktriangleright\) Propagation] The choice of the transition matrix, as explained in Section~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}, is set by default to be the normalized adjacency matrix.
                                 The maximal iteration number \(t_{\max}\) is similar to the height parameter of the Weisfeler-Lehman kernel and is set to 5.
                                 Other parameters regarding the hashing and binning processed are kept at their default values.
-                                Comparing two instances takes around \SI{0.0812}{\s\per\building\squared}.
+                                Comparing two instances takes around \SI[scientific-notation = true]{0.0812}{\s\per\building\squared}.
                     \item[\(\blacktriangleright\) Graph hopper] This kernel takes no other parameter than the choice of base kernels.
                                 Comparisons between takes on average \SI{34.5}{\s\per\building\squared}.
                 \end{description}
@@ -284,9 +281,6 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
                 The Kymatio implementation of \gls{acr::scatnet} uses GPU to accelerate computations.
                 Using an NVIDIA GeForce GTX 750 Ti graphics card, it takes around \SI{14.06}{\s \per \building} on average to compute a height based features and \SI{20.86}{\s \per \building}.
                 As with previous features onces they are calculated they are cached for latter use.
-                \sisetup{
-                    scientific-notation = false
-                }
 
     \subsection{Classification settings}
         \label{subsec::experiments::setup::classification}
@@ -299,8 +293,8 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             The input models are generalized to \gls{acr::lod}-2.
             As a consequence, we chose \textbf{\gls{acr::elod}} = \gls{acr::lod}-2.
             If the \textbf{exclusivity} is \textsc{on}, at \textbf{\gls{acr::efin}} level 3, the second stage classification results depends on the first one.
-            We are, at this stage, trying to prove the feasability, in the first place, of the proposed approach.
-            As proven in the latter experiments (\textit{cf.} Section~\ref{sec::more_experiments::finesse}), the first stage results are not good enough in order to test this configuration.
+            After a brief experimental study, the first stage did not yield good enough results in order to test this configuration.
+            In fact, we remind the reader that, at this stage, our goal is, first and foremost, to prove the feasability of the proposed approach.
             That is why we limited the experiments to the case where the \textbf{exclusivity} is set to be \textsc{off}.
 
         \subsubsection{Classifiers}
@@ -310,9 +304,6 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             We relied upon the already available and ubequitous implementation in Python~\parencite{scikit-learn}.
             Below we detail quantitavely the used parameters.
             
-            \sisetup{
-                scientific-notation = true
-            }
             \paragraph{\acrshort*{acr::rf}}
                 A brief grid search involving a smaller set of building models and only baseline geometric features~\parencite{ennafii2018qualificationunannotated} yielded comparable results for the number of trees set in the range \numrange{850}{1000} and a maximum tree depth from \numrange{3}{5}.
                 Given the already immense parameter search space involving all possible feature configurations, feature extraction parameters and label possibilities, the \gls{acr::rf} parameters are set to \num{1000} for the tree number and 4 for the maximum tree depth for all other experiments without performing any grid search.
@@ -322,14 +313,11 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             \paragraph{\acrshort*{acr::svm}}
                 The linear \gls{acr::svm} is not well suited for the type of features that we use, even for baseline features as experiments do not yield any resuslts in time.
                 As a consequence, the latter was left out and we experimented only with the kernel \gls{acr::svm} using the standard \gls{acr::rbf} kernel (\textit{cf.} Equation~\ref{eq::rbf_kernel}) when instances are vectors not graphs.
-                Just as with the \gls{acr::rf} classifier, we conducted a grid search using baseline geometric features only in order to determine both parameters \(C\) and \(\gamma\) by limiting the range between \numrange[range-phrase={ and }]{1e1}{1e-3} for both.
+                Just as with the \gls{acr::rf} classifier, we conducted a grid search using baseline geometric features only in order to determine both parameters \(C\) and \(\gamma\) by limiting the range between \numrange[range-phrase={ and }, scientific-notation = true]{1e1}{1e-3} for both.
                 All values yielded sensibly the same scores.
-                As a result we set these parameters as follows: \(C = \num{1e-1}\) to not overpenalize nor underfit during learning and \(\gamma = \num{1e-3}\) to avoid overfitting.
+                As a result we set these parameters as follows: \(C = \num[scientific-notation = true]{1e-1}\) to not overpenalize nor underfit during learning and \(\gamma = \num[scientific-notation = true]{1e-3}\) to avoid overfitting.
                 Regarding \gls{acr::mkl}, we made use of the already implemented EasyMKL~\parencite{aiolli2015easymkl} approach.
                 It was the only method, to our knowledge that was readily available library to use with Python\footnote{\href{https://github.com/IvanoLauriola/MKLpy}{MKLpy}}.
-                \sisetup{
-                    scientific-notation = false
-                }
     
         \subsubsection{Used metrics}
             The overall accuracy is not interesting due to the highly unbalanced label distribution.
@@ -520,7 +508,7 @@ Second and last, Section~\ref{sec::experiments::evaluation} experimentally provi
             \centering
             \renewcommand{\arraystretch}{2}
             \begin{center}
-                \begin{tabular}{| c | x{1cm} x{1cm} x{1cm} x{1cm} |}
+                \begin{tabular}{| c | x{1.5cm} x{1.5cm} x{1.5cm} x{1.5cm} |}
                     \hline
                     & \multicolumn{4}{c|}{\textbf{Elancourt}}\\
                     \hline
