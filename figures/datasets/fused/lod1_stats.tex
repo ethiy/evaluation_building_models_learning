@@ -1,0 +1,83 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
+\begin{document}
+    \pgfplotstableread[col sep=comma, header=false]{
+        1, 1342, 667
+        2, 473, 1536
+        3, 203, 1806
+        4, 99, 1910
+    }\buildingEl
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2}
+        }
+    ]{sum}{\buildingEl}
+
+    \pgfplotstableread[col sep=comma, header=false]{
+        1, 493, 733
+        2, 131, 1095
+        3, 154, 1072
+        4, 189, 1037
+    }\buildingNaPa
+    \pgfplotstablecreatecol[
+        create col/expr={
+            \thisrow{1} + \thisrow{2}
+        }
+    ]{sum}{\buildingNaPa}
+
+    \pgfplotsset{
+        percentage plot/.style={
+            point meta=explicit,
+            every node near coord/.append style={
+                color=black,
+                align=center,
+                font=\scriptsize,
+            },
+            nodes near coords={
+                \pgfmathtruncatemacro\iszero{\originalvalue==0}
+                \ifnum\iszero=0
+                    \pgfmathprintnumber[fixed zerofill,precision=0]{\pgfplotspointmeta}
+                \fi
+            },
+            nodes near coords align={vertical},
+            visualization depends on={y \as \originalvalue}
+        },
+        percentage series/.style={
+            table/y expr=(\thisrow{#1} / \thisrow{sum} * 100),
+            table/meta=#1
+        }
+    }
+
+    \begin{tikzpicture}
+        \begin{axis}[
+            ylabel={Ratio},
+            ybar,
+            percentage plot,
+            bar width=10pt,
+            xticklabels={{BOS\\\vphantom{m}}, BUS, BIB, BIT},
+            xtick=data,
+            xtick pos=left,
+            ytick pos=left,
+            x tick label style={font=\ttfamily, text width=2cm, align=center},
+            ymax=100,
+            ymin=0,
+            xmax=4.6,
+            xmin=.4,
+            legend style={
+                legend columns=-2,
+                at={(.5,1.05)},
+                anchor=south
+            }
+        ]
+            \addplot table [percentage series=1] {\buildingEl};
+            \addplot table [percentage series=1] {\buildingNaPa};
+            \legend{
+                \footnotesize \strut \textbf{Elancourt},
+                \footnotesize \strut \textbf{Na-P13}
+            }
+        \end{axis}
+    \end{tikzpicture}
+\end{document}
