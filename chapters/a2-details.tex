@@ -1016,7 +1016,7 @@
         \begin{table}[htpb]
             \footnotesize
             \begin{center}
-                \begin{tabular}{| c | c c | c c | c c | c c |}
+                \begin{tabular}{| c | c | c | c | c |}
                     \hline
                     & \multicolumn{4}{c|}{\textbf{Elancourt}}\\
                     \hline
@@ -1091,9 +1091,9 @@
                     \specialrule{.2em}{.1em}{.1em}
                     \texttt{FOS} & 69.96 & 68.24 & 68.24 & \textbf{75.51} \\
                     \hline
-                    \texttt{FUS} & \textbf{67.78} & 35.79 & 35.81 & 28.72 \\
+                    \texttt{FUS} & \textit{67.78} & 35.79 & 35.81 & 28.72 \\
                     \hline
-                    \texttt{FIB} & 46.38 & 29.30 & 29.30 & \textbf{81.39} \\
+                    \texttt{FIB} & \textbf{46.38} & 29.30 & 29.30 & \textit{81.39} \\
                     \hline
                     \texttt{FIT} & 93.75 & 100 & 100 & 100 \\
                     \hline
@@ -1114,7 +1114,7 @@
                     \specialrule{.2em}{.1em}{.1em}
                     \texttt{FOS} & 85.36 & 85.31 & 85.26 & \textbf{89.76} \\
                     \hline
-                    \texttt{FUS} & \textbf{74.61} & 36.13 & 36.13 & 36.13 \\
+                    \texttt{FUS} & \textit{74.61} & 36.13 & 36.13 & 36.13 \\
                     \hline
                     \texttt{FIB} & \textbf{54.79} & 40.18 & 40.18 & 39.10 \\
                     \hline
@@ -1129,6 +1129,7 @@
                 F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using a \gls{acr::svm}.
                 These are deduced from Table~\ref{tab::svm_f3}.
                 Modalities that drives jumps of more than a \SI{4.5}{\percent} in F-score are distinguished in bold.
+                In italic are shown the scores suspected to result from overfitting.
             }
         \end{table}
         \begin{table}[htbp]
@@ -1163,6 +1164,7 @@
             \caption{\label{tab::f_score_rf_vs_svm_f3} Mean F-score and standard deviation using \gls{acr::rf} and \gls{acr::svm}.}
         \end{table}
 
+        \FloatBarrier
     \subsection{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} to baseline comparison}
         \subsubsection{Raw \acrshort*{acr::scatnet} features}
             \begin{table}[htbp]
