@@ -604,9 +604,10 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     Some operations over kernels always yield valid kernels.
                     This is true for instance for summation.
                     In fact, fixing the number of kernels $K\in \mathbb{N} \setminus \left\{0\right\}$, for basis kernels $k_i \; \forall i=1,2,\dots,K$ weithed by $\mu_i \in \mathbb{R}_+\; \forall i=1,2,\dots,K$,
-                    \begin{equation*}
+                    \begin{equation}
+                        \label{eq::mkl}
                         k(\bm{x}, \bm{y}) = \sum_{i=1}^K \mu_i \cdot k_i(\bm{x}, \bm{y})
-                    \end{equation*}
+                    \end{equation}
                     is also a valid kernel.
                     Such kernels proved to be better in practice than using single kernels~\parencite{lanckriet2004statistical}.
                     To simplify the problem, the solution is chosen in the simplex of the basis kernels: \textit{i.e.} $ (\mu_1, \mu_2, \dots, \mu_K) \in (\mathbb{R}_+)^K  \; s.t. \sum_{i=1}^K \mu_i = 1$.

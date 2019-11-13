@@ -905,6 +905,12 @@
             
     \subsection{Feature contributions using \acrshort*{acr::mkl}}
         \label{subsec::more_experiments::classifier::feature_importance}
+        In a linear \gls{acr::svm}, feature importance can be natively computed by looking at the weight vector \(\bm{w}\) as shown by~\textcite{guyon2002gene}.
+        This is, unfortunatly, not our case.
+        Instead we operate with Kernel \glspl{acr::svm} where features are fused using \gls{acr::mkl} with weights \(\left(\mu_i\right)_{i=1, 2, 3}\) (\textit{cf.} Equation~\ref{eq::mkl}) that are on the simplex, as discussed in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.
+        Consequently, when training with the last feature configuration, the resulting weights could be interpreted as feature importance ratios.
+        These are vizualized in Figure~\ref{fig::feature_importances_svm_bl}.\\
+
         \begin{figure}[htpb]
             \centering
             \ffigbox[\FBwidth]{
@@ -928,24 +934,51 @@
                 \end{subfloatrow}
             }{
                 \caption{
-                    \label{fig::feature_importances_svm_bl} Modality contribution for the \gls{acr::svm} classifier based on the coefficients computed by EasyMKL.
+                    \label{fig::feature_importances_svm_bl}
+                    Modality contribution for the \gls{acr::svm} classifier based on the coefficients computed by EasyMKL.
                     The first (\textit{resp.} second) column represents \textbf{Elancourt} (\textit{resp.} \textbf{Na-P13}).
                 }
             }
         \end{figure}
+
+        We can see how these ratios stay mostly around 1/3 with more leeway compared to \gls{acr::rf} (\textit{cf.} Figure~\ref{fig::feature_importances_rf_bl}).
+        This actually confirms how these \gls{acr::mkl} weights could be interpreted as features importances.
+        The larger margins to the 1/3 ratio could be explained by the sensibility of the weights to the noise when selecting training instances.
+        There is, however, one exception that could be noted between Figures~\ref{fig::feature_importances_svm_bl} and~\ref{fig::feature_importances_rf_bl}.
+        In fact, for \texttt{FOS}, geometric features have a larger importance when training with \gls{acr::svm} compared to the \gls{acr::rf} case.
+        This is actually not an issue as it could be explained by the topological nature of the error label.\\
+
+        Eventhough geometric features alone yield better results in some cases, the \gls{acr::mkl} cannot ignore the extrinsic features.
+        As in the \gls{acr::rf} case, this may be prove to be helpful for the transferability of learning.
+        Consequently, it would be interesting to rerun the same scalanility experiments, as in Section~\ref{sec::more_experiments::scalability}, with an \gls{acr::svm}.
+        This was not the case, due to time limitations.
     
 \section{Advanced features contributions}
     \label{sec::more_experiments::richer_features}
-    Three possibilities are investigated.
-    First, we keep the baseline geometric features and replace the basic image and height based feature extractors by the \gls{acr::scatnet} derived ones as explained in Section~\ref{subsec::learned_evaluation::richer_features::image}.
-    The ensuring results are compared to 
-    Second, in order to assess the added value of graph kernels, we ignore extrinsic madalities and only 
+    Herein, some advanced feature extractors are tried.
+    The goal is to find out if it is possible to achieve better results than the ones obtained with our handcrafted baseline features.
+    As we do not have enough learning instances to leverage deep learning methods we choose instead to use graph kernels as well as \glspl{acr::scatnet} as shown in Section~\ref{sec::learned_evaluation::richer_features} and implemented in Section~\ref{subsec::experiments::setup::feature_configurations}.\\
+
+    Three possibilities are investigated:
+    \begin{enumerate}[label=\roman*)]
+        \item We keep the baseline geometric features and replace the basic image and height based features by the \gls{acr::scatnet} derived extractors, as explained in Section~\ref{subsec::learned_evaluation::richer_features::image}.
+        \item We compare only geometric features test results using both the baseline features and graph kernels.
+        \item We combine both the graph kernels and the \gls{acr::scatnet} derived extractors and compare them to the baseline results.
+    \end{enumerate}
+    As with the previous section (\textit{cf.} Section~\ref{sec::more_experiments::classifier}), the experiments are conducted on two sets: \textbf{Elancourt} and \textbf{Na-P13}.
 
     \subsection{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} to baseline comparison}
         \label{subsec::more_experiments::richer_features::scatnet_baseline}
+        We start by running experiments using the \gls{acr::scatnet} derived features using both the \gls{acr::rf} and \gls{acr::svm} classifiers.
+        Results from both are compared first to the baseline results and later between them.
+        There are two options when employing \gls{acr::scatnet} with image based features: \texttt{channel} and \texttt{deletion} (\textit{cf.} Section~\ref{subsec::experiments::setup::feature_configurations}).
+        This adds another dimension to our comparisons making the number of possible feature configurations equal to six.
 
-        \subsubsection{Raw \acrshort*{acr::scatnet} features}
-            \label{subsubsec::more_experiments::richer_features::scatnet_baseline::raw}
+        \subsubsection{\texorpdfstring{\acrshort*{acr::rf}}{RF} results}
+            \label{subsubsec::more_experiments::richer_features::scatnet_baseline::rf}
+            We start by experimenting these six feature configurations on both sets.
+            Results are reported in Table~\ref{tab::stats_scat_rf_f3}.
+            
             \begin{sidewaystable}[htpb]
                 \footnotesize
                 \centering
@@ -1007,6 +1040,125 @@
                     Results are expressed in percentage on the two datasets at \textbf{\gls{acr::efin}} level 3.
                 }
             \end{sidewaystable}
+            
+            In general, we can observe how external modalities seem to play a more important role in detecting errors.
+            This can be confirmed with the larger standard deviations depicted in Figure~\ref{fig::f_score_rf_scat_bl} compared to the baseline features (\textit{cf.} Figure~\ref{fig::f_score_rf_bl}).\\
+
+            In addition, based on the same Figure~\ref{fig::f_score_rf_scat_bl}, we can deduce the best option to be used for \gls{acr::scatnet} image based features.
+            In most cases, the best options seems to be almost always \texttt{channel}.
+            This is understandable as this option do not modify the signal, from the get go, and preserves both the image and model informations until the last possible opportunity letting the classifier handle the fusion.
+            The early fusion conducted when choosing the \texttt{deletion} option deforms the input signal.
+            As the \gls{acr::scatnet} convolves filters and applies non linear functions to the input, the classifier cannot separate, in this case, between information that is derived from the image or from the evaluated model.\\
+            
+            There are however exceptions that we distinguish into two kinds.
+            The first is where \texttt{deletion} was better with a small margin that can be explained by the noise of training data selection.
+            This was the case of \texttt{BIT} on \textbf{Elancourt} and \texttt{FIG} on \textbf{Na-P13}.
+            On the contrary, the second, and more important, case is where the margin is large which was the case of \texttt{FIT} on \textbf{Elancourt} where \textbf{Geom. \(\otimes\) S(d)-Im.} had at least \SI{9}{\percent} more in F-score than the other configurations.
+            At this point we do not have any explication why this was the case.
+            This requires scalability experimentations as with Section~\ref{sec::more_experiments::scalability} to see if this feature configuration is robust enough.\\
+
+            \begin{figure}[htpb]
+                \centering
+                \ffigbox[\textwidth]{
+                    \begin{subfloatrow}[2]
+                        \ffigbox[.5\textwidth]{
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_vs_bl/rf/deletion/building}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_rf_scat_del_bl_building}
+                                \texttt{Building errors} (with \texttt{deletion}).
+                            }
+                        }
+                        \ffigbox[.5\textwidth]{
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_vs_bl/rf/deletion/facet}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_rf_scat_del_bl_facet}
+                                \texttt{Facet errors} (with \texttt{deletion}).
+                            }
+                        }
+                    \end{subfloatrow}
+                    \vskip1em
+                    \begin{subfloatrow}[2]
+                        \ffigbox[.5\textwidth]{
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_vs_bl/rf/channel/building}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_rf_scat_chan_bl_building}
+                                \texttt{Building errors} (with \texttt{channel}).
+                            }
+                        }
+                        \ffigbox[.5\textwidth]{
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_vs_bl/rf/channel/facet}
+                        }{
+                            \caption{
+                                \label{subfig::f_score_rf_scat_chan_bl_facet}
+                                \texttt{Facet errors} (with \texttt{channel}).
+                            }
+                        }
+                    \end{subfloatrow}
+                }{
+                    \caption{
+                        \label{fig::f_score_rf_scat_bl}
+                        Mean F-score and standard deviation obtained with an \gls{acr::rf} based on \gls{acr::scatnet} features.
+                        This is a vizualization of scores recorder in Table~\ref{tab::f_score_scat_bl}.
+                    }
+                }
+            \end{figure}
+
+            As with previous experiments, we also computed feature importances using the new configurations.
+            These are shown for both sets and options in Figure~\ref{fig::feature_importances_scat_rf}.\\
+
+            \begin{figure}[htpb]
+                \centering
+                \ffigbox[\textwidth]{
+                    \begin{subfloatrow}[2]
+                        \ffigbox[.5\textwidth]{
+                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/scat_vs_bl/rf/deletion/feature_importance/building}
+                        }{
+                            \caption{
+                                \label{subfig::feature_importances_scat_del_rf_building}
+                                \texttt{Building errors} (with \texttt{deletion}).
+                            }
+                        }
+                        \ffigbox[.5\textwidth]{
+                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/scat_vs_bl/rf/deletion/feature_importance/facet}
+                        }{
+                            \caption{
+                                \label{subfig::feature_importances_scat_del_rf_facet}
+                                \texttt{Facet errors} (with \texttt{deletion}).
+                            }
+                        }
+                    \end{subfloatrow}
+                    \vskip2em
+                    \begin{subfloatrow}[2]
+                        \ffigbox[.5\textwidth]{
+                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/scat_vs_bl/rf/channel/feature_importance/building}
+                        }{
+                            \caption{
+                                \label{subfig::feature_importances_scat_chan_rf_building}
+                                \texttt{Building errors} (with \texttt{channel}).
+                            }
+                        }
+                        \ffigbox[.5\textwidth]{
+                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/scat_vs_bl/rf/channel/feature_importance/facet}
+                        }{
+                            \caption{
+                                \label{subfig::feature_importances_scat_chan_rf_facet}
+                                \texttt{Facet errors} (with \texttt{channel}).}                            }
+                        }
+                    \end{subfloatrow}
+                }{
+                    \caption{
+                        \label{fig::feature_importances_scat_rf} Modality importance using the \gls{acr::rf} classifier.
+                        Height and Image based features use the \gls{acr::scatnet} with both \texttt{deletion} and \texttt{channel} options.
+                        The first (\textit{resp.} second) column represents \textbf{Elancourt} (\textit{resp.} \textbf{Na-P13}).
+                    }
+                }
+            \end{figure}
+
+        \subsubsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} results}
+            \label{subsubsec::more_experiments::richer_features::scatnet_baseline::svm}
             \begin{sidewaystable}[htpb]
                 \footnotesize
                 \centering
@@ -1068,54 +1220,6 @@
                     Results are expressed in percentage on the two datasets at \textbf{\gls{acr::efin}} level 3.
                 }
             \end{sidewaystable}
-
-            \begin{figure}[htpb]
-                \centering
-                \ffigbox[\textwidth]{
-                    \begin{subfloatrow}[2]
-                        \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_vs_bl/rf/deletion/building}
-                        }{
-                            \caption{
-                                \label{subfig::f_score_rf_scat_del_bl_building}
-                                \texttt{Building errors (with deletion).}
-                            }
-                        }
-                        \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_vs_bl/rf/deletion/facet}
-                        }{
-                            \caption{
-                                \label{subfig::f_score_rf_scat_del_bl_facet}
-                                \texttt{Facet errors (with deletion).}
-                            }
-                        }
-                    \end{subfloatrow}
-                    \vskip1em
-                    \begin{subfloatrow}[2]
-                        \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_vs_bl/rf/channel/building}
-                        }{
-                            \caption{
-                                \label{subfig::f_score_rf_scat_chan_bl_building}
-                                \texttt{Building errors (with channel).}
-                            }
-                        }
-                        \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_vs_bl/rf/channel/facet}
-                        }{
-                            \caption{
-                                \label{subfig::f_score_rf_scat_chan_bl_facet}
-                                \texttt{Facet errors (with channel).}
-                            }
-                        }
-                    \end{subfloatrow}
-                }{
-                    \caption{
-                        \label{fig::f_score_rf_scat_bl}
-                        Mean F-score and standard deviation obtained with an \gls{acr::rf} based on \gls{acr::scatnet} features.
-                    }
-                }
-            \end{figure}
     
             \begin{figure}[htpb]
                 \centering
@@ -1126,7 +1230,7 @@
                         }{
                             \caption{
                                 \label{subfig::f_score_svm_scat_del_bl_building}
-                                \texttt{Building errors (with deletion).}
+                                \texttt{Building errors} (with \texttt{deletion}).
                             }
                         }
                         \ffigbox[.5\textwidth]{
@@ -1134,7 +1238,7 @@
                         }{
                             \caption{
                                 \label{subfig::f_score_svm_scat_del_bl_facet}
-                                \texttt{Facet errors (with deletion).}
+                                \texttt{Facet errors} (with \texttt{deletion}).
                             }
                         }
                     \end{subfloatrow}
@@ -1145,7 +1249,7 @@
                         }{
                             \caption{
                                 \label{subfig::f_score_svm_scat_chan_bl_building}
-                                \texttt{Building errors (with channel).}
+                                \texttt{Building errors} (with \texttt{channel}).
                             }
                         }
                         \ffigbox[.5\textwidth]{
@@ -1153,8 +1257,7 @@
                         }{
                             \caption{
                                 \label{subfig::f_score_svm_scat_chan_bl_facet}
-                                \texttt{Facet errors (with channel).}
-                            }
+                                \texttt{Facet errors} (with \texttt{channel}).}                            }
                         }
                     \end{subfloatrow}
                 }{
@@ -1174,7 +1277,7 @@
                         }{
                             \caption{
                                 \label{subfig::feature_importances_scat_del_svm_building}
-                                \texttt{Building errors (with deletion).}
+                                \texttt{Building errors} (with \texttt{deletion}).
                             }
                         }
                         \ffigbox[.5\textwidth]{
@@ -1182,7 +1285,7 @@
                         }{
                             \caption{
                                 \label{subfig::feature_importances_scat_del_svm_facet}
-                                \texttt{Facet errors (with deletion).}
+                                \texttt{Facet errors} (with \texttt{deletion}).
                             }
                         }
                     \end{subfloatrow}
@@ -1192,72 +1295,22 @@
                             \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/scat_vs_bl/svm/channel/feature_importance/building}
                         }{
                             \caption{
-                                \label{subfig::feature_importances_scat_channel_svm_building}
-                                \texttt{Building errors (with channel).}
+                                \label{subfig::feature_importances_scat_chan_svm_building}
+                                \texttt{Building errors} (with \texttt{channel}).
                             }
                         }
                         \ffigbox[.5\textwidth]{
                             \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/scat_vs_bl/svm/channel/feature_importance/facet}
                         }{
                             \caption{
-                                \label{subfig::feature_importances_scat_channel_svm_facet}
-                                \texttt{Facet errors (with channel).}
-                            }
+                                \label{subfig::feature_importances_scat_chan_svm_facet}
+                                \texttt{Facet errors} (with \texttt{channel}).}                            }
                         }
                     \end{subfloatrow}
                 }{
                     \caption{
                         \label{fig::feature_importances_scat_svm} Modality contribution for the \gls{acr::svm} classifier based on the coefficients computed by EasyMKL.
-                        Height and Image based features use the \gls{acr::scatnet} with both deletion and channel options.
-                        The first (\textit{resp.} second) column represents \textbf{Elancourt} (\textit{resp.} \textbf{Na-P13}).
-                    }
-                }
-            \end{figure}
-
-            \begin{figure}[htpb]
-                \centering
-                \ffigbox[\textwidth]{
-                    \begin{subfloatrow}[2]
-                        \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/scat_vs_bl/rf/deletion/feature_importance/building}
-                        }{
-                            \caption{
-                                \label{subfig::feature_importances_scat_del_rf_building}
-                                \texttt{Building errors (with deletion).}
-                            }
-                        }
-                        \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/scat_vs_bl/rf/deletion/feature_importance/facet}
-                        }{
-                            \caption{
-                                \label{subfig::feature_importances_scat_del_rf_facet}
-                                \texttt{Facet errors (with deletion).}
-                            }
-                        }
-                    \end{subfloatrow}
-                    \vskip2em
-                    \begin{subfloatrow}[2]
-                        \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/scat_vs_bl/rf/channel/feature_importance/building}
-                        }{
-                            \caption{
-                                \label{subfig::feature_importances_scat_channel_rf_building}
-                                \texttt{Building errors (with channel).}
-                            }
-                        }
-                        \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/scat_vs_bl/rf/channel/feature_importance/facet}
-                        }{
-                            \caption{
-                                \label{subfig::feature_importances_scat_channel_rf_facet}
-                                \texttt{Facet errors (with channel).}
-                            }
-                        }
-                    \end{subfloatrow}
-                }{
-                    \caption{
-                        \label{fig::feature_importances_scat_rf} Modality importance using the \gls{acr::rf} classifier.
-                        Height and Image based features use the \gls{acr::scatnet} with both deletion and channel options.
+                        Height and Image based features use the \gls{acr::scatnet} with both \texttt{deletion} and \texttt{channel} options.
                         The first (\textit{resp.} second) column represents \textbf{Elancourt} (\textit{resp.} \textbf{Na-P13}).
                     }
                 }
@@ -1424,7 +1477,7 @@
                     }{
                         \caption{
                             \label{subfig::f_score_svm_gk_scat_del_bl_building}
-                            \texttt{Building errors (with deletion).}
+                            \texttt{Building errors} (with \texttt{deletion}).
                         }
                     }
                     \ffigbox[.5\textwidth]{
@@ -1432,7 +1485,7 @@
                     }{
                         \caption{
                             \label{subfig::f_score_svm_gk_scat_del_bl_facet}
-                            \texttt{Facet errors (with deletion).}
+                            \texttt{Facet errors (with \texttt{deletion}).}
                         }
                     }
                 \end{subfloatrow}
@@ -1443,7 +1496,7 @@
                     }{
                         \caption{
                             \label{subfig::f_score_svm_gk_scat_chan_bl_building}
-                            \texttt{Building errors (with channel).}
+                            \texttt{Building errors (with \texttt{channel}).}
                         }
                     }
                     \ffigbox[.5\textwidth]{
@@ -1451,7 +1504,7 @@
                     }{
                         \caption{
                             \label{subfig::f_score_svm_gk_scat_chan_bl_facet}
-                            \texttt{Facet errors (with channel).}
+                            \texttt{Facet errors (with \texttt{channel}).}
                         }
                     }
                 \end{subfloatrow}
@@ -1459,7 +1512,7 @@
                 \caption{
                     \label{fig::f_score_svm_gk_scat}
                     Mean F-score and standard deviation obtained with an \gls{acr::svm}.
-                    The geometric modality is based on graph kernels while height and image based features use the \gls{acr::scatnet} with deletion and channel options.
+                    The geometric modality is based on graph kernels while height and image based features use the \gls{acr::scatnet} with \texttt{deletion} and \texttt{channel} options.
                 }
             }
         \end{figure}
@@ -1473,7 +1526,7 @@
                     }{
                         \caption{
                             \label{subfig::feature_importances_gk_scat_del_svm_building}
-                            \texttt{Building errors (with deletion).}
+                            \texttt{Building errors} (with \texttt{deletion}).
                         }
                     }
                     \ffigbox[.5\textwidth]{
@@ -1481,7 +1534,7 @@
                     }{
                         \caption{
                             \label{subfig::feature_importances_gk_scat_del_svm_facet}
-                            \texttt{Facet errors (with deletion).}
+                            \texttt{Facet errors (with \texttt{deletion}).}
                         }
                     }
                 \end{subfloatrow}
@@ -1490,23 +1543,23 @@
                         \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/gk-scat_vs_bl/channel/feature_importance/building}
                     }{
                         \caption{
-                            \label{subfig::feature_importances_gk_scat_channel_svm_building}
-                            \texttt{Building errors (with channel).}
+                            \label{subfig::feature_importances_gk_scat_chan_svm_building}
+                            \texttt{Building errors (with \texttt{channel}).}
                         }
                     }
                     \ffigbox[.5\textwidth]{
                         \includestandalone[mode=buildnew, height=.23\textheight]{figures/results/gk-scat_vs_bl/channel/feature_importance/facet}
                     }{
                         \caption{
-                            \label{subfig::feature_importances_gk_scat_channel_svm_facet}
-                            \texttt{Facet errors (with channel).}
+                            \label{subfig::feature_importances_gk_scat_chan_svm_facet}
+                            \texttt{Facet errors (with \texttt{channel}).}
                         }
                     }
                 \end{subfloatrow}
             }{
                 \caption{
                     \label{fig::feature_importances_gk_scat_svm} Modality contribution for the \gls{acr::svm} classifier based on the coefficients computed by EasyMKL.
-                    The geometric modality is based on graph kernels while height and image based features use the \gls{acr::scatnet} with deletion and channel options.
+                    The geometric modality is based on graph kernels while height and image based features use the \gls{acr::scatnet} with \texttt{deletion} and \texttt{channel} options.
                     The first (\textit{resp.} second) column represents \textbf{Elancourt} (\textit{resp.} \textbf{Na-P13}).
                 }
             }
