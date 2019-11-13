@@ -1049,7 +1049,7 @@
             This is understandable as this option do not modify the signal, from the get go, and preserves both the image and model informations until the last possible opportunity letting the classifier handle the fusion.
             The early fusion conducted when choosing the \texttt{deletion} option deforms the input signal.
             As the \gls{acr::scatnet} convolves filters and applies non linear functions to the input, the classifier cannot separate, in this case, between information that is derived from the image or from the evaluated model.\\
-            
+
             There are however exceptions that we distinguish into two kinds.
             The first is where \texttt{deletion} was better with a small margin that can be explained by the noise of training data selection.
             This was the case of \texttt{BIT} on \textbf{Elancourt} and \texttt{FIG} on \textbf{Na-P13}.
@@ -1106,6 +1106,8 @@
                 }
             \end{figure}
 
+            comparisons ??
+
             As with previous experiments, we also computed feature importances using the new configurations.
             These are shown for both sets and options in Figure~\ref{fig::feature_importances_scat_rf}.\\
 
@@ -1145,7 +1147,7 @@
                         }{
                             \caption{
                                 \label{subfig::feature_importances_scat_chan_rf_facet}
-                                \texttt{Facet errors} (with \texttt{channel}).}                            }
+                                \texttt{Facet errors} (with \texttt{channel}).
                         }
                     \end{subfloatrow}
                 }{
@@ -1257,7 +1259,7 @@
                         }{
                             \caption{
                                 \label{subfig::f_score_svm_scat_chan_bl_facet}
-                                \texttt{Facet errors} (with \texttt{channel}).}                            }
+                                \texttt{Facet errors} (with \texttt{channel}).
                         }
                     \end{subfloatrow}
                 }{
@@ -1304,7 +1306,7 @@
                         }{
                             \caption{
                                 \label{subfig::feature_importances_scat_chan_svm_facet}
-                                \texttt{Facet errors} (with \texttt{channel}).}                            }
+                                \texttt{Facet errors} (with \texttt{channel}).
                         }
                     \end{subfloatrow}
                 }{
