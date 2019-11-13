@@ -656,7 +656,7 @@
             \ffigbox[\FBwidth]{
                 \begin{subfloatrow}[2]
                     \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, height=8cm]{figures/results/svm_rf/rf/building}
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/svm_rf/rf/building}
                     }{
                         \caption{
                             \label{subfig::f_score_rf_bl_building}
@@ -664,7 +664,7 @@
                         }
                     }
                     \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, height=8cm]{figures/results/svm_rf/rf/facet}
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/svm_rf/rf/facet}
                     }{
                         \caption{
                             \label{subfig::f_score_rf_bl_facet}
@@ -760,6 +760,7 @@
                     However, when adding both, it produces different results as can be shown in Table~\ref{tab::all_f-scores_svm_f3} for all errors but \texttt{BIT} and \texttt{FIT} for both sets as well as \texttt{FUS} for \textbf{NA-P13}.
                     This may be explained by the fact that both features have the same dynamic as they represent, in reality, histogram values as discussed in Section~\ref{sec::learned_evaluation::baseline}.
                     As a consequence, in this case, the \gls{acr::svm} considers both feature configurations to be similar unless when fed together to the \gls{acr::svm}.
+                    Another explanation is that the parameterization of the classifier was not ideal as it underfits when external modalities are added.
             \item Second, and more importantly, in some cases, the \gls{acr::svm}, in particular configurations, yields results that exceed the other ones by a large margin.
                     This was the case of \texttt{FUS} on \textbf{Elancourt} (\textit{resp.} \textbf{Na-P13}) with a jump of around \SI{31}{\percent} with the \textbf{Geom.} configuration (\textit{resp.} \SI{38}{\percent}) in F-score and \SI{35}{\percent} for \texttt{FIB} on \textbf{Na-P13} with the \textbf{All} configuration.
                     This could be owed to two possible reasons.
@@ -777,7 +778,7 @@
             \ffigbox[\FBwidth]{
                 \begin{subfloatrow}[2]
                     \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, height=8cm]{figures/results/svm_rf/svm/building}
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/svm_rf/svm/building}
                     }{
                         \caption{
                             \label{subfig::f_score_svm_bl_building}
@@ -785,7 +786,7 @@
                         }
                     }
                     \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, height=8cm]{figures/results/svm_rf/svm/facet}
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/svm_rf/svm/facet}
                     }{
                         \caption{
                             \label{subfig::f_score_svm_bl_facet}
@@ -847,11 +848,48 @@
         }, one could expect that they would be underperforming with the use of \glspl{acr::svm}.
         Although this is true for \texttt{FOS}, it is not the case for the other cases.\\
 
+        \begin{table}[htbp]
+            \footnotesize
+            \centering
+            \begin{tabular}{| c | x{3cm} x{3cm} | x{3cm} x{3cm} |}
+                \hline
+                & \multicolumn{2}{c |}{\textbf{Elancourt}} & \multicolumn{2}{c |}{\textbf{Na-P13}}\\
+                \hline
+                & \gls{acr::rf} & \gls{acr::svm} & \gls{acr::rf} & \gls{acr::svm}\\
+                \hline
+                \texttt{BOS} & \textbf{Geom.} & \textbf{Geom.} & \textbf{Geom.} & \underline{\textbf{Geom.}} \\
+                \hline
+                \texttt{BUS} & \textbf{Hei.} & \underline{\textbf{All}} & \underline{\textbf{All}} & \underline{\textbf{Geom.}} \\
+                \hline
+                \texttt{BIB} & \underline{\textbf{All}} & \underline{\textbf{Hei.}}, \textbf{Im.} & \textbf{Geom.} & \underline{\textbf{Geom.}} \\
+                \hline
+                \texttt{BIT} & \underline{\textbf{Geom.}} & \textbf{Hei.}, \textbf{Im.} &  \underline{\textbf{Geom.}} & \underline{\textbf{Geom.}} \\
+                \hline
+                \hline
+                \texttt{FOS} & \textbf{Hei.} & \underline{\textbf{All}} & \textbf{All} & \underline{\textbf{All}} \\
+                \hline
+                \texttt{FUS} & \textbf{Geom.} & \textbf{Geom.} & \textbf{Geom.} & \textbf{Geom.} \\
+                \hline
+                \texttt{FIB} & \textbf{Geom.} & \textbf{All} & \underline{\textbf{All}} & \underline{\textbf{Geom.}} \\
+                \hline
+                \texttt{FIT} & \textbf{Hei.} & \textbf{Hei.}, \textbf{Im.} & \underline{\textbf{All}} &  \textbf{Hei.}, \textbf{Im.} \\
+                \hline
+                \texttt{FIG} & \textbf{Geom.} & \underline{\textbf{Geom.}} & \textbf{All} & \underline{\textbf{Geom.}} \\
+                \hline
+            \end{tabular}
+            \caption{
+                \label{tab::svm_rf_best_features_f3}
+                The best performing feature configuration per zone, label and classifier.
+                This summarizes all comparisons between Tables~\ref{tab::all_f-scores_rf_f3} and~\ref{tab::all_f-scores_svm_f3}.
+                The features, that stand out compared to the others in these last tables, are underlined.
+            }
+        \end{table}
+
         In order to explain these observed exceptions, we tried to look at the best performing modalities per label and set comparing between the two classifiers.
-        Most labels perform best with the same kind of feature configurations.
+        Most labels perform best with the same kind of feature configurations, as shown in Table~\ref{tab::svm_rf_best_features_f3}.
         Most notably, we have previously suspected that using only geometric features results in overfitting with an \gls{acr::svm} when training on \texttt{FUS} for both sets.
         Comparing to the \gls{acr::rf}, the same feature configuration was also the best alternative.
-        This leads us to speculate that, contrarily to what was discussed in Section~\ref{subsec::more_experiments::classifier::svm}, it is not a case of overfitting for this modality but rather an underfitting on the other feature configurations.\\
+        This leads us to speculate that, contrarily to what was discussed in Section~\ref{subsec::more_experiments::classifier::svm}, it is not a case of overfitting for this modality but rather the trained \gls{acr::svm} underfitting on the other feature configurations.\\
 
         This is further confirmed by the cases where \gls{acr::rf} and \gls{acr::svm} did not share the same highest performing feature configuration.
         \begin{itemize}[label=\(\blacktriangleright\)]
@@ -1036,7 +1074,7 @@
                 \ffigbox[\textwidth]{
                     \begin{subfloatrow}[2]
                         \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=8cm]{figures/results/scat_vs_bl/rf/deletion/building}
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_vs_bl/rf/deletion/building}
                         }{
                             \caption{
                                 \label{subfig::f_score_rf_scat_del_bl_building}
@@ -1044,7 +1082,7 @@
                             }
                         }
                         \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=8cm]{figures/results/scat_vs_bl/rf/deletion/facet}
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_vs_bl/rf/deletion/facet}
                         }{
                             \caption{
                                 \label{subfig::f_score_rf_scat_del_bl_facet}
@@ -1055,7 +1093,7 @@
                     \vskip1em
                     \begin{subfloatrow}[2]
                         \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=8cm]{figures/results/scat_vs_bl/rf/channel/building}
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_vs_bl/rf/channel/building}
                         }{
                             \caption{
                                 \label{subfig::f_score_rf_scat_chan_bl_building}
@@ -1063,7 +1101,7 @@
                             }
                         }
                         \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=8cm]{figures/results/scat_vs_bl/rf/channel/facet}
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_vs_bl/rf/channel/facet}
                         }{
                             \caption{
                                 \label{subfig::f_score_rf_scat_chan_bl_facet}
@@ -1084,7 +1122,7 @@
                 \ffigbox[\textwidth]{
                     \begin{subfloatrow}[2]
                         \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=8cm]{figures/results/scat_vs_bl/svm/deletion/building}
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_vs_bl/svm/deletion/building}
                         }{
                             \caption{
                                 \label{subfig::f_score_svm_scat_del_bl_building}
@@ -1092,7 +1130,7 @@
                             }
                         }
                         \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=8cm]{figures/results/scat_vs_bl/svm/deletion/facet}
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_vs_bl/svm/deletion/facet}
                         }{
                             \caption{
                                 \label{subfig::f_score_svm_scat_del_bl_facet}
@@ -1103,7 +1141,7 @@
                     \vskip1em
                     \begin{subfloatrow}[2]
                         \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=8cm]{figures/results/scat_vs_bl/svm/channel/building}
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_vs_bl/svm/channel/building}
                         }{
                             \caption{
                                 \label{subfig::f_score_svm_scat_chan_bl_building}
@@ -1111,7 +1149,7 @@
                             }
                         }
                         \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=8cm]{figures/results/scat_vs_bl/svm/channel/facet}
+                            \includestandalone[mode=buildnew, height=7.5cm]{figures/results/scat_vs_bl/svm/channel/facet}
                         }{
                             \caption{
                                 \label{subfig::f_score_svm_scat_chan_bl_facet}
@@ -1382,7 +1420,7 @@
             \ffigbox[\textwidth]{
                 \begin{subfloatrow}[2]
                     \ffigbox[.5\textwidth]{
-                        \includestandalone[mode=buildnew, height=8cm]{figures/results/gk-scat_vs_bl/deletion/building}
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/gk-scat_vs_bl/deletion/building}
                     }{
                         \caption{
                             \label{subfig::f_score_svm_gk_scat_del_bl_building}
@@ -1390,7 +1428,7 @@
                         }
                     }
                     \ffigbox[.5\textwidth]{
-                        \includestandalone[mode=buildnew, height=8cm]{figures/results/gk-scat_vs_bl/deletion/facet}
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/gk-scat_vs_bl/deletion/facet}
                     }{
                         \caption{
                             \label{subfig::f_score_svm_gk_scat_del_bl_facet}
@@ -1401,7 +1439,7 @@
                 \vskip1em
                 \begin{subfloatrow}[2]
                     \ffigbox[.5\textwidth]{
-                        \includestandalone[mode=buildnew, height=8cm]{figures/results/gk-scat_vs_bl/channel/building}
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/gk-scat_vs_bl/channel/building}
                     }{
                         \caption{
                             \label{subfig::f_score_svm_gk_scat_chan_bl_building}
@@ -1409,7 +1447,7 @@
                         }
                     }
                     \ffigbox[.5\textwidth]{
-                        \includestandalone[mode=buildnew, height=8cm]{figures/results/gk-scat_vs_bl/channel/facet}
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/gk-scat_vs_bl/channel/facet}
                     }{
                         \caption{
                             \label{subfig::f_score_svm_gk_scat_chan_bl_facet}
