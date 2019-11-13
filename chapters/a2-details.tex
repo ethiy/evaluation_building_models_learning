@@ -1129,7 +1129,7 @@
                 F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using a \gls{acr::svm}.
                 These are deduced from Table~\ref{tab::svm_f3}.
                 Modalities that drives jumps of more than a \SI{4.5}{\percent} in F-score are distinguished in bold.
-                In italic are shown the scores suspected to result from overfitting.
+                The scores suspected to result from overfitting are underlined.
             }
         \end{table}
         \begin{table}[htbp]
@@ -1139,7 +1139,7 @@
                 \hline
                 & \multicolumn{2}{c |}{\gls{acr::rf}} & \multicolumn{2}{c |}{\gls{acr::svm}}\\
                 \hline
-                & \textbf{Elancourt} & \textbf{Nantes} \(\cup\) \textbf{Paris-13} & \textbf{Elancourt} & \textbf{Nantes} \(\cup\) \textbf{Paris-13}\\
+                & \textbf{Elancourt} & \textbf{Na-P13} & \textbf{Elancourt} & \textbf{Na-P13}\\
                 \hline
                 \texttt{BOS} & 83.52 \(\pm\) 0.66 & 58.27 \(\pm\) 4.95 & 82.11 \(\pm\) 18.83 & 38.68 \(\pm\) 6.91 \\
                 \hline
@@ -1161,7 +1161,11 @@
                 \texttt{FIG} & 75.88 \(\pm\) 0.73 & 87.51 \(\pm\) 2.10 & 72.58 \(\pm\) 12.03 & 75.20 \(\pm\) 8.15 \\
                 \hline
             \end{tabular}
-            \caption{\label{tab::f_score_rf_vs_svm_f3} Mean F-score and standard deviation using \gls{acr::rf} and \gls{acr::svm}.}
+            \caption{
+                \label{tab::f_score_rf_vs_svm_f3}
+                Mean F-score and standard deviation using \gls{acr::rf} and \gls{acr::svm}.
+                These were computed based on results reported in Tables~\ref{tab::all_f-scores_rf_f3} and~\ref{tab::all_f-scores_svm_f3}.
+            }
         \end{table}
 
         \FloatBarrier
@@ -1174,7 +1178,7 @@
                     \hline
                     & \multicolumn{4}{c |}{\gls{acr::rf}} \\
                     \hline
-                    & \multicolumn{2}{c |}{\textbf{Elancourt}} & \multicolumn{2}{c |}{\textbf{Nantes} \(\cup\) \textbf{Paris-13}} \\
+                    & \multicolumn{2}{c |}{\textbf{Elancourt}} & \multicolumn{2}{c |}{\textbf{Na-P13}} \\
                     \hline
                     & Deletion & Channel & Deletion & Channel \\
                     \hline
@@ -1199,7 +1203,7 @@
                     \hline
                     & \multicolumn{4}{c |}{\gls{acr::svm}} \\
                     \hline
-                    & \multicolumn{2}{c |}{\textbf{Elancourt}} & \multicolumn{2}{c |}{\textbf{Nantes} \(\cup\) \textbf{Paris-13}} \\
+                    & \multicolumn{2}{c |}{\textbf{Elancourt}} & \multicolumn{2}{c |}{\textbf{Na-P13}} \\
                     \hline
                     & Deletion & Channel & Deletion & Channel \\
                     \hline
@@ -1297,7 +1301,7 @@
                 \centering
                 \begin{tabular}{| c | c c | c c |}
                     \hline
-                    & \multicolumn{2}{c |}{\textbf{Elancourt}} & \multicolumn{2}{ c |}{\textbf{Nantes} \(\cup\) \textbf{Paris-13}} \\
+                    & \multicolumn{2}{c |}{\textbf{Elancourt}} & \multicolumn{2}{ c |}{\textbf{Na-P13}} \\
                     \hline
                     & Deletion & Channel & Deletion & Channel \\
                     \hline
@@ -1395,7 +1399,7 @@
                 \footnotesize
                 \begin{tabular}{| c | c c | c c |}
                     \hline
-                    & \multicolumn{2}{c |}{\textbf{Elancourt}} & \multicolumn{2}{ c |}{\textbf{Nantes} \(\cup\) \textbf{Paris-13}} \\
+                    & \multicolumn{2}{c |}{\textbf{Elancourt}} & \multicolumn{2}{ c |}{\textbf{Na-P13}} \\
                     \hline
                     & Deletion & Channel & Deletion & Channel \\
                     \hline
@@ -1432,7 +1436,7 @@
             \centering
             \begin{tabular}{| c | c c | c c |}
                 \hline
-                & \multicolumn{2}{c |}{\textbf{Elancourt}} & \multicolumn{2}{ c |}{\textbf{Nantes} \(\cup\) \textbf{Paris-13}} \\
+                & \multicolumn{2}{c |}{\textbf{Elancourt}} & \multicolumn{2}{ c |}{\textbf{Na-P13}} \\
                 \hline
                 & Deletion & Channel & Deletion & Channel \\
                 \hline
