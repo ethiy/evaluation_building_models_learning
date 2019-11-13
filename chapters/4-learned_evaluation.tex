@@ -500,7 +500,7 @@ These are proposed to better model defect predictions.
 
             Two options are possible:
             \begin{description}
-                \item[Deletion:] Pixels \(g\) in the corresponding orthoimage which are part of a polygon border (\textit{i.e.} \(Q_{\mathsf{M}}(g) = 1\)) are made black:
+                \item[\texttt{Deletion}:] Pixels \(g\) in the corresponding orthoimage which are part of a polygon border (\textit{i.e.} \(Q_{\mathsf{M}}(g) = 1\)) are made black:
                         \begin{equation}
                             \label{eq::deletion_orthoimage}
                             I^{\text{dl}}_{\mathsf{M}} \triangleq I_{\mathsf{M}} \odot \left(\begin{bmatrix}
@@ -515,7 +515,7 @@ These are proposed to better model defect predictions.
                             \item[\(Q_{\mathsf{M}}^{\otimes 3} = Q_{\mathsf{M}} \otimes Q_{\mathsf{M}} \otimes Q_{\mathsf{M}}\)] is the tensor obtained by stacking in depth thee copies of the same matrix \(Q_{\mathsf{M}}\);
                             \item[\(A \odot B  = \left(A_{ij} \cdot B_{ij} \right)_{ij}\)] denotes the Hadamard/Schur product of any two matrices \(A\) and \(B\).
                         \end{description}
-                \item[Channel:] The mask \(Q_{\mathsf{M}}\) is simply added to the orthoimage as a fourth channel:
+                \item[\texttt{Channel}:] The mask \(Q_{\mathsf{M}}\) is simply added to the orthoimage as a fourth channel:
                         \begin{equation}
                             \label{eq::channel_orthoimage}
                             I^{\text{ch}}_{\mathsf{M}} \triangleq I_{\mathsf{M}} \otimes Q_{\mathsf{M}}.
@@ -528,7 +528,7 @@ These are proposed to better model defect predictions.
             We apply then the same post-processing to yield feature vectors with the same dimensions \(d \cdot n_S\):
 
             \begin{description}
-                \item[Deletion:]
+                \item[\texttt{Deletion}:]
                         \begin{equation}
                             \label{eq::deletion_scanetg_image_based_features}
                             v^{\text{dl}}_{\text{scattered image}}\left(\mathsf{M}\right) \triangleq \begin{bmatrix}
@@ -551,7 +551,7 @@ These are proposed to better model defect predictions.
                                 }
                             }.
                         \end{equation}
-                \item[Channel:]
+                \item[\texttt{Channel}:]
                         \begin{equation}
                             \label{eq::channel_scatnet_image_based_features}
                             v^{\text{ch}}_{\text{scattered image}}\left(\mathsf{M}\right) \triangleq \begin{bmatrix}
