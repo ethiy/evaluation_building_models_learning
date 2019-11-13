@@ -859,6 +859,7 @@
         On \textbf{Na-P13}, \texttt{FUS} also performs best with geometric features only as explained for \textbf{Elancourt}.
         In addition, the only labels where the better performing feature configuration changed was with \texttt{BUS}, \texttt{FIB} and \texttt{FIG} where only geometric features yielded better results using a \gls{acr::svm} in contrast with the fact that \textbf{All} was the best alternative using a \gls{acr::rf}.
         This reinforces the idea that the \gls{acr::svm} was actually not adequately parameterized for the extrinsic features as was announced in Section~\ref{subsec::experiments::setup::classification}.
+        In fact, as discussed earlier in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}, \glspl{acr::svm} are very hard to parameterize compared to \glspl{acr::rf}.
             
     \subsection{Feature contributions using \acrshort*{acr::mkl}}
         \label{subsec::more_experiments::classifier::feature_importance}
