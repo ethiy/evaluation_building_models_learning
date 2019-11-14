@@ -1105,11 +1105,11 @@ rison} and~\ref{tab::generalization_comparison}.\\
                 }
             \end{figure}
 
-            There are however exceptions that we distinguish into two kinds.
+            There are however exceptions that we divide into two cases.
             The first is where \texttt{deletion} was better with a small margin that can be explained by the noise of training data selection.
             This was the case of \texttt{BIT} on \textbf{Elancourt} and \texttt{FIG} on \textbf{Na-P13}.
-            On the contrary, the second, and more important, case is where the margin is large which was the case of \texttt{FIT} on \textbf{Elancourt} where \textbf{Geom. \(\otimes\) S(d)-Im.} had at least \SI{9}{\percent} more in F-score than the other configurations.
-            At this point we do not have any explication why this was the case.
+            On the contrary, the second, and more important, case is where the margin is large which was the case of \texttt{FIT} on \textbf{Elancourt} where \textbf{Geom. \(\oplus\) S(d)-Im.} had at least \SI{9}{\percent} more in F-score than the other configurations.
+            At this point we do not have any explication to why this is the case.
             This requires scalability experimentations as with Section~\ref{sec::more_experiments::scalability} to see if this feature configuration is robust enough.\\
 
             \begin{table}[htbp]
@@ -1265,6 +1265,11 @@ rison} and~\ref{tab::generalization_comparison}.\\
 
         \subsubsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} results}
             \label{subsubsec::more_experiments::richer_features::scatnet_baseline::svm}
+            We runned the same experiments as in the previous sub-subsection.
+            Results are reported in Table~\ref{tab::stats_scat_svm_f3}.
+            The mean and standard deviation F-scores are shown in Figure~\ref{fig::f_score_svm_scat}.
+            Just as with the \gls{acr::rf} experiments, external modalities seem to play a more crucial role in error prediction than with baseline features (\textit{cf.} Figure~\ref{fig::f_score_svm_bl}).\\
+
             \begin{sidewaystable}[htpb]
                 \footnotesize
                 \centering
@@ -1326,6 +1331,11 @@ rison} and~\ref{tab::generalization_comparison}.\\
                     Results are expressed in percentage on the two datasets at \textbf{\gls{acr::efin}} level 3.
                 }
             \end{sidewaystable}
+
+            Following the same layout as in Section~\ref{subsubsec::more_experiments::richer_features::scatnet_baseline::rf}, based on Figure~\ref{fig::f_score_svm_scat}, we can compare the options of \gls{acr::scatnet} derived image based features based on the produced results.
+            In constrast with \gls{acr::rf}, in most cases, it is this time the \texttt{deletion} option that yields the best results.
+            The opposite occurs only three times: the \texttt{channel} option was best on \textbf{Elancourt} for \texttt{BOS} and \texttt{BIT} with a small margin, and for \texttt{BIB} with a jump of more that \SI{20}{\percent} in terms of F-score.
+            As in the previous sub-subsection, we do not have any theory explaining why the last exception occurs.\\
     
             \begin{figure}[htpb]
                 \centering
@@ -1374,6 +1384,69 @@ rison} and~\ref{tab::generalization_comparison}.\\
                     }
                 }
             \end{figure}
+
+            On the other hand, regarding the inversion of fusion scheme preference, there are two possible explanations:
+            \begin{itemize}[label=\(\blacktriangleright\)]
+                \item The reason that was presented in Section~\ref{subsubsec::more_experiments::richer_features::scatnet_baseline::rf} is false;
+                \item That reason holds but the issue is rather with the \gls{acr::svm} that was not well parameterized.
+            \end{itemize}
+            The last reason seems to be more probable as the late fusion schemes induces larger feature vector dimensions ( 1085 more than the other option) which may have caused problems for the \gls{acr::svm}.
+            In addition, this is consistent with the large drop in the performances of baseline external features with the \gls{acr::svm} classifier, as shown in Table~\ref{tab::svm_f3}.\\
+
+            \begin{table}[htbp]
+                \footnotesize 
+                \centering
+                \renewcommand{\arraystretch}{2}
+                \begin{subtable}{\textwidth}
+                    \begin{tabular}{| c | x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} |x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} |}
+                        \hline
+                        & \texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
+                        \hline
+                        \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S-Hei.} & \cellcolor{LOSS0515} \textbf{Geom.} & \cellcolor{GAIN1525} \textbf{S-Hei.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S(d)-Im.} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{GAIN2535} \textbf{S(d)-Im.} & \cellcolor{GAIN0515} \\
+                        \textbf{Na-P13} & \cellcolor{STBL} \textbf{Geom.} & \cellcolor{LOSS0515} \textbf{S(d)-Im.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S(d)-Im.} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{LOSS0515} & \cellcolor{STBL} \textbf{S(d)-Im.} & \cellcolor{STBL} \\
+                        \hline
+                    \end{tabular}
+                    \caption{
+                        \label{subtab::svm_scat_bl_comparison_del}
+                        Comparison with \texttt{deletion} option.
+                    }
+                \end{subtable}
+                \begin{subtable}{\textwidth}
+                    \begin{tabular}{| c | x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} |x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} |}
+                        \hline
+                        & \texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
+                        \hline
+                        \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S-Hei.} & \cellcolor{STBL} & \cellcolor{GAIN1525} \textbf{S-Hei.} & \cellcolor{STBL} & \cellcolor{GAIN1525} \textbf{S(c)-All} & \cellcolor{GAIN0515} \textbf{S(c)-Im.} & \cellcolor{GAIN1525} \textbf{S-Hei.} & \cellcolor{GAIN0515} \\
+                        \textbf{Na-P13} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{S(c)-Im.} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S(c)-Im.} & \cellcolor{GAIN1525} \textbf{S(c)-Im.} & \cellcolor{STBL} \\
+                        \hline
+                    \end{tabular}
+                    \caption{
+                        \label{subtab::svm_scat_bl_comparison_chan}
+                        Comparison with \texttt{channel} option.
+                    }
+                \end{subtable}
+                \renewcommand{\arraystretch}{1}
+                \caption[
+                    Evolution of the F-score value, for each error, with the \gls{acr::svm} classifier, using \gls{acr::scatnet} compared to baseline features.
+                ]{
+                    \label{tab::svm_scat_bl_comparison}
+                    Evolution of the F-score value, for each error, with the \gls{acr::svm} classifier, using \gls{acr::scatnet} compared to baseline features.
+                    Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (\textit{cf.} Table~\ref{tab::all_f-scores_scat_svm_f3}).
+                    The color indicates the magnitude:
+                    \textcolor{LOSS45}{\(\blacksquare\)}: (\SIrange[range-phrase={,  }]{-100}{-45}{\percent}]--
+                    \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
+                    \textcolor{LOSS2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
+                    \textcolor{LOSS1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
+                    \textcolor{LOSS0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) --
+                    \textcolor{STBL}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-5}{5}{\percent}) --
+                    \textcolor{GAIN0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) --
+                    \textcolor{GAIN1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{15}{25}{\percent}) --
+                    \textcolor{GAIN2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{25}{35}{\percent}) --
+                    \textcolor{GAIN3545}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{35}{45}{\percent}) --
+                    \textcolor{GAIN45}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{45}{100}{\percent}] --
+                    When two null F-scores are compared, the cell is colored in white \(\square\): neither positive nor negative.
+                }
+            \end{table}
 
             \begin{figure}[htpb]
                 \centering
