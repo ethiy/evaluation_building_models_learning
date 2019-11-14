@@ -1172,60 +1172,122 @@
     \subsection{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} to baseline comparison}
         \begin{table}[htpb]
             \footnotesize
-            \begin{center}
-                \begin{tabular}{| c | c | c | c | c | c | c |}
-                    \hline
-                    & \multicolumn{4}{c|}{\textbf{Elancourt}}\\
-                    \hline
-                    &\textbf{Geom.} & \textbf{Geom. \(\oplus\) S-Hei.} & \textbf{Geom. \(\oplus\) S(d)-Im.} & \textbf{S(d)-All} & \textbf{Geom. \(\oplus\) S(c)-Im.} & \textbf{S(c)-All}\\
-                    \hline
-                    \texttt{BOS} & 84.12 & 85.07 & 84.55 & 85.76 & 85.82 & 86.10 \\
-                    \hline
-                    \texttt{BUS} & 46.08 & \textbf{64.83} & 44.76 & \textbf{63.80} & 51.83 & \textbf{64.21} \\
-                    \hline
-                    \texttt{BIB} & 20.84 & 20.43 & 10.34 & 10.34 & 23.59 & 25.11 \\
-                    \hline
-                    \texttt{BIT} & 39.68 & \textbf{60.00} & 33.90 & \textbf{56.94} & 51.51 & 53.73 \\
-                    \specialrule{.2em}{.1em}{.1em}
-                    \texttt{FOS} & 98.99 & 99.14 & 98.26 & 98.12 & 99.42 & 99.46 \\
-                    \hline
-                    \texttt{FUS} & 3.67 & 6.16 & 9.12 & 10.84 & 10.26 & \textbf{22.10} \\
-                    \hline
-                    \texttt{FIB} & 16.60 & 1.72 & 0.88 & 0.00 & \textbf{21.87} & \textbf{21.17} \\
-                    \hline
-                    \texttt{FIT} & 12.51 & 34.29 & \textbf{43.25} & 34.29 & 18.74 & 12.91 \\
-                    \hline
-                    \texttt{FIG} & 76.66 & 83.66 & 83.40 & 84.08 & 82.95 & 83.81 \\
-                    \hline
-                    \hline
-                    & \multicolumn{4}{c|}{\textbf{Na-P13}}\\
-                    \hline
-                    &\textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All}\\
-                    \hline
-                    \texttt{BOS} & 62.44 & 54.50 & 56.27 & 56.46 & 60.87 & 59.16 \\
-                    \hline
-                    \texttt{BUS} & 33.12 & 1.51 & 43.37 & 41.21 & 43.37 & 41.46 \\
-                    \hline
-                    \texttt{BIB} & 3.84 & 5.09 & 0.00 & 0.00 & 5.07 & 3.84 \\
-                    \hline
-                    \texttt{BIT} & 10.10 & 0.00 & 15.69 & 12.93 & 13.80 & 11.00 \\
-                    \specialrule{.2em}{.1em}{.1em}
-                    \texttt{FOS} & 98.42 & 97.56 & 97.10 & 95.80 & 98.62 & 98.68 \\
-                    \hline
-                    \texttt{FUS} & 72.86 & 73.27 & 71.12 & 70.53 & 73.34 & 73.19 \\
-                    \hline
-                    \texttt{FIB} & 64.87 & 41.84 & 62.15 & 59.50 & \textbf{76.22} & \textbf{76.58} \\
-                    \hline
-                    \texttt{FIT} & 11.76 & 11.76 & 22.22 & 22.22 & \textbf{40.00} & \textbf{40.00} \\
-                    \hline
-                    \texttt{FIG} & 88.14 & 90.32 & 90.17 & 90.45 & 90.91 & 90.99 \\
-                    \hline
-                \end{tabular}
-            \end{center}
-            \caption{
+            \centering
+            \begin{tabular}{| c | c | c | c | c | c | c |}
+                \hline
+                & \multicolumn{6}{c|}{\textbf{Elancourt}}\\
+                \hline
+                &\textbf{Geom.} & \textbf{Geom. \(\oplus\) S-Hei.} & \textbf{Geom. \(\oplus\) S(d)-Im.} & \textbf{S(d)-All} & \textbf{Geom. \(\oplus\) S(c)-Im.} & \textbf{S(c)-All}\\
+                \hline
+                \texttt{BOS} & 84.12 & 85.07 & 84.55 & 85.76 & 85.82 & 86.10 \\
+                \hline
+                \texttt{BUS} & 46.08 & \textbf{64.83} & 44.76 & \textbf{63.80} & 51.83 & \textbf{64.21} \\
+                \hline
+                \texttt{BIB} & 20.84 & 20.43 & 10.34 & 10.34 & 23.59 & 25.11 \\
+                \hline
+                \texttt{BIT} & 39.68 & \textbf{60.00} & 33.90 & \textbf{56.94} & 51.51 & 53.73 \\
+                \specialrule{.2em}{.1em}{.1em}
+                \texttt{FOS} & 98.99 & 99.14 & 98.26 & 98.12 & 99.42 & 99.46 \\
+                \hline
+                \texttt{FUS} & 3.67 & 6.16 & 9.12 & 10.84 & 10.26 & \textbf{22.10} \\
+                \hline
+                \texttt{FIB} & 16.60 & 1.72 & 0.88 & 0.00 & \textbf{21.87} & \textbf{21.17} \\
+                \hline
+                \texttt{FIT} & 12.51 & 34.29 & \textbf{43.25} & 34.29 & 18.74 & 12.91 \\
+                \hline
+                \texttt{FIG} & 76.66 & 83.66 & 83.40 & 84.08 & 82.95 & 83.81 \\
+                \hline
+                \hline
+                & \multicolumn{6}{c|}{\textbf{Na-P13}}\\
+                \hline
+                &\textbf{Geom.} & \textbf{Geom. \(\oplus\) S-Hei.} & \textbf{Geom. \(\oplus\) S(d)-Im.} & \textbf{S(d)-All} & \textbf{Geom. \(\oplus\) S(c)-Im.} & \textbf{S(c)-All}\\
+                \hline
+                \texttt{BOS} & 62.44 & 54.50 & 56.27 & 56.46 & 60.87 & 59.16 \\
+                \hline
+                \texttt{BUS} & 33.12 & 1.51 & 43.37 & 41.21 & 43.37 & 41.46 \\
+                \hline
+                \texttt{BIB} & 3.84 & 5.09 & 0.00 & 0.00 & 5.07 & 3.84 \\
+                \hline
+                \texttt{BIT} & 10.10 & 0.00 & 15.69 & 12.93 & 13.80 & 11.00 \\
+                \specialrule{.2em}{.1em}{.1em}
+                \texttt{FOS} & 98.42 & 97.56 & 97.10 & 95.80 & 98.62 & 98.68 \\
+                \hline
+                \texttt{FUS} & 72.86 & 73.27 & 71.12 & 70.53 & 73.34 & 73.19 \\
+                \hline
+                \texttt{FIB} & 64.87 & 41.84 & 62.15 & 59.50 & \textbf{76.22} & \textbf{76.58} \\
+                \hline
+                \texttt{FIT} & 11.76 & 11.76 & 22.22 & 22.22 & \textbf{40.00} & \textbf{40.00} \\
+                \hline
+                \texttt{FIG} & 88.14 & 90.32 & 90.17 & 90.45 & 90.91 & 90.99 \\
+                \hline
+            \end{tabular}
+            \caption[
+                F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using an \gls{acr::rf} based on \gls{acr::scatnet} derived features.
+            ]{
                 \label{tab::all_f-scores_scat_rf_f3}
                 F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using an \gls{acr::rf} based on \gls{acr::scatnet} derived features.
-                These are deduced from Table~\ref{tab::scat_rf_f3}.
+                These are deduced from Table~\ref{tab::stats_scat_rf_f3}.
+                Modalities that drives jumps of more than a \SI{4.5}{\percent} in F-score are distinguished in bold.
+            }
+        \end{table}
+
+        \begin{table}[htpb]
+            \footnotesize
+            \centering
+            \begin{tabular}{| c | c | c | c | c | c | c |}
+                \hline
+                & \multicolumn{6}{c|}{\textbf{Elancourt}}\\
+                \hline
+                &\textbf{Geom.} & \textbf{Geom. \(\oplus\) S-Hei.} & \textbf{Geom. \(\oplus\) S(d)-Im.} & \textbf{S(d)-All} & \textbf{Geom. \(\oplus\) S(c)-Im.} & \textbf{S(c)-All}\\
+                \hline
+                \texttt{BOS} & 91.71 & 88.89 & 90.57 & 89.61 & 90.68 & 89.81 \\
+                \hline
+                \texttt{BUS} & 47.06 & 61.26 & \textbf{72.75} & 62.02 & 45.96 & 59.35 \\
+                \hline
+                \texttt{BIB} & 67.94 & 59.73 & 40.74 & 46.45 & \textbf{90.91} & 81.20 \\
+                \hline
+                \texttt{BIT} & 84.98 & 54.71 & 89.81 & 62.42 & \textbf{100.00} & 64.79 \\
+                \specialrule{.2em}{.1em}{.1em}
+                \texttt{FOS} & 69.96 & 77.88 & \textbf{95.58} & 82.98 & 70.56 & 76.34 \\
+                \hline
+                \texttt{FUS} & 67.78 & 57.53 & \textbf{75.41} & 72.46 & 67.84 & 74.57 \\
+                \hline
+                \texttt{FIB} & 46.38 & 44.31 & \textbf{85.12} & \textbf{84.75} & 29.92 & 30.54 \\
+                \hline
+                \texttt{FIT} & 93.75 & 93.75 & 100.00 & 100.00 & 100.00 & 100.00 \\
+                \hline
+                \texttt{FIG} & \textbf{86.48} & \textbf{85.92} & 75.88 & 78.22 & 75.40 & 68.92 \\
+                \hline
+                \hline
+                & \multicolumn{6}{c|}{\textbf{Na-P13}}\\
+                \hline
+                &\textbf{Geom.} & \textbf{Geom. \(\oplus\) S-Hei.} & \textbf{Geom. \(\oplus\) S(d)-Im.} & \textbf{S(d)-All} & \textbf{Geom. \(\oplus\) S(c)-Im.} & \textbf{S(c)-All}\\
+                \hline
+                \texttt{BOS} & \textbf{49.04} & \textbf{48.76} & 35.22 & 35.22 & 35.22 & 35.22 \\
+                \hline
+                \texttt{BUS} & 42.81 & 40.77 & 44.57 & \textbf{50.11} & 20.42 & 40.08 \\
+                \hline
+                \texttt{BIB} & 28.61 & 27.41 & 22.74 & 22.74 & 22.71 & 22.71 \\
+                \hline
+                \texttt{BIT} & \textbf{46.76} & \textbf{46.50} & 26.52 & 26.51 & 25.04 & 25.04 \\
+                \specialrule{.2em}{.1em}{.1em}
+                \texttt{FOS} & 85.36 & \textbf{88.66} & 85.31 & \textbf{89.71} & 85.28 & \textbf{89.23} \\
+                \hline
+                \texttt{FUS} & \textbf{74.61} & \textbf{71.44} & 36.13 & 60.25 & 36.13 & 49.66 \\
+                \hline
+                \texttt{FIB} & \textbf{54.79} & \textbf{53.41} & 44.28 & 45.52 & 40.18 & 40.08 \\
+                \hline
+                \texttt{FIT} & 94.44 & 94.44 & 100.00 & 100.00 & 100.00 & 100.00 \\
+                \hline
+                \texttt{FIG} & 85.86 & 86.20 & 87.13 & 87.19 & 74.98 & 82.71 \\
+                \hline
+            \end{tabular}
+            \caption[
+                F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using an \gls{acr::svm} based on \gls{acr::scatnet} derived features.
+            ]{
+                \label{tab::all_f-scores_scat_svm_f3}
+                F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using an \gls{acr::svm} based on \gls{acr::scatnet} derived features.
+                These are deduced from Table~\ref{tab::stats_scat_svm_f3}.
                 Modalities that drives jumps of more than a \SI{4.5}{\percent} in F-score are distinguished in bold.
             }
         \end{table}
