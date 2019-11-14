@@ -528,7 +528,7 @@
     Next, we compare the results obtained using the \gls{acr::svm} classifier to the ones resulting from the \gls{acr::rf}.
     We end with a comparison of feature importances computed for the two classifiers.
 
-    \subsection{The studyed urban areas}
+    \subsection{The studied urban areas}
         \label{subsec::more_experiments::classifier::dataset}
         According to the findings of the previous sections (\textit{cf.} Sections~\ref{subsec::more_experiments::scalability::transferability} and~\ref{subsec::more_experiments::finesse::2}), \textbf{Paris-13} and \textbf{Nantes} are similar compared to \textbf{Elancourt}.
         Moreover, the latter area contains a lot more instances than the others which is not ideal for comparisons.
@@ -656,7 +656,7 @@
             \ffigbox[\FBwidth]{
                 \begin{subfloatrow}[2]
                     \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, height=7cm]{figures/results/svm_rf/rf/building}
+                        \includestandalone[mode=buildnew, height=6.5cm]{figures/results/svm_rf/rf/building}
                     }{
                         \caption{
                             \label{subfig::f_score_rf_bl_building}
@@ -664,7 +664,7 @@
                         }
                     }
                     \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, height=7cm]{figures/results/svm_rf/rf/facet}
+                        \includestandalone[mode=buildnew, height=6.5cm]{figures/results/svm_rf/rf/facet}
                     }{
                         \caption{
                             \label{subfig::f_score_rf_bl_facet}
@@ -778,7 +778,7 @@
             \ffigbox[\FBwidth]{
                 \begin{subfloatrow}[2]
                     \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, height=7cm]{figures/results/svm_rf/svm/building}
+                        \includestandalone[mode=buildnew, height=6.5cm]{figures/results/svm_rf/svm/building}
                     }{
                         \caption{
                             \label{subfig::f_score_svm_bl_building}
@@ -786,7 +786,7 @@
                         }
                     }
                     \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, height=7cm]{figures/results/svm_rf/svm/facet}
+                        \includestandalone[mode=buildnew, height=6.5cm]{figures/results/svm_rf/svm/facet}
                     }{
                         \caption{
                             \label{subfig::f_score_svm_bl_facet}
@@ -811,7 +811,7 @@
             \footnotesize 
             \centering
             \renewcommand{\arraystretch}{3}
-            \begin{tabular}{| c | c c c c |c c c c c |}
+            \begin{tabular}{| c | x{1cm} x{1cm} x{1cm} x{1cm} |x{1cm} x{1cm} x{1cm} x{1cm} x{1cm} |}
                 \hline
                 & \texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
                 \hline
@@ -851,7 +851,7 @@
         \begin{table}[htbp]
             \footnotesize
             \centering
-            \begin{tabular}{| c | x{3cm} x{3cm} | x{3cm} x{3cm} |}
+            \begin{tabular}{| c | x{2cm} x{2cm} | x{2cm} x{2cm} |}
                 \hline
                 & \multicolumn{2}{c |}{\textbf{Elancourt}} & \multicolumn{2}{c |}{\textbf{Na-P13}}\\
                 \hline
@@ -903,7 +903,7 @@
         In fact, as discussed earlier in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}, \glspl{acr::svm} are very hard to parameterize compared to \glspl{acr::rf}.
         This seems to be a reasonable cause why the \gls{acr::svm} classifier underperforms compared to the \gls{acr::rf} one on \textbf{Na-P13}.
             
-    \subsection{Feature contributions using \acrshort*{acr::mkl}}
+    \subsection{Modality contributions comparison}
         \label{subsec::more_experiments::classifier::feature_importance}
         In a linear \gls{acr::svm}, feature importance can be natively computed by looking at the weight vector \(\bm{w}\) as shown by~\textcite{guyon2002gene}.
         This is, unfortunatly, not our case.
@@ -969,16 +969,21 @@
 
     \subsection{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} to baseline comparison}
         \label{subsec::more_experiments::richer_features::scatnet_baseline}
-        We start by running experiments using the \gls{acr::scatnet} derived features using both the \gls{acr::rf} and \gls{acr::svm} classifiers.
-        Results from both are compared first to the baseline results and later between them.
+        We start by the \gls{acr::scatnet} comparisons.
+        We run the same experiments as in Section~\ref{sec::more_experiments::classifier}, where this time height and image based features are replaced by derived ones.
         There are two options when employing \gls{acr::scatnet} with image based features: \texttt{channel} and \texttt{deletion} (\textit{cf.} Section~\ref{subsec::experiments::setup::feature_configurations}).
-        This adds another dimension to our comparisons making the number of possible feature configurations equal to six.
+        This adds another dimension to our comparisons making the number of possible feature configurations equal to six.\\
+
+        Both the \gls{acr::rf} and \gls{acr::svm} classifiers are used.
+        Results from both are first compared to the baseline results reported in Section~\ref{sec::more_experiments::classifier}.
+        Afterwhat, we examine the differences between results from both classifiers.
 
         \subsubsection{\texorpdfstring{\acrshort*{acr::rf}}{RF} results}
             \label{subsubsec::more_experiments::richer_features::scatnet_baseline::rf}
-            We start by experimenting these six feature configurations on both sets.
-            Results are reported in Table~\ref{tab::stats_scat_rf_f3}.
-            
+            Results, using the \gls{acr::rf} classifier, on both sets, are reported in Table~\ref{tab::stats_scat_rf_f3}.
+            In general, we can observe how external modalities seem to play a more important role in detecting errors.
+            This can be confirmed with the larger standard deviations depicted in Figure~\ref{fig::f_score_rf_scat_bl} compared to the baseline features (\textit{cf.} Figure~\ref{fig::f_score_rf_bl}).\\
+
             \begin{sidewaystable}[htpb]
                 \footnotesize
                 \centering
@@ -1041,9 +1046,6 @@
                 }
             \end{sidewaystable}
             
-            In general, we can observe how external modalities seem to play a more important role in detecting errors.
-            This can be confirmed with the larger standard deviations depicted in Figure~\ref{fig::f_score_rf_scat_bl} compared to the baseline features (\textit{cf.} Figure~\ref{fig::f_score_rf_bl}).\\
-
             In addition, based on the same Figure~\ref{fig::f_score_rf_scat_bl}, we can deduce the best option to be used for \gls{acr::scatnet} image based features.
             In most cases, the best options seems to be almost always \texttt{channel}.
             This is understandable as this option do not modify the signal, from the get go, and preserves both the image and model informations until the last possible opportunity letting the classifier handle the fusion.
@@ -1062,7 +1064,7 @@
                 \ffigbox[\textwidth]{
                     \begin{subfloatrow}[2]
                         \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=7cm]{figures/results/scat_vs_bl/rf/deletion/building}
+                            \includestandalone[mode=buildnew, height=6.5cm]{figures/results/scat_vs_bl/rf/deletion/building}
                         }{
                             \caption{
                                 \label{subfig::f_score_rf_scat_del_bl_building}
@@ -1070,7 +1072,7 @@
                             }
                         }
                         \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=7cm]{figures/results/scat_vs_bl/rf/deletion/facet}
+                            \includestandalone[mode=buildnew, height=6.5cm]{figures/results/scat_vs_bl/rf/deletion/facet}
                         }{
                             \caption{
                                 \label{subfig::f_score_rf_scat_del_bl_facet}
@@ -1081,7 +1083,7 @@
                     \vskip1em
                     \begin{subfloatrow}[2]
                         \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=7cm]{figures/results/scat_vs_bl/rf/channel/building}
+                            \includestandalone[mode=buildnew, height=6.5cm]{figures/results/scat_vs_bl/rf/channel/building}
                         }{
                             \caption{
                                 \label{subfig::f_score_rf_scat_chan_bl_building}
@@ -1089,7 +1091,7 @@
                             }
                         }
                         \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=7cm]{figures/results/scat_vs_bl/rf/channel/facet}
+                            \includestandalone[mode=buildnew, height=6.5cm]{figures/results/scat_vs_bl/rf/channel/facet}
                         }{
                             \caption{
                                 \label{subfig::f_score_rf_scat_chan_bl_facet}
@@ -1229,7 +1231,7 @@
                 \ffigbox[\textwidth]{
                     \begin{subfloatrow}[2]
                         \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=7cm]{figures/results/scat_vs_bl/svm/deletion/building}
+                            \includestandalone[mode=buildnew, height=6.5cm]{figures/results/scat_vs_bl/svm/deletion/building}
                         }{
                             \caption{
                                 \label{subfig::f_score_svm_scat_del_bl_building}
@@ -1237,7 +1239,7 @@
                             }
                         }
                         \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=7cm]{figures/results/scat_vs_bl/svm/deletion/facet}
+                            \includestandalone[mode=buildnew, height=6.5cm]{figures/results/scat_vs_bl/svm/deletion/facet}
                         }{
                             \caption{
                                 \label{subfig::f_score_svm_scat_del_bl_facet}
@@ -1248,7 +1250,7 @@
                     \vskip1em
                     \begin{subfloatrow}[2]
                         \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=7cm]{figures/results/scat_vs_bl/svm/channel/building}
+                            \includestandalone[mode=buildnew, height=6.5cm]{figures/results/scat_vs_bl/svm/channel/building}
                         }{
                             \caption{
                                 \label{subfig::f_score_svm_scat_chan_bl_building}
@@ -1256,7 +1258,7 @@
                             }
                         }
                         \ffigbox[.5\textwidth]{
-                            \includestandalone[mode=buildnew, height=7cm]{figures/results/scat_vs_bl/svm/channel/facet}
+                            \includestandalone[mode=buildnew, height=6.5cm]{figures/results/scat_vs_bl/svm/channel/facet}
                         }{
                             \caption{
                                 \label{subfig::f_score_svm_scat_chan_bl_facet}
@@ -1388,7 +1390,7 @@
             \ffigbox[\FBwidth]{
                 \begin{subfloatrow}[2]
                     \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, height=7cm]{figures/results/gk_vs_bl/building}
+                        \includestandalone[mode=buildnew, height=6.5cm]{figures/results/gk_vs_bl/building}
                     }{
                         \caption{
                             \label{subfig::f_score_svm_gk_building}
@@ -1396,7 +1398,7 @@
                         }
                     }
                     \ffigbox[\FBwidth]{
-                        \includestandalone[mode=buildnew, height=7cm]{figures/results/gk_vs_bl/facet}
+                        \includestandalone[mode=buildnew, height=6.5cm]{figures/results/gk_vs_bl/facet}
                     }{
                         \caption{
                             \label{subfig::f_score_svm_gk_facet}
@@ -1478,7 +1480,7 @@
             \ffigbox[\textwidth]{
                 \begin{subfloatrow}[2]
                     \ffigbox[.5\textwidth]{
-                        \includestandalone[mode=buildnew, height=7cm]{figures/results/gk-scat_vs_bl/deletion/building}
+                        \includestandalone[mode=buildnew, height=6.5cm]{figures/results/gk-scat_vs_bl/deletion/building}
                     }{
                         \caption{
                             \label{subfig::f_score_svm_gk_scat_del_bl_building}
@@ -1486,7 +1488,7 @@
                         }
                     }
                     \ffigbox[.5\textwidth]{
-                        \includestandalone[mode=buildnew, height=7cm]{figures/results/gk-scat_vs_bl/deletion/facet}
+                        \includestandalone[mode=buildnew, height=6.5cm]{figures/results/gk-scat_vs_bl/deletion/facet}
                     }{
                         \caption{
                             \label{subfig::f_score_svm_gk_scat_del_bl_facet}
@@ -1497,7 +1499,7 @@
                 \vskip1em
                 \begin{subfloatrow}[2]
                     \ffigbox[.5\textwidth]{
-                        \includestandalone[mode=buildnew, height=7cm]{figures/results/gk-scat_vs_bl/channel/building}
+                        \includestandalone[mode=buildnew, height=6.5cm]{figures/results/gk-scat_vs_bl/channel/building}
                     }{
                         \caption{
                             \label{subfig::f_score_svm_gk_scat_chan_bl_building}
@@ -1505,7 +1507,7 @@
                         }
                     }
                     \ffigbox[.5\textwidth]{
-                        \includestandalone[mode=buildnew, height=7cm]{figures/results/gk-scat_vs_bl/channel/facet}
+                        \includestandalone[mode=buildnew, height=6.5cm]{figures/results/gk-scat_vs_bl/channel/facet}
                     }{
                         \caption{
                             \label{subfig::f_score_svm_gk_scat_chan_bl_facet}

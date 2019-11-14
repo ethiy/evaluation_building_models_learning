@@ -64,6 +64,7 @@
     }
 
     \begin{tikzpicture}
+        \node (figure) at (0, 0) {};
         \begin{axis}[
             yticklabels={,,},
             ybar,
@@ -82,7 +83,8 @@
                 legend columns=-2,
                 at={(.5,1.05)},
                 anchor=south
-            }
+            },
+            at={(figure)}
         ]
             \addplot table [percentage series=1] {\buildingEl};
             \addplot table [percentage series=1] {\buildingNa};
@@ -93,5 +95,6 @@
                 \footnotesize \strut \textbf{Paris-13}
             }
         \end{axis}
+        \path (figure.south) node[anchor=north] {};
     \end{tikzpicture}
 \end{document}
