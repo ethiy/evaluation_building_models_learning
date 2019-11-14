@@ -615,23 +615,23 @@
                 \cline{2-9}
                 & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
                 \hline
-                \texttt{BOS} & \textbf{51.65} & \textbf{78.93} & 47.84 & 81.75 & 39.50 & 72.45 & 47.43 & 78.57 \\
+                \texttt{BOS} & \textbf{51.65} & \textbf{78.93} & 47.84 & 81.75 & 48.15 & 77.74 & 47.43 & 78.57 \\
                 \hline
-                \texttt{BUS} & 19.85 & 100 & 22.90 & 100 & 7.69 & 100 & \textbf{34.61} & \textbf{93.75} \\
+                \texttt{BUS} & 19.85 & 100 & 22.90 & 100 & \textbf{36.64} & \textbf{92.31} & 34.61 & 93.75 \\
                 \hline
-                \texttt{BIB} & \textbf{1.96} & \textbf{100} & 0.65 & 100 & 0 & --- &  1.31 & 100 \\
+                \texttt{BIB} & \textbf{1.96} & \textbf{100} & 0.65 & 100 & 0.65 & 100 &  1.31 & 100 \\
                 \hline
-                \texttt{BIT} & \textbf{5.32} & \textbf{100} & 3.19 & 100 & 0 & --- & 1.06 & 100 \\
+                \texttt{BIT} & \textbf{5.32} & \textbf{100} & 3.19 & 100 & 2.13 & 100 & 1.06 & 100 \\
                 \specialrule{.2em}{.1em}{.1em}
-                \texttt{FOS} & 98.62 & 98.22 & 98.62 & 98.21 & 98.48 & 75.47 & \textbf{98.62} & \textbf{98.76} \\
+                \texttt{FOS} & 98.62 & 98.22 & 98.62 & 98.21 & 98.48 & 98.76 & \textbf{98.62} & \textbf{98.76} \\
                 \hline
-                \texttt{FUS} & \textbf{68.80} & \textbf{77.44} & 68.18 & 77.10 & 23.14 & 84.85 & 67.83 & 78.15 \\
+                \texttt{FUS} & 68.80 & 77.44 & 68.18 & 77.10 & \textbf{68.80} & \textbf{78.54} & 67.83 & 78.15 \\
                 \hline
-                \texttt{FIB} & 55.23 & 78.60 & 53.59 & 78.47 & 18.95 & 71.60 & \textbf{65.35} & \textbf{74.63} \\
+                \texttt{FIB} & 55.23 & 78.60 & 53.59 & 78.47 & 65.47 & 74.44 & \textbf{65.35} & \textbf{74.63} \\
                 \hline
-                \texttt{FIT} & 6.25 & 100 & 6.25 & 100 & 5.88 & 100 & \textbf{11.76} & \textbf{100} \\
+                \texttt{FIT} & 6.25 & 100 & 6.25 & 100 & 6.25 & 100 & \textbf{11.76} & \textbf{100} \\
                 \hline
-                \texttt{FIG} & 94.55 & 82.54 & 95.15 & 82.72 & 100 & 73.01 & \textbf{95.15} & \textbf{83.60} \\
+                \texttt{FIG} & 94.55 & 82.54 & 95.15 & 82.72 & 94.55 & 83.43 & \textbf{95.15} & \textbf{83.60} \\
                 \hline
             \end{tabular}
             \caption{
@@ -680,7 +680,7 @@
             }
         \end{figure}
     
-        Mean and standard deviation F-scores are vizualized in Figure~\ref{f_score_rf_bl}.
+        Mean and standard deviation F-scores are vizualized in Figure~\ref{fig::f_score_rf_bl}.
         Obviously, everything remains unchanged for \textbf{Elancourt}.
         However, we see how the standard deviations on the fused set seem to be greater than what observed previosuly in Figure~\ref{fig::f_score_ablation_f3}.
         Moreover, added to the same labels \texttt{BUS} and \texttt{FIB} that were already improved by the use of image based features as shown in Table~\ref{tab::all_f-scores_ablation_f3}, \texttt{BIT} and \texttt{FIT} F-scores are also greatly impacted on the new fused set.
@@ -805,9 +805,11 @@
     \subsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} compared to \texorpdfstring{\acrshort*{acr::rf}}{RF}}
         \label{subsec::more_experiments::classifier::svm_rf}
         In Table~\ref{tab::rf_vs_svm_comparison}, are compared the \gls{acr::svm} F-scores (\textit{cf.} Table~\ref{tab::all_f-scores_svm_f3}) to \gls{acr::rf} ones (\textit{cf.} Table~\ref{tab::all_f-scores_rf_f3}).
-        The same color scheme is used as with the Tables~\ref{tab::transferability_comparison} and~\ref{tab::generalization_comparison}.\\
+        The same color sche            the fact that , conveys how the building typology is crucial for error prediction, so much so that even with , these features are still important.
+rison} and~\ref{tab::generalization_comparison}.\\
 
-        \begin{table}[htbp]
+        \begin{table}[htbp]            the fact that , conveys how the building typology is crucial for error prediction, so much so that even with , these features are still important.
+
             \footnotesize 
             \centering
             \renewcommand{\arraystretch}{2}
@@ -860,7 +862,7 @@
                 \hline
                 \texttt{BOS} & \textbf{Geom.} & \textbf{Geom.} & \textbf{Geom.} & \underline{\textbf{Geom.}} \\
                 \hline
-                \texttt{BUS} & \textbf{Hei.} & \underline{\textbf{All}} & \underline{\textbf{All}} & \underline{\textbf{Geom.}} \\
+                \texttt{BUS} & \textbf{Hei.} & \underline{\textbf{All}} & \underline{\textbf{Im.}} & \underline{\textbf{Geom.}} \\
                 \hline
                 \texttt{BIB} & \underline{\textbf{All}} & \underline{\textbf{Hei.}}, \textbf{Im.} & \textbf{Geom.} & \underline{\textbf{Geom.}} \\
                 \hline
@@ -869,7 +871,7 @@
                 \hline
                 \texttt{FOS} & \textbf{Hei.} & \underline{\textbf{All}} & \textbf{All} & \underline{\textbf{All}} \\
                 \hline
-                \texttt{FUS} & \textbf{Geom.} & \textbf{Geom.} & \textbf{Geom.} & \textbf{Geom.} \\
+                \texttt{FUS} & \textbf{Geom.} & \textbf{Geom.} & \textbf{Im.} & \textbf{Geom.} \\
                 \hline
                 \texttt{FIB} & \textbf{Geom.} & \textbf{All} & \underline{\textbf{All}} & \underline{\textbf{Geom.}} \\
                 \hline
@@ -896,10 +898,10 @@
         This is further confirmed by the cases where \gls{acr::rf} and \gls{acr::svm} did not share the same highest performing feature configuration.
         \begin{itemize}[label=\(\blacktriangleright\)]
             \item On \textbf{Elancourt}, for \texttt{BUS}, \texttt{FOS} and \texttt{FIT}, the \gls{acr::rf} performed better with height based features, compared to the \gls{acr::svm} which works better with other feature configurations containing extrinsic features.
-                    Moreover, \texttt{BIT}, that was better detected with intrinsic features only when trained with an \gls{acr::rf}, was better detected with any extrinsic feature based configuration using an \gls{acr::svm}.
+                    Moreover, \texttt{BIT} was better detected with intrinsic features only (\textit{resp.} any extrinsic feature based configuration) when trained with an \gls{acr::rf} (\textit{resp.} \gls{acr::svm}).
                     These findings do not rise any red flags, as they remain consistent with what was discussed earlier in other experiments.
-            \item On \textbf{Na-P13}, the only labels where the better performing feature configuration changed were \texttt{BUS}, \texttt{FIB} and \texttt{FIG}.
-                    In fact, only geometric features yielded better results using an \gls{acr::svm}, in contrast with the fact that \textbf{All} was the best alternative using an \gls{acr::rf}.
+            \item On \textbf{Na-P13}, the only labels where the better performing feature configuration changed were \texttt{BUS}, \texttt{FUS}, \texttt{FIB} and \texttt{FIG}.
+                    In fact, only geometric features yielded better results using an \gls{acr::svm}, in contrast with the fact that \textbf{All} or \textbf{Im.} were the best alternative with an \gls{acr::rf}.
         \end{itemize}
         This reinforces the idea that the \gls{acr::svm} was actually not adequately parameterized for the extrinsic features as was announced in Section~\ref{subsec::experiments::setup::classification}.
         In fact, as discussed earlier in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}, \glspl{acr::svm} are very hard to parameterize compared to \glspl{acr::rf}.
@@ -1259,6 +1261,7 @@
                 \item \texttt{FIB}, on \textbf{Na-P13} with a ration around 1/3.
                         This can be explained by the fact that this modality was decisive in getting the best F-score possible (\textit{cf.} Table~\ref{tab::rf_scat_bl_comparison}).
             \end{itemize}
+            On another note, building typology is so important that, even with advanced extrinsic features, baseline geometric features have a very large importance ratio.
 
         \subsubsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} results}
             \label{subsubsec::more_experiments::richer_features::scatnet_baseline::svm}
