@@ -1356,6 +1356,67 @@
 
         \FloatBarrier
     \subsection{Graph kernels and \texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} to baseline comparison}
+        \begin{table}[htpb]
+            \footnotesize
+            \centering
+            \begin{tabular}{| c | c | c | c | c | c | c |}
+                \hline
+                & \multicolumn{6}{c|}{\textbf{Elancourt}}\\
+                \hline
+                &\textbf{K-Geom.} & \textbf{K-Geom. \(\oplus\) S-Hei.} & \textbf{K-Geom. \(\oplus\) S(d)-Im.} & \textbf{K-S(d)-All} & \textbf{K-Geom. \(\oplus\) S(c)-Im.} & \textbf{K-S(c)-All}\\
+                \hline
+                \texttt{BOS} & 87.04 & 86.67 & 87.56 & 87.32 & 87.61 & 87.41 \\
+                \hline
+                \texttt{BUS} & 66.11 & 67.85 & 64.81 & 66.02 & 65.14 & 66.07 \\
+                \hline
+                \texttt{BIB} & 65.62 & 65.64 & 66.06 & 66.67 & 66.66 & 67.27 \\
+                \hline
+                \texttt{BIT} & 58.29 & 58.29 & 59.63 & 59.19 & 58.82 & 58.82 \\
+                \specialrule{.2em}{.1em}{.1em}
+                \texttt{FOS} & 98.34 & 98.34 & 98.34 & 98.34 & 98.31 & 98.31 \\
+                \hline
+                \texttt{FUS} & 44.46 & 44.35 & 45.25 & 45.12 & 44.97 & 44.97 \\
+                \hline
+                \texttt{FIB} & 48.22 & 48.05 & 48.41 & 48.07 & 48.35 & 48.20 \\
+                \hline
+                \texttt{FIT} & 100.00 & 100.00 & 100.00 & 100.00 & 100.00 & 100.00 \\
+                \hline
+                \texttt{FIG} & 74.86 & 75.17 & 75.47 & 75.69 & 75.74 & 75.95 \\
+                \hline
+                \hline
+                & \multicolumn{6}{c|}{\textbf{Na-P13}}\\
+                \hline
+                &\textbf{K-Geom.} & \textbf{K-Geom. \(\oplus\) S-Hei.} & \textbf{K-Geom. \(\oplus\) S(d)-Im.} & \textbf{K-S(d)-All} & \textbf{K-Geom. \(\oplus\) S(c)-Im.} & \textbf{K-S(c)-All}\\
+                \hline
+                \texttt{BOS} & \textbf{50.85} & \textbf{50.66} & 46.10 & 46.10 & 46.21 & 46.10 \\
+                \hline
+                \texttt{BUS} & 46.38 & 45.87 & 47.01 & 47.01 & 47.21 & 47.01 \\
+                \hline
+                \texttt{BIB} & 44.83 & 44.75 & 47.48 & 47.48 & 47.56 & 47.48 \\
+                \hline
+                \texttt{BIT} & 47.54 & 47.33 & 48.70 & 48.70 & 48.84 & 48.70 \\
+                \specialrule{.2em}{.1em}{.1em}
+                \texttt{FOS} & 97.13 & 97.71 & 97.34 & 97.34 & 97.20 & 97.34 \\
+                \hline
+                \texttt{FUS} & 72.73 & 72.51 & 73.02 & 73.02 & 73.22 & 73.02 \\
+                \hline
+                \texttt{FIB} & 67.87 & 67.71 & 67.62 & 67.62 & 67.78 & 67.62 \\
+                \hline
+                \texttt{FIT} & 100.00 & 100.00 & 100.00 & 100.00 & 100.00 & 100.00 \\
+                \hline
+                \texttt{FIG} & 84.84 & 85.15 & 86.00 & 86.00 & 85.41 & 86.00 \\
+                \hline
+            \end{tabular}
+            \caption[
+                F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using an \gls{acr::svm} based on \gls{acr::scatnet} derived features.
+            ]{
+                \label{tab::all_f-scores_scat_svm_f3}
+                F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using an \gls{acr::svm} based on \gls{acr::scatnet} derived features.
+                These are deduced from Table~\ref{tab::stats_scat_svm_f3}.
+                Modalities that drives jumps of more than a \SI{4.5}{\percent} in F-score are distinguished in bold.
+            }
+        \end{table}
+
         \begin{table}[htbp]
             \footnotesize
             \centering
