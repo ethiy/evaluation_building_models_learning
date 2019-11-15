@@ -105,7 +105,7 @@
             \renewcommand{\arraystretch}{2}
             \begin{tabular}{| c | c | c c c c |c c c c c|}
                 \hline
-                && \texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
+                && \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG}\\
                 \hline
                 \multirow{6}{*}{\rotatebox{90}{\texttt{Coherence}}} & \textbf{El.} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{STBL} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN3545} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{GAIN0515} \\
                 & \textbf{El.} \(\rightarrow\) \textbf{P13} & \cellcolor{LOSS1525} & \cellcolor{LOSS1525} \textbf{Im.} & \cellcolor{LOSS1525} & \cellcolor{LOSS2535} & \cellcolor{STBL} & \cellcolor{GAIN3545} \textbf{Im.} & \cellcolor{GAIN2535} \textbf{Im.} & \cellcolor{LOSS1525} & \cellcolor{GAIN0515} \\
@@ -805,17 +805,15 @@
     \subsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} compared to \texorpdfstring{\acrshort*{acr::rf}}{RF}}
         \label{subsec::more_experiments::classifier::svm_rf}
         In Table~\ref{tab::rf_vs_svm_comparison}, are compared the \gls{acr::svm} F-scores (\textit{cf.} Table~\ref{tab::all_f-scores_svm_f3}) to \gls{acr::rf} ones (\textit{cf.} Table~\ref{tab::all_f-scores_rf_f3}).
-        The same color sche            the fact that , conveys how the building typology is crucial for error prediction, so much so that even with , these features are still important.
-rison} and~\ref{tab::generalization_comparison}.\\
+        The same color scheme is used as with the Tables~\ref{tab::transferability_comparison} and~\ref{tab::generalization_comparison}.\\
 
-        \begin{table}[htbp]            the fact that , conveys how the building typology is crucial for error prediction, so much so that even with , these features are still important.
-
+        \begin{table}[htbp]
             \footnotesize 
             \centering
             \renewcommand{\arraystretch}{2}
             \begin{tabular}{| c | x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} |x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} |}
                 \hline
-                & \texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
+                & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG}\\
                 \hline
                 \textbf{Elancourt} & \cellcolor{GAIN0515} & \cellcolor{STBL} \textbf{All} & \cellcolor{GAIN45} & \cellcolor{GAIN45} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{GAIN2535} & \cellcolor{GAIN2535}  \textbf{Geom.} & \cellcolor{GAIN45} & \cellcolor{GAIN0515} \textbf{Geom.} \\
                 \textbf{Na-P13} & \cellcolor{LOSS0515} \textbf{Geom.} & \cellcolor{LOSS0515} \textbf{Geom.} & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{GAIN3545} \textbf{Geom.} & \cellcolor{LOSS0515} \textbf{All} & \cellcolor{LOSS3545} & \cellcolor{LOSS0515} \textbf{Geom.} & \cellcolor{GAIN45} & \cellcolor{STBL} \textbf{Geom.} \\
@@ -1119,7 +1117,7 @@ rison} and~\ref{tab::generalization_comparison}.\\
                 \begin{subtable}{\textwidth}
                     \begin{tabular}{| c | x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} |x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} |}
                         \hline
-                        & \texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
+                        & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG}\\
                         \hline
                         \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S-Hei.} & \cellcolor{LOSS0515} \textbf{Geom.} & \cellcolor{GAIN1525} \textbf{S-Hei.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S(d)-Im.} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{GAIN2535} \textbf{S(d)-Im.} & \cellcolor{GAIN0515} \\
                         \textbf{Na-P13} & \cellcolor{STBL} \textbf{Geom.} & \cellcolor{LOSS0515} \textbf{S(d)-Im.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S(d)-Im.} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{LOSS0515} & \cellcolor{STBL} \textbf{S(d)-Im.} & \cellcolor{STBL} \\
@@ -1133,7 +1131,7 @@ rison} and~\ref{tab::generalization_comparison}.\\
                 \begin{subtable}{\textwidth}
                     \begin{tabular}{| c | x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} |x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} |}
                         \hline
-                        & \texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
+                        & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG}\\
                         \hline
                         \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S-Hei.} & \cellcolor{STBL} & \cellcolor{GAIN1525} \textbf{S-Hei.} & \cellcolor{STBL} & \cellcolor{GAIN1525} \textbf{S(c)-All} & \cellcolor{GAIN0515} \textbf{S(c)-Im.} & \cellcolor{GAIN1525} \textbf{S-Hei.} & \cellcolor{GAIN0515} \\
                         \textbf{Na-P13} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{S(c)-Im.} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S(c)-Im.} & \cellcolor{GAIN1525} \textbf{S(c)-Im.} & \cellcolor{STBL} \\
@@ -1265,7 +1263,7 @@ rison} and~\ref{tab::generalization_comparison}.\\
 
         \subsubsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} results}
             \label{subsubsec::more_experiments::richer_features::scatnet_baseline::svm}
-            We runned the same experiments as in the previous sub-subsection.
+            We run the same experiments as in the previous sub-subsection.
             Results are reported in Table~\ref{tab::stats_scat_svm_f3}.
             The mean and standard deviation F-scores are shown in Figure~\ref{fig::f_score_svm_scat}.
             Just as with the \gls{acr::rf} experiments, external modalities seem to play a more crucial role in error prediction than with baseline features (\textit{cf.} Figure~\ref{fig::f_score_svm_bl}).\\
@@ -1400,7 +1398,7 @@ rison} and~\ref{tab::generalization_comparison}.\\
                 \begin{subtable}{\textwidth}
                     \begin{tabular}{| c | x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} |x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} |}
                         \hline
-                        & \texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
+                        & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG}\\
                         \hline
                         \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN1525} \textbf{S(d)-Im.} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{LOSS0515} \textbf{S(d)-Im.} & \cellcolor{GAIN1525} \textbf{S(d)-Im.} & \cellcolor{GAIN3545} \textbf{S(d)-Im.} & \cellcolor{GAIN3545} \textbf{S(d)-Im.} & \cellcolor{STBL} \textbf{S(d)-Im.} & \cellcolor{STBL} \\
                         \textbf{Na-P13} & \cellcolor{STBL} \textbf{Geom.} & \cellcolor{LOSS0515} \textbf{S(d)-Im.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S(d)-Im.} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{LOSS0515} & \cellcolor{STBL} \textbf{S(d)-Im.} & \cellcolor{STBL} \\
@@ -1414,7 +1412,7 @@ rison} and~\ref{tab::generalization_comparison}.\\
                 \begin{subtable}{\textwidth}
                     \begin{tabular}{| c | x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} |x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} |}
                         \hline
-                        & \texttt{BOS} & \texttt{BUS}&\texttt{BIB}&\texttt{BIT}&\texttt{FOS} & \texttt{FUS}&\texttt{FIB}&\texttt{FIT}&\texttt{FIG}\\
+                        & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG}\\
                         \hline
                         \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S-Hei.} & \cellcolor{STBL} \textbf{S(c)-Im.} & \cellcolor{STBL} \textbf{S(c)-Im.} & \cellcolor{STBL} & \cellcolor{GAIN3545} \textbf{S(c)-All} & \cellcolor{STBL} \textbf{Geom.} & \cellcolor{STBL} \textbf{S(c)-Im.} & \cellcolor{STBL} \textbf{Geom.} \\
                         \textbf{Na-P13} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{S(c)-Im.} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S(c)-Im.} & \cellcolor{GAIN1525} \textbf{S(c)-Im.} & \cellcolor{STBL} \\
