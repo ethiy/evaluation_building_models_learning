@@ -1762,7 +1762,7 @@
         \end{figure}
 
         As in the previous subsection, we draw comparisons between the graph kernel and baseline results.
-        These are summarized in Table~\ref{tab::gk_svm_comparison}.
+        These are summarized in Table~\ref{tab::gk_svm_comparison}.\\
 
         \begin{table}[htbp]
             \footnotesize 
@@ -1798,7 +1798,43 @@
             }
         \end{table}
 
+        We can see that on \textbf{Na-P13}, grapĥ kernels yield better scores than baseline features for \texttt{BIB}, \texttt{FOS}, \texttt{FIB} and \texttt{FIG}, while they are stable on the rest.
+        On \textbf{Elancourt}, it is a different situation.
+        In fact, while it is, same as on the other set, better on \texttt{BOS} and \texttt{FIT}, the F-score remains stable for \texttt{BIB} and \texttt{FIB}.
+        Moreover, it is better on \texttt{BUS} but worse on \texttt{BIT}, \texttt{FUS} and \texttt{FIG}.\\
+
+        These discrepancies could be explained by looking at each set composition.
+        Actually, \texttt{FIT} is a purely topological error label in nature.
+        This justifies why advanced geometric features which takes into account the structure of the building models, are better in prediction.
+        The same could be said about \texttt{FOS}, which explains why both these labels benefited from the usage of graph kernels.
+        However, it was not the case of \texttt{BIT} which is contradictory with the previous explanation.\\
+
+        The second factor that should be taken into account is the frequency of the label.
+        The more the latter is large, the larger the impact of graph kernels.
+        In fact, this , added to the statistics shown in Figure~\ref{fig::error_fused_statistics}, can explain the change in prediction scores for each error:
+        \begin{itemize}[label=\(\blacktriangleright\)]
+            \item \texttt{BUS} was better on \textbf{Elancourt};
+            \item \texttt{BIB} was better on \textbf{Na-P13};
+            \item \texttt{BIT} was worse on \textbf{Elancourt};
+            \item \texttt{FOS} was better on \textbf{Elancourt};
+            \item \texttt{FUS} was worse on \textbf{Elancourt};
+            \item \texttt{FIB} was better on \textbf{Na-P13};
+            \item \texttt{FIT} was as better on \textbf{Elancourt} as on \textbf{Na-P13};
+            \item \texttt{FIG} was as worse on \textbf{Elancourt}.
+        \end{itemize}
+        ~\\
+
+        Based on these comparisons, and the Table~\ref{tab::best_scat_bl_svm_rf}, we can try to anticipate the changes that will occur when using both graph kernels and \gls{acr::scatnet} features.
+        In fact, baseline geometric features were the best configuration for some error labels.
+        Improving on these with graph kernels, we can only expect better scores for \texttt{BIB} and \texttt{FIT} on \textbf{Na-P13}.
+        However, on the rest, we cannot predict how these features will interact with the other modalities.
+
     \subsection{Graph kernels and \texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} to baseline comparison}
+        \label{subsec::more_experiments::richer_features::graph_kernel_scatnet_baseline}
+        Now that we have studied the contribution of each of the proposed advanced features, these are going to be combined in order to assess how they will affect the detection results.
+        As in the previous subsection, using graph kernels forces us to abandon \glspl{acr::rf} and to experiment only with \glspl{acr::svm}.
+        Results are reported in Table~\ref{tab::stats_gk_scat_svm_f3}.\\
+        
         \begin{sidewaystable}[htpb]
             \footnotesize
             \begin{tabular}{| c | c c | c c | c c | c c | c c | c c |}
@@ -1858,6 +1894,12 @@
                 \gls{acr::svm} results using graph kernels and \glspl{acr::scatnet}, expressed in percentage, on the two datasets at \textbf{\gls{acr::efin}} level 3.
             }
         \end{sidewaystable}
+
+        In figure~\ref{fig::f_score_svm_gk_scat}, it is stricking how standard deviations are very low\footnote{
+            It is under \SI{1}{\percent}, in most cases, and \SI{3}{\percent}, in the worst case.
+        } for all errors and on both sets.
+        The only exception is when image based features with \gls{acr::scatnet} are added on \textbf{Na-P13} and the F-score drops by almost \SI{4.5}{\percent}.
+        As discussed in Sections~\ref{subsec::more_experiments::classifier::svm} and~\ref{subsubsec::more_experiments::richer_features::scatnet_baseline::svm}, this may be due to the fact that the used classifier was not properly parameterized for the extrinsic features.\\
 
         \begin{figure}[htpb]
             \centering
