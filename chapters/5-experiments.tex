@@ -11,10 +11,10 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
 
 \section{Datasets}
     \label{sec::experiments::datasets}
+    In this section, we present the studied building models.
+    Section~\ref{subsec::experiments::datasets::scenes} describes the selected urban scenes as well as the modeling technique which helped produce the studied models.
+    Next, in Section~\ref{subsec::experiments::datasets::stats}, we analyse the distribution of the previously defined errors (\textit{cf.} Chapter~\ref{chap::semantic_evaluation}) over the three urban areas of interest.
     
-    % \subsection{Data preprocesing}
-    %     \label{subsec::experiments::datasets::preprocessing}
-
     \subsection{Urban scenes and modeling techniques}
         \label{subsec::experiments::datasets::scenes}        
         \gls{acr::3d} models from three different cities of France are selected in order to assess the performance of our framework: \textbf{Elancourt}, \textbf{Nantes}, and the XIII\textsuperscript{th} district of Paris (\textbf{Paris-13}) (\textit{cf.} Figure~\ref{fig::france_map}).
@@ -276,7 +276,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
                 This is reasonable and fails only for some rare cases were the building is obviously over segmented an can be detected as such by simply applying a building model size threshold.\\
                 The maximal number of layers \(m\) is 2.
                 As a consequence, the total number, according to Equation~\ref{eq::scatnet_number_paths} of scattering outputs is \(n_S = 217\).
-                This implies that the length of \gls{acr::scatnet} based features is \(d \times n_S\) = \num{5 x 217} = 1085.\\
+                This implies that the length of \gls{acr::scatnet} based features is \(d \times n_S\) = \num{5 x 217} = 1085 per channel.\\
 
                 The Kymatio implementation of \gls{acr::scatnet} uses GPU to accelerate computations.
                 Using an NVIDIA GeForce GTX 750 Ti graphics card, it takes around \SI{14.06}{\s \per \building} on average to compute a height based features and \SI{20.86}{\s \per \building}.
@@ -300,15 +300,14 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
         \subsubsection{Classifiers}
             As discussed in Section~\ref{subsec::learned_evaluation::classification::classifiers}, two classifier types were considered in the experimental study.
             As already explained beforehand in Section~\ref{subsec::learned_evaluation::classification::classifiers}, a one-vs-all approach is used to adapt \glspl{acr::rf} to multi-label settings.
-            The same approach was choosen to accommodate \glspl{acr::svm} to both the multi-class and the multi-label possibilities.
+            The same approach was chosen to accommodate \glspl{acr::svm} to both the multi-class and the multi-label possibilities.
             We relied upon the already available and ubequitous implementation in Python~\parencite{scikit-learn}.
             Below we detail quantitavely the used parameters.
             
             \paragraph{\acrshort*{acr::rf}}
                 A brief grid search involving a smaller set of building models and only baseline geometric features~\parencite{ennafii2018qualificationunannotated} yielded comparable results for the number of trees set in the range \numrange{850}{1000} and a maximum tree depth from \numrange{3}{5}.
                 Given the already immense parameter search space involving all possible feature configurations, feature extraction parameters and label possibilities, the \gls{acr::rf} parameters are set to \num{1000} for the tree number and 4 for the maximum tree depth for all other experiments without performing any grid search.
-                Regarding \gls{acr::scatnet} based features, in Section~\ref{subsec::more_experiments::richer_features::scatnet_baseline} were reduced using \gls{acr::pca} and Kernel\footnote{The used kernel is that same the one used with the \gls{acr::svm} classifier.} \gls{acr::pca} in order to not overwhelm the geometric features.
-                To that end, these rich features are reduced to 20 in length to equal the dimension of baseline geometric feature vectors.
+                Since this classifier model is easier to parameterize than the other, it will always be used in experiments unless said otherwise.
 
             \paragraph{\acrshort*{acr::svm}}
                 The linear \gls{acr::svm} is not well suited for the type of features that we use, even for baseline features as experiments do not yield any resuslts in time.
@@ -378,8 +377,11 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
                 \(\bm{Acc}\) & 68.46 & 75.65 & 89.57 & 94.66 & 66.36 & 83.62 & 88.24 & 98.36 & 60.86 \\
                 \bottomrule
             \end{tabular}
-            \caption{
-                \label{tab::rmse_results} \textbf{\gls{acr::efin}} 3 error prediction results using the \gls{acr::rmse} on \textbf{Elancourt}.
+            \caption[
+                \textbf{\gls{acr::efin}} 3 error prediction results using the \gls{acr::rmse} on \textbf{Elancourt}.
+            ]{
+                \label{tab::rmse_results}
+                \textbf{\gls{acr::efin}} 3 error prediction results using the \gls{acr::rmse} on \textbf{Elancourt}.
                 \(\bm{Acc}\) expresses the overall accuracy ratio.
             }
         \end{table}
@@ -481,8 +483,11 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
                     \hline
                 \end{tabular}
             \end{center}
-            \caption{
-                \label{tab::ablation_f3} Feature ablation study results preformed on the three areas at \textbf{\gls{acr::efin}} level 3.
+            \caption[
+                Baseline feature ablation study results preformed on the three areas at \textbf{\gls{acr::efin}} level 3.
+            ]{
+                \label{tab::ablation_f3}
+                Baseline feature ablation study results preformed on the three areas at \textbf{\gls{acr::efin}} level 3.
                 Test results are expressed in percentage.
                 All \texttt{atomic} errors are considered over all possible configurations.
                 Results in bold indicate the feature configuration with the highest F-score.
@@ -573,9 +578,11 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
                 \end{tabular}
             \end{center}
             \renewcommand{\arraystretch}{1}
-            \caption{
+            \caption[
+                F-scores vizualization for ablation results at \textbf{\gls{acr::efin}} level 3 with baseline features.
+            ]{
                 \label{tab::all_f-scores_ablation_f3_viz}
-                F-scores vizualization for ablation results at \textbf{\gls{acr::efin}} level 3.
+                F-scores vizualization for ablation results at \textbf{\gls{acr::efin}} level 3 with baseline features.
                 These are deduced from Table~\ref{tab::all_f-scores_ablation_f3}.
                 The color indicates the how well detected a label is: 
                 \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{0}{15}{\percent})--
@@ -609,7 +616,9 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
                     }
                 \end{subfloatrow}
             }{
-                \caption{
+                \caption[
+                    Visualizing mean F-score and standard deviation for the feature ablation study.
+                ]{
                     \label{fig::f_score_ablation_f3}
                     Visualizing mean F-score and standard deviation for the feature ablation study.
                     Details are reported in Table~\ref{tab::f_score_ablation_f3}.
@@ -675,8 +684,11 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
                     }
                 \end{subfloatrow}
             }{
-                \caption{
-                    \label{fig::feature_importances_rf_bl} Modality importance computed by stacking single feature importances retrieved from the \gls{acr::rf} classifier.
+                \caption[
+                    Modality importance computed by stacking single feature importances retrieved from the \gls{acr::rf} classifier.
+                ]{
+                    \label{fig::feature_importances_rf_bl}
+                    Modality importance computed by stacking single feature importances retrieved from the \gls{acr::rf} classifier.
                     The first (\textit{resp.} second and third) column represents \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
                 }
             }
@@ -698,3 +710,6 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
         In fact, as shown in Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}, for most \texttt{atomic} errors, test results using geometric features are comparable to those obtained with more modalities.
         However, during training, all modalities are relevant with importance ratios approximating 1/3 as shown in Figure~\ref{fig::feature_importances_rf_bl}.
         As a consequence, for subsequent experimentations all configurations are taken into consideration.
+
+    \subsection{Overview}
+        \label{subsec::experiments::baseline_feature_analysis::overview}

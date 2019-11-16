@@ -24,7 +24,9 @@
             \includestandalone[mode=buildnew, width=.8\textwidth]{figures/scalabitity_graph}
         }
         {
-            \caption{
+            \caption[
+                A graph representing possible experiments: arrow origins represent training scenes while test ones are depicted as targets.
+            ]{
                 \label{fig::scalability_study}
                 A graph representing possible experiments: arrow origins represent training scenes while test ones are depicted as targets.
                 \(Z_i, i=1,2,3\) represent the urban zones.
@@ -75,10 +77,12 @@
                     }
                 \end{subfloatrow}
             }{
-                \caption{
+                \caption[
+                    Mean F-score and standard deviation for the transferability study.
+                ]{
                     \label{fig::f_score_transferability_f3}
                     Mean F-score and standard deviation for the transferability study.
-                    \textbf{El.} (\textit{resp.} \textbf{Na.} and \textbf{P13.}) corresponds to \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
+                    \textbf{El.} (\textit{resp.} \textbf{Na.} and \textbf{P13.}) stand for \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
                     This is a vizualization of results reported in Table~\ref{tab::f_score_transferability_f3}.
                 }
             }
@@ -128,6 +132,7 @@
             ]{
                 \label{tab::transferability_comparison}
                 Evolution of the F-score value, for each error, between transferability experiments and the ablation study (\textit{cf.} Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}).
+                \textbf{El.} (\textit{resp.} \textbf{Na.} and \textbf{P13.}) stand for \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
                 Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (\textit{cf.} Table~\ref{tab::all_f-scores_transferability_f3}).
                 The color indicates the magnitude of change: 
                 \textcolor{LOSS45}{\(\blacksquare\)}: (\SIrange[range-phrase={,  }]{-100}{-45}{\percent}]--
@@ -209,10 +214,12 @@
                     }
                 \end{subfloatrow}
             }{
-                \caption{
+                \caption[
+                    Mean F-score and standard deviation for the generalization study per test zone.
+                ]{
                     \label{fig::f_score_generalization_f3}
                     Mean F-score and standard deviation for the generalization study per test zone.
-                    Scores are also provided in Table~\ref{tab::f_score_generalization_f3}.
+                    These are also provided in Table~\ref{tab::f_score_generalization_f3}.
                 }
             }
         \end{figure}
@@ -317,7 +324,10 @@
                     }
                 \end{subfloatrow}
             }{
-                \caption{\label{fig::f_score_representativeness_f3} Mean F-score and standard deviation for the representativeness experiments depending on the training set size.}
+                \caption{
+                    \label{fig::f_score_representativeness_f3}
+                    Mean F-score and standard deviation for the representativeness experiments depending on the training set size.
+                }
             }
         \end{figure}
             
@@ -338,7 +348,10 @@
         However, \texttt{BIT}, \texttt{FIT} and \texttt{BIB} prove to be harder to stabilize with mean F-scores around \SI{16}{\percent}, \SI{9}{\percent} and \SI{19}{\percent} respectively.
         We can hence observe how, understandably, mixing the training sets produces scores that averages out the ones from the ablation study.
         On the other hand, more sophisticated features are still required to help predicting the less frequent and more semantic labels.
-    
+
+    \subsection{Overview}
+        \label{subsec::more_experiments::scalability::overview}
+
 \section{The \texorpdfstring{\acrlong*{acr::efin}}{eFin} impact on predictions}
     \label{sec::more_experiments::finesse}
     In this section, we reproduce the experimental settings described in Section~\ref{sec::experiments::baseline_feature_analysis} and Section~\ref{sec::more_experiments::scalability}.
@@ -387,9 +400,11 @@
                 \texttt{Facet errors} & 99.03 & 91.26 & 99.03 & 91.26 & 99.03 & 91.26 & 99.03 & 91.26 \\
                 \hline
             \end{tabular}
-            \caption{
+            \caption[
+                Baseline feature ablation study on the three datasets for the \textbf{\gls{acr::efin}} level 2.
+            ]{
                 \label{tab::ablation_f2}
-                Feature ablation study on the three datasets for the \textbf{\gls{acr::efin}} = 2 case.
+                Baseline feature ablation study on the three datasets for the \textbf{\gls{acr::efin}} level 2.
                 Results are expressed in percentage.
                 All four modality configurations are compared across both family errors.
             }
@@ -432,7 +447,7 @@
             }{
                 \caption{
                     \label{fig::f_score_f2}
-                    F-score mean and standard deviation for the feature ablation study outcomes per zone for \textbf{\gls{acr::efin}} level 2.
+                    F-score mean and standard deviation for the baseline feature study results per zone for \textbf{\gls{acr::efin}} level 2.
                 }
             }
         \end{figure}
@@ -500,10 +515,12 @@
                 \hline
             \end{tabular}
             \renewcommand{\arraystretch}{1}
-            \caption{
+            \caption[
+                Test results expressed in percentage for the \textbf{\gls{acr::efin}} = 1 case.
+            ]{
                 \label{tab::ablation_f1}
                 Test results expressed in percentage for the \textbf{\gls{acr::efin}} = 1 case.
-                All four modality configurations are compared across both family errors.
+                All four modality configurations, using baseline features, are compared across both family errors.
             }
         \end{table}
         
@@ -515,6 +532,18 @@
         Furthermore, we confirm expectations as, at most, only 1 out of 57 (\textit{resp.} 0 out of 55 and 3 out of 21) valid instances are detected for \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
         As a consequence, we do not report the rest of previously conducted experiments for this \textbf{\gls{acr::efin}} level.
         Indeed, There is no interest in comparing prediction transferability, generalization or representativeness if we hardly detect them at all on the same training scene.
+
+    \subsection{Overview}
+        \label{subsec::more_experiments::finesse::overview}
+        To summarize, we have applied the same study, that was previously conducted at the \texttt{atomic} errors level, at the \textbf{\gls{acr::efin}} levels 2 and 1.
+        We have experimentally proven that:
+        \begin{itemize}[label=\(\blacktriangleright\)]
+            \item \texttt{Facet errors} are detected with around a \SI{90}{\percent} F-score unaffected by the urban scenes.
+            \item As seen previously on \textbf{\gls{acr::efin}} level 3, \texttt{Building errors} are harder to train on \textbf{Nantes} and \textbf{Paris-13}, with an F-score around \SI{75}{\percent};
+            \item We confirm once again that \texttt{Building errors} learning is harder to transfer than \texttt{Facet errors};
+            \item We also confirm that \textbf{Elancourt} is the best choice to learn \texttt{Building errors} on, as well as the fact that \textbf{Nantes} and \textbf{Paris-13} are similar in composition;
+            \item As expected, the distinction between \texttt{Erroneous} and \texttt{Valid} proved to be difficult to learn.
+        \end{itemize}
 
 \section{Classifier choice analysis}
     \label{sec::more_experiments::classifier}
@@ -682,7 +711,7 @@
     
         Mean and standard deviation F-scores are vizualized in Figure~\ref{fig::f_score_rf_bl}.
         Obviously, everything remains unchanged for \textbf{Elancourt}.
-        However, we see how the standard deviations on the fused set seem to be greater than what observed previosuly in Figure~\ref{fig::f_score_ablation_f3}.
+        However, we see how the standard deviations on the fused set seem to be greater than what observed previously in Figure~\ref{fig::f_score_ablation_f3}.
         Moreover, added to the same labels \texttt{BUS} and \texttt{FIB} that were already improved by the use of image based features as shown in Table~\ref{tab::all_f-scores_ablation_f3}, \texttt{BIT} and \texttt{FIT} F-scores are also greatly impacted on the new fused set.
         In fact, the first better performs when only geometric features are used as previously explained before in Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}.
         For the second, it was image based features that proved to be better suited.
@@ -756,7 +785,7 @@
 
         Two observations are worth noting herein:
         \begin{itemize}[label=\(\blacktriangleright\)]
-            \item First is the fact that contrarily to \gls{acr::rf} results, adding height or image based features only to the intrinsic featurtes seem to produce the same scores.
+            \item First is the fact that contrarily to \gls{acr::rf} results, adding height or image based features only to the intrinsic features seem to produce the same scores.
                     However, when adding both, it produces different results as can be shown in Table~\ref{tab::all_f-scores_svm_f3} for all errors but \texttt{BIT} and \texttt{FIT} for both sets as well as \texttt{FUS} for \textbf{NA-P13}.
                     This may be explained by the fact that both features have the same dynamic as they represent, in reality, histogram values as discussed in Section~\ref{sec::learned_evaluation::baseline}.
                     As a consequence, in this case, the \gls{acr::svm} considers both feature configurations to be similar unless when fed together to the \gls{acr::svm}.
@@ -907,7 +936,7 @@
         This reinforces the idea that the \gls{acr::svm} was actually not adequately parameterized for the extrinsic features as was announced in Section~\ref{subsec::experiments::setup::classification}.
         In fact, as discussed earlier in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}, \glspl{acr::svm} are very hard to parameterize compared to \glspl{acr::rf}.
         This seems to be a reasonable cause why the \gls{acr::svm} classifier underperforms compared to the \gls{acr::rf} one on \textbf{Na-P13}.
-            
+
     \subsection{Modality contributions comparison}
         \label{subsec::more_experiments::classifier::feature_importance}
         In a linear \gls{acr::svm}, feature importance can be natively computed by looking at the weight vector \(\bm{w}\) as shown by~\textcite{guyon2002gene}.
@@ -957,7 +986,10 @@
         As in the \gls{acr::rf} case, this may be prove to be helpful for the transferability of learning.
         Consequently, it would be interesting to rerun the same scalanility experiments, as in Section~\ref{sec::more_experiments::scalability}, with an \gls{acr::svm}.
         This was not the case, due to time limitations.
-    
+
+    \subsection{Overview}
+        \label{subsec::more_experiments::classifier::overview}
+
 \section{Advanced features contributions}
     \label{sec::more_experiments::richer_features}
     Herein, some advanced feature extractors are tried.
@@ -1997,3 +2029,6 @@
                 }
             }
         \end{figure}
+
+    \subsection{Overview}
+        \label{subsec::more_experiments::richer_features::overview}
