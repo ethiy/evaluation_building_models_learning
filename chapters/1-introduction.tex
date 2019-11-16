@@ -12,21 +12,21 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
 
 \section{Urban \texorpdfstring{\acrshort*{acr::3d}}{3D} reconstruction}
     \label{sec::introduction::urban_3d_reconstruction}
-    \index{\gls{acr::3d}!reconstruction}\gls{acr::3d} reconstruction is a wide research field that interests \index{photogrammetry}photogrammetry, \index{computer vision}computer vision and \index{computer graphics}computer graphics communities.
-    Starting from some input sensor data\footnote{which usually are unstructured.} (\gls{acr::lidar} point clouds or stereo images), the goal is to model the \gls{acr::3d} surface that bounds an object fo interest.
-    In \index{\acrshort{acr::gis}}\acrfull{acr::gis}, \gls{acr::3d} data is instrumental to model the Earth surface at different scales.
+    Object \index{\gls{acr::3d}!reconstruction}\gls{acr::3d} reconstruction is a wide research field that interests \index{photogrammetry}photogrammetry, \index{computer vision}computer vision and \index{computer graphics}computer graphics communities.
+    Starting from some input sensor data\footnote{which usually are unstructured.} (\gls{acr::lidar} point clouds or multiview stereo images), the goal is to model the \gls{acr::3d} surface that bounds an object of interest.
+    In \index{\acrshort{acr::gis}}\acrfull{acr::gis}, \gls{acr::3d} data is instrumental to model the Earth surface at different spatial scales.
     In particular, this field takes a special interest in \index{urban!area}urban areas.
     Objects present in such scenes usually obey some specific rules which constrain their shape.
     In this section, we dicuss applications of \index{urban!\gls{acr::3d}!model}urban \gls{acr::3d} models (cf. Section~\ref{subsec::introduction::urban_3d_reconstruction::applications}).
-    We afterwards tackle the subject of \index{building!\gls{acr::3d}!model} building \gls{acr::3d} modeling and the issues it raises(cf. Section~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}).
+    We afterwards tackle the subject of \index{building!\gls{acr::3d}!model} \gls{acr::3d} building modeling and the issues it raises(cf. Section~\ref{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}).
     This section ends in Section~\ref{subsec::introduction::urban_3d_reconstruction::challenges} with a list of some of the important technical challenges that are still to be overcome in this domain.
 
     \subsection{Applications of urban \texorpdfstring{\gls*{acr::3d}}{3D} models}
         \label{subsec::introduction::urban_3d_reconstruction::applications}
-        In what follows, we present a brief survey of \index{urban!model!application} urban \gls{acr::3d} models applications.
+        In the following, we present a brief survey of \index{urban!model!application} urban \gls{acr::3d} models applications.
         A more comprehensive study was presented in~\parencite{biljecki2015applications}.
-        The goal is to persuade the reader of the relevance of urban \index{urban!\gls{acr::3d}!model}\gls{acr::3d} modeling and how much affected can everybody can be.
-        Indeed, urban \gls{acr::3d} models answer various needs: scientific, societal, environemental and administrative.
+        The goal is to persuade the reader of the relevance of urban \index{urban!\gls{acr::3d}!model}\gls{acr::3d} modeling and how much affected everybody can be.
+        Indeed, urban \gls{acr::3d} models answer to various needs: administrative, environmental, scientific and societal.
 
         \subsubsection{Administration related challenges}
             Administrative bodies need to document land usage in an effort to efficiently manage territories.
@@ -43,7 +43,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                 ]{
                     \label{fig::3d_cadastre_need_example}
                     Example of a problematic situation where \acrshort*{acr::3d} cadastre would be of help and \acrshort*{acr::2d} maps fail.
-                    The two building footprints overlap and are tricky to represent in \acrshort*{acr::2d}.
+                    The two building footprints overlap and are too complex to represent in \acrshort*{acr::2d}.
                     Image taken from~\parencite{biljecki2015applications}.
                 }
             \end{figure}
@@ -60,7 +60,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             In reality, the \gls{acr::2d} city footprint is not sufficient to assess its capacity to contain people.
             One has to compute the number of habitable units, which depends on the height of buildings.
             This motivates the need of \gls{acr::3d} data as shown in Figure~\ref{fig::3d_simulation}.
-            The \index{vizualization} vizualization and \index{simulation}simulation of urban zones can be equally helpfull for \index{public consultation}public consultation~\parencite{wu2010virtual}.\\
+            The \index{vizualization} vizualization and \index{simulation}simulation of urban zones can be equally helpful for \index{public consultation}public consultation~\parencite{wu2010virtual}.\\
 
             \begin{figure}[htpb]
                 \centering
@@ -90,7 +90,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             \end{figure}
 
             Related to urban planning, \gls{acr::3d} models could be used as a reference for other planners.
-            These models could be used to describe the flow of vehicles and pedestrians in an urban environement as illustrated in~\textcite{vanhoey2017varcity}.
+            These models could be used to describe the flow of vehicles and pedestrians in an urban environment as illustrated in~\textcite{vanhoey2017varcity}.
             In addition, it could be used in physical simulations for urban applications.
             For instance, communication companies need to have a \gls{acr::3d} model of urban scenes to predict signal propagation in the goal of optimal network planning~\parencite{yun2007radio}.
             It can be also useful for flood simulation.
@@ -111,10 +111,10 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                 }
             \end{figure}
 
-            All these simulation derived informations could be supplied to decision makers in order to better plan the cities of tomorrow.
+            All these simulation derived informations could be supplied to decision makers in order to better plan the cities of tomorrow~\parencite{huck2019urban}.
 
         \subsubsection{Environmental challenges}
-            Environement preservation is a all the more important in the forecoming years.
+            Environment preservation is a of utter importance in the forecoming years.
             Urban settlement are one of the largest energy consumers.
             A more efficient energy utilization is necessary to sustain the frantic growth of urban areas.
             This motivates the need to quantify the energy consumption of urban settlements~\parencite{WATE20153372} or retrofitting costs~\parencite{previtali2014automatic}.
@@ -135,7 +135,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                 }
             \end{figure}
 
-            Another critical environemental issue that affects cities is air pollution.
+            Another critical environmental issue that affects cities is air pollution.
             Indeed, it has serious implications on human health as demonstrated in~\textcite{pascal2013assessing} and~\textcite{chen2013evidence}.
             In order to understand its dynamics, researchers simulate the local air flow (\textit{i.e.} the city microclimate) using computational fluid dynamics.
             This requires a detailed knowledge of the scenes layout.
@@ -190,15 +190,15 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                         Position estimation that relies on urban \gls{acr::2d5} models.
                         The initial pose is derived from a sensor measurement that is not reliable.
                         In Figures~\ref{subfig::init_pose} (\textit{resp.}~\ref{subfig::final_pose} and~\ref{subfig::gt_pose}), the \gls{acr::2d5} model is projected on the image using the initial pose (\textit{resp.} the refined pose and the ground truth one).
-                        The \gls{acr::2d5} model helps refine the camera pose~\parencite{armagan2017semantic}.
-                        It is shown in the last graph (\textit{cf.} Figure~\ref{subfig::viz}), where the final estimation (green) is closer to the ground truth (red) than the initial one (blue)~\parencite{armagan2017semantic}.
+                        The \gls{acr::2d5} model helps refine the camera pose.
+                        It is shown in the last graph (\textit{cf.} Figure~\ref{subfig::viz}), where the final estimation (green) is closer to the ground truth (red) than the initial one (blue).
                         Images taken from~\parencite{armagan2017semantic}.
                     }
                 }
             \end{figure}
 
             Once the image matched, one can retrieve an absolute 6-\gls{acr::dog} pose estimation.
-            This is especially helpfull in urban canyons as shown in~\textcite{piasco2018survey}.\\
+            This is especially helpful in urban canyons as shown in~\parencite{piasco2018survey}.\\
             The same ideas can be applied also for indoor environments, such as social cues aware robots navigating alongside humans~\parencite{gupta2018social} or industrial grade robots\addref.
        
         \subsubsection{Entertainement related challenges}
@@ -217,18 +217,20 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             For instance, tourists can use such tools to prepare their trip by familiarizing themselves with the city they are visiting.
             This can be possible through mixed or augmented reality as shown by~\textcite{devaux20183d} (\textit{cf.} Figure~\ref{subfig::augemented_reality}).
             It can also be employed in the service of art.
-            Actually,~\textcite{russell2011automatic,aubry2014painting} illustrated how it is possible to align paintings or photographs with \gls{acr::3d} scenes(\textit{cf.} Figure~\ref{subfig::historical_pose}).\\
+            Actually,~\textcite{russell2011automatic,aubry2014painting} illustrated how it is possible to align paintings or photographs with \gls{acr::3d} scenes (\textit{cf.} Figure~\ref{subfig::historical_pose}).\\
             \begin{figure}[htpb]
                 \centering
-                \ffigbox[\FBwidth]{
-                    \begin{subfloatrow}[2]
-                        \ffigbox[\FBwidth]{
-                            \includegraphics[width=.45\textwidth]{images/introduction/3d_model_applications/insitu_sewer_hololens}
+                \ffigbox[\textwidth]{
+                    \begin{subfloatrow}
+                        \ffigbox[\textwidth]{
+                            \includegraphics[width=.8\textwidth]{images/introduction/3d_model_applications/insitu_sewer_hololens}
                         }{
                             \caption{\label{subfig::augemented_reality} Virtual vizualization of sewers in Paris based on the \gls{acr::3d} model of the city~\parencite{devaux20183d}.}
                         }
-                        \ffigbox[\FBwidth]{
-                            \includegraphics[width=.45\textwidth]{images/introduction/3d_model_applications/trocadero_historical}
+                    \end{subfloatrow}
+                    \begin{subfloatrow}
+                        \ffigbox[\textwidth]{
+                            \includegraphics[width=.8\textwidth]{images/introduction/3d_model_applications/trocadero_historical}
                         }{
                             \caption[
                                 Pose estimation of a historical aerial image of Trocadero square (Paris, France) that was registered~\parencite{harrach2019interactive} to a city \gls{acr::3d} model visualized with iTowns~\parencite{devaux2012web}.
@@ -247,7 +249,6 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                     }
                 }
             \end{figure}
-            This last work could be also used to help marketers sell living units.
             \addtocounter{footnote}{-1}
             \footnotetext{
                 \href{http://www.itowns-project.org}{iTowns project}
@@ -256,7 +257,9 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             \footnotetext{
                 \href{http://recherche.ign.fr/labos/matis/~devaux}{Alexandre Devaux website}
             }
-            Indeed, customers can, for example, visit a digitally reconstructed appartement and virtually furnish it~\parencite{kim2019planar}.
+
+            This last work could be also used to help marketers sell living units.
+            Indeed, customers can, for example, visit a digitally reconstructed apartment and virtually furnish it~\parencite{kim2019planar}.
             Another application is living unit pricing.
             In fact, one would not have to travel to the asset location in order to assess it.
             Markerters can do so using its \gls{acr::3d} model.
@@ -267,7 +270,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             Security and emergency fields are not the exception, when it comes to the utilization of city \gls{acr::3d} models~\parencite{kwan2005emergency, ruppel2011designing}.
             For instance,~\textcite{chen2014application} shows how these models are used for ladder trucks optimal deployement planning by firefighters.
             \gls{acr::3d} city models can also be used to determine safe margins in the case of bomb disposal operations.
-            This can be possible through explosion simulation in the urban environement of interest~\parencite{willenborg2015simulation}.\\
+            This can be possible through explosion simulation in the urban environment of interest~\parencite{willenborg2015simulation}.\\
             \begin{figure}[htpb]
                 \centering
                 \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/explosion_simulation}            
@@ -280,15 +283,16 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                 }
             \end{figure}
             Security forces can equally benefit from city \gls{acr::3d} modeling.
-            \gls{acr::3d} models can be used to help analysing crime scenes~\parencite{wolff2009towards}, as well as it can also be helpfull for crime prevention as proved by~\textcite{wolff2008geospatial}.
+            \gls{acr::3d} models can be used to help analysing crime scenes~\parencite{wolff2009towards}, as well as it can also be helpful for crime prevention as proved by~\textcite{wolff2008geospatial}.
             These models could be instrumental in military applications~\textcite{zlatanova2002trends, budroni2010automatic}.
             Military forces could, indeed, use building \gls{acr::3d} model based augmented reality to train for intervention scenarii, such as hostage rescue operations.
 
-    \subsection{Building \texorpdfstring{\gls*{acr::3d}}{3D} modeling}
+    \subsection{\texorpdfstring{\gls*{acr::3d}}{3D} building modeling}
         \label{subsec::introduction::urban_3d_reconstruction::building_3d_modeling}
         We have seen, previously, how city \gls{acr::3d} models can be instrumental.
         They have a large range of applications in entertainement, industry, security, urbanization and sustainable developpement.
         In this work, the focus is put on outdoor, rather than indoor, modeling.\\
+
         Precisely, we will raise, herein, the issue of large-scale outdoor city modeling.
         We will see how building reconstruction has a prominent role in the field.
         Afterwhat, we will discuss different building model acquisition techniques and how it influences their quality.
@@ -337,7 +341,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             \end{figure}
             Regarding the first and second groups, was proven, the lack of motivation for precise \gls{acr::3d} reconstruction, in a large-scale setting.
             Exhibiting less temporal volatility, precise modeling of items from the third group seems to be easier.
-            In fact, terrain relief can be modeled simply from a \gls{acr::dsm} or a \gls{acr::dtm}.
+            In fact, terrain relief can be modeled simply from a \acrfull{acr::dsm} or a \gls{acr::dtm}.
             Although not being so easy to detect~\parencite{mnih2010learning}, roads could be naturally modeled using simple planar structures.
             On the other hand, city furniture, bridges and buildings are more complex.
             While detailed accurate models are needed for buildings and bridges, they are not necessary for city furniture.
@@ -357,13 +361,13 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
 
             Based on the previous temporal frequency differentiation analysis, we narrowed down the urban elements that need special consideration in modeling to two: buildings and bridges. 
             Actually, we can rule out the latter, this time, owing to a spatial frequency study.
-            In terms of land cover, the most present objects in an urban environement are roads, vegetation and buildings \addref.
+            In terms of land cover, the most present objects in an urban environment are roads, vegetation and buildings \addref.
             Hence, modeling these three object types becomes crucial in order to obtain a viable urban \gls{acr::3d} model.
             We have seen previously how roads and vegetation could be satisfactorily reconstructed using relatively simple models.
             This is, however, not the case of buildings.
             That is why, out of all urban features, buildings seem to attract the most attention in urban \gls{acr::3d} modeling.
 
-        \subsubsection{Building \texorpdfstring{\gls*{acr::3d}}{3D} modeling}
+        \subsubsection{\texorpdfstring{\gls*{acr::3d}}{3D} building modeling}
             Before discussing further on the different types of building models, a definition is provided first.
             A building \gls{acr::3d} model is a cartographic product which represents the surface of the building in question.
             The latter is a generalization of the reality whose goal is not to represent all the details meticulously.
@@ -412,8 +416,8 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             This field is far from being fully mature as proved by~\textcite{stoter2018geo}.
             In addition to the geometric inconsistancies that emanate from \gls{acr::bim} and \gls{acr::gis} model mapping,~\textcite{stoter2018geo} show how semantic ambiguities thwart the automatic conversion from one format to the other.\\
 
-            In this thesis, the scalability of \gls{acr::3d} modeling is a main concern.
-            As a consequence, a special focus is given to automatic and, in a lesser degree, interactive building \gls{acr::3d} modeling techniques.
+            In this thesis, the scalability\footnote{The capacity of the modeling method to scale at district and even ciy level.} of \gls{acr::3d} modeling is a main concern.
+            As a consequence, a special focus is given to automatic and, in a lesser degree, interactive \gls{acr::3d} building modeling techniques.
 
         \subsubsection{Building \texorpdfstring{\gls*{acr::3d}}{3D} models meets semantics}
             \label{subsubsec::introduction::urban_3d_reconstruction::building_3d_modeling::semantics}
@@ -493,9 +497,9 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                     Image taken from~\parencite{biljecki2016improved}.
                 }
             \end{figure}
-    \subsection{Obstacles in building \texorpdfstring{\gls*{acr::3d}}{3D} modeling}
+    \subsection{challenges in \texorpdfstring{\gls*{acr::3d}}{3D} building modeling}
         \label{subsec::introduction::urban_3d_reconstruction::challenges}
-        The subject of building \gls{acr::3d} modeling has been widely studied in more than twenty years.
+        The subject of \gls{acr::3d} building modeling has been widely studied in more than twenty years.
         Still, there are some unsolved issues in the field~\parencite{musialski2013survey, lafarge2015some}.
         Presented here is the same classification as in~\textcite{lafarge2015some}.
 
@@ -508,7 +512,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             One way of dealing with this type of obstacles, is to multiply the data acquisition settings.
             This can, actually, help mitigate not only occlusion problems but also noise interference.\\
             However, too much data heterogeneity can also hinder the \gls{acr::3d} modeling process.
-            In fact, with more accessible data acquired using different sensors (cameras, \gls{acr::radar} and \gls{acr::lidar}, for instance), in various settings (aerial, sattelite or terrestrial) and circumstances (rainy, sunny, foggy\dots and night-time, day-time\dots), other hurdles need to be overcome.
+            In fact, with more accessible data acquired using different sensors (optical cameras, \gls{acr::radar} and \gls{acr::lidar}, for instance), in various settings (aerial, satellite or terrestrial) and conditions (rainy, sunny, foggy\dots and night-time, day-time\dots), other hurdles need to be overcome.
             For one, more data does not always mean more knowledge, as demonstrated in~\textcite{brachmann2018learning}.
             In fact, one should take good care in choosing how to fuse their input data~\parencite{kedzierski2014terrestrial}.
             For instance, the latter needs be coregistered in the same referential~\parencite{monnier2013registration, mezian2016uncertainty} (\textit{cf.} Figure~\ref{fig::3d_model_terrestrial_registration}).
@@ -537,10 +541,10 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             This reduces the complexity of the manual modeling process.
             It produces, however, lower precision models as errors are of the order of \SI{0.5}{\m}~\parencite{jamet1995building}.
             This is still a slow process that is highly demanding in terms of operator expertise~\parencite{ruther2002application}.\\
-            The manual labour can be alleviated, partially, by automating some parts of the \gls{acr::3d} surface aquisition pipeline~\parencite{musialski2013survey}.
+            The manual labour can be alleviated, partly, by automating some parts of the \gls{acr::3d} surface aquisition pipeline~\parencite{musialski2013survey}.
             Some interactive approaches have been proposed to model building.
             The operator is still needed for highly complex semantic tasks~\parencite{mayunga2005semi, castellazzi2015laser}.
-            Such methods suffer from imprecision compared to the fully manual ones: for instance,~\textcite{mayunga2005semi} produces models with geometric error standard deviation in the order of \SI{1}{\m}.\\
+            Such methods suffer from imprecision compared to the fully manual ones: for instance,~\textcite{mayunga2005semi} produce models with a geometric error standard deviation in the order of \SI{1}{\m}.\\
             Full automation is still unattainable, especially when it comes to semantics.
             Different strategies are used, where each one targets a specific resolution, balancing between compaction and geometric accuracy.
             Ordered from the most to the least compact, these strategies are listed herein.
@@ -566,33 +570,6 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             a geographic proximity does not imply always a temporal or architectural closeness for buildings as shown later in Figure~\ref{fig::samples}.
             At a regional or continental scale, the differences become even more overt: \textit{cf.} Figures~\ref{fig::elancourt_ortho}, ~\ref{fig::nantes_ortho} and~\ref{fig::paris-13_ortho}.
             As a result, some choose to alternate automatic and interactive methods~\parencite{musialski2013survey}: an automatic reconstruction followed by a interactive correction step.
-            \begin{figure}[htpb]
-                \ffigbox[\FBwidth]{
-                    \begin{subfloatrow}[2]
-                        \ffigbox[\FBwidth]{
-                            \includegraphics[width=.45\textwidth]{example-image}
-                        }{
-                            \caption{
-                                \label{subfig::xiiith_paris_haussmann_tower} Example of two nearly located buildings, in the XIIIth disctict of Paris, with different architectural styles:
-                                a Haussmann style building, dating from the begining of the XXth century, next to very tall tower, built \textit{circa} 1970s.
-                            }
-                        }
-                        \ffigbox[\FBwidth]{
-                            \includegraphics[width=.45\textwidth]{example-image}
-                        }{
-                            \caption{
-                                \label{subfig::different_regions} Example of two buildings from two different locations in the world:
-                                Blalallala.
-                            }
-                        }                        
-                    \end{subfloatrow}
-                }{
-                    \caption{
-                        \label{fig::different_styles}
-                        Building architecture shows high heterogenuity not only across different regions, but also in the same urban scene.
-                    }
-                }
-            \end{figure}
         
         \subsubsection{Quality evaluation}
             As discussed, semantics play a prominent role in building \gls{acr::3d} models.
@@ -627,7 +604,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
         The basic common principle is the two-manifoldness of surface representations~\parencite{groger2011achieve}, which aims at excluding self-intersections.
         It is however not sufficient for the complex building cases.
         An urban object, in the international standards is, in reality, represented as an agregation of two-manifold surfaces, as shown in~\textcite{groger2011achieve, ledoux2013validation}.
-        This kind of structures can be simply modeled as a \gls{acr::3d} \gls{acr::lcc}\parencite{damiand2014combinatorial}\footnote{
+        This kind of structures can be simply modeled as a \gls{acr::3d} \gls{acr::lcc}~\parencite{damiand2014combinatorial}\footnote{
             An nD \gls{acr::lcc} is an embedding of combinatorial maps in \(\mathbb{R}^n\).
         }, as demonstrated in \textcite{diakite2014topological}.
         This leads to the use of \gls{acr::3d} \glspl{acr::lcc} to check the consistency of city models~\parencite{gorszczyk2016automatic}.
@@ -666,7 +643,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
         This is may be due to the lesser attention that is given to the latter.
         This can be explained by the different levels of difficulty when producing these data.
         It is indeed a more difficult to reconstruct a \gls{acr::3d} model of a building than detecting their footprint.
-        For example, one can take a look in the number of submission for each task of the proposed \gls{acr::isprs} benchmark~\textcite{rottensteiner2012isprs, rottensteiner2014results}.
+        For example, one can take a look in the number of submission for each task of the proposed \gls{acr::isprs} benchmark~\parencite{rottensteiner2012isprs, rottensteiner2014results}.
         The \gls{acr::3d} reconstruction task received less submissions than the other one.\\
         Two ways can be used to judge the quality of the geometric representation of a building.
         Manual evaluation relies on human interaction to determine how close the model is to reality.
@@ -714,6 +691,8 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
 \section{Contributions}
     \label{sec::introduction::contributions}
     Based on all the previous discussions, we adopted a research direction that has rarely been taken up to now, as far as we know.
+    Our aim is to evaluate the quality of building \gls{acr::3d} models automatically and at large scales.\\
+
     Herein is explained the path that led to this subject.
     To do so, the context of this work is explained in detail in Section~\ref{subsec::introduction::contributions::positioning}.
     Further on, promising and conceivable utilizations are stated in Section~\ref{subsec::introduction::contributions::use}.
@@ -758,7 +737,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             In fact, as seen in Computer Vision,\addref the more semantic tasks are, the more difficult they are to automate.
             It is even more arduous taking into account the \textbf{large-scale} constraint which implies a robustness to the natural heterogeneity in urban scenes as well as the variance of modeling approches.
 
-    \subsection{Potential use}
+    \subsection{Aplication cases}
         \label{subsec::introduction::contributions::use}
         Ahead was discussed the context of the proposed work.
         Hereafter is discussed the potential use of a semantically aware automatic geometry evaluation of building \gls{acr::3d} models.
@@ -820,7 +799,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             \subsubsection{Crowdsourcing evaluating}
             Crowdsourcing~\parencite{kovashka2016crowdsourcing} can be seen as a building modeling method.
             It has become easier with the help of some online tools like SketchUp\footnote{
-                \href{https://www.sketchup.com}{SketchUp}.
+                \href{https://www.sketchup.com}{SketchUp website}.
             }, where anyone can model, for instance, their home and share it publically.
             The quality of the models depend on their author.
             An automatic evaluation method can help check that the uploaded models respect the specifications.
@@ -868,17 +847,23 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             As a consequence, the problem is formulated as a supervized learning one.
             Based on the errors, that are extracted from the taxonomy, a classifier is trained in order to predict defects for unseen models.
 
-        \subsubsection{Feature baseline}
+        \subsubsection{Custom features}
             Since the formulated problem has not been massively studied, there was no feature extraction baseline to compare to.
             Hence, a baseline of features is presented in this work.
-            They are computed based on the geometric attributes of the building model and the comparison to external data: optical images and height maps.
+            In addition, we also presented some more advanced ones relying on \glspl{acr::scatnet} and graph kernels, with the aim of improving on the detection rates of the baseline approach.
+            They are computed based on the geometric attributes of the building model and the comparison to external remote sensing data: \gls{acr::vhr} optical images and height maps.
         
-        \subsubsection{Scalability}
+        \subsubsection{Scalability analysis}
             One of the goals of this work is to acheive scalability in large-scale.
             This implies the transferability of the learned predictors to unseen urban settings or untested modeling techniques.
             It involves also a representativeness and generalization study of the training sets.
             An analysis is conducted accordingly.
             We experimentaly prove the stability of classifiers, under some settings.
+        
+        \subsubsection{\texorpdfstring{\gls*{acr::3d}}{3D} model handling}
+            We also developped a set of tools to handle the geometry of \gls{acr::3d} building models.
+            They were necessary in order to manage poorly stored models that were rarely well oriented let alone being manifold.
+            It was also useful in computing exact projections of polyhedral buildings and extracting other useful informations that were later used for feature extraction.
 
 \section{Structure of the Thesis}
     \label{sec::introduction::structure_of_thesis}
