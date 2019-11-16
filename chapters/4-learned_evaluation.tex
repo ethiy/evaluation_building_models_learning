@@ -4,6 +4,7 @@
 
 In the previous chapter (Chapter~\ref{chap::semantic_evaluation}), we developped a hierchical and modular taxonomy of errors for the overhead modeling case.
 Based on this taxonomy, and depending on the particular needs, specific error labels are extracted and considered during the quality evaluation.\\
+
 In this chapter, we present the second part of our proposed approach.
 It is based on formulating the problem as a supervized classification one.
 Issues related to the latter are detailed in Section~\ref{sec::learned_evaluation::classification}.
@@ -525,7 +526,7 @@ These are proposed to better model defect predictions.
             Both settings are experimented with and compared later in Section~\ref{subsec::more_experiments::richer_features::scatnet_baseline}.\\
 
             Now we can apply the \gls{acr::scatnet} on any of the previously defined images.
-            We apply then the same post-processing to yield feature vectors with the same dimensions \(d \cdot n_S\):
+            We apply then the same post-processing to yield feature vectors with the same dimensions per channel \(d \cdot n_S\):
 
             \begin{description}
                 \item[\texttt{Deletion}:]
@@ -549,7 +550,7 @@ These are proposed to better model defect predictions.
                                     \vdots\\
                                     \lambda_m \in \Lambda_m
                                 }
-                            }.
+                            } \in \mathbb{R}^{3 \cdot d \cdot n_S}.
                         \end{equation}
                 \item[\texttt{Channel}:]
                         \begin{equation}
@@ -572,6 +573,6 @@ These are proposed to better model defect predictions.
                                     \vdots\\
                                     \lambda_m \in \Lambda_m
                                 }
-                            }.
+                            } \in \mathbb{R}^{4 \cdot d \cdot n_S}.
                         \end{equation}
             \end{description}
