@@ -14,7 +14,7 @@
             \includegraphics[height=4cm]{images/introduction/difference_mesh_model/ground_truth}
         };
         \path (3d) + (-2.675, 1.25) node (facet_point) {};
-        \path (3d) + (1, 1.875) node[orange] (facet) {\scriptsize Facet $\equiv$ architectural feature};
+        \path (3d) + (1, 1.875) node[OliveGreen] (facet) {\scriptsize Facet $\equiv$ architectural feature};
         \path ($(facet.west) ! .8 ! (facet_point)$) node (halfway_facet_point) {};
         \path[draw, ->, OliveGreen] (facet.west) -- (halfway_facet_point |- facet.west) -- (facet_point);
 

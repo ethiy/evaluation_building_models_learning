@@ -154,7 +154,7 @@ These are proposed to better model defect predictions.
     \subsection{Geometric features}
         \label{subsec::learned_evaluation::baseline::geometric}
         Given a building model \(\mathsf{M}\), the facet set is denoted by $\mathsf{F_M}$.
-        $\forall (f, g) \in \mathsf{F_M} \times \mathsf{F_M} \; f \sim g$ correspond to facets $f$ and $g$ being adjacent: 
+        $\forall (f, g) \in \mathsf{F_M} \times \mathsf{F_M} \; f \sim g$ correspond to facets \(f\) and \(g\) being adjacent: 
         \textit{i.e.}, they share a common edge. As the roof topology graph in~\parencite{verma20063d}, the input building model $\mathsf{M}$ can be seen as a facet (dual) graph:
 
         \begin{equation}
@@ -165,9 +165,11 @@ These are proposed to better model defect predictions.
         \begin{figure}[htbp]
             \centering
             \includestandalone[mode=buildnew, width=.75\textwidth]{figures/features/geometric}
-            \caption{
+            \caption[
+                Computed geometric attributes represented on the dual graph, for facets \(f\) and \(g\).
+            ]{
                 \label{fig::geometric_features}
-                Computed geometric attributes represented on the dual graph, for facets $f$ and $g$.
+                Computed geometric attributes represented on the dual graph, for facets \(f\) and \(g\).
                 The green vector groups the node (facet) attributes while the blue one shows the edge features.
             }
         \end{figure}
