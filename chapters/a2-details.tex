@@ -4,7 +4,15 @@
 
 \clearpage
 
+In this appendix, we provide numerical details of the experimental study.
+First, in Section~\ref{sec::details::dataset_stats}, we present in greater details statistics for each urban scene.
+Next, Section~\ref{sec::details::experiments} presents detailed account of each experiment that was mentionned before.
+
 \section{Dataset statistics}
+    \label{sec::details::dataset_stats}
+    Table~\ref{tab::data_stats} provides the number of each label at \texttt{finesse} levels 2 and 3 as well as their presence ratios, on each urban scene.
+    These are vizualized in Figure~\ref{fig::error_statistics}.\\
+
     \begin{table}
         \footnotesize
         \centering
@@ -89,7 +97,13 @@
     \end{table}
 
 \section{Experimental results}
-    \subsection{Baseline ablation study}
+    \label{sec::details::experiments}
+    For every conducted experiment, we provide herein the F-score at each zone and for each feature configuration and error label.
+    We also report the mean and standard deviation of these scores across all feature configurations.\\
+
+    \subsection{Baseline feature analysis}
+        Herein are reported the F-scores of baseline feature experiments analysed in Section~\ref{sec::experiments::baseline_feature_analysis}.
+
         \begin{table}[htpb]
             \footnotesize
             \begin{center}
@@ -165,11 +179,13 @@
                     \hline
                 \end{tabular}
             \end{center}
-            \caption{
+            \caption[
+                F-scores for the baseline features ablation study results at \textbf{\gls{acr::efin}} level 3.
+            ]{
                 \label{tab::all_f-scores_ablation_f3}
-                F-scores for ablation results at \textbf{\gls{acr::efin}} level 3.
+                F-scores for the baseline features ablation study results at \textbf{\gls{acr::efin}} level 3.
                 These are deduced from Table~\ref{tab::ablation_f3}.
-                Modalities that drives jumps of more than a \SI{4.5}{\percent} in F-score are distinguished in bold.
+                Modalities, which stand out with at least \SI{4.5}{\percent} in F-score, are distinguished in bold.
             }
         \end{table}
         \begin{table}[htbp]
@@ -198,11 +214,14 @@
                 \texttt{FIG} & 75.88 $\pm$ 0.73 & 81.64 $\pm$ 0.58 & 91.00 $\pm$ 0.38 \\
                 \bottomrule
             \end{tabular}
-            \caption{\label{tab::f_score_ablation_f3} Mean F-score and standard deviation for the feature ablation study.}
+            \caption{\label{tab::f_score_ablation_f3} Mean F-score and standard deviation for the feature baseline study.}
         \end{table}
     
         \FloatBarrier
     \subsection{Transferability study}
+        We report in this subsection the F-scores drawn from the transferability experiments that were analysed in Section~\ref{subsec::more_experiments::scalability::transferability}.
+        We also provide the precision and recall scores that were too cumbersome to include in the main text.
+
         \begin{sidewaystable}[htbp]
             \footnotesize
             \centering
@@ -283,9 +302,11 @@
                 \texttt{FIG} & 80.35 & 84.80 & \textbf{80.93} & \textbf{84.55} & 77.82 & 83.86 & 79.18 & 83.92 & 83.40 & 74.46 & \textbf{85.19} & \textbf{74.05} & 82.93 & 73.48 & 82.38 & 73.08 \\
                 \hline
             \end{tabular}
-            \caption{
+            \caption[
+                Transferability results of all six combinations reported, in percentage, at \textbf{\gls{acr::efin}} level 3, based on baseline features.
+            ]{
                 \label{tab::transferability_f3}
-                Transferability results of all six combinations reported, in percentage, at \textbf{\gls{acr::efin}} level 3.
+                Transferability results of all six combinations reported, in percentage, at \textbf{\gls{acr::efin}} level 3, based on baseline features.
                 Bold indicates the best performing feature configuration in terms of F-score.
             }
         \end{sidewaystable}
@@ -363,11 +384,13 @@
                 \texttt{FIG} & 82.52 & 82.70 & 80.73 & 81.48 & 78.68 & 79.23 & 77.92 & 77.45 \\
                 \hline
             \end{tabular}
-            \caption{
+            \caption[
+                F-scores for transferability results at \textbf{\gls{acr::efin}} level 3 using baseline features.
+            ]{
                 \label{tab::all_f-scores_transferability_f3}
-                F-scores for transferability results at \textbf{\gls{acr::efin}} level 3.
+                F-scores for transferability results at \textbf{\gls{acr::efin}} level 3 using baseline features.
                 These are deduced from Table~\ref{tab::transferability_f3}.
-                Modalities that drives jumps of more than a \SI{4.5}{\percent} in F-score are distinguished in bold.
+                Modalities, which stand out with at least \SI{4.5}{\percent} in F-score, are distinguished in bold.
             }
         \end{table}
         \begin{table}[htbp]
@@ -418,12 +441,14 @@
             \end{tabular}
             \caption{
                 \label{tab::f_score_transferability_f3}
-                F-score mean and standard deviation per \texttt{atomic} error for the transferability experiments.
+                F-score mean and standard deviation per \texttt{atomic} error for the transferability experiments using baseline features.
             }
         \end{table}
     
         \FloatBarrier
     \subsection{Generalization study}
+        As with the transferability results, we report herein the recall, precision and F-scores of the generalization study from Section~\ref{subsec::more_experiments::scalability::generalization}.
+
         \begin{table}[htbp]
             \footnotesize
             \begin{tabular}{|c | c c | c c | c c | c c |}
@@ -503,9 +528,11 @@
                 \texttt{FIG} & \textbf{88.95} & \textbf{74.23} & 90.92 & 72.79 & 89.02 & 73.78 & 89.70 & 73.19 \\
                 \hline
             \end{tabular}
-            \caption{
+            \caption[
+                Results of the generalization study, reported in percentage, at the \textbf{\gls{acr::efin}} level 3 using baseline features.
+            ]{
                 \label{tab::generalization_f3}
-                Results of generalization study, reported in percentage at the \textbf{\gls{acr::efin}} level 3.
+                Results of the generalization study, reported in percentage, at the \textbf{\gls{acr::efin}} level 3 using baseline features.
                 Classifiers are trained on two zones and tested on the one that was left out.
             }
         \end{table}
@@ -585,11 +612,13 @@
                     \hline
                 \end{tabular}
             \end{center}
-            \caption{
+            \caption[
+                F-scores for the generalization experiments at \textbf{\gls{acr::efin}} level 3 using baseline features.
+            ]{
                 \label{tab::all_f-scores_generalization_f3}
-                F-scores for the generalization experiments at \textbf{\gls{acr::efin}} level 3.
+                F-scores for the generalization experiments at \textbf{\gls{acr::efin}} level 3 using baseline features.
                 These are deduced from Table~\ref{tab::generalization_f3}.
-                Modalities that drives jumps of more than a \SI{4.5}{\percent} in F-score are distinguished in bold.
+                Modalities, which stand out with at least \SI{4.5}{\percent} in F-score, are distinguished in bold.
             }
         \end{table}
 
@@ -619,12 +648,15 @@
                 \bottomrule
             \end{tabular}
             \caption{
-                \label{tab::f_score_generalization_f3} Mean F-score and standard deviation for the generalization experiments.
+                \label{tab::f_score_generalization_f3}
+                Mean F-score and standard deviation for the generalization experiments using baseline features.
             }
         \end{table}
     
         \FloatBarrier
     \subsection{Representativeness study}
+        As with the transferability and generalization results, we report herein the recall, precision and F-scores of the representativeness study from Section~\ref{subsec::more_experiments::scalability::representativeness}.
+
         \begin{sidewaystable}[htbp]
             \footnotesize
             \begin{center}
@@ -705,8 +737,11 @@
                     \texttt{FIG} & 83.13 & 78.53 & \textbf{90.94} & \textbf{74.38} & 83.78 & 77.58 & 87.40 & 69.67 & 86.73 & 75.04 & \textbf{88.66} & \textbf{74.22} & 82.45 & 74.32 & 83.19 & 74.10 \\
                     \hline
                 \end{tabular}
-                \caption{
-                    \label{tab::representativeness_f3} Representativeness study on the fused dataset at different training sizes.
+                \caption[
+                    Representativeness study on the fused dataset at different training sizes using baseline features.
+                ]{
+                    \label{tab::representativeness_f3}
+                    Representativeness study on the fused dataset at different training sizes using baseline features.
                     Results are reported in percentage.
                     Bold is synonym of the best performing configuration of modalities F-score wise.
                 }
@@ -786,11 +821,13 @@
                 \texttt{FIG} & 80.76 & 81.83 & 80.56 & 77.53 & 80.46 & 80.80 & 78.17 & 78.38 \\
                 \hline
             \end{tabular}
-            \caption{
+            \caption[
+                F-scores for representativeness results at \textbf{\gls{acr::efin}} level 3 using baseline features.
+            ]{
                 \label{tab::all_f-scores_representativeness_f3}
-                F-scores for representativeness results at \textbf{\gls{acr::efin}} level 3.
+                F-scores for representativeness results at \textbf{\gls{acr::efin}} level 3 using baseline features.
                 These are deduced from Table~\ref{tab::representativeness_f3}.
-                Modalities that drives jumps of more than a \SI{4.5}{\percent} in F-score are distinguished in bold.
+                Modalities, which stand out with at least \SI{4.5}{\percent} in F-score, are distinguished in bold.
             }
         \end{table}
 
@@ -826,6 +863,9 @@
 
         \FloatBarrier
     \subsection{The \texorpdfstring{\acrlong*{acr::efin}}{eFin} study}
+        Herein are reported the F-scores of \textbf{\gls{acr::efin}} experiments analysed in Section~\ref{sec::more_experiments::finesse}.
+        We start with the ablation study at \textbf{\gls{acr::efin}} level 2.\\
+
         \begin{table}[htbp]
             \centering
             \footnotesize
@@ -840,9 +880,12 @@
             \end{tabular}
             \caption{
                 \label{tab::f_score_ablation_f2}
-                F-score mean and standard deviation for the feature ablation study results per zone for \textbf{\gls{acr::efin}} level 2.
+                F-score mean and standard deviation for the baseline feature ablation study results per zone for \textbf{\gls{acr::efin}} level 2.
             }
         \end{table}
+
+        Next are presented the detailed results of the transferability study at \textbf{\gls{acr::efin}} level 2.
+        As with the \texttt{atomic} error labels, we also provide the precision and recall ratios.\\
 
         \begin{table}[htbp]
             \footnotesize
@@ -916,7 +959,10 @@
                 \hline
                 \hline
             \end{tabular}
-            \caption{\label{tab::transferability_f2} Transferability study on \textbf{\gls{acr::efin}} level 2.}
+            \caption{
+                \label{tab::transferability_f2}
+                Transferability study on \textbf{\gls{acr::efin}} level 2 using baseline features.
+            }
         \end{table}
 
         \begin{table}[htbp]
@@ -945,9 +991,11 @@
             \end{tabular}
             \caption{
                 \label{tab::f_score_transferability_f2}
-                Mean F-score and standard deviation in each zone on \textbf{\gls{acr::efin}} level 2.
+                Mean F-score and standard deviation in each zone on \textbf{\gls{acr::efin}} level 2 using baseline features.
             }
         \end{table}
+
+        As before, we present the precision, recall and F-score of representativeness study at \textbf{\gls{acr::efin}} level 2.\\
         
         \begin{sidewaystable}[htbp]
             \footnotesize
@@ -1008,11 +1056,17 @@
                 \texttt{Facet errors} & 91.72 $\pm$ 0.31 & \textbf{91.83 $\pm$ 0.49} & 91.61 $\pm$ 0.35 \\
                 \bottomrule
             \end{tabular}
-            \caption{\label{tab::f_score_representativeness_f2} F-score mean and standard deviation for the representativeness experiments on \textbf{\gls{acr::efin}} level 2.}
+            \caption{
+                \label{tab::f_score_representativeness_f2}
+                F-score mean and standard deviation for the representativeness experiments on \textbf{\gls{acr::efin}} level 2 using baseline features.
+            }
         \end{table}
     
         \FloatBarrier
     \subsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} to \texorpdfstring{\acrshort*{acr::rf}}{RF} comparison}
+        In this subsection, we provide the F-score results obtained with baseline features using both \gls{acr::rf} and \gls{acr::svm} classifiers.
+        A detailed analysis is presented in Section~\ref{sec::more_experiments::classifier}.\\
+
         \begin{table}[htpb]
             \footnotesize
             \begin{center}
@@ -1065,11 +1119,13 @@
                     \hline
                 \end{tabular}
             \end{center}
-            \caption{
+            \caption[
+                F-scores on the two experimental sets of interest at \textbf{\gls{acr::efin}} level 3 using an \gls{acr::rf} and baseline features.
+            ]{
                 \label{tab::all_f-scores_rf_f3}
-                F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using an \gls{acr::rf}.
+                F-scores on the two experimental sets of interest at \textbf{\gls{acr::efin}} level 3 using an \gls{acr::rf} and baseline features.
                 These are deduced from Table~\ref{tab::rf_f3}.
-                Modalities that drives jumps of more than a \SI{4.5}{\percent} in F-score are distinguished in bold.
+                Modalities, which stand out with at least \SI{4.5}{\percent} in F-score, are distinguished in bold.
             }
         \end{table}
         \begin{table}[htpb]
@@ -1124,11 +1180,13 @@
                     \hline
                 \end{tabular}
             \end{center}
-            \caption{
+            \caption[
+                F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using an \gls{acr::svm} and baseline features.
+            ]{
                 \label{tab::all_f-scores_svm_f3}
-                F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using an \gls{acr::svm}.
+                F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using an \gls{acr::svm} and baseline features.
                 These are deduced from Table~\ref{tab::svm_f3}.
-                Modalities that drives jumps of more than a \SI{4.5}{\percent} in F-score are distinguished in bold.
+                Modalities, which stand out with at least \SI{4.5}{\percent} in F-score, are distinguished in bold.
                 The scores suspected to result from overfitting are underlined.
             }
         \end{table}
@@ -1161,15 +1219,20 @@
                 \texttt{FIG} & 75.88 \(\pm\) 0.73 & 88.57 \(\pm\) 0.36 & 72.58 \(\pm\) 12.03 & 75.20 \(\pm\) 8.15 \\
                 \hline
             \end{tabular}
-            \caption{
+            \caption[
+                Mean F-score and standard deviation using \gls{acr::rf} and \gls{acr::svm} and baseline features.
+            ]{
                 \label{tab::f_score_rf_vs_svm_f3}
-                Mean F-score and standard deviation using \gls{acr::rf} and \gls{acr::svm}.
+                Mean F-score and standard deviation using \gls{acr::rf} and \gls{acr::svm} and baseline features.
                 These were computed based on results reported in Tables~\ref{tab::all_f-scores_rf_f3} and~\ref{tab::all_f-scores_svm_f3}.
             }
         \end{table}
 
         \FloatBarrier
     \subsection{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} to baseline comparison}
+        As in the previous subsection, we present herein the F-scores of both classifiers but, this time, using \gls{acr::scatnet} features.
+        A detailed analysis is provided in Section~\ref{subsec::more_experiments::richer_features::scatnet_baseline}.\\
+
         \begin{table}[htpb]
             \footnotesize
             \centering
@@ -1227,7 +1290,7 @@
                 \label{tab::all_f-scores_scat_rf_f3}
                 F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using an \gls{acr::rf} based on \gls{acr::scatnet} derived features.
                 These are deduced from Table~\ref{tab::stats_scat_rf_f3}.
-                Modalities that drives jumps of more than a \SI{4.5}{\percent} in F-score are distinguished in bold.
+                Modalities, which stand out with at least \SI{4.5}{\percent} in F-score, are distinguished in bold.
             }
         \end{table}
 
@@ -1288,7 +1351,7 @@
                 \label{tab::all_f-scores_scat_svm_f3}
                 F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using an \gls{acr::svm} based on \gls{acr::scatnet} derived features.
                 These are deduced from Table~\ref{tab::stats_scat_svm_f3}.
-                Modalities that drives jumps of more than a \SI{4.5}{\percent} in F-score are distinguished in bold.
+                Modalities, which stand out with at least \SI{4.5}{\percent} in F-score, are distinguished in bold.
             }
         \end{table}
 
@@ -1347,7 +1410,9 @@
                 \texttt{FIG} & \textbf{81.62 \(\pm\) 5.37} & 79.18 \(\pm\) 8.53 & \textbf{86.60 \(\pm\) 0.67} & 82.44 \(\pm\) 5.21 \\
                 \hline
             \end{tabular}
-            \caption{
+            \caption[
+                Mean F-score and standard deviation using \gls{acr::rf} and \gls{acr::svm} based on \gls{acr::scatnet} features.
+            ]{
                 \label{tab::f_score_scat_bl}
                 Mean F-score and standard deviation using \gls{acr::rf} and \gls{acr::svm} based on \gls{acr::scatnet} features.
                 Bold indicates the best option between \texttt{channel} and \texttt{deletion}.
@@ -1356,6 +1421,9 @@
 
         \FloatBarrier
     \subsection{Graph kernels and \texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} to baseline comparison}
+        In this subsection, we present the F-score results obtained with graph kernels and \gls{acr::scatnet} using the \gls{acr::svm} classifier.
+        A detailed analysis is provided in Section~\ref{subsec::more_experiments::richer_features::graph_kernel_scatnet_baseline}.\\
+
         \begin{table}[htpb]
             \footnotesize
             \centering
@@ -1408,12 +1476,12 @@
                 \hline
             \end{tabular}
             \caption[
-                F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using an \gls{acr::svm} based on \gls{acr::scatnet} derived features.
+                F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using an \gls{acr::svm} based on graph kernels and \gls{acr::scatnet} derived features.
             ]{
-                \label{tab::all_f-scores_scat_svm_f3}
-                F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using an \gls{acr::svm} based on \gls{acr::scatnet} derived features.
+                \label{tab::all_f-scores_gk_scat_svm_f3}
+                F-scores on the two datasets of interest at \textbf{\gls{acr::efin}} level 3 using an \gls{acr::svm} based on graph kernels and \gls{acr::scatnet} derived features.
                 These are deduced from Table~\ref{tab::stats_scat_svm_f3}.
-                Modalities that drives jumps of more than a \SI{4.5}{\percent} in F-score are distinguished in bold.
+                Modalities, which stand out with at least \SI{4.5}{\percent} in F-score, are distinguished in bold.
             }
         \end{table}
 
@@ -1447,7 +1515,7 @@
                 \hline
             \end{tabular}
             \caption{
-                \label{tab::f_score_rf_scat_kpca_f3}
+                \label{tab::f_score_svm_gk_scat_f3}
                 Mean F-score and standard deviation using \gls{acr::svm} with graph kernels and \gls{acr::scatnet} based features.
             }
         \end{table}
