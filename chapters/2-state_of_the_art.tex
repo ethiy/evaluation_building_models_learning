@@ -286,7 +286,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
     In this section are presented notions from statistic learning and computer vision domains that were useful for this work.
     This constitutes a simple reminder and is not a thorough survey of the field.
     Section~\ref{subsec::state_of_the_art::mlpr::classifiers} start off with a brief description of the utilized supervised classifiers.
-    Second, Section~\ref{subsec::state_of_the_art::mlpr::feature_extraction} presents some advanced feature extraction techniques on which our method is based.
+    Secondly, Section~\ref{subsec::state_of_the_art::mlpr::feature_extraction} presents some advanced feature extraction techniques on which our method is based.
 
     \subsection{Supervised classifiers}
         \label{subsec::state_of_the_art::mlpr::classifiers}
@@ -993,7 +993,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
                 \glspl{acr::cnn} learn such a representation which verifies these previous conditions stated in Equations~\ref{eq::contractive},~\ref{eq::invariance} and~\ref{eq::stable_deformation}.
                 In fact, it is possible by virtue of some basic building blocs.
                 First, since the weights are learned based on a classification objective, images with similar content are supposed to be mapped to the same region.
-                Second, pooling layers in \glspl{acr::cnn} provide a solution for invariance to translations and local deformations up to a scale.\\
+                Secondly, pooling layers in \glspl{acr::cnn} provide a solution for invariance to translations and local deformations up to a scale.\\
 
                 \glspl{acr::scatnet} formalizes these ideas using wavelet transforms.
                 Actually, \glspl{acr::scatnet} were originally developped to better understand \glspl{acr::cnn}.
@@ -1385,7 +1385,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
                 \textcite{vishwanathan2010graph} proposed efficient numerical algorithms to alleviate this problem.
                 However, these graphs suffer from other issues.
                 First, the kernel does take into account the attributes of graphs if they exist, although it is possible to adapt.
-                Second, these kernels suffer from tottering which is the fact that the random walk is mostly consistent of multiple movements between a small subset of vertices in a row.
+                Secondly, these kernels suffer from tottering which is the fact that the random walk is mostly consistent of multiple movements between a small subset of vertices in a row.
                 Third, related to the previous point, the random walk would spend much time on central nodes that connect to most other nodes adding to their contribution to the kernel, while peripherial ones that can hold the most distinctive feature of the structure are watered down.
                 It is possible to address these issues as demonstrated by~\textcite{horvath2004cyclic, mahe2004extensions}.
                 However these kernels cannot be guaranteed to be computed in polynomial time~\parencite{vishwanathan2010graph}.
@@ -1592,7 +1592,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
                     k_p(G, G') = \sum_{t=1}^{t_{\max}} k_s(G_t, G_t').
                 \end{equation}
                 Two points are still to be precised.
-                First, the type of base kernels to use and second, the attribute propagation scheme.\\
+                First, the type of base kernels to use and Secondly, the attribute propagation scheme.\\
 
                 \subparagraph{Efficient base kernels through hashing}
                     Knowing the corresponding feature vector extractor $\phi_s(G)$ makes the computation of the simple graph kernel efficient~\parencite{shervashidze2011weisfeiler,neumann2016propagation}.

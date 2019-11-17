@@ -2,11 +2,11 @@
 
 \vfill
 
-In the previous chapter (Chapter~\ref{chap::semantic_evaluation}), we developped a heirarchical and modular taxonomy of errors for the overhead modeling case.
-Based on this taxonomy, and depending on the particular needs, specific error labels are extracted and considered during the quality evaluation.\\
+In the previous chapter (Chapter~\ref{chap::semantic_evaluation}), we developped a heirarchical and modular taxonomy of errors for the overhead imagery modeling case.
+Based on this taxonomy, and depending on the particular needs, specific error labels are extracted and considered during the quality evaluation step.\\
 
 In this chapter, we present the second part of our proposed approach.
-It is based on formulating the problem as a supervized classification one.
+It casts the problem as a supervized classification one.
 Issues related to the latter are detailed in Section~\ref{sec::learned_evaluation::classification}.
 Next, Section~\ref{sec::learned_evaluation::baseline} presents in details the baseline of features extracted out of building \gls{acr::3d} models.
 Third and last, advanced features are discussed in Section~\ref{sec::learned_evaluation::richer_features}.
@@ -14,11 +14,11 @@ These are proposed to better model defect predictions.
 
 \clearpage
 
-\section{Quality evaluation as classification}
+\section{Quality evaluation as a classification task}
     \label{sec::learned_evaluation::classification}
     In order to satisfy the \textbf{large-scale} condition imposed at Section~\ref{subsec::introduction::contributions::positioning}, we propose to formulate the problem as a supervized learning one.
     Errors are considered as labels while features are computed so as to describe the observed buildings.
-    Actually, as a first approach, the existence of all errors is predicted at the building level, even for \texttt{Facet Errors} labels\footnote{These errors are, in fact, by definition more local.}.
+    Actually, as a first approach, the existence of all errors is predicted at the \textbf{building level}, even for \texttt{Facet Errors} labels\footnote{These errors are, in fact, by definition more local.}.
     Determining which facet is affected by an error is a much more challenging problem than the previous one.
     That is why the facet level prediction of errors is not explored in this work.
     The goal is, instead, to test the feasibility of the learning approach.\\
@@ -26,20 +26,21 @@ These are proposed to better model defect predictions.
     Errors are predicted based on learned statistical characteristics of the evaluated models.
     The learned approach is usually used to take care of highly semantic tasks, such as ours, that are otherwise hard to process using engineered metrics \addref.\\
     Provided an initial manual annotation effort, the prediction phase is fully automatic, as will be proved by experimental results in Chapter~\ref{chap::experiments}.
-    In order for this approach to be scalable at large scales, and hence verify the second constraint in Section~\ref{subsec::introduction::contributions::positioning} which is \textbf{automation}, prediction results should be stable enough independently of the urban scene.
+    In order for this approach to be scalable, and hence verify the second constraint in Section~\ref{subsec::introduction::contributions::positioning} ``\textbf{automation}'', prediction results should be stable enough independently of the urban scene.
     This is fully studied in Chapter~\ref{chap::more_experiments}.\\
 
     Two aspects should be discussed to in order to apply this approach to the building \gls{acr::3d} model quality evaluation.
     First, as seen in Section~\ref{sec::semantic_evaluation::label_extraction}, the parametric nature of the taxonomy leads to a varying set of labels.
     For this purpose, we describe in Section~\ref{subsec::learned_evaluation::classification::different_porblems} the different classification problems depending on the evaluation parameters.
-    Second, the feature extraction procedure should also be compliant with the \textbf{large-scale} objective set beforehand.
+    Secondly, the feature extraction procedure should also be compliant with the \textbf{large-scale} objective set beforehand.
     This aspect and more are detailed in Section~\ref{subsec::learned_evaluation::classification::feature_extraction}.
     Third, the classifier should be able to handle the heterogeneity of the feature vector and must adapt to different input vectors types and sizes.
     The choice of classifiers is, hence, discussed in Section~\ref{subsec::learned_evaluation::classification::classifiers}.
 
     \subsection{Different classification problems}
         \label{subsec::learned_evaluation::classification::different_porblems}
-        The nature of the different classification problems are presented in Table~\ref{tab::classification_problems} depending on the three evaluation parameters defined in Section~\ref{sec::semantic_evaluation::label_extraction}.\\
+        The nature of the different classification problems are presented in Table~\ref{tab::classification_problems} depending on the three evaluation parameters defined in Section~\ref{sec::semantic_evaluation::label_extraction}.
+        As a reminder, these are: the \textbf{\gls{acr::efin}}, the \textbf{\gls{acr::elod}} and the \textbf{exclusivity}.\\
 
         \begin{table}[htbp]
             \small
@@ -69,7 +70,7 @@ These are proposed to better model defect predictions.
         \begin{equation*}
             multi\_label(\texttt{Valid}, l_1, l_2, \dots, l_c) \equiv multi\_label(l_1, l_2, \dots, l_c).
         \end{equation*}
-        $binary$ refers to the special case of $multi\_class$ where $c = 2$: \textit{i.e}
+        $binary$ refers to the special case of $multi\_class$ where $c = 2$: \textit{i.e.}
         \begin{equation*}
             binary(l_1, l_2) \equiv multi\_class(l_1, l_2)
         \end{equation*}
@@ -102,8 +103,8 @@ These are proposed to better model defect predictions.
         Since we are considering all possible cases, especially automatically reconstructed building models, only the model geometry is guaranteed to be always available.\\
     
         Extrinsic feature extraction relies on comparing the model to an available external data.
-        Obviously, high quality reference models are the best type of data to compare the evaluated model to.
-        However, taking into consideration the \textbf{large-scale} objective that was fixed earlier (subsection~\ref{subsec::introduction::contributions::use}), this is not a viable solution.
+        Obviously, high quality reference models are the best type of data to compare the evaluated model with.
+        However, taking into consideration the \textbf{large-scale} objective that was fixed earlier (Section~\ref{subsec::introduction::contributions::use}), this is not a viable solution.
         We rely then on more basic reference data such as remote sensing acquired data that are the basis of large-scale modeling of urban scenes.\\
         For instance, raw depth information can be used in quality evaluation.
         It can prove helpful in detecting geometric defects that are intrinsically of \gls{acr::3d} nature.
@@ -117,7 +118,7 @@ These are proposed to better model defect predictions.
         \label{subsec::learned_evaluation::classification::classifiers}
         The choice of classifiers shoud take into consideration the highly modular nature of the framework with multimodal features involving many parameters.
         Two classifiers where chosen in this study: \gls{acr::rf} and \gls{acr::svm}.
-        Both were discussed at great length in Section~\ref{sec::state_of_the_art::mlpr}.
+        Both were discussed in details in Section~\ref{sec::state_of_the_art::mlpr}.
         Hereafter, we explain how each one is used in this setting.\\
 
         \subsubsection{\acrlong*{acr::rf}}
@@ -134,6 +135,7 @@ These are proposed to better model defect predictions.
             However, it offers other advantages that are not met by \gls{acr::rf}.
             In fact, \glspl{acr::svm} can be useful when labels are not equally distributed in the training set.
             This is actually the case of some errors that are rare in our dataset: specifically the inaccurate topology ones (\textit{cf.} Section~\ref{subsec::experiments::datasets::stats}).
+            It also manages to learn efficiently on sets with limited sets, as will prove to be the situation (\textit{cf.} Section~\ref{subsec::experiments::datasets::scenes}). 
             This type of classifiers naturally encorporates kernels such as the ones presented later in Section~\ref{subsec::learned_evaluation::richer_features::graph}.
             Finally, it is also preferred when dealing with high dimensional feature vectors like those produced by \glspl{acr::scatnet} (\textit{cf.} Section~\ref{subsec::learned_evaluation::richer_features::image}).
 
@@ -265,7 +267,7 @@ These are proposed to better model defect predictions.
         The latter are detected using gradient filters on images.
         Gradient based features are advantageous compared to any radiometry based ones.
         This is due to the fact that the latter are much less invariant to changes in the than the first ones.
-        Indeed, classic Computer Vision techniques rely on gradient based features:~\textcite{lowe2004distinctive,dalal2005histograms}.
+        Indeed, classic Computer Vision techniques rely on gradient based features:~\parencite{lowe2004distinctive,dalal2005histograms}.
         This is adequate to our case where models and images are part of large heterogeneous datasets.\\
         
         We apply this to our context by comparing building model edges to local image gradients.
@@ -347,17 +349,17 @@ These are proposed to better model defect predictions.
 \section{Advanced features}
     \label{sec::learned_evaluation::richer_features}
     The last section presented features that are by construction taken to be as simple as possible.
-    The goal was to test the feasibility of the learned quality evaluation approach.
-    This is discussed in length in Section~\ref{sec::experiments::baseline_feature_analysis} and Sections~\ref{sec::more_experiments::finesse} and~\ref{sec::more_experiments::scalability}.\\
+    We target to keep simple features in order to evaluate the feasibility of our learning approach.
+    This is comprehensively discussed in Sections~\ref{sec::experiments::baseline_feature_analysis},~\ref{sec::more_experiments::finesse} and~\ref{sec::more_experiments::scalability}.\\
 
-    This section presents features that better exploits structural information of the input models that were missed by the baseline.
+    In constrast, this section presents features that better exploits structural information of the input models that were missed by the baseline.
     In the previous section, we identifed two types of instances from which features are extacted: graph-like and image-like data.
     Advanced graph based feature extractors are proposed in Section~\ref{subsec::learned_evaluation::richer_features::graph}.
     For images-like structures, better attributes are also presented in the next Section~\ref{subsec::learned_evaluation::richer_features::image}.
 
     \subsection{Graph kernels}
         \label{subsec::learned_evaluation::richer_features::graph}
-        In Section~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}, were discussed some kernels that can describe adequately graphs.
+        In Section~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}, were discussed some kernels that can adequately describe graphs.
         The geometric baseline features we provided in Section~\ref{subsec::learned_evaluation::baseline::geometric}, more precisely in Equation~\ref{eq::geometric_features}, could actually be seen as a concatenation of the basic feature maps from Equations~\ref{eq::feature_node_graph} and~\ref{eq::feature_edge_graph}.
         This corresponds, in fact, to the basic kernel in Equation~\ref{eq::feature_graph_kernel_sum}.\\
 
@@ -394,7 +396,7 @@ These are proposed to better model defect predictions.
         We also experimented with three other types of kernels: the Multiscale Laplacian kernel, the propagation kernel and the graph hopper kernel.
         The latter depends on the choice of the base kernel which compares node attributes.
         The \gls{acr::rbf} was briefly experimented and did not yield desirable results.
-        Two alternatives were utilized:
+        Two alternatives are utilized:
         \begin{description}
             \item[Linear kernel:] As shown in Equation~\ref{eq::linear_kernel}, this is the most simple choice;
             \item[Brownian bridge kernel:] This base kernel was originally proposed for the Shortest Path kernel~\parencite{borgwardt2005shortest} and is also valid for its scalable derivation.
@@ -403,7 +405,7 @@ These are proposed to better model defect predictions.
             \underbrace{2}_{\substack{\text{kernels ignoring}\\\text{ node attributes}}} + \underbrace{3}_{\substack{\text{attributed}\\\text{graphs}}} \times \left(\underbrace{2}_{\substack{\text{Multiscale Laplacian \&}\\\text{Propagation}}} + \underbrace{1}_{\text{Graph hopper}} \times \underbrace{2}_{\substack{\text{base}\\\text{kernels}}}\right) = 14
         \end{equation*} graph kernels.
         These are aggregated into one kernel using a linear combination.
-        This is possible thanks to \gls{acr::mkl} as explained earlier in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.
+        This is possible thanks to \acrfull{acr::mkl} as explained earlier in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.
         Other types of kernels were briefly experimented with, namely the Lov\'asz \(\vartheta\), Graphlet Sampling, Subgraph Matching and Shortest Path kernels.
         However, they did not yield any valuable results and most of the time failed numerically.
         
@@ -420,25 +422,25 @@ These are proposed to better model defect predictions.
             In addition, theoretically the height data can be fed directly to a \gls{acr::scatnet} without requiring any normalization or preprocessing since, by construction, they can admit any type of \gls{acr::2d} signal\footnote{There are other versions of \glspl{acr::scatnet} taking one dimensional signals~\parencite{anden2014deep} or even graphs~\parencite{eickenberg2018solid}.}.
             This explains why \glspl{acr::scatnet} were chosen as a height based feature extractor.\\
 
-            From a practical standpoint, the residuals computed as in Section~\ref{subsec::learned_evaluation::baseline::height} come as images in different sizes \(w_{\mathsf{M}} \times h_{\mathsf{M}}\)\cref{note::w_h} depending on the input model.
+            From a practical standpoint, the residuals computed as in Section~\ref{subsec::learned_evaluation::baseline::height} come as images in different sizes \(w_{\mathsf{M}} \times h_{\mathsf{M}}\) (\textit{cf.} Section~\ref{subsec::learned_evaluation::baseline::image}) depending on the input model.
             Consequently, concatenating \gls{acr::scatnet} coefficients into a single vector is going to result in variable feature vector dimensions.
             One solution is to resize all images to a certain fixed size beforehand.
             However, this solution was quickly ruled out based on few experiments.
             In fact, aside from the fact that this process either looses valuable structural informations or adds undesired blur, it completly deforms the input signal as the \(\frac{w}{h}\) ratio is not guaranteed to constant for all inputs resulting in squashed or elongated image.
-            Moreover, since \glspl{acr::scatnet} yields a great deal of coefficients that can easily surpass the number of training instances which hinders the learning ability of any classifier.
+            Moreover, since \glspl{acr::scatnet} yield a great deal of coefficients that can easily surpass the number of training instances which hinders the learning ability of any classifier.
             As a consequence, we propose to add a function to help extract meaningful feature vectors with the same length.\\
 
             Suppose we have a function \(\chi: \mathbb{R}^{w_1 \times d_1} \rightarrow \mathbb{R}^d\) such as the ones presented in Equations~\ref{eq::histogram_extractor} and~\ref{eq::max_min_mean_med_extractor} which has the same output dimension no matter the input size \(w_1 \times d_1\).
             It can be applied on the output of each scattering output \(S_l[dsm - alt](\bullet, p)\):
             \begin{equation}
                 \label{eq::reduced_scattering}
-                \chi \left(S_m[dsm_{\mathsf{M}} - alt_{\mathsf{M}}]\left(\bullet, p_m\right)\right) \in \mathbb{R}^d.
+                \chi \left(S_m[dsm_{\mathsf{M}} - alt_{\mathsf{M}}]\left(\bullet, p_m\right)\right) \in \mathbb{R}^d,
             \end{equation}
             where:
-            \begin{description}
-                \item[\(l\)] is the scattering output layer;
-                \item[\(p_m\)] is a valid path at layer \(l\) (\textit{cf.} Equation~\ref{eq::scatter_second}). 
-            \end{description}
+            \begin{conditions}
+                l & is the scattering output layer;\\
+                p_m & is a valid path at layer \(l\) (\textit{cf.} Equation~\ref{eq::scatter_second}). 
+            \end{conditions}
             
             The resulting coefficients defined in Equation~\ref{eq::reduced_scattering} can be concatenated for all \(n_S\) scattering paths to form a feature vector:
             \begin{equation}
@@ -461,12 +463,12 @@ These are proposed to better model defect predictions.
                         \vdots\\
                         \lambda_m \in \Lambda_m
                     }
-                } \in \mathbb{R}^{d \cdot n_S}.
+                } \in \mathbb{R}^{d \cdot n_S},
             \end{equation}
             where:
-            \begin{description}
-                \item[\(\Lambda_m\)] is the space of all possible values of parameter \(\lambda_m\) at layer \(m\).
-            \end{description}
+            \begin{conditions}
+                \Lambda_m & is the space of all possible values of parameter \(\lambda_m\) at layer \(m\).
+            \end{conditions}
 
             Regarding the \(\chi\) function it is taken herein as follows:
             \begin{equation}
@@ -477,12 +479,12 @@ These are proposed to better model defect predictions.
                     \operatorname{mean}(l)\\
                     \operatorname{median}(l)\\
                     \operatorname{std}(l)
-                \end{bmatrix}.
+                \end{bmatrix},
             \end{equation}
             where:
-            \begin{description}
-                \item[\(\operatorname{std}(l)\)] computes the standard deviation over the tuple \(l\).
-            \end{description}
+            \begin{conditions}
+                \operatorname{std}(l) & computes the standard deviation over the tuple \(l\).
+            \end{conditions}
 
         \subsubsection{Height based features}
             \glspl{acr::scatnet} seem then to be good choice for image based feature extractors.
@@ -494,12 +496,12 @@ These are proposed to better model defect predictions.
             In order to draw features comparing orthoimages to buildings models, we start first by rasterizing the borders of polygons \(f^q \in \mathsf{F_M}\) of the model into a grid structure mask:
             \begin{equation}
                 \label{eq::borders_mask}
-                Q_{\mathsf{M}} \triangleq \left(\mathbb{1}_{g_{i,j} \cap \left(\bigcup_{f^q \in \mathsf{F_M}}f^q\right)}\right)_{\substack{i \in \llbracket 1, w_\mathsf{M} \rrbracket\\j \in \llbracket 1, w_\mathsf{M} \rrbracket}}
+                Q_{\mathsf{M}} \triangleq \left(\mathbb{1}_{g_{i,j} \cap \left(\bigcup_{f^q \in \mathsf{F_M}}f^q\right)}\right)_{\substack{i \in \llbracket 1, w_\mathsf{M} \rrbracket\\j \in \llbracket 1, w_\mathsf{M} \rrbracket}},
             \end{equation}
             where:
-            \begin{description}
-                \item[\(g_{i,j}\):] is the rectangle\footnote{It is usually a square as both dimensions are equal.} representing the pixel at row \(i\) and column \(j\).
-            \end{description}
+            \begin{conditions}
+                g_{i,j} & is the rectangle\footnote{It is usually a square as both dimensions are equal.} representing the pixel at row \(i\) and column \(j\).
+            \end{conditions}
 
             Two options are possible:
             \begin{description}
@@ -514,10 +516,10 @@ These are proposed to better model defect predictions.
                             \end{bmatrix} - Q_{\mathsf{M}}^{\otimes 3}\right),
                         \end{equation}
                         where:
-                        \begin{description}
-                            \item[\(Q_{\mathsf{M}}^{\otimes 3} = Q_{\mathsf{M}} \otimes Q_{\mathsf{M}} \otimes Q_{\mathsf{M}}\)] is the tensor obtained by stacking in depth thee copies of the same matrix \(Q_{\mathsf{M}}\);
-                            \item[\(A \odot B  = \left(A_{ij} \cdot B_{ij} \right)_{ij}\)] denotes the Hadamard/Schur product of any two matrices \(A\) and \(B\).
-                        \end{description}
+                        \begin{conditions}
+                            Q_{\mathsf{M}}^{\otimes 3} = Q_{\mathsf{M}} \otimes Q_{\mathsf{M}} \otimes Q_{\mathsf{M}} & is the tensor obtained by stacking in depth thee copies of the same matrix \(Q_{\mathsf{M}}\);
+                            A \odot B  = \left(A_{ij} \cdot B_{ij} \right)_{ij} & denotes the Hadamard/Schur product of any two matrices \(A\) and \(B\).
+                        \end{conditions}
                 \item[\texttt{Channel}:] The mask \(Q_{\mathsf{M}}\) is simply added to the orthoimage as a fourth channel:
                         \begin{equation}
                             \label{eq::channel_orthoimage}
@@ -578,3 +580,6 @@ These are proposed to better model defect predictions.
                             } \in \mathbb{R}^{4 \cdot d \cdot n_S}.
                         \end{equation}
             \end{description}
+        
+            Eventhough we have used the \(\chi\) function to reduce the dimension, these feature vector still contain a sizable amount of coefficients.
+            This will prove to be difficult to learn on for both of the considered classifiers.
