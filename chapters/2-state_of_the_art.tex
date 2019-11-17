@@ -2,26 +2,29 @@
 
 \vfill
 
-Presented herein is a detailed tour of the different notions necessary for the understanding of the present manuscript.
+Presented herein is a tour of the different notions necessary for the understanding of the present manuscript.
 It is divided into three sections.
-First, we categories, in Section~\ref{sec::state_of_the_art::building_modeling}, the \gls{acr::3d} building modeling techniques.
+First, we categorize, in Section~\ref{sec::state_of_the_art::building_modeling}, the \gls{acr::3d} building modeling techniques.
 A global idea of the subject is required to have a good idea of what defects to expect in evaluated building models.
-Second, we present a complete state-of-the-art survey on quality evaluation for \gls{acr::3d} building models (\textit{cf.} Section~\ref{sec::state_of_the_art::quality}).
+Secondly, we present a complete state-of-the-art survey on quality evaluation for \gls{acr::3d} building models (\textit{cf.} Section~\ref{sec::state_of_the_art::quality}).
 In the last Section~\ref{sec::state_of_the_art::mlpr}, are presented the main tools that are used in our proposed approach.
-Indeed, we discuss aspects of supervised classification as well as some feature extraction techniques.
+Indeed, we discuss aspects of supervised classification as well as main feature extraction techniques.
 
 \clearpage
 
-\section{Automatic Building \texorpdfstring{\gls*{acr::3d}}{3D} modeling}
+\section{Automatic building \texorpdfstring{\gls*{acr::3d}}{3D} modeling}
     \label{sec::state_of_the_art::building_modeling}
-    In this work, we study large-scale urban modeling quality evaluation.
-    Building models, at this scale, cannot be obtained manually.
+    In this work, we study quality evaluation of large-scale urban modeling.
+    Building models, at city scale, cannot be obtained manually.
     Automatically acquired building models are, actually, the first target of our study.
     As a consequence, there is a need for a overview of automatic \gls{acr::3d} building modeling.
     The aim of this section is not to give a thourough survey of all \gls{acr::3d} modeling techniques, but rather explain the main approaches and how they affect the quality of the final product.
     For a comprehensive study of urban reconstruction methods, we refer the reader to the work of~\textcite{musialski2013survey}.\\
-    Section~\ref{subsec::state_of_the_art::building_modeling::building_extraction} presents the different approaches used for building delineation.
-    Afterwards, we present, in Section~\ref{subsec::state_of_the_art::building_modeling::modeling_strategies}, a general categorization of modeling strategies for buildings.
+
+    Automatic building \gls{acr::3d} modeling consists mainly on two steps.
+    Section~\ref{subsec::state_of_the_art::building_modeling::building_extraction} presents the different approaches used in the first step: building delineation.
+    Afterwhat, the second step consists in modeling the surface of the building.
+    Section~\ref{subsec::state_of_the_art::building_modeling::modeling_strategies} presents a general categorization of modeling strategies for buildings.
 
     \subsection{Building extraction}
         \label{subsec::state_of_the_art::building_modeling::building_extraction}
@@ -31,24 +34,29 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         In constrast, the second approach type extracts building outlines directly from the input sensor data~\parencite{poullis2009automatic,lafarge2012creating,nguatem2017modeling,zhu2018large}.
         Both approaches suffer from some shortcomings.\\
 
-        The first one relies on the fact that the \gls{acr::gis} database is acquired at the same time as the sensor data.
-        Otherwise, there will be no guaranty that the modeled scene has not changed in the meantime.
-        For instance, a building can be removed --- as a whole or partially --- between the two data acquisitions.
-        This would result in having terrain or vegetation reconstructed as a building part.\\
-        Even if the database is guaranteed to be produced at the same time as the input data, another issue can cause problems.
-        In some datasets, building outlines are actually not stored in their original form: they are instead deformed to fit their specifications.
-        For instance, buildings smaller than a certain area can be ommitted.
-        The specified generalization level can also play a role as small features could be smoothed away.
-        A part from this type of issues, the provided building outlines could be erroneous simply due to a faulty, wether manual or automatic, process.\\
+        \subparagraph{\gls{acr::gis} databases}
+            The first type of approaches relies on the fact that the \gls{acr::gis} database is acquired at the same time as the sensor data.
+            Otherwise, there will be no guaranty that the modeled scene has not changed in the meantime.
+            For instance, a building can be removed --- as a whole or partially --- between the two data acquisitions.
+            This would result in having terrain or vegetation reconstructed as a building part.\\
+
+            Even if the database is guaranteed to be produced at the same time as the input data, there is another issue that must be dealt with.
+            In some datasets, building outlines are actually not stored in their original form: they are instead deformed to fit their specifications.
+            For instance, buildings smaller than a certain area can be ommitted.
+            The specified generalization level can also play a role as small features could be smoothed away.
+            A part from this type of issues, the provided building outlines could be erroneous simply due to a faulty, wether manual or automatic, process.\\
         
-        The classification based one is solely dependent on the input data quality.
-        Contrarily to the first case, there is no redundancy that can help filter out noise in the data.
-        \Gls{acr::lidar} point clouds are, for example, too sparse and unstructured for instance to detect exact boundaries between objects~\parencite{michelin2012building}.
-        Conversly, images offer an alternative but, as a passive sensor, can suffer from issues related to shadows that are instrumental to building delineation~\parencite{adeline2013shadow}.\\
-        The classification process is not flawless either.
-        Just as with \gls{acr::gis} databases, classification relies on some \textit{a priori} informations that are generally encoded in regularization terms~\parencite{lafarge2008structural,zhu2018large,zeng2018neural}.
-        These are needed to retrieve outlines of buildings efficiently.
-        However, they can also fail to represent faithfully the ground truth and results in wrong building footprint extraction.
+        \subparagraph{Classification}
+            The second family of building extraction techniques is based on the classification of input sensor data.
+            As a consequence, the final building delineation quality depends mostly on the input data.
+            Contrarily to the first case, there is no redundancy that can help filter out noise in the data.
+            Low density \gls{acr::lidar} point clouds (with a density less than \SI{10}{\pts\per\m \squared}) are, for example, too sparse and unstructured for instance to detect exact boundaries between objects~\parencite{michelin2012building}.
+            Conversly, images offer an alternative but, as a passive sensor, can suffer from issues related to shadows (of buildings or other urban objects) that are detrimental to building delineation~\parencite{adeline2013shadow}.\\
+
+            The classification process is not flawless either.
+            Just as with \gls{acr::gis} databases, classification relies on some \textit{a priori} informations that are generally encoded in regularization terms~\parencite{lafarge2008structural,zhu2018large,zeng2018neural}.
+            These are needed to retrieve outlines of buildings efficiently.
+            However, they can also fail to represent faithfully the ground truth and results in wrong building footprint extraction.
 
     \subsection{Modeling strategies}
         \label{subsec::state_of_the_art::building_modeling::modeling_strategies}
@@ -56,37 +64,46 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         Several strategies are conducted.
         They can be classified in three categories: Model-driven, Data-driven and mixed approaches.\\
 
-        Model-driven, also called top-down, methods rely on strong assumptions on the type of buildings to be modeled.
-        For example the Manhattan-world class assumes that buildings are an aggregation of boxes~\parencite{vanegas2010building,ledoux2011topologically,arroyo2015dimension,li2016manhattan}.
-        This is actually an instance of grammars utilized in procedural modeling.
-        In the latter, a set of predetermined rules are used to determine the best shapes, out of a library, in order to better fit the input data~\parencite{lafarge2008structural,koutsourakis2009single,zhou20102,mathias2011procedural,martinovic2013bayesian,nan2015template,demir2015procedural,zeng2018neural}.
-        Top-down approaches are usually used when the input data resolution is not sufficiently accurate to directly retrieve detailed architectural features of the building~\parencite{lafarge2008structural}.\\
+        \subparagraph{Model-driven approaches}
+            This type of methos, also called top-down, rely on strong assumptions on the type of buildings to be modeled.
+            For example the Manhattan-world class assumes that buildings are an aggregation of boxes~\parencite{vanegas2010building,ledoux2011topologically,arroyo2015dimension,li2016manhattan}.
+            This is actually an instance of grammars utilized in procedural modeling.
+            In the latter, a set of predetermined rules are used to determine the best shapes, out of a library, in order to better fit the input data~\parencite{lafarge2008structural,koutsourakis2009single,zhou20102,mathias2011procedural,martinovic2013bayesian,nan2015template,demir2015procedural,zeng2018neural}.
+            Top-down approaches are usually used when the input data resolution is not sufficiently accurate to directly retrieve detailed architectural features of the building~\parencite{lafarge2008structural}.
 
-        On the other hand, data-driven, or bottom-up, modeling techniques need very high resolution sensor data in order to retrieve constituing geometric features of the building.
-        This is usually achieved using primitive extraction.
-        For instance, building surfaces could be viewed as piece-wise planar structures~\parencite{taillandier2004automatic,lafarge2012creating,nan2017polyfit}.
-        As a consequence, plane arrangements are drawn from the original data.
-        Edges are also examples of features that can be extracted from the data to guide building modeling~\parencite{baillard1999automatic}.
-        A second step consists in aggregating the extracted geometric features into a model.
-        This is usually implemented either through a greedy approach~\parencite{taillandier2004automatic} or a global optimization method~\parencite{poullis2013framework,verdie2015lod,zhu2018large,holzmann2018semantically}.\\
+        \subparagraph{Data-driven approaches}
+            They can also be called bottom-up.
+            These modeling techniques need very high resolution sensor data in order to retrieve constituing geometric features of the building.
+            This is usually achieved using primitive extraction.
+            For instance, building surfaces could be viewed as piece-wise planar structures~\parencite{taillandier2004automatic,lafarge2012creating,nan2017polyfit}.
+            As a consequence, plane arrangements are drawn from the original data.
+            Edges are also examples of features that can be extracted from the data to guide building modeling~\parencite{baillard1999automatic}.
+            A second step consists in aggregating the extracted geometric features into a single surface.
+            This is usually implemented either through a greedy approach~\parencite{taillandier2004automatic} or a global optimization method~\parencite{poullis2013framework,verdie2015lod,zhu2018large,holzmann2018semantically}.
 
-        The first type of methods suffers typically from topological defects when the grammar is not comprehensive enough, while the second kind knows other drawbacks, mainly, segmentation problems.
-        One way to alleviate these issues is to mix the two approaches.
-        \textcite{werner2002new}, for instance, fits predetermined shapes (wedges and rectangles) to already extracted edges and planes.
-        However, these are usually greedy approaches that do not scale well.\\
+        \subparagraph{Mixed approaches}
+            The first type of methods fails to scale for multiple urban scenes as it is contigent on having a comprehensive enough grammar, which is almost never the case.
+            On the other hand, the second kind of methods knows other drawbacks as it mainly tends to oversegment facets in order to stay close to the measured data.
+            One way to alleviate these issues is to mix the two approaches.
+            \textcite{werner2002new}, for instance, fits predetermined shapes (wedges and rectangles) to already extracted edges and planes.
+            However, these usually rely on greedy approaches that do not scale well.\\
 
-        There are still some limitations that these automatic approaches did not adress.
-        Higher resolution sensors are yielding more and more data with high frequencies that are still not taken into account as most produced models are at most \gls{acr::lod}-2 ones.
-        These can pose serious problems in modeling:~\textcite{bredif20073d} proved that undetected superstructures can lead to bad quality models and their reconstruction can help in that regard.
-        High buildings can cast shadows on, or occlude, neighbooring ones which results in issues with their surface retrieval.
-        This has not been widely studied~\parencite{lafarge2012creating,bao2013generating}, as buildings are moslty modeled one by one.
-        All these issues and more induce defects that should be characterized and classified for a better understanding of the field.
+        \subparagraph{Limitations of current modeling methods}
+            There are still some limitations that these automatic approaches did not adress.
+            Higher resolution sensors are yielding more and more data with high frequencies that are still not taken into account as most produced models are at most \gls{acr::lod}-2 ones.
+            These can pose serious problems in modeling:~\textcite{bredif20073d} proved that undetected superstructures can lead to bad quality models and their reconstruction can help in that regard.
+            High buildings can cast shadows on, or occlude, neighbooring ones which results in issues with their surface retrieval.
+            This has not been widely studied~\parencite{lafarge2012creating,bao2013generating}, as buildings are moslty modeled one by one and and most of the time not in challenging\footnote{
+                Like buildings delimited by narrow streets or ones with complex architectures.
+            } areas.
+            All these issues and more induce defects that should be characterized and classified for a better understanding of the field and, subsequently, objectively understand which methods are the most adapted for which areas.
 
 \section{Quality evaluation of \texorpdfstring{\gls*{acr::3d}}{3D} building models}
     \label{sec::state_of_the_art::quality}
-    We have seen previously the various methods used to automatically model buildings.
+    We have seen previously various methods used to automatically model buildings.
     The goal of this section is to describe the available approaches that evaluate the quality of such models.
     These could be distinguished based on two criteria.\\
+
     In Section~\ref{subsec::state_of_the_art::quality::output}, are presented the quality evaluation methods based on their output.
     An alternative perspective to charecterize quality evaluation methods relies upon the type of reference data (\textit{cf.} Section~\ref{subsec::state_of_the_art::quality::reference}).
     Based on this survey, we state in details, in Section~\ref{subsec::state_of_the_art::quality::novelty}, how the approach presented in this thesis is different from what was already proposed in the literature.
@@ -99,7 +116,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         In what follows, we explain, in details, these differences between the two method types.
 
         \subsubsection{Fidelity metrics based methods}
-            One way to characterize the quality of a building model is to compute indices or metrics reporting its accuracy.\\
+            One way to characterize the quality of a building model is to compute indices or metrics reporting its geometric accuracy.\\
 
             Most metrics provide information on the geometric precision of the model.
             These are computed for different geometric objects.
@@ -111,25 +128,25 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             In constrast, the choice of points to be inspected is not simple.
             Corner points resulting from the intersection of edges in the model is one choice.
             In fact,~\textcite{zeng2014multicriteria} registers corner points from the evaluated model and the corresponding reference.
-            Based on this registration, a comparison is drawn using \gls{acr::rmse}, just as in~\parencite{you2011quality,landes2012quality}.
+            Based on this registration, a comparison is drawn using \acrfull{acr::rmse}, just as in~\parencite{you2011quality,landes2012quality}.
             The same points are used as a proxy for manual quality inspection by~\textcite{elberink2011quality}.
             Another alternative is to sample points from lines or surfaces to be compared.
-            These could be predetermined manually as in~\textcite{kaartinen2005accuracy} or sampled regularely as demonstrated by~\textcite{vogtle2003quality,tran2019geometric}.
-            Imprecisions are not computed only relying the \gls{acr::rmse}, but can also be separated into planimetric and height inaccuraccies~\parencite{vogtle2003quality,jaynes2003recognition,kaartinen2005accuracy}.\\
+            These could be predetermined manually as in~\parencite{kaartinen2005accuracy} or sampled regularly as demonstrated by~\textcite{vogtle2003quality,tran2019geometric}.
+            Imprecisions are not computed only relying the \gls{acr::rmse}, but can also be separated into planimetric (\gls{acr::lod}-0) and height inaccuraccies (\gls{acr::lod}-1)~\parencite{vogtle2003quality,jaynes2003recognition,kaartinen2005accuracy}.\\
 
             Second comes edges and all one dimensional objects in general.
-            These convey structural, in addition to positional, informations.
-            \textcite{kaartinen2005accuracy} compares lengths as well as slopes of edges formed by reference points.
-            Edges related metrics are also used as an intermediary as shown by~\textcite{elberink2011quality,michelin2013quality}.
+            These convey structural, in addition to positional, information.
+            \textcite{kaartinen2005accuracy} compare lengths as well as slopes of edges formed by reference points.
+            Edge related metrics are also used as an intermediary as shown by~\textcite{elberink2011quality,michelin2013quality}.
             They are both interested in edges resulting from facet intersections.
             While the first relies on \gls{acr::rmse}, the second computes more complex metrics that compares model edges to ones extracted out of sensor data.\\
 
             Next are compared surfaces (\textit{i.e.} two dimensional objects), bounded (for example, polygons) or not (like planes).
             These hold more structural information than the first ones and hence are widely used for evaluation.
             \textcite{rottensteiner2014results} used height discrepency of roof planes so as to evaluate building models.
-            This ideal for Manhattan-world assumptions as was the case of~\textcite{zebedin2008fusion}.
+            This metric is ideal for Manhattan-world model evaluation, as in the case of~\textcite{zebedin2008fusion}.
             In addition to height discrepency, normal displacement is computed using always the same \gls{acr::rmse} metric by~\textcite{henricsson19973}.
-            Conversely,~\textcite{zeng2014multicriteria} uses also a \gls{acr::rmse} for comparison, but not in the Euclidean space.
+            Conversely,~\textcite{zeng2014multicriteria} use also a \gls{acr::rmse} for comparison, but not in the Euclidean space.
             In fact, after mapping the evaluated and reference models to a sphere, they compare their spherical harmonic~\parencite{brechbuhler1995parametrization} representations.
             Just as with edges, planes can be evaluated using angular measurements, as was proposed by~\textcite{henricsson19973,landes2012quality}.
             Another alternative is to compare reconstructed and reference models based on surface area comparisons.
@@ -144,7 +161,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             As a consequence, it was used as an index to evaluate reconstructions\footnote{It is sometimes called by its antonym: complexity.}: the more a model was compact the better it was.
             This is reflected, for instance, in the work of~\textcite{lafarge2012creating,duan_eccv16,zhang2017deep,zeng2018neural,zhu2018large}, where this metric is never used alone but always alongside geometric ones.
 
-        \subsubsection{Semantic labels based methods}
+        \subsubsection{Semantic based methods}
             \label{subsec::state_of_the_art::quality::output::semantic}
             In a drive to provide a quantitative assessment of building models, the previously defined metrics fail to convey specific and localized information about a predetermined building model.
             These indices are usually used to give a general idea of the quality of models produced by some modeling method.
@@ -152,7 +169,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
             Some evaluation methods, in an effort to alleviate these issues, yield semantic labels that describe the errors of an evaluated model.
             Hereafter, are described the different types of labels that were proposed in the literature.\\
 
-            \parencite{boudet2006supervised} was the first ever work, that we are aware of, which tackles semantic labels as outputs of the evaluation.
+            \textcite{boudet2006supervised} was the first ever work, that we are aware of, which tackles semantic labels as outputs of the evaluation.
             This approach has four classes which indicate how much valid can the modeling be: ``acceptable'' and ``correct'' portray valid buildings while ``false"``and ``generalized"``are refused.
             It can be seen as a four grade based score system expressing the confidence in a building model.
             The main limitation of this method is the fact that the proposed labels do not specify what defects a model presents if it is not valid.
@@ -177,14 +194,15 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                 \item[Vegetation errors:] this corresponds to a special case when modeled building are occluded, completely or partially, by higher vegetation.
                         It becomes impossible to evaluate properly these models.
             \end{description}
-            Although the last taxonomy is rich, it is not exhaustive enough as it misses cases that are not present in the urban zone that was studied in the paper, such as inaccurate primitive choices.
+            Although the last taxonomy is rich, it is not exhaustive enough as it misses cases that are not present in the urban zone that was studied in the paper.
+            For instance, the fact of modeling a cone shaped roof with a piecewise planar structure is not taken into account in this taxonomy.
             Moreover, it adopts the point of view of the modeling method that was used to provide their dataset.
             Knowing the specific weaknesses of the latter guided the choice of error family classification and the error definitions.
             This is particularly clear when looking at their error categorization.
             In fact, the first error class relates to the fact that the used building modeling approach~\parencite{durupt2006automatic} relies on footprints given as input.
             The second category corresponds to the actual step of building roof structure inference.
 
-    \subsection{Reference data types}
+    \subsection{Types of reference data}
         \label{subsec::state_of_the_art::quality::reference}
         In order to evaluate models, reference data are utilized for comparison.
         Based on the latter, another way to discriminate among modeling methods is possible.
@@ -199,45 +217,45 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
             The most obvious case consists in field measurements of the modeled building.
             \textcite{dick2004modelling}, for instance, evaluated their buildings based on manual tape measurements taken on specific architectural features, like windows and columns, with an accuracy of \SI{0.01}{\m} for the first and \SI{0.1}{\m} for the second.
-            Complete and scalables measurements of buildings are possible using topographic surveys.
+            Complete and scalable measurements of buildings are possible using topographic surveys.
             Using the latter, building models could be reconstructed with precision up to \SI{\pm 0.1}{\m}~\parencite{henricsson19973} or \SI{\pm 0.05}{\m}~\parencite{vogtle2003quality}.\\
             There is also the possibility of manually modeling the building using oblique images, or stereoplotting.
-            ~\textcite{zebedin2008fusion} uses such a method to produce their reference data from aerial images with accuracy up to the order of \SI{\pm 0.15}{\m}.
+            ~\textcite{zebedin2008fusion} uses such a method to produce their reference data from aerial images with an accuracy up to the order of \SI{\pm 0.15}{\m}.
             The same procedure was used also by~\textcite{jaynes2003recognition} producing models with inaccuraccies bounded by \SI[fraction-function = \sfrac]{\pm 1/3}{\m}.
 
         \subsubsection{Remote sensing data}
-            Reference ground truth models are not easy to come by~\parencite{schuster2003new}.
+            Reference ground truth models are not readily available at large quantities~\parencite{schuster2003new}.
             The previous choice is hard to scale up to district or city levels.
             In fact, they are more suitable to evaluate few building models: \textit{e.g.} in order to validate a reconstruction method.
-            On the other hand, remote sensing data are more accessible and could be used, instead, as reference.
+            Conversely, remote sensing data are more accessible and could be used, instead, as reference.
             In fact, since these are usually fed as input in modeling methods, it is only reasonable to evaluate the produced models in comparison to the intake.
             Listed here, are the different types of remote sensing data and how they could be used for building model evaluation.\\
 
-            Aerial images are the first example of reference data used in building model evaluation.
-            These could be original oblique images or preprocessed orthoimages.
-            The first class of images are the most precise but the other one is more available.
-            Oblique images were used by~\textcite{michelin2013quality} to extract \gls{acr::3d} segments based on plane sweeping techniques.
-            Reference edges are filtered out and are used to evaluate the \gls{acr::3d} model (intersection) edges.
-            Based on these segments,~\textcite{boudet2006supervised} not only evaluates edges but also corners (\textit{i.e.} edge intersections) and planes.
-            Facet were also evaluated, in~\parencite{boudet2006supervised}, based on correlation functions computed from multiple overlapping oblique images.
-            Orthoimages were used also to, for instance, compute \gls{acr::ndvi} scores for vegetation occluded building model discrimination.\\
+            \subparagraph{Aerial images}
+                These could be original oblique images or preprocessed orthoimages.
+                The first class of images are the most precise but the other one is more available.
+                Images were used by~\textcite{michelin2013quality} to extract \gls{acr::3d} segments based on plane sweeping techniques.
+                Reference edges are filtered out and are used to evaluate the \gls{acr::3d} model (intersection) edges.
+                Based on these segments,~\textcite{boudet2006supervised} not only evaluates edges but also corners (\textit{i.e.} edge intersections) and planes.
+                Facets were also evaluated, in~\parencite{boudet2006supervised}, based on correlation functions computed from multiple overlapping oblique images.
+                Orthoimages were used also to, for instance, compute \gls{acr::ndvi} scores for vegetation occluded building model discrimination.
 
-            Second, are \gls{acr::lidar} point clouds.
-            This type of data have the inherent advantage, compared to images, of natively providing depth information.
-            \textcite{kaartinen2005accuracy} used data that was acquired multiple times with a guarantied precision up to \SI{0.083}{\m} in plane and \SI{0.035}{\m} in height.
-            Out of the latter were chosen reference points that were compared to equivalents in the evaluated building models (check the previous Section).
-            All the points could also be used for comparison by computing metrics such as \gls{acr::rmse}~\parencite{lafarge2012creating,zhu2018large}.
-            Original input data is not always accessible.
-            One issue arises when using different data: data registration.
-            This is taken into account by~\textcite{akca2010quality}, before addressing the completeness of building models.\\
+            \subparagraph{\gls{acr::lidar} point clouds}
+                This type of data have the inherent advantage, compared to images, of natively providing depth information.
+                \textcite{kaartinen2005accuracy} used data that was acquired multiple times with a guaranteed precision up to \SI{0.083}{\m} in planimetry and \SI{0.035}{\m} in height.
+                Out of the latter were chosen reference points that were compared to equivalents in the evaluated building models (check the previous Section).
+                All the points could also be used for comparison by computing metrics such as \gls{acr::rmse}~\parencite{lafarge2012creating,zhu2018large}.
+                Original input data is not always accessible.
+                One other issue arises when using data from multiple sources where it has to be coregistred in the same reference system.
+                This is taken into account by~\textcite{akca2010quality}, before addressing the completeness of building models.
             
-            Third and last, are presented height maps.
-            These are not sensor data as they are a byproduct of earlier data types.
-            Still, they are considered here since they are used as input by some building modeling pipelines.
-            Just like with \gls{acr::lidar}, \gls{acr::dsm} is used for building models comparison based on \gls{acr::rmse}~\parencite{zeng2018neural}.
-            \textcite{michelin2013quality}, however, uses the same data but differently.
-            In fact, \gls{acr::dsm}, being a result of oblique images, can be used as proxy, to help extracting \gls{acr::3d} geometric features instead of recomputing correlation scores like in~\parencite{boudet2006supervised}.
-            It can also be valuable for missing court detection by calculating sky viewshed angle scores~\parencite{michelin2013quality}.
+            \subparagraph{Height maps}
+                These are not sensor data as they are a byproduct of earlier data types.
+                Still, they are considered here since they are used as input by some building modeling pipelines.
+                Just like with \gls{acr::lidar} point clouds, \gls{acr::dsm} is used for building model comparison based on \gls{acr::rmse}~\parencite{zeng2018neural}.
+                \textcite{michelin2013quality}, however, use the same data but differently.
+                In fact, \gls{acr::dsm}, being a result of oblique images, can be used as proxy, to help extracting \gls{acr::3d} geometric features instead of recomputing correlation scores like in~\parencite{boudet2006supervised}.
+                It can also be valuable for missing court detection by calculating sky viewshed angle scores~\parencite{michelin2013quality}.
 
     \subsection{Novelty of the proposed method}
         \label{subsec::state_of_the_art::quality::novelty}
@@ -246,28 +264,33 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         In fact, the semantic character of the evaluation overrules approaches relying only on geometry based metrics.
         This represents most of the methods discussed earlier (\textit{cf.} Section~\ref{subsec::state_of_the_art::quality::output}).
         Actually, these metrics could be used once a semantic error is identified to help quantify the defect.
-        On the other hand, the need for reasonably available reference data, which is dictated by the \textbf{large-scale} constraint, implies the reliance on remote sensing data based methods (\textit{cf.} Section~\ref{subsec::state_of_the_art::quality::reference}).\\
+        Conversely, the need for reasonably available reference data, which is dictated by the \textbf{large-scale} constraint, implies the reliance on remote sensing data based methods (\textit{cf.} Section~\ref{subsec::state_of_the_art::quality::reference}).\\
 
-        Methods that are both semantic and rely only on more readily available remote sensing data are in the number of two:~\parencite{boudet2006supervised,michelin2013quality}.
+        There are only two approaches that are both semantic and rely only on more readily available remote sensing data:~\parencite{boudet2006supervised,michelin2013quality}.
         Both define semantic errors that are predicted with the help of Oblique images and \glspl{acr::dsm}.
         A classifier learns statistical properties of the building \gls{acr::3d} models using features that are derived from these sensor data.
-        The learning process further helps scaling the process to unseen data by predicting errors using the same attributes.\\
+        The learning process further helps scaling the evaluation pipeline to unseen data by predicting errors using the same attributes.\\
 
-        Our work relies on the same idea, but goes a bit farther by proposing the possibility to evaluate building models without using any reference data.
+        Our work relies on the same idea, but goes farther by allowing the possibility to evaluate building models without using any reference data and relying on their intrinsic attributes instead.
         It also offers a new taxonomy of errors that is intended to be exhaustive and generalizable.
-        These latter notions are developped in details in Chapter~\ref{chap::semantic_evaluation}, while Chapter~\ref{chap::learned_evaluation} presents how features are chosen to represent building models and the learning process.
+        These latter notions are developped in details in Chapter~\ref{chap::semantic_evaluation}, while Chapter~\ref{chap::learned_evaluation} presents how features are chosen to represent building models and the learning process.\\
+
+        In fact, we propose a a novel hierarchical and modular taxonomy that assembles all possible semantic and geometric errors that can affect the building model.
+        Based on this taxonomy, depending on the end user needs, error labels are extracted for the classification.
+        We also developped a baseline of features, intrinsic as well as extrinsic\footnote{If available.}, which describe the evaluated models.
+        Using these features so as to train some regular off-the-shelf classifiers, we proved the feasability of our approach.
+        Finally, we made use of some advanced feature extractors in the aims of imporving the prediction scores of the proposed pipeline.
 
 \section{Supervised learning and pattern recognition}
     \label{sec::state_of_the_art::mlpr}
     In this section are presented notions from statistic learning and computer vision domains that were useful for this work.
     This constitutes a simple reminder and is not a thorough survey of the field.
-    Section~\ref{subsec::state_of_the_art::mlpr::classifiers} start off with a brief description of utilized supervised classifiers.
-    Second (Section~\ref{subsec::state_of_the_art::mlpr::feature_extraction}) comes a presentation of computer vision concepts on which our method is based.
-    Last is discussed graph classification that was also instrumental in this work.
+    Section~\ref{subsec::state_of_the_art::mlpr::classifiers} start off with a brief description of the utilized supervised classifiers.
+    Second, Section~\ref{subsec::state_of_the_art::mlpr::feature_extraction} presents some advanced feature extraction techniques on which our method is based.
 
     \subsection{Supervised classifiers}
         \label{subsec::state_of_the_art::mlpr::classifiers}
-        In this subsection, we denote a family of observations and their classes by
+        In this subsection, we denote a family of \(n\) observations and their classes by
         \begin{equation*}
             \left((\bm{x^i}, y^i)\right)_{i=1,2,\dots,n}.
         \end{equation*}
@@ -277,7 +300,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
         \end{equation*}
         Classes are modeled by a finite set bijective to the set \(\left\{1,2,\dots,C\right\}\):
         \begin{equation*}
-            \forall i=1,2,\dots,n \;, y_i \in \left\{1,2,\dots,C\right\}            
+            \forall i=1,2,\dots,n \;, y_i \in \left\{1,2,\dots,C\right\}.        
         \end{equation*}
         The goal of supervised classification is to learn, based on the training set $\left((\bm{x^i}, y^i)\right)_{i=1,2,\dots,n}$, some statistical characteristics in order to predict the classes of some new observations:\footnote{This family is called the test set.}
         \begin{equation*}
@@ -356,7 +379,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
                 \begin{figure}
                     \centering
-                    \includestandalone[mode=buildnew, width=\textwidth]{figures/svm/linear_separable}
+                    \includestandalone[mode=buildnew, width=.7\textwidth]{figures/svm/linear_separable}
                     \caption[
                         Illustration of the hard-margin \acrshort*{acr::svm}.
                     ]{
@@ -421,7 +444,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
                 \begin{figure}
                     \centering
-                    \includestandalone[mode=buildnew, width=\textwidth]{figures/svm/non_linear_separable}
+                    \includestandalone[mode=buildnew, width=.7\textwidth]{figures/svm/non_linear_separable}
                     \caption[
                         Illustration of a soft margin \acrshort*{acr::svm}.
                     ]{
@@ -449,17 +472,17 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \tilde{y}^i.(\bm{w}^\intercal\cdot\bm{x}^i + b) \geq 1 - \xi^i.
                 \end{equation}
                 Four cases are distinguished, for slack variables:
-                \begin{description}
-                    \item[$\xi^i = 0$ :] The class of the point is certain;
-                    \item[$0 < \xi^i \leq 1$ :] The point is of the same class but is uncertain: \textit{i.e.} between the support hyperplane and the separator;
-                    \item[$1 < \xi^i < 2$ :] The point is of the opposite class and is uncertain: \textit{i.e.} between the separator and the opposite support hyperplane;
-                    \item[$2 \leq \xi^i$ :] The point is certainly of the opposite class: \textit{i.e.} beyond the opposite support hyperplane.
-                \end{description}
+                \begin{itemize}[label=\(\blacktriangleright\)]
+                    \item \(\xi^i = 0\): the class of the point is certain;
+                    \item \(0 < \xi^i \leq 1\): the point is of the same class but is uncertain: \textit{i.e.} between the support hyperplane and the separator;
+                    \item \(1 < \xi^i < 2\): the point is of the opposite class and is uncertain: \textit{i.e.} between the separator and the opposite support hyperplane;
+                    \item \(2 \leq \xi^i\): the point is certainly of the opposite class: \textit{i.e.} beyond the opposite support hyperplane.
+                \end{itemize}
                 As a consequence, when a dataset is not linearly separable, at least one sample $i_0$ cannot fit in a linear model and $1 < \xi^{i_0}$.
                 All these situations are illustrated in Figure~\ref{fig::soft_margin}.\\
 
                 The idea is to find a configuration where most slack variables are null or near $0$.
-                Sparsity is also wished: we prefer having one wrong point rather than a lot of points that are uncertain.
+                Sparsity is also required: we prefer having one wrong point rather than a lot of points that are uncertain.
                 For this purpose, these variables would be penalized against using an $L_1$ norm.
                 Since all slack variables are positive, the soft margin \gls{acr::svm} problem becomes:
                 \begin{equation}
@@ -1125,7 +1148,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     \end{equation}
                     
                     To the image, the wavelet-modulus operator is applied giving coefficients $U_{i_1, \theta_1}(x)$.
-                    The latter is averaged using the second operation~\ref{eq::pool_bi-dim-angular}.
+                    The latter is averaged using the second operation from Equation~\ref{eq::pool_bi-dim-angular}.
                     This defines the second layer of scattering coefficients:
                     \begin{equation}
                         \label{eq::scatter_first}
@@ -1168,18 +1191,18 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                         n_S = \underbrace{1}_{\substack{\text{layer}\\l = 0}} + \underbrace{L \cdot I}_{\substack{\text{layer}\\l = 1}} + \underbrace{\frac{L^2\cdot I \cdot \left(I - 1\right)}{2}}_{\substack{\text{layer}\\l = 2}}.
                     \end{equation}
 
-                    \textcite{sifre2013rotation} goes on to propose a way to make the scattering invariant to scale effects also.
+                    \textcite{sifre2013rotation} go on to propose a way to make the scattering invariant to scale effects also.
                     This is done by introducing a logarithm that linearizes the dependency of scattering coefficients to scales $i_1$ and $i_2$~\parencite{sifre2013rotation,oyallon2015deep}.
                     A scale-space averaging is thus applied to achieve the sought invariance~\parencite{sifre2013rotation}.\\
 
-                    In contrast,~\textcite{oyallon2015deep} proposes to keep only the translation invariance and let the classifier decide on the relevance of rotation and scale invariance, much like in~\parencite{cohen2016group}.
+                    In contrast,~\textcite{oyallon2015deep} propose to keep only the translation invariance and let the classifier decide on the relevance of rotation and scale invariance, much like in~\parencite{cohen2016group}.
                     To do so only a spatial averaging convoluation is applied as $x \mapsto \tilde{x}(\bullet, \omega) \star \phi_I$ which is covariant to rotations.
                     Similarly, they drop the scale-space averaging at the end, while the logarithm guaranties the covariance of the signal to scaling effects.
                     The operations are also conducted in a way that renders the shape of the \gls{acr::scatnet}, shown in Figure~\ref{fig::scatnet}, more like that of \gls{acr::cnn}.
 
-                    \begin{figure}
+                    \begin{figure}[htbp]
                         \centering
-                        \includestandalone[mode=buildnew, height=.5\textheight]{figures/scattering_network}
+                        \includestandalone[mode=buildnew, width=\textwidth]{figures/scattering_network}
                         \caption[
                             Illustration of a \acrshort*{acr::scatnet}.
                         ]{
@@ -1487,7 +1510,7 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
                     Moreover, both graphs are required to be of the same size.\\
 
                     This kernel is not well adapted.
-                    To alleviate this issue,~\textcite{kondor2016multiscale} proposes to describe the graph nodes by vertex permutation invariant features.
+                    To alleviate this issue,~\textcite{kondor2016multiscale} propose to describe the graph nodes by vertex permutation invariant features.
                     If $U$ (\textit{resp.} $U'$) is a matrix which encodes such a transformation for graph $G$ (\textit{resp.} $G'$), $k_{l}$ is adapted in what is called feature space Laplacian graph kernel:
                     \begin{equation}
                         \label{eq::feature_laplacian_kernel}
@@ -1654,3 +1677,10 @@ Indeed, we discuss aspects of supervised classification as well as some feature 
 
     \subsection{Overview}
         \label{subsec::state_of_the_art::mlpr::overview}
+        The goal of this section was to introduce some techniques that are later used in our evaluation approach.
+        To summarize, we first introduced the two classifiers that are going to be used for learning and predicting error labels.
+        In fact, we explained how both function in order to better anticipate and interpret the results later on.
+        In a second time, we presented some advanced feature extractors that will be utilized to describe the evaluated models efficiently.
+        Indeed, we have shown how the \gls{acr::scatnet} is a good alternative to the state-of-the-art \glspl{acr::cnn} for image classification, especially when the number of learning instances is reduced, as will prove to be our case.
+        Regarding graphs, we introduced kernels which help take the graph structure, as well as node attributes, into account.
+        Now that the building bricks of our approach are explained, we will procede to illustrate our proposed method in finer details.

@@ -975,9 +975,9 @@
             }
         \end{figure}
 
-        We can see how these ratios stay mostly around 1/3 with more leeway compared to \gls{acr::rf} (\textit{cf.} Figure~\ref{fig::feature_importances_rf_bl}).
+        We can see how these ratios stay mostly around \num[fraction-function = \sfrac]{1/3} with more leeway compared to \gls{acr::rf} (\textit{cf.} Figure~\ref{fig::feature_importances_rf_bl}).
         This actually confirms how these \gls{acr::mkl} weights could be interpreted as features importances.
-        The larger margins to the 1/3 ratio could be explained by the sensibility of the weights to the noise when selecting training instances.
+        The larger margins to the \num[fraction-function = \sfrac]{1/3} ratio could be explained by the sensibility of the weights to the noise when selecting training instances.
         There is, however, one exception that could be noted between Figures~\ref{fig::feature_importances_svm_bl} and~\ref{fig::feature_importances_rf_bl}.
         In fact, for \texttt{FOS}, geometric features have a larger importance when training with \gls{acr::svm} compared to the \gls{acr::rf} case.
         This is actually not an issue as it could be explained by the topological nature of the error label.\\
@@ -1291,7 +1291,7 @@
                 \item \texttt{FOS}, on both sets, with an importance below \SI{1}{\percent}.
                         This is understandable as this error is of topological nature and is better detected with intrinsic features.
                         Indeed, for this error even height based features score less than \SI{1}{\percent} in importance ratio.
-                \item \texttt{FIB}, on \textbf{Na-P13} with a ration around 1/3.
+                \item \texttt{FIB}, on \textbf{Na-P13} with a ration around \num[fraction-function = \sfrac]{1/3}.
                         This can be explained by the fact that this modality was decisive in getting the best F-score possible (\textit{cf.} Table~\ref{tab::rf_scat_bl_comparison}).
             \end{itemize}
             On another note, building typology is so important that, even with advanced extrinsic features, baseline geometric features have a very large importance ratio.

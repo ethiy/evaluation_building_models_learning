@@ -22,7 +22,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
         \textbf{Nantes}, as shown in Figure~\ref{fig::nantes_ortho}, represents a denser urban setting but with a lower building diversity (\textit{cf.} Figure~\ref{subfig::nantes_samples}).
         In Figure~\ref{fig::paris-13_ortho}, one can see how \textbf{Paris-13} consists of mostly flat roof high towers which coexist with Haussmann style buildings that typically exhibit highly fragmented roofs (\textit{cf.} Figure~\ref{subfig::paris-13_samples}).
         The \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}) scene contains 2,009 (\textit{resp.} 748 and 478) annotated building models.
-        In order to handle these models, \verb{proj.city}\footnote{
+        In order to handle these models, \verb!proj.city!\footnote{
             \href{https://github.com/ethiy/proj.city.git}{A library for 3D city model projection.}
         }, a C++ library, was developped making use of the CGAL library~\parencite{fabri2000design}.
         Thanks to this tool, we can project building models in the nadir direction as well as produce their height maps.
@@ -714,7 +714,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
         
         In a second time, we notice that no modality is more important than the others, contrarily to what was observed in Table~\ref{tab::ablation_f3}.
         In fact, as shown in Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}, for most \texttt{atomic} errors, test results using geometric features are comparable to those obtained with more modalities.
-        However, during training, all modalities are relevant with importance ratios approximating 1/3 as shown in Figure~\ref{fig::feature_importances_rf_bl}.
+        However, during training, all modalities are relevant with importance ratios approximating \num[fraction-function = \sfrac]{1/3} as shown in Figure~\ref{fig::feature_importances_rf_bl}.
         As a consequence, for subsequent experimentations all configurations are taken into consideration.
 
     \subsection{Overview}
