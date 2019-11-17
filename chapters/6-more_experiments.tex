@@ -88,20 +88,21 @@
             }
         \end{figure}
 
-        First, a \texttt{coherence} analysis is performed.
-        We compare the results of the transferability experiments to the ablation results with the same training scene.
-        This is achieved by looking, for a given area $Z_i$ in all couples $(Z_i, Z_j)_{\forall j \neq i}$, at the differences between Tables~\ref{tab::all_f-scores_transferability_f3} and~\ref{tab::all_f-scores_ablation_f3}.
-        The goal is to see to which extent the test zone looks like the training one.\\
+        \subparagraph{\texttt{Coherence} study}
+            First, a \texttt{coherence} analysis is performed.
+            We compare the results of the transferability experiments to the ablation results with the same training scene.
+            This is achieved by looking, for a given area $Z_i$ in all couples $(Z_i, Z_j)_{\forall j \neq i}$, at the differences between Tables~\ref{tab::all_f-scores_transferability_f3} and~\ref{tab::all_f-scores_ablation_f3}.
+            The goal is to see to which extent the test and training zone are similar.\\
 
-        All these comparisons are provided in Table~\ref{tab::transferability_comparison}.
-        A color scheme was devised to encode the amplitude of change.
-        The resemblance between \textbf{Paris-13} and \textbf{Nantes} are stricking.
-        In fact, when training on one of the two zones and testing on \textbf{Elancourt}, out of the nine labels only two are different.
-        \texttt{BUS} has a gain between \SIrange[range-phrase={ and }]{5}{15}{\percent} when trained on \textbf{Paris-13} while its F-score records a drop in the range \SIrange{-15}{-5}{\percent} if trained on \textbf{Nantes}.
-        \texttt{FUS}, however, looses between \SIrange[range-phrase={ and }]{-45}{-35}{\percent} when trained on \textbf{Paris-13} and \SIrange[range-phrase={ and }]{-35}{-25}{\percent} for \textbf{Nantes}.
-        Conversely when training on \textbf{Elancourt} and testing on the other two areas, the comparisons are not identical.
-        However, from a general standpoint, we can see how the \texttt{building errors} are always recording losses when testing on both \textbf{Paris-13} and \textbf{Nantes}.
-        Except for \texttt{FIT}, the inverse situation is obseved for \texttt{Facet errors} where labels are either better detected or stable.\\
+            All these comparisons are provided in Table~\ref{tab::transferability_comparison}.
+            A color scheme was devised to encode the amplitude of change.
+            The resemblance between \textbf{Paris-13} and \textbf{Nantes} are stricking.
+            In fact, when training on one of the two zones and testing on \textbf{Elancourt}, out of the nine labels only two are different.
+            \texttt{BUS} has a gain between \SIrange[range-phrase={ and }]{5}{15}{\percent} when trained on \textbf{Paris-13} while its F-score records a drop in the range \SIrange{-15}{-5}{\percent} if trained on \textbf{Nantes}.
+            \texttt{FUS}, in contrast, looses between \SIrange[range-phrase={ and }]{-45}{-35}{\percent} when trained on \textbf{Paris-13} and \SIrange[range-phrase={ and }]{-35}{-25}{\percent} for \textbf{Nantes}.\\
+            Conversely when training on \textbf{Elancourt} and testing on the other two areas, the comparisons are not as identical as before.
+            However, from a general standpoint, we can see how the \texttt{building errors} are always recording losses when testing on both \textbf{Paris-13} and \textbf{Nantes}.
+            Except for \texttt{FIT}, the inverse situation is obseved for \texttt{Facet errors} where labels are either better detected or stable.
 
         \begin{table}[htbp]
             \footnotesize 
@@ -150,43 +151,45 @@
             }
         \end{table}
 
-        Secondly, we investigate how the urban scene composition helps predicting defects in an unseen one.
-        This is called the \texttt{projectivity} comparison.
-        For a given test scene $Z_j$ in couples $(Z_i, Z_j)_{\forall i \neq j}$, we compare again results from Tables~\ref{tab::all_f-scores_transferability_f3} and~\ref{tab::all_f-scores_ablation_f3}.
-        A gain in performance for a label can be interpreted by the transferability power of its learning process.\\
+        \subparagraph{\texttt{Projectivity} analysis}
+            Secondly, we investigate how the urban scene composition helps predicting defects in an unseen one.
+            This is called the \texttt{projectivity} comparison.
+            For a given test scene $Z_j$ in couples $(Z_i, Z_j)_{\forall i \neq j}$, we compare again results from Tables~\ref{tab::all_f-scores_transferability_f3} and~\ref{tab::all_f-scores_ablation_f3}.
+            A gain in performance for a label can be interpreted by the transferability power of its learning process.\\
 
-        Comparisons are detailed in Table~\ref{tab::transferability_comparison} with the same color scheme as for \texttt{coherence} comparisons.
-        Error family wise, we can summarize these comparisons as follows:
-        \begin{description}
-            \item[\texttt{Building errors}:] Out of 20 possible \texttt{projectivity} comparisons, 13 yield negative results.
-                    This proves how hard it is to transfer learning for this error family.
-            \item[\texttt{Facet errors}:] Conversely, only 7 out of 27 \texttt{projectivity} scores are worse compared to training and testing on the same test area.
-                    One notable pattern is the stability of \texttt{FOS} and \texttt{FIB} errors no matter the chosen transferability couple.
-        \end{description}
+            Comparisons are detailed in Table~\ref{tab::transferability_comparison} with the same color scheme as for \texttt{coherence} comparisons.
+            Error family wise, we can summarize these comparisons as follows:
+            \begin{description}
+                \item[\texttt{Building errors}:] Out of 20 possible \texttt{projectivity} comparisons, 13 yield negative results.
+                        This proves how hard it is to transfer learning for this error family.
+                \item[\texttt{Facet errors}:] Conversely, only 7 out of 27 \texttt{projectivity} scores are worse compared to training and testing on the same test area.
+                        One notable pattern is the stability of \texttt{FOS} and \texttt{FIB} errors no matter the chosen transferability couple.
+            \end{description}
 
-        When looking at \texttt{Facet errors} transferability power, we can see how training on \textbf{Nantes} and testing on \textbf{Paris-13} yields the same scores as when the opposite experiment is conducted.
-        We can also see how \textbf{Elancourt} is best for learning \texttt{FIT} as it transfers well to \textbf{Nantes} while having no effect on \textbf{Paris-13}.
-        In contrast, both comparisons are negative when training of the last two areas.
-        With the exception of this label, training on the latter dense zones proves to be advantageous than learning on \textbf{Elancourt}, \texttt{projectivity} wise.
-        In terms of \texttt{Building errors}, clear discernible patterns are hard to find.
-        This agrees with the previous conclusion that this error family is not easy to learn.
-        The only exceptions were \texttt{BIT} and \texttt{BUS}.
-        For these two labels, training on \textbf{Elancourt} proved to be slightly better than on the other scenes.\\
+            When looking at the transferability power of \texttt{Facet errors}, we can see how training on \textbf{Nantes} and testing on \textbf{Paris-13} yields the same scores as when the opposite experiment is conducted.
+            We can also see how \textbf{Elancourt} is best for learning \texttt{FIT} as it transfers well to \textbf{Nantes} while having no effect on \textbf{Paris-13}.
+            In contrast, both comparisons are negative when training of the last two areas.
+            With the exception of this label, training on the latter dense zones proves to be advantageous than learning on \textbf{Elancourt}.\\
+            In terms of \texttt{Building errors}, clear discernible patterns are hard to find.
+            This agrees with the previous conclusion that this error family is not easy to learn.
+            The only exceptions were \texttt{BIT} and \texttt{BUS}.
+            For these two labels, training on \textbf{Elancourt} proved to be slightly better than on the other scenes.
 
-        As we can suspect from looking at the large standard deviations illustrated in Figure~\ref{fig::f_score_transferability_f3}, modalities play an instrumental role in insuring the transferability experiments.
-        All modalities that were standing out in terms of the F-score were mentioned in the corresponding cell in Table~\ref{tab::transferability_comparison}.
-        As intended (\textit{cf.} Section~\ref{subsec::learned_evaluation::baseline::image}), image based features are instrumental in transferability for \texttt{FUS}, \texttt{BUS}, \texttt{FIB} and \texttt{BIB}.
-        Geometric features, on the other hand, play a lesser role helping mostly with \texttt{BIT} transferability when training on dense urban scenes as well as \texttt{FUS} for the \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13} experiment.
-        Actually, \texttt{BIT} is a purely topological error that can be learned with the help of these structural features.
-        On the contrary, adding more modalities would only confuse the classifier as also seen in the ablation study in Table~\ref{tab::ablation_f3}.
-        Height based errors alone are not crucial for transferability, intervening only once in the case of \texttt{FIB} in the \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13} experiment.
-        However, it has a bigger impact when added to image based ones (\textit{cf.} cells with \textbf{All} in Table~\ref{tab::transferability_comparison}).
-        All these previous findings further justify why we did not leave out any modality, as they are more frequently critical for transferability than in the ablation study (\textit{cf.} Table~\ref{tab::all_f-scores_ablation_f3}).\\
+        \subparagraph{Impact of external modalities}
+            As we can suspect from looking at the large standard deviations illustrated in Figure~\ref{fig::f_score_transferability_f3}, modalities play an instrumental role in insuring the transferability experiments.
+            All modalities that stood out, in terms of the F-score, were mentioned in the corresponding cell in Table~\ref{tab::transferability_comparison}.\\
+            As intended (\textit{cf.} Section~\ref{subsec::learned_evaluation::baseline::image}), image based features are instrumental in transferability for \texttt{FUS}, \texttt{BUS}, \texttt{FIB} and \texttt{BIB}.\\
+            Geometric features, on the other hand, play a lesser role helping mostly with \texttt{BIT} transferability when training on dense urban scenes as well as \texttt{FUS} for the \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13} experiment.
+            Actually, \texttt{BIT} is a purely topological error that can be learned with the help of these structural features.
+            On the contrary, adding more modalities would only confuse the classifier as also seen in the ablation study in Table~\ref{tab::ablation_f3}.\\
+            Height based errors alone are not crucial for transferability, intervening only once in the case of \texttt{FIB} in the \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13} experiment.
+            However, it has a bigger impact when added to image based ones (\textit{cf.} cells with \textbf{All} in Table~\ref{tab::transferability_comparison}).\\
+            All these previous findings further justify why we did not leave out any modality, as they are more frequently critical for transferability than in the ablation study (\textit{cf.} Table~\ref{tab::all_f-scores_ablation_f3}).
 
     \subsection{Generalization study}
         \label{subsec::more_experiments::scalability::generalization}
         We try to find out how omitting one urban zone from the training dataset affects the test results on that same area.
-        An other way to look at it is, from an operational point of view, to find out how much learning on a union of many urban scenes is helpful when testing on an unseen one.
+        Another way to look at it is, from an operational point of view, to find out how much learning on a union of many urban scenes is helpful when testing on an unseen one.
         Experiments that merge all zones except $Z_i$ ($\underset{\forall j \neq i}{\bigcup} Z_j$) for training and test on $Z_i$ are denoted by the couple $(\underset{\forall j \neq i}{\bigcup} Z_j, Z_i)$ or by $ \underset{\forall j \neq i}{\bigcup} Z_j \rightarrow Z_i$.
         There are three possibilities: \textbf{Elancourt} $\cup$ \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13}, \mbox{\textbf{Paris-13}}\,$\cup$\,\textbf{Nantes}\,\(\rightarrow\)\,\textbf{Elancourt} and \mbox{\textbf{Paris-13}}\,$\cup$\,\textbf{Elancourt}\,\(\rightarrow\)\,\textbf{Nantes}.
         The F-score evolution, per experiment and label, is depicted in Figure~\ref{fig::f_score_generalization_f3}.\\
@@ -263,7 +266,7 @@
         We compare the F-score ratios of these experiments, shown in Table~\ref{tab::all_f-scores_generalization_f3}, with ones from the ablation study for each test area.
         These comparisons are compiled in Table~\ref{tab::generalization_comparison}.\\
     
-        We start again with a comparison with respect to error families:
+        We start by summarizing comparisons with respect to error families:
         \begin{description}
             \item[\texttt{Building errors}:] Out of the 11 possibilities, 6 yield worse results.
                     This is approximatly \SI{10}{\percent} less than the transferability study.
@@ -272,7 +275,7 @@
         \end{description}
         This confirms again how difficult \texttt{Building errors} are to learn compared to \texttt{Facet errors}.
         However, this time combining urban scenes yielded better results.
-        We can suspect that this is the consequence of these studied zones being complementary in terms of learning.\\
+        We can suspect that this is the consequence of the fact that these studied zones are complementary for learning.\\
         
         Similarly to the previous study, image and height modalities play a major role in error detection.
         Image based features are crucial for \texttt{FIB}, \texttt{FUS}, \texttt{BOS}, \texttt{BIB} and \texttt{BUS} detection (Table~\ref{tab::generalization_comparison}).
@@ -332,7 +335,7 @@
         \end{figure}
             
         We note the high stability of the F-score.
-        This indicates that having a small heterogeneous dataset is not detrimental to the learning capacity and can be even the most suitable solution.
+        This indicates that having a small heterogeneous dataset is not detrimental to the learning capacity and can sometimes be the most suitable solution.
         \texttt{BOS}, \texttt{FOS}, and \texttt{FIG} have a standard deviation under \SI{2}{\percent}, as opposed to \texttt{FIB}, \texttt{BIT} and \texttt{FIT}.
         Indeed, the latter vary greatly with respect to the training size, and even a larger standard deviation according to the feature configurations.\\
 
@@ -351,8 +354,23 @@
 
     \subsection{Overview}
         \label{subsec::more_experiments::scalability::overview}
+        The goal of this section was to prove the scalability of the proposed approach.
+        To achieve this, we tested how well classifiers trained on a source set can score on a different target one.
+        Depending on how the source set was chosen, three types of experiments were examined: transferability, generalization and representativeness.
+        They yielded consistent results which helped prove:
+        \begin{itemize}[label=\(\blacktriangleright\)]
+            \item \textbf{Nantes} and \textbf{Paris-13} are similar compared to \textbf{Elancourt};
+            \item \texttt{FOS} and \texttt{FIG} detection is highly transferable with over \SI{95}{\percent} in F-score;
+            \item \texttt{Facet errors} detection is easier to scale than \texttt{Building errors};
+            \item \texttt{Building errors} and \texttt{FIT} are better detected on \textbf{Elancourt} than on the other scenes;
+            \item Except \texttt{FIT}, \texttt{Facet errors} are better detected on either \textbf{Nantes} or \textbf{Paris-13};
+            \item Rare errors such as \texttt{BIT} and \texttt{FIT} (on all urban areas) are poorly detected;
+            \item Geometric features are not as good as extrinsic based configurations for error detection scalability;
+            \item Extrinsic features play a more crucial role in transferability and generalization, especially image based ones;
+            \item Representativeness wise, \SI{20}{\percent} is sufficient in most error labels for learning.
+        \end{itemize}
 
-\section{The \texorpdfstring{\acrlong*{acr::efin}}{eFin} impact on predictions}
+\section{The impact of \texorpdfstring{\acrshort*{acr::efin}}{eFin}}
     \label{sec::more_experiments::finesse}
     In this section, we reproduce the experimental settings described in Section~\ref{sec::experiments::baseline_feature_analysis} and Section~\ref{sec::more_experiments::scalability}.
     First, the \textbf{\gls{acr::efin}} is set to be 2.
@@ -453,7 +471,7 @@
         \end{figure}
     
         We start by the ablation study.
-        Table~\ref{tab::ablation_f2} reveals that adding more remote sensing modalities do not change the prediction results dramatically.
+        Table~\ref{tab::ablation_f2} reveals that adding more remote sensing modalities do not dramatically change the prediction results.
         This is perfectly illustrated, in Figure~\ref{fig::f_score_f2}, by the low variance of F-scores for the three areas of interest.
         We can explain this by referring to the analysis at the \textbf{\gls{acr::efin}} level 3 in Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}.
         Two main reasons could be noticed:
@@ -528,7 +546,7 @@
         Since valid samples are very rare in our case, it is expected that it will be very difficult to detect these instances.
         In consequence, in Table~\ref{tab::ablation_f1}, we choose to report correctly \texttt{Valid} buildings instead of computing the precision score in percentage.\\
             
-        At this level, even more that the error family semantic degree, feature configurations have virtually no impact on test results: \textbf{Elancourt} was the only exception when image features are added to geometric ones.
+        At this level, even more than the error family semantic degree, feature configurations have virtually no impact on test results: \textbf{Elancourt} was the only exception when image features are added to geometric ones.
         Furthermore, we confirm expectations as, at most, only 1 out of 57 (\textit{resp.} 0 out of 55 and 3 out of 21) valid instances are detected for \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
         As a consequence, we do not report the rest of previously conducted experiments for this \textbf{\gls{acr::efin}} level.
         Indeed, There is no interest in comparing prediction transferability, generalization or representativeness if we hardly detect them at all on the same training scene.
@@ -539,7 +557,7 @@
         We have experimentally proven that:
         \begin{itemize}[label=\(\blacktriangleright\)]
             \item \texttt{Facet errors} are detected with around a \SI{90}{\percent} F-score unaffected by the urban scenes.
-            \item As seen previously on \textbf{\gls{acr::efin}} level 3, \texttt{Building errors} are harder to train on \textbf{Nantes} and \textbf{Paris-13}, with an F-score around \SI{75}{\percent};
+            \item As seen previously on \textbf{\gls{acr::efin}} level 3, \texttt{Building errors} are hard to train on \textbf{Nantes} and \textbf{Paris-13}, with an F-score around \SI{75}{\percent};
             \item We confirm once again that:
             \begin{itemize}[label=\(\blacktriangleright\)]
                 \item \texttt{Building errors} learning is harder to transfer than \texttt{Facet errors};
@@ -562,7 +580,7 @@
     Next, we compare the results obtained using the \gls{acr::svm} classifier to the ones resulting from the \gls{acr::rf}.
     We end with a comparison of feature importances computed for the two classifiers.
 
-    \subsection{The studied urban areas}
+    \subsection{\textbf{Paris-13} and \textbf{Nantes} fusion}
         \label{subsec::more_experiments::classifier::dataset}
         According to the findings of the previous sections (\textit{cf.} Sections~\ref{subsec::more_experiments::scalability::transferability} and~\ref{subsec::more_experiments::finesse::2}), \textbf{Paris-13} and \textbf{Nantes} are similar compared to \textbf{Elancourt}.
         Moreover, the latter area contains a lot more instances than the others which is not ideal for comparisons.
@@ -945,7 +963,7 @@
     \subsection{Modality contributions comparison}
         \label{subsec::more_experiments::classifier::feature_importance}
         In a linear \gls{acr::svm}, feature importance can be natively computed by looking at the weight vector \(\bm{w}\) as shown by~\textcite{guyon2002gene}.
-        This is, unfortunatly, not our case.
+        This is, unfortunatly, not the case.
         Instead we operate with Kernel \glspl{acr::svm} where features are fused using \gls{acr::mkl} with weights \(\left(\mu_i\right)_{i=1, 2, 3}\) (\textit{cf.} Equation~\ref{eq::mkl}) that are on the simplex, as discussed in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.
         Consequently, when training with the last feature configuration, the resulting weights could be interpreted as feature importance ratios.
         These are vizualized in Figure~\ref{fig::feature_importances_svm_bl}.\\
@@ -994,6 +1012,19 @@
 
     \subsection{Overview}
         \label{subsec::more_experiments::classifier::overview}
+
+        % \begin{itemize}[label=\(\blacktriangleright\)]
+        %     \item \textbf{Nantes} and \textbf{Paris-13} are similar compared to \textbf{Elancourt};
+        %     \item \texttt{FOS} and \texttt{FIG} detection is highly transferable with over \SI{95}{\percent} in F-score;
+        %     \item \texttt{Facet errors} detection is easier to scale than \texttt{Building errors};
+        %     \item \texttt{Building errors} and \texttt{FIT} are better detected on \textbf{Elancourt} than on the other scenes;
+        %     \item Except \texttt{FIT}, \texttt{Facet errors} are better detected on either \textbf{Nantes} or \textbf{Paris-13};
+        %     \item Rare errors such as \texttt{BIT} and \texttt{FIT} (on all urban areas) are poorly detected;
+        %     \item Geometric features are not as good as extrinsic based configurations for error detection scalability;
+        %     \item Extrinsic features play a more crucial role in transferability and generalization, especially image based ones;
+        %     \item Representativeness wise, \SI{20}{\percent} is sufficient in most error labels for learning.
+        % \end{itemize}
+
 
 \section{Advanced features contributions}
     \label{sec::more_experiments::richer_features}
