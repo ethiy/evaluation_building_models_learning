@@ -3,8 +3,8 @@
 \vfill
 
 In Chapters~\ref{chap::semantic_evaluation} and~\ref{chap::learned_evaluation}, we proposed a semantic quality evaluation of building \gls{acr::3d} models employing a learning formulation.
-Herein, we aim at puting our pipeline to the test using the obtained dataset.
-First, in Section~\ref{sec::experiments::datasets}, we delineate how the building models were obtained.
+Herein, we put our pipeline to the test.
+First, in Section~\ref{sec::experiments::datasets}, we delineate how the building models, that are used for the study, were obtained.
 Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provides a first experimental outlook of the capacity of our approach to detect errors affecting building \gls{acr::3d} models.
 
 \clearpage
@@ -26,7 +26,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
             \href{https://github.com/ethiy/proj.city.git}{A library for 3D city model projection.}
         }, a C++ library, was developped making use of the CGAL library~\parencite{fabri2000design}.
         Thanks to this tool, we can project building models in the nadir direction as well as produce their height maps.
-        The \gls{acr::dsm} and the orthorectified image resolution is \SI{0.06}{\m} for the first area while it is \SI{0.1}{\m} for the other ones.\\
+        The \gls{acr::dsm} and the orthorectified image spatial resolution is \SI{0.06}{\m} for the first area while it is \SI{0.1}{\m} for the other ones.\\
 
         \begin{figure}[htpb]
             \ffigbox[\textwidth]{
@@ -71,7 +71,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
             }{
                 \caption{
                     \label{fig::paris-13_ortho}
-                    Orthoimage showing the heterogeneous of the XIII\textsuperscript{th} district of Paris.
+                    Orthoimage showing the heterogeneity of the XIII\textsuperscript{th} district of Paris.
                 }
             }
         \end{figure}
@@ -107,7 +107,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
             }{
                 \caption{
                     \label{fig::samples}
-                    Samples of building types per region.
+                    Samples of building types per area of interest.
                 }
             }
         \end{figure}
@@ -119,6 +119,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
         These models have a \gls{acr::lod}-2 level.
         This method is adapted to roof types of low complexity and favors symmetrical models that are common in residential areas.
         It has been selected to ensure a varying error rate for the three areas of interest, especially since models were generated with partly erroneous cadastral maps.
+        Consequently, the modeling will fail, allowing to tackle the evaluation of the ensuing models.
         3,235 buildings in total are considered.
         They were annotated according to the atomic errors list provided by our taxonomy.
 
@@ -169,9 +170,11 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
             }
         \end{figure}
 
-        Some of the models obtained using the previous datasets were annotated manually in order to build training datasets.
+        Some of the models obtained using the previous datasets were manually annotated manually in order to build training datasets.
         To annotate a building model, the manual operator compares the nadir projection of the model to the corresponding orthoimage and \gls{acr::dsm}.
-        This was possible thanks to the work\footnote{\href{https://github.com/CHUPClem/sGrISner.git}{GIS Graphical interface for annotation.}} of Clémence Chupin, who was a Master student at \gls{acr::ensg}.
+        This was possible thanks to the work\footnote{\href{https://github.com/CHUPClem/sGrISner.@git}{GIS Graphical interface for annotation.}} of Clémence Chupin, who was a Master student at \gls{acr::ensg}.
+        She develops a pyQT interface in order to ease the task.
+        This allows to switch between data sources and better assess the errors affecting each building.
         Figure~\ref{fig::error_statistics} reports modeling errors statistics over the annotated buildings.\\
 
         These statistics are first analysed depending on the family errors at the \texttt{finesse} = 2 level (\textit{cf.} Figure~\ref{fig::family_errors}).
@@ -187,9 +190,9 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
         The same is true for \texttt{FIG} with a frequency from \SIrange{59.8}{80}{\percent}.
         \texttt{FIT}, on the other hand, are very rare in all the areas with ratios a little less than \SI{1.5}{\percent}.
         The rest have a presence ratio within the percentage interval of [10, 30].
-        The errors that are rare are understandably going to impact negatively the learning process.\\
+        The errors that are rare are understandably going to negatively impact the learning process.\\
         
-        Second, we can compare error frequency discrepancies depending on the studied scene.
+        Secondly, we can compare error frequency discrepancies depending on the studied scene.
         \textbf{Elancourt} is different compared to the relatively close sets \textbf{Nantes} and \textbf{Paris-13}, with regards to \texttt{BOS}, \texttt{BUS} and \texttt{BIT}.
         In fact, the last two areas are more densely urbanized than the first one exhibitting the same properties at \gls{acr::lod}-0.
         \texttt{BIB}, on the other hand, are equally distributed over the different datasets as it depends mostly on the input sensor data resolution independently of building types.\\
@@ -205,37 +208,39 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
 
 \section{The experimental set-up}
     \label{sec::experiments::setup}
-    In this section, we give detailed account of how every building block of our pipeline is parameterized.
+    In this section, we give detailed account of how every ingredient of our pipeline is parameterized.
     We first start, in Section~\ref{subsec::experiments::setup::feature_configurations}, by specifying the different feature configurations that are used in the experimental study and how there were implemented.
-    Next, in Section~\ref{subsec::experiments::setup::classification}, we discuss in great detail how the classification process was conducted.
+    Next, in Section~\ref{subsec::experiments::setup::classification}, we discuss in detail how the classification process was conducted.
 
     \subsection{Feature configurations}
         \label{subsec::experiments::setup::feature_configurations}
         We present herein the features that were used in experiments.
-        First, as we tried to prove the efficiency of the proposed learning framework, we made use different configurations using the baseline features.
-        Second, as advanced features were used, new possible combinations are discussed.
+        First, we try to prove the efficiency of the proposed learning framework.
+        Hence, we test different configurations using the baseline features.
+        Secondly, more advanced features are fed into the pipeline.
+        Consequently, new possible combinations are discussed.
 
         \subsubsection{Baseline features}
             The geometric features are intrinsic and are always available.
             As a consequence, we tested four feature configurations: ``geometric features'' (\textbf{Geom.}) only, ``geometric and height features''(\textbf{Geom. \(\oplus\) Hei.}), ``geometric and image features''(\textbf{Geom. \(\oplus\) Im.}) as well as ``geometric, height and image features''(\textbf{All}).
-            In order to have a better understanding of how much each modality is important, their feature vectors are by design drawn to be of the same size: 20.\\
+            In order to have a better understanding of how important each modality is, their feature vectors are by design drawn to be of the same size: 20.\\
             Actually, using the function \(\chi_{\max,\min,\operatorname{mean},\operatorname{med}}\) defined in Equation~\ref{eq::max_min_mean_med_extractor}, the geometric feature vector in Equation~\ref{eq::geometric_features} is of dimension
             \begin{equation*}
                 \underbrace{4}_{\substack{\text{the output dimension}\\\text{of the function } \chi_{\max,\min,\operatorname{mean},\operatorname{med}} }} \times \underbrace{5}_{\substack{\text{the number of the facet}\\\text{graph attributes}}} = 20.
             \end{equation*}
-            Regarding height based feature vectors their dimension depend on the histogram parameters.
+            Regarding height based feature vectors, their dimension depend on the histogram parameters.
             Since we compute differences between observed and model height at terrain level also (\textit{cf.} Section~\ref{subsec::learned_evaluation::baseline::height}), and because these are virtually unbounded and can differ from one scene to another, the maximum possible discrepancy is limited to \SI{\pm 50}{\m} for all scenes.
             In order to have the same feature vector dimension for this modality as for the geometric one, the number of bins is fixed manually to \(20\).\\
             For image based features, the cosine similarity between normal vectors, used in Equation~\ref{eq::corr_fac}, is by definition bounded in the interval [-1, 1].
             This interval is consequently divided evenly into \(20\) bins for the histogram computation.
             The \glspl{acr::dsm} and orthorectified images used to derive height and image features have the same spatial resolution as the reconstruction input data.\\
 
-            These features implementation is conducted in Python and is not thoroughly.
+            These features implementation is conducted in Python and is not optimized.
             Geometric features are computed in average in \SI{0.05}{\s \per \building}, height based ones take in average \SI{1.4}{\s \per \building} and finally image based ones need more than \SI{69}{\s \per \building}.
             In order to reduce the runtime of each experiment, the last two types of features are cached once computed for a building model and retrieved latter for tests.
 
         \subsubsection{Advanced features}
-            Baseline features are replaced by more enhanced ones as shown in Section~\ref{sec::learned_evaluation::richer_features}.
+            Baseline features are replaced by more advanced ones as shown in Section~\ref{sec::learned_evaluation::richer_features}.
             These are denoted as follows:
             \begin{itemize}[label=\(\blacktriangleright\)]
                 \item \textbf{S-Hei.} refers to \gls{acr::scatnet} height based features;
@@ -286,11 +291,11 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
 
                 The Kymatio implementation of \gls{acr::scatnet} uses GPU to accelerate computations.
                 Using an NVIDIA GeForce GTX 750 Ti graphics card, it takes around \SI{14.06}{\s \per \building} on average to compute a height based features and \SI{20.86}{\s \per \building}.
-                As with previous features onces they are calculated they are cached for latter use.
+                As with previous features onces, once computed they are cached for latter use.
 
     \subsection{Classification settings}
         \label{subsec::experiments::setup::classification}
-            Feature extractors were defined in the previous subsection 
+            Feature extractors were defined in the previous subsection.
             Herein, are given extensive details how the considered classifiers (\textit{cf.} Section~\ref{subsec::learned_evaluation::classification::classifiers}) are applied.
             We also provide the metrics that will help measure the accuracy of predictions.
 
@@ -311,20 +316,20 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
             Below we detail quantitavely the used parameters.
             
             \paragraph{\acrshort*{acr::rf}}
-                A brief grid search involving a smaller set of building models and only baseline geometric features~\parencite{ennafii2018qualificationunannotated} yielded comparable results for the number of trees set in the range \numrange{850}{1000} and a maximum tree depth from \numrange{3}{5}.
+                A standard grid search involving a smaller set of building models and only baseline geometric features~\parencite{ennafii2018qualificationunannotated} yielded comparable results for the number of trees set in the range \numrange{850}{1000} and a maximum tree depth from \numrange{3}{5}.
                 Given the already immense parameter search space involving all possible feature configurations, feature extraction parameters and label possibilities, the \gls{acr::rf} parameters are set to \num{1000} for the tree number and 4 for the maximum tree depth for all other experiments without performing any grid search.
                 Since this classifier model is easier to parameterize than the other, it will always be used in experiments unless said otherwise.
 
             \paragraph{\acrshort*{acr::svm}}
-                The linear \gls{acr::svm} is not well suited for the type of features that we use, even for baseline features as experiments do not yield any resuslts in time.
+                The linear \gls{acr::svm} is not well suited for the type of features that we use, even for baseline features as experiments do not yield any results in time.
                 As a consequence, the latter was left out and we experimented only with the kernel \gls{acr::svm} using the standard \gls{acr::rbf} kernel (\textit{cf.} Equation~\ref{eq::rbf_kernel}) when instances are vectors not graphs.
                 Just as with the \gls{acr::rf} classifier, we conducted a grid search using baseline geometric features only in order to determine both parameters \(C\) and \(\gamma\) by limiting the range between \numrange[range-phrase={ and }, scientific-notation = true]{1e1}{1e-3} for both.
                 All values yielded sensibly the same scores.
                 As a result we set these parameters as follows: \(C = \num[scientific-notation = true]{1e-1}\) to not overpenalize nor underfit during learning and \(\gamma = \num[scientific-notation = true]{1e-3}\) to avoid overfitting.
                 Regarding \gls{acr::mkl}, we made use of the already implemented EasyMKL~\parencite{aiolli2015easymkl} approach.
-                It was the only method, to our knowledge that was readily available library to use with Python\footnote{\href{https://github.com/IvanoLauriola/MKLpy}{MKLpy}}.
+                It was the only method, to our knowledge that was readily available library in Python\footnote{\href{https://github.com/IvanoLauriola/MKLpy}{MKLpy}}.
     
-        \subsubsection{Used metrics}
+        \subsubsection{Metrics for quantitative assessment}
             The overall accuracy is not interesting due to the highly unbalanced label distribution.
             We prefer reporting recall \(\bm{Rec}\) and precision \(\bm{Prec}\) ratios.
             As a reminder these metrics are defined as follows:
@@ -357,7 +362,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
     As a consequence, for now, we limit ourselves to using the baseline features.\\
 
     First, in Section~\ref{subsec::experiments::baseline_feature_analysis::rmse}, the \gls{acr::rmse} is proven to be inadequate for detecting errors in our taxonomy.
-    Second, prediction results from all possible configurations of baseline features are compared in Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}.
+    Secondly, prediction results from all possible configurations of baseline features are compared in Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}.
     Third and last, Section~\ref{subsec::experiments::baseline_feature_analysis::feature_importance} concludes the analysis by studying the feature importance, for all training zones.
 
     \subsection{\texorpdfstring{\acrlong*{acr::rmse}}{RMSE} predictive capacity}
@@ -719,3 +724,16 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
 
     \subsection{Overview}
         \label{subsec::experiments::baseline_feature_analysis::overview}
+        In this section, we have used the \gls{acr::rf} classifier on two types of features: a simple \gls{acr::rmse} and the custom build baseline features.
+        From the experimental results, we have learned that:
+        \begin{itemize}[label=\(\blacktriangleright\)]
+            \item \gls{acr::rmse} fails completly to predict errors defined in our taxonomy;
+            \item \texttt{Building errors} are better detected on \textbf{Elancourt} than on the other scenes;
+            \item \texttt{FOS} is very well detected with over \SI{95}{\percent} F-score, over all areas of interest;
+            \item Except \texttt{FOS}, the more the urban zone is dense the better \texttt{Facet erros} are detected;
+            \item Rare errors such as \texttt{BIT} and \texttt{FIT} (on all urban areas) are poorly detected;
+            \item Geometric features alone is, with a small margin, as good as the other extrinsic based configurations for error detection;
+            \item Consequently, the building type is a good indicator for error detection in the same area;
+            \item \texttt{BUS} is the only error that the other modalities are better at with a large gap;
+            \item Although, in most cases, not improving error prediction, external data based modalities are as important as geometric features.
+        \end{itemize}
