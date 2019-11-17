@@ -150,7 +150,7 @@
             }
         \end{table}
 
-        Second, we investigate how the urban scene composition helps predicting defects in an unseen one.
+        Secondly, we investigate how the urban scene composition helps predicting defects in an unseen one.
         This is called the \texttt{projectivity} comparison.
         For a given test scene $Z_j$ in couples $(Z_i, Z_j)_{\forall i \neq j}$, we compare again results from Tables~\ref{tab::all_f-scores_transferability_f3} and~\ref{tab::all_f-scores_ablation_f3}.
         A gain in performance for a label can be interpreted by the transferability power of its learning process.\\
@@ -540,8 +540,13 @@
         \begin{itemize}[label=\(\blacktriangleright\)]
             \item \texttt{Facet errors} are detected with around a \SI{90}{\percent} F-score unaffected by the urban scenes.
             \item As seen previously on \textbf{\gls{acr::efin}} level 3, \texttt{Building errors} are harder to train on \textbf{Nantes} and \textbf{Paris-13}, with an F-score around \SI{75}{\percent};
-            \item We confirm once again that \texttt{Building errors} learning is harder to transfer than \texttt{Facet errors};
-            \item We also confirm that \textbf{Elancourt} is the best choice to learn \texttt{Building errors} on, as well as the fact that \textbf{Nantes} and \textbf{Paris-13} are similar in composition;
+            \item We confirm once again that:
+            \begin{itemize}[label=\(\blacktriangleright\)]
+                \item \texttt{Building errors} learning is harder to transfer than \texttt{Facet errors};
+                \item \textbf{Elancourt} is the best choice to learn \texttt{Building errors} on;
+                \item \textbf{Nantes} and \textbf{Paris-13} are similar in composition;
+            \end{itemize}
+            \item \SI{20}{\percent} is sufficient for learning on the mixed dataset;
             \item As expected, the distinction between \texttt{Erroneous} and \texttt{Valid} proved to be difficult to learn.
         \end{itemize}
 
@@ -714,7 +719,7 @@
         However, we see how the standard deviations on the fused set seem to be greater than what observed previously in Figure~\ref{fig::f_score_ablation_f3}.
         Moreover, added to the same labels \texttt{BUS} and \texttt{FIB} that were already improved by the use of image based features as shown in Table~\ref{tab::all_f-scores_ablation_f3}, \texttt{BIT} and \texttt{FIT} F-scores are also greatly impacted on the new fused set.
         In fact, the first better performs when only geometric features are used as previously explained before in Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}.
-        For the second, it was image based features that proved to be better suited.
+        For the Secondly, it was image based features that proved to be better suited.
         This agrees with the fact that for the \textbf{Elancourt} \(\rightarrow\) \textbf{Nantes} experiment, image based features were instrumental in better detecting \texttt{FIT} than training on \textbf{Nantes} itself (\textit{cf.} Figure~\ref{tab::transferability_comparison}).
         
     \subsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} results}
@@ -790,7 +795,7 @@
                     This may be explained by the fact that both features have the same dynamic as they represent, in reality, histogram values as discussed in Section~\ref{sec::learned_evaluation::baseline}.
                     As a consequence, in this case, the \gls{acr::svm} considers both feature configurations to be similar unless when fed together to the \gls{acr::svm}.
                     Another explanation is that the parameterization of the classifier was not ideal as it underfits when external modalities are added.
-            \item Second, and more importantly, in some cases, the \gls{acr::svm}, in particular configurations, yields results that exceed the other ones by a large margin.
+            \item Secondly, and more importantly, in some cases, the \gls{acr::svm}, in particular configurations, yields results that exceed the other ones by a large margin.
                     This was the case of \texttt{FUS} on \textbf{Elancourt} (\textit{resp.} \textbf{Na-P13}) with a jump of around \SI{31}{\percent} with the \textbf{Geom.} configuration (\textit{resp.} \SI{38}{\percent}) in F-score and \SI{35}{\percent} for \texttt{FIB} on \textbf{Na-P13} with the \textbf{All} configuration.
                     This could be owed to two possible reasons.
                     Either these feature configurations are actually the best alternatives which is not conflicting with previous findings.
@@ -1141,7 +1146,7 @@
             There are however exceptions that we divide into two cases.
             The first is where \texttt{deletion} was better with a small margin that can be explained by the noise of training data selection.
             This was the case of \texttt{BIT} on \textbf{Elancourt} and \texttt{FIG} on \textbf{Na-P13}.
-            On the contrary, the second, and more important, case is where the margin is large which was the case of \texttt{FIT} on \textbf{Elancourt} where \textbf{Geom. \(\oplus\) S(d)-Im.} had at least \SI{9}{\percent} more in F-score than the other configurations.
+            On the contrary, the Secondly, and more important, case is where the margin is large which was the case of \texttt{FIT} on \textbf{Elancourt} where \textbf{Geom. \(\oplus\) S(d)-Im.} had at least \SI{9}{\percent} more in F-score than the other configurations.
             At this point we do not have any explication to why this is the case.
             This requires scalability experimentations as with Section~\ref{sec::more_experiments::scalability} to see if this feature configuration is robust enough.\\
 
