@@ -2213,10 +2213,10 @@
             \item In contrast to the baseline version, height based features with \gls{acr::scatnet} proved to be crucial for detecting error labels;
             \item The \texttt{channel} option was best when used with an \gls{acr::rf}, while \texttt{deletion} worked best with the \gls{acr::svm} classifier;
             \item Using \gls{acr::scatnet} derived features, \gls{acr::svm} proved to be better overall, especially on \textbf{Elancourt}, than using an \gls{acr::rf};
-            \item Once again, the \gls{acr::svm} was not well parameterized to take full advantage of the extrinsic features;
-            \item Graph kernels imporve prediction results of labels provided they are frequent enough;
-            \item Although being helpful, height based features have the least importance ratio compared to the other modalities for both classifiers;
-            \item Graph kernels, outnumbering the kernels of extrinsic features, are, in most cases, as good as baseline geometric features when combined the \gls{acr::scatnet} derived ones;
+            \item Once again, the \gls{acr::svm} proved to be not well parameterized to take full advantage of the extrinsic features;
+            \item Graph kernels, compared to baseline features, imporve prediction results of labels provided they are frequent enough;
+            \item Although being helpful, height based features have, by a large margin, the least importance ratio compared to the other modalities for both classifiers;
+            \item Graph kernels, outnumbering the kernels for extrinsic modalities, have reduced the potency of the \gls{acr::scatnet} derived features;
             \item \textbf{Elancourt} the easiest to learn on with a minimum F-score of \SI{72}{\percent} and \SI{85}{\percent} on 7 out of 9 of the error labels;
             \item \texttt{Building errors} proved again to yield worse scores on \textbf{Na-P13}.
         \end{itemize}
