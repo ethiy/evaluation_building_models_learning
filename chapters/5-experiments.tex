@@ -722,12 +722,12 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
         However, during training, all modalities are relevant with importance ratios approximating \num[fraction-function = \sfrac]{1/3} as shown in Figure~\ref{fig::feature_importances_rf_bl}.
         As a consequence, for subsequent experimentations all configurations are taken into consideration.
 
-    \subsection{Overview}
-        \label{subsec::experiments::baseline_feature_analysis::overview}
+    \subsection{Summary}
+        \label{subsec::experiments::baseline_feature_analysis::summary}
         In this section, we have used the \gls{acr::rf} classifier on two types of features: a simple \gls{acr::rmse} and the custom build baseline features.
         From the experimental results, we have learned that:
         \begin{itemize}[label=\(\blacktriangleright\)]
-            \item \gls{acr::rmse} fails completly to predict errors defined in our taxonomy;
+            \item The \gls{acr::rmse} fails completly to predict errors defined in our taxonomy;
             \item \texttt{Building errors} are better detected on \textbf{Elancourt} than on the other scenes;
             \item \texttt{FOS} is very well detected with over \SI{95}{\percent} in F-score, over all areas of interest;
             \item Except \texttt{FOS}, the more the urban zone is dense the better \texttt{Facet erros} are detected;
