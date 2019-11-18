@@ -11,51 +11,56 @@ Secondly, Section~\ref{sec::conclusion::perspectives} addresses some issues that
 \section{\textsc{Summary}}
     \label{sec::conclusion::summary}
     A learning framework was proposed to semantically evaluate the quality of \gls{acr::3d} models of buildings.
-    For that purpose, errors were hierarchically organized into a novel flexible taxonomy.
+    For that purpose, based on our observation over three different urban areas, a general categorization of errors is drawn in a hierarchical and modular manner.
     It aims to handle the large diversity of urban environments and varying requirements stemming from end-users (geometric accuracy and level of details).
-    Based on the desired \gls{acr::lod}, exclusivity and semantic level, an error collection is considered.
-    Model quality is then predicted using a supervised Random Forest classifier.
+    Based on the desired \acrlong{acr::elod}, exclusivity and \acrlong{acr::efin}, an error collection is considered.
+    Model quality is then predicted using either a supervised \acrlong{acr::rf} or \acrlong{acr::svm} classifier.
     Each model provides intrinsic geometrical characteristics that are compiled in a handcrafted feature vector.
     Remote sensing modalities can be introduced.
     This helps better describing building models and detecting errors.
     Attributes can indeed be extracted by comparing the \gls{acr::3d} model with optical images or depth data at the spatial resolution at least similar to the input \gls{acr::3d} model.
-    Experiments shows it helps detecting hard cases both for geometrical and topological errors.\\
+    Experiments shows it helps detecting hard cases both for geometrical and topological errors with the right choice of classifiers.
+    In addition to these baseline features, we also made use of graph kernels in order to better take into account the geometric structure of the evaluated model.
+    We also utilized the \acrlong{acr::scatnet} so as to better extract information from the extrinsic modalities.\\
 
-    This new framework was applied to the case of aerial urban reconstruction, where features are extracted from Very High Resolution airborne images and a \gls*{acr::dsm}.
-    A fully annotated dataset containing 3,235 aerial reconstructed building models with high diversity and from three distinct areas was used to test our method.
-    It was associated with multimodal RGB optical and Digital Surface Model features.
+    This new framework was applied to the case of aerial urban reconstruction, where features are extracted from Very High Resolution airborne images and a \acrlong{acr::dsm}.
+    A fully annotated dataset containing 3,235 aerial reconstructed building models with high diversity and from three distinct areas was used to assess our method.
+    Externel remote sensing data consisted in multimodal RGB optical and Digital Surface Model features.
     Although being mitigated over under-represented errors, results are satisfactory in the well balanced cases.
+    Moreover, with the right choice of the classifier as well as the feature configuration, we can achieve better results than those obtained with the baseline features.
     More importantly, we proved that the urban scene composition affects greatly error detection.
     In fact, some predictions scores are not only stable, when training on a different urban scene, they even outperform when learning on the same scene.
-    Additionally, we reported how, for a heterogeneous training dataset, the size of the training set have, practically no effect, as test score stay stable for all errors.
+    Additionally, we reported how, for a heterogeneous training dataset, the size of the training set have, practically, no effect as test score stay stable for all errors.
     This demonstrates that the proposed framework can be easily scaled with the right choice of training samples with little manually generated data.
     This exactly answers to the raised problematic, contrarily to the present state-of-the-art literature.
+    We believe our framework is robust enough to evaluate unseen areas.
+    It represents also a strong basis for subsequent manual or automatic \gls{acr::3d} building model correction.
 
 \section{\textsc{Perspectives}}
     \label{sec::conclusion::perspectives}
     The goal of this work was to introduce an new paradigm of large scale and automated semantic evaluation of building models which was largely understudied in the community.
     Thanks to a thourough experimental analysis, we have proven the feasability of our approach which is based on the supervized formulation of the error detection as well as the error taxonomy definition.
     Yet some questions went unanswered.
-    We present hereafter some issues that should be discussed further.\\
+    We present hereafter some issues that should be adressed further.\\
 
     The proposed taxonomy was mainly developped based on observations in the overhead case.
-    Terrestrial data has become lately more ubiquituous.
+    \textbf{Terrestrial data} has become lately more ubiquituous.
     As a consequence, the number of façade modeling methods have proliferated accordingly.
     The relevance of the proposed errors was briefly discussed for this case in Section~\ref{sec::semantic_evaluation::overhead} but is still to be proven experimentally.\\
 
     This error taxonomy although providing valuable information on the type of defects that can affect the building model.
     It was indeed developped so as to guide human operators correct models through a concise and meaningful description of the failures altering said models.
-    However, our approach does not quantify the detected errors to further help the model correction process.
-    For instance, if we imagine a model with a planar facet the slope of which is imprecisely estimated.
+    However, our approach does not \textbf{quantify the detected errors} to further help the model correction process.
+    For instance, if we imagine a model with a planar facet with an imprecisely estimated slope.
     This corresponds to a \texttt{\acrfull{acr::fig}} error, but the operator would have no idea by how much the facet was tilted.
     As a consequence, a possible extension of this work is to associate appropriate metrics to each \texttt{atomic} error which would provide actionable information on the detected error.
     Such metrics have already been studied profusely in the literature as shown in Section~\ref{sec::state_of_the_art::quality}.\\
 
-    Always related to building model correction, error existance was predicted at building level even for facet level defects.
-    This is actually not an ideal setting for a postprocesing step as errors are not localized.
-    This could be solved by relying on the facet graph structure of the models (\textit{cf.} Section~\ref{subsec::learned_evaluation::baseline::geometric}) and labelizing individual facets.\\
+    Always related to building model correction, error existance was predicted at building level even for \textbf{facet level} defects.
+    This is actually not an ideal setting for a postprocessing step as errors are not localized.
+    This could be solved by relying on the facet graph structure of the models (\textit{cf.} Section~\ref{subsec::learned_evaluation::baseline::geometric}) and labeling individual facets.\\
 
-    In order to scale the whole building modeling pipeline and linked to automatic quality evaluation, the question of model correction automation steps into light.
+    In order to scale the whole building modeling pipeline and linked to automatic quality evaluation, the question of model \textbf{correction automation} steps into light.
     Indeed, one could imagine how an automatic evaluation of building model yielding semantic localized errors along with specific metrics can be useful for automated model correction.
     In fact, to each error could be associated a set of unitary actions based on the discussion in Section~\ref{sec::semantic_evaluation::overhead}.
     Hence, the correction step could be designed as an optimization problem which would determine the best combination of actions that can solve the raised issues while making use of the corresponding error metrics as an \textit{a priori}.
@@ -63,12 +68,12 @@ Secondly, Section~\ref{sec::conclusion::perspectives} addresses some issues that
     
     In the experimental study, all models originated from one modeling approach.
     The scalability was only tested in terms of the considered urban area.
-    Actually, it would be interesting to test the transferability of learned classifiers depending on the model origin especially as intrinsic features play an important role in error prediction.\\
+    Actually, it would be interesting to test the transferability of learned classifiers depending on the \textbf{model origin} especially as intrinsic features play an important role in error prediction.\\
 
     Connected to the learning issues, the proposed advanced features had a positive but limited impact on the predictability of errors.
-    Deep learning proved in the last decade to be the state-of-the-art approach in Computer Vision tasks.
+    \textbf{Deep learning} proved in the last decade to be the state-of-the-art approach in Computer Vision tasks.
     However, it requires a large number of training instances.
     Manual annotation necessitates a considerable effort especially for expert tasks as ours.
     To alleviate this issue there are two possibilities.
-    First, we can develop an active learning approach that can help scale the annotation effort.
-    Secondly, we can simulate errors by altering ground truth models like th ones presented in~\parencite{rottensteiner2012isprs}.
+    First, we can develop an \textbf{active learning} approach that can help scale the annotation effort.
+    Secondly, we can \textbf{simulate errors} by altering ground truth models like th ones presented in~\parencite{rottensteiner2012isprs}.
