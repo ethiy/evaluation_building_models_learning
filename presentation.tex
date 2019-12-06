@@ -1,0 +1,377 @@
+\documentclass[10pt, export]{beamer}
+
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}		
+\usepackage[english]{babel}
+
+\usepackage{siunitx}
+
+\usepackage{xcolor}
+\definecolor{darkgreen}{RGB}{0, 155, 85}
+
+\definecolor{LOSS45}{RGB}{130,8,8}
+\definecolor{LOSS3545}{RGB}{183,10,10}
+\definecolor{LOSS2535}{RGB}{255,0,0}
+\definecolor{LOSS1525}{RGB}{255,122,12}
+\definecolor{LOSS0515}{RGB}{255,181,12}
+\definecolor{STBL}{RGB}{215,215,215}
+\definecolor{GAIN0515}{RGB}{58,255,12}
+\definecolor{GAIN1525}{RGB}{58,178,12}
+\definecolor{GAIN2535}{RGB}{56,136,17}
+\definecolor{GAIN3545}{RGB}{50,119,16}
+\definecolor{GAIN45}{RGB}{48,83,56}
+
+
+\usepackage{graphicx}
+\usepackage{floatrow}
+\usepackage[labelsep=colon]{caption}
+\usepackage{subcaption}
+\renewcommand{\thesubfigure}{\alph{subfigure}}
+\captionsetup[subfigure]{subrefformat=parens, labelformat=parens, labelsep=space}
+\usepackage{rotating}
+
+\usepackage{enumitem}
+
+\usepackage{standalone}
+
+\usepackage{multirow}
+
+\usepackage{array}
+\newcolumntype{x}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\usepackage{booktabs}
+\usepackage{makecell}
+
+\usepackage{tikz}
+\usetikzlibrary{calc, 3d, shadows, decorations, shapes.arrows, fadings}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{forest}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{bbold}
+\usepackage{stmaryrd}
+
+    
+\usepackage[
+    backend=biber,
+    style=authoryear,
+    dashed=false,
+    sorting=nty,
+    maxbibnames=5,
+    minbibnames=5,
+    maxcitenames=2,
+    mincitenames=2,
+    uniquelist=false,
+    uniquename=false,
+    hyperref=true,
+    backref=true,
+    backrefstyle=all+,
+    isbn=false,
+    url=false,
+    doi=false
+]{biblatex}
+\usepackage{xpatch}
+
+\addbibresource{references.bib}
+
+\usepackage[acronym, toc, automake=true]{glossaries}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=false,
+    pdftitle={Semantic aware quality evaluation of 3D building models},
+    pdfauthor={Oussama Ennafii},
+    pdfkeywords={3D urban modeling} {buildings} {quality assessment} {taxonomy} {classification} {error detection} {geometry} {aerial imagery} {Very High Spatial Resolution} {Digital Surface Model},
+    pdfstartview={FitH},
+    unicode=true
+}
+
+\setbeamerfont{footnote}{size=\tiny}
+
+\usepackage[useregional]{datetime2}
+
+\usepackage{style/glossaries}
+
+\usetheme{ign}
+
+\title{Semantic aware quality evaluation of 3D building models}
+\subtitle{a scalable approach}
+\date{\tiny \DTMdisplaydate{2020}{1}{10}{5}}
+\author{
+    Oussama Ennafii
+}
+
+\begin{document}
+    \begin{frame}[plain]
+        \titlepage{}
+    \end{frame}
+
+    \section{Introduction}        
+        \begin{frame}{Motivation}
+            % \begin{figure}
+            %     \begin{center}
+            %         \includestandalone[mode=buildnew, width=\textwidth]{figures/context}
+            %     \end{center}
+            % \end{figure}
+        \end{frame}
+        \begin{frame}{Problem statement}
+            \begin{block}{\textcolor{purple}{\textbf{Goal}}}
+                \underline{Detect} and \underline{describe} semantic errors that affect building 3D models.
+            \end{block}
+            ~\\
+            \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                \item<2-> Semantic errors \textbf{independent} from \underline{reconstruction methods} and \underline{urban scenes}.
+                \item<3-> \underline{Transferability}, and \underline{scalability}, of the evaluation method.
+            \end{itemize}
+        \end{frame}
+
+    \section{Methodology}
+        \begin{frame}{Main ideas behind our approach}
+            \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                \item<1-> \underline{Compile} errors that affect building models in a \underline{taxonomy};
+                \item<2-> Evaluation at \underline{building level};
+                \item<3-> \underline{No reference} 3D models $\longrightarrow$ a \underline{supervised} classification problem;
+                \item<4-> Study in a \underline{2.5D overhead (aerial)} modeling setting.
+            \end{itemize}
+        \end{frame}
+        \begin{frame}{Taxonomy structure}
+            Two criteria determine the taxonomy structure:
+            \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                \item<2-> the \textbf{\acrfull{acr::lod}};
+                    % \begin{figure}
+                    %     \begin{center}
+                    %         \includegraphics[width=\textwidth]{images/introduction/lods}
+                    %     \end{center}
+                    % \end{figure}
+                \item<3-> the \textbf{finesse}: the semantic evaluation level.
+            \end{itemize}
+        \end{frame}
+        % \begin{frame}{Error taxonomy (\texttt{finesse} $= 0$)}
+        %     \begin{figure}
+        %         \includestandalone[mode=buildnew, width=\textwidth]{finesse_0_taxonomy}
+        %     \end{figure}
+        % \end{frame}
+        % \begin{frame}{Error taxonomy (\texttt{finesse} $= 1$)}
+        %     \begin{figure}
+        %         \includestandalone[mode=buildnew, width=\textwidth]{finesse_1_taxonomy}
+        %     \end{figure}
+        % \end{frame}
+        % \begin{frame}{Error taxonomy (\texttt{finesse} $= 2$)}
+        %     \only<1|handout:0>{
+        %         \begin{figure}
+        %             \includestandalone[mode=buildnew, width=\textwidth]{finesse_2_taxonomy}
+        %         \end{figure}
+        %     }
+        %     \only<2>{
+        %         \begin{figure}
+        %             \includestandalone[mode=buildnew, width=\textwidth]{finesse_2_taxonomy_lods}
+        %         \end{figure}
+        %     }
+        % \end{frame}
+        % \begin{frame}{Error taxonomy (\texttt{finesse} $= 3$, $\leq$ \acrshort{acr::lod}-1)}
+        %     \begin{figure}
+        %         \includestandalone[mode=buildnew, width=\textwidth]{finesse_3_bul_taxonomy}
+        %     \end{figure}
+        % \end{frame}
+        % \begin{frame}{Building \texttt{atomic} errors: 2.5D overhead reconstruction case}
+        %     \only<1|handout:1>{
+        %         \begin{figure}
+        %             \begin{center}
+        %                 \begin{subfigure}{.4\textwidth}
+        %                     \centering
+        %                     \fbox{\includegraphics[height=.45\textheight]{images/errors/building/under_segmentation}}
+        %                     \caption{\label{fig::bul_under} Under segmentation (\texttt{BUS}).}
+        %                 \end{subfigure}
+        %                 \begin{subfigure}{.5\textwidth}
+        %                     \centering
+        %                     \fbox{\includegraphics[height=.45\textheight]{images/errors/building/over_segmentation}}
+        %                     \caption{\label{fig::bul_over} Over segmentation (\texttt{BOS}).}
+        %                 \end{subfigure}
+        %             \end{center}
+        %         \end{figure}
+        %     }
+        %     \only<2|handout:2>{
+        %         \begin{figure}
+        %             \begin{center}
+        %                 \begin{subfigure}{.45\textwidth}
+        %                     \centering
+        %                     \fbox{\includegraphics[height=.5\textheight]{images/errors/building/border}}
+        %                     \caption{\label{fig::bul_footprint} Imprecise border (\texttt{BIB}).}
+        %                 \end{subfigure}
+        %                 \begin{subfigure}{.45\textwidth}
+        %                     \centering
+        %                     \fbox{\includegraphics[height=.5\textheight]{images/errors/building/topology}}
+        %                     \caption{\label{fig::bul_height} Inaccurate topology (\texttt{BIT}).}
+        %                 \end{subfigure}
+        %             \end{center}
+        %         \end{figure}
+        %     }
+        % \end{frame}
+        % \begin{frame}{Error taxonomy (\texttt{finesse} $= 3$, $\leq$ \acrshort{acr::lod}-2)}
+        %     \begin{figure}
+        %         \includestandalone[mode=buildnew, width=\textwidth]{finesse_3_all_taxonomy}
+        %     \end{figure}
+        % \end{frame}
+        % \begin{frame}{Facet \texttt{atomic} errors: 2.5D overhead reconstruction case}
+        %     \only<1|handout:1>{
+        %         \begin{figure}
+        %             \begin{center}
+        %                 \begin{subfigure}{.31\textwidth}
+        %                     \centering
+        %                     \fbox{\includegraphics[height=.4\textheight]{images/errors/facet/under_segmentation}}
+        %                     \caption{\label{fig::fac_under} Under segmentation (\texttt{FUS})}
+        %                 \end{subfigure}
+        %                 \begin{subfigure}{.31\textwidth}
+        %                     \centering
+        %                     \fbox{\includegraphics[height=.4\textheight]{images/errors/facet/over_segmentation}}
+        %                     \caption{\label{fig::fac_over} Over segmentation (\texttt{FOS})}
+        %                 \end{subfigure}
+        %                 \begin{subfigure}{.31\textwidth}
+        %                     \centering
+        %                     \fbox{\includegraphics[height=.4\textheight]{images/errors/facet/geometry}}
+        %                     \caption{\label{fig::fac_height} Imprecise geometry (\texttt{FIG})}
+        %                 \end{subfigure}
+        %             \end{center}
+        %         \end{figure}
+        %     }
+        %     \only<2|handout:2>{
+        %         \begin{figure}
+        %             \begin{center}
+        %                 \begin{subfigure}{.45\textwidth}
+        %                     \centering
+        %                     \fbox{\includegraphics[height=.65\textwidth]{images/errors/facet/border}}
+        %                     \caption{\label{fig::fac_footprint} Imprecise borders (\texttt{FIB})}
+        %                 \end{subfigure}
+        %                 \begin{subfigure}{.45\textwidth}
+        %                     \centering
+        %                     \fbox{\includegraphics[height=.65\textwidth]{images/errors/facet/topology}}
+        %                     \caption{\label{fig::fac_height} Inaccurate topology (\texttt{FIT})}
+        %                 \end{subfigure}
+        %             \end{center}
+        %         \end{figure}
+        %     }
+        % \end{frame}
+        % \begin{frame}{The evaluation pipeline}
+        %     \begin{figure}
+        %         % \includestandalone[mode=buildnew, height=.81\textheight]{graphical_pipeline}
+        %     \end{figure}
+        % \end{frame}
+    \section{Experiments}
+        % \begin{frame}{Datasets: urban scenes}
+        %     \begin{figure}
+        %         \begin{center}
+        %             % \includestandalone[mode=buildnew, width=.9\textwidth]{dataset}
+        %         \end{center}
+        %     \end{figure}
+        % \end{frame}
+        % \begin{frame}{Ablation study: Elancourt example}
+        %     \begin{table}
+        %         \scriptsize
+        %         \begin{center}
+        %             \scriptsize
+        %             \begin{tabular}{|x{.5cm} | x{.8cm} x{.8cm} | x{.9cm} x{.9cm} | x{.8cm} x{.8cm} | x{.8cm} x{.8cm}|}
+        %                 \hline
+        %                 &\multicolumn{2}{x{1.6cm}|}{\textbf{Geom.}} & \multicolumn{2}{x{1.8cm}|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{x{1.6cm}|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{1.6cm}|}{\textbf{All}}\\
+        %                 \cline{2-9}
+        %                 &\textbf{Rec.} & \textbf{Prec.} & \textbf{Rec.} & \textbf{Prec.} & \textbf{Rec.} & \textbf{Prec.} & \textbf{Rec.} & \textbf{Prec.}\\
+        %                 \hline
+        %                 \texttt{BOS} & \textbf{93.96} & 76.15 & 91.43 & \textbf{77.76} & 91.51 & 76.08 & 90.83 & 76.14 \\
+        %                 \hline
+        %                 \strut\\[-\normalbaselineskip]
+        %                 \only<3|handout:0>{\\[-\normalbaselineskip]\rowcolor{IGNGreen}}\texttt{BUS} & 32.98 & \textbf{76.47} & \textbf{41.86} & 75.57 & 40.38 & 71.00 & 39.32 & 71.81 \\
+        %                 \hline
+        %                 \strut\\[-\normalbaselineskip]
+        %                 \only<5|handout:0>{\\[-\normalbaselineskip]\rowcolor{IGNRed}}\texttt{BIB} & 12.32 & 67.57 & 12.81 & \textbf{68.42} & 16.26 & 67.35 & \textbf{16.75} & 68.0 \\
+        %                 \hline
+        %                 \strut\\[-\normalbaselineskip]
+        %                 \only<4|handout:0>{\\[-\normalbaselineskip]\rowcolor{orange}}\only<5|handout:0>{\\[-\normalbaselineskip]\rowcolor{IGNRed}}\texttt{BIT} & \textbf{25.25} & 92.59 & 20.20 & 90.91 & 20.20 & \textbf{95.24} & 11.11 & 91.67 \\
+        %                 \hline
+        %                 \hline
+        %                 \texttt{FOS} & 98.91 & 99.07 & 98.91 & \textbf{99.30} & \textbf{98.99} & 98.84 & 98.91 & 98.84 \\
+        %                 \hline
+        %                 \strut\\[-\normalbaselineskip]
+        %                 \only<5|handout:0>{\\[-\normalbaselineskip]\rowcolor{IGNRed}}\texttt{FUS} & \textbf{1.90} & 54.55 & 0.63 & \textbf{66.67} & 1.61 & 50 & 1.27 & \textbf{66.67} \\
+        %                 \hline
+        %                 \strut\\[-\normalbaselineskip]
+        %                 \only<5|handout:0>{\\[-\normalbaselineskip]\rowcolor{IGNRed}}\texttt{FIB} & \textbf{9.17} & 87.5 & 0 & --- & 8.30 & 82.61 & 7.42 & \textbf{100} \\
+        %                 \hline
+        %                 \strut\\[-\normalbaselineskip]
+        %                 \only<5|handout:0>{\\[-\normalbaselineskip]\rowcolor{IGNRed}}\texttt{FIT} & \textbf{6.67} & \textbf{100} & 8.73 & 95.24 & 3.33 & \textbf{100} & 3.33 & \textbf{100} \\
+        %                 \hline
+        %                 \texttt{FIG} & \textbf{80.54} & 73.14 & 80.45 & \textbf{72.62} & 78.69 & 72.12 & 79.02 & 71.82 \\
+        %                 \hline
+        %             \end{tabular}
+        %         \end{center}
+        %     \end{table}
+        %     \only<1>{
+        %         \begin{center}
+        %             \footnotesize Results in percentage obtained using \texttt{RF} (\underline{1,000 trees} \& \underline{max depth 4}) and \underline{10-fold cross. val}.
+        %         \end{center}
+        %     }
+        %     \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+        %         \item[\textcolor{IGNDarkGreen}{$\blacktriangleright$}]<2-> \footnotesize In most cases \textbf{Geom.} is sufficient;
+        %         \item<3-> \footnotesize Except for \texttt{BUS} $\rightarrow$ other modalities have a big impact ($\approx$ + 10\%).
+        %         \item[\textcolor{orange}{$\blacktriangleright$}]<4-> \footnotesize Only \textbf{Geom.} is even \underline{the best} for \texttt{BIT}.
+        %         \item[\textcolor{IGNRed}{$\blacktriangleright$}]<5-> \footnotesize Highly unbalanced labels are \underline{hard} to detect.
+        %     \end{itemize}
+        % \end{frame}
+        % \begin{frame}{Transferability}
+        %     % \begin{table}
+        %     %     \scriptsize
+        %     %     \begin{center}
+        %     %         \begin{tabular}{| x{1.5cm}| x{.4cm} | x{.4cm} | x{.4cm} | x{.4cm} | x{.4cm} | x{.4cm} | x{.4cm} | x{.4cm} | x{.4cm} |}
+        %     %             \hline
+        %     %             &\texttt{BOS}  & \texttt{BUS} &\texttt{BIB} &\texttt{BIT} &\texttt{FOS}  & \texttt{FUS} &\texttt{FIB} &\texttt{FIT} &\texttt{FIG} \\
+        %     %             \hline
+        %     %             Elancourt $\rightarrow$ Nantes &\cellcolor{IGNRed} & \cellcolor{IGNRed}&\cellcolor{IGNRed}& \cellcolor{IGNRed}& \cellcolor{IGNGreen}& \cellcolor{IGNGreen}&\cellcolor{IGNGreen} Im. & \cellcolor{IGNRed}&\cellcolor{IGNGreen}\\
+        %     %             \hline
+        %     %             Elancourt $\rightarrow$ Paris-13  & \cellcolor{IGNRed}& \cellcolor{IGNRed}& \cellcolor{IGNGreen}& \cellcolor{IGNRed}& \cellcolor{IGNGreen}& \cellcolor{IGNGreen}Im.& \cellcolor{IGNGreen}Im.& \cellcolor{IGNRed}&\cellcolor{IGNGreen}\\
+        %     %             \hline
+        %     %             Nantes $\rightarrow$ Paris-13  & \cellcolor{IGNRed}& \cellcolor{IGNRed}& \cellcolor{IGNDarkGrey} & \cellcolor{IGNGreen}& \cellcolor{IGNGreen}& \cellcolor{IGNGreen}& \cellcolor{IGNGreen}& \cellcolor{IGNDarkGrey} &\cellcolor{IGNGreen}\\
+        %     %             \hline
+        %     %             Nantes $\rightarrow$ Elancourt  &\cellcolor{IGNGreen} & \cellcolor{IGNRed}& \cellcolor{IGNRed}&\cellcolor{IGNGreen}All & \cellcolor{IGNGreen}& \cellcolor{IGNRed}&\cellcolor{IGNRed}Im. &\cellcolor{IGNGreen}Im. &\cellcolor{IGNGreen}\\
+        %     %             \hline
+        %     %             Paris-13 $\rightarrow$ Nantes  &\cellcolor{IGNRed} & \cellcolor{IGNRed}& \cellcolor{IGNDarkGrey} & \cellcolor{IGNGreen}&\cellcolor{IGNGreen} & \cellcolor{IGNRed}& \cellcolor{IGNGreen}& \cellcolor{IGNDarkGrey} & \cellcolor{IGNRed} Hei.\\
+        %     %             \hline
+        %     %             Paris-13 $\rightarrow$ Elancourt &\cellcolor{IGNGreen} &\cellcolor{IGNRed} & \cellcolor{IGNGreen}Im. & \cellcolor{IGNGreen}& \cellcolor{IGNGreen}& \cellcolor{IGNRed}& \cellcolor{IGNRed}Im. & \cellcolor{IGNDarkGrey} & \cellcolor{IGNGreen}\\
+        %     %             \hline
+        %     %         \end{tabular}
+        %     %         \caption{\footnotesize \textcolor{IGNRed}{$\blacksquare$}: Loss in F-score, \textcolor{IGNGreen}{$\blacksquare$}: Stability or gain in F-score.}
+        %     %     \end{center}
+        %     \end{table}
+        %     \uncover<2->{
+        %         \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+        %             \item<2-> \footnotesize Only 8/24 of \texttt{Building errors} transferability cases are \textcolor{IGNGreen}{positive}.
+        %             \item<3-> \footnotesize \texttt{Facets errors} are more transferable: 19/30 are \textcolor{IGNGreen}{positive}.
+        %             \item<4-> \footnotesize Additional modalities play a \underline{critical role} in error prediction.
+        %         \end{itemize}
+        %     }
+        % \end{frame}
+        
+    \section{Conclusion}
+        \begin{frame}{\textcolor{yellow}{Conclusion} \& \textcolor{purple}{Perspectives}}
+            \begin{itemize}[label=$\blacktriangleright$, font=\color{yellow}, itemsep=2em]
+                \item<1-> \textbf{Flexible, robust and hierarchical} taxonomy;
+                \item<2-> \textbf{Fast, lightweight and modular} pipeline for model evaluation;
+                \item<3-> Pipeline tested with \textbf{baseline} handcrafted features:
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item<4-> Geometric features are often sufficient for error prediction;
+                        \item<5-> Adding modalities is most helpfull in transferability.
+                    \end{itemize}
+            \end{itemize}
+            \uncover<6->{
+                ~\\
+                Future work:
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{purple}, itemsep=2em]
+                    \item<6-> Extend to richer features $\longrightarrow$ Graph kernels, Scattering.
+                    \item<7-> Dataset augmentation $\longrightarrow$ \textbf{Simulate errors}.
+                \end{itemize}
+            }
+        \end{frame}
+\end{document}

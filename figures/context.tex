@@ -1,0 +1,26 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.arrows}
+
+\usepackage{graphicx}
+
+\begin{document}
+    \begin{tikzpicture}
+        \path (0, 0) node (sampled_pc) {\includegraphics[width=2cm]{images/context/sampled_pc}};
+        \path (sampled_pc.north) node[anchor=south, text width=5em] (sampled_pc_legend) { (a) Remote sensing data.};
+        \path (sampled_pc.east) node[anchor=west] (3d_reconstruction) [
+            draw,
+            single arrow,
+            color=blue,
+            minimum height=1cm
+        ] {3D urban reconstruction};
+        \path (3d_reconstruction.east) node[anchor=west] (3d_model) {\includegraphics[width=2cm]{images/context/3d_model}};
+        \path (3d_model.south west) node[anchor=north east, text width=5em, Green] (facet_legend) {\tiny Facet $\equiv$ architectural feature.};
+        \path (3d_model) + (-.25, .1) node (facet) {};
+        \draw[->, orange] (facet_legend.east) -| (facet);
+        \path (3d_model.north) node[anchor=south, text width=6em] (3d_model_legend) {\scriptsize (b) Reconstructed model.};
+        \path (3d_model.south east) node [anchor=north west, red, text width=5em] (evaluation) {How good is this model?};
+        \draw[->, red] (3d_model.east) -| (evaluation.north);
+    \end{tikzpicture}
+\end{document}
