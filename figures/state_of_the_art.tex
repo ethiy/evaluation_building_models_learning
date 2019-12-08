@@ -1,0 +1,83 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning, patterns, shapes.misc}
+
+\usepackage[
+    backend=biber,
+    style=authoryear,
+    dashed=false,
+    sorting=nty,
+    maxbibnames=5,
+    minbibnames=5,
+    maxcitenames=2,
+    mincitenames=2,
+    uniquelist=false,
+    uniquename=false,
+    hyperref=true,
+    backref=true,
+    backrefstyle=all+,
+    isbn=false,
+    url=false,
+    doi=false
+]{biblatex}
+\addbibresource{references.bib}
+
+\begin{document}
+    \tikzset{
+        data/.style={
+            draw,
+            minimum height = 1cm,
+            minimum width  = 8cm,
+            fill           = yellow!30
+        }
+    }
+    \tikzset{
+        output/.style={
+            draw,
+            minimum height = 4 cm,
+            minimum width  = 1 cm,
+            fill           = yellow!30
+        }
+    }
+    \tikzset{
+        intersection/.style={
+            draw,
+            minimum height = 4 cm,
+            minimum width  = 8 cm
+        }
+    }
+    \tikzset{
+        cross/.style={
+            cross out,
+            draw=black,
+            minimum size=2*(#1-\pgflinewidth),
+            inner sep=0pt,
+            outer sep=0pt
+        },
+        cross/.default={5pt}
+    }
+
+	\begin{tikzpicture}
+		\node[data]  (manual) {\textbf{Manual data}};
+		\path (manual.east) + (4, 0) node[data] (sensor) {\textbf{Sensor data}};
+		\path (manual.north west) + (-.5, 2) node[output] (semantic_errors) {\rotatebox{90}{\textbf{Semantic errors}}};
+		\path (semantic_errors.north) + (0, 2) node[output] (geom_ind) {\rotatebox{90}{\textbf{Geometric indices}}};
+
+    \path (manual.north) + (0, 2) node[intersection] (manual_semantic) {};
+		\path (manual_semantic.north) + (0, 2) node[intersection] (manual_indx) {};
+		\path (sensor.north) + (0, 2) node[intersection] (sensor_semantic) {};
+		\path (sensor_semantic.north) + (0, 2) node[intersection] (sensor_indx) {};
+
+	    \path (manual_indx) + (0, -.5) node[cross, label=below:\parencite{Zeng2014}]{};
+	    \path (manual_indx) + (-1, 1) node[cross, label=above:\parencite{Voegtle2003}]{};
+	    \path (manual_indx) + (1.5, .5) node[cross, label=below:\parencite{Kaartinen2005}]{};
+	    \path (sensor_indx) node[cross, label=below:\parencite{Akca2010}]{};
+	    \path (sensor_semantic) + (0, 1.75) node[cross, label=below:\parencite{OudeElberink2010}]{};
+	    \path (sensor_semantic) + (-.75, .25) node[cross, label=below:\parencite{boudet2006supervised}]{};
+	    \path (sensor_semantic) + (1.5, -.75) node[cross, label=below:\parencite{Michelin2013}]{};
+	\end{tikzpicture}
+\end{document}

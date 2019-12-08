@@ -56,7 +56,6 @@
 \usepackage{bm}
 \usepackage{bbold}
 \usepackage{stmaryrd}
-
     
 \usepackage[
     backend=biber,
@@ -114,21 +113,32 @@
 
     \section{Introduction}        
         \begin{frame}{Motivation}
-            % \begin{figure}
-            %     \begin{center}
-            %         \includestandalone[mode=buildnew, width=\textwidth]{figures/context}
-            %     \end{center}
-            % \end{figure}
+            \centering
+            \includestandalone[mode=buildnew, width=\textwidth]{figures/context}
         \end{frame}
-        \begin{frame}{Problem statement}
-            \begin{block}{\textcolor{purple}{\textbf{Goal}}}
-                \underline{Detect} and \underline{describe} semantic errors that affect building 3D models.
-            \end{block}
-            ~\\
-            \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
-                \item<2-> Semantic errors \textbf{independent} from \underline{reconstruction methods} and \underline{urban scenes}.
-                \item<3-> \underline{Transferability}, and \underline{scalability}, of the evaluation method.
+        \begin{frame}{Goal}
+            \begin{itemize}
+                \item<1-> Define errors that can affect building \gls{acr::3d} models.
+                \item<2-> Devise a method for error detection.
             \end{itemize}
+            \begin{itemize}
+                \item<1-> Errors not in format but in fidelity to the real world.
+                \item<1-> Generalization= compromise fidelity vs. simplification => semantics.
+            \end{itemize}
+        \end{frame}
+        \begin{frame}{Constraints}
+            \begin{itemize}
+                \item<1-> Large-scale.
+                \item<2-> Automation.
+            \end{itemize}
+            \begin{itemize}
+                \item<2-> Semantic errors \textbf{independent} from \underline{reconstruction methods} and \underline{urban scenes}.
+                \item<3-> \underline{Scalability}, of the evaluation method.
+            \end{itemize}
+        \end{frame}
+        \begin{frame}{State of the art}
+            \centering
+            \includestandalone[mode=buildnew, width=\textwidth]{figures/state_of_the_art}
         \end{frame}
 
     \section{Methodology}
@@ -145,38 +155,29 @@
             \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
                 \item<2-> the \textbf{\acrfull{acr::lod}};
                     % \begin{figure}
-                    %     \begin{center}
-                    %         \includegraphics[width=\textwidth]{images/introduction/lods}
-                    %     \end{center}
+                        \centering
+                        \includegraphics[width=\textwidth]{images/introduction/lods}
                     % \end{figure}
                 \item<3-> the \textbf{finesse}: the semantic evaluation level.
             \end{itemize}
         \end{frame}
-        % \begin{frame}{Error taxonomy (\texttt{finesse} $= 0$)}
-        %     \begin{figure}
-        %         \includestandalone[mode=buildnew, width=\textwidth]{finesse_0_taxonomy}
-        %     \end{figure}
-        % \end{frame}
-        % \begin{frame}{Error taxonomy (\texttt{finesse} $= 1$)}
-        %     \begin{figure}
-        %         \includestandalone[mode=buildnew, width=\textwidth]{finesse_1_taxonomy}
-        %     \end{figure}
-        % \end{frame}
-        % \begin{frame}{Error taxonomy (\texttt{finesse} $= 2$)}
-        %     \only<1|handout:0>{
-        %         \begin{figure}
-        %             \includestandalone[mode=buildnew, width=\textwidth]{finesse_2_taxonomy}
-        %         \end{figure}
-        %     }
-        %     \only<2>{
-        %         \begin{figure}
-        %             \includestandalone[mode=buildnew, width=\textwidth]{finesse_2_taxonomy_lods}
-        %         \end{figure}
-        %     }
-        % \end{frame}
+        \begin{frame}{Error taxonomy (\texttt{finesse} $= 0$)}
+            \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_0_taxonomy}
+        \end{frame}
+        \begin{frame}{Error taxonomy (\texttt{finesse} $= 1$)}
+            \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_1_taxonomy}
+        \end{frame}
+        \begin{frame}{Error taxonomy (\texttt{finesse} $= 2$)}
+            \only<1|handout:0>{
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_2_taxonomy}
+            }
+            \only<2>{
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_2_taxonomy_lods}
+            }
+        \end{frame}
         % \begin{frame}{Error taxonomy (\texttt{finesse} $= 3$, $\leq$ \acrshort{acr::lod}-1)}
         %     \begin{figure}
-        %         \includestandalone[mode=buildnew, width=\textwidth]{finesse_3_bul_taxonomy}
+        %         \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_3_bul_taxonomy}
         %     \end{figure}
         % \end{frame}
         % \begin{frame}{Building \texttt{atomic} errors: 2.5D overhead reconstruction case}
@@ -213,11 +214,10 @@
         %         \end{figure}
         %     }
         % \end{frame}
-        % \begin{frame}{Error taxonomy (\texttt{finesse} $= 3$, $\leq$ \acrshort{acr::lod}-2)}
-        %     \begin{figure}
-        %         \includestandalone[mode=buildnew, width=\textwidth]{finesse_3_all_taxonomy}
-        %     \end{figure}
-        % \end{frame}
+        \begin{frame}{Error taxonomy (\texttt{finesse} $= 3$, $\leq$ \acrshort{acr::lod}-2)}
+            \centering
+            \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_3_all_taxonomy}
+        \end{frame}
         % \begin{frame}{Facet \texttt{atomic} errors: 2.5D overhead reconstruction case}
         %     \only<1|handout:1>{
         %         \begin{figure}
@@ -258,9 +258,7 @@
         %     }
         % \end{frame}
         % \begin{frame}{The evaluation pipeline}
-        %     \begin{figure}
-        %         % \includestandalone[mode=buildnew, height=.81\textheight]{graphical_pipeline}
-        %     \end{figure}
+        %     \includestandalone[mode=buildnew, height=.81\textheight]{graphical_pipeline}
         % \end{frame}
     \section{Experiments}
         % \begin{frame}{Datasets: urban scenes}
