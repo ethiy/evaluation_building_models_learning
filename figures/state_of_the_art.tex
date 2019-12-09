@@ -72,12 +72,12 @@
 		\path (sensor.north) + (0, 2) node[intersection] (sensor_semantic) {};
 		\path (sensor_semantic.north) + (0, 2) node[intersection] (sensor_indx) {};
 
-	    \path (manual_indx) + (0, -.5) node[cross, label=below:\parencite{Zeng2014}]{};
-	    \path (manual_indx) + (-1, 1) node[cross, label=above:\parencite{Voegtle2003}]{};
-	    \path (manual_indx) + (1.5, .5) node[cross, label=below:\parencite{Kaartinen2005}]{};
-	    \path (sensor_indx) node[cross, label=below:\parencite{Akca2010}]{};
-	    \path (sensor_semantic) + (0, 1.75) node[cross, label=below:\parencite{OudeElberink2010}]{};
+	    \path (manual_indx) + (0, -.5) node[cross, label=below:\parencite{zeng2014multicriteria}]{};
+	    \path (manual_indx) + (-1, 1) node[cross, label=above:\parencite{vogtle2003quality}]{};
+	    \path (manual_indx) + (1.5, .5) node[cross, label=below:\parencite{kaartinen2005accuracy}]{};
+	    \path (sensor_indx) node[cross, label=below:\parencite{akca2010quality}]{};
+	    \path (sensor_semantic) + (0, 1.75) node[cross, label=below:\parencite{elberink2011quality}]{};
 	    \path (sensor_semantic) + (-.75, .25) node[cross, label=below:\parencite{boudet2006supervised}]{};
-	    \path (sensor_semantic) + (1.5, -.75) node[cross, label=below:\parencite{Michelin2013}]{};
+	    \path (sensor_semantic) + (1.5, -.75) node[cross, label=below:\parencite{michelin2012building}]{};
 	\end{tikzpicture}
 \end{document}
