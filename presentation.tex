@@ -175,11 +175,54 @@
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_2_taxonomy_lods}
             }
         \end{frame}
-        % \begin{frame}{Error taxonomy (\texttt{finesse} $= 3$, $\leq$ \acrshort{acr::lod}-1)}
-        %     \begin{figure}
-        %         \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_3_bul_taxonomy}
-        %     \end{figure}
-        % \end{frame}
+        \begin{frame}{Error taxonomy (\texttt{finesse} $= 3$, $\leq$ \acrshort{acr::lod}-1)}
+            \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_3_bul_taxonomy}
+        \end{frame}
+        \begin{frame}{Building \texttt{atomic} errors: 2.5D overhead reconstruction case}
+            \begin{figure}[H]
+                \centering
+                \ffigbox[\textwidth]{
+                    \begin{subfloatrow}
+                        \ffigbox[0.5\textwidth]{
+                            \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/building/bos}
+                        }{
+                            \caption{
+                                \label{subfig::gt_bus_3d}
+                                Ground truth \gls{acr::3d} models.
+                                The different buildings are in different colors: blue and green.
+                            }
+                        }
+                        \ffigbox[0.5\textwidth]{
+                            \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/building/bus}
+                        }{
+                            \caption{
+                                \label{subfig::bus_3d}
+                                \gls{acr::3d} models of the buildings fused into one model.
+                            }
+                        }
+                    \end{subfloatrow}
+                    \vskip1em
+                    \begin{subfloatrow}
+                            \centering
+                            \ffigbox[.75\textwidth]{
+                                \includegraphics[width=.45\textwidth]{images/errors/building/under_segmentation}
+                            }{
+                                \caption{
+                                    \label{subfig::bus_2d}
+                                    Nadir projection of an erroneous building superposed on the corresponding orthoimage.
+                                    We can recognize, based on the color differences of roof tiles, the existance of two buildings instead of one.
+                                }
+                            }
+                    \end{subfloatrow}
+                }{
+                    \caption{
+                        \label{fig::bus}
+                        Illustration of a \gls{acr::bus} error.
+                    }
+                }
+            \end{figure}
+        \end{frame}
+
         % \begin{frame}{Building \texttt{atomic} errors: 2.5D overhead reconstruction case}
         %     \only<1|handout:1>{
         %         \begin{figure}
