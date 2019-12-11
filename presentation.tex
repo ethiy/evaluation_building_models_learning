@@ -113,21 +113,75 @@
     \end{frame}
 
     \section{Introduction}
-        \subsection{Motivation}   
-            \begin{frame}{Applications}{Physical simulation}
-                \centering
-                \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/explosion_simulation}
-            \end{frame}
-            \begin{frame}{Applications}{Planning}
-                \centering
-                \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/simplu}
-            \end{frame}
-            \begin{frame}{Applications}{Entertainement}
-                \centering
-                \animategraphics[autoplay, loop, width=\textwidth]{5}{images/not_used/time_machine_in_situ/frame-}{0}{169}
-            \end{frame}
-        
         \subsection{Context}
+            \begin{frame}{\texorpdfstring{\acrshort*{acr::3d}}{3D} building model}
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \item<1-> \acrshort{acr::3d} model \(\equiv\) generalization of the building surface.
+                    \item<2-> Compromise between compacity and geometric fidelity.
+                    \item<3-> Semantics \(\Rightarrow\) impact on gemetry:
+                        \begin{itemize}
+                            \item<4-> Architectural feature (semantic) \(\sim\) primitive (geometric).
+                        \end{itemize}
+                \end{itemize}
+            \end{frame}
+
+            \begin{frame}{Implicit semantics}
+                \begin{figure}[H]
+                    \centering
+                    \only<1>{
+                        \includestandalone[mode=buildnew, width=.8\textwidth]{figures/model_vs_mesh/mesh_model}
+                    }
+                    \only<2>{
+                        \includestandalone[mode=buildnew, width=.8\textwidth]{figures/model_vs_mesh/ground_truth_model}
+                    }
+                    \caption{
+                        \scriptsize 
+                        \only<1>{
+                            \gls{acr::3d} mesh of a building surface (\(\approx\) \num[output-exponent-marker = \text{e}]{1e5} triangles).
+                        }
+                        \only<2>{
+                            Building \gls{acr::3d} (polyhedral) model (\(\approx\) \num{800} facets).
+                        }
+                    }
+                \end{figure}
+            \end{frame}
+
+            \begin{frame}{\texorpdfstring{\acrfull*{acr::lod}}{Level of Detail}}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=\textwidth]{images/introduction/lods}
+                    \caption{Different \glspl{acr::lod} considered in this study (Image taken from\parencite~{biljecki2016improved}).}
+                \end{figure}
+            \end{frame}
+
+            \begin{frame}{Applications}{Physical simulation}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=.8\textwidth]{images/introduction/3d_model_applications/explosion_simulation}
+                    \caption{Explosion simulation (Image taken from~\parencite{biljecki2015applications}).}
+                \end{figure}
+            \end{frame}
+
+            \begin{frame}{Applications}{Planning}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=.8\textwidth]{images/introduction/3d_model_applications/simplu}
+                    \caption{Example of \gls{acr::3d} urban scene simulated based on known urban norms (Image taken from~\parencite{brasebin2017stochastic}).}
+                \end{figure}
+            \end{frame}
+
+            \begin{frame}{Applications}{Entertainement}
+                \begin{figure}[H]
+                    \centering
+                    \animategraphics[autoplay, loop, width=\textwidth]{5}{images/not_used/time_machine_in_situ/frame-}{0}{169}
+                    \caption{ \footnotemark.}
+                \end{figure}
+                \footnotetext{
+                    \href{http://recherche.ign.fr/labos/matis/~devaux}{Alexandre Devaux website.}
+                }
+            \end{frame}
+
+        \subsection{Motivation}
             \begin{frame}{\texorpdfstring{\acrshort*{acr::3d}}{3D} building modeling}
                 \centering
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/context}
@@ -135,65 +189,46 @@
 
             \begin{frame}{Goal}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                    \item<1-> \underline{Define} errors that can affect building \gls{acr::3d} models.
-                    \item<2-> \underline{Devise} a method for error detection.
+                    \item<1-> \underline{Define errors} that affects building \gls{acr::3d} models.
+                    \item<2-> Devise a method for \underline{error detection}.
                 \end{itemize}
             \end{frame}
 
-            \begin{frame}{Modeling errors}
+            \begin{frame}{Modeling errors}{Different point of views}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                    \item<1-> Errors in format: How compliant to CityGML for instance.
-                    but in fidelity to the real world.
-                    \item<2-> Errors in fidelity.
-                    \item<3-> Errors in generalization.
+                    \item<1-> Errors in format: compliant to CityGML\footfullcite{ledoux2013validation} \dots.
+                    \item<2-> Errors in fidelity (geometry)\footfullcite{berger2013benchmark}.
+                    \item<3-> Errors in generalization (semantics).
                 \end{itemize}
             \end{frame}
 
-            \begin{frame}{Implicit semantics}
-                \begin{figure}[H]
-                    \begin{center}
-                        \ffigbox{
-                        \begin{subfloatrow}
-                            \centering
-                                \ffigbox[\FBwidth]{
-                                    \includestandalone[mode=buildnew, height=.3\textheight]{figures/model_vs_mesh/mesh_model}
-                                }{
-                                    \caption{\scriptsize 3D mesh of a building surface ($\approx$ \num[output-exponent-marker = \text{e}]{1e5} triangles).}
-                                }
-                        \end{subfloatrow}
-                        \begin{subfloatrow}
-                            \centering
-                                \ffigbox[\FBwidth]{
-                                    \includestandalone[mode=buildnew, height=.3\textheight]{figures/model_vs_mesh/ground_truth_model}
-                                }{
-                                    \caption{
-                                        \scriptsize
-                                        Building 3D polyhedral model ($\approx$ 800 facets).
-                                    }
-                                }
-                        \end{subfloatrow}
-                        }{}
-                    \end{center}
-                \end{figure}
-            \end{frame}
-
-            \begin{frame}{Semantic errors}
-                \begin{itemize}
-                    \item<1-> Modeling = compromise fidelity vs. generalization: related to \textit{explicit} semantics.
-                    \item<2-> \textit{explicit} semantics has impact on geometry: \textit{implicit} semantics.
-                    \item<3-> Need for semantic aware errors.
+            \begin{frame}{Semantic errors}{Need for semantics}
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \item<1-> Modeling \(\equiv\) compromise between geometric accuracy and \textit{implicit} semantics.
+                    \item<2-> Errors are \underline{geometric} and \underline{semantic} aware.
                 \end{itemize}
             \end{frame}
-
-        \begin{frame}{Constraints}
-            \begin{itemize}
-                \item<1-> Large-scale.
-                \item<2-> Automation.
-            \end{itemize}
-            ~\\
-            \begin{itemize}
-                \item<1-> Semantic errors \textbf{independent} from \underline{reconstruction methods} and \underline{urban scenes}.
-                \item<2-> \underline{Scalability}, of the evaluation method.
+        
+        \begin{frame}{Semantic errors}{Constraints}
+            \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                \item<1-> \textbf{Large-scale}: town or city level.
+                    \only<2-6>{
+                        \begin{itemize}
+                            \item<2-> No reference models;
+                            \item<3-> Independence towards the model origin:
+                            \begin{itemize}
+                                \item<4-> modeling approach;
+                                \item<5-> urban scene.
+                            \end{itemize}
+                            \item<6-> Scalability ot the detection method.
+                        \end{itemize}
+                    }
+                \item<7-> \textbf{Automation}: without human operators.
+                    \only<8->{
+                        \begin{itemize}
+                            \item<9-> Highly semantic task: not easy.
+                        \end{itemize}
+                    }
             \end{itemize}
         \end{frame}
 
@@ -215,10 +250,6 @@
             Two criteria determine the taxonomy structure:
             \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
                 \item<2-> the \textbf{\acrfull{acr::lod}};
-                    \begin{figure}[H]
-                        \centering
-                        \includegraphics[width=.7\textwidth]{images/introduction/lods}
-                    \end{figure}
                 \item<3-> the \textbf{finesse}: the semantic evaluation level.
             \end{itemize}
         \end{frame}
