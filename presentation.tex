@@ -112,72 +112,78 @@
         \titlepage{}
     \end{frame}
 
-    \section{Introduction}        
-        \begin{frame}{Motivation}
-            \centering
-            \includestandalone[mode=buildnew, width=\textwidth]{figures/context}
-        \end{frame}
+    \section{Introduction}
+        \subsection{Motivation}   
+            \begin{frame}{Applications}{Physical simulation}
+                \centering
+                \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/explosion_simulation}
+            \end{frame}
+            \begin{frame}{Applications}{Planning}
+                \centering
+                \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/simplu}
+            \end{frame}
+            \begin{frame}{Applications}{Entertainement}
+                \centering
+                \animategraphics[autoplay, loop, width=\textwidth]{5}{images/not_used/time_machine_in_situ/frame-}{0}{169}
+            \end{frame}
+        
+        \subsection{Context}
+            \begin{frame}{\texorpdfstring{\acrshort*{acr::3d}}{3D} building modeling}
+                \centering
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/context}
+            \end{frame}
 
-        \begin{frame}{Motivation}
-            \centering
-            \includegraphics[width=\textwidth]{images/introduction/3d_model_applications/explosion_simulation}
-        \end{frame}
-        \begin{frame}{Motivation}
-            \centering
-            \animategraphics[autoplay, loop, width=\textwidth]{5}{images/not_used/time_machine_in_situ/frame-}{0}{169}
-        \end{frame}
+            \begin{frame}{Goal}
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \item<1-> \underline{Define} errors that can affect building \gls{acr::3d} models.
+                    \item<2-> \underline{Devise} a method for error detection.
+                \end{itemize}
+            \end{frame}
 
-        \begin{frame}{Goal}
-            \begin{itemize}
-                \item<1-> \underline{Define} errors that can affect building \gls{acr::3d} models.
-                \item<2-> \underline{Devise} a method for error detection.
-            \end{itemize}
-        \end{frame}
+            \begin{frame}{Modeling errors}
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \item<1-> Errors in format: How compliant to CityGML for instance.
+                    but in fidelity to the real world.
+                    \item<2-> Errors in fidelity.
+                    \item<3-> Errors in generalization.
+                \end{itemize}
+            \end{frame}
 
-        \begin{frame}{Model errors}
-            \begin{itemize}
-                \item<1-> Errors in format: How compliant to CityGML for instance.
-                but in fidelity to the real world.
-                \item<2-> Errors in fidelity.
-                \item<3-> Errors in generalization.
-            \end{itemize}
-        \end{frame}
-
-        \begin{frame}{Implicit semantics}
-            \begin{figure}[H]
-                \begin{center}
-                    \ffigbox{
-                       \begin{subfloatrow}
-                        \centering
-                            \ffigbox[\FBwidth]{
-                                \includestandalone[mode=buildnew, height=.3\textheight]{figures/model_vs_mesh/mesh_model}
-                            }{
-                                \caption{\scriptsize 3D mesh of a building surface ($\approx$ \num[output-exponent-marker = \text{e}]{1e5} triangles).}
-                            }
-                       \end{subfloatrow}
-                       \begin{subfloatrow}
-                        \centering
-                            \ffigbox[\FBwidth]{
-                                \includestandalone[mode=buildnew, height=.3\textheight]{figures/model_vs_mesh/ground_truth_model}
-                            }{
-                                \caption{
-                                    \scriptsize
-                                    Building 3D polyhedral model ($\approx$ 800 facets).
+            \begin{frame}{Implicit semantics}
+                \begin{figure}[H]
+                    \begin{center}
+                        \ffigbox{
+                        \begin{subfloatrow}
+                            \centering
+                                \ffigbox[\FBwidth]{
+                                    \includestandalone[mode=buildnew, height=.3\textheight]{figures/model_vs_mesh/mesh_model}
+                                }{
+                                    \caption{\scriptsize 3D mesh of a building surface ($\approx$ \num[output-exponent-marker = \text{e}]{1e5} triangles).}
                                 }
-                            }
-                       \end{subfloatrow}
-                    }{}
-                \end{center}
-            \end{figure}
-        \end{frame}
+                        \end{subfloatrow}
+                        \begin{subfloatrow}
+                            \centering
+                                \ffigbox[\FBwidth]{
+                                    \includestandalone[mode=buildnew, height=.3\textheight]{figures/model_vs_mesh/ground_truth_model}
+                                }{
+                                    \caption{
+                                        \scriptsize
+                                        Building 3D polyhedral model ($\approx$ 800 facets).
+                                    }
+                                }
+                        \end{subfloatrow}
+                        }{}
+                    \end{center}
+                \end{figure}
+            \end{frame}
 
-        \begin{frame}{Semantic errors}
-            \begin{itemize}
-                \item<1-> Modeling = compromise fidelity vs. generalization: related to \textit{explicit} semantics.
-                \item<2-> \textit{explicit} semantics has impact on geometry: \textit{implicit} semantics.
-                \item<3-> Need for semantic aware errors.
-            \end{itemize}
-        \end{frame}
+            \begin{frame}{Semantic errors}
+                \begin{itemize}
+                    \item<1-> Modeling = compromise fidelity vs. generalization: related to \textit{explicit} semantics.
+                    \item<2-> \textit{explicit} semantics has impact on geometry: \textit{implicit} semantics.
+                    \item<3-> Need for semantic aware errors.
+                \end{itemize}
+            \end{frame}
 
         \begin{frame}{Constraints}
             \begin{itemize}
