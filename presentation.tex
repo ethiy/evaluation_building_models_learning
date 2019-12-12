@@ -42,7 +42,7 @@
 \usepackage{makecell}
 
 \usepackage{tikz}
-\usetikzlibrary{calc, 3d, shadows, decorations, shapes.arrows, fadings}
+\usetikzlibrary{calc, 3d, shadows, decorations, shapes.arrows, fadings, trees}
 \usepackage{pgfplots}
 \usepackage{pgfplotstable}
 \usepackage{forest}
@@ -283,54 +283,34 @@
             \end{frame}
         
         \subsection{General layout}
-            \begin{frame}{\texttt{Qualifiability}}
+            \begin{frame}{Error classification}
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy_tree_animated}
+            \end{frame}
+
+            \begin{frame}{\texttt{Atomic errors}}
                 \begin{itemize}
-                    \item<1-> \texttt{Unqualifiable} model:
-                        \onslide<2->{
-                            \only<2>{
+                    \item<1-> \Acrfull{acr::2d} errors:
+                        \begin{itemize}
+                            \item<2-> Segmentation issue (semantic):
                                 \begin{itemize}
-                                    \item Wrong geometrical format\footcite{ledoux2013validation};
+                                    \item<3-> Over segmentation;
+                                    \item<4-> Under segmentation.      
                                 \end{itemize}
-                            }
-                            \only<3>{
-                                \begin{itemize}
-                                    \item Vegetation occlusion;
-                                \end{itemize}
-                            }
-                        }
-                    \item<6-> \texttt{Qualifiable} model.
+                            \item<5-> Border issue (geometric):
+                            \begin{itemize}
+                                \item<6-> Inaccurate topology;
+                                \item<7-> Imprecise border.      
+                            \end{itemize}
+                        \end{itemize}
+                    \item<8-> \gls{acr::3d} error (geometric):
+                        \begin{itemize}
+                            \item<9-> Imprecise geometry.
+                        \end{itemize}
                 \end{itemize}
             \end{frame}
-            % \begin{frame}{Error classification}{\texttt{Atomic errors}}
-            %     \begin{itemize}
-            %         \item<1-> \gls{acr::2d} errors:
-            %             \onslide<>{
-            %                 \only<>{
 
-            %                 }
-            %             }
-            %         \item<6-> \gls{acr::3d} error:
-            %     \end{itemize}
-            % \end{frame}
-        
-            \begin{frame}{Error taxonomy (\texttt{finesse} $= 0$)}
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_0_taxonomy}
-            \end{frame}
-            \begin{frame}{Error taxonomy (\texttt{finesse} $= 1$)}
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_1_taxonomy}
-            \end{frame}
-                \begin{frame}{Error taxonomy (\texttt{finesse} $= 2$)}
-            \only<1|handout:0>{
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_2_taxonomy}
-            }
-            \only<2>{
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_2_taxonomy_lods}
-            }
-        \end{frame}
-        \begin{frame}{Error taxonomy (\texttt{finesse} $= 3$, $\leq$ \acrshort{acr::lod}-1)}
-            \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_3_bul_taxonomy}
-        \end{frame}
-        \begin{frame}{Building \texttt{atomic} errors: 2.5D overhead reconstruction case}
+        \subsection{Overhead \texorpdfstring{\acrshort*{acr::2d5}}{2.5D} case}
+            \begin{frame}{Building \texttt{atomic} errors: 2.5D overhead reconstruction case}
             % \begin{figure}[H]
             %     \centering
             %     \ffigbox[\textwidth]{
@@ -373,7 +353,7 @@
             %         }
             %     }
             % \end{figure}
-        \end{frame}
+            \end{frame}
 
         % \begin{frame}{Building \texttt{atomic} errors: 2.5D overhead reconstruction case}
         %     \only<1|handout:1>{
@@ -409,10 +389,6 @@
         %         \end{figure}
         %     }
         % \end{frame}
-        \begin{frame}{Error taxonomy (\texttt{finesse} $= 3$, $\leq$ \acrshort{acr::lod}-2)}
-            \centering
-            \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_3_all_taxonomy}
-        \end{frame}
         % \begin{frame}{Facet \texttt{atomic} errors: 2.5D overhead reconstruction case}
         %     \only<1|handout:1>{
         %         \begin{figure}

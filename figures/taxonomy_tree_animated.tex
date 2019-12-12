@@ -1,0 +1,99 @@
+\documentclass[tikz]{standalone}
+\usepackage[T1]{fontenc}
+
+\usepackage{tikz}
+\usetikzlibrary{trees, decorations.pathreplacing}
+
+\begin{document}
+
+    \tikzstyle{level 1}=[level distance=2cm, sibling distance=3.5cm]
+    \tikzstyle{level 2}=[level distance=3.5cm, sibling distance=3.5cm]
+    \tikzstyle{level 3}=[level distance=3.25cm, sibling distance=4cm]
+    \tikzstyle{level 4}=[level distance=2.5cm, sibling distance=.75cm]
+    
+    \tikzstyle{bag} = [text width=4em, text centered]
+    \tikzstyle{end} = [circle, minimum width=3pt, fill, inner sep=0pt]
+
+    \tikzset{
+        invisible/.style={opacity=0},
+        visible on/.style={alt=#1{}{invisible}},
+        alt/.code args={<#1>#2#3}{
+            \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+        },
+    }    
+    
+    \begin{tikzpicture}[grow=right]
+        \node[bag, draw=none] (input) {\textsc{Input}}
+            child[visible on=<2->] {
+                node[end, label=right:{\parbox[c]{12em}{\textsc{Unquali-\\fiable}}}] (unqualifiable) {}
+            }
+            child[visible on=<2->] {
+                node[bag] (qualifiable) {Qualifiable}
+                    child[visible on=<3->] {
+                        node[bag]{Erroneous}
+                            child[visible on=<4->] {
+                                node[bag] (building_errors) {Building Errors}
+                                child[visible on=<6->] {
+                                    node[end, label=right:\texttt{\acrlong*{acr::big}}] (b_under) {}
+                                }
+                                child[visible on=<6->] {
+                                    node[end, label=right:\texttt{\acrlong*{acr::bit}}] {}
+                                }
+                                child[visible on=<6->] {
+                                    node[end, label=right:\texttt{\acrlong*{acr::bib}}] {}
+                                }
+                                child[visible on=<6->] {
+                                    node[end, label=right:\texttt{\acrlong*{acr::bos}}] {}
+                                }
+                                child[visible on=<6->] {
+                                    node[end, label=right:\texttt{\acrlong*{acr::bus}}] {}
+                                }
+                                edge from parent
+                            }
+                            child[visible on=<4->] {
+                                node[bag] (facet_errors) {Facet Errors}
+                                child[visible on=<6->] {
+                                    node[end, label=right:\texttt{\acrlong*{acr::fig}}] {}
+                                }
+                                child[visible on=<6->] {
+                                    node[end, label=right:\texttt{\acrlong*{acr::fit}}] {}
+                                }
+                                child[visible on=<6->] {
+                                    node[end, label=right:\texttt{\acrlong*{acr::fib}}] {}
+                                }
+                                child[visible on=<6->] {
+                                    node[end, label=right:\texttt{\acrlong*{acr::fos}}] {}
+                                }
+                                child[visible on=<6->] {
+                                    node[end, label=right:\texttt{\acrlong*{acr::fus}}] {}
+                                }
+                                edge from parent
+                            }
+                            edge from parent
+                        }
+                    child[visible on=<3->] {
+                        node[end, label=right:\textsc{Valid}] (valid) {}
+                    }
+                edge from parent
+            };
+            
+        \path (qualifiable |- valid.north) + (-1,1) node[visible on=<2->] (qualifiability_max) {$\texttt{finesse}=0$};
+        \path (valid.north) + (-1,1) node[visible on=<3->] (correctness_max) {$\texttt{finesse}=1$};
+        \path (facet_errors |- valid.north) + (-1.25,1) node[visible on=<4->] (families_max) {$\texttt{finesse}=2$};
+        \path (b_under |- valid.north) + (-.75,1) node[visible on=<6->] (atomic_max) {$\texttt{finesse}=3$};
+        \path (families_max |- input) node[visible on=<5->] (lod_max) {};
+        \path (b_under |- input) + (9.2,0) node[visible on=<5->] (lod_min) {};
+        
+        \draw[dashed, orange, ultra thick, visible on=<2->] (qualifiability_max |- b_under.south) + (0,-.5) -- (qualifiability_max);
+        \draw[dashed, green, ultra thick, visible on=<3->] (correctness_max |- b_under.south) + (0,-.5) -- (correctness_max);
+        \draw[dashed, purple, ultra thick, visible on=<4->] (families_max |- b_under.south) + (0,-.5) -- (families_max);
+        \draw[dashed, blue, ultra thick, visible on=<6->] (atomic_max |- b_under.south) + (0,-.5) -- (atomic_max);
+        
+        \draw[dash dot, ultra thick, visible on=<5->] (lod_max)  -- (lod_min) node[below, pos=.9] {\footnotesize \acrshort*{acr::lod}-0 $\cup$ \acrshort*{acr::lod}-1} node [above, pos=.9] {\footnotesize \acrshort*{acr::lod}-2 $\cup$ \acrshort*{acr::lod}-3};
+
+        \path (families_max |- b_under.south) + (0,-1) node[visible on=<7->] (startbraces) {};
+        \path (lod_min |- b_under.south) + (0,-1) node[visible on=<7->] (endbraces) {};
+        \draw[decorate, decoration={brace, amplitude=5pt}, visible on=<7->] (b_under.south) + (-1,-1) -- (startbraces) node[midway, yshift=-2em, align=center]{Family errors:\\possible \textbf{exclusivity}};
+        \draw[decorate, decoration={brace, amplitude=5pt,mirror}, visible on=<8->] (b_under.south) + (-1,-1) -- (endbraces) node[midway, yshift=-2em, align=center]{\texttt{Atomic} errors:\\no \textbf{exclusivity}};
+    \end{tikzpicture}
+\end{document}
