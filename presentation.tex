@@ -235,20 +235,47 @@
             \includestandalone[mode=buildnew, width=\textwidth]{figures/state_of_the_art}
         \end{frame}
 
-    \section{Methodology}
-        \begin{frame}{Main ideas behind our approach}
+        \begin{frame}{Constributions}
             \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
-                \item<1-> \underline{Compile} errors that affect building models in a \underline{taxonomy};
-                \item<2-> Evaluation at \underline{building level};
-                \item<3-> \underline{No reference} 3D models $\longrightarrow$ a \underline{supervised} classification problem;
-                \item<4-> Study in a \underline{2.5D overhead (aerial)} modeling setting.
+                \item<1-> 
             \end{itemize}
         \end{frame}
+
+    \section{Errors}
+        \begin{frame}{Error definitions}{\texttt{Generability} and \texttt{Exhaustivity}}
+            \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                \item<1-> Independence towards the:
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                        \item<2-> Urban scene \(\leftrightarrow\) \texttt{Generability};
+                        \item<3-> Origin of the model \(\leftrightarrow\) \texttt{Exhaustivity}.
+                    \end{itemize}
+                \item<3-> Conflict!\\For a constant budget:
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                        \item<4-> \(\uparrow\) \texttt{Generability} \(\implies\) \(\downarrow\) specific errors \(\implies\) \(\downarrow\) \texttt{Exhaustivity};
+                        \item<5-> \(\uparrow\) \texttt{Exhaustivity} \(\implies\) \(\downarrow\) area size \(\implies\) \(\downarrow\) \texttt{Exhaustivity};
+                    \end{itemize}
+            \end{itemize}
+        \end{frame}
+
+        \begin{frame}{Error definitions}{Hierarchization and Modularity}
+            \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                \item<1-> Hierarchization:
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                        \item<2-> \underline{Iteratively} define more and more specific errors;
+                        \item<3-> Each \underline{specificity level}: the most possible \texttt{Generability}.
+                    \end{itemize}
+                \item<3-> Modularity:
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                        \item<4-> Model error \(\equiv\) Composition of \underline{basic errors} common to all scenes.
+                    \end{itemize}
+            \end{itemize}
+        \end{frame}
+
         \begin{frame}{Taxonomy structure}
             Two criteria determine the taxonomy structure:
             \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
                 \item<2-> the \textbf{\acrfull{acr::lod}};
-                \item<3-> the \textbf{finesse}: the semantic evaluation level.
+                \item<3-> the \textbf{finesse}: the \underline{specificity level}.
             \end{itemize}
         \end{frame}
         \begin{frame}{Error taxonomy (\texttt{finesse} $= 0$)}
