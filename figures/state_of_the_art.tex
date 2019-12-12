@@ -30,7 +30,8 @@
     \tikzset{
         data/.style={
             draw,
-            minimum height = 1cm,
+            thick,
+            minimum height = .75cm,
             minimum width  = 8cm,
             fill           = yellow!30
         }
@@ -38,15 +39,17 @@
     \tikzset{
         output/.style={
             draw,
-            minimum height = 4 cm,
-            minimum width  = 1 cm,
+            thick,
+            minimum height = 5 cm,
+            minimum width  = .75 cm,
             fill           = yellow!30
         }
     }
     \tikzset{
         intersection/.style={
             draw,
-            minimum height = 4 cm,
+            thick,
+            minimum height = 5 cm,
             minimum width  = 8 cm
         }
     }
@@ -54,7 +57,7 @@
         cross/.style={
             cross out,
             draw=black,
-            minimum size=2*(#1-\pgflinewidth),
+            minimum size=1.1*(#1-\pgflinewidth),
             inner sep=0pt,
             outer sep=0pt
         },
@@ -63,21 +66,21 @@
 
 	\begin{tikzpicture}
 		\node[data]  (manual) {\textbf{Manual data}};
-		\path (manual.east) + (4, 0) node[data] (sensor) {\textbf{Sensor data}};
-		\path (manual.north west) + (-.5, 2) node[output] (semantic_errors) {\rotatebox{90}{\textbf{Semantic errors}}};
-		\path (semantic_errors.north) + (0, 2) node[output] (geom_ind) {\rotatebox{90}{\textbf{Geometric indices}}};
+		\path (manual.east) node[data, anchor=west] (sensor) {\textbf{Sensor data}};
+		\path (manual.north west) node[output, anchor=south east] (semantic_errors) {\rotatebox{90}{\textbf{Semantic errors}}};
+		\path (semantic_errors.north) node[output, anchor=south] (geom_ind) {\rotatebox{90}{\textbf{Geometric indices}}};
 
-    \path (manual.north) + (0, 2) node[intersection] (manual_semantic) {};
-		\path (manual_semantic.north) + (0, 2) node[intersection] (manual_indx) {};
-		\path (sensor.north) + (0, 2) node[intersection] (sensor_semantic) {};
-		\path (sensor_semantic.north) + (0, 2) node[intersection] (sensor_indx) {};
+        \path (manual.north) node[intersection, anchor=south] (manual_semantic) {};
+		\path (manual_semantic.north) node[intersection, anchor=south] (manual_indx) {};
+		\path (sensor.north) node[intersection, anchor=south] (sensor_semantic) {};
+		\path (sensor_semantic.north) node[intersection, anchor=south] (sensor_indx) {};
 
-	    \path (manual_indx) + (0, -.5) node[cross, label=below:\parencite{zeng2014multicriteria}]{};
-	    \path (manual_indx) + (-1, 1) node[cross, label=above:\parencite{vogtle2003quality}]{};
-	    \path (manual_indx) + (1.5, .5) node[cross, label=below:\parencite{kaartinen2005accuracy}]{};
-	    \path (sensor_indx) node[cross, label=below:\parencite{akca2010quality}]{};
-	    \path (sensor_semantic) + (0, 1.75) node[cross, label=below:\parencite{elberink2011quality}]{};
-	    \path (sensor_semantic) + (-.75, .25) node[cross, label=below:\parencite{boudet2006supervised}]{};
-	    \path (sensor_semantic) + (1.5, -.75) node[cross, label=below:\parencite{michelin2012building}]{};
+	    \path (manual_indx) + (0, -.5) node[cross, label=below:{\scriptsize \parencite{zeng2014multicriteria}}]{};
+	    \path (manual_indx) + (-1, 1) node[cross, label=above:{\scriptsize \parencite{vogtle2003quality}}]{};
+	    \path (manual_indx) + (1.5, .5) node[cross, label=below:{\scriptsize \parencite{kaartinen2005accuracy}}]{};
+	    \path (sensor_indx) node[cross, label=below:{\scriptsize \parencite{akca2010quality}}]{};
+	    \path (sensor_semantic) + (0, 1.75) node[cross, label=below:{\scriptsize \parencite{elberink2011quality}}]{};
+	    \path (sensor_semantic) + (-.75, .25) node[cross, label=below:{\scriptsize \parencite{boudet2006supervised}}]{};
+	    \path (sensor_semantic) + (1.5, -.75) node[cross, label=below:{\scriptsize \parencite{michelin2012building}}]{};
 	\end{tikzpicture}
 \end{document}

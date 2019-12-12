@@ -25,11 +25,10 @@
 
 \usepackage{graphicx}
 \usepackage{floatrow}
-\usepackage[labelsep=colon]{caption}
-\usepackage{subcaption}
-\renewcommand{\thesubfigure}{\alph{subfigure}}
-\captionsetup[subfigure]{subrefformat=parens, labelformat=parens, labelsep=space}
-\usepackage{rotating}
+\usepackage[
+    scriptsize,
+    labelformat=empty
+]{caption}
 
 \usepackage{enumitem}
 
@@ -65,8 +64,7 @@
     sorting=nty,
     maxbibnames=5,
     minbibnames=5,
-    maxcitenames=2,
-    mincitenames=2,
+    maxcitenames=1,
     uniquelist=false,
     uniquename=false,
     hyperref=true,
@@ -101,7 +99,7 @@
 \usetheme{ign}
 
 \title{Semantic aware quality evaluation of 3D building models}
-\subtitle{a scalable approach}
+\subtitle{A scalable approach}
 \date{\tiny \DTMdisplaydate{2020}{1}{10}{5}}
 \author{
     Oussama Ennafii
@@ -109,14 +107,14 @@
 
 \begin{document}
     \begin{frame}[plain]
-        \titlepage{}
+        \titlepage
     \end{frame}
 
     \section{Introduction}
         \subsection{Context}
             \begin{frame}{\texorpdfstring{\acrshort*{acr::3d}}{3D} building model}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                    \item<1-> \acrshort{acr::3d} model \(\equiv\) generalization of the building surface.
+                    \item<1-> \Acrfull{acr::3d} model \(\equiv\) generalization of the building surface.
                     \item<2-> Compromise between compacity and geometric fidelity.
                     \item<3-> Semantics \(\Rightarrow\) impact on gemetry:
                         \begin{itemize}
@@ -137,7 +135,7 @@
                     \caption{
                         \scriptsize 
                         \only<1>{
-                            \gls{acr::3d} mesh of a building surface (\(\approx\) \num[output-exponent-marker = \text{e}]{1e5} triangles).
+                            \Gls{acr::3d} mesh of a building surface (\(\approx\) \num[output-exponent-marker = \text{e}]{1e5} triangles).
                         }
                         \only<2>{
                             Building \gls{acr::3d} (polyhedral) model (\(\approx\) \num{800} facets).
@@ -150,7 +148,7 @@
                 \begin{figure}[H]
                     \centering
                     \includegraphics[width=\textwidth]{images/introduction/lods}
-                    \caption{Different \glspl{acr::lod} considered in this study (Image taken from\parencite~{biljecki2016improved}).}
+                    \caption{Different \glspl{acr::lod} considered in this study (Image taken from~\parencite{biljecki2016improved}).}
                 \end{figure}
             \end{frame}
 
@@ -173,27 +171,24 @@
             \begin{frame}{Applications}{Entertainement}
                 \begin{figure}[H]
                     \centering
-                    \animategraphics[autoplay, loop, width=\textwidth]{5}{images/not_used/time_machine_in_situ/frame-}{0}{169}
-                    \caption{ \footnotemark.}
+                    \animategraphics[autoplay, loop, width=.8\textwidth]{20}{images/not_used/time_machine_in_situ/frame-}{0}{169}
+                    \caption{Mixed reality for historical applications using iTowns\footnotemark platform (Credits to A. Devaux\footnotemark).}
                 \end{figure}
+                \footnotetext{
+                    \href{http://www.itowns-project.org}{iTowns project.}
+                }
+                \addtocounter{footnote}{1}
                 \footnotetext{
                     \href{http://recherche.ign.fr/labos/matis/~devaux}{Alexandre Devaux website.}
                 }
             \end{frame}
 
-        \subsection{Motivation}
             \begin{frame}{\texorpdfstring{\acrshort*{acr::3d}}{3D} building modeling}
                 \centering
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/context}
             \end{frame}
 
-            \begin{frame}{Goal}
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                    \item<1-> \underline{Define errors} that affects building \gls{acr::3d} models.
-                    \item<2-> Devise a method for \underline{error detection}.
-                \end{itemize}
-            \end{frame}
-
+        \subsection{Motivation}
             \begin{frame}{Modeling errors}{Different point of views}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                     \item<1-> Errors in format: compliant to CityGML\footfullcite{ledoux2013validation} \dots.
@@ -205,32 +200,35 @@
             \begin{frame}{Semantic errors}{Need for semantics}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                     \item<1-> Modeling \(\equiv\) compromise between geometric accuracy and \textit{implicit} semantics.
-                    \item<2-> Errors are \underline{geometric} and \underline{semantic} aware.
+                    \item<2-> Errors are \underline{geometric} and \underline{semantic} in nature.
                 \end{itemize}
             \end{frame}
         
-        \begin{frame}{Semantic errors}{Constraints}
-            \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                \item<1-> \textbf{Large-scale}: town or city level.
-                    \only<2-6>{
+            \begin{frame}{Goal}
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \item<1-> \underline{Define errors} that affects building \gls{acr::3d} models.
+                    \item<2-> Devise a method for \underline{error detection}.
+                \end{itemize}
+            \end{frame}
+
+            \begin{frame}{Semantic errors}{Constraints}
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \item<1-> \textbf{Large-scale}: town or city level.
                         \begin{itemize}
-                            \item<2-> No reference models;
-                            \item<3-> Independence towards the model origin:
+                            \item<2-6> No reference models;
+                            \item<3-6> Independence towards the model origin:
                             \begin{itemize}
-                                \item<4-> modeling approach;
-                                \item<5-> urban scene.
+                                \item<4-6> modeling approach;
+                                \item<5-6> urban scene.
                             \end{itemize}
-                            \item<6-> Scalability ot the detection method.
+                            \item<6> Scalability ot the detection method.
                         \end{itemize}
-                    }
-                \item<7-> \textbf{Automation}: without human operators.
-                    \only<8->{
+                    \item<7-8> \textbf{Automation}: without human operators.
                         \begin{itemize}
-                            \item<9-> Highly semantic task: not easy.
+                            \item<8> Highly semantic task: not easy.
                         \end{itemize}
-                    }
-            \end{itemize}
-        \end{frame}
+                \end{itemize}
+            \end{frame}
 
         \begin{frame}{State of the art}
             \centering
@@ -271,48 +269,48 @@
             \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_3_bul_taxonomy}
         \end{frame}
         \begin{frame}{Building \texttt{atomic} errors: 2.5D overhead reconstruction case}
-            \begin{figure}[H]
-                \centering
-                \ffigbox[\textwidth]{
-                    \begin{subfloatrow}
-                        \ffigbox[0.5\textwidth]{
-                            \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/building/bos}
-                        }{
-                            \caption{
-                                \label{subfig::gt_bus_3d}
-                                Ground truth \gls{acr::3d} models.
-                                The different buildings are in different colors: blue and green.
-                            }
-                        }
-                        \ffigbox[0.5\textwidth]{
-                            \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/building/bus}
-                        }{
-                            \caption{
-                                \label{subfig::bus_3d}
-                                \gls{acr::3d} models of the buildings fused into one model.
-                            }
-                        }
-                    \end{subfloatrow}
-                    \vskip1em
-                    \begin{subfloatrow}
-                            \centering
-                            \ffigbox[.75\textwidth]{
-                                \includegraphics[width=.45\textwidth]{images/errors/building/under_segmentation}
-                            }{
-                                \caption{
-                                    \label{subfig::bus_2d}
-                                    Nadir projection of an erroneous building superposed on the corresponding orthoimage.
-                                    We can recognize, based on the color differences of roof tiles, the existance of two buildings instead of one.
-                                }
-                            }
-                    \end{subfloatrow}
-                }{
-                    \caption{
-                        \label{fig::bus}
-                        Illustration of a \gls{acr::bus} error.
-                    }
-                }
-            \end{figure}
+            % \begin{figure}[H]
+            %     \centering
+            %     \ffigbox[\textwidth]{
+            %         \begin{subfloatrow}
+            %             \ffigbox[0.5\textwidth]{
+            %                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/building/bos}
+            %             }{
+            %                 \caption{
+            %                     \label{subfig::gt_bus_3d}
+            %                     Ground truth \gls{acr::3d} models.
+            %                     The different buildings are in different colors: blue and green.
+            %                 }
+            %             }
+            %             \ffigbox[0.5\textwidth]{
+            %                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/building/bus}
+            %             }{
+            %                 \caption{
+            %                     \label{subfig::bus_3d}
+            %                     \gls{acr::3d} models of the buildings fused into one model.
+            %                 }
+            %             }
+            %         \end{subfloatrow}
+            %         \vskip1em
+            %         \begin{subfloatrow}
+            %                 \centering
+            %                 \ffigbox[.75\textwidth]{
+            %                     \includegraphics[width=.45\textwidth]{images/errors/building/under_segmentation}
+            %                 }{
+            %                     \caption{
+            %                         \label{subfig::bus_2d}
+            %                         Nadir projection of an erroneous building superposed on the corresponding orthoimage.
+            %                         We can recognize, based on the color differences of roof tiles, the existance of two buildings instead of one.
+            %                     }
+            %                 }
+            %         \end{subfloatrow}
+            %     }{
+            %         \caption{
+            %             \label{fig::bus}
+            %             Illustration of a \gls{acr::bus} error.
+            %         }
+            %     }
+            % \end{figure}
         \end{frame}
 
         % \begin{frame}{Building \texttt{atomic} errors: 2.5D overhead reconstruction case}
