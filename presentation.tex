@@ -241,50 +241,85 @@
             \end{itemize}
         \end{frame}
 
-    \section{Errors}
-        \begin{frame}{Error definitions}{\texttt{Generability} and \texttt{Exhaustivity}}
-            \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
-                \item<1-> Independence towards the:
-                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
-                        \item<2-> Urban scene \(\leftrightarrow\) \texttt{Generability};
-                        \item<3-> Origin of the model \(\leftrightarrow\) \texttt{Exhaustivity}.
-                    \end{itemize}
-                \item<3-> Conflict!\\For a constant budget:
-                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
-                        \item<4-> \(\uparrow\) \texttt{Generability} \(\implies\) \(\downarrow\) specific errors \(\implies\) \(\downarrow\) \texttt{Exhaustivity};
-                        \item<5-> \(\uparrow\) \texttt{Exhaustivity} \(\implies\) \(\downarrow\) area size \(\implies\) \(\downarrow\) \texttt{Exhaustivity};
-                    \end{itemize}
-            \end{itemize}
-        \end{frame}
+    \section{Semantic evaluation}
+        \subsection{Design principles}
+            \begin{frame}{\texttt{Generability} and \texttt{Exhaustivity}}
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                    \item<1-> Independence towards the:
+                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                            \item<2-> Urban scene \(\leftrightarrow\) \texttt{Generability};
+                            \item<3-> Origin of the model \(\leftrightarrow\) \texttt{Exhaustivity}.
+                        \end{itemize}
+                    \item<4-> Conflict!\\For a constant budget:
+                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                            \item<5-> \(\uparrow\) \texttt{Generability} \(\implies\) \(\downarrow\) specific errors \(\implies\) \(\downarrow\) \texttt{Exhaustivity};
+                            \item<6-> \(\uparrow\) \texttt{Exhaustivity} \(\implies\) \(\downarrow\) area size \(\implies\) \(\downarrow\) \texttt{Generability};
+                        \end{itemize}
+                \end{itemize}
+            \end{frame}
 
-        \begin{frame}{Error definitions}{Hierarchization and Modularity}
-            \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
-                \item<1-> Hierarchization:
-                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
-                        \item<2-> \underline{Iteratively} define more and more specific errors;
-                        \item<3-> Each \underline{specificity level}: the most possible \texttt{Generability}.
-                    \end{itemize}
-                \item<3-> Modularity:
-                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
-                        \item<4-> Model error \(\equiv\) Composition of \underline{basic errors} common to all scenes.
-                    \end{itemize}
-            \end{itemize}
-        \end{frame}
+            \begin{frame}{Hierarchization and Modularity}
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                    \item<1-> Hierarchization:
+                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                            \item<2-> \underline{Iteratively} define more and more specific errors;
+                            \item<3-> Each \underline{specificity level}: the most possible \texttt{Generability}.
+                        \end{itemize}
+                    \item<4-> Modularity:
+                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                            \item<5-> An error \(\equiv\) Composition of \underline{basic errors} common to all scenes.
+                        \end{itemize}
+                \end{itemize}
+            \end{frame}
 
-        \begin{frame}{Taxonomy structure}
-            Two criteria determine the taxonomy structure:
-            \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
-                \item<2-> the \textbf{\acrfull{acr::lod}};
-                \item<3-> the \textbf{finesse}: the \underline{specificity level}.
-            \end{itemize}
-        \end{frame}
-        \begin{frame}{Error taxonomy (\texttt{finesse} $= 0$)}
-            \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_0_taxonomy}
-        \end{frame}
-        \begin{frame}{Error taxonomy (\texttt{finesse} $= 1$)}
-            \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_1_taxonomy}
-        \end{frame}
-        \begin{frame}{Error taxonomy (\texttt{finesse} $= 2$)}
+            \begin{frame}{Definitions}
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                    \item<1-> \texttt{Finesse}: the \underline{specificity level}.
+                    \item<2-> \texttt{Atomic} errors \(\leftrightarrow\) \underline{maximum} \texttt{finesse} error:
+                        \begin{itemize}
+                            \item<3-> Intuitively: \underline{unitary} (semantically) correction task.
+                        \end{itemize}
+                \end{itemize}
+            \end{frame}
+        
+        \subsection{General layout}
+            \begin{frame}{\texttt{Qualifiability}}
+                \begin{itemize}
+                    \item<1-> \texttt{Unqualifiable} model:
+                        \onslide<2->{
+                            \only<2>{
+                                \begin{itemize}
+                                    \item Wrong geometrical format\footcite{ledoux2013validation};
+                                \end{itemize}
+                            }
+                            \only<3>{
+                                \begin{itemize}
+                                    \item Vegetation occlusion;
+                                \end{itemize}
+                            }
+                        }
+                    \item<6-> \texttt{Qualifiable} model.
+                \end{itemize}
+            \end{frame}
+            % \begin{frame}{Error classification}{\texttt{Atomic errors}}
+            %     \begin{itemize}
+            %         \item<1-> \gls{acr::2d} errors:
+            %             \onslide<>{
+            %                 \only<>{
+
+            %                 }
+            %             }
+            %         \item<6-> \gls{acr::3d} error:
+            %     \end{itemize}
+            % \end{frame}
+        
+            \begin{frame}{Error taxonomy (\texttt{finesse} $= 0$)}
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_0_taxonomy}
+            \end{frame}
+            \begin{frame}{Error taxonomy (\texttt{finesse} $= 1$)}
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_1_taxonomy}
+            \end{frame}
+                \begin{frame}{Error taxonomy (\texttt{finesse} $= 2$)}
             \only<1|handout:0>{
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy/finesse_2_taxonomy}
             }
