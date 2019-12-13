@@ -116,7 +116,7 @@
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                     \item<1-> \Acrfull{acr::3d} model \(\equiv\) generalization of the building surface.
                     \item<2-> Compromise between compacity and geometric fidelity.
-                    \item<3-> Semantics \(\Rightarrow\) impact on gemetry:
+                    \item<3-> Semantics \(\Rightarrow\) impact on geometry:
                         \begin{itemize}
                             \item<4-> Architectural feature (semantic) \(\sim\) primitive (geometric).
                         \end{itemize}
@@ -133,7 +133,6 @@
                         \includestandalone[mode=buildnew, width=.8\textwidth]{figures/model_vs_mesh/ground_truth_model}
                     }
                     \caption{
-                        \scriptsize 
                         \only<1>{
                             \Gls{acr::3d} mesh of a building surface (\(\approx\) \num[output-exponent-marker = \text{e}]{1e5} triangles).
                         }
@@ -288,9 +287,9 @@
             \end{frame}
 
             \begin{frame}{\texttt{Atomic errors}}
-                \begin{itemize}
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
                     \item<1-> \Acrfull{acr::2d} errors:
-                        \begin{itemize}
+                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                             \item<2-> Segmentation issue (semantic):
                                 \begin{itemize}
                                     \item<3-> Over segmentation;
@@ -303,56 +302,113 @@
                             \end{itemize}
                         \end{itemize}
                     \item<8-> \gls{acr::3d} error (geometric):
-                        \begin{itemize}
+                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                             \item<9-> Imprecise geometry.
                         \end{itemize}
                 \end{itemize}
             \end{frame}
 
         \subsection{Overhead \texorpdfstring{\acrshort*{acr::2d5}}{2.5D} case}
-            \begin{frame}{Building \texttt{atomic} errors: 2.5D overhead reconstruction case}
-            % \begin{figure}[H]
-            %     \centering
-            %     \ffigbox[\textwidth]{
-            %         \begin{subfloatrow}
-            %             \ffigbox[0.5\textwidth]{
-            %                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/building/bos}
-            %             }{
-            %                 \caption{
-            %                     \label{subfig::gt_bus_3d}
-            %                     Ground truth \gls{acr::3d} models.
-            %                     The different buildings are in different colors: blue and green.
-            %                 }
-            %             }
-            %             \ffigbox[0.5\textwidth]{
-            %                 \includestandalone[mode=buildnew, width=.45\textwidth]{figures/errors/building/bus}
-            %             }{
-            %                 \caption{
-            %                     \label{subfig::bus_3d}
-            %                     \gls{acr::3d} models of the buildings fused into one model.
-            %                 }
-            %             }
-            %         \end{subfloatrow}
-            %         \vskip1em
-            %         \begin{subfloatrow}
-            %                 \centering
-            %                 \ffigbox[.75\textwidth]{
-            %                     \includegraphics[width=.45\textwidth]{images/errors/building/under_segmentation}
-            %                 }{
-            %                     \caption{
-            %                         \label{subfig::bus_2d}
-            %                         Nadir projection of an erroneous building superposed on the corresponding orthoimage.
-            %                         We can recognize, based on the color differences of roof tiles, the existance of two buildings instead of one.
-            %                     }
-            %                 }
-            %         \end{subfloatrow}
-            %     }{
-            %         \caption{
-            %             \label{fig::bus}
-            %             Illustration of a \gls{acr::bus} error.
-            %         }
-            %     }
-            % \end{figure}
+            \begin{frame}{Building \texttt{atomic} errors}{Segmentation errors}
+                \begin{figure}[H]
+                    \centering
+                    \only<1>{
+                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bos}
+                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bus}
+                    }
+                    \only<2>{
+                        \includegraphics[height=.4\textheight]{images/errors/building/under_segmentation}
+                    }
+                    \only<3>{
+                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bus}
+                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bos}
+                    }
+                    \only<4>{
+                        \includegraphics[height=.4\textheight]{images/errors/building/over_segmentation}
+                    }
+                    \caption{
+                        \only<1>{
+                            Ground truth buildings are in different colors: \textcolor{cyan}{blue} and \textcolor{green}{green}.
+                        }
+                        \only<2>{
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage.
+                        }
+                        \only<3>{
+                            Modeled buildings are in different colors: \textcolor{cyan}{blue} and \textcolor{green}{green}.
+                        }
+                        \only<4>{
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage.
+                        }
+                    }
+                \end{figure}
+                \only<1-2>{
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item \texttt{\Acrfull{acr::bus}} \(\leftrightarrow\) Multiple buildings are modeled as one.
+                    \end{itemize}
+                }
+                \only<3->{
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item \texttt{\Acrfull{acr::bos}} \(\leftrightarrow\) One building is modeled as multiple ones.
+                    \end{itemize}
+                }
+            \end{frame}
+
+            \begin{frame}{Building \texttt{atomic} errors}{Border errors}
+                \begin{figure}[H]
+                    \centering
+                    \only<1>{
+                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/correct_bib}
+                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bib}
+                    }
+                    \only<2>{
+                        \includegraphics[height=.4\textheight]{images/errors/building/border}
+                    }
+                    \only<3>{
+                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/correct_bit}
+                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bit}
+                    }
+                    \only<4>{
+                        \includegraphics[height=.4\textheight]{images/errors/building/topology}
+                    }
+                    \caption{
+                        \only<1>{
+                            \textcolor{red}{Red} \(\leftrightarrow\) imprecise borders.
+                        }
+                        \only<2>{
+                            Nadir projection: \textcolor{green}{green} \(\leftrightarrow\) ground truth and \textcolor{red}{red} \(\leftrightarrow\) the model.
+                        }
+                        \only<3>{
+                            \textcolor{olive}{Yellow} \(\leftrightarrow\) inaccurate borders.
+                        }
+                        \only<4>{
+                            Nadir projection: \textcolor{green}{green} \(\leftrightarrow\) ground truth and \textcolor{red}{red} \(\leftrightarrow\) the model.
+                        }
+                    }
+                \end{figure}
+                \only<1-2>{
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item \texttt{\Acrfull{acr::bib}} \(\leftrightarrow\) inaccurate border geometry.
+                    \end{itemize}
+                }
+                \only<3->{
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item \texttt{\Acrfull{acr::bit}} \(\leftrightarrow\) wrong footprint shape.
+                    \end{itemize}
+                }
+            \end{frame}
+
+            \begin{frame}{Building \texttt{atomic} errors}{Border errors}
+                \begin{figure}[H]
+                    \centering
+                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/correct_big}
+                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/big}
+                    \caption{
+                        \textcolor{violet}{Purple} \(\leftrightarrow\) imprecise facet.
+                    }
+                \end{figure}
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \item \texttt{\Acrfull{acr::big}} \(\leftrightarrow\) inaccurate height.
+                \end{itemize}
             \end{frame}
 
         % \begin{frame}{Building \texttt{atomic} errors: 2.5D overhead reconstruction case}
