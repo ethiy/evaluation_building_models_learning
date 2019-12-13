@@ -6,18 +6,18 @@
 \usepackage{tikz}
 \usetikzlibrary{3d}
 
-\newenvironment{3dtikzpicture}[3][]{
-	\pgfmathsetmacro\xx{cos(#3)}
-	\pgfmathsetmacro\xy{cos(#2)*sin(#3)}
-	\pgfmathsetmacro\yx{-sin(#3)}
-	\pgfmathsetmacro\yy{cos(#2)*cos(#3)}
-	\pgfmathsetmacro\zy{sin(#2)}
-	\begin{tikzpicture}[x={(\xx cm,\xy cm)},y={(\yx cm,\yy cm)},z={(0,\zy cm)},#1]
-}{
-	\end{tikzpicture}
-}
-
 \begin{document}
+    \newenvironment{3dtikzpicture}[3][]{
+        \pgfmathsetmacro\xx{cos(#3)}
+        \pgfmathsetmacro\xy{cos(#2)*sin(#3)}
+        \pgfmathsetmacro\yx{-sin(#3)}
+        \pgfmathsetmacro\yy{cos(#2)*cos(#3)}
+        \pgfmathsetmacro\zy{sin(#2)}
+        \begin{tikzpicture}[x={(\xx cm,\xy cm)},y={(\yx cm,\yy cm)},z={(0,\zy cm)},#1]
+    }{
+        \end{tikzpicture}
+    }
+
 	\tikzset{
         face/.style={
             fill=lightgray,

@@ -397,7 +397,7 @@
                 }
             \end{frame}
 
-            \begin{frame}{Building \texttt{atomic} errors}{Border errors}
+            \begin{frame}{Building \texttt{atomic} errors}{\texorpdfstring{\acrshort*{acr::3d}}{3D} error}
                 \begin{figure}[H]
                     \centering
                     \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/correct_big}
@@ -408,6 +408,118 @@
                 \end{figure}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                     \item \texttt{\Acrfull{acr::big}} \(\leftrightarrow\) inaccurate height.
+                \end{itemize}
+            \end{frame}
+
+            \begin{frame}{Facet \texttt{atomic} errors}{Segmentation errors}
+                \begin{figure}[H]
+                    \centering
+                    \only<1>{
+                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
+                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fus}
+                    }
+                    \only<2>{
+                        \includegraphics[height=.4\textheight, angle=270]{images/errors/facet/under_segmentation}
+                    }
+                    \only<3>{
+                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
+                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fos}
+                    }
+                    \only<4>{
+                        \includegraphics[height=.4\textheight]{images/errors/facet/over_segmentation}
+                    }
+                    \caption{
+                        \only<1>{
+                            \textcolor{cyan}{Blue} \(\leftrightarrow\) under-segmented facet.
+                        }
+                        \only<2>{
+                            Nadir projection: \textcolor{green}{green} \(\leftrightarrow\) unmodeled edge.
+                        }
+                        \only<3>{
+                            \textcolor{green}{Green} \(\leftrightarrow\) inexisting edges.
+                        }
+                        \only<4>{
+                            Nadir projection: \textcolor{red}{red} \(\leftrightarrow\) inexisting edges.
+                        }
+                    }
+                \end{figure}
+                \only<1-2>{
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item \texttt{\Acrfull{acr::fus}} \(\leftrightarrow\) Multiple facets are modeled as one.
+                    \end{itemize}
+                }
+                \only<3->{
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item \texttt{\Acrfull{acr::fos}} \(\leftrightarrow\) One facet is modeled as multiple ones.
+                    \end{itemize}
+                }
+            \end{frame}
+
+            \begin{frame}{Facet \texttt{atomic} errors}{Border errors}
+                \begin{figure}[H]
+                    \centering
+                    \only<1>{
+                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
+                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fib}
+                    }
+                    \only<2>{
+                        \includegraphics[height=.4\textheight]{images/errors/facet/border}
+                    }
+                    \only<3>{
+                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fit}
+                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fit}
+                    }
+                    \only<4>{
+                        \includegraphics[height=.4\textheight]{images/errors/facet/topology}
+                    }
+                    \caption{
+                        \only<1>{
+                            \textcolor{red}{Red} \(\leftrightarrow\) imprecise borders.
+                        }
+                        \only<2>{
+                            Nadir projection: \textcolor{green}{green} \(\leftrightarrow\) ground truth.
+                        }
+                        \only<3>{
+                            \textcolor{olive}{Yellow} \(\leftrightarrow\) inaccurate borders.
+                        }
+                        \only<4>{
+                            Nadir projection: \textcolor{green}{green} \(\leftrightarrow\) ground truth and \textcolor{red}{red} \(\leftrightarrow\) the model.
+                        }
+                    }
+                \end{figure}
+                \only<1-2>{
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item \texttt{\Acrfull{acr::fib}} \(\leftrightarrow\) inaccurate border geometry.
+                    \end{itemize}
+                }
+                \only<3->{
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item \texttt{\Acrfull{acr::fit}} \(\leftrightarrow\) wrong facet shape.
+                    \end{itemize}
+                }
+            \end{frame}
+
+            \begin{frame}{Facet \texttt{atomic} errors}{\texorpdfstring{\acrshort*{acr::3d}}{3D} error}
+                \begin{figure}[H]
+                    \centering
+                    \only<1>{
+                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
+                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fig}
+                    }
+                    \only<2>{
+                        \includegraphics[height=.4\textheight]{images/errors/facet/geometry}
+                    }
+                    \caption{
+                        \only<1>{
+                            \textcolor{violet}{Purple} \(\leftrightarrow\) imprecise facet.
+                        }
+                        \only<2>{
+                            Nadir projection: sloped facet modeled as flat.
+                        }
+                    }
+                \end{figure}
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \item \texttt{\Acrfull{acr::fig}} \(\leftrightarrow\) inaccurate height.
                 \end{itemize}
             \end{frame}
 
