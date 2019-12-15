@@ -113,7 +113,7 @@
     \section{Introduction}
         \subsection{Context}
             \begin{frame}{\texorpdfstring{\acrshort*{acr::3d}}{3D} building model}
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item<1-> \Acrfull{acr::3d} model \(\longleftrightarrow\) generalization of the building surface.
                     \item<only@2> Surface reconstruction \(\longleftrightarrow\) geometric fidelity;
                     \item<only@3> Generalization \(\longleftrightarrow\) reduce the complexity;
@@ -187,43 +187,40 @@
 
         \subsection{Motivation}
             \begin{frame}{Modeling errors}{Different point of views}
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item<1-> Errors in format: compliant to CityGML\footfullcite{ledoux2013validation} \dots.
-                    \item<2-> Errors in fidelity (geometry)\footfullcite{berger2013benchmark}.
-                    \item<3-> Errors in generalization (semantics).
+                    \item<2-> Errors in fidelity (geometry)\uncover<2->{\footfullcite{berger2013benchmark}}.
+                    \item<3-> Errors in generalization.
                 \end{itemize}
             \end{frame}
 
-            \begin{frame}{Semantic errors}{Need for semantics}
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                    \item<1-> Modeling \(\equiv\) compromise between geometric accuracy and \textit{implicit} semantics.
-                    \item<2-> Errors are \underline{geometric} and \underline{semantic} in nature.
+            \begin{frame}{Need for semantics}
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                    \item<1-> Modeling \(\longleftrightarrow\) compromise between:
+                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                        \item<2-> geometric accuracy;
+                        \item<3-> and \textit{implicit} semantics.
+                    \end{itemize}
+                    \item<4-> Errors are \underline{geometric} and \underline{semantic} in nature.
                 \end{itemize}
             \end{frame}
         
             \begin{frame}{Goal}
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item<1-> \underline{Define errors} that affects building \gls{acr::3d} models.
                     \item<2-> Devise a method for \underline{error detection}.
                 \end{itemize}
             \end{frame}
 
-            \begin{frame}{Semantic errors}{Constraints}
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                    \item<1-> \textbf{Large-scale}: town or city level.
+            \begin{frame}{Challenges}
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                    \item<1-> \underline{Scalability} up to city level;
+                    \item<2-> Genericity towards:
                         \begin{itemize}
-                            \item<2-6> No reference models;
-                            \item<3-6> Independence towards the model origin:
-                            \begin{itemize}
-                                \item<4-6> modeling approach;
-                                \item<5-6> urban scene.
-                            \end{itemize}
-                            \item<6> Scalability ot the detection method.
+                            \item<3-> modeling approach;
+                            \item<4-> urban scene.
                         \end{itemize}
-                    \item<7-8> \textbf{Automation}: without human operators.
-                        \begin{itemize}
-                            \item<8> Highly semantic task: not easy.
-                        \end{itemize}
+                    \item<5-> Automation with the least human intervention possible.
                 \end{itemize}
             \end{frame}
 
@@ -232,8 +229,8 @@
             \includestandalone[mode=buildnew, width=\textwidth]{figures/state_of_the_art}
         \end{frame}
 
-        \begin{frame}{Constributions}
-            \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+        \begin{frame}{Contributions}
+            \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
                 \item<1-> 
             \end{itemize}
         \end{frame}
@@ -241,14 +238,14 @@
     \section{Semantic evaluation}
         \subsection{Design principles}
             \begin{frame}{\texttt{Generability} and \texttt{Exhaustivity}}
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
                     \item<1-> Independence towards the:
-                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
                             \item<2-> Urban scene \(\leftrightarrow\) \texttt{Generability};
                             \item<3-> Origin of the model \(\leftrightarrow\) \texttt{Exhaustivity}.
                         \end{itemize}
                     \item<4-> Conflict!\\For a constant budget:
-                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
                             \item<5-> \(\uparrow\) \texttt{Generability} \(\implies\) \(\downarrow\) specific errors \(\implies\) \(\downarrow\) \texttt{Exhaustivity};
                             \item<6-> \(\uparrow\) \texttt{Exhaustivity} \(\implies\) \(\downarrow\) area size \(\implies\) \(\downarrow\) \texttt{Generability};
                         \end{itemize}
@@ -256,21 +253,21 @@
             \end{frame}
 
             \begin{frame}{Hierarchization and Modularity}
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
                     \item<1-> Hierarchization:
-                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
                             \item<2-> \underline{Iteratively} define more and more specific errors;
                             \item<3-> Each \underline{specificity level}: the most possible \texttt{Generability}.
                         \end{itemize}
                     \item<4-> Modularity:
-                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
                             \item<5-> An error \(\equiv\) Composition of \underline{basic errors} common to all scenes.
                         \end{itemize}
                 \end{itemize}
             \end{frame}
 
             \begin{frame}{Definitions}
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
                     \item<1-> \texttt{Finesse}: the \underline{specificity level}.
                     \item<2-> \texttt{Atomic} errors \(\leftrightarrow\) \underline{maximum} \texttt{finesse} error:
                         \begin{itemize}
@@ -285,9 +282,9 @@
             \end{frame}
 
             \begin{frame}{\texttt{Atomic errors}}
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}, itemsep=2em]
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
                     \item<1-> \Acrfull{acr::2d} errors:
-                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                             \item<2-> Segmentation issue (semantic):
                                 \begin{itemize}
                                     \item<3-> Over segmentation;
@@ -300,7 +297,7 @@
                             \end{itemize}
                         \end{itemize}
                     \item<8-> \gls{acr::3d} error (geometric):
-                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                             \item<9-> Imprecise geometry.
                         \end{itemize}
                 \end{itemize}
@@ -340,12 +337,12 @@
                     }
                 \end{figure}
                 \only<1-2>{
-                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                         \item \texttt{\Acrfull{acr::bus}} \(\leftrightarrow\) Multiple buildings are modeled as one.
                     \end{itemize}
                 }
                 \only<3->{
-                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                         \item \texttt{\Acrfull{acr::bos}} \(\leftrightarrow\) One building is modeled as multiple ones.
                     \end{itemize}
                 }
@@ -384,12 +381,12 @@
                     }
                 \end{figure}
                 \only<1-2>{
-                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                         \item \texttt{\Acrfull{acr::bib}} \(\leftrightarrow\) inaccurate border geometry.
                     \end{itemize}
                 }
                 \only<3->{
-                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                         \item \texttt{\Acrfull{acr::bit}} \(\leftrightarrow\) wrong footprint shape.
                     \end{itemize}
                 }
@@ -404,7 +401,7 @@
                         \textcolor{violet}{Purple} \(\leftrightarrow\) imprecise facet.
                     }
                 \end{figure}
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item \texttt{\Acrfull{acr::big}} \(\leftrightarrow\) inaccurate height.
                 \end{itemize}
             \end{frame}
@@ -442,12 +439,12 @@
                     }
                 \end{figure}
                 \only<1-2>{
-                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                         \item \texttt{\Acrfull{acr::fus}} \(\leftrightarrow\) Multiple facets are modeled as one.
                     \end{itemize}
                 }
                 \only<3->{
-                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                         \item \texttt{\Acrfull{acr::fos}} \(\leftrightarrow\) One facet is modeled as multiple ones.
                     \end{itemize}
                 }
@@ -486,12 +483,12 @@
                     }
                 \end{figure}
                 \only<1-2>{
-                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                         \item \texttt{\Acrfull{acr::fib}} \(\leftrightarrow\) inaccurate border geometry.
                     \end{itemize}
                 }
                 \only<3->{
-                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                         \item \texttt{\Acrfull{acr::fit}} \(\leftrightarrow\) wrong facet shape.
                     \end{itemize}
                 }
@@ -516,7 +513,7 @@
                         }
                     }
                 \end{figure}
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item \texttt{\Acrfull{acr::fig}} \(\leftrightarrow\) inaccurate height.
                 \end{itemize}
             \end{frame}
@@ -649,11 +646,11 @@
         %             \footnotesize Results in percentage obtained using \texttt{RF} (\underline{1,000 trees} \& \underline{max depth 4}) and \underline{10-fold cross. val}.
         %         \end{center}
         %     }
-        %     \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-        %         \item[\textcolor{IGNDarkGreen}{$\blacktriangleright$}]<2-> \footnotesize In most cases \textbf{Geom.} is sufficient;
+        %     \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+        %         \item[\textcolor{IGNDarkGreen}{\(\blacktriangleright\)}]<2-> \footnotesize In most cases \textbf{Geom.} is sufficient;
         %         \item<3-> \footnotesize Except for \texttt{BUS} $\rightarrow$ other modalities have a big impact ($\approx$ + 10\%).
-        %         \item[\textcolor{orange}{$\blacktriangleright$}]<4-> \footnotesize Only \textbf{Geom.} is even \underline{the best} for \texttt{BIT}.
-        %         \item[\textcolor{IGNRed}{$\blacktriangleright$}]<5-> \footnotesize Highly unbalanced labels are \underline{hard} to detect.
+        %         \item[\textcolor{orange}{\(\blacktriangleright\)}]<4-> \footnotesize Only \textbf{Geom.} is even \underline{the best} for \texttt{BIT}.
+        %         \item[\textcolor{IGNRed}{\(\blacktriangleright\)}]<5-> \footnotesize Highly unbalanced labels are \underline{hard} to detect.
         %     \end{itemize}
         % \end{frame}
         % \begin{frame}{Transferability}
@@ -681,7 +678,7 @@
         %     %     \end{center}
         %     \end{table}
         %     \uncover<2->{
-        %         \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+        %         \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
         %             \item<2-> \footnotesize Only 8/24 of \texttt{Building errors} transferability cases are \textcolor{IGNGreen}{positive}.
         %             \item<3-> \footnotesize \texttt{Facets errors} are more transferable: 19/30 are \textcolor{IGNGreen}{positive}.
         %             \item<4-> \footnotesize Additional modalities play a \underline{critical role} in error prediction.
@@ -691,11 +688,11 @@
         
     \section{Conclusion}
         \begin{frame}{\textcolor{yellow}{Conclusion} \& \textcolor{purple}{Perspectives}}
-            \begin{itemize}[label=$\blacktriangleright$, font=\color{yellow}, itemsep=2em]
+            \begin{itemize}[label=\(\blacktriangleright\), font=\color{yellow}, itemsep=2em]
                 \item<1-> \textbf{Flexible, robust and hierarchical} taxonomy;
                 \item<2-> \textbf{Fast, lightweight and modular} pipeline for model evaluation;
                 \item<3-> Pipeline tested with \textbf{baseline} handcrafted features:
-                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                         \item<4-> Geometric features are often sufficient for error prediction;
                         \item<5-> Adding modalities is most helpfull in transferability.
                     \end{itemize}
@@ -703,7 +700,7 @@
             \uncover<6->{
                 ~\\
                 Future work:
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{purple}, itemsep=2em]
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{purple}, itemsep=2em]
                     \item<6-> Extend to richer features $\longrightarrow$ Graph kernels, Scattering.
                     \item<7-> Dataset augmentation $\longrightarrow$ \textbf{Simulate errors}.
                 \end{itemize}
