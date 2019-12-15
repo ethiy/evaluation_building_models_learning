@@ -114,71 +114,69 @@
         \subsection{Context}
             \begin{frame}{\texorpdfstring{\acrshort*{acr::3d}}{3D} building model}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                    \item<1-> \Acrfull{acr::3d} model \(\equiv\) generalization of the building surface.
-                    \item<2-> Compromise between compacity and geometric fidelity.
-                    \item<3-> Semantics \(\Rightarrow\) impact on geometry:
-                        \begin{itemize}
-                            \item<4-> Architectural feature (semantic) \(\sim\) primitive (geometric).
-                        \end{itemize}
+                    \item<1-> \Acrfull{acr::3d} model \(\longleftrightarrow\) generalization of the building surface.
+                    \item<only@2> Surface reconstruction \(\longleftrightarrow\) geometric fidelity;
+                    \item<only@3> Generalization \(\longleftrightarrow\) reduce the complexity;
+                    \item<only@4> Generalization \(\implies\) \textit{implicit} semantics;
                 \end{itemize}
-            \end{frame}
-
-            \begin{frame}{Implicit semantics}
-                \begin{figure}[H]
-                    \centering
-                    \only<1>{
-                        \includestandalone[mode=buildnew, width=.8\textwidth]{figures/model_vs_mesh/mesh_model}
-                    }
-                    \only<2>{
-                        \includestandalone[mode=buildnew, width=.8\textwidth]{figures/model_vs_mesh/ground_truth_model}
-                    }
-                    \caption{
-                        \only<1>{
-                            \Gls{acr::3d} mesh of a building surface (\(\approx\) \num[output-exponent-marker = \text{e}]{1e5} triangles).
+                \onslide<2->{
+                    \begin{figure}[H]
+                        \centering
+                        \alt<2>{
+                            \includestandalone[mode=buildnew, width=.8\textwidth]{figures/model_vs_mesh/mesh_model}
+                            \caption{
+                                \Gls{acr::3d} mesh of a building surface (\(\approx\) \num[output-exponent-marker = \text{e}]{1e5} triangles).
+                            }
+                        }{
+                            \includestandalone[mode=buildnew, width=.8\textwidth]{figures/model_vs_mesh/ground_truth_model}
+                            \caption{
+                                Building \gls{acr::3d} (polyhedral) model (\(\approx\) \num{800} facets).
+                            }
                         }
-                        \only<2>{
-                            Building \gls{acr::3d} (polyhedral) model (\(\approx\) \num{800} facets).
-                        }
-                    }
-                \end{figure}
+                    \end{figure}
+                }
             \end{frame}
 
             \begin{frame}{\texorpdfstring{\acrfull*{acr::lod}}{Level of Detail}}
                 \begin{figure}[H]
                     \centering
-                    \includegraphics[width=\textwidth]{images/introduction/lods}
-                    \caption{Different \glspl{acr::lod} considered in this study (Image taken from~\parencite{biljecki2016improved}).}
+                    \includegraphics[width=\textwidth]{images/introduction/lods_3}
+                    \caption{Considered \glspl{acr::lod} (Image taken from~\parencite{biljecki2016improved}).}
                 \end{figure}
             \end{frame}
 
-            \begin{frame}{Applications}{Physical simulation}
-                \begin{figure}[H]
-                    \centering
-                    \includegraphics[width=.8\textwidth]{images/introduction/3d_model_applications/explosion_simulation}
-                    \caption{Explosion simulation (Image taken from~\parencite{biljecki2015applications}).}
-                \end{figure}
-            \end{frame}
+            \begin{frame}{Applications}
+                \framesubtitle<1>{Physical simulation}
+                \framesubtitle<2>{Planning}
+                \framesubtitle<3>{Entertainement}
 
-            \begin{frame}{Applications}{Planning}
-                \begin{figure}[H]
-                    \centering
-                    \includegraphics[width=.8\textwidth]{images/introduction/3d_model_applications/simplu}
-                    \caption{Example of \gls{acr::3d} urban scene simulated based on known urban norms (Image taken from~\parencite{brasebin2017stochastic}).}
-                \end{figure}
-            \end{frame}
-
-            \begin{frame}{Applications}{Entertainement}
-                \begin{figure}[H]
-                    \centering
-                    \animategraphics[autoplay, loop, width=.8\textwidth]{20}{images/not_used/time_machine_in_situ/frame-}{0}{169}
-                    \caption{Mixed reality for historical applications using iTowns\footnotemark platform (Credits to A. Devaux\footnotemark).}
-                \end{figure}
-                \footnotetext{
-                    \href{http://www.itowns-project.org}{iTowns project.}
+                \temporal<2>{
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=.8\textwidth]{images/introduction/3d_model_applications/explosion_simulation}
+                        \caption{Explosion simulation (Image taken from~\parencite{biljecki2015applications}).}
+                    \end{figure}
                 }
-                \addtocounter{footnote}{1}
-                \footnotetext{
-                    \href{http://recherche.ign.fr/labos/matis/~devaux}{Alexandre Devaux website.}
+                {
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=.8\textwidth]{images/introduction/3d_model_applications/simplu}
+                        \caption{Example of \gls{acr::3d} urban scene simulated based on known urban norms (Image taken from~\parencite{brasebin2017stochastic}).}
+                    \end{figure}
+                }
+                {
+                    \begin{figure}[H]
+                        \centering
+                        \animategraphics[autoplay, loop, width=.8\textwidth]{20}{images/introduction/3d_model_applications/trocadero/trocadero-}{0}{73}
+                        \caption{Mixed reality for historical applications using iTowns\footnotemark platform (Credits to A. Devaux\footnotemark).}
+                    \end{figure}
+                    \footnotetext{
+                        \href{http://www.itowns-project.org}{iTowns project.}
+                    }
+                    \addtocounter{footnote}{1}
+                    \footnotetext{
+                        \href{http://recherche.ign.fr/labos/matis/~devaux}{Alexandre Devaux website.}
+                    }
                 }
             \end{frame}
 
