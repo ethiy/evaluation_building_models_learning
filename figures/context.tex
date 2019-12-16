@@ -14,9 +14,9 @@
             single arrow,
             color=blue,
             minimum height=1cm
-        ] {3D urban reconstruction};
+        ] {3D urban modeling};
         \path (3d_reconstruction.east) node[anchor=west] (3d_model) {\includegraphics[width=2cm]{images/context/3d_model}};
-        \path (3d_model.north) node[anchor=south, text width=6em] (3d_model_legend) {\scriptsize (b) Reconstructed model.};
+        \path (3d_model.north) node[anchor=south, text width=6em] (3d_model_legend) {\scriptsize (b) Building model.};
         \path (3d_model.south east) node [anchor=north west, red, text width=5em] (evaluation) {How good is this model?};
         \draw[->, red] (3d_model.east) -| (evaluation.north);
     \end{tikzpicture}

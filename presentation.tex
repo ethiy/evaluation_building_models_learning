@@ -82,7 +82,7 @@
 
 \usepackage{hyperref}
 \hypersetup{
-    colorlinks=false,
+    % colorlinks=false,
     pdftitle={Semantic aware quality evaluation of 3D building models},
     pdfauthor={Oussama Ennafii},
     pdfkeywords={3D urban modeling} {buildings} {quality assessment} {taxonomy} {classification} {error detection} {geometry} {aerial imagery} {Very High Spatial Resolution} {Digital Surface Model},
@@ -91,6 +91,14 @@
 }
 
 \setbeamerfont{footnote}{size=\tiny}
+
+\tikzset{
+    invisible/.style={opacity=0},
+    visible on/.style={alt=#1{}{invisible}},
+    alt/.code args={<#1>#2#3}{
+        \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}
+    },
+}    
 
 \usepackage[useregional]{datetime2}
 
@@ -250,16 +258,6 @@
                         \end{itemize}
                 \end{itemize}
             \end{frame}
-
-            \begin{frame}{Definitions}
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
-                    \item<1-> \texttt{Finesse}: the \underline{specificity level}.
-                    \item<2-> \texttt{Atomic} errors \(\leftrightarrow\) \underline{maximum} \texttt{finesse} error:
-                        \begin{itemize}
-                            \item<3-> Intuitively: \underline{unitary} (semantically) correction task.
-                        \end{itemize}
-                \end{itemize}
-            \end{frame}
         
         \subsection{General layout}
             \begin{frame}{Error classification}
@@ -267,242 +265,196 @@
             \end{frame}
 
             \begin{frame}{\texttt{Atomic errors}}
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item<1-> \Acrfull{acr::2d} errors:
                         \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                            \item<2-> Segmentation issue (semantic):
+                            \item<only@2-10> Segmentation issue (semantic):
                                 \begin{itemize}
-                                    \item<3-> Over segmentation;
-                                    \item<4-> Under segmentation.      
+                                    \item<only@3-6> Under segmentation;
+                                    \item<only@7-10> Over segmentation.      
                                 \end{itemize}
-                            \item<5-> Border issue (geometric):
+                            \item<only@11-19> Border issue (geometric):
                             \begin{itemize}
-                                \item<6-> Inaccurate topology;
-                                \item<7-> Imprecise border.      
+                                \item<only@12-15> Inaccurate topology;
+                                \item<only@16-19> Imprecise border.      
                             \end{itemize}
                         \end{itemize}
-                    \item<8-> \gls{acr::3d} error (geometric):
+                    \item<only@20-> \gls{acr::3d} error (geometric):
                         \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                            \item<9-> Imprecise geometry.
+                            \item<only@21-> Imprecise geometry.
                         \end{itemize}
                 \end{itemize}
+                \begin{overlayarea}{\textwidth}{.5\textheight}
+                    \only<3-6>{
+                        \begin{figure}[H]
+                            \centering
+                            \alt<3-4>{
+                                \alt<3>{
+                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bos}
+                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bus}
+                                }{
+                                    \includegraphics[height=.4\textheight]{images/errors/building/under_segmentation}
+                                }
+                            }{
+                                \alt<5>{
+                                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
+                                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fus}
+                                }{
+                                    \includegraphics[height=.4\textheight, angle=270]{images/errors/facet/under_segmentation}
+                                }
+                            }
+                            \caption{
+                                \alt<3-4>{
+                                    \alt<3>{
+                                        Ground truth buildings are in different colors: \textcolor{cyan}{blue} and \textcolor{green}{green}.
+                                    }{
+                                        Nadir projection of an erroneous building superposed on the corresponding orthoimage.
+                                    }
+                                }{
+                                    \alt<5>{
+                                        \textcolor{cyan}{Blue} \(\leftrightarrow\) under-segmented facet.
+                                    }{
+                                        Nadir projection: \textcolor{red}{red} \(\leftrightarrow\) inexisting edges.
+                                    }
+                                }
+                            }
+                        \end{figure}
+                    }
+                    \only<7-10>{
+                        \begin{figure}[H]
+                            \centering
+                            \alt<7-8>{
+                                \alt<7>{
+                                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bus}
+                                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bos}
+                                }{
+                                    \includegraphics[height=.4\textheight]{images/errors/building/over_segmentation}
+                                }
+                            }{
+                                \alt<9>{
+                                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
+                                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fos}
+                                }{
+                                    \includegraphics[height=.4\textheight]{images/errors/facet/over_segmentation}
+                                }
+                            }
+                            \caption{
+                                \alt<7-8>{
+                                    \alt<7>{
+                                        Modeled buildings are in different colors: \textcolor{cyan}{blue} and \textcolor{green}{green}.
+                                    }{
+                                        Nadir projection: \textcolor{green}{green} \(\leftrightarrow\) unmodeled edge.
+                                    }
+                                }{
+                                    \alt<9>{
+                                        \textcolor{green}{Green} \(\leftrightarrow\) inexisting edges.
+                                    }{
+                                        Nadir projection of an erroneous building superposed on the corresponding orthoimage.
+                                    }
+                                }
+                            }
+                        \end{figure}
+                    }
+                    \only<12-15>{
+                        \begin{figure}[H]
+                            \centering
+                            \alt<12-13>{
+                                \alt<12>{
+                                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/correct_bit}
+                                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bit}
+                                }{
+                                    \includegraphics[height=.4\textheight]{images/errors/building/topology}
+                                }
+                            }{
+                                \alt<14>{
+                                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fit}
+                                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fit}
+                                }{
+                                    \includegraphics[height=.4\textheight]{images/errors/facet/topology}
+                                }
+                            }
+                            \caption{
+                                \alt<12-13>{
+                                    \alt<12>{
+                                        \textcolor{olive}{Yellow} \(\leftrightarrow\) inaccurate borders.
+                                    }{
+                                        Nadir projection: \textcolor{green}{green} \(\leftrightarrow\) ground truth and \textcolor{red}{red} \(\leftrightarrow\) the model.
+                                    }
+                                }{
+                                    \alt<14>{
+                                        \textcolor{olive}{Yellow} \(\leftrightarrow\) inaccurate borders.
+                                    }{
+                                        Nadir projection: \textcolor{green}{green} \(\leftrightarrow\) ground truth and \textcolor{red}{red} \(\leftrightarrow\) the model.
+                                    }
+                                }
+                            }
+                        \end{figure}
+                    }
+                    \only<16-19>{
+                        \begin{figure}[H]
+                            \centering
+                            \alt<16-17>{
+                                \alt<16>{
+                                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/correct_bib}
+                                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bib}
+                                }{
+                                    \includegraphics[height=.4\textheight]{images/errors/building/border}
+                                }
+                            }{
+                                \alt<18>{
+                                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
+                                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fib}
+                                }{
+                                    \includegraphics[height=.4\textheight]{images/errors/facet/border}
+                                }
+                            }
+                            \caption{
+                                \alt<16-17>{
+                                    \alt<16>{
+                                        \textcolor{red}{Red} \(\leftrightarrow\) imprecise borders.
+                                    }{
+                                        Nadir projection: \textcolor{green}{green} \(\leftrightarrow\) ground truth and \textcolor{red}{red} \(\leftrightarrow\) the model.
+                                    }
+                                }{
+                                    \alt<18>{
+                                        \textcolor{red}{Red} \(\leftrightarrow\) imprecise borders.
+                                    }{
+                                        Nadir projection: \textcolor{green}{green} \(\leftrightarrow\) ground truth.
+                                    }
+                                }
+                            }
+                        \end{figure}
+                    }
+                    \only<21-23>{
+                        \begin{figure}[H]
+                            \centering
+                            \alt<21>{
+                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/correct_big}
+                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/big}
+                            }{
+                                \alt<22>{
+                                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
+                                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fig}
+                                }{
+                                    \includegraphics[height=.4\textheight]{images/errors/facet/geometry}
+                                }
+                            }
+                            \caption{
+                                \alt<21>{
+                                    \textcolor{violet}{Purple} \(\leftrightarrow\) imprecise facet.
+                                }{
+                                    \alt<22>{
+                                        \textcolor{violet}{Purple} \(\leftrightarrow\) imprecise facet.
+                                    }{
+                                        Nadir projection: slanted facet (\SI{25}{\degree}) modeled as horizontal.
+                                    }
+                                }
+                            }
+                        \end{figure}
+                    }
+                \end{overlayarea}
             \end{frame}
 
-        \subsection{Overhead \texorpdfstring{\acrshort*{acr::2d5}}{2.5D} case}
-            \begin{frame}{Building \texttt{atomic} errors}{Segmentation errors}
-                \begin{figure}[H]
-                    \centering
-                    \only<1>{
-                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bos}
-                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bus}
-                    }
-                    \only<2>{
-                        \includegraphics[height=.4\textheight]{images/errors/building/under_segmentation}
-                    }
-                    \only<3>{
-                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bus}
-                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bos}
-                    }
-                    \only<4>{
-                        \includegraphics[height=.4\textheight]{images/errors/building/over_segmentation}
-                    }
-                    \caption{
-                        \only<1>{
-                            Ground truth buildings are in different colors: \textcolor{cyan}{blue} and \textcolor{green}{green}.
-                        }
-                        \only<2>{
-                            Nadir projection of an erroneous building superposed on the corresponding orthoimage.
-                        }
-                        \only<3>{
-                            Modeled buildings are in different colors: \textcolor{cyan}{blue} and \textcolor{green}{green}.
-                        }
-                        \only<4>{
-                            Nadir projection of an erroneous building superposed on the corresponding orthoimage.
-                        }
-                    }
-                \end{figure}
-                \only<1-2>{
-                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item \texttt{\Acrfull{acr::bus}} \(\leftrightarrow\) Multiple buildings are modeled as one.
-                    \end{itemize}
-                }
-                \only<3->{
-                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item \texttt{\Acrfull{acr::bos}} \(\leftrightarrow\) One building is modeled as multiple ones.
-                    \end{itemize}
-                }
-            \end{frame}
-
-            \begin{frame}{Building \texttt{atomic} errors}{Border errors}
-                \begin{figure}[H]
-                    \centering
-                    \only<1>{
-                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/correct_bib}
-                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bib}
-                    }
-                    \only<2>{
-                        \includegraphics[height=.4\textheight]{images/errors/building/border}
-                    }
-                    \only<3>{
-                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/correct_bit}
-                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bit}
-                    }
-                    \only<4>{
-                        \includegraphics[height=.4\textheight]{images/errors/building/topology}
-                    }
-                    \caption{
-                        \only<1>{
-                            \textcolor{red}{Red} \(\leftrightarrow\) imprecise borders.
-                        }
-                        \only<2>{
-                            Nadir projection: \textcolor{green}{green} \(\leftrightarrow\) ground truth and \textcolor{red}{red} \(\leftrightarrow\) the model.
-                        }
-                        \only<3>{
-                            \textcolor{olive}{Yellow} \(\leftrightarrow\) inaccurate borders.
-                        }
-                        \only<4>{
-                            Nadir projection: \textcolor{green}{green} \(\leftrightarrow\) ground truth and \textcolor{red}{red} \(\leftrightarrow\) the model.
-                        }
-                    }
-                \end{figure}
-                \only<1-2>{
-                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item \texttt{\Acrfull{acr::bib}} \(\leftrightarrow\) inaccurate border geometry.
-                    \end{itemize}
-                }
-                \only<3->{
-                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item \texttt{\Acrfull{acr::bit}} \(\leftrightarrow\) wrong footprint shape.
-                    \end{itemize}
-                }
-            \end{frame}
-
-            \begin{frame}{Building \texttt{atomic} errors}{\texorpdfstring{\acrshort*{acr::3d}}{3D} error}
-                \begin{figure}[H]
-                    \centering
-                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/correct_big}
-                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/big}
-                    \caption{
-                        \textcolor{violet}{Purple} \(\leftrightarrow\) imprecise facet.
-                    }
-                \end{figure}
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item \texttt{\Acrfull{acr::big}} \(\leftrightarrow\) inaccurate height.
-                \end{itemize}
-            \end{frame}
-
-            \begin{frame}{Facet \texttt{atomic} errors}{Segmentation errors}
-                \begin{figure}[H]
-                    \centering
-                    \only<1>{
-                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
-                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fus}
-                    }
-                    \only<2>{
-                        \includegraphics[height=.4\textheight, angle=270]{images/errors/facet/under_segmentation}
-                    }
-                    \only<3>{
-                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
-                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fos}
-                    }
-                    \only<4>{
-                        \includegraphics[height=.4\textheight]{images/errors/facet/over_segmentation}
-                    }
-                    \caption{
-                        \only<1>{
-                            \textcolor{cyan}{Blue} \(\leftrightarrow\) under-segmented facet.
-                        }
-                        \only<2>{
-                            Nadir projection: \textcolor{green}{green} \(\leftrightarrow\) unmodeled edge.
-                        }
-                        \only<3>{
-                            \textcolor{green}{Green} \(\leftrightarrow\) inexisting edges.
-                        }
-                        \only<4>{
-                            Nadir projection: \textcolor{red}{red} \(\leftrightarrow\) inexisting edges.
-                        }
-                    }
-                \end{figure}
-                \only<1-2>{
-                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item \texttt{\Acrfull{acr::fus}} \(\leftrightarrow\) Multiple facets are modeled as one.
-                    \end{itemize}
-                }
-                \only<3->{
-                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item \texttt{\Acrfull{acr::fos}} \(\leftrightarrow\) One facet is modeled as multiple ones.
-                    \end{itemize}
-                }
-            \end{frame}
-
-            \begin{frame}{Facet \texttt{atomic} errors}{Border errors}
-                \begin{figure}[H]
-                    \centering
-                    \only<1>{
-                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
-                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fib}
-                    }
-                    \only<2>{
-                        \includegraphics[height=.4\textheight]{images/errors/facet/border}
-                    }
-                    \only<3>{
-                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fit}
-                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fit}
-                    }
-                    \only<4>{
-                        \includegraphics[height=.4\textheight]{images/errors/facet/topology}
-                    }
-                    \caption{
-                        \only<1>{
-                            \textcolor{red}{Red} \(\leftrightarrow\) imprecise borders.
-                        }
-                        \only<2>{
-                            Nadir projection: \textcolor{green}{green} \(\leftrightarrow\) ground truth.
-                        }
-                        \only<3>{
-                            \textcolor{olive}{Yellow} \(\leftrightarrow\) inaccurate borders.
-                        }
-                        \only<4>{
-                            Nadir projection: \textcolor{green}{green} \(\leftrightarrow\) ground truth and \textcolor{red}{red} \(\leftrightarrow\) the model.
-                        }
-                    }
-                \end{figure}
-                \only<1-2>{
-                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item \texttt{\Acrfull{acr::fib}} \(\leftrightarrow\) inaccurate border geometry.
-                    \end{itemize}
-                }
-                \only<3->{
-                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item \texttt{\Acrfull{acr::fit}} \(\leftrightarrow\) wrong facet shape.
-                    \end{itemize}
-                }
-            \end{frame}
-
-            \begin{frame}{Facet \texttt{atomic} errors}{\texorpdfstring{\acrshort*{acr::3d}}{3D} error}
-                \begin{figure}[H]
-                    \centering
-                    \only<1>{
-                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
-                        \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fig}
-                    }
-                    \only<2>{
-                        \includegraphics[height=.4\textheight]{images/errors/facet/geometry}
-                    }
-                    \caption{
-                        \only<1>{
-                            \textcolor{violet}{Purple} \(\leftrightarrow\) imprecise facet.
-                        }
-                        \only<2>{
-                            Nadir projection: sloped facet modeled as flat.
-                        }
-                    }
-                \end{figure}
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item \texttt{\Acrfull{acr::fig}} \(\leftrightarrow\) inaccurate height.
-                \end{itemize}
-            \end{frame}
-    
     \section{Learned evaluation}
         \begin{frame}{Evaluation is classification}
             \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
@@ -522,19 +474,14 @@
             \end{figure}
         \end{frame}
 
-        \subsection{Geometric features}
-            \begin{frame}{Geometric features}{Baseline}
-                \begin{figure}[H]
-                    \centering
-                    \includestandalone[mode=buildnew, width=.75\textwidth]{figures/features/geometric}
-                    \caption[
-                        Computed geometric attributes represented on the dual graph, for facets \(f\) and \(g\).
-                    ]{
-                        \label{fig::geometric_features}
-                        Computed geometric attributes represented on the dual graph, for facets \(f\) and \(g\).
-                        The green vector groups the node (facet) attributes while the blue one shows the edge features.
-                    }
-                \end{figure}
+        \subsection{Baseline}
+            \begin{frame}{Geometric features}
+                \centering
+                \includestandalone[mode=buildnew, width=.75\textwidth]{figures/features/geometric_animated}
+            \end{frame}
+            \begin{frame}{Height based features}
+                \centering
+                \includestandalone[mode=buildnew, width=.75\textwidth]{figures/features/height_based_animated}                
             \end{frame}
     \section{Experiments}
         % \begin{frame}{Datasets: urban scenes}

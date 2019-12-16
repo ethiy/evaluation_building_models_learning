@@ -13,14 +13,6 @@
     
     \tikzstyle{bag} = [text width=4em, text centered]
     \tikzstyle{end} = [circle, minimum width=3pt, fill, inner sep=0pt]
-
-    \tikzset{
-        invisible/.style={opacity=0},
-        visible on/.style={alt=#1{}{invisible}},
-        alt/.code args={<#1>#2#3}{
-            \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
-        },
-    }    
     
     \begin{tikzpicture}[grow=right]
         \node[bag, draw=none] (input) {\textsc{Input}}

@@ -1,0 +1,43 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{fourier}
+
+\usepackage{xcolor}
+\definecolor{darkgreen}{RGB}{0, 155, 85}
+
+\usepackage{standalone}
+
+\usepackage{pgfplots}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, shadows, calc, decorations}
+
+\usepackage{mathrsfs, amsmath}
+
+
+\begin{document}
+    \begin{tikzpicture}
+    	\node (facet_graph) {\includestandalone[mode=buildnew, height=4cm]{figures/graphical_abstract/building_graph}};
+        \path (facet_graph) + (-.2, -1) node (f) {\small $f$};
+        \path (facet_graph) + (2, -.8) node (g) {\small $g$};
+        
+        \path (f) + (-2, -1) node[darkgreen, visible on=<2->] (facet_attributes) {\tiny \(\begin{bmatrix}
+        	\operatorname{degree}(f)\\
+            \operatorname{Area}(f)\\
+            \operatorname{Circumference}(f)
+         \end{bmatrix}\)
+        };
+        \path (f) + (1.5, -1.5) node[blue, visible on=<3->] (edge_attributes) {\tiny
+        $\begin{bmatrix}
+            \Vert \operatorname{Centroid}(f)- \operatorname{Centroid}(g) \Vert_2\\
+            \arccos(\vec{\operatorname{normal}}(f) \cdot \vec{\operatorname{normal}}(g))
+         \end{bmatrix}$
+        };
+        
+        \path[draw, ->, line width=1pt, rounded corners=10pt, darkgreen, visible on=<2->] (f.185) -- (facet_attributes.north);
+        \path (edge_attributes.north |- f.east) + (-.25, .4) node (edge) {};
+        \path[draw, ->, line width=1pt, rounded corners=10pt, blue, visible on=<3->] (edge) -- (edge |- edge_attributes.north);
+    \end{tikzpicture}
+\end{document}
