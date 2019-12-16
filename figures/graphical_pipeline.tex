@@ -1,0 +1,36 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\usepackage{standalone}
+
+\begin{document}
+    \begin{tikzpicture}
+    	\node (residual) at (0,0) {\fbox{\includegraphics[height=1cm, angle=270]{images/introduction/graphical_abstract/residual}}};
+        \path (residual.south) + (0,-.2) node (residual_legend) {\footnotesize (c) Height based};
+
+        \path (residual.west) + (-2, 0) node (facet_graph) {\includestandalone[mode=buildnew, height=1cm]{figures/graphical_abstract/building_graph}};
+        \path (facet_graph |- residual_legend) node (facet_graph_legend) {\footnotesize (b) Geometric};
+
+        \path (residual.north) + (0, 2) node (model) {\includestandalone[mode=buildnew, height=1cm]{figures/graphical_abstract/building_model}};
+        \path (model.south) + (0,-.2) node (model_legend) {\footnotesize (a) Input model};
+
+        \path (residual.east) + (2, 0) node (ortho_projection) {\fbox{\includegraphics[height=1cm, angle=270]{images/introduction/graphical_abstract/orthoprojection}}};
+        \path (ortho_projection |- residual_legend) node (ortho_projection_legend) {\footnotesize (d) Image based};
+
+        \draw[rounded corners] (facet_graph.north west) rectangle (ortho_projection_legend.east |- facet_graph_legend.south west);
+        \path (facet_graph.north west) node[anchor=south west] (features) {\footnotesize Features};
+
+        \path (ortho_projection.east |- model.north) + (1, 0) node (rs_data) {};
+        \draw[->, line width=1pt, dashed] (rs_data) |- (ortho_projection_legend.east |- ortho_projection) node [left, pos=.1, text width=3em] {\scriptsize Remote sensing data.};
+
+		\path (residual.south) + (0, -2) node (errors) {\includestandalone[mode=buildnew, height=1cm]{figures/graphical_abstract/building_errors}};
+        \path (errors.south) + (0,-.2) node (errors_legend) {\footnotesize (e) Error detection};
+        \path (errors.15) + (.35, 0) node[align=left] (errors_list) {\scriptsize {\color{red} \(\blacksquare\) \texttt{\acrshort{acr::fib}}}};
+        \path (errors_list.south) node[align=left] (errors_list) {\scriptsize {\color{green} \(\blacksquare\) \texttt{\acrshort{acr::fos}}}};
+
+        \path[draw, ->, line width=1pt, rounded corners=10pt, IGNGreen] (model_legend.south) -- (residual |- facet_graph.north);
+        \path[draw, ->, line width=1pt, rounded corners=10pt, IGNGreen] (residual |- facet_graph_legend.south) -- (errors.north) node [midway, left, IGNGreen] {\scriptsize Supervised classifier (RF, SVM)};
+    \end{tikzpicture}
+\end{document}

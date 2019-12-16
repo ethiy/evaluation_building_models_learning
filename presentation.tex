@@ -237,21 +237,6 @@
 
     \section{Semantic evaluation}
         \subsection{Design principles}
-            \begin{frame}{\texttt{Generability} and \texttt{Exhaustivity}}
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
-                    \item<1-> Independence towards the:
-                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
-                            \item<2-> Urban scene \(\leftrightarrow\) \texttt{Generability};
-                            \item<3-> Origin of the model \(\leftrightarrow\) \texttt{Exhaustivity}.
-                        \end{itemize}
-                    \item<4-> Conflict!\\For a constant budget:
-                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
-                            \item<5-> \(\uparrow\) \texttt{Generability} \(\implies\) \(\downarrow\) specific errors \(\implies\) \(\downarrow\) \texttt{Exhaustivity};
-                            \item<6-> \(\uparrow\) \texttt{Exhaustivity} \(\implies\) \(\downarrow\) area size \(\implies\) \(\downarrow\) \texttt{Generability};
-                        \end{itemize}
-                \end{itemize}
-            \end{frame}
-
             \begin{frame}{Hierarchization and Modularity}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
                     \item<1-> Hierarchization:
@@ -517,83 +502,40 @@
                     \item \texttt{\Acrfull{acr::fig}} \(\leftrightarrow\) inaccurate height.
                 \end{itemize}
             \end{frame}
+    
+    \section{Learned evaluation}
+        \begin{frame}{Evaluation is classification}
+            \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                \item<1-> Evaluation at \underline{building level};
+                \item<2-> Error detection \(\leftrightarrow\) supervized classification;
+                \item<3-> Respects both constraints:
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item<4-> \textbf{Large-scale}: prediction on unseen instances;
+                        \item<5-> \textbf{Automation}: needs manual annotations.
+                    \end{itemize}
+            \end{itemize}
+        \end{frame}
 
-        % \begin{frame}{Building \texttt{atomic} errors: 2.5D overhead reconstruction case}
-        %     \only<1|handout:1>{
-        %         \begin{figure}
-        %             \begin{center}
-        %                 \begin{subfigure}{.4\textwidth}
-        %                     \centering
-        %                     \fbox{\includegraphics[height=.45\textheight]{images/errors/building/under_segmentation}}
-        %                     \caption{\label{fig::bul_under} Under segmentation (\texttt{BUS}).}
-        %                 \end{subfigure}
-        %                 \begin{subfigure}{.5\textwidth}
-        %                     \centering
-        %                     \fbox{\includegraphics[height=.45\textheight]{images/errors/building/over_segmentation}}
-        %                     \caption{\label{fig::bul_over} Over segmentation (\texttt{BOS}).}
-        %                 \end{subfigure}
-        %             \end{center}
-        %         \end{figure}
-        %     }
-        %     \only<2|handout:2>{
-        %         \begin{figure}
-        %             \begin{center}
-        %                 \begin{subfigure}{.45\textwidth}
-        %                     \centering
-        %                     \fbox{\includegraphics[height=.5\textheight]{images/errors/building/border}}
-        %                     \caption{\label{fig::bul_footprint} Imprecise border (\texttt{BIB}).}
-        %                 \end{subfigure}
-        %                 \begin{subfigure}{.45\textwidth}
-        %                     \centering
-        %                     \fbox{\includegraphics[height=.5\textheight]{images/errors/building/topology}}
-        %                     \caption{\label{fig::bul_height} Inaccurate topology (\texttt{BIT}).}
-        %                 \end{subfigure}
-        %             \end{center}
-        %         \end{figure}
-        %     }
-        % \end{frame}
-        % \begin{frame}{Facet \texttt{atomic} errors: 2.5D overhead reconstruction case}
-        %     \only<1|handout:1>{
-        %         \begin{figure}
-        %             \begin{center}
-        %                 \begin{subfigure}{.31\textwidth}
-        %                     \centering
-        %                     \fbox{\includegraphics[height=.4\textheight]{images/errors/facet/under_segmentation}}
-        %                     \caption{\label{fig::fac_under} Under segmentation (\texttt{FUS})}
-        %                 \end{subfigure}
-        %                 \begin{subfigure}{.31\textwidth}
-        %                     \centering
-        %                     \fbox{\includegraphics[height=.4\textheight]{images/errors/facet/over_segmentation}}
-        %                     \caption{\label{fig::fac_over} Over segmentation (\texttt{FOS})}
-        %                 \end{subfigure}
-        %                 \begin{subfigure}{.31\textwidth}
-        %                     \centering
-        %                     \fbox{\includegraphics[height=.4\textheight]{images/errors/facet/geometry}}
-        %                     \caption{\label{fig::fac_height} Imprecise geometry (\texttt{FIG})}
-        %                 \end{subfigure}
-        %             \end{center}
-        %         \end{figure}
-        %     }
-        %     \only<2|handout:2>{
-        %         \begin{figure}
-        %             \begin{center}
-        %                 \begin{subfigure}{.45\textwidth}
-        %                     \centering
-        %                     \fbox{\includegraphics[height=.65\textwidth]{images/errors/facet/border}}
-        %                     \caption{\label{fig::fac_footprint} Imprecise borders (\texttt{FIB})}
-        %                 \end{subfigure}
-        %                 \begin{subfigure}{.45\textwidth}
-        %                     \centering
-        %                     \fbox{\includegraphics[height=.65\textwidth]{images/errors/facet/topology}}
-        %                     \caption{\label{fig::fac_height} Inaccurate topology (\texttt{FIT})}
-        %                 \end{subfigure}
-        %             \end{center}
-        %         \end{figure}
-        %     }
-        % \end{frame}
-        % \begin{frame}{The evaluation pipeline}
-        %     \includestandalone[mode=buildnew, height=.81\textheight]{graphical_pipeline}
-        % \end{frame}
+        \begin{frame}{The evaluation pipeline}
+            \begin{figure}[H]
+                \includestandalone[mode=buildnew, height=.75\textheight]{figures/graphical_pipeline}
+            \end{figure}
+        \end{frame}
+
+        \subsection{Geometric features}
+            \begin{frame}{Geometric features}{Baseline}
+                \begin{figure}[H]
+                    \centering
+                    \includestandalone[mode=buildnew, width=.75\textwidth]{figures/features/geometric}
+                    \caption[
+                        Computed geometric attributes represented on the dual graph, for facets \(f\) and \(g\).
+                    ]{
+                        \label{fig::geometric_features}
+                        Computed geometric attributes represented on the dual graph, for facets \(f\) and \(g\).
+                        The green vector groups the node (facet) attributes while the blue one shows the edge features.
+                    }
+                \end{figure}
+            \end{frame}
     \section{Experiments}
         % \begin{frame}{Datasets: urban scenes}
         %     \begin{figure}
