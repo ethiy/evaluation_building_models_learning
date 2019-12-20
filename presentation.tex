@@ -98,7 +98,7 @@
     alt/.code args={<#1>#2#3}{
         \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}
     },
-}    
+}
 
 \usepackage[useregional]{datetime2}
 
@@ -213,6 +213,11 @@
                 \end{itemize}
             \end{frame}
         
+            \begin{frame}{State of the art}
+                \centering
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/state_of_the_art}
+            \end{frame}
+
             \begin{frame}{Goal}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item<1-> \underline{Define errors} that affects building \gls{acr::3d} models.
@@ -232,18 +237,13 @@
                 \end{itemize}
             \end{frame}
 
-        \begin{frame}{State of the art}
-            \centering
-            \includestandalone[mode=buildnew, width=\textwidth]{figures/state_of_the_art}
-        \end{frame}
-
-        \begin{frame}{Contributions}
-            \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
-                \item<1-> Semantic error taxonomy;
-                \item<2-> Learning evaluation approach;
-                \item<3-> Experimental validation.
-            \end{itemize}
-        \end{frame}
+            \begin{frame}{Contributions}
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
+                    \item<1-> Semantic error taxonomy;
+                    \item<2-> Learning evaluation approach;
+                    \item<3-> Experimental validation.
+                \end{itemize}
+            \end{frame}
 
     \section{Semantic evaluation}
         \subsection{Design principles}
@@ -493,89 +493,6 @@
         \begin{frame}{Datasets: urban scenes}
             \centering
             \includestandalone[mode=buildnew, width=.9\textwidth]{figures/dataset}
-        \end{frame}
-        \begin{frame}{Ablation study: Elancourt example}
-            \begin{table}[H]
-                \scriptsize
-                \begin{center}
-                    \scriptsize
-                    \begin{tabular}{|x{.5cm} | x{.8cm} x{.8cm} | x{.9cm} x{.9cm} | x{.8cm} x{.8cm} | x{.8cm} x{.8cm}|}
-                        \hline
-                        &\multicolumn{2}{x{1.6cm}|}{\textbf{Geom.}} & \multicolumn{2}{x{1.8cm}|}{\textbf{Geom. $\cup$ Hei.}} & \multicolumn{2}{x{1.6cm}|}{\textbf{Geom. $\cup$ Im.}} & \multicolumn{2}{x{1.6cm}|}{\textbf{All}}\\
-                        \cline{2-9}
-                        &\textbf{Rec.} & \textbf{Prec.} & \textbf{Rec.} & \textbf{Prec.} & \textbf{Rec.} & \textbf{Prec.} & \textbf{Rec.} & \textbf{Prec.}\\
-                        \hline
-                        \texttt{BOS} & \textbf{93.96} & 76.15 & 91.43 & \textbf{77.76} & 91.51 & 76.08 & 90.83 & 76.14 \\
-                        \hline
-                        \strut\\[-\normalbaselineskip]
-                        \only<3|handout:0>{\\[-\normalbaselineskip]\rowcolor{IGNGreen}}\texttt{BUS} & 32.98 & \textbf{76.47} & \textbf{41.86} & 75.57 & 40.38 & 71.00 & 39.32 & 71.81 \\
-                        \hline
-                        \strut\\[-\normalbaselineskip]
-                        \only<5|handout:0>{\\[-\normalbaselineskip]\rowcolor{IGNRed}}\texttt{BIB} & 12.32 & 67.57 & 12.81 & \textbf{68.42} & 16.26 & 67.35 & \textbf{16.75} & 68.0 \\
-                        \hline
-                        \strut\\[-\normalbaselineskip]
-                        \only<4|handout:0>{\\[-\normalbaselineskip]\rowcolor{orange}}\only<5|handout:0>{\\[-\normalbaselineskip]\rowcolor{IGNRed}}\texttt{BIT} & \textbf{25.25} & 92.59 & 20.20 & 90.91 & 20.20 & \textbf{95.24} & 11.11 & 91.67 \\
-                        \hline
-                        \hline
-                        \texttt{FOS} & 98.91 & 99.07 & 98.91 & \textbf{99.30} & \textbf{98.99} & 98.84 & 98.91 & 98.84 \\
-                        \hline
-                        \strut\\[-\normalbaselineskip]
-                        \only<5|handout:0>{\\[-\normalbaselineskip]\rowcolor{IGNRed}}\texttt{FUS} & \textbf{1.90} & 54.55 & 0.63 & \textbf{66.67} & 1.61 & 50 & 1.27 & \textbf{66.67} \\
-                        \hline
-                        \strut\\[-\normalbaselineskip]
-                        \only<5|handout:0>{\\[-\normalbaselineskip]\rowcolor{IGNRed}}\texttt{FIB} & \textbf{9.17} & 87.5 & 0 & --- & 8.30 & 82.61 & 7.42 & \textbf{100} \\
-                        \hline
-                        \strut\\[-\normalbaselineskip]
-                        \only<5|handout:0>{\\[-\normalbaselineskip]\rowcolor{IGNRed}}\texttt{FIT} & \textbf{6.67} & \textbf{100} & 8.73 & 95.24 & 3.33 & \textbf{100} & 3.33 & \textbf{100} \\
-                        \hline
-                        \texttt{FIG} & \textbf{80.54} & 73.14 & 80.45 & \textbf{72.62} & 78.69 & 72.12 & 79.02 & 71.82 \\
-                        \hline
-                    \end{tabular}
-                \end{center}
-            \end{table}
-            % \only<1>{
-            %     \begin{center}
-            %         \footnotesize Results in percentage obtained using \texttt{RF} (\underline{1,000 trees} \& \underline{max depth 4}) and \underline{10-fold cross. val}.
-            %     \end{center}
-            % }
-            \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                \item[\textcolor{IGNDarkGreen}{\(\blacktriangleright\)}]<2-> \footnotesize In most cases \textbf{Geom.} is sufficient;
-                \item<3-> \footnotesize Except for \texttt{BUS} $\rightarrow$ other modalities have a big impact ($\approx$ + 10\%).
-                \item[\textcolor{orange}{\(\blacktriangleright\)}]<4-> \footnotesize Only \textbf{Geom.} is even \underline{the best} for \texttt{BIT}.
-                \item[\textcolor{IGNRed}{\(\blacktriangleright\)}]<5-> \footnotesize Highly unbalanced labels are \underline{hard} to detect.
-            \end{itemize}
-        \end{frame}
-        \begin{frame}{Transferability}
-            \begin{table}[H]
-                \scriptsize
-                \begin{center}
-                    \begin{tabular}{| x{1.5cm}| x{.4cm} | x{.4cm} | x{.4cm} | x{.4cm} | x{.4cm} | x{.4cm} | x{.4cm} | x{.4cm} | x{.4cm} |}
-                        \hline
-                        &\texttt{BOS}  & \texttt{BUS} &\texttt{BIB} &\texttt{BIT} &\texttt{FOS}  & \texttt{FUS} &\texttt{FIB} &\texttt{FIT} &\texttt{FIG} \\
-                        \hline
-                        Elancourt $\rightarrow$ Nantes &\cellcolor{IGNRed} & \cellcolor{IGNRed}&\cellcolor{IGNRed}& \cellcolor{IGNRed}& \cellcolor{IGNGreen}& \cellcolor{IGNGreen}&\cellcolor{IGNGreen} Im. & \cellcolor{IGNRed}&\cellcolor{IGNGreen}\\
-                        \hline
-                        Elancourt $\rightarrow$ Paris-13  & \cellcolor{IGNRed}& \cellcolor{IGNRed}& \cellcolor{IGNGreen}& \cellcolor{IGNRed}& \cellcolor{IGNGreen}& \cellcolor{IGNGreen}Im.& \cellcolor{IGNGreen}Im.& \cellcolor{IGNRed}&\cellcolor{IGNGreen}\\
-                        \hline
-                        Nantes $\rightarrow$ Paris-13  & \cellcolor{IGNRed}& \cellcolor{IGNRed}& \cellcolor{IGNDarkGrey} & \cellcolor{IGNGreen}& \cellcolor{IGNGreen}& \cellcolor{IGNGreen}& \cellcolor{IGNGreen}& \cellcolor{IGNDarkGrey} &\cellcolor{IGNGreen}\\
-                        \hline
-                        Nantes $\rightarrow$ Elancourt  &\cellcolor{IGNGreen} & \cellcolor{IGNRed}& \cellcolor{IGNRed}&\cellcolor{IGNGreen}All & \cellcolor{IGNGreen}& \cellcolor{IGNRed}&\cellcolor{IGNRed}Im. &\cellcolor{IGNGreen}Im. &\cellcolor{IGNGreen}\\
-                        \hline
-                        Paris-13 $\rightarrow$ Nantes  &\cellcolor{IGNRed} & \cellcolor{IGNRed}& \cellcolor{IGNDarkGrey} & \cellcolor{IGNGreen}&\cellcolor{IGNGreen} & \cellcolor{IGNRed}& \cellcolor{IGNGreen}& \cellcolor{IGNDarkGrey} & \cellcolor{IGNRed} Hei.\\
-                        \hline
-                        Paris-13 $\rightarrow$ Elancourt &\cellcolor{IGNGreen} &\cellcolor{IGNRed} & \cellcolor{IGNGreen}Im. & \cellcolor{IGNGreen}& \cellcolor{IGNGreen}& \cellcolor{IGNRed}& \cellcolor{IGNRed}Im. & \cellcolor{IGNDarkGrey} & \cellcolor{IGNGreen}\\
-                        \hline
-                    \end{tabular}
-                    \caption{\footnotesize \textcolor{IGNRed}{$\blacksquare$}: Loss in F-score, \textcolor{IGNGreen}{$\blacksquare$}: Stability or gain in F-score.}
-                \end{center}
-            \end{table}
-            \uncover<2->{
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<2-> \footnotesize Only 8/24 of \texttt{Building errors} transferability cases are \textcolor{IGNGreen}{positive}.
-                    \item<3-> \footnotesize \texttt{Facets errors} are more transferable: 19/30 are \textcolor{IGNGreen}{positive}.
-                    \item<4-> \footnotesize Additional modalities play a \underline{critical role} in error prediction.
-                \end{itemize}
-            }
         \end{frame}
         
     \section{Conclusion}
