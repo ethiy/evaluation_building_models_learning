@@ -7,17 +7,30 @@
 
 \begin{document}
     \begin{tikzpicture}
-        \node (sampled_pc) {\includegraphics[width=2cm]{images/context/sampled_pc}};
-        \path (sampled_pc.north) node[anchor=south, text width=5em] (sampled_pc_legend) {\scriptsize (a) Remote sensing data.};
-        \path (sampled_pc.east) node[anchor=west, visible on=<2->] (3d_reconstruction) [
+        \node[visible on=<3-6>] (sampled_pc) {\includegraphics[width=2cm]{images/context/sampled_pc}};
+        \path (sampled_pc.east) node[anchor=west, visible on=<3>] (3d_reconstruction) [
             draw,
             single arrow,
             color=blue,
             minimum height=1cm
         ] {3D urban modeling};
-        \path (3d_reconstruction.east) node[anchor=west, visible on=<3->] (3d_model) {\includegraphics[width=2cm]{images/context/3d_model}};
-        \path (3d_model.north) node[anchor=south, text width=6em, visible on=<3->] (3d_model_legend) {\scriptsize (b) Building model.};
-        \path (3d_model.south east) node [anchor=north west, red, text width=5em, visible on=<4->] (evaluation) {How good is this model?};
-        \draw[->, red, visible on=<5->] (3d_model.east) -| (evaluation.north);
+        \path (sampled_pc.east) node[anchor=west, visible on=<6>] (3d_reconstruction) [
+            draw,
+            single arrow,
+            color=blue,
+            minimum height=1cm
+        ] {3D urban modeling};
+
+        \path (3d_reconstruction) node[visible on=<1>] (aerial_images) {\includegraphics[width=4cm]{example-image}};
+        \path (aerial_images) node[visible on=<2>] (lidar_pcs) {\includegraphics[width=4cm]{example-image}};
+
+        \path (3d_reconstruction) node[visible on=<4>] (human_op) {\includegraphics[width=2cm]{images/context/operator}};
+        \path (human_op) node[visible on=<5>] (automatic) {\includegraphics[width=2cm]{images/context/automatic}};
+
+        \path (3d_reconstruction.east) node[anchor=west, visible on=<6>] (3d_model) {\includegraphics[width=2cm]{images/context/3d_model}};
+
+        \path (3d_reconstruction) node[visible on=<7->] (3d_model_quality) {\includegraphics[width=2cm]{images/context/3d_model}};
+
+        \path (3d_model_quality.south) node[anchor=north, red, visible on=<8->] (evaluation) {How good is this model?};
     \end{tikzpicture}
 \end{document}

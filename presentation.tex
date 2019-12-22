@@ -1,4 +1,4 @@
-\documentclass[10pt]{beamer}
+\documentclass[12pt]{beamer}
 
 \usepackage{lmodern}
 \usepackage[utf8]{inputenc}
@@ -82,7 +82,6 @@
 
 \usepackage{hyperref}
 \hypersetup{
-    % colorlinks=false,
     pdftitle={Semantic aware quality evaluation of 3D building models},
     pdfauthor={Oussama Ennafii},
     pdfkeywords={3D urban modeling} {buildings} {quality assessment} {taxonomy} {classification} {error detection} {geometry} {aerial imagery} {Very High Spatial Resolution} {Digital Surface Model},
@@ -149,7 +148,7 @@
                 \begin{figure}[H]
                     \centering
                     \includegraphics[width=\textwidth]{images/introduction/lods_3}
-                    \caption{Considered \glspl{acr::lod} (Image taken from~\parencite{biljecki2016improved}).}
+                    \caption{Considered \glspl{acr::lod}~\parencite{biljecki2016improved}.}
                 \end{figure}
             \end{frame}
 
@@ -162,14 +161,14 @@
                     \begin{figure}[H]
                         \centering
                         \includegraphics[width=.8\textwidth]{images/introduction/3d_model_applications/explosion_simulation}
-                        \caption{Explosion simulation (Image taken from~\parencite{biljecki2015applications}).}
+                        \caption{Explosion simulation~\parencite{biljecki2015applications}.}
                     \end{figure}
                 }
                 {
                     \begin{figure}[H]
                         \centering
                         \includegraphics[width=.8\textwidth]{images/introduction/3d_model_applications/simplu}
-                        \caption{Example of \gls{acr::3d} urban scene simulated based on known urban norms (Image taken from~\parencite{brasebin2017stochastic}).}
+                        \caption{Example of \gls{acr::3d} urban scene simulated based on known urban norms~\parencite{brasebin2017stochastic}.}
                     \end{figure}
                 }
                 {
@@ -227,13 +226,14 @@
 
             \begin{frame}{Challenges}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<1-> \underline{Scalability} up to city level;
-                    \item<2-> Genericity towards:
+                    \item<1-> Least expensive reference data;
+                    \item<2-> \underline{Scalability} up to city level;
+                    \item<3-> Genericity towards:
                         \begin{itemize}
-                            \item<3-> modeling approach;
-                            \item<4-> urban scene.
+                            \item<4-> modeling approach;
+                            \item<5-> urban scene.
                         \end{itemize}
-                    \item<5-> Automation with the least human intervention possible.
+                    \item<6-> Automation with the least human intervention possible.
                 \end{itemize}
             \end{frame}
 
