@@ -37,6 +37,15 @@
         }
     }
     \tikzset{
+        data_type/.style={
+            draw,
+            thick,
+            minimum height = .75cm,
+            minimum width  = 16cm,
+            fill           = cyan!30
+        }
+    }
+    \tikzset{
         output/.style={
             draw,
             thick,
@@ -46,11 +55,36 @@
         }
     }
     \tikzset{
+        output_type/.style={
+            draw,
+            thick,
+            minimum height = 10 cm,
+            minimum width  = .75 cm,
+            fill           = teal!30
+        }
+    }
+    \tikzset{
         intersection/.style={
             draw,
             thick,
             minimum height = 5 cm,
             minimum width  = 8 cm
+        }
+    }
+    \tikzset{
+        intersection_ref/.style={
+            draw,
+            thick,
+            minimum height = 10 cm,
+            minimum width  = 8 cm
+        }
+    }
+    \tikzset{
+        eval_methods/.style={
+            draw,
+            thick,
+            minimum height = 10 cm,
+            minimum width  = 16 cm
         }
     }
     \tikzset{
@@ -65,22 +99,40 @@
     }
 
 	\begin{tikzpicture}
-		\node[data]  (manual) {\textbf{Manual data}};
-		\path (manual.east) node[data, anchor=west] (sensor) {\textbf{Sensor data}};
-		\path (manual.north west) node[output, anchor=south east] (semantic_errors) {\rotatebox{90}{\textbf{Semantic errors}}};
-		\path (semantic_errors.north) node[output, anchor=south] (geom_ind) {\rotatebox{90}{\textbf{Geometric indices}}};
+		\node[data, visible on=<3->]  (manual) {\textbf{Manual data}};
+        \path (manual.east) node[data, anchor=west, visible on=<3->] (sensor) {\textbf{Sensor data}};
+        \path (manual.west) node [data_type, anchor=west, visible on=<2>] (data_type) {\textbf{Reference data type}};
 
-        \path (manual.north) node[intersection, anchor=south] (manual_semantic) {};
-		\path (manual_semantic.north) node[intersection, anchor=south] (manual_indx) {};
-		\path (sensor.north) node[intersection, anchor=south] (sensor_semantic) {};
-		\path (sensor_semantic.north) node[intersection, anchor=south] (sensor_indx) {};
+		\path (manual.north west) node[output_type, anchor=south east, visible on=<4>] (output_type) {\rotatebox{90}{\textbf{Output type}}};
+		\path (manual.north west) node[output, anchor=south east, visible on=<5->] (semantic_errors) {\rotatebox{90}{\textbf{Semantic errors}}};
+		\path (semantic_errors.north) node[output, anchor=south, visible on=<5->] (geom_ind) {\rotatebox{90}{\textbf{Geometric indices}}};
 
-	    \path (manual_indx) + (0, -.5) node[cross, label=below:{\scriptsize \parencite{zeng2014multicriteria}}]{};
-	    \path (manual_indx) + (-1, 1) node[cross, label=above:{\scriptsize \parencite{vogtle2003quality}}]{};
-	    \path (manual_indx) + (1.5, .5) node[cross, label=below:{\scriptsize \parencite{kaartinen2005accuracy}}]{};
-	    \path (sensor_indx) node[cross, label=below:{\scriptsize \parencite{akca2010quality}}]{};
-	    \path (sensor_semantic) + (0, 1.75) node[cross, label=below:{\scriptsize \parencite{elberink2011quality}}]{};
-	    \path (sensor_semantic) + (-.75, .25) node[cross, label=below:{\scriptsize \parencite{boudet2006supervised}}]{};
-	    \path (sensor_semantic) + (1.5, -.75) node[cross, label=below:{\scriptsize \parencite{michelin2012building}}]{};
+        \path (data_type.north) node[eval_methods, anchor=south, visible on=<1-2>] (eval_methods) {\textbf{Quality evaluation methods}};
+
+        \path (manual.north) node[intersection_ref, anchor=south, visible on=<3-4>] (manual_ref) {};
+        \path (manual.north) node[intersection, anchor=south, visible on=<5-6>] (manual_semantic) {};
+        \path (manual_semantic.north) node[intersection, anchor=south, visible on=<5-6>] (manual_indx) {};
+        \path (manual.north) node[intersection, anchor=south, fill=red!30, visible on=<7->] (manual_semantic) {};
+        \path (manual_semantic.north) node[intersection, anchor=south, fill=red!30, visible on=<7->] (manual_indx) {};
+        
+		\path (sensor.north) node[intersection_ref, anchor=south, visible on=<3-4>] (sensor_ref) {};
+		\path (sensor.north) node[intersection, anchor=south, visible on=<5-7>] (sensor_semantic) {};
+		\path (sensor.north) node[intersection, anchor=south, fill=green!30, visible on=<8->] (sensor_semantic) {};
+		\path (sensor_semantic.north) node[intersection, anchor=south, visible on=<5->] (sensor_indx) {};
+
+        \path (manual_indx) + (0, -.5) node[cross, visible on=<6->] (zeng2014multicriteria) {};
+        \path (zeng2014multicriteria) node[anchor=north, visible on=<6->] {\scriptsize \parencite{zeng2014multicriteria}};
+	    \path (manual_indx) + (-1, 1) node[cross, visible on=<6->] (vogtle2003quality) {};
+        \path (vogtle2003quality) node[anchor=south, visible on=<6->] {\scriptsize \parencite{vogtle2003quality}};
+        \path (manual_indx) + (1.5, .5) node[cross, visible on=<6->] (kaartinen2005accuracy) {};
+        \path (kaartinen2005accuracy) node[anchor=north, visible on=<6->] {\scriptsize \parencite{kaartinen2005accuracy}};
+        \path (sensor_indx) node[cross, visible on=<6->] (akca2010quality) {};
+        \path (akca2010quality) node[anchor=north, visible on=<6->] {\scriptsize \parencite{akca2010quality}};
+        \path (sensor_semantic) + (0, 1.75) node[cross, visible on=<6->] (elberink2011quality) {};
+        \path (elberink2011quality) node[anchor=north, visible on=<6->] {\scriptsize \parencite{elberink2011quality}};
+        \path (sensor_semantic) + (-.75, .25) node[cross, visible on=<6->] (boudet2006supervised) {};
+        \path (boudet2006supervised) node[anchor=north, visible on=<6->] {\scriptsize \parencite{boudet2006supervised}};
+        \path (sensor_semantic) + (1.5, -.75) node[cross, visible on=<6->] (michelin2012building) {};
+        \path (michelin2012building) node[anchor=north, visible on=<6->] {\scriptsize \parencite{michelin2012building}};
 	\end{tikzpicture}
 \end{document}
