@@ -8,12 +8,12 @@
 \begin{document}
 
 	\begin{tikzpicture}
-		\node[visible on=<1>] (image) {\includegraphics[width=1.5cm, angle=270]{images/introduction/graphical_abstract/orthoprojection}};
-		\path (image.south) node[anchor=north, visible on=<1>, text width=1.5cm] (image_legend) {\scriptsize Nadir projection on orthoimage.};
+		\node[visible on=<1>] (image) {\includegraphics[width=5cm, angle=270]{images/introduction/graphical_abstract/orthoprojection}};
+		\path (image.south) node[anchor=north, visible on=<1>, text width=5cm, align=center] (image_legend) {\scriptsize Nadir projection on orthoimage.};
 
-		\path (image) node[visible on=<2>] (pixel_segment) {\includestandalone[width=1.5cm]{figures/features/image_based}};
+		\path (image) + (-.25, 0) node[visible on=<2>] (pixel_segment) {\includestandalone[width=5cm]{figures/features/image_based}};
 
-		\path (image) node[visible on=<3->] (segment_hist) {\includegraphics[width=1.5cm, angle=270]{images/introduction/graphical_abstract/orthoprojection}};
+		\path (image) node[visible on=<3->] (segment_hist) {\includegraphics[width=5cm, angle=270]{images/introduction/graphical_abstract/orthoprojection}};
 
 		\path (image) + (.7, -.3) node[visible on =<3>] (segment_hist_1) {
 			\resizebox{.25cm}{.25cm}{
