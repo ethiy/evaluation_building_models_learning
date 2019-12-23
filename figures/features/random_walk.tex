@@ -1,0 +1,51 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\usepackage{tikz}
+
+
+\begin{document}
+    \tikzset{
+        vertex/.style={circle, fill=black}
+    }
+    \tikzset{
+        active/.style={circle, fill=red}
+    }
+    \tikzset{
+        candidat/.style={circle, fill=violet!50}
+    }
+	\begin{tikzpicture}
+		\node[vertex] (a) {};
+		\node[active, visible on=<2>] (a) {};
+		\node[candidat, visible on=<3>] (a) {};
+		\path (a) + (.5, -2) node[vertex] (b) {};
+		\path (a) + (.5, -2) node[candidat, visible on=<2>] (b) {};
+		\path (a) + (.5, -2) node[active, visible on=<3>] (b) {};
+		\path (b) + (1.5, .75) node[vertex] (c) {};
+		\path (c) + (2, .45) node[vertex] (d) {};
+        \path (d) + (1.5, -.7) node[vertex] (e) {};
+		\path (d) + (1.5, -.7) node[candidat, visible on=<3>] (e) {};
+        \path (e) + (-2, 1.75) node[vertex] (f) {};
+        \path (f) + (-1.5, -.5) node[vertex] (g) {};
+        \path (f) + (-1.5, -.5) node[candidat, visible on=<2>] (g) {};
+        
+        \draw[cyan] (a) edge (b);
+        \draw[cyan] (c) edge (b);
+        \draw[cyan] (c) edge (d);
+        \draw[cyan] (e) edge (d);
+        \draw[cyan] (e) edge (b);
+        \draw[cyan] (e) edge (f);
+        \draw[cyan] (g) edge (f);
+        \draw[cyan] (g) edge (a);
+        \draw[cyan] (g) edge (c);
+        \draw[cyan] (d) edge (f);
+
+        \draw[blue, visible on=<2-3>] (a) edge (b);
+        \draw[blue, visible on=<2>] (a) edge (g);
+
+        \draw[blue, visible on=<3>] (c) edge (b);
+        \draw[blue, visible on=<3>] (e) edge (b);
+    \end{tikzpicture}
+\end{document}

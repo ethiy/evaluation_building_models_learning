@@ -246,7 +246,7 @@
             \end{frame}
 
     \section{Semantic evaluation}
-        \subsection{Design principles}
+        \subsection{General layout}
             \begin{frame}{Hierarchization and Modularity}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
                     \item<1-> Hierarchization:
@@ -261,11 +261,11 @@
                 \end{itemize}
             \end{frame}
         
-        \subsection{General layout}
             \begin{frame}{Error classification}
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy_tree_animated}
             \end{frame}
 
+        \subsection{Overhead case}
             \begin{frame}{\texttt{Atomic errors}}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item<1-> \Acrfull{acr::2d} errors:
@@ -410,14 +410,26 @@
                 \centering
                 \includestandalone[mode=buildnew, width=.75\textwidth]{figures/features/geometric_animated}
             \end{frame}
+
             \begin{frame}{Height based features}
                 \centering
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/features/height_based_animated}                
             \end{frame}
+
             \begin{frame}{Image based features}
                 \centering
-                \includestandalone[mode=buildnew, height=.8\textheight]{figures/features/image_based_animated}                
+                \includestandalone[mode=buildnew, height=.8\textheight]{figures/features/image_based_animated}
             \end{frame}
+
+        \subsection{Advanced graph features}
+            \begin{frame}{Random walk on graphs}
+                \centering
+                \begin{figure}[H]
+                    \animategraphics[autoplay, loop, width=.45\textwidth]{25}{figures/features/drunk_man/drunk_man-}{0}{72}
+                    \includestandalone[mode=buildnew, width=.45\textwidth]{figures/features/random_walk}
+                \end{figure}
+            \end{frame}
+
     \section{Experiments}
         \begin{frame}{Datasets: urban scenes}
             \centering
