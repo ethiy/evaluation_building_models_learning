@@ -423,11 +423,120 @@
 
         \subsection{Advanced graph features}
             \begin{frame}{Random walk on graphs}
-                \centering
                 \begin{figure}[H]
+                    \centering
                     \animategraphics[autoplay, loop, width=.45\textwidth]{25}{figures/features/drunk_man/drunk_man-}{0}{72}
                     \includestandalone[mode=buildnew, width=.45\textwidth]{figures/features/random_walk}
                 \end{figure}
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                    \item<4-> Walk described by normalized adjacency matrix \(P\);
+                    \item<5-> Use \(P\) as a feature vector \(\longrightarrow\) \only<6->{\alert<6>{No};}
+                    \item<7-> \(P\) is not invariant:
+                    \begin{itemize}
+                        \item<8-> permutations;
+                        \item<9-> graph size;
+                    \end{itemize}
+                \end{itemize}
+            \end{frame}
+
+            \begin{frame}{Random walk based kernels}
+                \framesubtitle<1-4>{Random walk kernel}
+                \framesubtitle<5-13>{Multiscale Laplacian kernel}
+                \framesubtitle<14->{Propagation kernel}
+                \begin{overlayarea}{\textwidth}{.8\textheight}
+                    \only<1-4>{
+                        \begin{columns}[T]
+                            \centering
+                            \begin{column}{.48\textwidth}
+                                \centering
+                                \includegraphics[width=\textwidth]{images/related_work/direct_product_graphs}
+                            \end{column}
+                            \begin{column}{.48\textwidth}
+                                \centering
+                                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                                    \item<2-> Quadratic form \(\implies\) invariance to:
+                                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                                            \item<3-> permutation;
+                                            \item<4-> graph size;
+                                        \end{itemize}
+                                \end{itemize}
+                            \end{column}
+                        \end{columns}
+                    }
+                    \only<5-13>{
+                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                            \item<5-> \(G\) \(\longleftrightarrow\) a probability distribution.
+                            \item<6-> Compare probabilities (Bhattacharyya kernel) \(\longrightarrow\) Compare graphs.
+                            \item<7-> Adapt to be:
+                            \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                                \item<8-> permutation invariant \(\longrightarrow\) \only<9->{linear map;}
+                                \item<10-> node attribute aware \(\longrightarrow\) \only<11->{vertex base kernels;}
+                                \item<12-> graph scale \(\longrightarrow\) \only<13->{kernel between subgraphs.}
+                            \end{itemize}
+                        \end{itemize}
+                    }
+                    \only<14->{
+                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                            \item<14-> Nodes are Gaussian mixtures of other nodes;
+                            \item<15-> Propagate mixture coefficients using \(P\);
+                            \item<16-> Probability distributions are hashed.
+                        \end{itemize}
+                    }
+                \end{overlayarea}
+            \end{frame}
+
+            \begin{frame}{Graph Hopper kernel}
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                    \item<1-> Random walk \(\xrightarrow{\text{suffers}}\) tottering;
+                    \begin{itemize}
+                        \item Isolated nodes are ignored;
+                    \end{itemize}
+                    \item<2-> Compare Paths instead;
+                    \begin{itemize}
+                        \item<3-> Hop along same size paths.
+                        \item<4-> Compare vertex attributes \(\longrightarrow\) base kernel.
+                    \end{itemize}
+                \end{itemize}
+            \end{frame}
+
+            \begin{frame}{Graph Hopper kernel}
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                    \item<1-> Random walk \(\xrightarrow{\text{suffers}}\) tottering;
+                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                        \item Isolated nodes are ignored;
+                    \end{itemize}
+                    \item<2-> Compare Paths instead;
+                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                        \item<3-> Hop along same size paths.
+                        \item<4-> Compare vertex attributes \(\longrightarrow\) base kernel.
+                    \end{itemize}
+                \end{itemize}
+            \end{frame}
+
+            \begin{frame}{Lov\'asz/\texorpdfstring{\acrshort*{acr::svm}}{SVM} kernel}
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                    \item<1-> Lov\'asz number \(\vartheta\left(G\right)\):
+                    \begin{itemize}
+                        \item<2-> graph invariant;
+                        \item<3-> smallest half-angle of cone containing the orthonormal representation of \(G\).
+                    \end{itemize}
+                    \item<4-> Compare graph \(\longleftrightarrow\) Compare Lov\'asz number of subgraphs.
+                    \item<5-> \(\vartheta\left(G\right)\) not easy to compute \(\longleftrightarrow\) Approximation with \gls{acr::svm} kernel.
+                \end{itemize}
+            \end{frame}
+
+        \subsection{Advanced image features}
+            
+            \begin{frame}{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet}}
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                    \item<1-> Reverse engineered \gls{acr::cnn};
+                    \item<2-> Stack: 
+                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                        \item<3-> Band pass filters \(\longrightarrow\) retrieve high frequency information;
+                        \item<4-> Modulus operator \(\longrightarrow\) non-linearity;
+                        \item<5-> Averaging operator \(\longrightarrow\) invariance.
+                    \end{itemize}
+                \end{itemize}
             \end{frame}
 
     \section{Experiments}
