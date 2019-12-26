@@ -11,11 +11,11 @@
         vertex/.style={circle, fill=black}
     }
 	\begin{tikzpicture}
-		\node[vertex, fill=violet!50] (a) {};
+		\node[vertex, fill=purple] (a) {};
 		\path (a) + (2, -2) node[vertex] (b) {};
-		\path (b) + (1, 1.5) node[vertex, fill=violet!50] (c) {};
-		\path (a) + (1, .5) node[vertex] (d) {};
-        \path (c) + (1.5, 0) node[vertex] (e) {};
+		\path (b) + (1, 1.5) node[vertex, fill=purple] (c) {};
+		\path (a) + (1, .5) node[vertex, fill=violet!50] (d) {};
+        \path (c) + (1.5, 0) node[vertex, fill=violet!50] (e) {};
         
         \draw[cyan] (a) edge (b);
         \draw[cyan] (c) edge (b);
