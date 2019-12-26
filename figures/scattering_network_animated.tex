@@ -1,0 +1,129 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\usepackage{bm, amsmath, mleftright}
+\usepackage{graphicx}
+
+\usepackage{forest}
+
+\NewDocumentCommand{\evalat}{sO{\big}mm}{%
+    \IfBooleanTF{#1}
+    {\mleft. #3 \mright|_{#4}}
+    {#3#2|_{#4}}%
+}
+
+\begin{document}
+    \forestset{
+        signal/.style = {rounded corners, draw, align=center, base=top},
+        unamed/.style = {draw, circle},
+        visible on/.style={
+            for tree={
+                /tikz/visible on={#1},
+                edge+={/tikz/visible on={#1}}
+            }
+        }
+    }
+    \begin{forest} for tree={inner sep=1pt, l=35pt, fit=tight, s sep=15pt, child anchor=north, parent anchor=south, grow=south}
+        [
+            {\includegraphics[width=1cm]{images/scatnet/x}}, edge={magenta}, name=x, for children={visible on=<3->}
+            [
+                {$U_{i_1, \theta_1} \circ x (u)$}, signal, edge={magenta}, name=x11, for children={visible on=<5->}
+                [
+                    {$\widetilde{U}_{i_2,\xi_2, \theta_2} \circ U_{i_1, \bullet} \circ x(u, \theta_1)$}, signal, edge={magenta}, name=x21, for children={visible on=<7->}
+                    [
+                        {}, unamed, edge={magenta}, name=x31
+                    ]
+                    [
+                        {\dots}, edge={magenta}
+                    ]
+                    [
+                        {}, unamed, edge={magenta}, name=x33
+                    ]
+                ]
+                [
+                    {\dots}, edge={magenta}
+                ]
+                [
+                    {}, unamed, edge={magenta}, name=x23, for children={visible on=<7->}
+                    [
+                        {}, unamed, edge={magenta}, name=x37
+                    ]
+                    [
+                        {\dots}, edge={magenta}
+                    ]
+                    [
+                        {}, unamed, edge={magenta}, name=x39
+                    ]
+                ]
+            ]
+            [
+                {\dots}, edge={magenta}, for children={visible on=<3->}
+            ]
+            [
+                {}, unamed, edge={magenta}, edge label={node[midway,yshift=5pt,right,font=\scriptsize]{$\vert  \bullet \star \psi_{i_1, \theta_1}\vert$}}, name=x13, for children={visible on=<5->}
+                [
+                    {}, unamed, edge={magenta}, name=x27, for children={visible on=<7->}
+                    [
+                        {}, unamed, edge={magenta}, name=x319
+                    ]
+                    [
+                        {\dots}, edge={magenta}
+                    ]
+                    [
+                        {}, unamed, edge={magenta}, name=x321
+                    ]
+                ]
+                [
+                    {\dots}, edge={magenta}
+                ]
+                [
+                    {}, unamed, edge={magenta}, edge label={node[midway,yshift=5pt,right,font=\scriptsize]{$\vert \bullet \star \psi_{i_2,\xi_2, \theta_2}\vert$}}, name=x29, for children={visible on=<7->}
+                    [
+                        {}, unamed, edge={magenta}, name=x325
+                    ]
+                    [
+                        {\dots}, edge={magenta}
+                    ]
+                    [
+                        {}, unamed, edge={magenta}, name=x327
+                    ]
+                ]
+            ]
+        ];
+        \path (x.south west) + (-2, 0)  node[rounded corners, anchor=north east, draw, align=center, blue, visible on=<2->] (s) {$S_0[x]$};
+        \path (x11.south west) + (-2.5, 0)  node[rounded corners, anchor=north east, blue, visible on=<3->, draw, align=center] (s11) {$\evalat[\Bigg]{S_1[x]}{i_1, \theta_1}$};
+        \path (x13.south west) + (-2, 0)  node[anchor=north east, blue, visible on=<3->] (s13) {};
+        \path (x21.south west) + (-2, -.5)  node[rounded corners, anchor=north east, blue, visible on=<4->, draw, align=center] (s21) {$\evalat[\Bigg]{S_2[x]}{i_1, \theta_1, i_2,\xi_2, \theta_2}$};
+        \path (x23.south west) + (-1, -.25)  node[anchor=north east] (s23) {};
+        \path (x27.south west) + (-1, -.25)  node[anchor=north east] (s27) {};
+        \path (x29.south west) + (-1, -.25)  node[anchor=north east] (s29) {};
+        \path (x31.south west) + (-.5, -.25)  node[anchor=north east] (s31) {};
+        \path (x33.south west) + (-.5, -.25)  node[anchor=north east] (s33) {};
+        \path (x37.south west) + (-.5, -.25)  node[anchor=north east] (s37) {};
+        \path (x39.south west) + (-.5, -.25)  node[anchor=north east] (s39) {};
+        \path (x319.south west) + (-.5, -.25)  node[anchor=north east] (s319) {};
+        \path (x321.south west) + (-.5, -.25)  node[anchor=north east] (s321) {};
+        \path (x325.south west) + (-.5, -.25)  node[anchor=north east] (s325) {};
+        \path (x327.south west) + (-.5, -.25)  node[anchor=north east] (s327) {};
+        \path[draw, ->, blue] (x.west) -- (s.east) node[pos=.2,yshift=5pt,left,font=\scriptsize, visible on=<2->]{$\bullet \star \phi_{I}$};
+        \path[draw, ->, blue] (x11.west) -- (s11.east) node[pos=.2,yshift=5pt,left,font=\scriptsize, visible on=<3->]{$\bullet \star \phi_{I}$};
+        \path[draw, ->, blue] (x13.west) -- (s13.east) node[visible on=<3->] {};
+        \path[draw, ->, blue] (x21.west) -- (s21.east) node[midway,yshift=-5pt,right,font=\scriptsize, visible on=<4->]{$\bullet \star \phi_{I}$};
+        \path[draw, ->, blue] (x23.west) -- (s23.east) node[visible on=<4->] {};
+        \path[draw, ->, blue] (x27.west) -- (s27.east) node[visible on=<4->] {};
+        \path[draw, ->, blue] (x29.west) -- (s29.east) node[visible on=<4->] {};
+        \path[draw, ->, blue] (x31.west) -- (s31.east) node[visible on=<6->] {};
+        \path[draw, ->, blue] (x33.west) -- (s33.east) node[visible on=<6->] {};
+        \path[draw, ->, blue] (x37.west) -- (s37.east) node[visible on=<6->] {};
+        \path[draw, ->, blue] (x39.west) -- (s39.east) node[visible on=<6->] {};
+        \path[draw, ->, blue] (x319.west) -- (s319.east) node[visible on=<6->] {};
+        \path[draw, ->, blue] (x321.west) -- (s321.east) node[visible on=<6->] {};
+        \path[draw, ->, blue] (x325.west) -- (s325.east) node[visible on=<6->] {};
+        \path[draw, ->, blue] (x327.west) -- (s327.east) node[visible on=<6->] {};
+
+
+        % \draw[white, visible on=<1-2>] (x11.north west) rectangle (x13.south east);
+    \end{forest}
+\end{document}

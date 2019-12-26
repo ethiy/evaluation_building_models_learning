@@ -56,6 +56,7 @@
 \usepackage{bm}
 \usepackage{bbold}
 \usepackage{stmaryrd}
+\usepackage{mleftright}
     
 \usepackage[
     backend=biber,
@@ -98,6 +99,13 @@
         \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}
     },
 }
+
+\NewDocumentCommand{\evalat}{sO{\big}mm}{%
+    \IfBooleanTF{#1}
+    {\mleft. #3 \mright|_{#4}}
+    {#3#2|_{#4}}%
+}
+
 
 \usepackage[useregional]{datetime2}
 
@@ -533,10 +541,10 @@
             \begin{frame}{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet}}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item<1-> Reverse engineered \acrfull{acr::cnn};
-                    \item<2-> Stack: 
+                    \item<2-> Ingredients: 
                     \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item<3-> Band pass filters \(\longrightarrow\) retrieve high frequency information;
-                        \item<4-> Modulus operator \(\longrightarrow\) non-linearity;
+                        \item<3-> Band pass filters \(\longrightarrow\) high frequency information;
+                        \item<4-> Modulus \(\longrightarrow\) non-linearity;
                         \item<5-> Average pooling operator \(\longrightarrow\) invariance.
                     \end{itemize}
                 \end{itemize}
@@ -544,7 +552,7 @@
             
             \begin{frame}{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} structure}
                 \centering
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/scattering_network}
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/scattering_network_animated}
             \end{frame}
 
             \begin{frame}{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} filters}
