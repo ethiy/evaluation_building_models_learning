@@ -24,6 +24,7 @@
 		\path (a) + (.5, -2) node[candidat, visible on=<2>] (b) {};
 		\path (a) + (.5, -2) node[active, visible on=<3>] (b) {};
 		\path (b) + (1.5, .75) node[vertex] (c) {};
+		\path (b) + (1.5, .75) node[vertex, visible on=<3>] (c) {};
 		\path (c) + (2, .45) node[vertex] (d) {};
         \path (d) + (1.5, -.7) node[vertex] (e) {};
 		\path (d) + (1.5, -.7) node[candidat, visible on=<3>] (e) {};
@@ -47,7 +48,5 @@
 
         \draw[blue, visible on=<3>] (c) edge (b);
         \draw[blue, visible on=<3>] (e) edge (b);
-
-        \path (current bounding box.north) node[anchor=south] (graph) {\small Graph \(G\)};
     \end{tikzpicture}
 \end{document}

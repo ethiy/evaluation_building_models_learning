@@ -1,0 +1,26 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\usepackage{tikz}
+
+
+\begin{document}
+    \tikzset{
+        vertex/.style={circle, fill=black}
+    }
+	\begin{tikzpicture}
+		\node[vertex, fill=violet!50] (a) {};
+		\path (a) + (2, -2) node[vertex] (b) {};
+		\path (b) + (1, 1.5) node[vertex, fill=violet!50] (c) {};
+		\path (a) + (1, .5) node[vertex] (d) {};
+        \path (c) + (1.5, 0) node[vertex] (e) {};
+        
+        \draw[cyan] (a) edge (b);
+        \draw[cyan] (c) edge (b);
+        \draw[cyan] (c) edge (a);
+        \draw[cyan] (a) edge (d);
+        \draw[cyan] (e) edge (c);
+    \end{tikzpicture}
+\end{document}
