@@ -497,7 +497,7 @@
                     \only<1>{
                         \begin{figure}[H]
                             \centering
-                            \caption{Tottering: isolated nodes are ignored.}
+                            \caption{Tottering: \textcolor{purple!30}{isolated} nodes are less visited.}
                             \includestandalone[mode=buildnew, width=.45\textwidth]{figures/features/tottering}
                         \end{figure}
                     }
@@ -507,10 +507,11 @@
                     }
                 \end{overlayarea}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<2-> Compare \underline{paths} instead;
+                    \item<2-> Compare \underline{paths} instead (no cycles);
                     \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item<3-> Hop along same length paths.
-                        \item<4-> Compare vertex attributes \(\longrightarrow\) base kernel.
+                        \item<3-> Sum over same length paths.
+                        \item<6-> Hop and compare vertex attributes \(\longrightarrow\) base kernel.
+                        \item<10-> Sum over all vertex comparisons \(\longrightarrow\) \underline{invariance}.
                     \end{itemize}
                 \end{itemize}
             \end{frame}
@@ -518,11 +519,11 @@
             \begin{frame}{Lov\'asz/\texorpdfstring{\acrshort*{acr::svm}}{SVM} kernel}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item<1-> Lov\'asz number \(\vartheta\left(G\right)\):
-                    \begin{itemize}
-                        \item<2-> graph invariant;
-                        \item<3-> smallest cone containing the orthonormal representation of \(G\).
+                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                        \item<2-3> graph invariant;
+                        \item<3> smallest cone containing the orthonormal representation of \(G\).
                     \end{itemize}
-                    \item<4-> Compare graph \(\longleftrightarrow\) Compare Lov\'asz number of subgraphs.
+                    \item<4-> Compare graphs \(\longleftrightarrow\) Compare Lov\'asz number of subgraphs.
                     \item<5-> \(\vartheta\left(G\right)\) not easy to compute \(\longleftrightarrow\) Approximation with \gls{acr::svm} kernel.
                 \end{itemize}
             \end{frame}
