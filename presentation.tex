@@ -566,8 +566,24 @@
 
             \begin{frame}{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} filters}
                 \centering
-                \includegraphics[width=\textwidth]{images/related_work/morlet_wavelets}
-                \includegraphics[width=\textwidth]{images/related_work/first_layer_cnn}
+                \alt<2>{
+                    \includegraphics[width=\textwidth]{images/related_work/morlet_wavelets}
+                }
+                {
+                    \includegraphics[width=.5\textwidth]{images/related_work/first_layer_cnn}\\
+                    \includegraphics[width=.75\textwidth]{images/related_work/second_layer_cnn}
+                }
+            \end{frame}
+
+            \begin{frame}{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} filters}
+                \centering
+                \alt<2>{
+                    \includegraphics[width=\textwidth]{images/related_work/morlet_wavelets}
+                }
+                {
+                    \includegraphics[width=.5\textwidth]{images/related_work/first_layer_cnn}\\
+                    \includegraphics[width=.75\textwidth]{images/related_work/second_layer_cnn}
+                }
             \end{frame}
 
     \section{Experiments}
