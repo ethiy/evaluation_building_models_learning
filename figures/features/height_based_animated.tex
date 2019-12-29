@@ -11,23 +11,23 @@
 \begin{document}
     \pgfplotsset{every tick label/.append style={font=\tiny}}
 	\begin{tikzpicture}
-		\node[visible on=<1-2>] (dsm_1) at (0,0) {\includegraphics[width=3cm]{images/features/height/dsm-292034}};
-        \path (dsm_1.south) node[anchor=north, text width=3cm, align=center, visible on=<1-2>] (dsm_legend) {\scriptsize \acrshort{acr::dsm}};
+		\node[visible on=<1-2>] (dsm) at (0,0) {\includegraphics[width=3cm]{images/features/height/dsm-292034}};
+        \path (dsm.south) node[anchor=north, text width=3cm, align=center, visible on=<1-2>] (dsm_legend) {\scriptsize \acrshort{acr::dsm}};
 
-        \path (dsm_1.east) node[anchor=west, visible on=<2>] (minus_1) {\Large --};
+        \path (dsm.east) node[anchor=west, visible on=<2>] (minus) {\Large --};
 
-		\path (minus_1.east) node[anchor=west, visible on=<2>] (model_1) {\includegraphics[width=3cm]{images/features/height/heightmap-292034}};
-        \path (model_1.south) node[anchor=north, text width=3cm, align=center, visible on=<2>] (model_legend) {\scriptsize Model heights};
+		\path (minus.east) node[anchor=west, visible on=<2>] (model) {\includegraphics[width=3cm]{images/features/height/heightmap-292034}};
+        \path (model.south) node[anchor=north, text width=3cm, align=center, visible on=<2>] (model_legend) {\scriptsize Model heights};
 
-        \path (minus_1) node[visible on=<3>] (residual_1) {\includegraphics[width=3cm]{images/features/height/residual-292034}};
-        \path (residual_1.south) node[anchor=north, text width=3cm, align=center, visible on=<3>] (residual_legend) {\scriptsize Residuals};
+        \path (minus) node[visible on=<3>] (residual) {\includegraphics[width=3cm]{images/features/height/residual-292034}};
+        \path (residual.south) node[anchor=north, text width=3cm, align=center, visible on=<3>] (residual_legend) {\scriptsize Residuals};
 
-        \path (residual_1.west) node[anchor=east, visible on=<3>] (equals_1) {\Large =};
+        \path (residual.west) node[anchor=east, visible on=<3>] (equals) {\Large =};
 
-        \path (residual_1.south) + (-1.5, 0) node[anchor=south] (hist_1) {};
+        \path (residual.south) + (-1.5, 0) node[anchor=south] (hist) {};
         \path (residual_legend.south) node[text width=4cm, align=center, visible on=<4>] (hist_legend) {\scriptsize Histogram};
         \begin{axis}[
-            at={(hist_1)},
+            at={(hist)},
             width=4.5cm,
             area style,
             ymin=0,

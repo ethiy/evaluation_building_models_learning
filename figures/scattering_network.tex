@@ -3,253 +3,86 @@
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
 
-\usepackage{bm}
+\usepackage{bm, amsmath, mleftright}
+\usepackage{graphicx}
 
-\usepackage{forest}
+\NewDocumentCommand{\evalat}{sO{\big}mm}{%
+    \IfBooleanTF{#1}
+    {\mleft. #3 \mright|_{#4}}
+    {#3#2|_{#4}}%
+}
+
+
+\usepackage{tikz}
+\usetikzlibrary{trees, calc}
 
 \begin{document}
-    \scriptsize
-    \forestset{
-        signal/.style = {rounded corners, draw, align=center, base=top},
-        unamed/.style = {draw, circle},
-    }
-    \begin{forest} for tree={inner sep=1pt, l=25pt,l sep=5pt}
-        [
-            {$x(u)$}, signal, name=x
-            [
-                {$U_{i_1, \theta_1}(x)$}, signal, edge label={node[midway,left,font=\scriptsize]{$\vert x\star \psi_{i_1, \theta_1}\vert$}}, name=x11
-                [
-                    {$\widetilde{U}_{\lambda_2} \circ U_{i_1, \bullet}(x)$}, signal, edge label={node[midway,left,font=\scriptsize]{$\vert \vert x\star \psi_{i_1, \bullet}\vert \star \psi_{\lambda_2}\vert$}}, name=x21
-                    [
-                        {}, unamed, name=x31
-                    ]
-                    [
-                        {}, unamed, name=x32
-                    ]
-                    [
-                        {\dots}
-                    ]
-                    [
-                        {}, unamed, name=x33
-                    ]
-                ]
-                [
-                    {}, unamed, name=x22
-                    [
-                        {}, unamed, name=x34
-                    ]
-                    [
-                        {}, unamed, name=x35
-                    ]
-                    [
-                        {\dots}
-                    ]
-                    [
-                        {}, unamed, name=x36
-                    ]
-                ]
-                [
-                    {\dots}
-                ]
-                [
-                    {}, unamed, name=x23
-                    [
-                        {}, unamed, name=x37
-                    ]
-                    [
-                        {}, unamed, name=x38
-                    ]
-                    [
-                        {\dots}
-                    ]
-                    [
-                        {}, unamed, name=x39
-                    ]
-                ]
-            ]
-            [
-                {}, unamed, name=x12
-                [
-                    {}, unamed, name=x24
-                    [
-                        {}, unamed, name=x310
-                    ]
-                    [
-                        {}, unamed, name=x311
-                    ]
-                    [
-                        {\dots}
-                    ]
-                    [
-                        {}, unamed, name=x312
-                    ]
-                ]
-                [
-                    {}, unamed, name=x25
-                    [
-                        {}, unamed, name=x313
-                    ]
-                    [
-                        {}, unamed, name=x314
-                    ]
-                    [
-                        {\dots}
-                    ]
-                    [
-                        {}, unamed, name=x315
-                    ]
-                ]
-                [
-                    {\dots}
-                ]
-                [
-                    {}, unamed, name=x26
-                    [
-                        {}, unamed, name=x316
-                    ]
-                    [
-                        {}, unamed, name=x317
-                    ]
-                    [
-                        {\dots}
-                    ]
-                    [
-                        {}, unamed, name=x318
-                    ]
-                ]
-            ]
-            [
-                {\dots}
-            ]
-            [
-                {}, unamed, name=x13
-                [
-                    {}, unamed, name=x27
-                    [
-                        {}, unamed, name=x319
-                    ]
-                    [
-                        {}, unamed, name=x320
-                    ]
-                    [
-                        {\dots}
-                    ]
-                    [
-                        {}, unamed, name=x321
-                    ]
-                ]
-                [
-                    {}, unamed, name=x28
-                    [
-                        {}, unamed, name=x322
-                    ]
-                    [
-                        {}, unamed, name=x323
-                    ]
-                    [
-                        {\dots}
-                    ]
-                    [
-                        {}, unamed, name=x324
-                    ]
-                ]
-                [
-                    {\dots}
-                ]
-                [
-                    {}, unamed, name=x29
-                    [
-                        {}, unamed, name=x325
-                    ]
-                    [
-                        {}, unamed, name=x326
-                    ]
-                    [
-                        {\dots}
-                    ]
-                    [
-                        {}, unamed, name=x327
-                    ]
-                ]
-            ]
-        ];
-        \path (x.north west) + (-1.5, .75)  node[rounded corners, draw, align=center] (s) {$S_0[x](x)$};
-        \path (x11.north west) + (-1, .5)  node[rounded corners, draw, align=center] (s11) {$S_1[x]$};
-        \path (x12.north west) + (-1, .5)  node (s12) {};
-        \path (x13.north west) + (-1, .5)  node (s13) {};
-        \path (x21.west) + (-1.5, 0)  node[rounded corners, draw, align=center] (s21) {$S_2[x]$};
-        \path (x22.north west) + (-.5, .25)  node (s22) {};
-        \path (x23.north west) + (-.5, .25)  node (s23) {};
-        \path (x24.north west) + (-.5, .25)  node (s24) {};
-        \path (x25.north west) + (-.5, .25)  node (s25) {};
-        \path (x26.north west) + (-.5, .25)  node (s26) {};
-        \path (x27.north west) + (-.5, .25)  node (s27) {};
-        \path (x28.north west) + (-.5, .25)  node (s28) {};
-        \path (x29.north west) + (-.5, .25)  node (s29) {};
-        \path (x31.north west) + (-.25, .15)  node (s31) {};
-        \path (x32.north west) + (-.25, .15)  node (s32) {};
-        \path (x33.north west) + (-.25, .15)  node (s33) {};
-        \path (x34.north west) + (-.25, .15)  node (s34) {};
-        \path (x35.north west) + (-.25, .15)  node (s35) {};
-        \path (x36.north west) + (-.25, .15)  node (s36) {};
-        \path (x37.north west) + (-.25, .15)  node (s37) {};
-        \path (x38.north west) + (-.25, .15)  node (s38) {};
-        \path (x39.north west) + (-.25, .15)  node (s39) {};
-        \path (x310.north west) + (-.25, .15)  node (s310) {};
-        \path (x311.north west) + (-.25, .15)  node (s311) {};
-        \path (x312.north west) + (-.25, .15)  node (s312) {};
-        \path (x313.north west) + (-.25, .15)  node (s313) {};
-        \path (x314.north west) + (-.25, .15)  node (s314) {};
-        \path (x315.north west) + (-.25, .15)  node (s315) {};
-        \path (x316.north west) + (-.25, .15)  node (s316) {};
-        \path (x317.north west) + (-.25, .15)  node (s317) {};
-        \path (x318.north west) + (-.25, .15)  node (s318) {};
-        \path (x319.north west) + (-.25, .15)  node (s319) {};
-        \path (x321.north west) + (-.25, .15)  node (s321) {};
-        \path (x322.north west) + (-.25, .15)  node (s322) {};
-        \path (x323.north west) + (-.25, .15)  node (s323) {};
-        \path (x324.north west) + (-.25, .15)  node (s324) {};
-        \path (x325.north west) + (-.25, .15)  node (s325) {};
-        \path (x326.north west) + (-.25, .15)  node (s326) {};
-        \path (x327.north west) + (-.25, .15)  node (s327) {};
-        \path[draw, ->, blue] (x.north west) -- (s.south east) node {};
-        \path[draw, ->, blue] (x11.north west) -- (s11.south east) node {};
-        \path[draw, ->, blue] (x12.north west) -- (s12.south east) node {};
-        \path[draw, ->, blue] (x13.north west) -- (s13.south east) node {};
-        \path[draw, ->, blue] (x21.west) -- (s21.east) node {};
-        \path[draw, ->, blue] (x22.north west) -- (s22.south east) node {};
-        \path[draw, ->, blue] (x23.north west) -- (s23.south east) node {};
-        \path[draw, ->, blue] (x24.north west) -- (s24.south east) node {};
-        \path[draw, ->, blue] (x25.north west) -- (s25.south east) node {};
-        \path[draw, ->, blue] (x26.north west) -- (s26.south east) node {};
-        \path[draw, ->, blue] (x27.north west) -- (s27.south east) node {};
-        \path[draw, ->, blue] (x28.north west) -- (s28.south east) node {};
-        \path[draw, ->, blue] (x29.north west) -- (s29.south east) node {};
-        \path[draw, ->, blue] (x31.north west) -- (s31.south east) node {};
-        \path[draw, ->, blue] (x32.north west) -- (s32.south east) node {};
-        \path[draw, ->, blue] (x33.north west) -- (s33.south east) node {};
-        \path[draw, ->, blue] (x34.north west) -- (s34.south east) node {};
-        \path[draw, ->, blue] (x35.north west) -- (s35.south east) node {};
-        \path[draw, ->, blue] (x36.north west) -- (s36.south east) node {};
-        \path[draw, ->, blue] (x37.north west) -- (s37.south east) node {};
-        \path[draw, ->, blue] (x38.north west) -- (s38.south east) node {};
-        \path[draw, ->, blue] (x39.north west) -- (s39.south east) node {};
-        \path[draw, ->, blue] (x310.north west) -- (s310.south east) node {};
-        \path[draw, ->, blue] (x311.north west) -- (s311.south east) node {};
-        \path[draw, ->, blue] (x312.north west) -- (s312.south east) node {};
-        \path[draw, ->, blue] (x313.north west) -- (s313.south east) node {};
-        \path[draw, ->, blue] (x314.north west) -- (s314.south east) node {};
-        \path[draw, ->, blue] (x315.north west) -- (s315.south east) node {};
-        \path[draw, ->, blue] (x316.north west) -- (s316.south east) node {};
-        \path[draw, ->, blue] (x317.north west) -- (s317.south east) node {};
-        \path[draw, ->, blue] (x318.north west) -- (s318.south east) node {};
-        \path[draw, ->, blue] (x319.north west) -- (s319.south east) node {};
-        \path[draw, ->, blue] (x321.north west) -- (s321.south east) node {};
-        \path[draw, ->, blue] (x322.north west) -- (s322.south east) node {};
-        \path[draw, ->, blue] (x323.north west) -- (s323.south east) node {};
-        \path[draw, ->, blue] (x324.north west) -- (s324.south east) node {};
-        \path[draw, ->, blue] (x325.north west) -- (s325.south east) node {};
-        \path[draw, ->, blue] (x326.north west) -- (s326.south east) node {};
-        \path[draw, ->, blue] (x327.north west) -- (s327.south east) node {};
-    \end{forest}
+    \tikzstyle{level 1}=[level distance=3cm, sibling distance=3cm]
+    \tikzstyle{level 2}=[level distance=4cm, sibling distance=2cm]
+    
+    \tikzstyle{signal}=[rounded corners, draw, align=center]
+    \tikzstyle{unamed}=[draw, circle]
+
+    \begin{tikzpicture}[grow=south]
+        \node (x) {\includegraphics[width=3cm]{images/scatnet/x}}
+            child[magenta, visible on=<4->]{
+                node[unamed] (x1_1) {}
+                child[magenta, visible on=<8->]{
+                    node[unamed] (x1_1_1) {}
+                }
+                child[magenta, visible on=<8->]{
+                    node (x1_1_2) {\dots}
+                }
+                child[magenta, visible on=<8->]{
+                    node[unamed] (x1_1_3) {}
+                }
+            }
+            child[magenta, visible on=<4->]{
+                node (x1_2) {\dots}
+            }
+            child[magenta, visible on=<4->]{
+                node[unamed] (x1_3) {}
+                child[magenta, visible on=<8->]{
+                    node[unamed] (x1_3_1) {}
+                }
+                child[magenta, visible on=<8->]{
+                    node (x1_3_2) {\dots}
+                }
+                child[magenta, visible on=<8->]{
+                    node[unamed] (x1_3_3) {} edge from parent node[midway, right, align=center, draw=none, visible on=<8>] {
+                        $\left\lvert \bullet \ostar_{SE(2)} \psi_{i_2, \xi_2, \theta_2}\right\rvert$\\
+                        \footnotesize $i_2 = 1, 2, \dots, I$\\
+                        $\xi_2= 1, 2, \dots, \lfloor\log_2(L)\rfloor$\\
+                        $\theta_2 = 1, 2, \dots, L$
+                    }
+                } edge from parent node[midway, right, align=center, draw=none, visible on=<4>] {
+                    $\left\lvert \bullet \star \psi_{i_1, \theta_1}\right\rvert$\\
+                    \footnotesize $i_1 = 1, 2, \dots, I$\\
+                    $\theta_1 = 1, 2, \dots, L$
+                }
+            };
+
+            \path (x.south) + (0, -2) node[signal, blue, anchor=north, visible on=<2>] (s0) {\small $S_0[x]$};
+            \path[draw, blue, ->, visible on=<2>] (x.south) -- (s0) node[midway, left] {$\phi_I$};
+            \path[draw, blue, ->, visible on=<3>] (x.south) -- ($(x.south) + (0, -1)$) node[anchor=north] {\includegraphics[width=2cm]{images/scatnet/s0}};
+            \path[draw, blue, ->, visible on=<4->] (x.200) -- ($(x.200) + (-2, -1)$) node[signal, anchor=north east] (s0) {\small $S_0[x]$};
+
+            \path (x1_1.south west) + (-1, -.5) node[signal, blue, anchor=north east, visible on=<5>] (s1_1) {\small $\evalat[\Bigg]{S_1[x]}{i_1, \theta_1}$};
+            \path[draw, blue, ->, visible on=<5>] (x1_1.200) -- (s1_1) node[midway, left] {$\phi_I$};
+            \path[draw, blue, ->, visible on=<5>] (x1_3.200) -- ($(x1_3.south west) + (-1, -.5)$) node[anchor=north east] (s1_3) {};
+            \path[draw, blue, ->, visible on=<6>] (x1_2.south) -- ($(x1_2.south) + (0, -1)$) node[anchor=north] (s1) {\includegraphics[width=6cm]{images/scatnet/s1}};
+            \path[draw, blue, ->, visible on=<7->] (x1_1.200) -- ($(x1_1.south west) + (-1, -.5)$) node[signal, anchor=north east] {\small $\evalat[\Bigg]{S_1[x]}{i_1, \theta_1}$};
+            \path[draw, blue, ->, visible on=<7->] (x1_3.200) -- ($(x1_3.south west) + (-1, -.5)$) node[anchor=north east] (s1_3) {};
+
+            \path (x1_1_1.south west) + (-1, -.5) node[signal, anchor=north east, blue, visible on=<9>] (s1_1_1) {\small $\evalat[\Bigg]{S_2[x]}{i_1, \theta_1, i_2,\xi_2, \theta_2}$};
+            \path[draw, blue, ->, , visible on=<9>] (x1_1_1.200) -- (s1_1_1) node[midway, left] {$\phi_I$};
+            \path[draw, blue, ->, , visible on=<9>] (x1_1_3.200) -- ($(x1_1_3.south west) + (-1, -.5)$) node[anchor=north east] (s1_1_3) {};
+            \path[draw, blue, ->, , visible on=<9>] (x1_3_1.200) -- ($(x1_3_1.south west) + (-1, -.5)$) node[anchor=north east] (s1_3_1) {};
+            \path[draw, blue, ->, , visible on=<9>] (x1_3_3.200) -- ($(x1_3_3.south west) + (-1, -.5)$) node[anchor=north east] (s1_3_3) {};
+            \path[visible on=<10>] ($(x1_1_3.south)!.5!(x1_3_1.south)$) + (0, -.5) node[anchor=south] (s2) {\includegraphics[width=12cm]{images/scatnet/s2}};
+
+            \path[draw, blue, ->, visible on=<11->] (x1_1_1.200) -- ($(x1_1_1.south west) + (-1, -.5)$) node[signal, anchor=north east] (s1_1_1) {\small $\evalat[\Bigg]{S_2[x]}{i_1, \theta_1, i_2, \xi_2, \theta_2}$};
+            \path[draw, blue, ->, , visible on=<11->] (x1_3_1.200) -- ($(x1_3_1.south west) + (-1, -.5)$) node[anchor=north east] (s1_3_1) {};
+            \path[draw, blue, ->, , visible on=<11->] (x1_3_3.200) -- ($(x1_3_3.south west) + (-1, -.5)$) node[anchor=north east] (s1_3_3) {};
+        \end{tikzpicture}
 \end{document}
