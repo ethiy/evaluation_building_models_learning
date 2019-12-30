@@ -24,55 +24,50 @@
     \tikzstyle{unamed}=[draw, circle]
 
     \begin{tikzpicture}[grow=south]
-        \node (x) {\includegraphics[width=3cm]{images/scatnet/x}}
-            child[magenta, visible on=<4->]{
+        \node[visible on=<-12>] (x) {\includegraphics[width=3cm]{images/scatnet/x}}
+            child[magenta, visible on=<5-12>]{
                 node[unamed] (x1_1) {}
-                child[magenta, visible on=<8->]{
+                child[magenta, visible on=<9-12>]{
                     node[unamed] (x1_1_1) {}
                 }
-                child[magenta, visible on=<8->]{
+                child[magenta, visible on=<9-12>]{
                     node (x1_1_2) {\dots}
                 }
-                child[magenta, visible on=<8->]{
+                child[magenta, visible on=<9-12>]{
                     node[unamed] (x1_1_3) {}
                 }
             }
-            child[magenta, visible on=<4->]{
+            child[magenta, visible on=<5-12>]{
                 node (x1_2) {\dots}
             }
-            child[magenta, visible on=<4->]{
+            child[magenta, visible on=<5-12>]{
                 node[unamed] (x1_3) {}
-                child[magenta, visible on=<8->]{
+                child[magenta, visible on=<9-12>]{
                     node[unamed] (x1_3_1) {}
                 }
-                child[magenta, visible on=<8->]{
+                child[magenta, visible on=<9-12>]{
                     node (x1_3_2) {\dots}
                 }
-                child[magenta, visible on=<8->]{
+                child[magenta, visible on=<9-12>]{
                     node[unamed] (x1_3_3) {} edge from parent node[midway, right, align=center, draw=none, visible on=<8>] {
-                        $\left\lvert \bullet \ostar_{SE(2)} \psi_{i_2, \xi_2, \theta_2}\right\rvert$\\
-                        \footnotesize $i_2 = 1, 2, \dots, I$\\
-                        $\xi_2= 1, 2, \dots, \lfloor\log_2(L)\rfloor$\\
-                        $\theta_2 = 1, 2, \dots, L$
+                        $\left\lvert \bullet \ostar_{SE(2)} \psi_{i_2, \xi_2, \theta_2}\right\rvert$
                     }
                 } edge from parent node[midway, right, align=center, draw=none, visible on=<4>] {
-                    $\left\lvert \bullet \star \psi_{i_1, \theta_1}\right\rvert$\\
-                    \footnotesize $i_1 = 1, 2, \dots, I$\\
-                    $\theta_1 = 1, 2, \dots, L$
+                    $\left\lvert \bullet \star \psi_{i_1, \theta_1}\right\rvert$
                 }
             };
 
             \path (x.south) + (0, -2) node[signal, blue, anchor=north, visible on=<2>] (s0) {\small $S_0[x]$};
             \path[draw, blue, ->, visible on=<2>] (x.south) -- (s0) node[midway, left] {$\phi_I$};
             \path[draw, blue, ->, visible on=<3>] (x.south) -- ($(x.south) + (0, -1)$) node[anchor=north] {\includegraphics[width=2cm]{images/scatnet/s0}};
-            \path[draw, blue, ->, visible on=<4->] (x.200) -- ($(x.200) + (-2, -1)$) node[signal, anchor=north east] (s0) {\small $S_0[x]$};
+            \path[draw, blue, ->, visible on=<4-12>] (x.200) -- ($(x.200) + (-2, -1)$) node[signal, anchor=north east] (s0) {\small $S_0[x]$};
 
             \path (x1_1.south west) + (-1, -.5) node[signal, blue, anchor=north east, visible on=<5>] (s1_1) {\small $\evalat[\Bigg]{S_1[x]}{i_1, \theta_1}$};
             \path[draw, blue, ->, visible on=<5>] (x1_1.200) -- (s1_1) node[midway, left] {$\phi_I$};
             \path[draw, blue, ->, visible on=<5>] (x1_3.200) -- ($(x1_3.south west) + (-1, -.5)$) node[anchor=north east] (s1_3) {};
             \path[draw, blue, ->, visible on=<6>] (x1_2.south) -- ($(x1_2.south) + (0, -1)$) node[anchor=north] (s1) {\includegraphics[width=6cm]{images/scatnet/s1}};
-            \path[draw, blue, ->, visible on=<7->] (x1_1.200) -- ($(x1_1.south west) + (-1, -.5)$) node[signal, anchor=north east] {\small $\evalat[\Bigg]{S_1[x]}{i_1, \theta_1}$};
-            \path[draw, blue, ->, visible on=<7->] (x1_3.200) -- ($(x1_3.south west) + (-1, -.5)$) node[anchor=north east] (s1_3) {};
+            \path[draw, blue, ->, visible on=<7-12>] (x1_1.200) -- ($(x1_1.south west) + (-1, -.5)$) node[signal, anchor=north east] {\small $\evalat[\Bigg]{S_1[x]}{i_1, \theta_1}$};
+            \path[draw, blue, ->, visible on=<7-12>] (x1_3.200) -- ($(x1_3.south west) + (-1, -.5)$) node[anchor=north east] (s1_3) {};
 
             \path (x1_1_1.south west) + (-1, -.5) node[signal, anchor=north east, blue, visible on=<9>] (s1_1_1) {\small $\evalat[\Bigg]{S_2[x]}{i_1, \theta_1, i_2,\xi_2, \theta_2}$};
             \path[draw, blue, ->, , visible on=<9>] (x1_1_1.200) -- (s1_1_1) node[midway, left] {$\phi_I$};
@@ -80,9 +75,17 @@
             \path[draw, blue, ->, , visible on=<9>] (x1_3_1.200) -- ($(x1_3_1.south west) + (-1, -.5)$) node[anchor=north east] (s1_3_1) {};
             \path[draw, blue, ->, , visible on=<9>] (x1_3_3.200) -- ($(x1_3_3.south west) + (-1, -.5)$) node[anchor=north east] (s1_3_3) {};
             \path[visible on=<10>] ($(x1_1_3.south)!.5!(x1_3_1.south)$) + (0, -.5) node[anchor=south] (s2) {\includegraphics[width=12cm]{images/scatnet/s2}};
+            \path[visible on=<12>] ($(x1_1_3.south)!.5!(x1_3_1.south)$) node[anchor=north] (s3) {\(\vdots\)};
 
-            \path[draw, blue, ->, visible on=<11->] (x1_1_1.200) -- ($(x1_1_1.south west) + (-1, -.5)$) node[signal, anchor=north east] (s1_1_1) {\small $\evalat[\Bigg]{S_2[x]}{i_1, \theta_1, i_2, \xi_2, \theta_2}$};
-            \path[draw, blue, ->, , visible on=<11->] (x1_3_1.200) -- ($(x1_3_1.south west) + (-1, -.5)$) node[anchor=north east] (s1_3_1) {};
-            \path[draw, blue, ->, , visible on=<11->] (x1_3_3.200) -- ($(x1_3_3.south west) + (-1, -.5)$) node[anchor=north east] (s1_3_3) {};
+            \path[draw, blue, ->, visible on=<11-12>] (x1_1_1.200) -- ($(x1_1_1.south west) + (-1, -.5)$) node[signal, anchor=north east] (s1_1_1) {\small $\evalat[\Bigg]{S_2[x]}{i_1, \theta_1, i_2, \xi_2, \theta_2}$};
+            \path[draw, blue, ->, , visible on=<11-12>] (x1_1_1.200) -- ($(x1_1_1.south west) + (-1, -.5)$) node[anchor=north east] (s1_1_1) {};
+            \path[draw, blue, ->, , visible on=<11-12>] (x1_3_1.200) -- ($(x1_3_1.south west) + (-1, -.5)$) node[anchor=north east] (s1_3_1) {};
+            \path[draw, blue, ->, , visible on=<11-12>] (x1_3_3.200) -- ($(x1_3_3.south west) + (-1, -.5)$) node[anchor=north east] (s1_3_3) {};
+
+            \path (x) node[signal, visible on=<13->, blue] (x) {x(u)};
+            \path (x |- s1_1_1) node[visible on=<13->, blue] (s) {\small \(\left\{S_0[x], \evalat[\Bigg]{S_1[x]}{i_1, \theta_1}, \evalat[\Bigg]{S_2[x]}{i_1, \theta_1, i_2,\xi_2, \theta_2}\right\}\)};
+            \path ($(x.south)!.5!(s.north)$) ;
+
+            \draw[-, very thick, visible on=<13->, black] (x.south) -- (s.north) node[signal, midway, fill=white, visible on=<13->, black] (scatnet) {\Large \acrshort{acr::scatnet}};
         \end{tikzpicture}
 \end{document}

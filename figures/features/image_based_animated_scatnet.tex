@@ -1,0 +1,40 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\usetikzlibrary{3d, calc}
+
+\usepackage{amsmath}
+
+\usepackage{standalone}
+
+\begin{document}
+
+	\begin{tikzpicture}
+		\node (image) {\includegraphics[width=2cm]{../../images/features/scatnet/elancourt-39322}};
+
+		\path (image.north east) + (0, 1) node[anchor=south east] (model) {\includestandalone[mode=buildnew, width=2cm]{../../figures/graphical_abstract/building_model}};
+
+		\path (image.east) + (1.7, .2) node[visible on=<2->, anchor=west] (blue_channel) {\includegraphics[width=2cm]{../../images/features/scatnet/elancourt-39322_b}};
+		\path (blue_channel) + (-.2, -.2) node[visible on=<2->] (green_channel) {\includegraphics[width=2cm]{../../images/features/scatnet/elancourt-39322_g}};
+		\path (green_channel) + (-.2, -.2) node[visible on=<2->] (red_channel) {\includegraphics[width=2cm]{../../images/features/scatnet/elancourt-39322_r}};
+
+		\path (model.east) + (1.5, 0) node[visible on=<2->, anchor=west] (mask) {\includegraphics[width=2cm]{../../images/features/scatnet/elancourt-39322_mask}};
+
+		\path (blue_channel.east) + (2.5, 0) node[visible on=<3->, anchor=west] (blue_mask_channel) {\includegraphics[width=2cm]{../../images/features/scatnet/elancourt-39322_b_mask}};
+		\path (green_channel.east) + (2.5, 0) node[visible on=<3->, anchor=west] (green_mask_channel) {\includegraphics[width=2cm]{../../images/features/scatnet/elancourt-39322_g_mask}};
+		\path (red_channel.east) + (2.5, 0) node[visible on=<3->, anchor=west] (red_mask_channel) {\includegraphics[width=2cm]{../../images/features/scatnet/elancourt-39322_r_mask}};
+
+		\path (green_mask_channel |- mask) node[visible on=<3->] (early_fusion) {Early fusion: \texttt{deletion}.};
+
+		\path (green_mask_channel.east) + (2.5, 0) node[anchor=west, blue] (s) {\small \(\begin{Bmatrix}
+            S_0[x]\\
+            S_1[x]\\
+            S_2[x]
+        \end{Bmatrix}\)};
+		\draw[->, very thick, black] (blue_mask_channel) -- ($(s.west |- blue_mask_channel) + (.2, 0)$) node[midway, draw, rounded corners, black, fill=white] {scatnet};
+		\draw[->, very thick, black] (green_mask_channel) -- (s) node[midway, draw, rounded corners, black, fill=white] (scatnet) {scatnet};
+		\draw[->, very thick, black] (red_mask_channel) -- ($(s.west |- red_mask_channel) + (-.2, 0)$) node[midway, draw, rounded corners, black, fill=white] {scatnet};
+	\end{tikzpicture}
+\end{document}
