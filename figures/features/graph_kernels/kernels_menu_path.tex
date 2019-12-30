@@ -1,0 +1,45 @@
+\documentclass[tikz]{standalone}
+
+\usetikzlibrary{arrows,shapes,positioning,shadows,trees}
+
+\usepackage{xcolor}
+\usepackage{amssymb}
+
+\begin{document}
+    \tikzset{
+    basic/.style = {draw, font=\sffamily, rectangle},
+    root/.style = {basic, rounded corners, thin, align=center, fill=IGNGreen},
+    level 2/.style = {basic, rounded corners, thin, align=center, fill=olive!60},
+    level 3/.style = {basic, thin, align=left, fill=yellow!30}
+    }
+
+    \begin{tikzpicture}[
+        level 1/.style={sibling distance=5cm},
+        edge from parent/.style={->,draw},
+        >=latex
+    ]
+        \node[root] {Graph kernels} child{
+            node[level 2] (random_walk) {Random Walk based}
+        } child{
+            node[level 2] (path) {Path based}
+        } child{
+            node[level 2] (algebraic) {Algebraic based}
+        };
+
+        \begin{scope}[every node/.style={level 3}]
+            \path (random_walk.south west) + (15pt, -10pt) node[anchor=north west, opacity=0] (c11) {\textcolor{IGNGreen}{\(\blacktriangleright\)} Random Walk};
+            \path (c11.south west) + (0, -10pt) node[anchor=north west, opacity=0] (c12) {\textcolor{IGNGreen}{\(\blacktriangleright\)} Multiscale Laplacian};
+            \path (c12.south west) + (0, -10pt) node[anchor=north west, opacity=0] (c13) {\textcolor{IGNGreen}{\(\blacktriangleright\)} Propagation};
+
+            \path (path.south west) + (15pt, -10pt) node[anchor=north west] (c21) {\textcolor{IGNGreen}{\(\blacktriangleright\)} Graph Hopper};
+
+            \path (algebraic.south west) + (15pt, -10pt) node[anchor=north west, opacity=0] (c31) {\textcolor{IGNGreen}{\(\blacktriangleright\)} Lov\'asz \(\vartheta\)};
+        \end{scope}
+
+        \foreach \value in {1,2,3} \draw[->, opacity=0] (random_walk.190) |- (c1\value.west);
+
+        \draw[->] (path.200) |- (c21.west);
+
+        \draw[->, opacity=0] (algebraic.195) |- (c31.west);
+    \end{tikzpicture}
+\end{document}

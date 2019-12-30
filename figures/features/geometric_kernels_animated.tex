@@ -1,0 +1,44 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{fourier}
+
+\usepackage{xcolor}
+\definecolor{darkgreen}{RGB}{0, 155, 85}
+
+\usepackage{standalone}
+
+\usepackage{pgfplots}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, shadows, calc, decorations, 3d}
+
+\usepackage{mathrsfs, amsmath}
+
+
+\begin{document}
+    \begin{tikzpicture}
+        \node (facet_graph) {\includestandalone[mode=buildnew, height=4cm]{figures/graphical_abstract/building_graph}};
+        \path (facet_graph.south west) node[visible on=<5->, anchor=north west, align=left] (multi_scale_laplacian_kernel) {\footnotesize \textcolor{black}{\(\blacktriangleright\)} Multiscale Laplacian kernel;};
+        \path (multi_scale_laplacian_kernel.south west) node[visible on=<6->, anchor=north west, align=left] (graph_hopper_kernel) {\footnotesize \textcolor{black}{\(\blacktriangleright\)} Graph hopper kernel;};
+        \path (graph_hopper_kernel.south west) node[visible on=<7->, anchor=north west, align=left] (propagation_kernel) {\footnotesize \textcolor{black}{\(\blacktriangleright\)} Propagation kernel.};
+
+        \path (facet_graph.south west) node[visible on=<2-3>, anchor=north west, align=left] (random_walk_kernel) {\footnotesize \textcolor{black}{\(\blacktriangleright\)} Random walk kernel;};
+        \path (random_walk_kernel.south west) node[visible on=<3>, anchor=north west, align=left] (svm_kernel) {\footnotesize \textcolor{black}{\(\blacktriangleright\)} SVM \(\vartheta\) kernel.};
+
+        \path (facet_graph) + (-.9, -1) node[blue, visible on=<4-7>] (degree_area_circumference) {
+            \tiny \(\begin{bmatrix}
+                \operatorname{degree}(f)\\
+                \operatorname{Area}(f)\\
+                \operatorname{Circumference}(f)
+            \end{bmatrix}\)
+        };
+        \path (degree_area_circumference) node[blue, visible on=<8>] (centroid) {
+            \scriptsize \(\operatorname{Centroid}(f)\)
+        };
+        \path (degree_area_circumference) node[blue, visible on=<9>] (normal) {
+            \scriptsize \(\operatorname{normal}(f)\)
+        };
+    \end{tikzpicture}
+\end{document}

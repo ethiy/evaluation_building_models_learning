@@ -29,7 +29,7 @@
                                     node[end, label=right:\texttt{\acrlong*{acr::big}}] (b_under) {}
                                 }
                                 child[visible on=<6->] {
-                                    node[end, label=right:\texttt{\acrlong*{acr::bit}}] {}
+                                    node[end, label=right:\texttt{\acrlong*{acr::bit}}] (bit) {}
                                 }
                                 child[visible on=<6->] {
                                     node[end, label=right:\texttt{\acrlong*{acr::bib}}] {}
@@ -69,18 +69,18 @@
                 edge from parent
             };
             
-        \path (qualifiable |- valid.north) + (-1,1) node[visible on=<2->] (qualifiability_max) {$\texttt{finesse}=0$};
-        \path (valid.north) + (-1,1) node[visible on=<3->] (correctness_max) {$\texttt{finesse}=1$};
-        \path (facet_errors |- valid.north) + (-1.25,1) node[visible on=<4->] (families_max) {$\texttt{finesse}=2$};
-        \path (b_under |- valid.north) + (-.75,1) node[visible on=<6->] (atomic_max) {$\texttt{finesse}=3$};
-        \path (families_max |- input) node[visible on=<5->] (lod_max) {};
-        \path (b_under |- input) + (9.2,0) node[visible on=<5->] (lod_min) {};
+        \path (qualifiable |- valid.north) + (-1,1) node[visible on=<2->] (qualifiability_max) {\texttt{finesse}=0};
+        \path (valid.north) + (-1,1) node[visible on=<3->] (correctness_max) {\texttt{finesse}=1};
+        \path (facet_errors |- valid.north) + (-1.25,1) node[visible on=<4->] (families_max) {\texttt{finesse}=2};
+        \path (b_under |- valid.north) + (-.75,1) node[visible on=<6->] (atomic_max) {\texttt{finesse}=3};
+        \path (families_max |- input) node (lod_max) {};
+        \path (bit.east |- input) + (6.5, 0) node (lod_min) {};
         
         \draw[dashed, orange, ultra thick, visible on=<2->] (qualifiability_max |- b_under.south) + (0,-.5) -- (qualifiability_max);
         \draw[dashed, green, ultra thick, visible on=<3->] (correctness_max |- b_under.south) + (0,-.5) -- (correctness_max);
         \draw[dashed, purple, ultra thick, visible on=<4->] (families_max |- b_under.south) + (0,-.5) -- (families_max);
         \draw[dashed, blue, ultra thick, visible on=<6->] (atomic_max |- b_under.south) + (0,-.5) -- (atomic_max);
         
-        \draw[dash dot, ultra thick, visible on=<5->] (lod_max)  -- (lod_min) node[below, pos=.9] {\footnotesize \acrshort*{acr::lod}-0 $\cup$ \acrshort*{acr::lod}-1} node [above, pos=.9] {\footnotesize \acrshort*{acr::lod}-2 $\cup$ \acrshort*{acr::lod}-3};
+        \draw[dash dot, ultra thick, visible on=<5->] (lod_max)  -- (lod_min) node[below, pos=.9, visible on=<5>] {\footnotesize \acrshort*{acr::lod}-0 $\cup$ \acrshort*{acr::lod}-1} node [above, pos=.9, visible on=<5>] {\footnotesize \acrshort*{acr::lod}-2 $\cup$ \acrshort*{acr::lod}-3};
     \end{tikzpicture}
 \end{document}
