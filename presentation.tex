@@ -514,17 +514,21 @@
                 }
             \end{frame}
 
-            \begin{frame}{Graph kernels}
+            \begin{frame}{Random walk}{Tottering}
+                \begin{figure}[H]
+                    \centering
+                    \includestandalone[mode=buildnew, width=.5\textwidth]{figures/features/graph_kernels/tottering}
+                \end{figure}
+                \begin{itemize}
+                    \item Tottering \(\longleftrightarrow\) cycles;
+                    \item \textcolor{purple}{Central} nodes are overrepresented;
+                    \item \textcolor{purple!30}{Isolated} nodes are less visited.
+                \end{itemize}
+            \end{frame}
+
+            \begin{frame}
                 \centering
-                \alt<2>{
-                    \begin{figure}[H]
-                        \centering
-                        \caption{Tottering: \textcolor{purple!30}{isolated} nodes are less visited.}
-                        \includestandalone[mode=buildnew, width=.45\textwidth]{figures/features/graph_kernels/tottering}
-                    \end{figure}
-                }{
-                    \includestandalone[mode=buildnew, width=\textwidth]{figures/features/graph_kernels/kernels_menu_path}
-                }
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/features/graph_kernels/kernels_menu_path}
             \end{frame}
 
             \begin{frame}{Path based}{Graph Hopper kernel}
@@ -534,9 +538,9 @@
                 \end{figure}
 
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<2-> Compare \underline{paths} instead (no cycles);
+                    \item<2-> Use \underline{paths} instead (no cycles);
                     \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item<3-> Sum over same length paths.
+                        \item<3-> Compare same length paths.
                         \item<7-> Hop and compare vertex attributes \(\longrightarrow\) base kernel.
                         \item<11-> Sum over all vertex comparisons \(\longrightarrow\) \underline{invariance}.
                     \end{itemize}
@@ -555,14 +559,14 @@
                         \item<2-> graph invariant;
                         \item<3-> smallest cone containing the orthonormal representation of \(G\).
                     \end{itemize}
-                    \item<4-> Compare graphs \(\longleftrightarrow\) Compare Lov\'asz number of subgraphs.
-                    \item<5-> \(\vartheta\left(G\right)\) not easy to compute \(\longleftrightarrow\) Approximation with \gls{acr::svm} kernel.
+                    \item<4-> Compare graphs \(\longleftrightarrow\) Compare Lov\'asz number of their subgraphs.
+                    \item<5-> \(\vartheta\left(G\right)\) not easy to compute \(\longleftrightarrow\) Approximation with \gls{acr::svm}kernel.
                 \end{itemize}
             \end{frame}
 
             \begin{frame}{Advanced graph features}
-                \centering
-                \includestandalone[mode=buildnew, width=.6\textwidth]{figures/features/geometric_kernels_animated}
+                \raggedleft
+                \includestandalone[mode=buildnew, height=.8\textheight]{figures/features/geometric_kernels_animated}
             \end{frame}
 
         \subsection{Advanced image features}
@@ -589,14 +593,19 @@
                 \alt<2>{
                     \includegraphics[width=\textwidth]{images/related_work/morlet_wavelets}
                 }{
-                    \includegraphics[width=.4\textwidth]{images/related_work/first_layer_cnn}\\
+                    \includegraphics[width=.35\textwidth]{images/related_work/first_layer_cnn}\\
                     \includegraphics[width=.5\textwidth]{images/related_work/second_layer_cnn}
                 }
             \end{frame}
 
-            \begin{frame}
+            \begin{frame}{Why using \texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet}}
                 \begin{itemize}
-                    \item pros \& cons;
+                    \item[\textbullet] Filters are hardcoded not learned:
+                    \begin{itemize}
+                        \item[\color{IGNDarkGreen} +] No need for a large dataset;
+                        \item[\color{red} ---] Features: not adaptable.
+                    \end{itemize}
+                    \item[\color{IGNDarkGreen} +] Interpretable;
                 \end{itemize}
             \end{frame}
 
@@ -606,7 +615,8 @@
             \end{frame}
 
             \begin{frame}{Advanced image based features}
-                
+                \centering
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/features/image_based_animated_scatnet}
             \end{frame}
 
     \section{Experiments}

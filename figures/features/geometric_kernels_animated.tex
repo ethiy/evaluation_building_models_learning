@@ -20,25 +20,25 @@
 \begin{document}
     \begin{tikzpicture}
         \node (facet_graph) {\includestandalone[mode=buildnew, height=4cm]{figures/graphical_abstract/building_graph}};
-        \path (facet_graph.south west) node[visible on=<5->, anchor=north west, align=left] (multi_scale_laplacian_kernel) {\footnotesize \textcolor{IGNGreen}{\(\blacktriangleright\)} Multiscale Laplacian kernel;};
-        \path (multi_scale_laplacian_kernel.south west) node[visible on=<6->, anchor=north west, align=left] (graph_hopper_kernel) {\footnotesize \textcolor{IGNGreen}{\(\blacktriangleright\)} Graph hopper kernel;};
-        \path (graph_hopper_kernel.south west) node[visible on=<7->, anchor=north west, align=left] (propagation_kernel) {\footnotesize \textcolor{IGNGreen}{\(\blacktriangleright\)} Propagation kernel.};
 
-        \path (facet_graph.south west) node[visible on=<2-3>, anchor=north west, align=left] (random_walk_kernel) {\footnotesize \textcolor{IGNGreen}{\(\blacktriangleright\)} Random walk kernel;};
-        \path (random_walk_kernel.south west) node[visible on=<3>, anchor=north west, align=left] (svm_kernel) {\footnotesize \textcolor{IGNGreen}{\(\blacktriangleright\)} SVM \(\vartheta\) kernel.};
+        \path (facet_graph) + (-.9, -1) node[black] (f) {\footnotesize \(f\)};
 
-        \path (facet_graph) + (-.9, -1) node[blue, visible on=<4-7>] (degree_area_circumference) {
-            \tiny \(\begin{bmatrix}
+        \path (facet_graph.west |- f) node[anchor=east, blue, visible on=<4-7>] (centroid) {\scriptsize \(\operatorname{Centroid}(f)\)};
+        \draw[->, blue, visible on=<4->] (f.west) -- (centroid.east);
+        \path (centroid.east) node[anchor=east, blue, visible on=<8>] (normal) {\scriptsize \(\operatorname{Normal}(f)\)};
+        \path (centroid.east) node[anchor=east, blue, visible on=<9>] (degree_area_circumference) {
+            \scriptsize \(\begin{bmatrix}
                 \operatorname{degree}(f)\\
                 \operatorname{Area}(f)\\
                 \operatorname{Circumference}(f)
             \end{bmatrix}\)
         };
-        \path (degree_area_circumference) node[blue, visible on=<8>] (centroid) {
-            \scriptsize \(\operatorname{Centroid}(f)\)
-        };
-        \path (degree_area_circumference) node[blue, visible on=<9>] (normal) {
-            \scriptsize \(\operatorname{normal}(f)\)
-        };
-    \end{tikzpicture}
+
+        \path (degree_area_circumference.west |- facet_graph.south) node[visible on=<5->, anchor=north west, align=left] (multi_scale_laplacian_kernel) {\small \textcolor{IGNGreen}{\(\blacktriangleright\)} Multiscale Laplacian kernel;};
+        \path (multi_scale_laplacian_kernel.south west) node[visible on=<6->, anchor=north west, align=left] (graph_hopper_kernel) {\small \textcolor{IGNGreen}{\(\blacktriangleright\)} Graph hopper kernel;};
+        \path (graph_hopper_kernel.south west) node[visible on=<7->, anchor=north west, align=left] (propagation_kernel) {\small \textcolor{IGNGreen}{\(\blacktriangleright\)} Propagation kernel.};
+
+        \path (degree_area_circumference.west |- facet_graph.south) node[visible on=<2-3>, anchor=north west, align=left] (random_walk_kernel) {\small \textcolor{IGNGreen}{\(\blacktriangleright\)} Random walk kernel;};
+        \path (random_walk_kernel.south west) node[visible on=<3>, anchor=north west, align=left] (svm_kernel) {\small \textcolor{IGNGreen}{\(\blacktriangleright\)} SVM \(\vartheta\) kernel.};
+   \end{tikzpicture}
 \end{document}
