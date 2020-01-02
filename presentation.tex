@@ -1,4 +1,4 @@
-\documentclass[12pt]{beamer}
+\documentclass[12pt, xcolor=table]{beamer}
 
 \usepackage{lmodern}
 \usepackage[utf8]{inputenc}
@@ -12,6 +12,8 @@
 \definecolor{elancourt}{rgb}{1,.79,.5}
 \definecolor{paris}{rgb}{.84,.1,.11}
 \definecolor{nantes}{rgb}{.17,.51,.73}
+
+\renewcommand<>\cellcolor[1]{\only#2{\beameroriginal\cellcolor{#1}}}
 
 \definecolor{LOSS45}{RGB}{130,8,8}
 \definecolor{LOSS3545}{RGB}{183,10,10}
@@ -626,7 +628,7 @@
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/features/image_based_animated_scatnet}
             \end{frame}
 
-    \section{Experimental study}
+    \section{Experiments}
         \subsection{Dataset}
             \begin{frame}{Urban scenes}
                 \only<1>{
@@ -750,8 +752,66 @@
                 \includestandalone[mode=buildnew, height=.75\textheight]{figures/scalabitity_graph_animated}
             \end{frame}
 
-            \begin{frame}{Possible settings}
-                
+            \begin{frame}{Possible settings}{Baseline}
+                \centering
+                \only<1-2>{
+                    \footnotesize
+                    \begin{tabular}{c c c c c}
+                        \toprule
+                        Features & Classifier & Experiment & \textbf{\acrshort{acr::efin}} & Number\\
+                        \hline
+                        \multirow{4}{*}{Baseline} & \multirow{4}{*}{\acrshort{acr::rf}} & \multirow{4}{*}{3} & Vanilla & \cellcolor{IGNGreen}<2>{\num{4 x 3}}\\
+                         &  &  & Transf. & \cellcolor{IGNGreen}<2>{\num{4 x 6}}\\
+                         &  &  & Gener. & \cellcolor{IGNGreen}<2>{\num{4 x 3}}\\
+                         &  &  & Repres. & \cellcolor{IGNGreen}<2>{\num{4 x 6}}\\
+                        \hline
+                        \multirow{4}{*}{Baseline} & \multirow{4}{*}{\acrshort{acr::rf}} & \multirow{4}{*}{2} & Vanilla & \cellcolor{IGNGreen}<2>{\num{4 x 3}}\\
+                         &  &  & Transf. & \cellcolor{IGNGreen}<2>{\num{4 x 6}}\\
+                         &  &  & Gener. & \cellcolor{paris}<2>{\num{4 x 3}}\\
+                         &  &  & Repres. & \cellcolor{IGNGreen}<2>{\num{4 x 6}}\\
+                        \hline
+                        \multirow{4}{*}{Baseline} & \multirow{4}{*}{\acrshort{acr::rf}}  & \multirow{4}{*}{1} & Vanilla & \cellcolor{IGNGreen}<2>{\num{4 x 3}}\\
+                         &  &  & Transf. & \cellcolor{paris}<2>{\num{4 x 6}}\\
+                         &  &  & Gener. & \cellcolor{paris}<2>{\num{4 x 3}}\\
+                         &  &  & Repres. & \cellcolor{paris}<2>{\num{4 x 6}}\\
+                        \hline
+                        \multicolumn{4}{l}{Total} & \num[fraction-function = \sfrac]{144/216}\\
+                        \bottomrule
+                    \end{tabular}
+                }
+                % \only<3-4>{
+                %     \footnotesize
+                %     \begin{tabular}{c c c c c}
+                %         \toprule
+                %         Features & Classifier & Experiment & \textbf{\acrshort{acr::efin}} & Number\\
+                %         \hline
+                %         \multirow{4}{*}{Baseline} & \multirow{4}{*}{\acrshort{acr::svm}} & \multirow{4}{*}{3} & Vanilla & \cellcolor{orange}<4>{\num{4 x 3}}\\
+                %          &  &  & Transf. & \cellcolor{paris}<4>{\num{4 x 6}}\\
+                %          &  &  & Gener. & \cellcolor{paris}<4>{\num{4 x 3}}\\
+                %          &  &  & Repres. & \cellcolor{paris}<4>{\num{4 x 6}}\\
+                %         \hline
+                %         \multirow{4}{*}{Baseline} & \multirow{4}{*}{\acrshort{acr::svm}} & \multirow{4}{*}{2} & Vanilla & \cellcolor{paris}<4>{\num{4 x 3}}\\
+                %          &  &  & Transf. & \cellcolor{paris}<4>{\num{4 x 6}}\\
+                %          &  &  & Gener. & \cellcolor{paris}<4>{\num{4 x 3}}\\
+                %          &  &  & Repres. & \cellcolor{paris}<4>{\num{4 x 6}}\\
+                %         \hline
+                %         \multirow{4}{*}{Baseline} & \multirow{4}{*}{\acrshort{acr::svm}} & \multirow{4}{*}{1} & Vanilla & \cellcolor{paris}<4>{\num{4 x 3}}\\
+                %          &  &  & Transf. & \cellcolor{paris}<4>{\num{4 x 6}}\\
+                %          &  &  & Gener. & \cellcolor{paris}<4>{\num{4 x 3}}\\
+                %          &  &  & Repres. & \cellcolor{paris}<4>{\num{4 x 6}}\\
+                %         \bottomrule
+                %     \end{tabular}
+                % }
+            \end{frame}
+
+            \begin{frame}{F-scores}{Baseline}
+                \centering
+                \only<1>{
+                    \includestandalone[mode=buildnew, height=.8\textheight]{figures/results/presentation/ablation/building}
+                }
+                \only<2>{
+                    \includestandalone[mode=buildnew, height=.8\textheight]{figures/results/presentation/ablation/facet}
+                }
             \end{frame}
         
     \section{Conclusion}
