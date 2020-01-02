@@ -59,13 +59,11 @@
 
             \path (x.south) + (0, -2) node[signal, blue, anchor=north, visible on=<2>] (s0) {\small $S_0[x]$};
             \path[draw, blue, ->, visible on=<2>] (x.south) -- (s0) node[midway, left] {$\phi_I$};
-            \path[draw, blue, ->, visible on=<3>] (x.south) -- ($(x.south) + (0, -1)$) node[anchor=north] {\includegraphics[width=2cm]{images/scatnet/s0}};
             \path[draw, blue, ->, visible on=<4-13>] (x.200) -- ($(x.200) + (-2, -1)$) node[signal, anchor=north east] (s0) {\small $S_0[x]$};
 
             \path (x1_1.south west) + (-1, -.5) node[signal, blue, anchor=north east, visible on=<6>] (s1_1) {\small $\evalat[\Bigg]{S_1[x]}{i_1, \theta_1}$};
             \path[draw, blue, ->, visible on=<6>] (x1_1.200) -- (s1_1) node[midway, left] {$\phi_I$};
             \path[draw, blue, ->, visible on=<6>] (x1_3.200) -- ($(x1_3.south west) + (-1, -.5)$) node[anchor=north east] (s1_3) {};
-            \path[draw, blue, ->, visible on=<7>] (x1_2.south) -- ($(x1_2.south) + (0, -1)$) node[anchor=north] (s1) {\includegraphics[width=6cm]{images/scatnet/s1}};
             \path[draw, blue, ->, visible on=<8-13>] (x1_1.200) -- ($(x1_1.south west) + (-1, -.5)$) node[signal, anchor=north east] {\small $\evalat[\Bigg]{S_1[x]}{i_1, \theta_1}$};
             \path[draw, blue, ->, visible on=<8-13>] (x1_3.200) -- ($(x1_3.south west) + (-1, -.5)$) node[anchor=north east] (s1_3) {};
 
@@ -74,15 +72,18 @@
             \path[draw, blue, ->, , visible on=<10>] (x1_1_3.200) -- ($(x1_1_3.south west) + (-1, -.5)$) node[anchor=north east] (s1_1_3) {};
             \path[draw, blue, ->, , visible on=<10>] (x1_3_1.200) -- ($(x1_3_1.south west) + (-1, -.5)$) node[anchor=north east] (s1_3_1) {};
             \path[draw, blue, ->, , visible on=<10>] (x1_3_3.200) -- ($(x1_3_3.south west) + (-1, -.5)$) node[anchor=north east] (s1_3_3) {};
-            \path[visible on=<11>] ($(x1_1_3.south)!.5!(x1_3_1.south)$) + (0, -.5) node[anchor=south] (s2) {\includegraphics[width=12cm]{images/scatnet/s2}};
-            \path[visible on=<13>] ($(x1_1_3.south)!.5!(x1_3_1.south)$) + (0, -.5) node[anchor=north] (s3) {\large \(\vdots\)};
+            \path[visible on=<13>] ($(x1_1_3.south)!.5!(x1_3_1.south)$) + (0, -.5) node[anchor=north, blue] (s3) {\Huge \(\vdots\)};
 
             \path[draw, blue, ->, visible on=<12-13>] (x1_1_1.200) -- ($(x1_1_1.south west) + (-1, -.5)$) node[signal, anchor=north east] (s1_1_1) {\small $\evalat[\Bigg]{S_2[x]}{i_1, \theta_1, i_2, \xi_2, \theta_2}$};
             \path[draw, blue, ->, , visible on=<12-13>] (x1_1_1.200) -- ($(x1_1_1.south west) + (-1, -.5)$) node[anchor=north east] (s1_1_1) {};
             \path[draw, blue, ->, , visible on=<12-13>] (x1_3_1.200) -- ($(x1_3_1.south west) + (-1, -.5)$) node[anchor=north east] (s1_3_1) {};
             \path[draw, blue, ->, , visible on=<12-13>] (x1_3_3.200) -- ($(x1_3_3.south west) + (-1, -.5)$) node[anchor=north east] (s1_3_3) {};
 
-            \path (x) node[signal, visible on=<14->, blue] (x) {\Large \(x\)};
+            \path[draw, blue, ->, visible on=<3>] (x.south) -- ($(x.south) + (0, -1)$) node[anchor=north] {\includegraphics[width=2cm]{images/scatnet/s0}};
+            \path ($(s1_1_1.east |- x1_2.south)!.5!(x1_3_3.west|- x1_2.south)$) + (0, .5) node[visible on=<7>] (s1) {\includegraphics[height=10cm]{images/scatnet/s1}};
+            \path ($(s1_1_1.east |- x1_2.south)!.5!(x1_3_3.west|- x1_2.south)$) + (0, .5) node[visible on=<11>] (s2) {\includegraphics[height=10cm]{images/scatnet/s2}};
+
+            \path (x) node[signal, visible on=<14->, blue, thick] (x) {\Huge \(x\)};
             \path (x |- s1_1_1) node[visible on=<14->, blue] (s) {\footnotesize \(\left\{S_0[x], \evalat[\Bigg]{S_1[x]}{i_1, \theta_1}, \evalat[\Bigg]{S_2[x]}{i_1, \theta_1, i_2,\xi_2, \theta_2}\right\}\)};
             \path ($(x.south)!.5!(s.north)$) ;
 

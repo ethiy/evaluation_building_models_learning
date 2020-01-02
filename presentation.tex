@@ -9,6 +9,9 @@
 
 \usepackage{xcolor, colortbl}
 \definecolor{darkgreen}{RGB}{0, 155, 85}
+\definecolor{elancourt}{rgb}{1,.79,.5}
+\definecolor{paris}{rgb}{.84,.1,.11}
+\definecolor{nantes}{rgb}{.17,.51,.73}
 
 \definecolor{LOSS45}{RGB}{130,8,8}
 \definecolor{LOSS3545}{RGB}{183,10,10}
@@ -599,13 +602,17 @@
             \end{frame}
 
             \begin{frame}{Why using \texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet}}
-                \begin{itemize}
-                    \item[\textbullet] Filters are hardcoded not learned:
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                    \item<1-> Filters are hardcoded not learned:
                     \begin{itemize}
-                        \item[\color{IGNDarkGreen} +] No need for a large dataset;
-                        \item[\color{red} ---] Features: not adaptable.
+                        \item[\color{IGNDarkGreen} +]<2-> No need for a large dataset;
+                        \item[\color{IGNDarkGreen} +]<3-> Interpretable; 
+                        \item[\color{red} ---]<4-> Features: not adaptable.
                     \end{itemize}
-                    \item[\color{IGNDarkGreen} +] Interpretable;
+                    \item<5-> Limited to shallow layers:
+                    \begin{itemize}
+                        \item[\color{red} ---]<6-> Less semantic.
+                    \end{itemize}
                 \end{itemize}
             \end{frame}
 
@@ -620,10 +627,89 @@
             \end{frame}
 
     \section{Experiments}
-        \begin{frame}{Datasets: urban scenes}
-            \centering
-            \includestandalone[mode=buildnew, width=.9\textwidth]{figures/dataset}
-        \end{frame}
+        \subsection{Dataset}
+            \begin{frame}{Urban scenes}
+                \only<1>{
+                    \centering
+                    \includegraphics[height=.8\textheight]{images/datasets/france_map}
+                }
+                \only<2->{
+                    \begin{columns}[T]
+                        \centering
+                        \begin{column}{.48\textwidth}
+                            \only<2-7>{
+                                \begin{itemize}
+                                    \item[\color{elancourt} \(\blacksquare\)]<2-> \textbf{Elancourt}: 
+                                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                                            \item<3-> \num{2009} buildings;
+                                            \item<4-> Residential area;
+                                            \item<5-> Industrial area;
+                                            \item<6-> \gls{acr::dsm} resolution: \SI{0.06}{\cm}
+                                            \item<7-> Orthoimage resolution: \SI{0.06}{\cm}
+                                        \end{itemize}
+                                \end{itemize}
+                            }
+                            \only<8-13>{
+                                \begin{itemize}
+                                    \item[\color{nantes} \(\blacksquare\)]<8-> \textbf{Nantes}: 
+                                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                                            \item<9-> \num{748} buildings;
+                                            \item<10-> Dense downtown;
+                                            \item<11-> High buildings;
+                                            \item<12-> \gls{acr::dsm} resolution: \SI{0.1}{\cm}
+                                            \item<13-> Orthoimage resolution: \SI{0.1}{\cm}
+                                        \end{itemize}
+                                \end{itemize}
+                            }
+                            \only<14-19>{
+                                \begin{itemize}
+                                    \item[\color{paris} \(\blacksquare\)]<14-> \textbf{Paris-13}: 
+                                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                                            \item<15-> \num{478} buildings;
+                                            \item<16-> Dense Hausmann style downtown;
+                                            \item<17-> Skyscrapers;
+                                            \item<18-> \gls{acr::dsm} resolution: \SI{0.1}{\cm}
+                                            \item<19-> Orthoimage resolution: \SI{0.1}{\cm}
+                                        \end{itemize}
+                                \end{itemize}
+                            }
+                        \end{column}
+                        \begin{column}{.48\textwidth}
+                            \begin{overlayarea}{\textwidth}{.8\textheight}
+                                \centering
+                                \only<4>{
+                                    \includegraphics[height=3cm]{images/datasets/elancourt_samples_2}
+                                }
+                                \only<5>{
+                                    \includegraphics[height=3cm]{images/datasets/elancourt_samples_1}
+                                }
+                                \only<6-7>{
+                                    \includegraphics[height=6cm]{images/datasets/elancourt_samples}
+                                }
+                                \only<10>{
+                                    \includegraphics[height=3cm]{images/datasets/nantes_samples_2}
+                                }
+                                \only<11>{
+                                    \includegraphics[height=3cm]{images/datasets/nantes_samples_1}
+                                }
+                                \only<12-13>{
+                                    \includegraphics[height=6cm]{images/datasets/nantes_samples}
+                                }
+                                \only<16>{
+                                    \includegraphics[height=3cm]{images/datasets/paris-13_samples_1}
+                                }
+                                \only<17>{
+                                    \includegraphics[height=3cm]{images/datasets/paris-13_samples_2}
+                                }
+                                \only<18-19>{
+                                    \includegraphics[height=6cm]{images/datasets/paris-13_samples}
+                                }
+                            \end{overlayarea}
+                        \end{column}
+                    \end{columns}
+                }
+            \end{frame}
+
         
     \section{Conclusion}
         \begin{frame}{\textcolor{yellow}{Conclusion} \& \textcolor{purple}{Perspectives}}
