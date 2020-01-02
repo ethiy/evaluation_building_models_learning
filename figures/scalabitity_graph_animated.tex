@@ -1,0 +1,64 @@
+\documentclass[tikz]{standalone}
+\usepackage[T1]{fontenc}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, shadows, calc, decorations}
+
+\usepackage{xcolor}
+\definecolor{wheat}{RGB}{245,222,179}
+\definecolor{darkgreen}{RGB}{0, 155, 85}
+
+
+\begin{document}
+    \tikzstyle{zone}=[
+        draw,
+        font=\Large,
+        align=center,
+        minimum height=2.5em,
+        drop shadow,
+        rounded corners
+    ]
+
+    \tikzstyle{edge}=[
+        draw,
+        ->,
+        line width=1pt,
+        align=center,
+    ]
+
+    \tikzstyle{branch}=[
+        draw,
+        line width=1pt,
+        align=center,
+    ]
+
+	\pgfdeclarelayer{background}
+    \pgfsetlayers{background,main}
+	\begin{tikzpicture}
+		\node[zone, fill=gray!20] (z1) at (-5, 0) {$Z_1$};
+        \node[zone, fill=gray!20] (z2) at (1.25, 2.16506350946) {$Z_2$};
+        \node[zone, fill=gray!20]  (z3) at (1.25, -2.16506350946) {$Z_3$};
+        
+        \path (z1.west |- z2.north) + (-.125, .125) node (top_left) {};
+        \path ($(z1) ! .5 ! (z2)$) node (middle) {};
+        \path ( middle |- z2.north) node (top) {};
+        \path (z3.south east) + (.125, -.125) node (bottom_right) {};
+
+        \begin{pgfonlayer}{background}
+            \path[fill=gray!50,fill opacity=.5, rounded corners, dashed] (top_left) rectangle (bottom_right);
+        \end{pgfonlayer}
+        
+        \path[edge, out=60,in=120,looseness=25, black!50!yellow] (top) to node[midway, above, align=center]{\scriptsize{Representativeness (5.3)}} (top);
+                
+        \path[edge, out=70,in=110,looseness=8] (z1) to node[midway, above, align=center]{4.3} (z1);
+        \path[edge, out=70,in=110,looseness=8] (z2) to node[midway, above, align=center]{4.3} (z2);
+        \path[edge, out=70,in=110,looseness=8] (z3) to node[midway, above, align=center]{4.3} (z3);
+        
+        \path[edge, darkgreen] (z1) to node[midway, sloped, above, align=center]{\scriptsize{Transferability (5.1)}} (z2.west);
+        \path[edge, darkgreen] (z1) to node[midway, sloped, above, align=center]{\scriptsize{Transferability (5.1)}} (z3.200);
+        
+        \path[branch, purple, out=0, in=195] (z1) to (-1.15, -0.125);
+        \path[branch, purple, out=120, in=240] (z3.120) to (-1.15, -0.125);
+        \path[edge, purple] (-1.15, -0.125) to node[left, sloped, above, align=center]{\scriptsize{Generalization (5.2)}} (z2);
+	\end{tikzpicture}
+\end{document}
