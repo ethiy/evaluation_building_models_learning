@@ -4,34 +4,34 @@
 
 \begin{document}
     \pgfplotstableread[col sep=comma]{
-        x, y, ey
-        1, 98.97, 0.10
-        2, 98.20, 0.16
-        3, 97.39, 0.40
+        x, y, label
+        1, 99.10, 
+        2, 98.33, 
+        3, 97.98, 
     }\FOS
     \pgfplotstableread[col sep=comma]{
-        x, y, ey
-        1, 2.63, 1.04
-        2, 35.29, 2.37
-        3, 79.25, 0.41
+        x, y, label
+        1, 3.67, 
+        2, 37.66, 
+        3, 79.73, 
     }\FUS
     \pgfplotstableread[col sep=comma]{
-        x, y, ey
-        1, 11.37, 7.67
-        2, 50.13, 4.10
-        3, 57.09, 0.79
+        x, y, label
+        1, 16.60, 
+        2, 54.54, {Im.}
+        3, 57.89, 
     }\FIB
     \pgfplotstableread[col sep=comma]{
-        x, y, ey
-        1, 10.35, 4.73
-        2, 0, 0
-        3, 0, 0
+        x, y, label
+        1, 15.99, 
+        2, 0, 
+        3, 0, 
     }\FIT
     \pgfplotstableread[col sep=comma]{
-        x, y, ey
-        1, 75.88, 0.73
-        2, 81.64, 0.58
-        3, 91.00, 0.38
+        x, y, label
+        1, 76.66, 
+        2, 82.16, 
+        3, 91.33, 
     }\FIG
 
     \begin{tikzpicture} 
@@ -44,6 +44,9 @@
             xtick align=outside,
             xtick pos=left,
             ytick pos=left,
+            nodes near coords={\pgfplotspointmeta},
+            nodes near coords style={black, text width=2em, align=center, font={\bfseries \tiny}},
+            point meta=explicit symbolic,
             every axis plot/.append style={thick},
             ymax=100,
             ymin=0,
@@ -58,52 +61,27 @@
             \addplot+[
                 bar shift = -20pt,
                 fill=green!40,
-                draw=green,
-                error bars/.cd,
-                error bar style={green},
-                error mark options={green, rotate=90},
-                y dir=both,
-                y explicit
-            ] table[x=x, y=y, y error=ey] {\FOS};
+                draw=green
+            ] table[x=x, y=y, meta index=2] {\FOS};
             \addplot+[
                 bar shift = -10pt,
                 fill=cyan!40,
-                draw=cyan,
-                error bars/.cd,
-                error bar style={cyan},
-                error mark options={cyan, rotate=90},
-                y dir=both,
-                y explicit
-            ] table[x=x, y=y, y error=ey] {\FUS};
+                draw=cyan
+            ] table[x=x, y=y, meta index=2] {\FUS};
             \addplot+[
                 fill=red!40,
-                draw=red,
-                error bars/.cd,
-                error bar style={red},
-                error mark options={red, rotate=90},
-                y dir=both,
-                y explicit
-            ] table[x=x, y=y, y error=ey] {\FIB};
+                draw=red
+            ] table[x=x, y=y, meta index=2] {\FIB};
             \addplot+[
                 bar shift = 10pt,
                 fill=olive!40,
-                draw=olive,
-                error bars/.cd,
-                error bar style={olive},
-                error mark options={olive, rotate=90},
-                y dir=both,
-                y explicit
-            ] table[x=x, y=y, y error=ey] {\FIT};
+                draw=olive
+            ] table[x=x, y=y, meta index=2] {\FIT};
             \addplot+[
                 bar shift = 20pt,
                 fill=violet!40,
-                draw=violet,
-                error bars/.cd,
-                error bar style={violet},
-                error mark options={violet, rotate=90},
-                y dir=both,
-                y explicit
-            ] table[x=x, y=y, y error=ey] {\FIG};
+                draw=violet
+            ] table[x=x, y=y, meta index=2] {\FIG};
             \legend{
                 \footnotesize \strut \texttt{FOS},
                 \footnotesize \strut \texttt{FUS},

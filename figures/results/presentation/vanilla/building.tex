@@ -4,28 +4,28 @@
 
 \begin{document}
     \pgfplotstableread[col sep=comma]{
-        x, y, ey
-        1, 83.52, 0.66
-        2, 45.71, 1.28
-        3, 55.13, 4.10
+        x, y, label
+        1, 84.12, 
+        2, 47.13, 
+        3, 57.71,
     }\BOS
     \pgfplotstableread[col sep=comma]{
-        x, y, ey
-        1, 50.56, 3.26
-        2, 26.11, 15.12
-        3, 18.64, 10.69
+        x, y, label
+        1, 53.88, {Hei., Im.}
+        2, 40.82, {Im.}
+        3, 34.57, {Im.}
     }\BUS
     \pgfplotstableread[col sep=comma]{
-        x, y, ey
-        1, 23.87, 3.10
-        2, 0.99, 1.14
-        3, 0, 0
+        x, y, label
+        1, 26.88, {Im.}
+        2, 1.98, 
+        3, 0, 
     }\BIB
     \pgfplotstableread[col sep=comma]{
-        x, y, ey
-        1, 31.47, 8.35
-        2, 3.72, 2.82
-        3, 1.89, 2.40
+        x, y, label
+        1, 39.68, {Geom.}
+        2, 6.56, 
+        3, 5.0, 
     }\BIT
 
     \begin{tikzpicture} 
@@ -38,6 +38,9 @@
             xtick align=outside,
             xtick pos=left,
             ytick pos=left,
+            nodes near coords={\pgfplotspointmeta},
+            nodes near coords style={black, text width=2em, align=center, font={\bfseries \tiny}},
+            point meta=explicit symbolic,
             every axis plot/.append style={thick},
             ymax=100,
             ymin=0,
@@ -52,43 +55,23 @@
             \addplot+[
                 bar shift = -15pt,
                 fill=green!40,
-                draw=green,
-                error bars/.cd,
-                error bar style={green},
-                error mark options={green, rotate=90},
-                y dir=both,
-                y explicit
-            ] table[x=x, y=y, y error=ey] {\BOS};
+                draw=green
+            ] table[x=x, y=y, meta index=2] {\BOS};
             \addplot+[
                 bar shift = -5pt,
                 fill=cyan!40,
-                draw=cyan,
-                error bars/.cd,
-                error bar style={cyan},
-                error mark options={cyan, rotate=90},
-                y dir=both,
-                y explicit
-            ] table[x=x, y=y, y error=ey] {\BUS};
+                draw=cyan
+            ] table[x=x, y=y, meta index=2] {\BUS};
             \addplot+[
                 bar shift = 5pt,
                 fill=red!40,
-                draw=red,
-                error bars/.cd,
-                error bar style={red},
-                error mark options={red, rotate=90},
-                y dir=both,
-                y explicit
-            ] table[x=x, y=y, y error=ey] {\BIB};
+                draw=red
+            ] table[x=x, y=y, meta index=2] {\BIB};
             \addplot+[
                 bar shift = 15pt,
                 fill=olive!40,
-                draw=olive,
-                error bars/.cd,
-                error bar style={olive},
-                error mark options={olive, rotate=90},
-                y dir=both,
-                y explicit
-            ] table[x=x, y=y, y error=ey] {\BIT};
+                draw=olive
+            ] table[x=x, y=y, meta index=2] {\BIT};
             \legend{
                 \footnotesize \strut \texttt{BOS},
                 \footnotesize \strut \texttt{BUS},

@@ -754,63 +754,132 @@
 
             \begin{frame}{Possible settings}{Baseline}
                 \centering
-                \only<1-2>{
-                    \footnotesize
-                    \begin{tabular}{c c c c c}
-                        \toprule
-                        Features & Classifier & Experiment & \textbf{\acrshort{acr::efin}} & Number\\
-                        \hline
-                        \multirow{4}{*}{Baseline} & \multirow{4}{*}{\acrshort{acr::rf}} & \multirow{4}{*}{3} & Vanilla & \cellcolor{IGNGreen}<2>{\num{4 x 3}}\\
-                         &  &  & Transf. & \cellcolor{IGNGreen}<2>{\num{4 x 6}}\\
-                         &  &  & Gener. & \cellcolor{IGNGreen}<2>{\num{4 x 3}}\\
-                         &  &  & Repres. & \cellcolor{IGNGreen}<2>{\num{4 x 6}}\\
-                        \hline
-                        \multirow{4}{*}{Baseline} & \multirow{4}{*}{\acrshort{acr::rf}} & \multirow{4}{*}{2} & Vanilla & \cellcolor{IGNGreen}<2>{\num{4 x 3}}\\
-                         &  &  & Transf. & \cellcolor{IGNGreen}<2>{\num{4 x 6}}\\
-                         &  &  & Gener. & \cellcolor{paris}<2>{\num{4 x 3}}\\
-                         &  &  & Repres. & \cellcolor{IGNGreen}<2>{\num{4 x 6}}\\
-                        \hline
-                        \multirow{4}{*}{Baseline} & \multirow{4}{*}{\acrshort{acr::rf}}  & \multirow{4}{*}{1} & Vanilla & \cellcolor{IGNGreen}<2>{\num{4 x 3}}\\
-                         &  &  & Transf. & \cellcolor{paris}<2>{\num{4 x 6}}\\
-                         &  &  & Gener. & \cellcolor{paris}<2>{\num{4 x 3}}\\
-                         &  &  & Repres. & \cellcolor{paris}<2>{\num{4 x 6}}\\
-                        \hline
-                        \multicolumn{4}{l}{Total} & \num[fraction-function = \sfrac]{144/216}\\
-                        \bottomrule
-                    \end{tabular}
-                }
-                % \only<3-4>{
-                %     \footnotesize
-                %     \begin{tabular}{c c c c c}
-                %         \toprule
-                %         Features & Classifier & Experiment & \textbf{\acrshort{acr::efin}} & Number\\
-                %         \hline
-                %         \multirow{4}{*}{Baseline} & \multirow{4}{*}{\acrshort{acr::svm}} & \multirow{4}{*}{3} & Vanilla & \cellcolor{orange}<4>{\num{4 x 3}}\\
-                %          &  &  & Transf. & \cellcolor{paris}<4>{\num{4 x 6}}\\
-                %          &  &  & Gener. & \cellcolor{paris}<4>{\num{4 x 3}}\\
-                %          &  &  & Repres. & \cellcolor{paris}<4>{\num{4 x 6}}\\
-                %         \hline
-                %         \multirow{4}{*}{Baseline} & \multirow{4}{*}{\acrshort{acr::svm}} & \multirow{4}{*}{2} & Vanilla & \cellcolor{paris}<4>{\num{4 x 3}}\\
-                %          &  &  & Transf. & \cellcolor{paris}<4>{\num{4 x 6}}\\
-                %          &  &  & Gener. & \cellcolor{paris}<4>{\num{4 x 3}}\\
-                %          &  &  & Repres. & \cellcolor{paris}<4>{\num{4 x 6}}\\
-                %         \hline
-                %         \multirow{4}{*}{Baseline} & \multirow{4}{*}{\acrshort{acr::svm}} & \multirow{4}{*}{1} & Vanilla & \cellcolor{paris}<4>{\num{4 x 3}}\\
-                %          &  &  & Transf. & \cellcolor{paris}<4>{\num{4 x 6}}\\
-                %          &  &  & Gener. & \cellcolor{paris}<4>{\num{4 x 3}}\\
-                %          &  &  & Repres. & \cellcolor{paris}<4>{\num{4 x 6}}\\
-                %         \bottomrule
-                %     \end{tabular}
-                % }
+                \footnotesize
+                \begin{tabular}{c c c c c}
+                    \toprule
+                    Features & Classifier & Experiment & \textbf{\acrshort{acr::efin}} & Number\\
+                    \hline
+                    \multirow{12}{*}{Baseline} & \multirow{12}{*}{\acrshort{acr::rf}} & \multirow{4}{*}{3} & Vanilla & \cellcolor{IGNGreen}<2>{\num{4 x 3}}\\
+                     &  &  & Transf. & \cellcolor{IGNGreen}<2>{\num{4 x 6}}\\
+                     &  &  & Gener. & \cellcolor{IGNGreen}<2>{\num{4 x 3}}\\
+                     &  &  & Repres. & \cellcolor{IGNGreen}<2>{\num{4 x 6}}\\
+                    \cline{3-5}
+                     &  & \multirow{4}{*}{2} & Vanilla & \cellcolor{IGNGreen}<2>{\num{4 x 3}}\\
+                     &  &  & Transf. & \cellcolor{IGNGreen}<2>{\num{4 x 6}}\\
+                     &  &  & Gener. & \cellcolor{paris}<2>{\num{4 x 3}}\\
+                     &  &  & Repres. & \cellcolor{IGNGreen}<2>{\num{4 x 6}}\\
+                    \cline{3-5}
+                     &   & \multirow{4}{*}{1} & Vanilla & \cellcolor{IGNGreen}<2>{\num{4 x 3}}\\
+                     &  &  & Transf. & \cellcolor{paris}<2>{\num{4 x 6}}\\
+                     &  &  & Gener. & \cellcolor{paris}<2>{\num{4 x 3}}\\
+                     &  &  & Repres. & \cellcolor{paris}<2>{\num{4 x 6}}\\
+                    \hline
+                    \multicolumn{4}{l}{Total} & \num[fraction-function = \sfrac]{144/216}\\
+                    \bottomrule
+                \end{tabular}
             \end{frame}
 
-            \begin{frame}{F-scores}{Baseline}
+            \begin{frame}{Vanilla experiments}
                 \centering
                 \only<1>{
-                    \includestandalone[mode=buildnew, height=.8\textheight]{figures/results/presentation/ablation/building}
+                    \includestandalone[mode=buildnew, height=.8\textheight]{figures/results/presentation/vanilla/building}
                 }
                 \only<2>{
-                    \includestandalone[mode=buildnew, height=.8\textheight]{figures/results/presentation/ablation/facet}
+                    \includestandalone[mode=buildnew, height=.8\textheight]{figures/results/presentation/vanilla/facet}
+                }
+            \end{frame}
+
+            \begin{frame}{Transferability experiments}
+                \centering
+                \renewcommand{\arraystretch}{1.5}
+                \only<1>{
+                    \begin{tabular}{| c | c | c | c | c |}
+                        \hline
+                         & \texttt{BOS}  & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} \\
+                        \hline
+                        \textbf{El.} \(\rightarrow\) \textbf{Na.} & \cellcolor{IGNRed} & \cellcolor{IGNRed} \textbf{All} &  & \cellcolor{IGNRed} \textbf{All} \\
+                        \hline
+                        \textbf{El.} \(\rightarrow\) \textbf{P13} & \cellcolor{IGNGreen} & \cellcolor{IGNGreen} \textbf{Im.} &  & \cellcolor{IGNGreen} \\
+                        \hline
+                        \textbf{Na.} \(\rightarrow\) \textbf{P13} & \cellcolor{IGNRed} & \cellcolor{IGNRed} \textbf{Im.} &  & \cellcolor{IGNGreen} \textbf{Geom.} \\
+                        \hline
+                        \textbf{Na.} \(\rightarrow\) \textbf{El.} & \cellcolor{IGNRed} & \cellcolor{IGNRed} \textbf{Im.} & \cellcolor{IGNGreen} \textbf{Im.} & \cellcolor{IGNRed} \textbf{Geom.} \\
+                        \hline
+                        \textbf{P13} \(\rightarrow\) \textbf{Na.} & \cellcolor{IGNRed} & \cellcolor{IGNRed} \textbf{Im.} &  & \cellcolor{IGNGreen} \textbf{Geom.} \\
+                        \hline
+                        \textbf{P13} \(\rightarrow\) \textbf{El.} & \cellcolor{IGNRed} & \cellcolor{IGNRed} \textbf{All} & \cellcolor{IGNGreen} \textbf{Im.} & \cellcolor{IGNRed} \textbf{Geom.} \\
+                        \hline
+                    \end{tabular}
+                }
+                \only<2>{
+                    \begin{tabular}{| c | c | c | c | c | c |}
+                        \hline
+                         & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG} \\
+                        \hline
+                        \textbf{El.} \(\rightarrow\) \textbf{Na.} & \cellcolor{IGNGreen} & \cellcolor{IGNRed} \textbf{Im.} & \cellcolor{IGNRed} \textbf{Im.} & \cellcolor{IGNGreen} \textbf{Im.} & \cellcolor{IGNGreen} \\
+                        \hline
+                        \textbf{El.} \(\rightarrow\) \textbf{P13} & \cellcolor{IGNGreen} & \cellcolor{IGNRed} \textbf{Im.} & \cellcolor{IGNRed} \textbf{Im.} &  & \cellcolor{IGNGreen} \\
+                        \hline
+                        \textbf{Na.} \(\rightarrow\) \textbf{P13} & \cellcolor{IGNGreen} & \cellcolor{IGNRed} \textbf{Geom.} & \cellcolor{IGNGreen} &  & \cellcolor{IGNGreen} \textbf{Hei.} \\
+                        \hline
+                        \textbf{Na.} \(\rightarrow\) \textbf{El.} & \cellcolor{IGNGreen} & \cellcolor{IGNGreen} \textbf{Im.} & \cellcolor{IGNGreen} \textbf{Im.} & \cellcolor{IGNRed} & \cellcolor{IGNGreen} \\
+                        \hline
+                        \textbf{P13} \(\rightarrow\) \textbf{Na.} & \cellcolor{IGNGreen} & \cellcolor{IGNRed} & \cellcolor{IGNGreen} \textbf{Im.} &  & \cellcolor{IGNGreen} \\
+                        \hline
+                        \textbf{P13} \(\rightarrow\) \textbf{El.} & \cellcolor{IGNGreen} & \cellcolor{IGNGreen} & \cellcolor{IGNGreen} \textbf{All} & \cellcolor{IGNRed} & \cellcolor{IGNGreen}\\
+                        \hline
+                    \end{tabular}
+                }
+                \renewcommand{\arraystretch}{1}
+                \only<3->{
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \item<3-> Transferability of \texttt{Building errors}: \num[fraction-function = \sfrac]{7/20}.
+                    \item<4-> Transferability of \texttt{Facets errors}: \num[fraction-function = \sfrac]{20/27}.
+                    \item<5-> External modalities are \underline{critical}.
+                \end{itemize}
+            }
+            \end{frame}
+
+            \begin{frame}{Possible settings}{Advanced features}
+                \centering
+                \footnotesize
+                \begin{tabular}{c c c c c}
+                    \toprule
+                    Features & Classifier & Experiment & \textbf{\acrshort{acr::efin}} & Number\\
+                    \hline
+                    \multirow{2}{*}{Baseline} & \acrshort{acr::rf} & \multirow{6}{*}{3} & \multirow{6}{*}{Vanilla} & \num{4 x 1} \\
+                     & \acrshort{acr::svm} &  &  & \num{4 x 2} \\
+                    \multirow{2}{*}{\gls{acr::scatnet}} & \acrshort{acr::rf} &  &  & \num{6 x 2} \\
+                     & \acrshort{acr::svm} &  &  & \num{6 x 2} \\
+                    Graph Kernels & \acrshort{acr::svm} &  &  & \num{1 x 2} \\
+                    GK \(\oplus\) \gls{acr::scatnet} & \acrshort{acr::svm} &  &  & \num{6 x 2} \\
+                    \hline
+                    \multicolumn{4}{l}{Total} & \num{50}\\
+                    \bottomrule
+                \end{tabular}
+            \end{frame}
+
+            \begin{frame}{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} results}
+                \centering
+                \only<1>{
+                    \begin{tabular}{| c | c | c | c | c |}
+                        \hline
+                         & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} \\
+                        \hline
+                        \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S-Hei.} & \cellcolor{STBL} & \cellcolor{GAIN1525} \textbf{S-Hei.} \\
+                        \hline
+                        \textbf{Na-P13} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{S(d|c)-Im.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S(d)-Im.} \\
+                        \hline
+                    \end{tabular}
+                    \begin{tabular}{| c | c | c | c | c | c |}
+                        \hline
+                         & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG}\\
+                        \hline
+                        \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN1525} \textbf{S(c)-All} & \cellcolor{GAIN0515} \textbf{S(c)-Im.} & \cellcolor{GAIN2535} \textbf{S(d)-Im.} & \cellcolor{GAIN0515} \\
+                        \hline
+                        \textbf{Na-P13} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S(c)-Im.} & \cellcolor{GAIN1525} \textbf{S(c)-Im.} & \cellcolor{STBL} \\
+                        \hline
+                    \end{tabular}
                 }
             \end{frame}
         
