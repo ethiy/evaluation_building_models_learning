@@ -1,5 +1,7 @@
 \documentclass[12pt, xcolor=table]{beamer}
 
+\usepackage{geometry}
+
 \usepackage{lmodern}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}		
@@ -131,6 +133,10 @@
 \date{\tiny \DTMdisplaydate{2020}{1}{10}{5}}
 \author{
     Oussama Ennafii
+}
+
+\institute{
+    PhD defense
 }
 
 \begin{document}
@@ -742,9 +748,6 @@
             \end{frame}
         
         \subsection{Set up}
-            % \begin{frame}{Parameters}
-                
-            % \end{frame}
 
             \begin{frame}{Experiment types}
                 \centering
@@ -925,4 +928,80 @@
                 \item<4-> Automatic correction.
             \end{itemize}
         \end{frame}
+
+    \bgroup
+    \setbeamercolor{background canvas}{bg=white}
+
+    \begin{frame}[plain]{}
+        \newgeometry{top=0cm, left=0cm, right=0cm, bottom=0cm}
+        \hspace{-.75cm}
+        \begin{tikzpicture}
+            \node (ign_logo) at (-1, 0) {
+                \includegraphics[width=1.606911447cm]{images/logos/logo-ign}
+            };
+            \path (ign_logo.south) node[anchor=north] (inria_logo) {
+                \includegraphics[width=1.606911447cm]{images/logos/logo-inria}
+            };
+            \path (inria_logo.south) node[anchor=north] (upe_logo) {
+                \includegraphics[width=1.606911447cm]{images/logos/logo-upe}
+            };
+            \path (ign_logo.north east) + (3, 0) node[anchor=north west] (trame) {\usebox \tramebox};
+            \path (upe_logo.south west) + (0, -1.75) node[anchor=north west] (background) {
+                {
+                    \includegraphics[width=11.5cm]{images/logos/background-50}
+                }
+            };
+            \path (trame.west) + (2.5, -.75) node (title_box) {\usebox \titlebox};
+            \path (title_box) + (0, .75) node (thanks) {
+                \begin{beamercolorbox}[
+                    wd=4cm,
+                    sep=8pt
+                ]{title page header}
+                    \usebeamerfont{title}
+                    \begin{center}
+                        Thank you for your attention!
+                    \end{center}
+                \end{beamercolorbox}
+            };
+            \path (background.north) node[anchor=north] (author) {
+                \begin{beamercolorbox}[
+                    wd=10cm,
+                    sep=8pt,
+                    #1
+                ]{author}
+                    \usebeamerfont{author}
+                    \begin{center}
+                        \insertauthor\par
+                    \end{center}
+                \end{beamercolorbox}
+            };
+            \path (author.south) + (0, -.1) node (institute) {
+                \begin{beamercolorbox}[
+                    wd=6cm,
+                    sep=8pt,
+                    #1
+                ]{institute}
+                    \usebeamerfont{institute}
+                    \begin{center}
+                        \insertinstitute\par
+                    \end{center}
+                \end{beamercolorbox}
+            };
+            \path (institute.south) + (0, -.1) node (date) {
+                \begin{beamercolorbox}[
+                    wd=6cm,
+                    sep=8pt,
+                    #1
+                ]{date}
+                    \usebeamerfont{date}
+                    \begin{center}
+                        \insertdate\par
+                    \end{center}
+                \end{beamercolorbox}
+            };
+        \end{tikzpicture}
+        \restoregeometry 
+    \end{frame}
+    \egroup
+
 \end{document}

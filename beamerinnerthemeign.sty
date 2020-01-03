@@ -5,9 +5,8 @@
 \RequirePackage{pgfplots}
 \RequirePackage{graphicx}
 \RequirePackage{adjustbox}
-\RequirePackage{transparent}
 
-\usetikzlibrary{backgrounds, positioning, calc}
+\usetikzlibrary{backgrounds, positioning}
 \pgfplotsset{compat=1.13}
 
 
@@ -27,14 +26,14 @@
 \newsavebox \tramebox
 \savebox \tramebox{
     \begin{tikzpicture}
-        \begin{axis}[axis lines=none, width=8cm, height=4.7cm, at={(0cm, 0cm)}]
-            \foreach \line in {1,2,...,30}{
+        \begin{axis}[axis lines=none, width=9cm, height=7cm, at={(0cm, 0cm)}]
+            \foreach \line in {1,2,...,60}{
                 \addplot[
                     only marks,
-                    color=IGNGrey,
+                    color=IGNDarkGrey,
                     mark=*,
-                    mark size=.05pt,
-                    samples=35
+                    mark size=.075pt,
+                    samples=50
                 ] {\line};
             }
         \end{axis}
@@ -45,26 +44,34 @@
 \savebox \titlebox{
     \begin{tikzpicture}
         \fill[top color=IGNDarkGreen, bottom color = IGNGreen]
-        (-2.8, 2.5)
-        -- (2.5, 2)
-        -- (2.8, -1)
+        (-3, 2.75)
+        -- (2.5, 2.25)
+        -- (2.8, -1.15)
         -- (-1.5, -1.5)
         -- (-3.2, 0);
     \end{tikzpicture}
 }
 \defbeamertemplate*{title page}{ign}[1][]
 {
+    \newgeometry{top=0cm, left=0cm, right=0cm, bottom=0cm}
+    \hspace{-.75cm}
     \begin{tikzpicture}
-        \path (-10, 4) node (logo) {
+        \node (ign_logo) at (-1, 0) {
             \includegraphics[width=1.606911447cm]{images/logos/logo-ign}
         };
-        \path (logo.west) + (6, -.5) node (trame) {\usebox \tramebox};
-        \path (logo.south east) + (3.125, -4) node (background) {
+        \path (ign_logo.south) node[anchor=north] (inria_logo) {
+            \includegraphics[width=1.606911447cm]{images/logos/logo-inria}
+        };
+        \path (inria_logo.south) node[anchor=north] (upe_logo) {
+            \includegraphics[width=1.606911447cm]{images/logos/logo-upe}
+        };
+        \path (ign_logo.north east) + (3, 0) node[anchor=north west] (trame) {\usebox \tramebox};
+        \path (upe_logo.south west) + (0, -1.75) node[anchor=north west] (background) {
             {
-                \includegraphics[width=11cm]{images/logos/background-50}
+                \includegraphics[width=11.5cm]{images/logos/background-50}
             }
         };
-        \path (trame.east) + (-2, -1) node (title_box) {\usebox \titlebox};
+        \path (trame.west) + (2.5, -.75) node (title_box) {\usebox \titlebox};
         \path (title_box) + (0, .4) node (title) {
             \begin{beamercolorbox}[
                 wd=5.8cm,
@@ -86,9 +93,9 @@
                 \end{center}
             \end{beamercolorbox}
         };
-        \path (trame.south) + (-.5, -2) node (author) {
+        \path (background.north) node[anchor=north] (author) {
             \begin{beamercolorbox}[
-                wd=4cm,
+                wd=10cm,
                 sep=8pt,
                 #1
             ]{author}
@@ -98,7 +105,7 @@
                 \end{center}
             \end{beamercolorbox}
         };
-        \path (author.south) + (0, -.15) node (institute) {
+        \path (author.south) + (0, -.1) node (institute) {
             \begin{beamercolorbox}[
                 wd=6cm,
                 sep=8pt,
@@ -123,6 +130,7 @@
             \end{beamercolorbox}
         };
     \end{tikzpicture}
+    \restoregeometry 
     \addtocounter{framenumber}{-1}
 }
 
@@ -207,7 +215,7 @@
         };
         \path (trame.south) + (-.5, -2) node (author) {
             \begin{beamercolorbox}[
-                wd=4cm,
+                wd=10cm,
                 sep=8pt
             ]{author}
                 \usebeamerfont{author}
@@ -216,5 +224,27 @@
                 \end{center}
             \end{beamercolorbox}
         };
+        % \path (author.south) + (0, -.15) node (institute) {
+        %     \begin{beamercolorbox}[
+        %         wd=6cm,
+        %         sep=8pt
+        %     ]{institute}
+        %         \usebeamerfont{institute}
+        %         \begin{center}
+        %             \insertinstitute\par
+        %         \end{center}
+        %     \end{beamercolorbox}
+        % };
+        % \path (institute.south) + (0, -.1) node (date) {
+        %     \begin{beamercolorbox}[
+        %         wd=6cm,
+        %         sep=8pt
+        %     ]{date}
+        %         \usebeamerfont{date}
+        %         \begin{center}
+        %             \insertdate\par
+        %         \end{center}
+        %     \end{beamercolorbox}
+        % };
     \end{tikzpicture}
 }
