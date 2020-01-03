@@ -20,12 +20,11 @@
 \definecolor{LOSS2535}{RGB}{255,0,0}
 \definecolor{LOSS1525}{RGB}{255,122,12}
 \definecolor{LOSS0515}{RGB}{255,181,12}
-\definecolor{STBL}{RGB}{215,215,215}
-\definecolor{GAIN0515}{RGB}{58,255,12}
-\definecolor{GAIN1525}{RGB}{58,178,12}
-\definecolor{GAIN2535}{RGB}{56,136,17}
-\definecolor{GAIN3545}{RGB}{50,119,16}
-\definecolor{GAIN45}{RGB}{48,83,56}
+\definecolor{STBL}{RGB}{58,255,12}
+\definecolor{GAIN0515}{RGB}{58,178,12}
+\definecolor{GAIN1525}{RGB}{56,136,17}
+\definecolor{GAIN2535}{RGB}{50,119,16}
+\definecolor{GAIN3545}{RGB}{48,83,56}
 
 
 \usepackage{graphicx}
@@ -743,9 +742,9 @@
             \end{frame}
         
         \subsection{Set up}
-            \begin{frame}{Parameters}
+            % \begin{frame}{Parameters}
                 
-            \end{frame}
+            % \end{frame}
 
             \begin{frame}{Experiment types}
                 \centering
@@ -861,6 +860,7 @@
 
             \begin{frame}{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} results}
                 \centering
+                \small
                 \only<1>{
                     \begin{tabular}{| c | c | c | c | c |}
                         \hline
@@ -871,6 +871,7 @@
                         \textbf{Na-P13} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{S(d|c)-Im.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S(d)-Im.} \\
                         \hline
                     \end{tabular}
+                    \vfill
                     \begin{tabular}{| c | c | c | c | c | c |}
                         \hline
                          & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG}\\
@@ -880,27 +881,48 @@
                         \textbf{Na-P13} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S(c)-Im.} & \cellcolor{GAIN1525} \textbf{S(c)-Im.} & \cellcolor{STBL} \\
                         \hline
                     \end{tabular}
+                    \vfill
+                    \begin{tikzpicture}
+                        \shade[left color=white,right color=LOSS0515] (0, 0) rectangle (1, .25);
+                        \draw[LOSS0515, fill=LOSS0515] (1, 0) rectangle (2, .25);
+                        \draw[STBL, fill=STBL] (2, 0) rectangle (3, .25);
+                        \draw[GAIN0515, fill=GAIN0515] (3, 0) rectangle (4, .25);
+                        \draw[GAIN1525, fill=GAIN1525] (4, 0) rectangle (5, .25);
+                        \draw[GAIN2535, fill=GAIN2535] (5, 0) rectangle (6, .25);
+                        \shade[left color=GAIN2535,right color=white] (6, 0) rectangle (7, .25);
+                        \draw[black] (0, 0) -- (7, 0);
+                        \draw[black] (0, .25) -- (7, .25);
+                        \draw[black, fill=white] (4, -.75) rectangle (3, -1);
+                        \path (3.5, -1.25) node {\footnotesize NaN};
+                        \draw[black] (1, .25) -- (1, -2pt) node[below, IGNDarkGrey] {\footnotesize -15\%};
+                        \draw[black] (2, .25) -- (2, -2pt) node[below, IGNDarkGrey] {\footnotesize -5\%};
+                        \draw[black] (3, .25) -- (3, -2pt) node[below, IGNDarkGrey] {\footnotesize 5\%};
+                        \draw[black] (4, .25) -- (4, -2pt) node[below, IGNDarkGrey] {\footnotesize 15\%};
+                        \draw[black] (5, .25) -- (5, -2pt) node[below, IGNDarkGrey] {\footnotesize 25\%};
+                        \draw[black] (6, .25) -- (6, -2pt) node[below, IGNDarkGrey] {\footnotesize 35\%};
+                    \end{tikzpicture}
                 }
             \end{frame}
         
     \section{Conclusion}
-        \begin{frame}{\textcolor{yellow}{Conclusion} \& \textcolor{purple}{Perspectives}}
-            \begin{itemize}[label=\(\blacktriangleright\), font=\color{yellow}, itemsep=2em]
+        \begin{frame}{Summary}
+            \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                 \item<1-> \textbf{Hierarchical and modular} taxonomy;
                 \item<2-> \textbf{Fast, lightweight and modular} pipeline for model evaluation;
                 \item<3-> Pipeline tested with \textbf{baseline} and \textbf{advanced} handcrafted features:
                     \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                         \item<4-> Geometric features are often sufficient for error prediction;
                         \item<5-> Adding modalities is most helpfull for transferability.
+                        \item<6-> Advanced features help attain good scores.
                     \end{itemize}
             \end{itemize}
-            \uncover<6->{
-                ~\\
-                Future work:
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{purple}, itemsep=2em]
-                    \item<6-> Use of deep learning.
-                    \item<7-> Dataset augmentation $\longrightarrow$ \textbf{Simulate errors}.
-                \end{itemize}
-            }
+        \end{frame}
+        \begin{frame}{Perspectives}
+            \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                \item<1-> Use of deep learning.
+                \item<2-> Dataset augmentation $\longrightarrow$ \textbf{Simulate errors}.
+                \item<3-> Localizing errors: facet level.
+                \item<4-> Automatic correction.
+            \end{itemize}
         \end{frame}
 \end{document}
