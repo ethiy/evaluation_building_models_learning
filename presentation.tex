@@ -454,126 +454,6 @@
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/features/graph_kernels/kernels_menu_all}
             \end{frame}
 
-            \begin{frame}{Random walk on graphs}
-                \begin{figure}[H]
-                    \caption{Random walk on graph \(G\).}
-                    \alt<1>{
-                        \centering
-                        \animategraphics[autoplay, loop, width=.45\textwidth]{25}{figures/features/graph_kernels/drunk_man/drunk_man-}{0}{72}
-                        \includestandalone[mode=buildnew, width=.45\textwidth]{figures/features/graph_kernels/random_walk}
-                    }{
-                        \centering
-                        \includestandalone[mode=buildnew, width=.45\textwidth]{figures/features/graph_kernels/random_walk}
-                    }
-                \end{figure}
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<4-> Described \(\longrightarrow\) normalized adjacency matrix \(P\);
-                    \item<5-> \(P\) as a feature vector \only<6->{ \(\longrightarrow\) \alert<6->{No};}
-                    \item<7-> \(P\) is not \underline{invariant} to:
-                    \begin{itemize}[label=-]
-                        \item<8-> permutations;
-                        \item<9-> graph size.
-                    \end{itemize}
-                    \item<10-> Kernel trick \(\longrightarrow\) compare graphs instead.
-                \end{itemize}
-            \end{frame}
-
-            \begin{frame}{Random walk based}
-                \framesubtitle<1-4>{Random walk kernel}
-                \framesubtitle<5-13>{Multiscale Laplacian kernel}
-                \framesubtitle<14->{Propagation kernel}
-                \only<1-4>{
-                    \begin{columns}[T]
-                        \centering
-                        \begin{column}{.4\textwidth}
-                            \centering
-                            \includegraphics[width=\textwidth]{images/related_work/direct_product_graphs}
-                        \end{column}
-                        \begin{column}{.56\textwidth}
-                            \centering
-                            \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                                \item<2-> Quadratic form with \(P_{\times}\) \(\implies\) \underline{invariance} to:
-                                    \begin{itemize}[label=-]
-                                        \item<3-> permutation;
-                                        \item<4-> graph size;
-                                    \end{itemize}
-                            \end{itemize}
-                        \end{column}
-                    \end{columns}
-                }
-                \only<5-13>{
-                    \vfill
-                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item<5-> \(G\) \(\longleftrightarrow\) Variance matrix of a \underline{Gaussian distribution}.
-                        \item<6-> Compare graphs \(\longleftrightarrow\) Compare probabilities.
-                        \item<7-> Adapted to be:
-                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                            \item<8-> permutation and size invariant \(\longrightarrow\) \only<9->{linear embedding;}
-                            \item<10-> node attribute aware \(\longrightarrow\) \only<11->{vertex kernel Gram matrix;}
-                            \item<12-> scalability \(\longrightarrow\) \only<13->{kernel between pyramid of subgraphs.}
-                        \end{itemize}
-                    \end{itemize}
-                    \vfill
-                }
-                \only<14->{
-                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item<14-> Nodes are \underline{Gaussian mixtures} of other nodes;
-                        \item<15-> Propagate mixture \underline{coefficients} using \(P\);
-                        \item<16-> Probability distributions are \underline{hashed} \(\longrightarrow\) \onslide<17->{graph feature vector}.
-                    \end{itemize}
-                }
-            \end{frame}
-
-            \begin{frame}{Random walk}{Tottering}
-                \begin{figure}[H]
-                    \centering
-                    \includestandalone[mode=buildnew, width=.5\textwidth]{figures/features/graph_kernels/tottering}
-                \end{figure}
-                \begin{itemize}
-                    \item Tottering \(\longleftrightarrow\) cycles;
-                    \item \textcolor{purple}{Central} nodes are overrepresented;
-                    \item \textcolor{purple!30}{Isolated} nodes are less visited.
-                \end{itemize}
-            \end{frame}
-
-            \begin{frame}
-                \centering
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/features/graph_kernels/kernels_menu_path}
-            \end{frame}
-
-            \begin{frame}{Path based}{Graph Hopper kernel}
-                \begin{figure}[H]
-                    \centering
-                    \includestandalone[mode=buildnew, width=\textwidth]{figures/features/graph_kernels/graph_hopper}
-                \end{figure}
-
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<2-> Use \underline{paths} instead (no cycles);
-                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item<3-> Compare same length paths.
-                        \item<7-> Hop and compare vertex attributes \(\longrightarrow\) base kernel.
-                        \item<11-> Sum over all vertex comparisons \(\longrightarrow\) \underline{invariance}.
-                    \end{itemize}
-                \end{itemize}
-            \end{frame}
-
-            \begin{frame}{Graph kernels}
-                \centering
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/features/graph_kernels/kernels_menu_algebraic}
-            \end{frame}
-
-            \begin{frame}{Lov\'asz/\texorpdfstring{\acrshort*{acr::svm}}{SVM} kernel}
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
-                    \item<1-> Lov\'asz number \(\vartheta\left(G\right)\):
-                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item<2-> graph invariant;
-                        \item<3-> smallest cone containing the orthonormal representation of \(G\).
-                    \end{itemize}
-                    \item<4-> Compare graphs \(\longleftrightarrow\) Compare Lov\'asz number of their subgraphs.
-                    \item<5-> \(\vartheta\left(G\right)\) not easy to compute \(\longleftrightarrow\) Approximation with \gls{acr::svm}kernel.
-                \end{itemize}
-            \end{frame}
-
             \begin{frame}{Advanced graph features}
                 \raggedleft
                 \includestandalone[mode=buildnew, height=.8\textheight]{figures/features/geometric_kernels_animated}
@@ -593,11 +473,6 @@
                 \end{itemize}
             \end{frame}
             
-            \begin{frame}{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} structure}
-                \centering
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/scattering_network_animated}
-            \end{frame}
-
             \begin{frame}{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} filters}
                 \centering
                 \alt<2>{
@@ -965,9 +840,8 @@
             };
             \path (background.north) node[anchor=north] (author) {
                 \begin{beamercolorbox}[
-                    wd=10cm,
-                    sep=8pt,
-                    #1
+                    wd=4cm,
+                    sep=8pt
                 ]{author}
                     \usebeamerfont{author}
                     \begin{center}
@@ -975,33 +849,130 @@
                     \end{center}
                 \end{beamercolorbox}
             };
-            \path (author.south) + (0, -.1) node (institute) {
-                \begin{beamercolorbox}[
-                    wd=6cm,
-                    sep=8pt,
-                    #1
-                ]{institute}
-                    \usebeamerfont{institute}
-                    \begin{center}
-                        \insertinstitute\par
-                    \end{center}
-                \end{beamercolorbox}
-            };
-            \path (institute.south) + (0, -.1) node (date) {
-                \begin{beamercolorbox}[
-                    wd=6cm,
-                    sep=8pt,
-                    #1
-                ]{date}
-                    \usebeamerfont{date}
-                    \begin{center}
-                        \insertdate\par
-                    \end{center}
-                \end{beamercolorbox}
-            };
-        \end{tikzpicture}
+            \end{tikzpicture}
         \restoregeometry 
     \end{frame}
     \egroup
+
+    \begin{frame}{Graph kernels}
+        \centering
+        \includestandalone[mode=buildnew, width=\textwidth]{figures/features/graph_kernels/kernels_menu_all}
+    \end{frame}
+
+    \begin{frame}{Random walk on graphs}
+        \begin{figure}[H]
+            \caption{Random walk on graph \(G\).}
+            \alt<1>{
+                \centering
+                \animategraphics[autoplay, loop, width=.45\textwidth]{25}{figures/features/graph_kernels/drunk_man/drunk_man-}{0}{72}
+                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/features/graph_kernels/random_walk}
+            }{
+                \centering
+                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/features/graph_kernels/random_walk}
+            }
+        \end{figure}
+        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+            \item<4-> Described \(\longrightarrow\) normalized adjacency matrix \(P\);
+            \item<5-> \(P\) as a feature vector \only<6->{ \(\longrightarrow\) \alert<6->{No};}
+            \item<7-> \(P\) is not \underline{invariant} to:
+            \begin{itemize}[label=-]
+                \item<8-> permutations;
+                \item<9-> graph size.
+            \end{itemize}
+            \item<10-> Kernel trick \(\longrightarrow\) compare graphs instead.
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Random walk based}
+        \framesubtitle<1-4>{Random walk kernel}
+        \framesubtitle<5-13>{Multiscale Laplacian kernel}
+        \framesubtitle<14->{Propagation kernel}
+        \only<1-4>{
+            \begin{columns}[T]
+                \centering
+                \begin{column}{.4\textwidth}
+                    \centering
+                    \includegraphics[width=\textwidth]{images/related_work/direct_product_graphs}
+                \end{column}
+                \begin{column}{.56\textwidth}
+                    \centering
+                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                        \item<2-> Quadratic form with \(P_{\times}\) \(\implies\) \underline{invariance} to:
+                            \begin{itemize}[label=-]
+                                \item<3-> permutation;
+                                \item<4-> graph size;
+                            \end{itemize}
+                    \end{itemize}
+                \end{column}
+            \end{columns}
+        }
+        \only<5-13>{
+            \vfill
+            \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                \item<5-> \(G\) \(\longleftrightarrow\) Variance matrix of a \underline{Gaussian distribution}.
+                \item<6-> Compare graphs \(\longleftrightarrow\) Compare probabilities.
+                \item<7-> Adapted to be:
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                    \item<8-> permutation and size invariant \(\longrightarrow\) \only<9->{linear embedding;}
+                    \item<10-> node attribute aware \(\longrightarrow\) \only<11->{vertex kernel Gram matrix;}
+                    \item<12-> scalability \(\longrightarrow\) \only<13->{kernel between pyramid of subgraphs.}
+                \end{itemize}
+            \end{itemize}
+            \vfill
+        }
+        \only<14->{
+            \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                \item<14-> Nodes are \underline{Gaussian mixtures} of other nodes;
+                \item<15-> Propagate mixture \underline{coefficients} using \(P\);
+                \item<16-> Probability distributions are \underline{hashed} \(\longrightarrow\) \onslide<17->{graph feature vector}.
+            \end{itemize}
+        }
+    \end{frame}
+
+    \begin{frame}{Random walk}{Tottering}
+        \begin{figure}[H]
+            \centering
+            \includestandalone[mode=buildnew, width=.5\textwidth]{figures/features/graph_kernels/tottering}
+        \end{figure}
+        \begin{itemize}
+            \item Tottering \(\longleftrightarrow\) cycles;
+            \item \textcolor{purple}{Central} nodes are overrepresented;
+            \item \textcolor{purple!30}{Isolated} nodes are less visited.
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Path based}{Graph Hopper kernel}
+        \begin{figure}[H]
+            \centering
+            \includestandalone[mode=buildnew, width=\textwidth]{figures/features/graph_kernels/graph_hopper}
+        \end{figure}
+
+        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+            \item<2-> Use \underline{paths} instead (no cycles);
+            \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                \item<3-> Compare same length paths.
+                \item<7-> Hop and compare vertex attributes \(\longrightarrow\) base kernel.
+                \item<11-> Sum over all vertex comparisons \(\longrightarrow\) \underline{invariance}.
+            \end{itemize}
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Lov\'asz/\texorpdfstring{\acrshort*{acr::svm}}{SVM} kernel}
+        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
+            \item<1-> Lov\'asz number \(\vartheta\left(G\right)\):
+            \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                \item<2-> graph invariant;
+                \item<3-> smallest cone containing the orthonormal representation of \(G\).
+            \end{itemize}
+            \item<4-> Compare graphs \(\longleftrightarrow\) Compare Lov\'asz number of their subgraphs.
+            \item<5-> \(\vartheta\left(G\right)\) not easy to compute \(\longleftrightarrow\) Approximation with \gls{acr::svm}kernel.
+        \end{itemize}
+    \end{frame}
+
+
+    \begin{frame}{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} structure}
+        \centering
+        \includestandalone[mode=buildnew, height=.8\textheight]{figures/scattering_network_animated}
+    \end{frame}
 
 \end{document}

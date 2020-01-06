@@ -40,8 +40,10 @@
 \defbeamertemplate*{footline}{}
 {
     \leavevmode
+    \newgeometry{top=0cm, left=0cm, right=0cm, bottom=0cm}
+    \hspace{-1.25cm}
     \begin{tikzpicture}
-        \path (0, 0) node (origin) {};
+        \node (origin) {};
         \path (origin.east) + (11.8, 0) node[anchor=west] (framenumber_box) {\usebox \framenumberbox};
         \path ($(framenumber_box.east)!.55!(framenumber_box.west)$) node {
             \begin{beamercolorbox}[
@@ -74,5 +76,6 @@
         };
         \draw[thick, color=IGNGrey!50] (logo.north west) -- (framenumber_box.north east);
     \end{tikzpicture}
+    \restoregeometry 
 }
 \mode<all>

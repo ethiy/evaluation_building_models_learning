@@ -87,6 +87,8 @@
             \path (x |- s1_1_1) node[visible on=<14->, blue] (s) {\footnotesize \(\left\{S_0[x], \evalat[\Bigg]{S_1[x]}{i_1, \theta_1}, \evalat[\Bigg]{S_2[x]}{i_1, \theta_1, i_2,\xi_2, \theta_2}\right\}\)};
             \path ($(x.south)!.5!(s.north)$) ;
 
+            \path (x1_1_1.340) -- ($(x1_3_3.south west) + (1, .5)$) node[signal, anchor=north west, opacity=0] (s1_3_3) {\small $\evalat[\Bigg]{S_2[x]}{i_1, \theta_1, i_2, \xi_2, \theta_2}$};
+
             \draw[->, very thick, visible on=<14->, black] (x.south) -- (s.north) node[signal, midway, fill=white, visible on=<14->] (scatnet) {\Large \acrshort{acr::scatnet}};
         \end{tikzpicture}
 \end{document}
