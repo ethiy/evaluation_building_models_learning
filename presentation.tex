@@ -17,16 +17,13 @@
 
 \renewcommand<>\cellcolor[1]{\only#2{\beameroriginal\cellcolor{#1}}}
 
-\definecolor{LOSS45}{RGB}{130,8,8}
-\definecolor{LOSS3545}{RGB}{183,10,10}
-\definecolor{LOSS2535}{RGB}{255,0,0}
-\definecolor{LOSS1525}{RGB}{255,122,12}
+\definecolor{LOSS35}{RGB}{255,0,0}
+\definecolor{LOSS1535}{RGB}{255,122,12}
 \definecolor{LOSS0515}{RGB}{255,181,12}
 \definecolor{STBL}{RGB}{58,255,12}
 \definecolor{GAIN0515}{RGB}{58,178,12}
-\definecolor{GAIN1525}{RGB}{56,136,17}
-\definecolor{GAIN2535}{RGB}{50,119,16}
-\definecolor{GAIN3545}{RGB}{48,83,56}
+\definecolor{GAIN1535}{RGB}{56,136,17}
+\definecolor{GAIN35}{RGB}{50,119,16}
 
 
 \usepackage{graphicx}
@@ -636,20 +633,20 @@
                     \toprule
                     Features & Classifier & \textbf{\acrshort{acr::efin}} & Experiment & Number\\
                     \hline
-                    \multirow{12}{*}{Baseline} & \multirow{12}{*}{\acrshort{acr::rf}} & \multirow{4}{*}{3} & Vanilla & \cellcolor{IGNGreen}<2>{\num{4 x 3}}\\
-                     &  &  & Transf. & \cellcolor{IGNGreen}<2>{\num{4 x 6}}\\
+                    \multirow{12}{*}{Baseline} & \multirow{12}{*}{\acrshort{acr::rf}} & \multirow{4}{*}{3} & Vanilla & \cellcolor{IGNGreen}<2-3>{\num{4 x 3}}\\
+                     &  &  & Transf. & \cellcolor{IGNGreen}<2-3>{\num{4 x 6}}\\
                      &  &  & Gener. & \cellcolor{IGNGreen}<2>{\num{4 x 3}}\\
                      &  &  & Repres. & \cellcolor{IGNGreen}<2>{\num{4 x 6}}\\
                     \cline{3-5}
                      &  & \multirow{4}{*}{2} & Vanilla & \cellcolor{IGNGreen}<2>{\num{4 x 3}}\\
                      &  &  & Transf. & \cellcolor{IGNGreen}<2>{\num{4 x 6}}\\
-                     &  &  & Gener. & \cellcolor{paris}<2>{\num{4 x 3}}\\
+                     &  &  & Gener. & \cellcolor{IGNDarkGrey}<2>{\textcolor<2>{white}{\num{4 x 3}}}\\
                      &  &  & Repres. & \cellcolor{IGNGreen}<2>{\num{4 x 6}}\\
                     \cline{3-5}
                      &   & \multirow{4}{*}{1} & Vanilla & \cellcolor{IGNGreen}<2>{\num{4 x 3}}\\
-                     &  &  & Transf. & \cellcolor{paris}<2>{\num{4 x 6}}\\
-                     &  &  & Gener. & \cellcolor{paris}<2>{\num{4 x 3}}\\
-                     &  &  & Repres. & \cellcolor{paris}<2>{\num{4 x 6}}\\
+                     &  &  & Transf. & \cellcolor{IGNDarkGrey}<2>{\textcolor<2>{white}{\num{4 x 6}}}\\
+                     &  &  & Gener. & \cellcolor{IGNDarkGrey}<2>{\textcolor<2>{white}{\num{4 x 3}}}\\
+                     &  &  & Repres. & \cellcolor{IGNDarkGrey}<2>{\textcolor<2>{white}{\num{4 x 6}}}\\
                     \hline
                     \multicolumn{4}{l}{Total} & \num[fraction-function = \sfrac]{144/216}\\
                     \bottomrule
@@ -664,57 +661,127 @@
                 \only<2>{
                     \includestandalone[mode=buildnew, height=.8\textheight]{figures/results/presentation/vanilla/facet}
                 }
+                \only<3>{
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item<3-> Rare errors are harder to detect \(\longrightarrow\) Use \gls{acr::svm}.
+                        \item<4-> \texttt{FOS} and \texttt{FIG} are very frequent \(\implies\) easily detected.
+                        \item<5-> Geometric features are usually good enough.
+                        \item<6-> In general:
+                        \begin{itemize}
+                            \item<6-> \texttt{Facet errors} better on dense scenes;
+                            \item<7-> \texttt{Building errors} better on the space scene;
+                        \end{itemize}
+                    \end{itemize}
+                }
             \end{frame}
 
             \begin{frame}{Transferability experiments}
                 \centering
                 \renewcommand{\arraystretch}{1.5}
-                \only<1>{
+                \only<1-4>{
+                    \footnotesize
+                    \centering
                     \begin{tabular}{| c | c | c | c | c |}
                         \hline
                          & \texttt{BOS}  & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} \\
                         \hline
-                        \textbf{El.} \(\rightarrow\) \textbf{Na.} & \cellcolor{IGNRed} & \cellcolor{IGNRed} \textbf{All} &  & \cellcolor{IGNRed} \textbf{All} \\
+                        \textbf{El.} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS1535} & \cellcolor{LOSS1535} \textbf{All} &  & \cellcolor{LOSS0515} \textbf{All} \\
                         \hline
-                        \textbf{El.} \(\rightarrow\) \textbf{P13} & \cellcolor{IGNGreen} & \cellcolor{IGNGreen} \textbf{Im.} &  & \cellcolor{IGNGreen} \\
+                        \textbf{El.} \(\rightarrow\) \textbf{P13} & \cellcolor{STBL} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} \\
                         \hline
-                        \textbf{Na.} \(\rightarrow\) \textbf{P13} & \cellcolor{IGNRed} & \cellcolor{IGNRed} \textbf{Im.} &  & \cellcolor{IGNGreen} \textbf{Geom.} \\
+                        \textbf{Na.} \(\rightarrow\) \textbf{P13} & \cellcolor{LOSS1535} & \cellcolor{LOSS1535} \textbf{Im.} &  & \cellcolor{GAIN1535} \textcolor{white}{\textbf{Geom.}} \\
                         \hline
-                        \textbf{Na.} \(\rightarrow\) \textbf{El.} & \cellcolor{IGNRed} & \cellcolor{IGNRed} \textbf{Im.} & \cellcolor{IGNGreen} \textbf{Im.} & \cellcolor{IGNRed} \textbf{Geom.} \\
+                        \textbf{Na.} \(\rightarrow\) \textbf{El.} & \cellcolor{LOSS0515} & \cellcolor{LOSS1535} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{LOSS1535} \textbf{Geom.} \\
                         \hline
-                        \textbf{P13} \(\rightarrow\) \textbf{Na.} & \cellcolor{IGNRed} & \cellcolor{IGNRed} \textbf{Im.} &  & \cellcolor{IGNGreen} \textbf{Geom.} \\
+                        \textbf{P13} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS0515} & \cellcolor{LOSS1535} \textbf{Im.} &  & \cellcolor{GAIN1535} \textcolor{white}{\textbf{Geom.}} \\
                         \hline
-                        \textbf{P13} \(\rightarrow\) \textbf{El.} & \cellcolor{IGNRed} & \cellcolor{IGNRed} \textbf{All} & \cellcolor{IGNGreen} \textbf{Im.} & \cellcolor{IGNRed} \textbf{Geom.} \\
+                        \textbf{P13} \(\rightarrow\) \textbf{El.} & \cellcolor{LOSS0515} & \cellcolor{LOSS1535} \textbf{All} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{Im.}} & \cellcolor{LOSS1535} \textbf{Geom.} \\
                         \hline
                     \end{tabular}
+                    \vfill
+                    \begin{tikzpicture}
+                        \shade[left color=white,right color=LOSS1535] (-1, 0) rectangle (0, .25);
+                        \draw[LOSS1535, fill=LOSS1535] (0, 0) rectangle (1, .25);
+                        \draw[LOSS0515, fill=LOSS0515] (1, 0) rectangle (2, .25);
+                        \draw[STBL, fill=STBL] (2, 0) rectangle (3, .25);
+                        \draw[GAIN0515, fill=GAIN0515] (3, 0) rectangle (4, .25);
+                        \draw[GAIN1535, fill=GAIN1535] (4, 0) rectangle (5, .25);
+                        \shade[left color=GAIN1535,right color=white] (5, 0) rectangle (6, .25);
+                        \draw[black] (-1, 0) -- (6, 0);
+                        \draw[black] (-1, .25) -- (6, .25);
+                        \draw[black] (0, .25) -- (0, -2pt) node[below, black] {\footnotesize -35\%};
+                        \draw[black] (1, .25) -- (1, -2pt) node[below, black] {\footnotesize -15\%};
+                        \draw[black] (2, .25) -- (2, -2pt) node[below, black] {\footnotesize -5\%};
+                        \draw[black] (3, .25) -- (3, -2pt) node[below, black] {\footnotesize 5\%};
+                        \draw[black] (4, .25) -- (4, -2pt) node[below, black] {\footnotesize 15\%};
+                        \draw[black] (5, .25) -- (5, -2pt) node[below, black] {\footnotesize 35\%};
+                    \end{tikzpicture}
+                    \uncover<2->{
+                        \normalsize
+                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                            \item<only@2> Transferability of \texttt{Building errors}: \num[fraction-function = \sfrac]{7/20}.
+                            \item<only@3> \texttt{BOS} and \texttt{BUS} are hard to transfer.
+                            \item<only@4> External modalities are \underline{critical}.
+                        \end{itemize}
+                    }
                 }
-                \only<2>{
+                \only<5-8>{
+                    \centering
+                    \footnotesize
                     \begin{tabular}{| c | c | c | c | c | c |}
                         \hline
                          & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG} \\
                         \hline
-                        \textbf{El.} \(\rightarrow\) \textbf{Na.} & \cellcolor{IGNGreen} & \cellcolor{IGNRed} \textbf{Im.} & \cellcolor{IGNRed} \textbf{Im.} & \cellcolor{IGNGreen} \textbf{Im.} & \cellcolor{IGNGreen} \\
+                        \textbf{El.} \(\rightarrow\) \textbf{Na.} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{STBL} \\
                         \hline
-                        \textbf{El.} \(\rightarrow\) \textbf{P13} & \cellcolor{IGNGreen} & \cellcolor{IGNRed} \textbf{Im.} & \cellcolor{IGNRed} \textbf{Im.} &  & \cellcolor{IGNGreen} \\
+                        \textbf{El.} \(\rightarrow\) \textbf{P13} & \cellcolor{STBL} & \cellcolor{LOSS1535} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} &  & \cellcolor{STBL} \\
                         \hline
-                        \textbf{Na.} \(\rightarrow\) \textbf{P13} & \cellcolor{IGNGreen} & \cellcolor{IGNRed} \textbf{Geom.} & \cellcolor{IGNGreen} &  & \cellcolor{IGNGreen} \textbf{Hei.} \\
+                        \textbf{Na.} \(\rightarrow\) \textbf{P13} & \cellcolor{STBL} & \cellcolor{LOSS1535} \textbf{Geom.} & \cellcolor{STBL} &  & \cellcolor{STBL} \textbf{Hei.} \\
                         \hline
-                        \textbf{Na.} \(\rightarrow\) \textbf{El.} & \cellcolor{IGNGreen} & \cellcolor{IGNGreen} \textbf{Im.} & \cellcolor{IGNGreen} \textbf{Im.} & \cellcolor{IGNRed} & \cellcolor{IGNGreen} \\
+                        \textbf{Na.} \(\rightarrow\) \textbf{El.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{GAIN1535} \textbf{Im.} & \cellcolor{LOSS0515} & \cellcolor{STBL} \\
                         \hline
-                        \textbf{P13} \(\rightarrow\) \textbf{Na.} & \cellcolor{IGNGreen} & \cellcolor{IGNRed} & \cellcolor{IGNGreen} \textbf{Im.} &  & \cellcolor{IGNGreen} \\
+                        \textbf{P13} \(\rightarrow\) \textbf{Na.} & \cellcolor{STBL} & \cellcolor{LOSS1535} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} \\
                         \hline
-                        \textbf{P13} \(\rightarrow\) \textbf{El.} & \cellcolor{IGNGreen} & \cellcolor{IGNGreen} & \cellcolor{IGNGreen} \textbf{All} & \cellcolor{IGNRed} & \cellcolor{IGNGreen}\\
+                        \textbf{P13} \(\rightarrow\) \textbf{El.} & \cellcolor{STBL} & \cellcolor{GAIN0515} & \cellcolor{GAIN1535} \textbf{All} & \cellcolor{LOSS0515} & \cellcolor{STBL} \\
                         \hline
                     \end{tabular}
+                    \vfill
+                    \begin{tikzpicture}
+                        \shade[left color=white,right color=LOSS1535] (-1, 0) rectangle (0, .25);
+                        \draw[LOSS1535, fill=LOSS1535] (0, 0) rectangle (1, .25);
+                        \draw[LOSS0515, fill=LOSS0515] (1, 0) rectangle (2, .25);
+                        \draw[STBL, fill=STBL] (2, 0) rectangle (3, .25);
+                        \draw[GAIN0515, fill=GAIN0515] (3, 0) rectangle (4, .25);
+                        \draw[GAIN1535, fill=GAIN1535] (4, 0) rectangle (5, .25);
+                        \shade[left color=GAIN1535,right color=white] (5, 0) rectangle (6, .25);
+                        \draw[black] (-1, 0) -- (6, 0);
+                        \draw[black] (-1, .25) -- (6, .25);
+                        \draw[black] (0, .25) -- (0, -2pt) node[below, black] {\footnotesize -35\%};
+                        \draw[black] (1, .25) -- (1, -2pt) node[below, black] {\footnotesize -15\%};
+                        \draw[black] (2, .25) -- (2, -2pt) node[below, black] {\footnotesize -5\%};
+                        \draw[black] (3, .25) -- (3, -2pt) node[below, black] {\footnotesize 5\%};
+                        \draw[black] (4, .25) -- (4, -2pt) node[below, black] {\footnotesize 15\%};
+                        \draw[black] (5, .25) -- (5, -2pt) node[below, black] {\footnotesize 35\%};
+                    \end{tikzpicture}
+                    \uncover<6->{
+                        \normalsize
+                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                            \item<only@6> Transferability of \texttt{Facets errors}: \num[fraction-function = \sfrac]{20/27}.
+                            \item<only@7> Dense scenes are better for \texttt{Facet errors}.
+                            \item<only@8> External modalities are \underline{critical}.
+                        \end{itemize}
+                    }
                 }
                 \renewcommand{\arraystretch}{1}
-                \only<3->{
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                    \item<3-> Transferability of \texttt{Building errors}: \num[fraction-function = \sfrac]{7/20}.
-                    \item<4-> Transferability of \texttt{Facets errors}: \num[fraction-function = \sfrac]{20/27}.
-                    \item<5-> External modalities are \underline{critical}.
-                \end{itemize}
-            }
+                \only<9->{
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item<9-> \texttt{Facets errors} > \texttt{Building errors}
+                        \item<10-> \texttt{BOS} and \texttt{BUS} are hard to transfer.
+                        \item<11-> Dense scenes: same behaviour.
+                        \item<12-> Dense scenes: better for \texttt{Facet errors}.
+                        \item<13-> External modalities are \underline{critical}.
+                    \end{itemize}
+                }
             \end{frame}
 
             \begin{frame}{Possible settings}{Advanced features}
@@ -726,9 +793,12 @@
                     \hline
                     \multirow{2}{*}{Baseline} & \acrshort{acr::rf} & \multirow{6}{*}{3} & \multirow{6}{*}{Vanilla} & \num{4 x 1} \\
                      & \acrshort{acr::svm} &  &  & \num{4 x 2} \\
-                    \multirow{2}{*}{\gls{acr::scatnet}} & \acrshort{acr::rf} &  &  & \num{6 x 2} \\
+                    \cline{1-2}
+                    \multirow{2}{*}{\gls{acr::scatnet}} & \acrshort{acr::rf} &  &  & \cellcolor{IGNGreen}<2>{\num{6 x 2}} \\
                      & \acrshort{acr::svm} &  &  & \num{6 x 2} \\
+                     \cline{1-2}
                     Graph Kernels & \acrshort{acr::svm} &  &  & \num{1 x 2} \\
+                    \cline{1-2}
                     GK \(\oplus\) \gls{acr::scatnet} & \acrshort{acr::svm} &  &  & \num{6 x 2} \\
                     \hline
                     \multicolumn{4}{l}{Total} & \num{50}\\
@@ -744,9 +814,9 @@
                         \hline
                          & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} \\
                         \hline
-                        \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S-Hei.} & \cellcolor{STBL} & \cellcolor{GAIN1525} \textbf{S-Hei.} \\
+                        \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S-Hei.}} & \cellcolor{STBL} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S-Hei.}} \\
                         \hline
-                        \textbf{Na-P13} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{S(d|c)-Im.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S(d)-Im.} \\
+                        \textbf{Na-P13} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{S(d|c)-Im.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S(d)-Im.}} \\
                         \hline
                     \end{tabular}
                     \vfill
@@ -754,9 +824,9 @@
                         \hline
                          & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG}\\
                         \hline
-                        \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN1525} \textbf{S(c)-All} & \cellcolor{GAIN0515} \textbf{S(c)-Im.} & \cellcolor{GAIN2535} \textbf{S(d)-Im.} & \cellcolor{GAIN0515} \\
+                        \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S(c)-All}} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S(c)-Im.}} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S(d)-Im.}} & \cellcolor{GAIN0515} \\
                         \hline
-                        \textbf{Na-P13} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{S(c)-Im.} & \cellcolor{GAIN1525} \textbf{S(c)-Im.} & \cellcolor{STBL} \\
+                        \textbf{Na-P13} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S(c)-Im.}} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S(c)-Im.}} & \cellcolor{STBL} \\
                         \hline
                     \end{tabular}
                     \vfill
@@ -765,20 +835,42 @@
                         \draw[LOSS0515, fill=LOSS0515] (1, 0) rectangle (2, .25);
                         \draw[STBL, fill=STBL] (2, 0) rectangle (3, .25);
                         \draw[GAIN0515, fill=GAIN0515] (3, 0) rectangle (4, .25);
-                        \draw[GAIN1525, fill=GAIN1525] (4, 0) rectangle (5, .25);
-                        \draw[GAIN2535, fill=GAIN2535] (5, 0) rectangle (6, .25);
-                        \shade[left color=GAIN2535,right color=white] (6, 0) rectangle (7, .25);
-                        \draw[black] (0, 0) -- (7, 0);
-                        \draw[black] (0, .25) -- (7, .25);
-                        \draw[black, fill=white] (4, -.75) rectangle (3, -1);
-                        \path (3.5, -1.25) node {\footnotesize NaN};
+                        \draw[GAIN1535, fill=GAIN1535] (4, 0) rectangle (5, .25);
+                        \shade[left color=GAIN1535,right color=white] (5, 0) rectangle (6, .25);
+                        \draw[black] (0, 0) -- (6, 0);
+                        \draw[black] (0, .25) -- (6, .25);
                         \draw[black] (1, .25) -- (1, -2pt) node[below, IGNDarkGrey] {\footnotesize -15\%};
                         \draw[black] (2, .25) -- (2, -2pt) node[below, IGNDarkGrey] {\footnotesize -5\%};
                         \draw[black] (3, .25) -- (3, -2pt) node[below, IGNDarkGrey] {\footnotesize 5\%};
                         \draw[black] (4, .25) -- (4, -2pt) node[below, IGNDarkGrey] {\footnotesize 15\%};
-                        \draw[black] (5, .25) -- (5, -2pt) node[below, IGNDarkGrey] {\footnotesize 25\%};
-                        \draw[black] (6, .25) -- (6, -2pt) node[below, IGNDarkGrey] {\footnotesize 35\%};
+                        \draw[black] (5, .25) -- (5, -2pt) node[below, IGNDarkGrey] {\footnotesize 35\%};
                     \end{tikzpicture}
+                    \uncover<2->{
+                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                            \item<only@2> Worse only once: \texttt{BUS} on \textbf{Na-P13}.
+                            \item<only@3> Better: \num[fraction-function = \sfrac]{9/17}.
+                            \item<only@4> External feature helpful for semantic and geometric errors.
+                            \item<only@5> Better extractors \(\implies\) external feature more helpful.
+                        \end{itemize}
+                    }
+                }
+            \end{frame}
+
+            \begin{frame}{Best results}
+                \centering
+                \only<1>{
+                    \includestandalone[mode=buildnew, height=.8\textheight]{figures/results/presentation/best/building}
+                }
+                \only<2>{
+                    \includestandalone[mode=buildnew, height=.8\textheight]{figures/results/presentation/best/facet}
+                }
+                \only<3>{
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item<3-> \gls{acr::svm} good for highly unbalanced errors.
+                        \item<4-> Better feature extractors were beneficial.
+                        \item<5-> Only \textbf{Elancourt}: \texttt{Building errors} > \SI{70}{\%}.
+                        \item<6-> \texttt{Facet errors} > \SI{70}{\%}.
+                    \end{itemize}
                 }
             \end{frame}
         

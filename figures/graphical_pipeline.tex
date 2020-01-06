@@ -14,8 +14,8 @@
         \path (residual.west) + (-1, 0) node[anchor=east, visible on=<1-2>, rectangle, fill=white, fit=(facet_graph)] (facet_graph_mask) {};
         \path (facet_graph.south) node[anchor=north, visible on=<3->] (facet_graph_legend) {\footnotesize Geometric};
 
-        \path (residual.east) + (1, 0) node[anchor=west, visible on=<7->] (ortho_projection) {\fbox{\includegraphics[height=1.5cm, angle=270]{images/introduction/graphical_abstract/orthoprojection}}};
-        \path (ortho_projection.south) node[anchor=north, visible on=<7->] (ortho_projection_legend) {\footnotesize Image based};
+        \path (residual.east) + (1, 0) node[anchor=west, visible on=<6->] (ortho_projection) {\fbox{\includegraphics[height=1.5cm, angle=270]{images/introduction/graphical_abstract/orthoprojection}}};
+        \path (ortho_projection.south) node[anchor=north, visible on=<6->] (ortho_projection_legend) {\footnotesize Image based};
 
         \scoped[on background layer]{
             \path (facet_graph.west |- residual.north) + (-1pt, 1pt) node (top_left) {};
@@ -51,12 +51,12 @@
         \path (ortho_projection.east |- model.north) + (1, 0) node (rs_data) {};
         \draw[->, line width=2pt, dashed, visible on=<5->, violet!30] (rs_data) |- (frame.east) node[left, pos=.1, text width=5em, black] {\footnotesize Remote sensing data.};
 
-		\path (frame.south) + (0, -1.5) node[anchor=north, visible on=<8->] (errors) {\includestandalone[mode=buildnew, height=1.5cm]{figures/graphical_abstract/building_errors}};
-        \path (errors.south) node[anchor=north, text width=2.5cm, align=center, visible on=<8->] (errors_legend) {\footnotesize Error detection};
-        \path (errors.15) + (.4, 0) node[align=center, visible on=<9->] (errors_list) {\footnotesize {\color{red} \(\blacksquare\) \texttt{\acrshort{acr::fib}}}};
-        \path (errors_list.south) node[align=center, visible on=<9->] (errors_list) {\footnotesize {\color{green} \(\blacksquare\) \texttt{\acrshort{acr::fos}}}};
+		\path (frame.south) + (0, -1.5) node[anchor=north, visible on=<7->] (errors) {\includestandalone[mode=buildnew, height=1.5cm]{figures/graphical_abstract/building_errors}};
+        \path (errors.south) node[anchor=north, text width=2.5cm, align=center, visible on=<7->] (errors_legend) {\footnotesize Error detection};
+        \path (errors.15) + (.4, 0) node[align=center, visible on=<7->] (errors_list) {\footnotesize {\color{red} \(\blacksquare\) \texttt{\acrshort{acr::fib}}}};
+        \path (errors_list.south) node[align=center, visible on=<7->] (errors_list) {\footnotesize {\color{green} \(\blacksquare\) \texttt{\acrshort{acr::fos}}}};
 
         \path[draw, ->, line width=2pt, rounded corners=10pt, IGNGreen, visible on=<2->] (model_legend.south) -- (frame.north);
-        \path[draw, ->, line width=2pt, rounded corners=10pt, IGNGreen, visible on=<8->] (frame.south) -- (errors.north) node [midway, left, IGNGreen] {\footnotesize Supervised classifier (RF, SVM)};
+        \path[draw, ->, line width=2pt, rounded corners=10pt, IGNGreen, visible on=<7->] (frame.south) -- (errors.north) node [midway, left, IGNGreen] {\footnotesize Supervised classifier (RF, SVM)};
     \end{tikzpicture}
 \end{document}

@@ -11,7 +11,7 @@
     }\BOS
     \pgfplotstableread[col sep=comma]{
         x, y, label
-        1, 53.88, {Hei., Im.}
+        1, 53.88, {Hei. Im.}
         2, 40.82, {Im.}
         3, 34.57, {Im.}
     }\BUS
@@ -30,12 +30,13 @@
 
     \begin{tikzpicture} 
         \begin{axis}[
-            ylabel={F-score},
+            ylabel={F-score (\%)},
             ybar,
             xtick={data},
             xticklabels={Elancourt, Nantes, Paris-13},
             x tick label style={rotate=60, anchor=east, yshift=-2mm, font=\bfseries},
             xtick align=outside,
+            ytick align=outside,
             xtick pos=left,
             ytick pos=left,
             nodes near coords={\pgfplotspointmeta},

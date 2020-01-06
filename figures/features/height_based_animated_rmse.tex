@@ -1,0 +1,32 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\usepackage{tikz}
+
+\usepackage{pgfplots}
+
+
+\begin{document}
+    \pgfplotsset{every tick label/.append style={font=\tiny}}
+	\begin{tikzpicture}
+		\node[visible on=<1-2>] (dsm) at (0,0) {\includegraphics[width=3cm]{images/features/scatnet/dsm}};
+        \path (dsm.south) node[anchor=north, text width=3cm, align=center, visible on=<1-2>] (dsm_legend) {\scriptsize \acrshort{acr::dsm}};
+
+        \path (dsm.east) node[anchor=west, visible on=<2>] (minus) {\Large --};
+
+		\path (minus.east) node[anchor=west, visible on=<2>] (model) {\includegraphics[width=3cm]{images/features/scatnet/height_map}};
+        \path (model.south) node[anchor=north, text width=3cm, align=center, visible on=<2>] (model_legend) {\scriptsize Model heights};
+
+        \path (minus) node[visible on=<3>] (residual) {\includegraphics[width=3cm]{images/features/scatnet/residual_colbar}};
+        \path (residual.south) node[anchor=north, text width=3cm, align=center, visible on=<3>] (residual_legend) {\scriptsize Residuals};
+
+        \path (residual.west) node[anchor=east, visible on=<3>] (equals) {\Large =};
+
+        \path (dsm.west) node[anchor=west, visible on=<4->] (residual) {\includegraphics[width=1.5cm]{images/features/scatnet/residual}};
+        \path (model.east) node[anchor=east, visible on=<4->, blue] (rmse) {\footnotesize \gls{acr::rmse}\)};
+
+        \draw[->, very thick, visible on=<4->, black] (residual) -- (rmse) node[midway, visible on=<4->, draw, rounded corners, black, fill=white] {\(\sum \left(\bullet ^ 2\right)\)};
+	\end{tikzpicture}
+\end{document}
