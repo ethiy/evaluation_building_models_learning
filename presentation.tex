@@ -143,42 +143,9 @@
 
     \section{Introduction}
         \subsection{Context}
-            \begin{frame}{\texorpdfstring{\acrshort*{acr::3d}}{3D} building model}
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<1-> \Acrfull{acr::3d} model \(\longleftrightarrow\) generalization of the building surface.
-                    \item<only@2> Surface reconstruction \(\longleftrightarrow\) geometric fidelity;
-                    \item<only@3> Generalization \(\longleftrightarrow\) reduce the complexity;
-                    \item<only@4> Generalization \(\implies\) \textit{implicit} semantics;
-                \end{itemize}
-                \onslide<2->{
-                    \begin{figure}[H]
-                        \centering
-                        \alt<2>{
-                            \includestandalone[mode=buildnew, width=.8\textwidth]{figures/model_vs_mesh/mesh_model}
-                            \caption{
-                                \Gls{acr::3d} mesh of a building surface (\(\approx\) \num[output-exponent-marker = \text{e}]{1e5} triangles).
-                            }
-                        }{
-                            \includestandalone[mode=buildnew, width=.8\textwidth]{figures/model_vs_mesh/ground_truth_model}
-                            \caption{
-                                Building \gls{acr::3d} (polyhedral) model (\(\approx\) \num{800} facets).
-                            }
-                        }
-                    \end{figure}
-                }
-            \end{frame}
-
-            \begin{frame}{\texorpdfstring{\acrfull*{acr::lod}}{Level of Detail}}
-                \begin{figure}[H]
-                    \centering
-                    \includegraphics[width=\textwidth]{images/introduction/lods_3}
-                    \caption{Considered \glspl{acr::lod}~\parencite{biljecki2016improved}.}
-                \end{figure}
-            \end{frame}
-
-            \begin{frame}{Applications}
+            \begin{frame}{Applications of \texorpdfstring{\acrshort*{acr::3d}}{3D} models}
                 \framesubtitle<1>{Physical simulation}
-                \framesubtitle<2>{Planning}
+                \framesubtitle<2>{Urban planning}
                 \framesubtitle<3>{Entertainement}
 
                 \temporal<2>{
@@ -191,37 +158,66 @@
                 {
                     \begin{figure}[H]
                         \centering
-                        \includegraphics[width=.8\textwidth]{images/introduction/3d_model_applications/simplu}
-                        \caption{Example of \gls{acr::3d} urban scene simulated based on known urban norms~\parencite{brasebin2017stochastic}.}
+                        \includegraphics[width=.8\textwidth]{images/introduction/3d_model_applications/brest_tramway}
+                        \caption{Example of the use of city \gls{acr::3d} models in public consultation in Brest.}
                     \end{figure}
                 }
                 {
                     \begin{figure}[H]
                         \centering
-                        \animategraphics[autoplay, loop, width=.8\textwidth]{20}{images/introduction/3d_model_applications/trocadero/trocadero-}{0}{73}
-                        \caption{Mixed reality for historical applications using iTowns\footnotemark platform (Credits to A. Devaux\footnotemark).}
+                        \includegraphics[width=.8\textwidth]{images/introduction/3d_model_applications/spider_man}
+                        \caption{Example of the use of city \gls{acr::3d} models in video games.}
                     \end{figure}
-                    \footnotetext{
-                        \href{http://www.itowns-project.org}{iTowns project.}
-                    }
-                    \addtocounter{footnote}{1}
-                    \footnotetext{
-                        \href{http://recherche.ign.fr/labos/matis/~devaux}{Alexandre Devaux website.}
-                    }
                 }
             \end{frame}
 
-            \begin{frame}{\texorpdfstring{\acrshort*{acr::3d}}{3D} building modeling}
-                \centering
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/context}
+            \begin{frame}{Modeling or reconstruction}
+                \begin{columns}[T]
+                    \centering
+                    \begin{column}{.5\textwidth}
+                        \includestandalone[mode=buildnew, width=\textwidth]{figures/model_vs_mesh/mesh_model}
+                        \footnotesize
+                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                            \item<1-> Building surface \underline{reconstruction}.
+                            \item<2-> Geometric \underline{fidelity}.
+                            \item<3-> \num{10000} facets.
+                            \item<4-> Weak geometric constraints.
+                        \end{itemize}
+                    \end{column}
+                    \begin{column}{.5\textwidth}
+                        \includestandalone[mode=buildnew, width=\textwidth]{figures/model_vs_mesh/ground_truth_model_animated}
+                        \footnotesize
+                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                            \item<1-> Building \underline{modeling}.
+                            \item<2-> Geometric fidelity + Compacity.
+                            \item<3-> \num{800} facets.
+                            \item<only@4> Semantics \(\implies\) impact on geometry.
+                            \item<only@5> \textit{Implicit} semantics. \phantom{on geometry}
+                        \end{itemize}
+                    \end{column}
+                \end{columns}
             \end{frame}
 
-        \subsection{Motivation}
+            \begin{frame}{\texorpdfstring{\acrshort*{acr::3d}}{3D} model}
+                \centering
+                \includestandalone[mode=buildnew, width=.7\textwidth]{figures/model_information}
+                
+            \end{frame}
+
+            \begin{frame}{\texorpdfstring{\acrshort*{acr::3d}}{3D} building modeling}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=\textwidth]{images/introduction/lods_3}
+                    \caption{\glspl{acr::lod} considered in the study~\parencite{biljecki2016improved}.}
+                \end{figure}
+            \end{frame}
+        
+        \subsection{Quality evaluation}
             \begin{frame}{Modeling errors}{Different point of views}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<1-> Errors in format: compliant to CityGML\footfullcite{ledoux2013validation} \dots.
-                    \item<2-> Errors in fidelity (geometry)\uncover<2->{\footfullcite{berger2013benchmark}}.
-                    \item<3-> Errors in generalization.
+                    \item<1-> Errors in format: compliancy to OGC standard\footfullcite{ledoux2013validation}.
+                    \item<2-> Errors in surface reconstruction\footfullcite{berger2013benchmark}.
+                    \item<3-> Errors in Modeling\footfullcite{rottensteiner2012isprs}.
                 \end{itemize}
             \end{frame}
 
@@ -235,664 +231,69 @@
                     \item<4-> Errors are \underline{geometric} and \underline{semantic} in nature.
                 \end{itemize}
             \end{frame}
-        
-            \begin{frame}{State of the art}
-                \centering
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/state_of_the_art}
-            \end{frame}
 
             \begin{frame}{Goal}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item<1-> \underline{Define errors} that affects building \gls{acr::3d} models.
-                    \item<2-> Devise a method for \underline{error detection}.
+                    \item<2-> Design a method for \underline{error detection}.
                 \end{itemize}
             \end{frame}
 
             \begin{frame}{Challenges}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<1-> Least expensive reference data;
-                    \item<2-> \underline{Scalability} up to city level;
+                    \item<1-> Reference data are expensive.
+                    \item<2-> Large scale : small city level > \num{1000} buildings.
+                    \item<3-> \underline{Different} urban scenes \(\implies\) High \underline{heterogeneity}.
+                    \item<6-> Manual evaluation: \SI[per-mode=repeated-symbol]{2}{\hour\per\km\squared\per\expert}.
+                \end{itemize}
+            \end{frame}
+            
+            \begin{frame}{State of the art}
+                \centering
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/state_of_the_art}
+            \end{frame}
+
+            \begin{frame}{What do we want?}
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                    \item<1-> Readily accessible reference data;
+                    \item<2-> \textbf{Scalability} up to city level;
                     \item<3-> Genericity towards:
                         \begin{itemize}
                             \item<4-> modeling approach;
                             \item<5-> urban scene.
                         \end{itemize}
-                    \item<6-> Automation with the least human intervention possible.
+                    \item<6-> \textbf{Automation} with the least human intervention possible.
                 \end{itemize}
             \end{frame}
 
-            \begin{frame}{Contributions}
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
+            \begin{frame}{Our answer}
+                \begin{enumerate}[label=\arabic*), itemsep=2em]
                     \item<1-> Semantic error taxonomy;
-                    \item<2-> Learning evaluation approach;
+                    \item<2-> Learning based evaluation approach;
                     \item<3-> Experimental validation.
-                \end{itemize}
+                \end{enumerate}
             \end{frame}
 
-    \section{Semantic evaluation}
-        \subsection{General layout}
-            \begin{frame}{Hierarchization and Modularity}
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
-                    \item<1-> Hierarchization:
-                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                            \item<2-> \underline{Iteratively} define more and more specific errors;
-                            \item<3-> Each \underline{specificity level}: errors as general as possible.
-                        \end{itemize}
-                    \item<4-> Modularity:
-                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                            \item<5-> An error \(\equiv\) Composition of \underline{basic errors} common to all scenes.
-                        \end{itemize}
-                \end{itemize}
-            \end{frame}
-        
-            \begin{frame}{Error classification}
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy_tree_animated}
-            \end{frame}
-
-        \subsection{Overhead case}
-            \begin{frame}{\texttt{Atomic errors}}
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<1-> \Acrfull{acr::2d} errors:
-                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                            \item<only@2-6> Segmentation issue (semantic):
-                                \begin{itemize}
-                                    \item<only@3-4> Under segmentation;
-                                    \item<only@5-6> Over segmentation.      
-                                \end{itemize}
-                            \item<only@7-11> Border issue (geometric):
-                            \begin{itemize}
-                                \item<only@8-9> Inaccurate topology;
-                                \item<only@10-11> Imprecise border.      
-                            \end{itemize}
-                        \end{itemize}
-                    \item<only@12-> \gls{acr::3d} error (geometric):
-                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                            \item<only@13-> Imprecise geometry.
-                        \end{itemize}
-                \end{itemize}
-                \begin{overlayarea}{\textwidth}{.5\textheight}
-                    \only<3-4>{
-                        \begin{figure}[H]
-                            \centering
-                            \alt<3>{
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bos}
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bus}
-                            }{
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fus}
-                            }
-                            \caption{
-                                \alt<3>{
-                                    Ground truth buildings are in different colors: \textcolor{cyan}{blue} and \textcolor{green}{green}.
-                                }{
-                                    \textcolor{cyan}{Blue} \(\leftrightarrow\) under-segmented facet.
-                                }
-                            }
-                        \end{figure}
-                    }
-                    \only<5-6>{
-                        \begin{figure}[H]
-                            \centering
-                            \alt<5>{
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bus}
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bos}
-                            }{
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fos}
-                            }
-                            \caption{
-                                \alt<5>{
-                                    Modeled buildings are in different colors: \textcolor{cyan}{blue} and \textcolor{green}{green}.
-                                }{
-                                    \textcolor{green}{Green} \(\leftrightarrow\) inexisting edges.
-                                }
-                            }
-                        \end{figure}
-                    }
-                    \only<8-9>{
-                        \begin{figure}[H]
-                            \centering
-                            \alt<8>{
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/correct_bit}
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bit}
-                            }{
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fit}
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fit}
-                            }
-                            \caption{
-                                \alt<8>{
-                                    \textcolor{olive}{Yellow} \(\leftrightarrow\) inaccurate borders.
-                                }{
-                                    \textcolor{olive}{Yellow} \(\leftrightarrow\) inaccurate borders.
-                                }
-                            }
-                        \end{figure}
-                    }
-                    \only<10-11>{
-                        \begin{figure}[H]
-                            \centering
-                            \alt<10>{
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/correct_bib}
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bib}
-                            }{
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fib}
-
-                            }
-                            \caption{
-                                \alt<10>{
-                                    \textcolor{red}{Red} \(\leftrightarrow\) imprecise borders.
-                                }{
-                                    \textcolor{red}{Red} \(\leftrightarrow\) imprecise borders.
-                                }
-                            }
-                        \end{figure}
-                    }
-                    \only<13-14>{
-                        \begin{figure}[H]
-                            \centering
-                            \alt<13>{
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/correct_big}
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/big}
-                            }{
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
-                                \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fig}
-                            }
-                            \caption{
-                                \alt<12>{
-                                    \textcolor{violet}{Purple} \(\leftrightarrow\) imprecise facet.
-                                }{
-                                    \textcolor{violet}{Purple} \(\leftrightarrow\) imprecise facet geometry.
-                                }
-                            }
-                        \end{figure}
-                    }
-                \end{overlayarea}
-            \end{frame}
-
-    \section{Learned evaluation}
-        \begin{frame}{Evaluation is classification}
-            \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                \item<1-> Evaluation at \underline{building level};
-                \item<2-> Error detection \(\leftrightarrow\) supervized classification;
-                \item<3-> Respects both constraints:
-                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                        \item<4-> \textbf{Large-scale}: prediction on unseen instances;
-                        \item<5-> \textbf{Automation}: needs manual annotations.
-                    \end{itemize}
-            \end{itemize}
-        \end{frame}
-
-        \begin{frame}{The evaluation pipeline}
-            \begin{figure}[H]
-                \includestandalone[mode=buildnew, height=.75\textheight]{figures/graphical_pipeline}
-            \end{figure}
-        \end{frame}
-
-        \subsection{Baseline}
-            \begin{frame}{Geometric features}
-                \centering
-                \includestandalone[mode=buildnew, width=.75\textwidth]{figures/features/geometric_animated}
-            \end{frame}
-
-            \begin{frame}{Height based features}
-                \centering
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/features/height_based_animated}
-            \end{frame}
-
-            \begin{frame}{Image based features}
-                \centering
-                \includestandalone[mode=buildnew, height=.8\textheight]{figures/features/image_based_animated}
-            \end{frame}
-
-        \subsection{Advanced graph features}
-            \begin{frame}{Graph kernels}
-                \centering
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/features/graph_kernels/kernels_menu_all}
-            \end{frame}
-
-            \begin{frame}{Advanced graph features}
-                \raggedleft
-                \includestandalone[mode=buildnew, height=.8\textheight]{figures/features/geometric_kernels_animated}
-            \end{frame}
-
-        \subsection{Advanced image features}
-            
-            \begin{frame}{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet}}
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<1-> Reverse engineered \acrfull{acr::cnn};
-                    \item<2-> Ingredients: 
-                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item<3-> Band pass filters \(\longrightarrow\) high frequency information;
-                        \item<4-> Modulus \(\longrightarrow\) non-linearity;
-                        \item<5-> Average pooling operator \(\longrightarrow\) invariance.
-                    \end{itemize}
-                \end{itemize}
-            \end{frame}
-            
-            \begin{frame}{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} filters}
-                \centering
-                \alt<2>{
-                    \includegraphics[width=\textwidth]{images/related_work/morlet_wavelets}
-                }{
-                    \includegraphics[width=.35\textwidth]{images/related_work/first_layer_cnn}\\
-                    \includegraphics[width=.5\textwidth]{images/related_work/second_layer_cnn}
-                }
-            \end{frame}
-
-            \begin{frame}{Why using \texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet}}
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<1-> Filters are hardcoded not learned:
-                    \begin{itemize}
-                        \item[\color{IGNDarkGreen} +]<2-> No need for a large dataset;
-                        \item[\color{IGNDarkGreen} +]<3-> Interpretable; 
-                        \item[\color{red} ---]<4-> Features: not adaptable.
-                    \end{itemize}
-                    \item<5-> Limited to shallow layers:
-                    \begin{itemize}
-                        \item[\color{red} ---]<6-> Less semantic.
-                    \end{itemize}
-                \end{itemize}
-            \end{frame}
-
-            \begin{frame}{Advanced height based features}
-                \centering
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/features/height_based_animated_scatnet}
-            \end{frame}
-
-            \begin{frame}{Advanced image based features}
-                \centering
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/features/image_based_animated_scatnet}
-            \end{frame}
-
-    \section{Experiments}
-        \subsection{Dataset}
-            \begin{frame}{Urban scenes}
-                \only<1>{
-                    \centering
-                    \includegraphics[height=.8\textheight]{images/datasets/france_map}
-                }
-                \only<2->{
-                    \begin{columns}[T]
-                        \centering
-                        \begin{column}{.48\textwidth}
-                            \only<2-7>{
-                                \begin{itemize}
-                                    \item[\color{elancourt} \(\blacksquare\)]<2-> \textbf{Elancourt}: 
-                                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                                            \item<3-> \num{2009} buildings;
-                                            \item<4-> Residential area;
-                                            \item<5-> Industrial area;
-                                            \item<6-> \gls{acr::dsm} resolution: \SI{0.06}{\cm}
-                                            \item<7-> Orthoimage resolution: \SI{0.06}{\cm}
-                                        \end{itemize}
-                                \end{itemize}
-                            }
-                            \only<8-13>{
-                                \begin{itemize}
-                                    \item[\color{nantes} \(\blacksquare\)]<8-> \textbf{Nantes}: 
-                                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                                            \item<9-> \num{748} buildings;
-                                            \item<10-> Dense downtown;
-                                            \item<11-> High buildings;
-                                            \item<12-> \gls{acr::dsm} resolution: \SI{0.1}{\cm}
-                                            \item<13-> Orthoimage resolution: \SI{0.1}{\cm}
-                                        \end{itemize}
-                                \end{itemize}
-                            }
-                            \only<14-19>{
-                                \begin{itemize}
-                                    \item[\color{paris} \(\blacksquare\)]<14-> \textbf{Paris-13}: 
-                                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                                            \item<15-> \num{478} buildings;
-                                            \item<16-> Dense Hausmann style downtown;
-                                            \item<17-> Skyscrapers;
-                                            \item<18-> \gls{acr::dsm} resolution: \SI{0.1}{\cm}
-                                            \item<19-> Orthoimage resolution: \SI{0.1}{\cm}
-                                        \end{itemize}
-                                \end{itemize}
-                            }
-                        \end{column}
-                        \begin{column}{.48\textwidth}
-                            \begin{overlayarea}{\textwidth}{.8\textheight}
-                                \centering
-                                \only<4>{
-                                    \includegraphics[height=3cm]{images/datasets/elancourt_samples_2}
-                                }
-                                \only<5>{
-                                    \includegraphics[height=3cm]{images/datasets/elancourt_samples_1}
-                                }
-                                \only<6-7>{
-                                    \includegraphics[height=6cm]{images/datasets/elancourt_samples}
-                                }
-                                \only<10>{
-                                    \includegraphics[height=3cm]{images/datasets/nantes_samples_2}
-                                }
-                                \only<11>{
-                                    \includegraphics[height=3cm]{images/datasets/nantes_samples_1}
-                                }
-                                \only<12-13>{
-                                    \includegraphics[height=6cm]{images/datasets/nantes_samples}
-                                }
-                                \only<16>{
-                                    \includegraphics[height=3cm]{images/datasets/paris-13_samples_1}
-                                }
-                                \only<17>{
-                                    \includegraphics[height=3cm]{images/datasets/paris-13_samples_2}
-                                }
-                                \only<18-19>{
-                                    \includegraphics[height=6cm]{images/datasets/paris-13_samples}
-                                }
-                            \end{overlayarea}
-                        \end{column}
-                    \end{columns}
-                }
-            \end{frame}
-
-            \begin{frame}{Annotation}
-                \centering
-                \only<1>{
-                    \includegraphics[width=\textwidth]{images/annotations/annotation_loading}
-                }
-                \only<2>{
-                    \includegraphics[width=\textwidth]{images/annotations/annotation_rendering}
-                }
-                \only<3>{
-                    \includegraphics[width=\textwidth]{images/annotations/annotation_correction}
-                }
-            \end{frame}
-
-            \begin{frame}{\texorpdfstring{\acrshort*{acr::3d}}{3D} models}
-                
-            \end{frame}
-
-            \begin{frame}{Error statistics}
-                \centering
-                \only<1>{
-                    \includestandalone[mode=buildnew, height=.75\textheight]{figures/datasets/families_stats}
-                }
-                \only<2>{
-                    \includestandalone[mode=buildnew, height=.75\textheight]{figures/datasets/lod1_stats}
-                }
-                \only<3>{
-                    \includestandalone[mode=buildnew, width=\textwidth]{figures/datasets/lod2_stats}
-                }
-            \end{frame}
-        
-        \subsection{Set up}
-
-            \begin{frame}{Experiment types}
-                \centering
-                \includestandalone[mode=buildnew, height=.75\textheight]{figures/scalabitity_graph_animated}
-            \end{frame}
-
-            \begin{frame}{Possible settings}{Baseline}
-                \centering
-                \footnotesize
-                \begin{tabular}{c c c c c}
-                    \toprule
-                    Features & Classifier & \textbf{\acrshort{acr::efin}} & Experiment & Number\\
-                    \hline
-                    \multirow{12}{*}{Baseline} & \multirow{12}{*}{\acrshort{acr::rf}} & \multirow{4}{*}{3} & Vanilla & \cellcolor{IGNGreen}<2-3>{\num{4 x 3}}\\
-                     &  &  & Transf. & \cellcolor{IGNGreen}<2-3>{\num{4 x 6}}\\
-                     &  &  & Gener. & \cellcolor{IGNGreen}<2>{\num{4 x 3}}\\
-                     &  &  & Repres. & \cellcolor{IGNGreen}<2>{\num{4 x 6}}\\
-                    \cline{3-5}
-                     &  & \multirow{4}{*}{2} & Vanilla & \cellcolor{IGNGreen}<2>{\num{4 x 3}}\\
-                     &  &  & Transf. & \cellcolor{IGNGreen}<2>{\num{4 x 6}}\\
-                     &  &  & Gener. & \cellcolor{IGNDarkGrey}<2>{\textcolor<2>{white}{\num{4 x 3}}}\\
-                     &  &  & Repres. & \cellcolor{IGNGreen}<2>{\num{4 x 6}}\\
-                    \cline{3-5}
-                     &   & \multirow{4}{*}{1} & Vanilla & \cellcolor{IGNGreen}<2>{\num{4 x 3}}\\
-                     &  &  & Transf. & \cellcolor{IGNDarkGrey}<2>{\textcolor<2>{white}{\num{4 x 6}}}\\
-                     &  &  & Gener. & \cellcolor{IGNDarkGrey}<2>{\textcolor<2>{white}{\num{4 x 3}}}\\
-                     &  &  & Repres. & \cellcolor{IGNDarkGrey}<2>{\textcolor<2>{white}{\num{4 x 6}}}\\
-                    \hline
-                    \multicolumn{4}{l}{Total} & \num[fraction-function = \sfrac]{144/216}\\
-                    \bottomrule
-                \end{tabular}
-            \end{frame}
-
-            \begin{frame}{Vanilla experiments}
-                \centering
-                \only<1>{
-                    \includestandalone[mode=buildnew, height=.8\textheight]{figures/results/presentation/vanilla/building}
-                }
-                \only<2>{
-                    \includestandalone[mode=buildnew, height=.8\textheight]{figures/results/presentation/vanilla/facet}
-                }
-                \only<3>{
-                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                        \item<3-> Rare errors are harder to detect \(\longrightarrow\) Use \gls{acr::svm}.
-                        \item<4-> \texttt{FOS} and \texttt{FIG} are very frequent \(\implies\) easily detected.
-                        \item<5-> Geometric features are usually good enough.
-                        \item<6-> In general:
-                        \begin{itemize}
-                            \item<6-> \texttt{Facet errors} better on dense scenes;
-                            \item<7-> \texttt{Building errors} better on the space scene;
-                        \end{itemize}
-                    \end{itemize}
-                }
-            \end{frame}
-
-            \begin{frame}{Transferability experiments}
-                \centering
-                \renewcommand{\arraystretch}{1.5}
-                \only<1-4>{
-                    \footnotesize
-                    \centering
-                    \begin{tabular}{| c | c | c | c | c |}
-                        \hline
-                         & \texttt{BOS}  & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} \\
-                        \hline
-                        \textbf{El.} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS1535} & \cellcolor{LOSS1535} \textbf{All} &  & \cellcolor{LOSS0515} \textbf{All} \\
-                        \hline
-                        \textbf{El.} \(\rightarrow\) \textbf{P13} & \cellcolor{STBL} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} \\
-                        \hline
-                        \textbf{Na.} \(\rightarrow\) \textbf{P13} & \cellcolor{LOSS1535} & \cellcolor{LOSS1535} \textbf{Im.} &  & \cellcolor{GAIN1535} \textcolor{white}{\textbf{Geom.}} \\
-                        \hline
-                        \textbf{Na.} \(\rightarrow\) \textbf{El.} & \cellcolor{LOSS0515} & \cellcolor{LOSS1535} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{LOSS1535} \textbf{Geom.} \\
-                        \hline
-                        \textbf{P13} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS0515} & \cellcolor{LOSS1535} \textbf{Im.} &  & \cellcolor{GAIN1535} \textcolor{white}{\textbf{Geom.}} \\
-                        \hline
-                        \textbf{P13} \(\rightarrow\) \textbf{El.} & \cellcolor{LOSS0515} & \cellcolor{LOSS1535} \textbf{All} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{Im.}} & \cellcolor{LOSS1535} \textbf{Geom.} \\
-                        \hline
-                    \end{tabular}
-                    \vfill
-                    \begin{tikzpicture}
-                        \shade[left color=white,right color=LOSS1535] (-1, 0) rectangle (0, .25);
-                        \draw[LOSS1535, fill=LOSS1535] (0, 0) rectangle (1, .25);
-                        \draw[LOSS0515, fill=LOSS0515] (1, 0) rectangle (2, .25);
-                        \draw[STBL, fill=STBL] (2, 0) rectangle (3, .25);
-                        \draw[GAIN0515, fill=GAIN0515] (3, 0) rectangle (4, .25);
-                        \draw[GAIN1535, fill=GAIN1535] (4, 0) rectangle (5, .25);
-                        \shade[left color=GAIN1535,right color=white] (5, 0) rectangle (6, .25);
-                        \draw[black] (-1, 0) -- (6, 0);
-                        \draw[black] (-1, .25) -- (6, .25);
-                        \draw[black] (0, .25) -- (0, -2pt) node[below, black] {\footnotesize -35\%};
-                        \draw[black] (1, .25) -- (1, -2pt) node[below, black] {\footnotesize -15\%};
-                        \draw[black] (2, .25) -- (2, -2pt) node[below, black] {\footnotesize -5\%};
-                        \draw[black] (3, .25) -- (3, -2pt) node[below, black] {\footnotesize 5\%};
-                        \draw[black] (4, .25) -- (4, -2pt) node[below, black] {\footnotesize 15\%};
-                        \draw[black] (5, .25) -- (5, -2pt) node[below, black] {\footnotesize 35\%};
-                    \end{tikzpicture}
-                    \uncover<2->{
-                        \normalsize
-                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                            \item<only@2> Transferability of \texttt{Building errors}: \num[fraction-function = \sfrac]{7/20}.
-                            \item<only@3> \texttt{BOS} and \texttt{BUS} are hard to transfer.
-                            \item<only@4> External modalities are \underline{critical}.
-                        \end{itemize}
-                    }
-                }
-                \only<5-8>{
-                    \centering
-                    \footnotesize
-                    \begin{tabular}{| c | c | c | c | c | c |}
-                        \hline
-                         & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG} \\
-                        \hline
-                        \textbf{El.} \(\rightarrow\) \textbf{Na.} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{STBL} \\
-                        \hline
-                        \textbf{El.} \(\rightarrow\) \textbf{P13} & \cellcolor{STBL} & \cellcolor{LOSS1535} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} &  & \cellcolor{STBL} \\
-                        \hline
-                        \textbf{Na.} \(\rightarrow\) \textbf{P13} & \cellcolor{STBL} & \cellcolor{LOSS1535} \textbf{Geom.} & \cellcolor{STBL} &  & \cellcolor{STBL} \textbf{Hei.} \\
-                        \hline
-                        \textbf{Na.} \(\rightarrow\) \textbf{El.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{GAIN1535} \textbf{Im.} & \cellcolor{LOSS0515} & \cellcolor{STBL} \\
-                        \hline
-                        \textbf{P13} \(\rightarrow\) \textbf{Na.} & \cellcolor{STBL} & \cellcolor{LOSS1535} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} \\
-                        \hline
-                        \textbf{P13} \(\rightarrow\) \textbf{El.} & \cellcolor{STBL} & \cellcolor{GAIN0515} & \cellcolor{GAIN1535} \textbf{All} & \cellcolor{LOSS0515} & \cellcolor{STBL} \\
-                        \hline
-                    \end{tabular}
-                    \vfill
-                    \begin{tikzpicture}
-                        \shade[left color=white,right color=LOSS1535] (-1, 0) rectangle (0, .25);
-                        \draw[LOSS1535, fill=LOSS1535] (0, 0) rectangle (1, .25);
-                        \draw[LOSS0515, fill=LOSS0515] (1, 0) rectangle (2, .25);
-                        \draw[STBL, fill=STBL] (2, 0) rectangle (3, .25);
-                        \draw[GAIN0515, fill=GAIN0515] (3, 0) rectangle (4, .25);
-                        \draw[GAIN1535, fill=GAIN1535] (4, 0) rectangle (5, .25);
-                        \shade[left color=GAIN1535,right color=white] (5, 0) rectangle (6, .25);
-                        \draw[black] (-1, 0) -- (6, 0);
-                        \draw[black] (-1, .25) -- (6, .25);
-                        \draw[black] (0, .25) -- (0, -2pt) node[below, black] {\footnotesize -35\%};
-                        \draw[black] (1, .25) -- (1, -2pt) node[below, black] {\footnotesize -15\%};
-                        \draw[black] (2, .25) -- (2, -2pt) node[below, black] {\footnotesize -5\%};
-                        \draw[black] (3, .25) -- (3, -2pt) node[below, black] {\footnotesize 5\%};
-                        \draw[black] (4, .25) -- (4, -2pt) node[below, black] {\footnotesize 15\%};
-                        \draw[black] (5, .25) -- (5, -2pt) node[below, black] {\footnotesize 35\%};
-                    \end{tikzpicture}
-                    \uncover<6->{
-                        \normalsize
-                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                            \item<only@6> Transferability of \texttt{Facets errors}: \num[fraction-function = \sfrac]{20/27}.
-                            \item<only@7> Dense scenes are better for \texttt{Facet errors}.
-                            \item<only@8> External modalities are \underline{critical}.
-                        \end{itemize}
-                    }
-                }
-                \renewcommand{\arraystretch}{1}
-                \only<9->{
-                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                        \item<9-> \texttt{Facets errors} > \texttt{Building errors}
-                        \item<10-> \texttt{BOS} and \texttt{BUS} are hard to transfer.
-                        \item<11-> Dense scenes: same behaviour.
-                        \item<12-> Dense scenes: better for \texttt{Facet errors}.
-                        \item<13-> External modalities are \underline{critical}.
-                    \end{itemize}
-                }
-            \end{frame}
-
-            \begin{frame}{Possible settings}{Advanced features}
-                \centering
-                \footnotesize
-                \begin{tabular}{c c c c c}
-                    \toprule
-                    Features & Classifier & \textbf{\acrshort{acr::efin}} & Experiment & Number\\
-                    \hline
-                    \multirow{2}{*}{Baseline} & \acrshort{acr::rf} & \multirow{6}{*}{3} & \multirow{6}{*}{Vanilla} & \num{4 x 1} \\
-                     & \acrshort{acr::svm} &  &  & \num{4 x 2} \\
-                    \cline{1-2}
-                    \multirow{2}{*}{\gls{acr::scatnet}} & \acrshort{acr::rf} &  &  & \cellcolor{IGNGreen}<2>{\num{6 x 2}} \\
-                     & \acrshort{acr::svm} &  &  & \num{6 x 2} \\
-                     \cline{1-2}
-                    Graph Kernels & \acrshort{acr::svm} &  &  & \num{1 x 2} \\
-                    \cline{1-2}
-                    GK \(\oplus\) \gls{acr::scatnet} & \acrshort{acr::svm} &  &  & \num{6 x 2} \\
-                    \hline
-                    \multicolumn{4}{l}{Total} & \num{50}\\
-                    \bottomrule
-                \end{tabular}
-            \end{frame}
-
-            \begin{frame}{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} results}
-                \centering
-                \small
-                \only<1>{
-                    \begin{tabular}{| c | c | c | c | c |}
-                        \hline
-                         & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} \\
-                        \hline
-                        \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S-Hei.}} & \cellcolor{STBL} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S-Hei.}} \\
-                        \hline
-                        \textbf{Na-P13} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{S(d|c)-Im.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S(d)-Im.}} \\
-                        \hline
-                    \end{tabular}
-                    \vfill
-                    \begin{tabular}{| c | c | c | c | c | c |}
-                        \hline
-                         & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG}\\
-                        \hline
-                        \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S(c)-All}} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S(c)-Im.}} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S(d)-Im.}} & \cellcolor{GAIN0515} \\
-                        \hline
-                        \textbf{Na-P13} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S(c)-Im.}} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S(c)-Im.}} & \cellcolor{STBL} \\
-                        \hline
-                    \end{tabular}
-                    \vfill
-                    \begin{tikzpicture}
-                        \shade[left color=white,right color=LOSS0515] (0, 0) rectangle (1, .25);
-                        \draw[LOSS0515, fill=LOSS0515] (1, 0) rectangle (2, .25);
-                        \draw[STBL, fill=STBL] (2, 0) rectangle (3, .25);
-                        \draw[GAIN0515, fill=GAIN0515] (3, 0) rectangle (4, .25);
-                        \draw[GAIN1535, fill=GAIN1535] (4, 0) rectangle (5, .25);
-                        \shade[left color=GAIN1535,right color=white] (5, 0) rectangle (6, .25);
-                        \draw[black] (0, 0) -- (6, 0);
-                        \draw[black] (0, .25) -- (6, .25);
-                        \draw[black] (1, .25) -- (1, -2pt) node[below, IGNDarkGrey] {\footnotesize -15\%};
-                        \draw[black] (2, .25) -- (2, -2pt) node[below, IGNDarkGrey] {\footnotesize -5\%};
-                        \draw[black] (3, .25) -- (3, -2pt) node[below, IGNDarkGrey] {\footnotesize 5\%};
-                        \draw[black] (4, .25) -- (4, -2pt) node[below, IGNDarkGrey] {\footnotesize 15\%};
-                        \draw[black] (5, .25) -- (5, -2pt) node[below, IGNDarkGrey] {\footnotesize 35\%};
-                    \end{tikzpicture}
-                    \uncover<2->{
-                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                            \item<only@2> Worse only once: \texttt{BUS} on \textbf{Na-P13}.
-                            \item<only@3> Better: \num[fraction-function = \sfrac]{9/17}.
-                            \item<only@4> External feature helpful for semantic and geometric errors.
-                            \item<only@5> Better extractors \(\implies\) external feature more helpful.
-                        \end{itemize}
-                    }
-                }
-            \end{frame}
-
-            \begin{frame}{Best results}
-                \centering
-                \only<1>{
-                    \includestandalone[mode=buildnew, height=.8\textheight]{figures/results/presentation/best/building}
-                }
-                \only<2>{
-                    \includestandalone[mode=buildnew, height=.8\textheight]{figures/results/presentation/best/facet}
-                }
-                \only<3>{
-                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                        \item<3-> \gls{acr::svm} good for highly unbalanced errors.
-                        \item<4-> Better feature extractors were beneficial.
-                        \item<5-> Only \textbf{Elancourt}: \texttt{Building errors} > \SI{70}{\%}.
-                        \item<6-> \texttt{Facet errors} > \SI{70}{\%}.
-                    \end{itemize}
-                }
-            \end{frame}
-        
     \section{Conclusion}
         \begin{frame}{Summary}
             \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                \item<1-> \textbf{Hierarchical and modular} taxonomy;
-                \item<2-> \textbf{Fast, lightweight and modular} pipeline for model evaluation;
-                \item<3-> Pipeline tested with \textbf{baseline} and \textbf{advanced} handcrafted features:
-                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item<4-> Geometric features are often sufficient for error prediction;
-                        \item<5-> Adding modalities is most helpfull for transferability.
-                        \item<6-> Advanced features help attain good scores.
-                    \end{itemize}
+                \item<1-> \textbf{Hierarchical and modular} error taxonomy;
+                \item<2-> \textbf{Scalable} evaluation method;
+                \item<4-> Intrinsic features could be used for error prediction;
+                \item<5-> Extrinsinc modalities \(\implies\) better transferability.
+                \item<6-> Advanced features \(\implies\) high prediction scores.
             \end{itemize}
         \end{frame}
         \begin{frame}{Perspectives}
             \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                \item<1-> Use of deep learning.
-                \item<2-> Dataset augmentation $\longrightarrow$ \textbf{Simulate errors}.
-                \item<3-> Localizing errors: facet level.
-                \item<4-> Automatic correction.
+                \item<1-> Use of deep learning:
+                \begin{itemize}[label=---]
+                    \item Dataset augmentation $\longrightarrow$ \textbf{Simulate errors};
+                    \item Semi-supervized learning.
+                \end{itemize}
+                \item<2-> Localizing errors: facet level.
+                \item<3-> Automatic correction.
+                \item<4-> Generalize to \gls{acr::lod}-3.
             \end{itemize}
         \end{frame}
 
