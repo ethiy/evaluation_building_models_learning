@@ -547,6 +547,57 @@
             \end{itemize}
         \end{frame}
 
+        \subsection{\texorpdfstring{\acrshort*{acr::rmse}}{RMSE} for predicition}
+            \begin{frame}{Why using \texorpdfstring{\acrshort*{acr::rmse}}{RMSE}?}
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \item<1-> Used in most modeling methods for evaluation;
+                    \item<2-> How predictive is it?
+                \end{itemize}
+            \end{frame}
+
+            \begin{frame}{\texorpdfstring{\acrshort*{acr::rmse}}{RMSE} as a features}
+                \centering
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/features/height_based_animated_rmse}
+            \end{frame}
+
+            \begin{frame}{\texorpdfstring{\acrshort*{acr::rmse}}{RMSE} results}
+                \centering
+                \scriptsize
+                \begin{tabular}{c c c c c}
+                    \toprule
+                    & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} \\
+                    \hline
+                    \(\bm{Rec}\) & \cellcolor<2>{IGNGreen}{99.55} & \cellcolor<1>{IGNRed}{0.21} & \cellcolor<1>{IGNRed}{0} & \cellcolor<1>{IGNRed}{0} \\
+                    \hline
+                    \(\bm{Prec}\) & \cellcolor<2>{IGNGreen}{68.78} & \cellcolor<1>{IGNRed}{33.33} & \cellcolor<1>{IGNRed}{---} & \cellcolor<1>{IGNRed}{0} \\
+                    \hline
+                    \(\bm{F_{score}}\) & \cellcolor<2>{IGNGreen}{81.35} & \cellcolor<1>{IGNRed}{0.42} & \cellcolor<1>{IGNRed}{0} & \cellcolor<1>{IGNRed}{0} \\
+                    \hline
+                    \(\bm{Acc}\) & \cellcolor<3>{IGNRed}{68.46} & 75.65 & 89.57 & 94.66 \\
+                    \bottomrule
+                \end{tabular}
+                \vfill
+                \begin{tabular}{c c c c c c}
+                    \toprule
+                    & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG} \\
+                    \hline
+                    \(\bm{Rec}\) & \cellcolor<2>{IGNGreen}{98.68} & \cellcolor<1>{IGNRed}{0.63} & \cellcolor<1>{IGNRed}{0} & \cellcolor<1>{IGNRed}{0} & \cellcolor<2>{IGNGreen}{98.15} \\
+                    \hline
+                    \(\bm{Prec}\) & \cellcolor<2>{IGNGreen}{66.60} & \cellcolor<1>{IGNRed}{0.25} & \cellcolor<1>{IGNRed}{---} & \cellcolor<1>{IGNRed}{0} & \cellcolor<2>{IGNGreen}{61.15} \\
+                    \hline
+                    \(\bm{F_{score}}\) & \cellcolor<2>{IGNGreen}{79.52} & \cellcolor<1>{IGNRed}{1.24} & \cellcolor<1>{IGNRed}{0} & \cellcolor<1>{IGNRed}{0} & \cellcolor<2>{IGNGreen}{75.36} \\
+                    \hline
+                    \(\bm{Acc}\) & \cellcolor<3>{IGNRed}{66.36} & 83.62 & 88.24 & 98.36 & \cellcolor<3>{IGNRed}{60.86} \\
+                    \bottomrule
+                \end{tabular}
+                \vfill
+                \normalsize
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \item<only@1> Most F-scores are poor;
+                    \item<only@2> Except for: \texttt{BOS}, \texttt{FOS} and \texttt{FIG};
+                    \item<only@3> They are highly unbalanced.
+                \end{itemize}
+            \end{frame}
 
     \section{Conclusion}
         \begin{frame}{Summary}

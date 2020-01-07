@@ -25,8 +25,8 @@
         \path (residual.west) node[anchor=east, visible on=<3>] (equals) {\Large =};
 
         \path (dsm.west) node[anchor=west, visible on=<4->] (residual) {\includegraphics[width=1.5cm]{images/features/scatnet/residual}};
-        \path (model.east) node[anchor=east, visible on=<4->, blue] (rmse) {\footnotesize \gls{acr::rmse}\)};
+        \path (model.east) node[anchor=east, visible on=<4->, blue] (rmse) {\footnotesize \gls{acr::rmse}};
 
-        \draw[->, very thick, visible on=<4->, black] (residual) -- (rmse) node[midway, visible on=<4->, draw, rounded corners, black, fill=white] {\(\sum \left(\bullet ^ 2\right)\)};
+        \draw[->, very thick, visible on=<4->, black] (residual) -- (rmse) node[midway, visible on=<4->, draw, rounded corners, black, fill=white] {\(\operatorname{mean} \left\lvert \bullet \right\rvert ^ 2\)};
 	\end{tikzpicture}
 \end{document}
