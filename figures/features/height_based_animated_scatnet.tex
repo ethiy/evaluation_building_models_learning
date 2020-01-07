@@ -11,10 +11,10 @@
         \path (dsm.east) node[anchor=west, visible on=<2>] (minus) {\Large --};
 
 		\path (minus.east) node[anchor=west, visible on=<2>] (model) {\includegraphics[width=3cm]{images/features/scatnet/height_map}};
-        \path (model.south) node[anchor=north, text width=3cm, align=center, visible on=<2>] (model_legend) {\scriptsize Model heights};
+        \path (model.south) node[anchor=north, text width=3cm, align=center, visible on=<2>] (model_legend) {\scriptsize Model height};
 
         \path (minus) node[visible on=<3>] (residual_colorbar) {\includegraphics[width=3cm]{images/features/scatnet/residual_colbar}};
-        \path (residual_colorbar.south) node[anchor=north, text width=3cm, align=center, visible on=<3>] (residual_legend) {\scriptsize Residuals};
+        \path (residual_colorbar.south) node[anchor=north, text width=3cm, align=center, visible on=<3>] (residual_legend) {\scriptsize Residual};
 
         \path (residual_colorbar.west) node[anchor=east, visible on=<3>] (equals) {\Large =};
 
