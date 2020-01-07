@@ -63,15 +63,15 @@
   			\path[face,shade] (0,0) rectangle (2,3);
         \end{scope}
         
-        \node[teal, visible on=<1>] (roof) at (3, 3, 3) {Roof};
-        \node[teal, visible on=<2>] (roof) at (3, 3, 3) {Area: \SI{90}{\m\squared}, slope: \SI{0}{\degree}};
-        \node[teal, visible on=<3->] (roof) at (3, 3, 3) {Holes: 1};
+        \node[teal, visible on=<3>] (roof) at (3, 3, 3) {Roof};
+        \node[teal, visible on=<1>] (roof) at (3, 3, 3) {Area: \SI{90}{\m\squared}, slope: \SI{0}{\degree}};
+        \node[teal, visible on=<2>] (roof) at (3, 3, 3) {Holes: 1};
         \draw[->, black] (roof) -- (2, 3, 2); 
 
-        \node[orange, visible on=<1>] (chimney) at (-1, 2.75, 5) {Chimney};
-        \draw[->, black, visible on=<1>] (chimney) -- (.75, 1.5, 3); 
+        \node[orange, visible on=<3>] (chimney) at (-1, 2.75, 5) {Chimney};
+        \draw[->, black, visible on=<3>] (chimney) -- (.75, 1.5, 3); 
 
-        \node[gray, visible on=<1>] (facade) at (-1, 2.75, 0) {Fa\c{c}ades};
-        \draw[->, black, visible on=<1>] (facade) -- (0, 2, 1.5); 
+        \node[gray, visible on=<3>] (facade) at (-1, 2.75, 0) {Fa\c{c}ades};
+        \draw[->, black, visible on=<3>] (facade) -- (0, 2, 1.5); 
     \end{3dtikzpicture}
 \end{document}

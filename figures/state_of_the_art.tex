@@ -99,7 +99,7 @@
     }
 
 	\begin{tikzpicture}
-		\node[data, visible on=<3->]  (manual) {\textbf{Manual data}};
+		\node[data, visible on=<3->]  (manual) {\textbf{Human based data}};
         \path (manual.east) node[data, anchor=west, visible on=<3->] (sensor) {\textbf{Sensor data}};
         \path (manual.west) node [data_type, anchor=west, visible on=<2>] (data_type) {\textbf{Reference data type}};
 

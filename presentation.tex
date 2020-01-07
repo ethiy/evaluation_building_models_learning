@@ -151,57 +151,54 @@
                 \temporal<2>{
                     \begin{figure}[H]
                         \centering
-                        \includegraphics[width=.8\textwidth]{images/introduction/3d_model_applications/explosion_simulation}
+                        \includegraphics[width=.9\textwidth]{images/introduction/3d_model_applications/explosion_simulation}
                         \caption{Explosion simulation~\parencite{biljecki2015applications}.}
                     \end{figure}
                 }
                 {
                     \begin{figure}[H]
                         \centering
-                        \includegraphics[width=.8\textwidth]{images/introduction/3d_model_applications/brest_tramway}
-                        \caption{Example of the use of city \gls{acr::3d} models in public consultation in Brest.}
+                        \includegraphics[height=.68\textheight]{images/introduction/3d_model_applications/brest_tramway}
+                        \caption{Example of the use of city \acrshort{acr::3d} models in public consultation in Brest.}
                     \end{figure}
                 }
                 {
                     \begin{figure}[H]
                         \centering
-                        \includegraphics[width=.8\textwidth]{images/introduction/3d_model_applications/spider_man}
-                        \caption{Example of the use of city \gls{acr::3d} models in video games.}
+                        \includegraphics[width=.9\textwidth]{images/introduction/3d_model_applications/spider_man}
+                        \caption{Example of the use of city \acrshort{acr::3d} models in video games.}
                     \end{figure}
                 }
             \end{frame}
 
             \begin{frame}{Modeling or reconstruction}
+                \centering
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/model_vs_mesh/modeling_reconstruction}
                 \begin{columns}[T]
-                    \centering
+                    \footnotesize
                     \begin{column}{.5\textwidth}
-                        \includestandalone[mode=buildnew, width=\textwidth]{figures/model_vs_mesh/mesh_model}
-                        \footnotesize
                         \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                            \item<1-> Building surface \underline{reconstruction}.
-                            \item<2-> Geometric \underline{fidelity}.
-                            \item<3-> \num{10000} facets.
-                            \item<4-> Weak geometric constraints.
+                            \item<1-> Surface reconstruction.
+                            \item<2-> \textcolor{IGNGreen}{High geometric fidelity.}
+                            \item<3-> \textcolor{IGNRed}{Low Compacity.}
                         \end{itemize}
                     \end{column}
                     \begin{column}{.5\textwidth}
-                        \includestandalone[mode=buildnew, width=\textwidth]{figures/model_vs_mesh/ground_truth_model_animated}
-                        \footnotesize
                         \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                            \item<1-> Building \underline{modeling}.
-                            \item<2-> Geometric fidelity + Compacity.
-                            \item<3-> \num{800} facets.
-                            \item<only@4> Semantics \(\implies\) impact on geometry.
-                            \item<only@5> \textit{Implicit} semantics. \phantom{on geometry}
+                            \item<4-> Modeling.
+                            \item<5->\textcolor{IGNRed}{Low geometric fidelity.}
+                            \item<6-> \textcolor{IGNGreen}{High Compacity.}
                         \end{itemize}
                     \end{column}
                 \end{columns}
             \end{frame}
 
-            \begin{frame}{\texorpdfstring{\acrshort*{acr::3d}}{3D} model}
+            \begin{frame}{\texorpdfstring{\acrshort*{acr::3d}}{3D} models}{More than geometry}
                 \centering
-                \includestandalone[mode=buildnew, width=.7\textwidth]{figures/model_information}
-                
+                \includestandalone[mode=buildnew, height=.6\textheight]{figures/model_information}\\
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                    \item \acrshort{acr::3d} model = Geometry \only<2->{+ Topology} \only<3->{+ Semantics.}
+                \end{itemize}
             \end{frame}
 
             \begin{frame}{\texorpdfstring{\acrshort*{acr::3d}}{3D} building modeling}
@@ -211,13 +208,21 @@
                     \caption{\glspl{acr::lod} considered in the study~\parencite{biljecki2016improved}.}
                 \end{figure}
             \end{frame}
+
+            \begin{frame}{Modeling}{Different sources of errors}
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                    \item<1-> Input imprecision: footprints, depth maps \dots
+                    \item<2-> High (inter-) variance between building types;
+                    \item<3-> High (intra-) variance between building features;
+                \end{itemize}
+            \end{frame}
         
         \subsection{Quality evaluation}
             \begin{frame}{Modeling errors}{Different point of views}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<1-> Errors in format: compliancy to OGC standard\footfullcite{ledoux2013validation}.
-                    \item<2-> Errors in surface reconstruction\footfullcite{berger2013benchmark}.
-                    \item<3-> Errors in Modeling\footfullcite{rottensteiner2012isprs}.
+                    \item<1-> Errors in format: compliancy to OGC standard~\parencite{ledoux2013validation}.
+                    \item<2-> Errors in surface reconstruction~\parencite{berger2013benchmark}.
+                    \item<3-> Errors in Modeling~\parencite{rottensteiner2012isprs}.
                 \end{itemize}
             \end{frame}
 
@@ -226,7 +231,7 @@
                     \item<1-> Modeling \(\longleftrightarrow\) compromise between:
                     \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                         \item<2-> geometric accuracy;
-                        \item<3-> and \textit{implicit} semantics.
+                        \item<3-> semantics (compacity).
                     \end{itemize}
                     \item<4-> Errors are \underline{geometric} and \underline{semantic} in nature.
                 \end{itemize}
@@ -234,36 +239,36 @@
 
             \begin{frame}{Goal}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<1-> \underline{Define errors} that affects building \gls{acr::3d} models.
-                    \item<2-> Design a method for \underline{error detection}.
+                    \item<1-> Design a method for \underline{error detection}.
+                    \item<2-> \underline{Define errors} that affects building \gls{acr::3d} models.
                 \end{itemize}
             \end{frame}
 
             \begin{frame}{Challenges}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<1-> Reference data are \underline{expensive}.
-                    \item<2-> Large scale : small city level > \underline{\num{1000}} buildings.
-                    \item<3-> \underline{Different} urban scenes \(\implies\) High \underline{heterogeneity}.
-                    \item<6-> Manual evaluation: \SI[per-mode=repeated-symbol]{2}{\hour\per\km\squared\per\expert}.
+                    \item<1-> Large scale : small city level > \underline{\num{10000}} buildings.
+                    \item<2-> \underline{Different} urban scenes \(\implies\) High \underline{heterogeneity}.
+                    \item<3-> Reference data are \underline{expensive}.
+                    \item<4-> Manual evaluation: \SI[per-mode=repeated-symbol]{2}{\hour\per\km\squared\per\expert}.
                 \end{itemize}
             \end{frame}
             
-            \begin{frame}{State of the art}
-                \centering
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/state_of_the_art}
-            \end{frame}
-
             \begin{frame}{What do we want?}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=1em]
-                    \item<1-> Readily accessible reference data;
+                    \item<1-> Readily available reference data;
                     \item<2-> \textbf{Scalability} up to city level;
                     \item<3-> Genericity towards:
                         \begin{enumerate}[label=(\roman*)]
                             \item<4-> modeling approach;
                             \item<5-> urban scene.
                         \end{enumerate}
-                    \item<6-> \textbf{Automation}: low human intervention.
+                    \item<6-> \textbf{Automation}: no human intervention.
                 \end{itemize}
+            \end{frame}
+
+            \begin{frame}{State of the art}
+                \centering
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/state_of_the_art}
             \end{frame}
 
             \begin{frame}{Our answer}
@@ -275,28 +280,14 @@
             \end{frame}
 
     \section{Semantic evaluation}
-        \begin{frame}{The issue at hand}
-            \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
-                \item<1-> Large scale (coverage) \(\implies\) Errors independent from:
-                \begin{itemize}
-                    \item<2-> Urban scene;
-                    \item<3-> Modeling approach.
-                \end{itemize}
-            \end{itemize}
-        \end{frame}
-
         \subsection{General layout}
-            \begin{frame}{Hierarchization and Modularity}
+            \begin{frame}{Taxonomy}{Hierarchization}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
                     \item<1-> Hierarchization:
                         \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                             \item<2-> \underline{Iteratively} define more and more specific errors;
                             \item<3-> Each \underline{specificity level}: errors as general as possible;
                             \item<4-> \texttt{finesse} = specificity level.
-                        \end{itemize}
-                    \item<4-> Modularity:
-                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                            \item<5-> An error \(\equiv\) Composition of \underline{basic errors} common to all scenes.
                         \end{itemize}
                 \end{itemize}
             \end{frame}
@@ -305,8 +296,23 @@
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/taxonomy_tree_animated}
             \end{frame}
 
+            \begin{frame}{Taxonomy}{Hierarchization and Modularity}
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
+                    \item Hierarchization:
+                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                            \item \underline{Iteratively} define more and more specific errors;
+                            \item Each \underline{specificity level}: errors as general as possible;
+                            \item \texttt{finesse} = specificity level.
+                        \end{itemize}
+                    \item<2-> Modularity:
+                        \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                            \item<3-> An error \(\equiv\) Composition of \underline{basic errors} common to all scenes.
+                        \end{itemize}
+                \end{itemize}
+            \end{frame}
+
         \subsection{Roof modeling case}
-            \begin{frame}{Atomic errors}{\texorpdfstring{\acrshort*{acr::2d}}{2D} errors}
+            \begin{frame}{Atomic errors}{Under segmentation}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item<1-> \Acrfull{acr::2d} errors:
                     \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
@@ -329,7 +335,7 @@
                                         \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
                                     }
                                     \caption{
-                                        Ground truth buildings.
+                                        Ground truth.
                                     }
                                 \end{figure}
                             \end{column}
@@ -351,37 +357,37 @@
                 \end{overlayarea}
             \end{frame}
 
-            \begin{frame}{Atomic errors}{\texorpdfstring{\acrshort*{acr::2d}}{2D} errors}
+            \begin{frame}{Atomic errors}{Over segmentation}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<1-> \Acrfull{acr::2d} errors:
+                    \item \Acrfull{acr::2d} errors:
                     \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item<2-> Segmentation issue (semantic):
+                        \item Segmentation issue (semantic):
                         \begin{itemize}
-                            \item<3-4> Over segmentation.
+                            \item<1-2> Over segmentation.
                         \end{itemize}
                     \end{itemize}
                 \end{itemize}
                 \begin{overlayarea}{\textwidth}{.5\textheight}
-                    \only<3->{
+                    \only<1->{
                         \begin{columns}[T]
                             \begin{column}{.5\textwidth}
                                 \centering
                                 \begin{figure}[H]
                                     \centering
-                                    \alt<3>{
+                                    \alt<1>{
                                         \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bus}
                                     }{
                                         \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
                                     }
                                     \caption{
-                                        Ground truth buildings.
+                                        Ground truth.
                                     }
                                 \end{figure}
                             \end{column}
                             \begin{column}{.5\textwidth}
                                 \begin{figure}[H]
                                     \centering
-                                    \alt<3>{
+                                    \alt<1>{
                                         \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bos}
                                     }{
                                         \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fos}
@@ -396,7 +402,7 @@
                 \end{overlayarea}
             \end{frame}
 
-            \begin{frame}{Atomic errors}{\texorpdfstring{\acrshort*{acr::2d}}{2D} errors}
+            \begin{frame}{Atomic errors}{Inaccurate topology}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item<1-> \Acrfull{acr::2d} errors:
                     \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
@@ -419,7 +425,7 @@
                                         \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fit}
                                     }
                                     \caption{
-                                        Ground truth buildings.
+                                        Ground truth.
                                     }
                                 \end{figure}
                             \end{column}
@@ -441,37 +447,37 @@
                 \end{overlayarea}
             \end{frame}
 
-            \begin{frame}{Atomic errors}{\texorpdfstring{\acrshort*{acr::2d}}{2D} errors}
+            \begin{frame}{Atomic errors}{Imprecise border}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<1-> \Acrfull{acr::2d} errors:
+                    \item \Acrfull{acr::2d} errors:
                     \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item<2-> Border issue (geometric):
+                        \item Border issue (geometric):
                         \begin{itemize}
-                            \item<3-4> Imprecise border.
+                            \item<-2> Imprecise border.
                         \end{itemize}
                     \end{itemize}
                 \end{itemize}
                 \begin{overlayarea}{\textwidth}{.5\textheight}
-                    \only<3->{
+                    \only<1->{
                         \begin{columns}[T]
                             \begin{column}{.5\textwidth}
                                 \centering
                                 \begin{figure}[H]
                                     \centering
-                                    \alt<3>{
+                                    \alt<1>{
                                         \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/correct_bib}
                                     }{
                                         \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
                                     }
                                     \caption{
-                                        Ground truth buildings.
+                                        Ground truth.
                                     }
                                 \end{figure}
                             \end{column}
                             \begin{column}{.5\textwidth}
                                 \begin{figure}[H]
                                     \centering
-                                    \alt<3>{
+                                    \alt<1>{
                                         \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/bib}
                                     }{
                                         \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fib}
@@ -497,26 +503,26 @@
                     \end{itemize}
                 \end{itemize}
                 \begin{overlayarea}{\textwidth}{.5\textheight}
-                    \only<3->{
+                    \only<2->{
                         \begin{columns}[T]
                             \begin{column}{.5\textwidth}
                                 \centering
                                 \begin{figure}[H]
                                     \centering
-                                    \alt<3>{
+                                    \alt<2>{
                                         \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/correct_big}
                                     }{
                                         \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/correct_fos_fus_fib_fig}
                                     }
                                     \caption{
-                                        Ground truth buildings.
+                                        Ground truth.
                                     }
                                 \end{figure}
                             \end{column}
                             \begin{column}{.5\textwidth}
                                 \begin{figure}[H]
                                     \centering
-                                    \alt<3>{
+                                    \alt<2>{
                                         \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/building/big}
                                     }{
                                         \includestandalone[mode=buildnew, height=.4\textheight]{figures/errors/facet/fig}
@@ -543,11 +549,16 @@
                 \begin{itemize}[label=$\implies$]
                     \item<5-> Multilabel classification.
                 \end{itemize}
-                \item<5-> Evaluation at \underline{building level};
+                \item<6-> Evaluation at \underline{building level};
             \end{itemize}
         \end{frame}
 
-        \subsection{\texorpdfstring{\acrshort*{acr::rmse}}{RMSE} for predicition}
+        \begin{frame}{The evaluation pipeline}
+            \centering
+            \includestandalone[mode=buildnew, height=.75\textheight]{figures/graphical_pipeline_basic}
+        \end{frame}
+
+        \subsection{\texorpdfstring{\acrshort*{acr::rmse}}{RMSE} for prediction}
             \begin{frame}{Why using \texorpdfstring{\acrshort*{acr::rmse}}{RMSE}?}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                     \item<1-> Used in most modeling methods for evaluation;
@@ -997,6 +1008,7 @@
         
         \subsection{Experiments}
             \begin{frame}{Possible settings}
+                \centering
                 \footnotesize
                 \begin{tabular}{c c c c c}
                     \toprule
@@ -1007,7 +1019,7 @@
                     \cline{1-2}
                     \multirow{2}{*}{\gls{acr::scatnet}} & \acrshort{acr::rf} &  &  & \cellcolor{IGNGreen}<2>{\num{6 x 2}} \\
                      & \acrshort{acr::svm} &  &  & \num{6 x 2} \\
-                     \cline{1-2}
+                    \cline{1-2}
                     Graph Kernels & \acrshort{acr::svm} &  &  & \num{1 x 2} \\
                     \cline{1-2}
                     GK \(\oplus\) \gls{acr::scatnet} & \acrshort{acr::svm} &  &  & \num{6 x 2} \\
