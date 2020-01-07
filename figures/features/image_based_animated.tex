@@ -10,6 +10,9 @@
 	\begin{tikzpicture}
 		\node[visible on=<1>] (image) {\includegraphics[width=5cm, angle=270]{images/introduction/graphical_abstract/orthoprojection}};
 		\path (image.south) node[anchor=north, visible on=<1>, text width=5cm, align=center] (image_legend) {\scriptsize Nadir projection on orthoimage.};
+		\path (image_legend) node[visible on=<3>, text width=5cm, align=center] (image_legend) {\scriptsize Histogram over edges.};
+		\path (image_legend) node[visible on=<4>, text width=5cm, align=center] (image_legend) {\scriptsize Histogram over Facets.};
+		\path (image_legend) node[visible on=<5>, text width=5cm, align=center] (image_legend) {\scriptsize Global histogram.};
 
 		\path (image) + (-.25, 0) node[visible on=<2>] (pixel_segment) {\includestandalone[width=5cm]{figures/features/image_based}};
 
