@@ -100,7 +100,7 @@
 
 	\begin{tikzpicture}
 		\node[data, visible on=<3->]  (manual) {\textbf{Human based data}};
-        \path (manual.east) node[data, anchor=west, visible on=<3->] (sensor) {\textbf{Sensor data}};
+        \path (manual.east) node[data, anchor=west, visible on=<3->] (sensor) {\textbf{Sensor based data}};
         \path (manual.west) node [data_type, anchor=west, visible on=<2>] (data_type) {\textbf{Reference data type}};
 
 		\path (manual.north west) node[output_type, anchor=south east, visible on=<4>] (output_type) {\rotatebox{90}{\textbf{Output type}}};
@@ -120,19 +120,25 @@
 		\path (sensor.north) node[intersection, anchor=south, fill=green!30, visible on=<8->] (sensor_semantic) {};
 		\path (sensor_semantic.north) node[intersection, anchor=south, visible on=<5->] (sensor_indx) {};
 
-        \path (manual_indx) + (0, -.5) node[cross, visible on=<6->] (zeng2014multicriteria) {};
-        \path (zeng2014multicriteria) node[anchor=north, visible on=<6->] {\scriptsize \parencite{zeng2014multicriteria}};
-	    \path (manual_indx) + (-1, 1) node[cross, visible on=<6->] (vogtle2003quality) {};
-        \path (vogtle2003quality) node[anchor=south, visible on=<6->] {\scriptsize \parencite{vogtle2003quality}};
-        \path (manual_indx) + (1.5, .5) node[cross, visible on=<6->] (kaartinen2005accuracy) {};
-        \path (kaartinen2005accuracy) node[anchor=north, visible on=<6->] {\scriptsize \parencite{kaartinen2005accuracy}};
-        \path (sensor_indx) node[cross, visible on=<6->] (akca2010quality) {};
-        \path (akca2010quality) node[anchor=north, visible on=<6->] {\scriptsize \parencite{akca2010quality}};
-        \path (sensor_semantic) + (0, 1.75) node[cross, visible on=<6->] (elberink2011quality) {};
-        \path (elberink2011quality) node[anchor=north, visible on=<6->] {\scriptsize \parencite{elberink2011quality}};
-        \path (sensor_semantic) + (-.75, .25) node[cross, visible on=<6->] (boudet2006supervised) {};
-        \path (boudet2006supervised) node[anchor=north, visible on=<6->] {\scriptsize \parencite{boudet2006supervised}};
-        \path (sensor_semantic) + (1.5, -.75) node[cross, visible on=<6->] (michelin2012building) {};
-        \path (michelin2012building) node[anchor=north, visible on=<6->] {\scriptsize \parencite{michelin2012building}};
+        \path (manual_indx.north west) node[anchor=north west, visible on=<6->] (henricsson19973) {\scriptsize \textcolor{IGNGreen}{\(\blacktriangleright\)} \parencite{henricsson19973}};
+        \path (henricsson19973.south west) node[anchor=north west, visible on=<6->] (kaartinen2005accuracy) {\scriptsize \textcolor{IGNGreen}{\(\blacktriangleright\)} \parencite{kaartinen2005accuracy}};
+        \path (kaartinen2005accuracy.south west) node[anchor=north west, visible on=<6->] (zeng2014multicriteria) {\scriptsize \textcolor{IGNGreen}{\(\blacktriangleright\)} \parencite{zeng2014multicriteria}};
+        \path (landes2012quality.south west) node[anchor=north west, visible on=<6->] (nguatem2017modeling) {\scriptsize \textcolor{IGNGreen}{\(\blacktriangleright\)} \parencite{nguatem2017modeling}};
+
+        \path (vogtle2003quality.east) + (.25, 0) node[anchor=west, visible on=<6->] (vogtle2003quality) {\scriptsize \textcolor{IGNGreen}{\(\blacktriangleright\)} \parencite{vogtle2003quality}};
+        \path (vogtle2003quality.south west) node[anchor=north west, visible on=<6->] (landes2012quality) {\scriptsize \textcolor{IGNGreen}{\(\blacktriangleright\)} \parencite{landes2012quality}};
+        \path (zebedin2008fusion.south west) node[anchor=north west, visible on=<6->] (rottensteiner2014results) {\scriptsize \textcolor{IGNGreen}{\(\blacktriangleright\)} \parencite{rottensteiner2014results}};
+        \path (zeng2014multicriteria.south west) node[anchor=north west, visible on=<6->] (zeng2018neural) {\scriptsize \textcolor{IGNGreen}{\(\blacktriangleright\)} \parencite{zeng2018neural}};
+
+        \path (manual_semantic.north west) node[anchor=north west, visible on=<6->] (jaynes2003recognition) {\scriptsize \textcolor{IGNGreen}{\(\blacktriangleright\)} \parencite{jaynes2003recognition}};
+        \path (jaynes2003recognition.south west) node[anchor=north west, visible on=<6->] (zebedin2008fusion) {\scriptsize \textcolor{IGNGreen}{\(\blacktriangleright\)} \parencite{zebedin2008fusion}};
+        \path (zebedin2008fusion.south west) node[anchor=north west, visible on=<6->] (rottensteiner2014results) {\scriptsize \textcolor{IGNGreen}{\(\blacktriangleright\)} \parencite{rottensteiner2014results}};
+
+        \path (sensor_indx.north west) node[anchor=north west, visible on=<6->] (akca2010quality) {\scriptsize \textcolor{IGNGreen}{\(\blacktriangleright\)} \parencite{akca2010quality}};
+        \path (akca2010quality.south west) node[anchor=north west, visible on=<6->] (lafarge2012creating) {\scriptsize \textcolor{IGNGreen}{\(\blacktriangleright\)} \parencite{lafarge2012creating}};
+        \path (lafarge2012creating.south west) node[anchor=north west, visible on=<6->] (zhu2018large) {\scriptsize \textcolor{IGNGreen}{\(\blacktriangleright\)} \parencite{zhu2018large}};
+
+        \path (sensor_semantic.north west) node[anchor=north west, visible on=<6->] (boudet2006supervised) {\scriptsize \textcolor{IGNGreen}{\(\blacktriangleright\)} \parencite{boudet2006supervised}: First to use learning.};
+        \path (boudet2006supervised.south west) node[anchor=north west, visible on=<6->] (michelin2012building) {\scriptsize \textcolor{IGNGreen}{\(\blacktriangleright\)} \parencite{michelin2012building}: First error taxonomy.};
 	\end{tikzpicture}
 \end{document}
