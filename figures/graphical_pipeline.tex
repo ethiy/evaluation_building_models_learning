@@ -48,8 +48,8 @@
         \path (frame.north) + (0, 1.5) node[anchor=south, text width=2.5cm, align=center] (model_legend) {\footnotesize Input model};
         \path (model_legend.north) node[anchor=south] (model) {\includestandalone[mode=buildnew, height=1.5cm]{figures/graphical_abstract/building_model}};
 
-        \path (frame.east |- model) + (.5, 0) node[visible on=<4->, draw, rectangle, rounded corners] (rs_data) {\footnotesize Remote sensing data};
-        \path (frame.west |- model) + (-.5, 0) node[opacity=0, draw, rectangle, rounded corners] {\footnotesize Remote sensing data};
+        \path (frame.east |- model) + (.5, 0) node[visible on=<4->, draw, rectangle, rounded corners] (rs_data) {\small Remote sensing data};
+        \path (frame.west |- model) + (-.5, 0) node[opacity=0, draw, rectangle, rounded corners] {\small Remote sensing data};
         \draw[->, line width=2pt, dashed, visible on=<4->, violet!30] (rs_data) |- (frame.east);
 
 		\path (frame.south) + (0, -1.5) node[anchor=north] (errors) {\includestandalone[mode=buildnew, height=1.5cm]{figures/graphical_abstract/building_errors}};

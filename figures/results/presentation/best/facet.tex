@@ -29,6 +29,31 @@
         3, 90.99, 
     }\FIG
 
+    \pgfplotstableread[col sep=comma]{
+        x, y, label
+        1, 99.10, 
+        3, 98.69, 
+    }\oldFOS
+    \pgfplotstableread[col sep=comma]{
+        x, y, label
+        1, 3.67, 
+        3, 72.86, 
+    }\oldFUS
+    \pgfplotstableread[col sep=comma]{
+        x, y, label
+        1, 16.60, 
+        3, 69.68, 
+    }\oldFIB
+    \pgfplotstableread[col sep=comma]{
+        x, y, label
+        1, 15.99, 
+        3, 21.05, 
+    }\oldFIT
+    \pgfplotstableread[col sep=comma]{
+        x, y, label
+        1, 76.66, 
+        3, 89.0, 
+    }\oldFIG
     \begin{tikzpicture} 
         \begin{axis}[
             ylabel={F-score (\%)},
@@ -68,6 +93,7 @@
                 draw=cyan
             ] table[x=x, y=y, meta index=2] {\FUS};
             \addplot+[
+                bar shift = -0pt,
                 fill=red!40,
                 draw=red
             ] table[x=x, y=y, meta index=2] {\FIB};
@@ -88,6 +114,37 @@
                 \footnotesize \strut \texttt{FIT},
                 \footnotesize \strut \texttt{FIG}
             }
+
+            \addplot+[
+                visible on=<5->,
+                bar shift = -40pt,
+                pattern=north east lines,
+                draw=green
+            ] table[x=x, y=y, meta index=2] {\oldFOS};
+            \addplot+[
+                visible on=<5->,
+                bar shift = -20pt,
+                pattern=north east lines,
+                draw=cyan
+            ] table[x=x, y=y, meta index=2] {\oldFUS};
+            \addplot+[
+                visible on=<5->,
+                bar shift = -0pt,
+                pattern=north east lines,
+                draw=red
+            ] table[x=x, y=y, meta index=2] {\oldFIB};
+            \addplot+[
+                visible on=<5->,
+                bar shift = 20pt,
+                pattern=north east lines,
+                draw=olive
+            ] table[x=x, y=y, meta index=2] {\oldFIT};
+            \addplot+[
+                visible on=<5->,
+                bar shift = 40pt,
+                pattern=north east lines,
+                draw=violet
+            ] table[x=x, y=y, meta index=2] {\oldFIG};
         \end{axis} 
     \end{tikzpicture}
 \end{document}

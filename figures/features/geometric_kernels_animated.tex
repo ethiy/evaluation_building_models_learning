@@ -34,11 +34,11 @@
             \end{bmatrix}\)
         };
 
-        \path (degree_area_circumference.west |- facet_graph.south) node[visible on=<5->, anchor=north west, align=left] (multi_scale_laplacian_kernel) {\small \textcolor{IGNGreen}{\(\blacktriangleright\)} Multiscale Laplacian kernel;};
+        \path (degree_area_circumference.west |- facet_graph.south) + (-1, 0) node[visible on=<5->, anchor=north west, align=left] (multi_scale_laplacian_kernel) {\small \textcolor{IGNGreen}{\(\blacktriangleright\)} Multiscale Laplacian kernel;};
         \path (multi_scale_laplacian_kernel.south west) node[visible on=<6->, anchor=north west, align=left] (graph_hopper_kernel) {\small \textcolor{IGNGreen}{\(\blacktriangleright\)} Graph hopper kernel;};
         \path (graph_hopper_kernel.south west) node[visible on=<7->, anchor=north west, align=left] (propagation_kernel) {\small \textcolor{IGNGreen}{\(\blacktriangleright\)} Propagation kernel.};
 
-        \path (degree_area_circumference.west |- facet_graph.south) node[visible on=<2-3>, anchor=north west, align=left] (random_walk_kernel) {\small \textcolor{IGNGreen}{\(\blacktriangleright\)} Random walk kernel;};
-        \path (random_walk_kernel.south west) node[visible on=<3>, anchor=north west, align=left] (svm_kernel) {\small \textcolor{IGNGreen}{\(\blacktriangleright\)} SVM \(\vartheta\) kernel.};
+        \path (degree_area_circumference.west |- facet_graph.south) + (-1, 0) node[visible on=<2-3>, anchor=north west, align=left] (random_walk_kernel) {\small \textcolor{IGNGreen}{\(\blacktriangleright\)} Random walk kernel;};
+        \path (random_walk_kernel.south west) node[visible on=<3>, anchor=north west, align=left] (svm_kernel) {\small \textcolor{IGNGreen}{\(\blacktriangleright\)} \acrshort{acr::svm} \(\vartheta\) kernel.};
    \end{tikzpicture}
 \end{document}

@@ -45,7 +45,7 @@
 \usepackage{makecell}
 
 \usepackage{tikz}
-\usetikzlibrary{calc, 3d, shadows, decorations, shapes, fadings, trees, backgrounds, fit}
+\usetikzlibrary{calc, 3d, shadows, decorations, shapes, fadings, trees, backgrounds, fit, patterns}
 \usepackage{pgfplots}
 \usepackage{pgfplotstable}
 \usepackage{forest}
@@ -116,6 +116,9 @@
 \newcommand{\smallbigcirc}[1]{%
     \vcenter{\hbox{\scalebox{0.77778}{$\m@th#1\bigcirc$}}}%
 }
+
+\patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
+
 \makeatother
 
 
@@ -279,6 +282,12 @@
                 \end{enumerate}
             \end{frame}
 
+    \AtBeginSection[]{
+        \begin{frame}[plain]<beamer>
+            \frametitle{Plan}
+            \tableofcontents[currentsection, currentsubsection, subsectionstyle=show/show/hide]
+        \end{frame}
+    }
     \section{Semantic evaluation}
         \subsection{General layout}
             \begin{frame}{Taxonomy}{Hierarchization}
@@ -543,7 +552,7 @@
                 \item<1-> Error detection \(\longleftrightarrow\) supervized classification:
                 \begin{itemize}[label=\(\rightarrow\)]
                     \item<2-> Adapted to \textbf{large scale};
-                    \item<3-> \textbf{Automatic} by design.
+                    \item<3-> \textbf{Automated} by design.
                 \end{itemize}
                 \item<4-> No Hierarchy between \texttt{atomic errors}:
                 \begin{itemize}[label=$\implies$]
@@ -592,13 +601,13 @@
                     \toprule
                     & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG} \\
                     \hline
-                    \(\bm{Rec}\) & \cellcolor<2->{IGNGreen}{98.68} & \cellcolor<1>{IGNRed}{0.63} & \cellcolor<1>{IGNRed}{0} & \cellcolor<1>{IGNRed}{0} & \cellcolor<2->{IGNGreen}{98.15} \\
+                    \(\bm{Rec}\) & \cellcolor<2-4>{IGNGreen}{98.68} & \cellcolor<1>{IGNRed}{0.63} & \cellcolor<1>{IGNRed}{0} & \cellcolor<1>{IGNRed}{0} & \cellcolor<2-4>{IGNGreen}{98.15} \\
                     \hline
-                    \(\bm{Prec}\) & \cellcolor<2->{IGNGreen}{66.60} & \cellcolor<1>{IGNRed}{0.25} & \cellcolor<1>{IGNRed}{---} & \cellcolor<1>{IGNRed}{0} & \cellcolor<2->{IGNGreen}{61.15} \\
+                    \(\bm{Prec}\) & \cellcolor<2-4>{IGNGreen}{66.60} & \cellcolor<1>{IGNRed}{0.25} & \cellcolor<1>{IGNRed}{---} & \cellcolor<1>{IGNRed}{0} & \cellcolor<2-4>{IGNGreen}{61.15} \\
                     \hline
-                    \(\bm{F_{score}}\) & \cellcolor<2->{IGNGreen}{79.52} & \cellcolor<1>{IGNRed}{1.24} & \cellcolor<1>{IGNRed}{0} & \cellcolor<1>{IGNRed}{0} & \cellcolor<2->{IGNGreen}{75.36} \\
+                    \(\bm{F_{score}}\) & \cellcolor<2-4>{IGNGreen}{79.52} & \cellcolor<1>{IGNRed}{1.24} & \cellcolor<1>{IGNRed}{0} & \cellcolor<1>{IGNRed}{0} & \cellcolor<2-4>{IGNGreen}{75.36} \\
                     \hline
-                    \(\bm{Acc}\) & \cellcolor<3>{IGNRed}{66.36} & 83.62 & 88.24 & 98.36 & \cellcolor<3>{IGNRed}{60.86} \\
+                    \(\bm{Acc}\) & \cellcolor<3-4>{IGNRed}{66.36} & 83.62 & 88.24 & 98.36 & \cellcolor<3-4>{IGNRed}{60.86} \\
                     \bottomrule
                 \end{tabular}
                 \vfill
@@ -606,8 +615,8 @@
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                     \item<only@1> Most F-scores are poor;
                     \item<only@2> Except for: \texttt{BOS}, \texttt{FOS} and \texttt{FIG};
-                    \item<only@3-> They are highly unbalanced;
-                    \item<4-> There is a need for better features.
+                    \item<only@3> They are highly unbalanced\only<4>{: Most \texttt{Valid}  detected positive};
+                    \item<only@5> There is a need for better features.
                 \end{itemize}
             \end{frame}
 
@@ -622,7 +631,7 @@
                 \includestandalone[mode=buildnew, width=.68\textwidth]{figures/features/geometric_animated}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                     \item Graph = \only<2->{\textcolor{darkgreen}{nodes(facets)}} \only<4->{ + \textcolor{blue}{edges(adjacency)}.}
-                    \item<6-> Features = Statistics on attributes (20).
+                    \item<6-> Features = Statistics on attributes (\num{4 x 5}).
                 \end{itemize}
             \end{frame}
 
@@ -724,14 +733,17 @@
             \begin{frame}{Annotation procedure}
                 \centering
                 \only<1>{
-                    \includegraphics[width=\textwidth]{images/annotations/annotation_rendering}
+                    \includegraphics[width=.8\textwidth]{images/annotations/annotation_rendering}
                 }
                 \only<2>{
-                    \includegraphics[width=\textwidth]{images/annotations/annotation_correct}
+                    \includegraphics[width=.8\textwidth]{images/annotations/annotation_correct}
                 }
                 \only<3>{
-                    \includegraphics[width=\textwidth]{images/annotations/annotation_annotation}
+                    \includegraphics[width=.8\textwidth]{images/annotations/annotation_annotation}
                 }
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \item<4-> \SI{15}{\minute \per \building}.
+                \end{itemize}
             \end{frame}
 
             \begin{frame}{Error statistics}
@@ -750,11 +762,11 @@
                         \item<4-> Highly unbalanced data;
                         \item<5-> Dense scenes are comparable;
                         \item<6-> Dense scene:
-                        \begin{itemize}[label=\(\implies\)]
-                            \item High \texttt{Facet errros} count;
-                            \item Low \texttt{Building errros} count;
+                        \begin{itemize}[label=\(\rightarrow\)]
+                            \item<7-> High \texttt{Facet errros} count;
+                            \item<7-> Low \texttt{Building errros} count;
                         \end{itemize}
-                        \item<7-> Sparce scene: inverse.
+                        \item<8-> Sparce scene: inverse.
                     \end{itemize}
                 }
             \end{frame}
@@ -811,52 +823,111 @@
 
         \subsection{Results}
             \begin{frame}{Vanilla experiments}
-                \framesubtitle<1>{\texttt{Building errors}}
-                \framesubtitle<2>{\texttt{Facet errors}}
+                \framesubtitle<1-5>{\texttt{Building errors}}
+                \framesubtitle<6-10>{\texttt{Facet errors}}
                 \centering
-                \only<1>{
-                    \includestandalone[mode=buildnew, height=.8\textheight]{figures/results/presentation/vanilla/building}
-                }
-                \only<2>{
-                    \includestandalone[mode=buildnew, height=.8\textheight]{figures/results/presentation/vanilla/facet}
-                }
-                \only<3->{
+                \only<1-5>{
+                    \includestandalone[mode=buildnew, height=.7\textheight]{figures/results/presentation/vanilla/building}
+                    \begin{itemize}
+                        \item<only@1> \phantom{M}
+                    \end{itemize}
                     \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                        \item<3-> Rare errors are hard to detect \(\longrightarrow\) \acrshort{acr::svm} is better.
-                        \item<4-> \texttt{FOS} and \texttt{FIG} are very frequent \(\implies\) easily detected.
-                        \item<5-> Geometric features are usually good enough.
-                        \item<6-> In general:
+                        \item<only@2> Rare errors are hard to detect.
+                        \item<only@3> Geometric features are usually good enough.
+                        \item<only@5> \texttt{Building errors} best on the sparce scene.
+                    \end{itemize}
+                }
+                \only<6-10>{
+                    \includestandalone[mode=buildnew, height=.7\textheight]{figures/results/presentation/vanilla/facet}
+                    \begin{itemize}
+                        \item<only@6> \phantom{M}
+                    \end{itemize}
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item<only@7> Rare errors are hard to detect.
+                        \item<only@8> \texttt{FOS} and \texttt{FIG} are very frequent \(\implies\) easily detected.
+                        \item<only@9> Geometric features are usually good enough.
+                        \item<only@10> \texttt{Facet errors} better on dense scenes;
+                    \end{itemize}
+                }
+                \only<11->{
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item<11-> Rare errors are hard to detect \(\longrightarrow\) \acrshort{acr::svm} is better.
+                        \item<12-> \texttt{FOS} and \texttt{FIG} are very frequent \(\implies\) easily detected.
+                        \item<13-> Geometric features are usually good enough.
+                        \item<14-> In general:
                         \begin{itemize}
-                            \item<6-> \texttt{Facet errors} better on dense scenes;
-                            \item<7-> \texttt{Building errors} better on the space scene;
+                            \item \texttt{Facet errors} better on dense scenes;
+                            \item \texttt{Building errors} better on the sparce scene;
                         \end{itemize}
                     \end{itemize}
                 }
             \end{frame}
 
             \begin{frame}{Transferability experiments}
+                \framesubtitle<1-3>{\texttt{Building errors}}
+                \framesubtitle<4-6>{\texttt{Facet errors}}
                 \centering
                 \renewcommand{\arraystretch}{1.5}
-                \only<1-4>{
+                \only<1-3>{
                     \footnotesize
                     \centering
-                    \begin{tabular}{| c | c | c | c | c |}
-                        \hline
-                        & \texttt{BOS}  & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} \\
-                        \hline
-                        \textbf{El.} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS1535} & \cellcolor{LOSS1535} \textbf{All} &  & \cellcolor{LOSS0515} \textbf{All} \\
-                        \hline
-                        \textbf{El.} \(\rightarrow\) \textbf{P13} & \cellcolor{STBL} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} \\
-                        \hline
-                        \textbf{Na.} \(\rightarrow\) \textbf{P13} & \cellcolor{LOSS1535} & \cellcolor{LOSS1535} \textbf{Im.} &  & \cellcolor{GAIN1535} \textcolor{white}{\textbf{Geom.}} \\
-                        \hline
-                        \textbf{Na.} \(\rightarrow\) \textbf{El.} & \cellcolor{LOSS0515} & \cellcolor{LOSS1535} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{LOSS1535} \textbf{Geom.} \\
-                        \hline
-                        \textbf{P13} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS0515} & \cellcolor{LOSS1535} \textbf{Im.} &  & \cellcolor{GAIN1535} \textcolor{white}{\textbf{Geom.}} \\
-                        \hline
-                        \textbf{P13} \(\rightarrow\) \textbf{El.} & \cellcolor{LOSS0515} & \cellcolor{LOSS1535} \textbf{All} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{Im.}} & \cellcolor{LOSS1535} \textbf{Geom.} \\
-                        \hline
-                    \end{tabular}
+                    \only<1>{
+                        \begin{tabular}{| c | x{1.2cm} | x{1.2cm} | x{1.2cm} | x{1.2cm} |}
+                            \hline
+                            & \texttt{BOS}  & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} \\
+                            \hline
+                            \textbf{Elancourt} \(\rightarrow\) \textbf{Nantes} & \cellcolor{LOSS1535} & \cellcolor{LOSS1535} \textbf{All} &  & \cellcolor{LOSS0515} \textbf{All} \\
+                            \hline
+                            \textbf{Elancourt} \(\rightarrow\) \textbf{Paris-13} & \cellcolor{STBL} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} \\
+                            \hline
+                            \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13} & \cellcolor{LOSS1535} & \cellcolor{LOSS1535} \textbf{Im.} &  & \cellcolor{GAIN1535} \textcolor{white}{\textbf{Geom.}} \\
+                            \hline
+                            \textbf{Nantes} \(\rightarrow\) \textbf{Elancourt} & \cellcolor{LOSS0515} & \cellcolor{LOSS1535} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{LOSS1535} \textbf{Geom.} \\
+                            \hline
+                            \textbf{Paris-13} \(\rightarrow\) \textbf{Nantes} & \cellcolor{LOSS0515} & \cellcolor{LOSS1535} \textbf{Im.} &  & \cellcolor{GAIN1535} \textcolor{white}{\textbf{Geom.}} \\
+                            \hline
+                            \textbf{Paris-13} \(\rightarrow\) \textbf{Elancourt} & \cellcolor{LOSS0515} & \cellcolor{LOSS1535} \textbf{All} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{Im.}} & \cellcolor{LOSS1535} \textbf{Geom.} \\
+                            \hline
+                        \end{tabular}
+                    }
+                    \only<2>{
+                        \begin{tabular}{| c | x{1.2cm} | x{1.2cm} | x{1.2cm} | x{1.2cm} |}
+                            \hline
+                            & \texttt{BOS}  & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} \\
+                            \hline
+                            \textbf{Elancourt} \(\rightarrow\) \textbf{Nantes} & \cellcolor{LOSS1535} & \cellcolor{LOSS1535} \textbf{All} &  & \cellcolor{lightgray}  \\
+                            \hline
+                            \textbf{Elancourt} \(\rightarrow\) \textbf{Paris-13} & \cellcolor{STBL} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{lightgray} \\
+                            \hline
+                            \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13} & \cellcolor{LOSS1535} & \cellcolor{LOSS1535} \textbf{Im.} &  & \cellcolor{lightgray} \\
+                            \hline
+                            \textbf{Nantes} \(\rightarrow\) \textbf{Elancourt} & \cellcolor{LOSS0515} & \cellcolor{LOSS1535} \textbf{Im.} & \cellcolor{lightgray}  & \cellcolor{lightgray} \\
+                            \hline
+                            \textbf{Paris-13} \(\rightarrow\) \textbf{Nantes} & \cellcolor{LOSS0515} & \cellcolor{LOSS1535} \textbf{Im.} &  & \cellcolor{lightgray} \\
+                            \hline
+                            \textbf{Paris-13} \(\rightarrow\) \textbf{Elancourt} & \cellcolor{LOSS0515} & \cellcolor{LOSS1535} \textbf{All} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+                            \hline
+                        \end{tabular}
+                    }
+                    \only<3>{
+                        \begin{tabular}{| c | x{1.2cm} | x{1.2cm} | x{1.2cm} | x{1.2cm} |}
+                            \hline
+                            & \texttt{BOS}  & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} \\
+                            \hline
+                            \textbf{Elancourt} \(\rightarrow\) \textbf{Nantes} &  &  \textcolor{black}{\textbf{All}} &  &  \textcolor{black}{\textbf{All}} \\
+                            \hline
+                            \textbf{Elancourt} \(\rightarrow\) \textbf{Paris-13} &  &  \textcolor{black}{\textbf{Im.}} &  &  \\
+                            \hline
+                            \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13} &  &  \textcolor{black}{\textbf{Im.}} &  &  \textcolor{black}{\textbf{Geom.}} \\
+                            \hline
+                            \textbf{Nantes} \(\rightarrow\) \textbf{Elancourt} &  &  \textcolor{black}{\textbf{Im.}} &  \textcolor{black}{\textbf{Im.}} &  \textcolor{black}{\textbf{Geom.}} \\
+                            \hline
+                            \textbf{Paris-13} \(\rightarrow\) \textbf{Nantes} &  &  \textcolor{black}{\textbf{Im.}} &  &  \textcolor{black}{\textbf{Geom.}} \\
+                            \hline
+                            \textbf{Paris-13} \(\rightarrow\) \textbf{Elancourt} &  &  \textcolor{black}{\textbf{All}} &  \textcolor{black}{\textbf{Im.}} &  \textcolor{black}{\textbf{Geom.}} \\
+                            \hline
+                        \end{tabular}
+                    }
                     \vfill
                     \begin{tikzpicture}
                         \shade[left color=white,right color=LOSS1535] (-1, 0) rectangle (0, .25);
@@ -875,37 +946,75 @@
                         \draw[black] (4, .25) -- (4, -2pt) node[below, black] {\footnotesize 15\%};
                         \draw[black] (5, .25) -- (5, -2pt) node[below, black] {\footnotesize 35\%};
 
-                        \node[align=center] at (2.5, .3) {\(\Delta F_{score}\)};
+                        \node[align=center, black] at (2.5, 1.25em) {\footnotesize \(\Delta F_{score}\)(\%)};
                     \end{tikzpicture}
-                    \uncover<1->{
-                        \normalsize
-                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                            \item<only@2> Transferability of \texttt{Building errors}: \num[fraction-function = \sfrac]{7/20}.
-                            \item<only@3> \texttt{BOS} and \texttt{BUS} are hard to transfer.
-                            \item<only@4> External modalities are \underline{critical}.
-                        \end{itemize}
-                    }
+                    \normalsize
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item<only@1> Transferability of \texttt{Building errors}: \num[fraction-function = \sfrac]{7/20}.
+                        \item<only@2> \texttt{BOS} and \texttt{BUS} are hard to transfer.
+                        \item<only@3> External modalities are \underline{critical}.
+                    \end{itemize}
                 }
-                \only<5-8>{
+                \only<4-6>{
                     \centering
                     \footnotesize
-                    \begin{tabular}{| c | c | c | c | c | c |}
-                        \hline
-                        & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG} \\
-                        \hline
-                        \textbf{El.} \(\rightarrow\) \textbf{Na.} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{STBL} \\
-                        \hline
-                        \textbf{El.} \(\rightarrow\) \textbf{P13} & \cellcolor{STBL} & \cellcolor{LOSS1535} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} &  & \cellcolor{STBL} \\
-                        \hline
-                        \textbf{Na.} \(\rightarrow\) \textbf{P13} & \cellcolor{STBL} & \cellcolor{LOSS1535} \textbf{Geom.} & \cellcolor{STBL} &  & \cellcolor{STBL} \textbf{Hei.} \\
-                        \hline
-                        \textbf{Na.} \(\rightarrow\) \textbf{El.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{GAIN1535} \textbf{Im.} & \cellcolor{LOSS0515} & \cellcolor{STBL} \\
-                        \hline
-                        \textbf{P13} \(\rightarrow\) \textbf{Na.} & \cellcolor{STBL} & \cellcolor{LOSS1535} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} \\
-                        \hline
-                        \textbf{P13} \(\rightarrow\) \textbf{El.} & \cellcolor{STBL} & \cellcolor{GAIN0515} & \cellcolor{GAIN1535} \textbf{All} & \cellcolor{LOSS0515} & \cellcolor{STBL} \\
-                        \hline
-                    \end{tabular}
+                    \only<4>{
+                        \begin{tabular}{| c | x{1cm} | x{1.2cm} | x{1cm} | x{1cm} | x{1cm} |}
+                            \hline
+                            & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG} \\
+                            \hline
+                            \textbf{Elancourt} \(\rightarrow\) \textbf{Nantes} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{STBL} \\
+                            \hline
+                            \textbf{Elancourt} \(\rightarrow\) \textbf{Paris-13} & \cellcolor{STBL} & \cellcolor{LOSS1535} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} &  & \cellcolor{STBL} \\
+                            \hline
+                            \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13} & \cellcolor{STBL} & \cellcolor{LOSS1535} \textbf{Geom.} & \cellcolor{STBL} &  & \cellcolor{STBL} \textbf{Hei.} \\
+                            \hline
+                            \textbf{Nantes} \(\rightarrow\) \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{Im.}} & \cellcolor{LOSS0515} & \cellcolor{STBL} \\
+                            \hline
+                            \textbf{Paris-13} \(\rightarrow\) \textbf{Nantes} & \cellcolor{STBL} & \cellcolor{LOSS1535} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} \\
+                            \hline
+                            \textbf{Paris-13} \(\rightarrow\) \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN0515} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{All}} & \cellcolor{LOSS0515} & \cellcolor{STBL} \\
+                            \hline
+                        \end{tabular}
+                    }
+                    \only<5>{
+                        \begin{tabular}{| c | x{1cm} | x{1.2cm} | x{1cm} | x{1cm} | x{1cm} |}
+                            \hline
+                            & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG} \\
+                            \hline
+                            \textbf{Elancourt} \(\rightarrow\) \textbf{Nantes} & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+                            \hline
+                            \textbf{Elancourt} \(\rightarrow\) \textbf{Paris-13} & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} &  & \cellcolor{lightgray} \\
+                            \hline
+                            \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13} & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} &  & \cellcolor{lightgray} \\
+                            \hline
+                            \textbf{Nantes} \(\rightarrow\) \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{Im.}} & \cellcolor{LOSS0515} & \cellcolor{STBL} \\
+                            \hline
+                            \textbf{Paris-13} \(\rightarrow\) \textbf{Nantes} & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} &  & \cellcolor{lightgray} \\
+                            \hline
+                            \textbf{Paris-13} \(\rightarrow\) \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN0515} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{All}} & \cellcolor{LOSS0515} & \cellcolor{STBL} \\
+                            \hline
+                        \end{tabular}
+                    }
+                    \only<6>{
+                        \begin{tabular}{| c | x{1cm} | x{1.2cm} | x{1cm} | x{1cm} | x{1cm} |}
+                            \hline
+                            & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG} \\
+                            \hline
+                            \textbf{Elancourt} \(\rightarrow\) \textbf{Nantes} &  &  \textcolor{black}{\textbf{Im.}} &  \textcolor{black}{\textbf{Im.}} &  \textcolor{black}{\textbf{Im.}} &  \\
+                            \hline
+                            \textbf{Elancourt} \(\rightarrow\) \textbf{Paris-13} &  &  \textcolor{black}{\textbf{Im.}} &  \textcolor{black}{\textbf{Im.}} &  &  \\
+                            \hline
+                            \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13} &  &  \textcolor{black}{\textbf{Geom.}} &  &  &  \textcolor{black}{\textbf{Hei.}} \\
+                            \hline
+                            \textbf{Nantes} \(\rightarrow\) \textbf{Elancourt} &  &  \textcolor{black}{\textbf{Im.}} &  \textcolor{black}{\textbf{Im.}} &  &  \\
+                            \hline
+                            \textbf{Paris-13} \(\rightarrow\) \textbf{Nantes} &  &  &  \textcolor{black}{\textbf{Im.}} &  &  \\
+                            \hline
+                            \textbf{Paris-13} \(\rightarrow\) \textbf{Elancourt} &  &  &  \textcolor{black}{\textbf{All}} &  &  \\
+                            \hline
+                        \end{tabular}
+                    }
                     \vfill
                     \begin{tikzpicture}
                         \shade[left color=white,right color=LOSS1535] (-1, 0) rectangle (0, .25);
@@ -924,31 +1033,29 @@
                         \draw[black] (4, .25) -- (4, -2pt) node[below, black] {\footnotesize 15\%};
                         \draw[black] (5, .25) -- (5, -2pt) node[below, black] {\footnotesize 35\%};
 
-                        \node[align=center] at (2.5, .3) {\(\Delta F_{score}\)};
+                        \node[align=center, black] at (2.5, 1.25em) {\footnotesize \(\Delta F_{score}\)(\%)};
                     \end{tikzpicture}
-                    \uncover<6->{
-                        \normalsize
-                        \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                            \item<only@6> Transferability of \texttt{Facets errors}: \num[fraction-function = \sfrac]{20/27}.
-                            \item<only@7> Dense scenes are better for \texttt{Facet errors}.
-                            \item<only@8> External modalities are \underline{critical}.
-                        \end{itemize}
-                    }
+                    \normalsize
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item<only@4> Transferability of \texttt{Facets errors}: \num[fraction-function = \sfrac]{20/27}.
+                        \item<only@5> Dense scenes are better for \texttt{Facet errors}.
+                        \item<only@6> External modalities are \underline{critical}.
+                    \end{itemize}
                 }
                 \renewcommand{\arraystretch}{1}
-                \only<9->{
+                \only<7->{
                     \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                        \item<9-> \texttt{Facets errors} > \texttt{Building errors}
-                        \item<10-> \texttt{BOS} and \texttt{BUS} are hard to transfer.
-                        \item<11-> Dense scenes: same behaviour.
-                        \item<12-> Dense scenes: better for \texttt{Facet errors}.
-                        \item<13-> External modalities are \underline{critical}.
+                        \item<7-> \texttt{Facets errors} > \texttt{Building errors}
+                        \item<8-> \texttt{BOS} and \texttt{BUS} are hard to transfer.
+                        \item<9-> Dense scenes: same behaviour.
+                        \item<10-> Dense scenes: better for \texttt{Facet errors}.
+                        \item<11-> External modalities are \underline{critical}.
                     \end{itemize}
                 }
             \end{frame}
     
     \section{Advanced features}
-        \subsection{Advanced graph features}
+        \subsection{Graph features}
             \begin{frame}{Our needs}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                     \item<1-> Global feature for each graph.
@@ -962,14 +1069,31 @@
             \begin{frame}{Our solution}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                     \item<1-> Use kernel trick:
-                    \item<2-> Compare graphs with kernels;
-                    \item<3-> Instead of computing feature vectors.
+                    \begin{itemize}[label=\(\rightarrow\)]
+                        \item<2-> Compare graphs with kernels (scalar products);
+                        \item<3-> Instead of computing feature vectors.
+                    \end{itemize}
                 \end{itemize}
             \end{frame}
 
-            \begin{frame}{Graph kernels}
+            \begin{frame}{Used graph kernels}
                 \centering
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/features/graph_kernels/kernels_menu_all}
+                \only<1-3>{
+                    \includestandalone[mode=buildnew, width=\textwidth]{figures/features/graph_kernels/kernels_menu_all}
+                }
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \item<4-> without node attributes:
+                    \begin{itemize}[label=\(\rightarrow\)]
+                        \item<5-> Random Walk~\parencite{vishwanathan2010graph};
+                        \item<5-> \acrshort{acr::svm} \(\vartheta\)~\parencite{johansson2014global}.
+                    \end{itemize}
+                    \item<6-> with node attributes:
+                    \begin{itemize}[label=\(\rightarrow\)]
+                        \item<7-> Multiscale Laplacian~\parencite{kondor2016multiscale};
+                        \item<7-> Propagation~\parencite{neumann2016propagation};
+                        \item<7-> Graph Hopper~\parencite{feragen2013scalable}.
+                    \end{itemize}
+                \end{itemize}
             \end{frame}
 
             \begin{frame}{Advanced graph features}
@@ -977,14 +1101,17 @@
                 \includestandalone[mode=buildnew, height=.8\textheight]{figures/features/geometric_kernels_animated}
             \end{frame}
     
-        \subsection{Advanced image features}
+        \subsection{Image features}
             \begin{frame}{Our needs}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                     \item<1-> Global feature for an image.
-                    \item<2-> Handle both \glspl{acr::dsm} and images.
-                    \item<3-> Handle edges.
-                    \item<4-> Handle textures.
-                    \item<5-> Handle small dataset.
+                    \item<2-> Handles:
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item<2-> both \glspl{acr::dsm} and images (RGB).
+                        \item<3-> Handle edges.
+                        \item<4-> Handle textures.
+                        \item<5-> Handle small dataset.
+                    \end{itemize}
                 \end{itemize}
             \end{frame}
 
@@ -994,11 +1121,11 @@
                     \begin{itemize}
                         \item[\color{IGNDarkGreen} +]<2-> No need for a large dataset;
                         \item[\color{IGNDarkGreen} +]<3-> Interpretable; 
-                        \item[\color{red} ---]<4-> Features: not adaptable.
+                        \item[\color{IGNRed} ---]<4-> Features: not adaptable.
                     \end{itemize}
                     \item<5-> Limited to shallow layers:
                     \begin{itemize}
-                        \item[\color{red} ---]<6-> Less powerful~\parencite{oyallon2015deep}.
+                        \item[\color{IGNRed} ---]<6-> Less powerful~\parencite{oyallon2015deep}.
                     \end{itemize}
                 \end{itemize}
             \end{frame}
@@ -1013,27 +1140,28 @@
                         \item<5-> Average pooling operator \(\longrightarrow\) local invariance~\parencite{mallat2012group}.
                     \end{itemize}
                 \end{itemize}
+                \begin{overlayarea}{\textwidth}{.3\textheight}
+                    \centering
+                    \only<3>{
+                        \includegraphics[width=\textwidth]{images/related_work/morlet_wavelets}
+                    }
+                \end{overlayarea}
             \end{frame}
             
-            \begin{frame}{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} filters}
-                \centering
-                \only<1>{
-                    \includegraphics[width=\textwidth]{images/related_work/morlet_wavelets}
-                }
-                \only<2>{
-                    \includegraphics[width=.35\textwidth]{images/related_work/first_layer_cnn}\\
-                    \includegraphics[width=.5\textwidth]{images/related_work/second_layer_cnn}
-                }
-            \end{frame}
-
             \begin{frame}{Advanced height based features}
                 \centering
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/features/height_based_animated_scatnet}
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                    \item<4-> Features = \only<4>{Statistics over coefficients }\only<5>{\num{1085} in length}.
+                \end{itemize}
             \end{frame}
 
             \begin{frame}{Advanced image based features}
                 \centering
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/features/image_based_animated_scatnet}
+                \includestandalone[mode=buildnew, width=.9\textwidth]{figures/features/image_based_animated_scatnet}
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                    \item<8-> Features = \only<8>{Statistics over coefficients }\only<9>{\num{1085} per channel in length}.
+                \end{itemize}
             \end{frame}
         
         \subsection{Experiments}
@@ -1066,14 +1194,15 @@
                         \item<2->[Max depth] \num{4};
                         \item<2->[Number of trees] \num{1000};
                     \end{description}
-                    \item<3-> Feature configurations:
+                    \item<3-> \textbf{Na-P13} = \textbf{Nantes} \(\cup\) \textbf{Paris-13}
+                    \item<4-> Feature configurations:
                     \begin{itemize}
-                        \item<4-> \textbf{Geom.};
-                        \item<4-> \textbf{Geom.} \(\oplus\) \textbf{S-Hei.};
-                        \item<4-> \textbf{Geom.} \(\oplus\) \textbf{S(d)-Im.};
-                        \item<4-> \textbf{Geom.} \(\oplus\) \textbf{S(c)-Im.};
-                        \item<4-> \textbf{S(d)-All} = \textbf{Geom.} \(\oplus\) \textbf{S-Hei.} \(\oplus\) \textbf{S(d)-Im.}.
-                        \item<4-> \textbf{S(c)-All} = \textbf{Geom.} \(\oplus\) \textbf{S-Hei.} \(\oplus\) \textbf{S(c)-Im.}.
+                        \item<5-> \textbf{Geom.};
+                        \item<5-> \textbf{Geom.} \(\oplus\) \textbf{S-Hei.};
+                        \item<5-> \textbf{Geom.} \(\oplus\) \textbf{S(d)-Im.};
+                        \item<5-> \textbf{Geom.} \(\oplus\) \textbf{S(c)-Im.};
+                        \item<5-> \textbf{S(d)-All} = \textbf{Geom.} \(\oplus\) \textbf{S-Hei.} \(\oplus\) \textbf{S(d)-Im.}.
+                        \item<5-> \textbf{S(c)-All} = \textbf{Geom.} \(\oplus\) \textbf{S-Hei.} \(\oplus\) \textbf{S(c)-Im.}.
                     \end{itemize}
                 \end{itemize}
             \end{frame}
@@ -1081,67 +1210,159 @@
             \begin{frame}{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} results}
                 \centering
                 \small
-                \begin{tabular}{| c | c | c | c | c |}
-                    \hline
-                     & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} \\
-                    \hline
-                    \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S-Hei.}} & \cellcolor{STBL} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S-Hei.}} \\
-                    \hline
-                    \textbf{Na-P13} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{S(d|c)-Im.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S(d)-Im.}} \\
-                    \hline
-                \end{tabular}
-                \vfill
-                \begin{tabular}{| c | c | c | c | c | c |}
-                    \hline
-                     & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG}\\
-                    \hline
-                    \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S(c)-All}} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S(c)-Im.}} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S(d)-Im.}} & \cellcolor{GAIN0515} \\
-                    \hline
-                    \textbf{Na-P13} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S(c)-Im.}} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S(c)-Im.}} & \cellcolor{STBL} \\
-                    \hline
-                \end{tabular}
-                \vfill
+                \only<1>{
+                    \begin{tabular}{| c | c | x{2cm} | c | x{1.8cm} |}
+                        \hline
+                         & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} \\
+                        \hline
+                        \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S-Hei.}} & \cellcolor{STBL} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S-Hei.}} \\
+                        \hline
+                        \textbf{Na-P13} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{S(d|c)-Im.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S(d)-Im.}} \\
+                        \hline
+                    \end{tabular}
+                    \vfill
+                    \begin{tabular}{| c | c | x{1.8cm} | x{1.8cm} | x{1.8cm} | c |}
+                        \hline
+                         & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG}\\
+                        \hline
+                        \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S(c)-All}} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S(c)-Im.}} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S(d)-Im.}} & \cellcolor{GAIN0515} \\
+                        \hline
+                        \textbf{Na-P13} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S(c)-Im.}} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S(c)-Im.}} & \cellcolor{STBL} \\
+                        \hline
+                    \end{tabular}
+                }
+                \only<2>{
+                    \begin{tabular}{| c | c | x{2cm} | c | x{1.8cm} |}
+                        \hline
+                         & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} \\
+                        \hline
+                        \textbf{Elancourt} & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+                        \hline
+                        \textbf{Na-P13} & \cellcolor{lightgray} & \cellcolor{LOSS0515} \textbf{S(d|c)-Im.} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+                        \hline
+                    \end{tabular}
+                    \vfill
+                    \begin{tabular}{| c | c | x{1.8cm} | x{1.8cm} | x{1.8cm} | c |}
+                        \hline
+                         & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG}\\
+                        \hline
+                        \textbf{Elancourt} & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+                        \hline
+                        \textbf{Na-P13} & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{lightgray} \\
+                        \hline
+                    \end{tabular}
+                }
+                \only<3>{
+                    \begin{tabular}{| c | c | x{2cm} | c | x{1.8cm} |}
+                        \hline
+                         & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} \\
+                        \hline
+                        \textbf{Elancourt} & \cellcolor{lightgray} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S-Hei.}} & \cellcolor{lightgray} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S-Hei.}} \\
+                        \hline
+                        \textbf{Na-P13} & \cellcolor{lightgray} &  & \cellcolor{lightgray} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S(d)-Im.}} \\
+                        \hline
+                    \end{tabular}
+                    \vfill
+                    \begin{tabular}{| c | c | x{1.8cm} | x{1.8cm} | x{1.8cm} | c |}
+                        \hline
+                         & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG}\\
+                        \hline
+                        \textbf{Elancourt} & \cellcolor{lightgray} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S(c)-All}} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S(c)-Im.}} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S(d)-Im.}} & \cellcolor{GAIN0515} \\
+                        \hline
+                        \textbf{Na-P13} & \cellcolor{lightgray} & \cellcolor{lightgray} & \cellcolor{GAIN0515} \textcolor{white}{\textbf{S(c)-Im.}} & \cellcolor{GAIN1535} \textcolor{white}{\textbf{S(c)-Im.}} & \cellcolor{lightgray} \\
+                        \hline
+                    \end{tabular}
+                }
+                \only<4>{
+                    \begin{tabular}{| c | c | x{2cm} | c | x{1.8cm} |}
+                        \hline
+                         & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} \\
+                        \hline
+                        \textbf{Elancourt} &  & \textcolor{black}{\textbf{S-Hei.}} &  & \textcolor{black}{\textbf{S-Hei.}} \\
+                        \hline
+                        \textbf{Na-P13} &  & \textcolor{black}{\textbf{S(d|c)-Im.}} &  & \textcolor{black}{\textbf{S(d)-Im.}} \\
+                        \hline
+                    \end{tabular}
+                    \vfill
+                    \begin{tabular}{| c | c | x{1.8cm} | x{1.8cm} | x{1.8cm} | c |}
+                        \hline
+                         & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG}\\
+                        \hline
+                        \textbf{Elancourt} &  & \textcolor{black}{\textbf{S(c)-All}} & \textcolor{black}{\textbf{S(c)-Im.}} & \textcolor{black}{\textbf{S(d)-Im.}} & \\
+                        \hline
+                        \textbf{Na-P13} &  &  & \textcolor{black}{\textbf{S(c)-Im.}} & \textcolor{black}{\textbf{S(c)-Im.}} &  \\
+                        \hline
+                    \end{tabular}
+                }
                 \begin{tikzpicture}
-                    \shade[left color=white,right color=LOSS0515] (0, 0) rectangle (1, .25);
+                    \shade[left color=white,right color=LOSS1535] (-1, 0) rectangle (0, .25);
+                    \draw[LOSS1535, fill=LOSS1535] (0, 0) rectangle (1, .25);
                     \draw[LOSS0515, fill=LOSS0515] (1, 0) rectangle (2, .25);
                     \draw[STBL, fill=STBL] (2, 0) rectangle (3, .25);
                     \draw[GAIN0515, fill=GAIN0515] (3, 0) rectangle (4, .25);
                     \draw[GAIN1535, fill=GAIN1535] (4, 0) rectangle (5, .25);
                     \shade[left color=GAIN1535,right color=white] (5, 0) rectangle (6, .25);
-                    \draw[black] (0, 0) -- (6, 0);
-                    \draw[black] (0, .25) -- (6, .25);
-                    \draw[black] (1, .25) -- (1, -2pt) node[below, IGNDarkGrey] {\footnotesize -15\%};
-                    \draw[black] (2, .25) -- (2, -2pt) node[below, IGNDarkGrey] {\footnotesize -5\%};
-                    \draw[black] (3, .25) -- (3, -2pt) node[below, IGNDarkGrey] {\footnotesize 5\%};
-                    \draw[black] (4, .25) -- (4, -2pt) node[below, IGNDarkGrey] {\footnotesize 15\%};
-                    \draw[black] (5, .25) -- (5, -2pt) node[below, IGNDarkGrey] {\footnotesize 35\%};
+                    \draw[black] (-1, 0) -- (6, 0);
+                    \draw[black] (-1, .25) -- (6, .25);
+                    \draw[black] (0, .25) -- (0, -2pt) node[below, black] {\footnotesize -35\%};
+                    \draw[black] (1, .25) -- (1, -2pt) node[below, black] {\footnotesize -15\%};
+                    \draw[black] (2, .25) -- (2, -2pt) node[below, black] {\footnotesize -5\%};
+                    \draw[black] (3, .25) -- (3, -2pt) node[below, black] {\footnotesize 5\%};
+                    \draw[black] (4, .25) -- (4, -2pt) node[below, black] {\footnotesize 15\%};
+                    \draw[black] (5, .25) -- (5, -2pt) node[below, black] {\footnotesize 35\%};
+
+                    \node[align=center, black] at (2.5, 1.25em) {\footnotesize \(\Delta F_{score}\)(\%)};
                 \end{tikzpicture}
-                \uncover<2->{
-                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                        \item<only@2> Worse only once: \texttt{BUS} on \textbf{Na-P13}.
-                        \item<only@3> Better: \num[fraction-function = \sfrac]{9/17}.
-                        \item<only@4> External feature helpful for semantic and geometric errors.
-                        \item<only@5> Better extractors \(\implies\) external feature more helpful.
-                    \end{itemize}
-                }
+                \begin{itemize}
+                    \item<only@1> \phantom{M}
+                \end{itemize}
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \item<only@2> Worse only once: \texttt{BUS} on \textbf{Na-P13}.
+                    \item<only@3> Better in \num[fraction-function = \sfrac]{9/17} cases.
+                    \item<only@4> Better extractors \(\implies\) external features stand out more.
+                \end{itemize}
             \end{frame}
 
             \begin{frame}{Best results}
-                \framesubtitle<1>{\texttt{Building errors}}
-                \framesubtitle<2>{\texttt{Facet errors}}
+                \framesubtitle<1-3>{\texttt{Building errors}}
+                \framesubtitle<4-6>{\texttt{Facet errors}}
                 \centering
-                \only<1>{
-                    \includestandalone[mode=buildnew, height=.8\textheight]{figures/results/presentation/best/building}
-                }
-                \only<2>{
-                    \includestandalone[mode=buildnew, height=.8\textheight]{figures/results/presentation/best/facet}
-                }
-                \only<3->{
+                \only<1-3>{
+                    \includestandalone[mode=buildnew, height=.65\textheight]{figures/results/presentation/best/building}
+                    \begin{itemize}
+                        \item<only@1> \phantom{M}
+                        \item<only@1> \phantom{M}
+                    \end{itemize}
                     \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                        \item<3-> \acrshort{acr::svm} good for highly unbalanced errors.
-                        \item<4-> Better feature extractors were beneficial.
-                        \item<5-> Only \textbf{Elancourt}: \texttt{Building errors} > \SI{70}{\%}.
-                        \item<6-> \texttt{Facet errors} > \SI{70}{\%}.
+                        \item<only@2> \acrshort{acr::svm} good for highly unbalanced errors.
+                        \item<only@2> Better feature extractors were beneficial.
+                        \item<only@3> \texttt{Building errors} > \SI{70}{\%}: Only \textbf{Elancourt}.
+                        \item<only@3> \texttt{Building errors} on dense scenes: Still to be improved.
+                    \end{itemize}
+                }
+                \only<4-6>{
+                    \includestandalone[mode=buildnew, height=.65\textheight]{figures/results/presentation/best/facet}
+                    \begin{itemize}
+                        \item<only@4> \phantom{M}
+                        \item<only@4> \phantom{M}
+                    \end{itemize}
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item<only@5> \acrshort{acr::svm} good for highly unbalanced errors.
+                        \item<only@5> Better feature extractors were beneficial.
+                        \item<only@6> \texttt{Facet errors} > \SI{70}{\%}.
+                    \end{itemize}
+                    \begin{itemize}
+                        \item<only@6> \phantom{M}
+                    \end{itemize}
+
+                }
+                \only<7->{
+                    \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                        \item<7-> \acrshort{acr::svm} good for highly unbalanced errors.
+                        \item<7-> Better feature extractors were beneficial.
+                        \item<8-> \texttt{Building errors} > \SI{70}{\%}: Only \textbf{Elancourt}.
+                        \item<8-> \texttt{Building errors} on dense scenes: Still to be improved.
+                        \item<9-> \texttt{Facet errors} > \SI{70}{\%}.
                     \end{itemize}
                 }
             \end{frame}
@@ -1151,22 +1372,48 @@
             \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                 \item<1-> \textbf{Hierarchical and modular} error taxonomy;
                 \item<2-> \textbf{Scalable} evaluation method;
-                \item<4-> Intrinsic features could be used for error prediction;
-                \item<5-> Extrinsinc modalities \(\implies\) better transferability.
-                \item<6-> Advanced features \(\implies\) high prediction scores.
+                \item<3-> Intrinsic features could be used for error prediction;
+                \item<4-> Extrinsinc modalities \(\implies\) better transferability.
+                \item<5-> Generalization \(\rightarrow\)) validates Transferability conclusions.
+                \item<6-> Representativity \(\rightarrow\)) \SI{30}{\percent} is sufficient.
+                \item<7-> Advanced features \(\implies\) higher prediction scores.
+                \item<8-> \texttt{Building errors} on dense scenes: Still to be improved.
             \end{itemize}
         \end{frame}
+
         \begin{frame}{Perspectives}
             \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                \item<1-> Use of deep learning:
+                \item<1-> Use of \acrshort{acr::cnn} (graphs and images):
                 \begin{itemize}[label=---]
-                    \item Dataset augmentation $\longrightarrow$ \textbf{Simulate errors};
+                    \item Dataset augmentation \(\rightarrow\) \textbf{Simulate errors};
                     \item Semi-supervized learning.
                 \end{itemize}
-                \item<2-> Localizing errors: facet level.
-                \item<3-> Automatic correction.
-                \item<4-> Generalize to \gls{acr::lod}-3.
-                \item<5-> More modalities: cadastre~\parencite{biljecki2017generating}.
+                \item<2-> Localizing \texttt{Facet errors}.
+                \item<3-> Generalize to \gls{acr::lod}-3.
+                \item<4-> Add modalities: cadastre~\parencite{biljecki2017generating}.
+                \item<5-> Automatic correction.
+            \end{itemize}
+        \end{frame}
+
+        \begin{frame}{Perspectives}{Automatic correction}
+            \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                \item<1-> Toolbox = set of modeling methods:
+                \begin{itemize}
+                    \item[\color{IGNDarkGreen} +]<2-> Off-the-shelf methods;
+                    \item[\color{IGNRed} ---]<2-> Low flexibility;
+                    \item[\color{IGNRed} ---]<2-> Time consuming.
+                \end{itemize}
+                \item<3-> Toolbox = set of elementary correction operators:
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                    \item<4-> Rules linking errors to operations:
+                    \begin{itemize}
+                        \item[\color{IGNDarkGreen} +]<5-> Flexible;
+                        \item[\color{IGNDarkGreen} +]<5-> Low latency;
+                        \item[\color{IGNRed} ---]<5-> Needs a finer taxonomy;
+                        \item[\color{IGNRed} ---]<5-> Rules: hard to generalize;
+                    \end{itemize}
+                    \item<6-> Learn the rules \(\rightarrow\)) Multi-armed Bandit;
+                \end{itemize}
             \end{itemize}
         \end{frame}
 
@@ -1219,6 +1466,51 @@
         \restoregeometry 
     \end{frame}
     \egroup
+
+    \begin{frame}{Graph kernels results}
+        \centering
+        \small
+        \begin{tabular}{| c | c | c | c | c |}
+            \hline
+             & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} \\
+            \hline
+            \textbf{Elancourt} & \cellcolor{STBL} & \cellcolor{GAIN1535} & \cellcolor{STBL} & \cellcolor{LOSS1535} \\
+            \hline
+            \textbf{Na-P13} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{GAIN1535} & \cellcolor{STBL} \\
+            \hline
+        \end{tabular}
+        \vfill
+        \begin{tabular}{| c | c | c | c | c | c |}
+            \hline
+             & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG}\\
+            \hline
+            \textbf{Elancourt} & \cellcolor{GAIN1535} & \cellcolor{LOSS1535} & \cellcolor{STBL} & \cellcolor{GAIN0515} & \cellcolor{LOSS0515} \\
+            \hline
+            \textbf{Na-P13} & \cellcolor{GAIN0515} & \cellcolor{STBL} & \cellcolor{GAIN0515} & \cellcolor{GAIN0515} & \cellcolor{STBL} \\
+            \hline
+        \end{tabular}
+        \vfill
+        \begin{tikzpicture}
+            \shade[left color=white,right color=LOSS1535] (-1, 0) rectangle (0, .25);
+            \draw[LOSS1535, fill=LOSS1535] (0, 0) rectangle (1, .25);
+            \draw[LOSS0515, fill=LOSS0515] (1, 0) rectangle (2, .25);
+            \draw[STBL, fill=STBL] (2, 0) rectangle (3, .25);
+            \draw[GAIN0515, fill=GAIN0515] (3, 0) rectangle (4, .25);
+            \draw[GAIN1535, fill=GAIN1535] (4, 0) rectangle (5, .25);
+            \shade[left color=GAIN1535,right color=white] (5, 0) rectangle (6, .25);
+            \draw[black] (-1, 0) -- (6, 0);
+            \draw[black] (-1, .25) -- (6, .25);
+            \draw[black] (0, .25) -- (0, -2pt) node[below, black] {\footnotesize -35\%};
+            \draw[black] (1, .25) -- (1, -2pt) node[below, black] {\footnotesize -15\%};
+            \draw[black] (2, .25) -- (2, -2pt) node[below, black] {\footnotesize -5\%};
+            \draw[black] (3, .25) -- (3, -2pt) node[below, black] {\footnotesize 5\%};
+            \draw[black] (4, .25) -- (4, -2pt) node[below, black] {\footnotesize 15\%};
+            \draw[black] (5, .25) -- (5, -2pt) node[below, black] {\footnotesize 35\%};
+
+            \node[align=center, black] at (2.5, 1.25em) {\footnotesize \(\Delta F_{score}\)(\%)};
+        \end{tikzpicture}
+    \end{frame}
+
 
     \begin{frame}{Graph kernels}
         \centering
@@ -1340,5 +1632,17 @@
         \centering
         \includestandalone[mode=buildnew, height=.8\textheight]{figures/scattering_network_animated}
     \end{frame}
+
+    \begin{frame}{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} filters}
+        \centering
+        \only<1>{
+            \includegraphics[width=\textwidth]{images/related_work/morlet_wavelets}
+        }
+        \only<2>{
+            \includegraphics[width=.35\textwidth]{images/related_work/first_layer_cnn}\\
+            \includegraphics[width=.5\textwidth]{images/related_work/second_layer_cnn}
+        }
+    \end{frame}
+
 
 \end{document}

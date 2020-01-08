@@ -24,6 +24,27 @@
         3, 48.84, {K-S(c)-Im.}
     }\BIT
 
+    \pgfplotstableread[col sep=comma]{
+        x, y, label
+        1, 84.12, 
+        3, 62.44, 
+    }\oldBOS
+    \pgfplotstableread[col sep=comma]{
+        x, y, label
+        1, 53.88, 
+        3, 50.46, 
+    }\oldBUS
+    \pgfplotstableread[col sep=comma]{
+        x, y, label
+        1, 26.88, 
+        3, 3.84, 
+    }\oldBIB
+    \pgfplotstableread[col sep=comma]{
+        x, y, label
+        1, 39.68, 
+        3, 10.10, 
+    }\oldBIT
+
     \begin{tikzpicture} 
         \begin{axis}[
             ylabel={F-score (\%)},
@@ -76,6 +97,31 @@
                 \footnotesize \strut \texttt{BIB},
                 \footnotesize \strut \texttt{BIT}
             }
+
+            \addplot+[
+                visible on=<2->,
+                bar shift = -30pt,
+                pattern=north east lines,
+                draw=green
+            ] table[x=x, y=y, meta index=2] {\oldBOS};
+            \addplot+[
+                visible on=<2->,
+                bar shift = -10pt,
+                pattern=north east lines,
+                draw=cyan
+            ] table[x=x, y=y, meta index=2] {\oldBUS};
+            \addplot+[
+                visible on=<2->,
+                bar shift = 10pt,
+                pattern=north east lines,
+                draw=red
+            ] table[x=x, y=y, meta index=2] {\oldBIB};
+            \addplot+[
+                visible on=<2->,
+                bar shift = 30pt,
+                pattern=north east lines,
+                draw=olive
+            ] table[x=x, y=y, meta index=2] {\oldBIT};
         \end{axis} 
     \end{tikzpicture}
 \end{document}

@@ -19,11 +19,7 @@
         \path (residual_colorbar.west) node[anchor=east, visible on=<3>] (equals) {\Large =};
 
         \path (dsm.west) node[anchor=west, visible on=<4->] (residual) {\includegraphics[width=1.5cm]{images/features/scatnet/residual}};
-        \path (model.east) node[anchor=east, visible on=<4->, blue] (s) {\footnotesize \(\begin{Bmatrix}
-            S_0[x]\\
-            S_1[x]\\
-            S_2[x]
-        \end{Bmatrix}\)};
+        \path (model.east) node[anchor=east, visible on=<4->, blue] (s) {\small \(\begin{Bmatrix}S[x]\end{Bmatrix}\)};
 
         \draw[->, very thick, visible on=<4->, black] (residual) -- (s) node[midway, visible on=<4->, draw, rounded corners, black, fill=white] (scatnet) {\gls{acr::scatnet}};
 	\end{tikzpicture}

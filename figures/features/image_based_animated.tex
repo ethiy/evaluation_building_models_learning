@@ -10,15 +10,15 @@
 	\begin{tikzpicture}
 		\node[visible on=<1>] (image) {\includegraphics[width=5cm, angle=270]{images/introduction/graphical_abstract/orthoprojection}};
 		\path (image.south) node[anchor=north, visible on=<1>, text width=5cm, align=center] (image_legend) {\scriptsize Nadir projection on orthoimage.};
-		\path (image_legend) node[visible on=<3>, text width=5cm, align=center] (image_legend) {\scriptsize Histogram over edges.};
+		\path (image_legend) node[visible on=<3>, text width=5cm, align=center] (image_legend) {\scriptsize Histogram over Edges.};
 		\path (image_legend) node[visible on=<4>, text width=5cm, align=center] (image_legend) {\scriptsize Histogram over Facets.};
 		\path (image_legend) node[visible on=<5>, text width=5cm, align=center] (image_legend) {\scriptsize Global histogram.};
 
 		\path (image) + (-.25, 0) node[visible on=<2>] (pixel_segment) {\includestandalone[width=4cm]{figures/features/image_based}};
-		\path (pixel_segment.south) node[anchor=north, visible on=<2>, text width=4cm, align=center] (image_legend) {
+		\path (pixel_segment.south) node[anchor=north, visible on=<2>, align=center] (image_legend) {
 			\scriptsize
 			\begin{tabular}{c c c c}
-				\textcolor{green!30}{\(\blacksquare\)} & intersecting pixel. & \textcolor{red}{\(\blacksquare\)} & model edge. \\
+				\textcolor{green!30}{\(\blacksquare\)} & intersecting pixel. & \textcolor{red}{\(\blacksquare\)} & model edge.\\
 				\textcolor{purple}{\(\nabla I\)} & local gradient. & \textcolor{black}{\(\vec{n}\)} & edge \acrshort{acr::2d} normal.
 			\end{tabular}
 		};
