@@ -14,9 +14,16 @@
 		\path (image_legend) node[visible on=<4>, text width=5cm, align=center] (image_legend) {\scriptsize Histogram over Facets.};
 		\path (image_legend) node[visible on=<5>, text width=5cm, align=center] (image_legend) {\scriptsize Global histogram.};
 
-		\path (image) + (-.25, 0) node[visible on=<2>] (pixel_segment) {\includestandalone[width=5cm]{figures/features/image_based}};
+		\path (image) + (-.25, 0) node[visible on=<2>] (pixel_segment) {\includestandalone[width=4cm]{figures/features/image_based}};
+		\path (pixel_segment.south) node[anchor=north, visible on=<2>, text width=4cm, align=center] (image_legend) {
+			\scriptsize
+			\begin{tabular}{c c c c}
+				\textcolor{green!30}{\(\blacksquare\)} & intersecting pixel. & \textcolor{red}{\(\blacksquare\)} & model edge. \\
+				\textcolor{purple}{\(\nabla I\)} & local gradient. & \textcolor{black}{\(\vec{n}\)} & edge \acrshort{acr::2d} normal.
+			\end{tabular}
+		};
 
-		\path (image) node[visible on=<3->] (segment_hist) {\includegraphics[width=5cm, angle=270]{images/introduction/graphical_abstract/orthoprojection}};
+		\path (image) node[visible on=<3-5>] (segment_hist) {\includegraphics[width=5cm, angle=270]{images/introduction/graphical_abstract/orthoprojection}};
 
 		\path (image) + (2.33, -1) node[visible on =<3>] (segment_hist_1) {
 			\resizebox{.75cm}{.75cm}{
@@ -338,6 +345,45 @@
 						ytick=\empty,
 						xtick=\empty,
 						visible on=<5>
+					]
+						\addplot+[ybar interval,mark=no] plot coordinates {
+							(-15, 0) 
+							(-14, 0)
+							(-13, 876)
+							(-12, 366)
+							(-11, 593)
+							(-10, 675)
+							(-9, 2231)
+							(-8, 33)
+							(-7, 546)
+							(-6, 195)
+							(-5, 182)
+							(-4, 3641)
+							(-3, 54)
+							(-2, 123)
+							(-1, 3815)
+							(0, 4291)
+							(1, 211)
+							(2, 10)
+							(3, 0)
+							(4, 0)
+							(5, 0)
+							(6, 0)
+							(7, 0)
+							(8, 0)
+						};
+					\end{axis}
+				\end{tikzpicture}
+			}
+		};
+		\path (image) node[visible on =<6>] (whole_hist) {
+			\resizebox{4cm}{3cm}{
+				\begin{tikzpicture}background rectangle/.style={fill=white}, show background rectangle
+					\begin{axis}[
+						area style,
+						axis background/.style={fill=white},
+						ymin=0,
+						visible on=<6>
 					]
 						\addplot+[ybar interval,mark=no] plot coordinates {
 							(-15, 0) 

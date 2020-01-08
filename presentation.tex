@@ -541,7 +541,7 @@
         \begin{frame}{Evaluation as classification}
             \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                 \item<1-> Error detection \(\longleftrightarrow\) supervized classification:
-                \begin{itemize}[label=---]
+                \begin{itemize}[label=\(\rightarrow\)]
                     \item<2-> Adapted to \textbf{large scale};
                     \item<3-> \textbf{Automatic} by design.
                 \end{itemize}
@@ -606,7 +606,8 @@
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                     \item<only@1> Most F-scores are poor;
                     \item<only@2> Except for: \texttt{BOS}, \texttt{FOS} and \texttt{FIG};
-                    \item<only@3> They are highly unbalanced.
+                    \item<only@3-> They are highly unbalanced;
+                    \item<4-> There is a need for better features.
                 \end{itemize}
             \end{frame}
 
@@ -618,27 +619,42 @@
 
             \begin{frame}{Geometric features}
                 \centering
-                \includestandalone[mode=buildnew, width=.75\textwidth]{figures/features/geometric_animated}
+                \includestandalone[mode=buildnew, width=.68\textwidth]{figures/features/geometric_animated}
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \item Graph = \only<2->{\textcolor{darkgreen}{nodes(facets)}} \only<4->{ + \textcolor{blue}{edges(adjacency)}.}
+                    \item<6-> Features = Statistics on attributes (20).
+                \end{itemize}
             \end{frame}
 
             \begin{frame}{Height based features}
                 \centering
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/features/height_based_animated}
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \item<5-> Features = Histogram bins (20).
+                \end{itemize}
             \end{frame}
 
             \begin{frame}{Image based features}
                 \centering
-                \includestandalone[mode=buildnew, height=.8\textheight]{figures/features/image_based_animated}
+                \includestandalone[mode=buildnew, height=.7\textheight]{figures/features/image_based_animated}
+                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
+                    \item<6> Features = Histogram bins (20).
+                \end{itemize}
             \end{frame}
     
     \section{Experiments}
         \subsection{Dataset}
             \begin{frame}{Origin of models}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                    \item<1-> Not many open large datasets;
-                    \item<2-> Bati3D\textsuperscript{\textregistered} data;
+                    \item<1-> Few open large datasets;
+                    \item<2-> Bati3D\textsuperscript{\textregistered} data:
+                    \begin{itemize}[label=$\rightarrow$]
+                        \item Based on~\parencite{durupt2006automatic};
+                        \item Relies on a footprint database;
+                        \item Designed mainly for residential areas;
+                    \end{itemize}
                     \item<3-> 10 areas: \num[fraction-function = \sfrac]{1/2} usable;
-                    \item<4-> Choose different urban scenes.
+                    \item<4-> Selected 3 different urban scenes.
                 \end{itemize}
             \end{frame}
             \begin{frame}{Urban scenes}
@@ -658,7 +674,7 @@
                                             \item<3-> Industrial area;
                                             \item<3-> Residential area;
                                             \item<4-> \gls{acr::dsm} resolution: \SI{0.06}{\m}
-                                            \item<4-> Orthoimage resolution: \SI{0.06}{\m}
+                                            \item<4-> Orthoimage (RGB) resolution: \SI{0.06}{\m}
                                         \end{itemize}
                                 \end{itemize}
                             }
@@ -707,19 +723,27 @@
 
             \begin{frame}{Annotation procedure}
                 \centering
-                \includegraphics[width=\textwidth]{images/annotations/annotation_rendering}
+                \only<1>{
+                    \includegraphics[width=\textwidth]{images/annotations/annotation_rendering}
+                }
+                \only<2>{
+                    \includegraphics[width=\textwidth]{images/annotations/annotation_correct}
+                }
+                \only<3>{
+                    \includegraphics[width=\textwidth]{images/annotations/annotation_annotation}
+                }
             \end{frame}
 
             \begin{frame}{Error statistics}
                 \centering
                 \only<1>{
-                    \includestandalone[mode=buildnew, height=.75\textheight]{figures/datasets/families_stats}
+                    \includestandalone[mode=buildnew, height=.75\textheight]{figures/datasets/families_stats_animated}
                 }
                 \only<2>{
-                    \includestandalone[mode=buildnew, height=.75\textheight]{figures/datasets/lod1_stats}
+                    \includestandalone[mode=buildnew, height=.75\textheight]{figures/datasets/lod1_stats_animated}
                 }
                 \only<3>{
-                    \includestandalone[mode=buildnew, width=\textwidth]{figures/datasets/lod2_stats}
+                    \includestandalone[mode=buildnew, width=\textwidth]{figures/datasets/lod2_stats_animated}
                 }
                 \only<4->{
                     \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
@@ -746,15 +770,14 @@
                     \item<1-> \Acrfull{acr::rf}:
                     \begin{description}
                         \item<2->[Max depth] \num{4};
-                        \item<3->[Number of trees] \num{1000};
+                        \item<2->[Number of trees] \num{1000};
                     \end{description}
-                    \item<4-> Feature vectors: same length = \num{20}.
-                    \item<5-> Feature configurations:
+                    \item<3-> Feature configurations:
                     \begin{itemize}
-                        \item<6-> \textbf{Geom.};
-                        \item<7-> \textbf{Geom.} \(\oplus\) \textbf{Hei.};
-                        \item<8-> \textbf{Geom.} \(\oplus\) \textbf{Im.};
-                        \item<9-> \textbf{All} = \textbf{Geom.} \(\oplus\) \textbf{Hei.} \(\oplus\) \textbf{Im.}.
+                        \item<4-> \textbf{Geom.};
+                        \item<4-> \textbf{Geom.} \(\oplus\) \textbf{Hei.};
+                        \item<4-> \textbf{Geom.} \(\oplus\) \textbf{Im.};
+                        \item<4-> \textbf{All} = \textbf{Geom.} \(\oplus\) \textbf{Hei.} \(\oplus\) \textbf{Im.}.
                     \end{itemize}
                 \end{itemize}
             \end{frame}
@@ -764,7 +787,7 @@
                 \footnotesize
                 \begin{tabular}{c c c c c}
                     \toprule
-                    Features & Classifier & \textbf{\acrshort{acr::efin}} & Experiment & Number\\
+                    Features & Classifier & \texttt{} & Experiment & Configurations\\
                     \hline
                     \multirow{12}{*}{Baseline} & \multirow{12}{*}{\acrshort{acr::rf}} & \multirow{4}{*}{3} & Vanilla & \cellcolor{IGNGreen}<2-3>{\num{4 x 3}}\\
                     &  &  & Transf. & \cellcolor{IGNGreen}<2-3>{\num{4 x 6}}\\
@@ -788,6 +811,8 @@
 
         \subsection{Results}
             \begin{frame}{Vanilla experiments}
+                \framesubtitle<1>{\texttt{Building errors}}
+                \framesubtitle<2>{\texttt{Facet errors}}
                 \centering
                 \only<1>{
                     \includestandalone[mode=buildnew, height=.8\textheight]{figures/results/presentation/vanilla/building}
@@ -797,7 +822,7 @@
                 }
                 \only<3->{
                     \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                        \item<3-> Rare errors are hard to detect \(\longrightarrow\) Use \acrshort{acr::svm}.
+                        \item<3-> Rare errors are hard to detect \(\longrightarrow\) \acrshort{acr::svm} is better.
                         \item<4-> \texttt{FOS} and \texttt{FIG} are very frequent \(\implies\) easily detected.
                         \item<5-> Geometric features are usually good enough.
                         \item<6-> In general:
@@ -849,6 +874,8 @@
                         \draw[black] (3, .25) -- (3, -2pt) node[below, black] {\footnotesize 5\%};
                         \draw[black] (4, .25) -- (4, -2pt) node[below, black] {\footnotesize 15\%};
                         \draw[black] (5, .25) -- (5, -2pt) node[below, black] {\footnotesize 35\%};
+
+                        \node[align=center] at (2.5, .3) {\(\Delta F_{score}\)};
                     \end{tikzpicture}
                     \uncover<1->{
                         \normalsize
@@ -896,6 +923,8 @@
                         \draw[black] (3, .25) -- (3, -2pt) node[below, black] {\footnotesize 5\%};
                         \draw[black] (4, .25) -- (4, -2pt) node[below, black] {\footnotesize 15\%};
                         \draw[black] (5, .25) -- (5, -2pt) node[below, black] {\footnotesize 35\%};
+
+                        \node[align=center] at (2.5, .3) {\(\Delta F_{score}\)};
                     \end{tikzpicture}
                     \uncover<6->{
                         \normalsize
@@ -958,6 +987,22 @@
                     \item<5-> Handle small dataset.
                 \end{itemize}
             \end{frame}
+
+            \begin{frame}{Why using \texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet}}
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                    \item<1-> Filters are hardcoded not learned:
+                    \begin{itemize}
+                        \item[\color{IGNDarkGreen} +]<2-> No need for a large dataset;
+                        \item[\color{IGNDarkGreen} +]<3-> Interpretable; 
+                        \item[\color{red} ---]<4-> Features: not adaptable.
+                    \end{itemize}
+                    \item<5-> Limited to shallow layers:
+                    \begin{itemize}
+                        \item[\color{red} ---]<6-> Less powerful~\parencite{oyallon2015deep}.
+                    \end{itemize}
+                \end{itemize}
+            \end{frame}
+
             \begin{frame}{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet}}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item<1-> Reverse engineered \acrfull{acr::cnn}~\parencite{mallat2012group};
@@ -981,21 +1026,6 @@
                 }
             \end{frame}
 
-            \begin{frame}{Why using \texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet}}
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<1-> Filters are hardcoded not learned:
-                    \begin{itemize}
-                        \item[\color{IGNDarkGreen} +]<2-> No need for a large dataset;
-                        \item[\color{IGNDarkGreen} +]<3-> Interpretable; 
-                        \item[\color{red} ---]<4-> Features: not adaptable.
-                    \end{itemize}
-                    \item<5-> Limited to shallow layers:
-                    \begin{itemize}
-                        \item[\color{red} ---]<6-> Less powerful~\parencite{oyallon2015deep}.
-                    \end{itemize}
-                \end{itemize}
-            \end{frame}
-
             \begin{frame}{Advanced height based features}
                 \centering
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/features/height_based_animated_scatnet}
@@ -1012,7 +1042,7 @@
                 \footnotesize
                 \begin{tabular}{c c c c c}
                     \toprule
-                    Features & Classifier & \textbf{\acrshort{acr::efin}} & Experiment & Number\\
+                    Features & Classifier & \texttt{finesse} & Experiment & Number\\
                     \hline
                     \multirow{2}{*}{Baseline} & \acrshort{acr::rf} & \multirow{6}{*}{3} & \multirow{6}{*}{Vanilla} & \num{4 x 1} \\
                      & \acrshort{acr::svm} &  &  & \num{4 x 2} \\
@@ -1034,17 +1064,16 @@
                     \item<1-> \Acrfull{acr::rf}:
                     \begin{description}
                         \item<2->[Max depth] \num{4};
-                        \item<3->[Number of trees] \num{1000};
+                        \item<2->[Number of trees] \num{1000};
                     \end{description}
-                    \item<4-> \gls{acr::scatnet} channel \(\longleftrightarrow\) \num{1085} features
-                    \item<5-> Feature configurations:
+                    \item<3-> Feature configurations:
                     \begin{itemize}
-                        \item<6-> \textbf{Geom.};
-                        \item<7-> \textbf{Geom.} \(\oplus\) \textbf{S-Hei.};
-                        \item<8-> \textbf{Geom.} \(\oplus\) \textbf{S(d)-Im.};
-                        \item<8-> \textbf{Geom.} \(\oplus\) \textbf{S(c)-Im.};
-                        \item<9-> \textbf{S(d)-All} = \textbf{Geom.} \(\oplus\) \textbf{S-Hei.} \(\oplus\) \textbf{S(d)-Im.}.
-                        \item<9-> \textbf{S(c)-All} = \textbf{Geom.} \(\oplus\) \textbf{S-Hei.} \(\oplus\) \textbf{S(c)-Im.}.
+                        \item<4-> \textbf{Geom.};
+                        \item<4-> \textbf{Geom.} \(\oplus\) \textbf{S-Hei.};
+                        \item<4-> \textbf{Geom.} \(\oplus\) \textbf{S(d)-Im.};
+                        \item<4-> \textbf{Geom.} \(\oplus\) \textbf{S(c)-Im.};
+                        \item<4-> \textbf{S(d)-All} = \textbf{Geom.} \(\oplus\) \textbf{S-Hei.} \(\oplus\) \textbf{S(d)-Im.}.
+                        \item<4-> \textbf{S(c)-All} = \textbf{Geom.} \(\oplus\) \textbf{S-Hei.} \(\oplus\) \textbf{S(c)-Im.}.
                     \end{itemize}
                 \end{itemize}
             \end{frame}
@@ -1098,6 +1127,8 @@
             \end{frame}
 
             \begin{frame}{Best results}
+                \framesubtitle<1>{\texttt{Building errors}}
+                \framesubtitle<2>{\texttt{Facet errors}}
                 \centering
                 \only<1>{
                     \includestandalone[mode=buildnew, height=.8\textheight]{figures/results/presentation/best/building}
