@@ -14,12 +14,12 @@
 		\path (image_legend) node[visible on=<4>, text width=5cm, align=center] (image_legend) {\scriptsize Histogram over Facets.};
 		\path (image_legend) node[visible on=<5>, text width=5cm, align=center] (image_legend) {\scriptsize Global histogram.};
 
-		\path (image) + (-.25, 0) node[visible on=<2>] (pixel_segment) {\includestandalone[width=4cm]{figures/features/image_based}};
+		\path (image) node[visible on=<2>] (pixel_segment) {\includestandalone[width=4cm]{figures/features/image_based}};
 		\path (pixel_segment.south) node[anchor=north, visible on=<2>, align=center] (image_legend) {
 			\scriptsize
 			\begin{tabular}{c c c c}
-				\textcolor{green!30}{\(\blacksquare\)} & intersecting pixel. & \textcolor{red}{\(\blacksquare\)} & model edge.\\
-				\textcolor{purple}{\(\nabla I\)} & local gradient. & \textcolor{black}{\(\vec{n}\)} & edge \acrshort{acr::2d} normal.
+				\textcolor{green!30}{\(\blacksquare\)}: & intersecting pixel. & \textcolor{red}{\(\blacksquare\)}: & model edge.\\
+				\textcolor{purple}{\(\nabla I\)}: & local gradient. & \textcolor{black}{\(\vec{n}\)}: & edge \acrshort{acr::2d} normal.
 			\end{tabular}
 		};
 

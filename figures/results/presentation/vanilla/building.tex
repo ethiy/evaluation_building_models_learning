@@ -54,36 +54,82 @@
             }
         ]
             \addplot+[
+                visible on=<1>,
                 bar shift = -15pt,
                 fill=green!40,
                 draw=green
-            ] table[x=x, y=y, meta index=2, visible on=<1>] {\BOS};
+            ] table[x=x, y=y, meta index=2] {\BOS};
             \addplot+[
+                visible on=<1>,
                 bar shift = -5pt,
                 fill=cyan!40,
                 draw=cyan
-            ] table[x=x, y=y, meta index=2, visible on=<1>] {\BUS};
+            ] table[x=x, y=y, meta index=2] {\BUS};
             \addplot+[
+                visible on=<1>,
                 bar shift = 5pt,
                 fill=red!40,
                 draw=red
             ] table[x=x, y=y, meta index=2] {\BIB};
             \addplot+[
-                bar shift = -15pt,
-                fill=green!40,
-                draw=green
-            ] table[x=x, y=y, meta index=2, visible on=<3->] {\BOS};
+                visible on=<1>,
+                bar shift = 15pt,
+                fill=olive!40,
+                draw=olive
+            ] table[x=x, y=y, meta index=2] {\BIT};
+
             \addplot+[
-                bar shift = -5pt,
-                fill=cyan!40,
-                draw=cyan
-            ] table[x=x, y=y, meta index=2, visible on=<4->] {\BUS};
-            \addplot+[
+                visible on=<2>,
                 bar shift = 5pt,
                 fill=red!40,
                 draw=red
             ] table[x=x, y=y, meta index=2] {\BIB};
             \addplot+[
+                visible on=<2>,
+                bar shift = 15pt,
+                fill=olive!40,
+                draw=olive
+            ] table[x=x, y=y, meta index=2] {\BIT};
+
+            \addplot+[
+                visible on=<3>,
+                bar shift = -15pt,
+                fill=green!40,
+                draw=green
+            ] table[x=x, y=y, meta index=2] {\BOS};
+            \addplot+[
+                visible on=<3>,
+                bar shift = 5pt,
+                fill=red!40,
+                draw=red
+            ] table[x=x, y=y, meta index=2] {\BIB};
+            \addplot+[
+                visible on=<3>,
+                bar shift = 15pt,
+                fill=olive!40,
+                draw=olive
+            ] table[x=x, y=y, meta index=2] {\BIT};
+
+            \addplot+[
+                visible on=<4->,
+                bar shift = -15pt,
+                fill=green!40,
+                draw=green
+            ] table[x=x, y=y, meta index=2] {\BOS};
+            \addplot+[
+                visible on=<4->,
+                bar shift = -5pt,
+                fill=cyan!40,
+                draw=cyan
+            ] table[x=x, y=y, meta index=2] {\BUS};
+            \addplot+[
+                visible on=<4->,
+                bar shift = 5pt,
+                fill=red!40,
+                draw=red
+            ] table[x=x, y=y, meta index=2] {\BIB};
+            \addplot+[
+                visible on=<4->,
                 bar shift = 15pt,
                 fill=olive!40,
                 draw=olive
