@@ -24,7 +24,7 @@
         \path (facet_graph) + (-.9, -1) node[black] (f) {\footnotesize \(f\)};
 
         \path (facet_graph.west |- f) node[anchor=east, blue, visible on=<3-4>] (centroid) {\scriptsize \(\operatorname{Centroid}(f)\)};
-        \draw[->, blue, visible on=<4->] (f.west) -- (centroid.east);
+        \draw[->, blue, visible on=<3->] (f.west) -- (centroid.east);
         \path (centroid.east) node[anchor=east, blue, visible on=<5>] (normal) {\scriptsize \(\operatorname{Normal}(f)\)};
         \path (centroid.east) node[anchor=east, blue, visible on=<6>] (degree_area_circumference) {
             \scriptsize \(\begin{bmatrix}

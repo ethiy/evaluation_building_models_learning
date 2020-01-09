@@ -311,7 +311,7 @@
     \AtBeginSection[]{
         \begin{frame}<beamer>
             \frametitle{Outline}
-            \tableofcontents[currentsection, currentsubsection, subsectionstyle=show/show/hide]
+            \tableofcontents[currentsubsection, subsectionstyle=show/show/hide]
         \end{frame}
     }
     \section{Error taxonomy}
@@ -694,39 +694,39 @@
                     \begin{columns}[T]
                         \centering
                         \begin{column}{.48\textwidth}
-                            \only<2-4>{
+                            \only<2>{
                                 \begin{itemize}
-                                    \item[\color{elancourt} \(\blacksquare\)]<2-> \textbf{Elancourt}: 
+                                    \item[\color{elancourt} \(\blacksquare\)] \textbf{Elancourt}: 
                                         \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                                            \item<3-> \num{2009} buildings;
-                                            \item<3-> Industrial area;
-                                            \item<3-> Residential area;
-                                            \item<4-> \gls{acr::dsm} resolution: \SI{0.06}{\m}
-                                            \item<4-> Orthoimage (RGB) resolution: \SI{0.06}{\m}
+                                            \item \num{2009} buildings;
+                                            \item Industrial area;
+                                            \item Residential area;
+                                            \item \gls{acr::dsm} resolution: \SI{0.06}{\m}
+                                            \item Orthoimage (RGB) resolution: \SI{0.06}{\m}
                                         \end{itemize}
                                 \end{itemize}
                             }
-                            \only<5-7>{
+                            \only<3>{
                                 \begin{itemize}
-                                    \item[\color{nantes} \(\blacksquare\)]<5-> \textbf{Nantes}: 
+                                    \item[\color{nantes} \(\blacksquare\)] \textbf{Nantes}: 
                                         \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                                            \item<6-> \num{748} buildings;
-                                            \item<6-> High buildings;
-                                            \item<6-> Dense downtown;
-                                            \item<7-> \gls{acr::dsm} res.: \SI{0.1}{\m}
-                                            \item<7-> Ortho. res.: \SI{0.1}{\m}
+                                            \item \num{748} buildings;
+                                            \item High buildings;
+                                            \item Dense downtown;
+                                            \item \gls{acr::dsm} res.: \SI{0.1}{\m}
+                                            \item Ortho. res.: \SI{0.1}{\m}
                                         \end{itemize}
                                 \end{itemize}
                             }
-                            \only<8-10>{
+                            \only<4>{
                                 \begin{itemize}
-                                    \item[\color{paris} \(\blacksquare\)]<8-> \textbf{Paris-13}: 
+                                    \item[\color{paris} \(\blacksquare\)] \textbf{Paris-13}: 
                                         \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                                            \item<9-> \num{478} buildings;
-                                            \item<9-> Dense Hausmann style downtown;
-                                            \item<9-> Skyscrapers;
-                                            \item<10-> \gls{acr::dsm} res.: \SI{0.1}{\m}
-                                            \item<10-> Ortho. res.: \SI{0.1}{\m}
+                                            \item \num{478} buildings;
+                                            \item Dense Hausmann style downtown;
+                                            \item Skyscrapers;
+                                            \item \gls{acr::dsm} res.: \SI{0.1}{\m}
+                                            \item Ortho. res.: \SI{0.1}{\m}
                                         \end{itemize}
                                 \end{itemize}
                             }
@@ -734,13 +734,13 @@
                         \begin{column}{.48\textwidth}
                             \begin{overlayarea}{\textwidth}{.8\textheight}
                                 \centering
-                                \only<2-4>{
+                                \only<2>{
                                     \includegraphics[height=6cm]{images/datasets/elancourt_samples}
                                 }
-                                \only<5-7>{
+                                \only<3>{
                                     \includegraphics[height=6cm]{images/datasets/nantes_samples}
                                 }
-                                \only<8-10>{
+                                \only<4>{
                                     \includegraphics[height=6cm]{images/datasets/paris-13_samples}
                                 }
                             \end{overlayarea}
@@ -1070,11 +1070,11 @@
                 \renewcommand{\arraystretch}{1}
                 \only<7->{
                     \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                        \item<7-> \texttt{Facets errors} > \texttt{Building errors}
-                        \item<8-> \texttt{BOS} and \texttt{BUS} are hard to transfer.
-                        \item<9-> Dense scenes: same behaviour.
-                        \item<10-> Dense scenes: better for \texttt{Facet errors}.
-                        \item<11-> External modalities are \underline{critical}.
+                        \item \underline{\texttt{Facets errors} > \texttt{Building errors}}.
+                        \item \underline{\texttt{BOS} and \texttt{BUS} are hard to transfer.}
+                        \item Dense scenes: same behaviour.
+                        \item Dense scenes: better for \texttt{Facet errors}.
+                        \item External modalities are \underline{critical}.
                     \end{itemize}
                 }
             \end{frame}
@@ -1140,7 +1140,7 @@
                 \end{itemize}
                 \vfill
                 \uncover<5->{
-                    Proposed solution: \gls{acr::scatnet}~\parencite{mallat2012group}.
+                    Proposed solution: \Acrfull{}{acr::scatnet}~\parencite{mallat2012group}.
                 }
             \end{frame}
 
@@ -1442,7 +1442,7 @@
                         \item[\color{IGNRed} ---]<5-> Needs a finer taxonomy;
                         \item[\color{IGNRed} ---]<5-> Rules: hard to generalize;
                     \end{itemize}
-                    \item<6-> Learn the rules \(\rightarrow\)) Multi-armed Bandit;
+                    \item<6-> Learn the rules \(\rightarrow\) Multi-armed Bandit;
                 \end{itemize}
             \end{itemize}
         \end{frame}
