@@ -23,7 +23,7 @@
         \path (facet_graph) + (-.2, -1) node (f) {\small $f$};
         \path (facet_graph) + (2, -.8) node (g) {\small $g$};
         
-        \path (f) + (-2, -1) node[darkgreen, visible on=<3->] (facet_attributes) {\tiny \(\begin{bmatrix}
+        \path (f) + (-2, -1) node[darkgreen, visible on=<4->] (facet_attributes) {\tiny \(\begin{bmatrix}
         	\operatorname{degree}(f)\\
             \operatorname{Area}(f)\\
             \operatorname{Circumference}(f)
@@ -36,7 +36,7 @@
          \end{bmatrix}$
         };
         
-        \path[draw, ->, line width=1pt, rounded corners=10pt, darkgreen, visible on=<3->] (f.185) -- (facet_attributes.north);
+        \path[draw, ->, line width=1pt, rounded corners=10pt, darkgreen, visible on=<4->] (f.185) -- (facet_attributes.north);
         \path (edge_attributes.north |- f.east) + (-.25, .4) node (edge) {};
         \path[draw, ->, line width=1pt, rounded corners=10pt, blue, visible on=<5->] (edge) -- (edge |- edge_attributes.north);
     \end{tikzpicture}

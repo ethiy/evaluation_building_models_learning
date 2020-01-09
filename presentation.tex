@@ -198,7 +198,7 @@
                 \end{columns}
                 \vfill
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<7-> Literature: trade off fidelity \(\vert\) compacity.
+                    \item<7-> Literature: trade off fidelity/compacity.
                 \end{itemize}
             \end{frame}
 
@@ -234,9 +234,8 @@
                 \end{itemize}
                 \vfill
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<4-> \(\uparrow\) \gls{acr::lod} \(\longleftrightarrow\) \(\downarrow\) coverage of \gls{acr::3d} models~\parencite{stoter2013three}.
+                    \item<4-> \(\uparrow\) \acrshort{acr::lod} \(\longleftrightarrow\) \(\downarrow\) coverage of \gls{acr::3d} models~\parencite{stoter2013three}.
                 \end{itemize}
-
             \end{frame}
         
         \subsection{Quality evaluation}
@@ -266,15 +265,10 @@
                         \item<2-> \underline{Define errors} that affects building \gls{acr::3d} models.
                     \end{itemize}
                 \end{tcolorbox}
-                \vfill
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<3-> Errors = Geometry \(\wedge\) Topology;
-                    \item<4-> Errors \(\neq\) Exhaustivity \(\vee\) Up-to-dateness.
-                \end{itemize}
             \end{frame}
 
             \begin{frame}{Challenges}
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=1em]
                     \item<1-> Large scale : small city > \underline{\num{10000}} buildings.
                     \item<2-> \underline{Different} urban scenes \(\implies\) High \underline{heterogeneity}.
                     \item<3-> Reference data are \underline{expensive}.
@@ -396,7 +390,7 @@
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item \Acrfull{acr::2d} errors:
                     \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item Segmentation issue (semantic):
+                        \item Segmentation issue:
                         \begin{itemize}
                             \item<1-> Over segmentation: \only<1>{building level}\only<2>{facet level}.
                         \end{itemize}
@@ -441,7 +435,7 @@
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item<1-> \Acrfull{acr::2d} errors:
                     \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item<2-> Border issue (geometric):
+                        \item<2-> Border issue:
                         \begin{itemize}
                             \item<3-4> Inaccurate topology: \only<3>{building level}\only<4>{facet level};
                         \end{itemize}
@@ -486,7 +480,7 @@
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item \Acrfull{acr::2d} errors:
                     \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item Border issue (geometric):
+                        \item Border issue:
                         \begin{itemize}
                             \item<1-> Imprecise border: \only<1>{building level}\only<2>{facet level}.
                         \end{itemize}
@@ -612,7 +606,7 @@
                     \hline
                     \(\bm{F_{score}}\) & \cellcolor<2-4>{IGNGreen}{81.35} & \cellcolor<1>{IGNRed}{0.42} & \cellcolor<1>{IGNRed}{0} & \cellcolor<1>{IGNRed}{0} \\
                     \hline
-                    \(\bm{Acc}\) & \cellcolor<3>{IGNRed}{68.46} & 75.65 & 89.57 & 94.66 \\
+                    \(\bm{Acc}\) & \cellcolor<3-4>{IGNRed}{68.46} & 75.65 & 89.57 & 94.66 \\
                     \bottomrule
                 \end{tabular}
                 \vfill
@@ -649,7 +643,7 @@
                 \centering
                 \includestandalone[mode=buildnew, width=.68\textwidth]{figures/features/geometric_animated}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                    \item Graph = \only<2->{\textcolor{darkgreen}{nodes(facets)}} \only<4->{ + \textcolor{blue}{edges(adjacency)}.}
+                    \item Graph = \only<2->{\textcolor{darkgreen}{nodes(facets)}} \only<3->{ + \textcolor{blue}{edges(adjacency)}.}
                     \item<6-> Features = Statistics on attributes (\num{4 x 5}).
                 \end{itemize}
             \end{frame}
@@ -766,6 +760,11 @@
             \end{frame}
 
             \begin{frame}{Error statistics}
+                \framesubtitle<1>{\acrshort{acr::lod}-2 level}
+                \framesubtitle<2>{\texttt{Building errors}}
+                \framesubtitle<3>{\texttt{Facet errors}}
+                \framesubtitle<4->{Summary}
+
                 \centering
                 \only<1>{
                     \includestandalone[mode=buildnew, height=.75\textheight]{figures/datasets/families_stats_animated}
@@ -1071,10 +1070,10 @@
                 \only<7->{
                     \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                         \item \underline{\texttt{Facets errors} > \texttt{Building errors}}.
-                        \item \underline{\texttt{BOS} and \texttt{BUS} are hard to transfer.}
+                        \item \texttt{BOS} and \texttt{BUS} are hard to transfer.
                         \item Dense scenes: same behaviour.
                         \item Dense scenes: better for \texttt{Facet errors}.
-                        \item External modalities are \underline{critical}.
+                        \item \underline{External modalities are critical}.
                     \end{itemize}
                 }
             \end{frame}
