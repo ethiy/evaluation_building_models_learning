@@ -50,15 +50,15 @@
         
         \path[edge, out=60,in=120,looseness=25, black!50!yellow, visible on=<6->] (top) to node[midway, above, align=center]{\scriptsize{Representativeness}} (top);
                 
-        \path[edge, out=70,in=110,looseness=8, visible on=<2->] (z1) to node[midway, above, align=center] {Vanilla} (z1);
-        \path[edge, out=70,in=110,looseness=8, visible on=<2->] (z2) to node[midway, above, align=center] {Vanilla} (z2);
-        \path[edge, out=70,in=110,looseness=8, visible on=<2->] (z3) to node[midway, above, align=center] {Vanilla} (z3);
+        \path[edge, out=70,in=110,looseness=8, visible on=<2>] (z1) to node[midway, above, align=center] {Vanilla} (z1);
+        \path[edge, out=70,in=110,looseness=8, visible on=<2>] (z2) to node[midway, above, align=center] {Vanilla} (z2);
+        \path[edge, out=70,in=110,looseness=8, visible on=<2>] (z3) to node[midway, above, align=center] {Vanilla} (z3);
         
-        \path[edge, darkgreen, visible on=<3->] (z1) to node[midway, sloped, above, align=center]{\scriptsize{Transferability}} (z2.west);
-        \path[edge, darkgreen, visible on=<3->] (z1) to node[midway, sloped, above, align=center]{\scriptsize{Transferability}} (z3.200);
+        \path[edge, darkgreen, visible on=<3>] (z1) to node[midway, sloped, above, align=center]{\scriptsize{Transferability}} (z2.west);
+        \path[edge, darkgreen, visible on=<3>] (z1) to node[midway, sloped, above, align=center]{\scriptsize{Transferability}} (z3.200);
         
-        \path[branch, purple, out=0, in=195, visible on=<4->] (z1) to (-1.15, -0.125);
-        \path[branch, purple, out=120, in=240, visible on=<4->] (z3.120) to (-1.15, -0.125);
-        \path[edge, purple, visible on=<4->] (-1.15, -0.125) to node[left, sloped, above, align=center]{\scriptsize{Generalization}} (z2);
+        \path[branch, purple, out=0, in=195, visible on=<4>] (z1) to (-1.15, -0.125);
+        \path[branch, purple, out=120, in=240, visible on=<4>] (z3.120) to (-1.15, -0.125);
+        \path[edge, purple, visible on=<4>] (-1.15, -0.125) to node[left, sloped, above, align=center]{\scriptsize{Generalization}} (z2);
 	\end{tikzpicture}
 \end{document}

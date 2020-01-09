@@ -34,7 +34,7 @@
 		\path ($(image)!.5!(model)$) node[visible on=<4>] (green_mask_channel_input) {\includegraphics[width=2cm]{images/features/scatnet/elancourt-39322_g_mask}};
 		\path (green_mask_channel_input) + (-.2, -.2) node[visible on=<4>] (red_mask_channel_input) {\includegraphics[width=2cm]{images/features/scatnet/elancourt-39322_r_mask}};
 
-		\path (green_mask_channel |- green_mask_channel_input) node[anchor=west, text=blue, fill=white, visible on=<4>] (s) {\Large \(\begin{Bmatrix}S[x]\end{Bmatrix}\)};
+		\path (green_mask_channel |- green_mask_channel_input) node[anchor=west, text=blue, fill=white, visible on=<4>] (s) {\Large \(\begin{Bmatrix}\bm{S(d)-Im.}\end{Bmatrix}\)};
 		\draw[->, very thick, black, visible on=<4>] (blue_mask_channel_input) -- ($(s.west |- blue_mask_channel_input) + (.2, 0)$) node[midway, draw, rounded corners, black, fill=white] {\gls{acr::scatnet}};
 		\draw[->, very thick, black, visible on=<4>] (green_mask_channel_input) -- (s.west) node[midway, draw, rounded corners, black, fill=white] (scatnet) {\gls{acr::scatnet}};
 		\draw[->, very thick, black, visible on=<4>] (red_mask_channel_input) -- ($(s.west |- red_mask_channel_input) + (-.2, 0)$) node[midway, draw, rounded corners, black, fill=white] {\gls{acr::scatnet}};
@@ -66,7 +66,7 @@
 		\path (green_mask_channel_input) + (-.1, -.1) node[visible on=<7->] (green_channel_channel_input) {\includegraphics[width=2cm]{images/features/scatnet/elancourt-39322_g}};
 		\path (green_mask_channel_input) + (-.3, -.3) node[visible on=<7->] (red_channel_channel_input) {\includegraphics[width=2cm]{images/features/scatnet/elancourt-39322_r}};
 
-		\path (green_mask_channel |- green_mask_channel_input) node[anchor=west, text=blue, fill=white, visible on=<7->] (s) {\Large \(\begin{Bmatrix}S[x]\end{Bmatrix}\)};
+		\path (green_mask_channel |- green_mask_channel_input) node[anchor=west, text=blue, fill=white, visible on=<7->] (s) {\Large \(\begin{Bmatrix}\bm{S(c)-Im.}\end{Bmatrix}\)};
 		\draw[->, very thick, black, visible on=<7->] (mask_channel_input) -- ($(s.west |- mask_channel_input) + (.2, 0)$) node[midway, draw, rounded corners, black, fill=white] {\gls{acr::scatnet}};
 		\draw[->, very thick, black, visible on=<7->] (blue_channel_channel_input) -- ($(s.west |- blue_channel_channel_input) + (0, 0)$) node[midway, draw, rounded corners, black, fill=white] {\gls{acr::scatnet}};
 		\draw[->, very thick, black, visible on=<7->] (green_channel_channel_input) -- ($(s.west |- green_channel_channel_input) + (-.2, 0)$) node[midway, draw, rounded corners, black, fill=white] (scatnet) {\gls{acr::scatnet}};

@@ -10,8 +10,8 @@
 	\begin{tikzpicture}
 		\node[visible on=<1>] (image) {\includegraphics[width=5cm, angle=270]{images/introduction/graphical_abstract/orthoprojection}};
 		\path (image.south) node[anchor=north, visible on=<1>, text width=5cm, align=center] (image_legend) {\scriptsize Nadir projection on orthoimage.};
-		\path (image_legend) node[visible on=<3>, text width=5cm, align=center] (image_legend) {\scriptsize Histogram over Edges.};
-		\path (image_legend) node[visible on=<4>, text width=5cm, align=center] (image_legend) {\scriptsize Histogram over Facets.};
+		\path (image_legend) node[visible on=<3>, text width=5cm, align=center] (image_legend) {\scriptsize Histograms over \textcolor{orange}{Edges}.};
+		\path (image_legend) node[visible on=<4>, text width=5cm, align=center] (image_legend) {\scriptsize Histograms over \textcolor{IGNDarkGreen}{Facets}.};
 		\path (image_legend) node[visible on=<5>, text width=5cm, align=center] (image_legend) {\scriptsize Global histogram.};
 
 		\path (image) node[visible on=<2>] (pixel_segment) {\includestandalone[width=4cm]{figures/features/image_based}};
@@ -36,7 +36,7 @@
 						xtick=\empty,
 						visible on=<3>
 					]
-						\addplot+[ycomb, blue, mark=*, mark options={scale=2, fill=blue}, very thick] plot coordinates {
+						\addplot+[ycomb, orange, mark=*, mark options={scale=2, fill=orange}, very thick] plot coordinates {
 							(-8, 3623)
 							(-7, 546)
 							(-6, 159)
@@ -58,7 +58,7 @@
 						xtick=\empty,
 						visible on=<3>
 					]
-						\addplot+[ycomb, blue, mark=*, mark options={scale=2, fill=blue}, very thick] plot coordinates {
+						\addplot+[ycomb, orange, mark=*, mark options={scale=2, fill=orange}, very thick] plot coordinates {
 							(-8, 3623)
 							(-7, 546)
 							(-6, 1595)
@@ -80,7 +80,7 @@
 						xtick=\empty,
 						visible on=<3>
 					]
-						\addplot+[ycomb, blue, mark=*, mark options={scale=2, fill=blue}, very thick] plot coordinates {
+						\addplot+[ycomb, orange, mark=*, mark options={scale=2, fill=orange}, very thick] plot coordinates {
 							(-8, 3623)
 							(-7, 5446)
 							(-6, 159)
@@ -102,7 +102,7 @@
 						xtick=\empty,
 						visible on=<3>
 					]
-						\addplot+[ycomb, blue, mark=*, mark options={scale=2, fill=blue}, very thick] plot coordinates {
+						\addplot+[ycomb, orange, mark=*, mark options={scale=2, fill=orange}, very thick] plot coordinates {
 							(-8, 3623)
 							(-7, 546)
 							(-6, 159)
@@ -124,7 +124,7 @@
 						xtick=\empty,
 						visible on=<3>
 					]
-						\addplot+[ycomb, blue, mark=*, mark options={scale=2, fill=blue}, very thick] plot coordinates {
+						\addplot+[ycomb, orange, mark=*, mark options={scale=2, fill=orange}, very thick] plot coordinates {
 							(-8, 3623)
 							(-7, 546)
 							(-6, 159)
@@ -146,7 +146,7 @@
 						xtick=\empty,
 						visible on=<3>
 					]
-						\addplot+[ycomb, blue, mark=*, mark options={scale=2, fill=blue}, very thick] plot coordinates {
+						\addplot+[ycomb, orange, mark=*, mark options={scale=2, fill=orange}, very thick] plot coordinates {
 							(-8, 323)
 							(-7, 5426)
 							(-6, 159)
@@ -168,7 +168,7 @@
 						xtick=\empty,
 						visible on=<3>
 					]
-						\addplot+[ycomb, blue, mark=*, mark options={scale=2, fill=blue}, very thick] plot coordinates {
+						\addplot+[ycomb, orange, mark=*, mark options={scale=2, fill=orange}, very thick] plot coordinates {
 							(-8, 23)
 							(-7, 5456)
 							(-6, 159)
@@ -190,7 +190,7 @@
 						xtick=\empty,
 						visible on=<3>
 					]
-						\addplot+[ycomb, blue, mark=*, mark options={scale=2, fill=blue}, very thick] plot coordinates {
+						\addplot+[ycomb, orange, mark=*, mark options={scale=2, fill=orange}, very thick] plot coordinates {
 							(-8, 33)
 							(-7, 546)
 							(-6, 1059)
@@ -212,7 +212,7 @@
 						xtick=\empty,
 						visible on=<3>
 					]
-						\addplot+[ycomb, blue, mark=*, mark options={scale=2, fill=blue}, very thick] plot coordinates {
+						\addplot+[ycomb, orange, mark=*, mark options={scale=2, fill=orange}, very thick] plot coordinates {
 							(-8, 3623)
 							(-7, 546)
 							(-6, 159)
@@ -235,7 +235,7 @@
 						xtick=\empty,
 						visible on=<4>
 					]
-						\addplot+[ycomb, blue, mark=*, mark options={scale=2, fill=teal}, teal, very thick] plot coordinates {
+						\addplot+[ycomb, IGNDarkGreen, mark=*, mark options={scale=2, fill=IGNDarkGreen}, very thick] plot coordinates {
 							(-8, 3623)
 							(-7, 546)
 							(-6, 159)
@@ -257,7 +257,7 @@
 						xtick=\empty,
 						visible on=<4>
 					]
-						\addplot+[ycomb, blue, mark=*, mark options={scale=2, fill=teal}, teal, very thick] plot coordinates {
+						\addplot+[ycomb, IGNDarkGreen, mark=*, mark options={scale=2, fill=IGNDarkGreen}, very thick] plot coordinates {
 							(-8, 373)
 							(-7, 546)
 							(-6, 12)
@@ -279,7 +279,7 @@
 						xtick=\empty,
 						visible on=<4>
 					]
-						\addplot+[ycomb, blue, mark=*, mark options={scale=2, fill=teal}, teal, very thick] plot coordinates {
+						\addplot+[ycomb, IGNDarkGreen, mark=*, mark options={scale=2, fill=IGNDarkGreen}, very thick] plot coordinates {
 							(-8, 623)
 							(-7, 546)
 							(-6, 1595)
@@ -301,7 +301,7 @@
 						xtick=\empty,
 						visible on=<4>
 					]
-						\addplot+[ycomb, blue, mark=*, mark options={scale=2, fill=teal}, teal, very thick] plot coordinates {
+						\addplot+[ycomb, IGNDarkGreen, mark=*, mark options={scale=2, fill=IGNDarkGreen}, very thick] plot coordinates {
 							(-8, 33)
 							(-7, 546)
 							(-6, 1595)
@@ -323,7 +323,7 @@
 						xtick=\empty,
 						visible on=<4>
 					]
-						\addplot+[ycomb, blue, mark=*, mark options={scale=2, fill=teal}, teal, very thick] plot coordinates {
+						\addplot+[ycomb, IGNDarkGreen, mark=*, mark options={scale=2, fill=IGNDarkGreen}, very thick] plot coordinates {
 							(-8, 33)
 							(-7, 546)
 							(-6, 1595)
@@ -335,8 +335,8 @@
 			}
 		};
 		
-		\path (image) node[visible on =<5>] (whole_hist) {
-			\resizebox{1.5cm}{1.5cm}{
+		\path (image) node[visible on=<5>] (whole_hist) {
+			\resizebox{2.5cm}{2.5cm}{
 				\begin{tikzpicture}background rectangle/.style={fill=white}, show background rectangle
 					\begin{axis}[
 						area style,
@@ -376,40 +376,40 @@
 				\end{tikzpicture}
 			}
 		};
-		\path (image) node[visible on =<6>] (whole_hist) {
+		\path (image) node[visible on=<6->] (whole_hist) {
 			\resizebox{4cm}{3cm}{
 				\begin{tikzpicture}background rectangle/.style={fill=white}, show background rectangle
 					\begin{axis}[
+						ylabel={\# occurrences},
+                        xlabel={Similarity},
 						area style,
 						axis background/.style={fill=white},
 						ymin=0,
-						visible on=<6>
+						xmin=-1,
+						xmax=1,
+						visible on=<6->
 					]
 						\addplot+[ybar interval,mark=no] plot coordinates {
-							(-15, 0) 
-							(-14, 0)
-							(-13, 876)
-							(-12, 366)
-							(-11, 593)
-							(-10, 675)
-							(-9, 2231)
-							(-8, 33)
-							(-7, 546)
-							(-6, 195)
-							(-5, 182)
-							(-4, 3641)
-							(-3, 54)
-							(-2, 123)
-							(-1, 3815)
-							(0, 4291)
-							(1, 211)
-							(2, 10)
-							(3, 0)
-							(4, 0)
-							(5, 0)
-							(6, 0)
-							(7, 0)
-							(8, 0)
+							(-1, 0) 
+							(-.9, 0)
+							(-.8, 876)
+							(-.7, 366)
+							(-.6, 593)
+							(-.5, 675)
+							(-.4, 2231)
+							(-.3, 33)
+							(-.2, 546)
+							(-.1, 195)
+							(0, 182)
+							(.1, 3641)
+							(.2, 54)
+							(.3, 123)
+							(.4, 3815)
+							(.5, 4291)
+							(.6, 211)
+							(.7, 10)
+							(.8, 0)
+							(.9, 0)
 						};
 					\end{axis}
 				\end{tikzpicture}

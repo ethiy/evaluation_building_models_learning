@@ -33,6 +33,8 @@
     labelformat=empty
 ]{caption}
 
+\usepackage{tcolorbox}
+
 \usepackage{enumitem}
 
 \usepackage{standalone}
@@ -146,7 +148,7 @@
 
     \section{Introduction}
         \subsection{Context}
-            \begin{frame}{Applications of \texorpdfstring{\acrshort*{acr::3d}}{3D} models}
+            \begin{frame}{Need for \texorpdfstring{\acrshort*{acr::3d}}{3D} models}
                 \framesubtitle<1>{Physical simulation}
                 \framesubtitle<2>{Urban planning}
                 \framesubtitle<3>{Entertainement}
@@ -162,19 +164,19 @@
                     \begin{figure}[H]
                         \centering
                         \includegraphics[height=.68\textheight]{images/introduction/3d_model_applications/brest_tramway}
-                        \caption{Example of the use of city \acrshort{acr::3d} models in public consultation in Brest.}
+                        \caption{Public consultation in Brest, France.}
                     \end{figure}
                 }
                 {
                     \begin{figure}[H]
                         \centering
                         \includegraphics[width=.9\textwidth]{images/introduction/3d_model_applications/spider_man}
-                        \caption{Example of the use of city \acrshort{acr::3d} models in video games.}
+                        \caption{Video games.}
                     \end{figure}
                 }
             \end{frame}
 
-            \begin{frame}{Modeling or reconstruction}
+            \begin{frame}{Reconstruction \texttt{vs.} Modeling}
                 \centering
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/model_vs_mesh/modeling_reconstruction}
                 \begin{columns}[T]
@@ -194,56 +196,80 @@
                         \end{itemize}
                     \end{column}
                 \end{columns}
-            \end{frame}
-
-            \begin{frame}{\texorpdfstring{\acrshort*{acr::3d}}{3D} models}{More than geometry}
-                \centering
-                \includestandalone[mode=buildnew, height=.6\textheight]{figures/model_information}\\
+                \vfill
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item \acrshort{acr::3d} model = Geometry \only<2->{+ Topology} \only<3->{+ Semantics.}
+                    \item<7-> Literature: trade off fidelity \(\vert\) compacity.
                 \end{itemize}
             \end{frame}
 
-            \begin{frame}{\texorpdfstring{\acrshort*{acr::3d}}{3D} building modeling}
+            \begin{frame}{\texorpdfstring{\acrshort*{acr::3d}}{3D} models}{More than pure geometry}
+                \centering
+                \includestandalone[mode=buildnew, height=.6\textheight]{figures/model_information}\\
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                    \item \acrshort{acr::3d} model = \only<1>{\textbf{Geometry}}\only<2>{Geometry + \textbf{Topology}}\only<3->{Geometry + Topology + \textbf{Semantics}.}
+                \end{itemize}
+            \end{frame}
+
+            \begin{frame}{Different levels of representation}
                 \begin{figure}[H]
                     \centering
                     \includegraphics[width=\textwidth]{images/introduction/lods_3}
-                    \caption{\glspl{acr::lod} considered in the study~\parencite{biljecki2016improved}.}
+                    \caption{\acrshort{acr::lod} considered in the study~\parencite{biljecki2016improved}.}
                 \end{figure}
+                \vfill
+                \uncover<2->{
+                    Model \Acrfull{acr::lod} depends on:
+                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                        \item<3-> End user requirements;
+                        \item<3-> Input data.
+                    \end{itemize}
+                }
             \end{frame}
 
-            \begin{frame}{Modeling}{Different sources of errors}
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+            \begin{frame}{Modeling}{Multiple sources of errors}
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=1em]
                     \item<1-> Input imprecision: footprints, depth maps \dots
                     \item<2-> High (inter-) variance between building types;
                     \item<3-> High (intra-) variance between features inside a building;
                 \end{itemize}
+                \vfill
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+                    \item<4-> \(\uparrow\) \gls{acr::lod} \(\longleftrightarrow\) \(\downarrow\) coverage of \gls{acr::3d} models~\parencite{stoter2013three}.
+                \end{itemize}
+
             \end{frame}
         
         \subsection{Quality evaluation}
-            \begin{frame}{Modeling errors}{Different point of views}
-                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
+            \begin{frame}{Modeling errors}{Different points of view}
+                \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=1em]
                     \item<1-> Errors in format: compliancy to OGC standard~\parencite{ledoux2013validation}.
                     \item<2-> Errors in surface reconstruction~\parencite{berger2013benchmark}.
                     \item<3-> Errors in Urban modeling~\parencite{rottensteiner2012isprs}.
                 \end{itemize}
             \end{frame}
 
-            \begin{frame}{Need for semantics}
+            \begin{frame}{Semantics}{Not to be ignored}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item<1-> Modeling \(\longleftrightarrow\) compromise between:
                     \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                         \item<2-> geometric accuracy;
-                        \item<3-> semantics (compacity).
+                        \item<3-> semantics.
                     \end{itemize}
                     \item<4-> Errors are \underline{geometric} and \underline{semantic} in nature.
                 \end{itemize}
             \end{frame}
 
-            \begin{frame}{Goal}
+            \begin{frame}{Goal of the thesis}
+                \begin{tcolorbox}[colframe=red!75!black]
+                    \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=1em]
+                        \item<1-> Design a method for \underline{error detection}.
+                        \item<2-> \underline{Define errors} that affects building \gls{acr::3d} models.
+                    \end{itemize}
+                \end{tcolorbox}
+                \vfill
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                    \item<1-> Design a method for \underline{error detection}.
-                    \item<2-> \underline{Define errors} that affects building \gls{acr::3d} models.
+                    \item<3-> Errors = Geometry \(\wedge\) Topology;
+                    \item<4-> Errors \(\neq\) Exhaustivity \(\vee\) Up-to-dateness.
                 \end{itemize}
             \end{frame}
 
@@ -259,9 +285,9 @@
             \begin{frame}{What do we want?}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=1em]
                     \item<1-> \textbf{Scalability} up to city level;
-                    \item<2-> Genericity towards:
+                    \item<2-> \underline{Genericity} towards:
                     \begin{enumerate}[label=(\roman*)]
-                        \item<3-> modeling approach;
+                        \item<3-> modeling approach of origin;
                         \item<4-> urban scene.
                     \end{enumerate}
                     \item<5-> Readily available reference data;
@@ -269,7 +295,7 @@
                 \end{itemize}
             \end{frame}
 
-            \begin{frame}{State of the art}
+            \begin{frame}{State-of-the-art}
                 \centering
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/state_of_the_art}
             \end{frame}
@@ -288,11 +314,11 @@
             \tableofcontents[currentsection, currentsubsection, subsectionstyle=show/show/hide]
         \end{frame}
     }
-    \section{Semantic evaluation}
+    \section{Error taxonomy}
         \subsection{General layout}
             \begin{frame}{Taxonomy}{Hierarchization}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}, itemsep=2em]
-                    \item<1-> Hierarchization:
+                    \item<1-> \textbf{Hierarchization}:
                         \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                             \item<2-> \underline{Iteratively} define more and more specific errors;
                             \item<3-> Each \underline{specificity level}: errors as general as possible;
@@ -313,21 +339,21 @@
                             \item Each \underline{specificity level}: errors as general as possible;
                             \item \texttt{finesse} = specificity level.
                         \end{itemize}
-                    \item Modularity:
+                    \item \textbf{Modularity}:
                         \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                             \item<2-> An error \(\equiv\) Composition of \underline{basic errors} common to all scenes.
                         \end{itemize}
                 \end{itemize}
             \end{frame}
 
-        \subsection{Roof modeling case}
+        \subsection{Overhead roof modeling case}
             \begin{frame}{Atomic errors}{Under segmentation}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item<1-> \Acrfull{acr::2d} errors:
                     \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                         \item<2-> Segmentation issue:
                         \begin{itemize}
-                            \item<3-4> Under segmentation;
+                            \item<3-> Under segmentation: \only<3>{building level}\only<4>{facet level};
                         \end{itemize}
                     \end{itemize}
                 \end{itemize}
@@ -372,7 +398,7 @@
                     \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                         \item Segmentation issue (semantic):
                         \begin{itemize}
-                            \item<1-2> Over segmentation.
+                            \item<1-> Over segmentation: \only<1>{building level}\only<2>{facet level}.
                         \end{itemize}
                     \end{itemize}
                 \end{itemize}
@@ -417,7 +443,7 @@
                     \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                         \item<2-> Border issue (geometric):
                         \begin{itemize}
-                            \item<3-4> Inaccurate topology;
+                            \item<3-4> Inaccurate topology: \only<3>{building level}\only<4>{facet level};
                         \end{itemize}
                     \end{itemize}
                 \end{itemize}
@@ -462,7 +488,7 @@
                     \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                         \item Border issue (geometric):
                         \begin{itemize}
-                            \item<-2> Imprecise border.
+                            \item<1-> Imprecise border: \only<1>{building level}\only<2>{facet level}.
                         \end{itemize}
                     \end{itemize}
                 \end{itemize}
@@ -505,7 +531,7 @@
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item<1-> \Acrfull{acr::3d} errors:
                     \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
-                        \item<2-3> Imprecise geometry.
+                        \item<2-3> Imprecise geometry: \only<2>{building level}\only<3>{facet level}.
                         \begin{itemize}
                             \item 
                         \end{itemize}
@@ -549,12 +575,12 @@
     \section{Learning based evaluation}
         \begin{frame}{Evaluation as classification}
             \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                \item<1-> Error detection \(\longleftrightarrow\) supervized classification:
+                \item<1-> Error detection \(\longleftrightarrow\) \textbf{supervized classification}:
                 \begin{itemize}[label=\(\rightarrow\)]
-                    \item<2-> Adapted to \textbf{large scale};
+                    \item<2-> Adapted to \textbf{large scales};
                     \item<3-> \textbf{Automated} by design.
                 \end{itemize}
-                \item<4-> No Hierarchy between \texttt{atomic errors}:
+                \item<4-> No hierarchy between \texttt{atomic errors}:
                 \begin{itemize}[label=$\implies$]
                     \item<5-> Multilabel classification.
                 \end{itemize}
@@ -562,20 +588,13 @@
             \end{itemize}
         \end{frame}
 
-        \begin{frame}{The evaluation pipeline}
+        \begin{frame}{The evaluation workflow}
             \centering
             \includestandalone[mode=buildnew, height=.75\textheight]{figures/graphical_pipeline_basic}
         \end{frame}
 
-        \subsection{\texorpdfstring{\acrshort*{acr::rmse}}{RMSE} for prediction}
-            \begin{frame}{Why using \texorpdfstring{\acrshort*{acr::rmse}}{RMSE}?}
-                \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                    \item<1-> Used in most modeling methods for evaluation;
-                    \item<2-> How predictive is it?
-                \end{itemize}
-            \end{frame}
-
-            \begin{frame}{\texorpdfstring{\acrshort*{acr::rmse}}{RMSE} as a features}
+        \subsection{Is \texorpdfstring{\acrshort*{acr::rmse}}{RMSE} sufficient?}
+            \begin{frame}{\texorpdfstring{\acrshort*{acr::rmse}}{RMSE} as a feature}
                 \centering
                 \includestandalone[mode=buildnew, width=\textwidth]{figures/features/height_based_animated_rmse}
             \end{frame}
@@ -621,7 +640,7 @@
             \end{frame}
 
         \subsection{Feature baseline}
-            \begin{frame}{The evaluation pipeline}
+            \begin{frame}{The evaluation workflow}
                 \centering
                 \includestandalone[mode=buildnew, height=.75\textheight]{figures/graphical_pipeline}
             \end{frame}
@@ -653,13 +672,13 @@
     
     \section{Experiments}
         \subsection{Dataset}
-            \begin{frame}{Origin of models}
+            \begin{frame}{Origin of the used models}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                    \item<1-> Few open large datasets;
+                    \item<1-> Open datasets?
                     \item<2-> Bati3D\textsuperscript{\textregistered} data:
                     \begin{itemize}[label=$\rightarrow$]
                         \item Based on~\parencite{durupt2006automatic};
-                        \item Relies on a footprint database;
+                        \item Relies on existing imperfect cadastral data;
                         \item Designed mainly for residential areas;
                     \end{itemize}
                     \item<3-> \(\approx\) 10 areas: \num[fraction-function = \sfrac]{1/2} usable;
@@ -759,14 +778,13 @@
                 }
                 \only<4->{
                     \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                        \item<4-> Highly unbalanced data;
-                        \item<5-> Dense scenes are comparable;
-                        \item<6-> Dense scene:
+                        \item Highly unbalanced data;
+                        \item Dense scenes (\textbf{Nantes} \& \textbf{Paris-13}):
                         \begin{itemize}[label=\(\rightarrow\)]
-                            \item<7-> High \texttt{Facet errors} count;
-                            \item<7-> Low \texttt{Building errors} count;
+                            \item High \texttt{Facet errors} count;
+                            \item Low \texttt{Building errors} count;
                         \end{itemize}
-                        \item<8-> Sparce scene: inverse.
+                        \item Sparce scene: inverse.
                     \end{itemize}
                 }
             \end{frame}
@@ -857,10 +875,10 @@
                 }
                 \only<11->{
                     \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                        \item<11-> Rare errors are hard to detect \(\longrightarrow\) \acrshort{acr::svm} is better.
-                        \item<12-> \texttt{FOS} and \texttt{FIG} are very frequent \(\implies\) easily detected.
-                        \item<13-> Geometric features are usually good enough.
-                        \item<14-> In general:
+                        \item \underline{Rare errors are hard to detect} \(\longrightarrow\) \acrshort{acr::svm} is better.
+                        \item \texttt{FOS} and \texttt{FIG} are very frequent \(\implies\) easily detected.
+                        \item \underline{Intrinsic features are usually good enough}.
+                        \item In general:
                         \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                             \item \texttt{Facet errors} better on dense scenes;
                             \item \texttt{Building errors} better on the sparce scene;
@@ -1065,15 +1083,15 @@
         \subsection{Graph features}
             \begin{frame}{Our needs}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                    \item<1-> Global feature for each graph.
+                    \item<1-> Global feature vector per graph.
                     \item<2-> Take structure into account.
-                    \item<3-> Different node attributes: different dynamics.
-                    \item<4-> Different building types \(\implies\) different graph sizes.
-                    \item<5-> Handle small dataset.
-                \end{itemize}                
+                    \item<2-> Different node attributes: different dynamics.
+                    \item<3-> Different building types \(\implies\) different graph sizes.
+                    \item<4-> Handle small dataset.
+                \end{itemize}
             \end{frame}
 
-            \begin{frame}{Our solution}
+            \begin{frame}{Proposed solution}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                     \item<1-> Use kernel trick:
                     \begin{itemize}[label=\(\rightarrow\)]
@@ -1111,15 +1129,19 @@
         \subsection{Image features}
             \begin{frame}{Our needs}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                    \item<1-> Global feature for an image.
+                    \item<1-> Global feature vector per image.
                     \item<2-> Handles:
                     \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                         \item<2-> both \glspl{acr::dsm} and RGB images.
-                        \item<3-> Handle edges.
-                        \item<4-> Handle textures.
-                        \item<5-> Handle small dataset.
+                        \item<3-> edges.
+                        \item<3-> textures.
+                        \item<4-> small dataset.
                     \end{itemize}
                 \end{itemize}
+                \vfill
+                \uncover<5->{
+                    Proposed solution: \gls{acr::scatnet}~\parencite{mallat2012group}.
+                }
             \end{frame}
 
             \begin{frame}{Why using \texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet}}
@@ -1366,11 +1388,11 @@
                 }
                 \only<7->{
                     \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
-                        \item<7-> \acrshort{acr::svm} good for highly unbalanced errors.
-                        \item<7-> Better feature extractors were beneficial.
-                        \item<8-> \texttt{Building errors} > \SI{70}{\%}: Only \textbf{Elancourt}.
-                        \item<8-> \texttt{Building errors} on dense scenes: Still to be improved.
-                        \item<9-> \texttt{Facet errors} > \SI{70}{\%}.
+                        \item \underline{\acrshort{acr::svm} good for highly unbalanced errors}.
+                        \item Better feature extractors were beneficial.
+                        \item \texttt{Facet errors} > \SI{70}{\%}.
+                        \item \texttt{Building errors} > \SI{70}{\%}: Only \textbf{Elancourt}.
+                        \item \texttt{Building errors} on dense scenes: \underline{Still to be improved.}
                     \end{itemize}
                 }
             \end{frame}

@@ -20,7 +20,7 @@
         \path (model.south) node[anchor=north, text width=3cm, align=center, visible on=<2>] (model_legend) {\scriptsize Model height};
 
         \path (minus) node[visible on=<3>] (residual) {\includegraphics[width=3cm]{images/features/scatnet/residual_colbar}};
-        \path (residual.south) node[anchor=north, text width=3cm, align=center, visible on=<3>] (residual_legend) {\scriptsize Residual};
+        \path (residual.south) node[anchor=north, text width=3cm, align=center, visible on=<3>] (residual_legend) {\scriptsize Residuals};
 
         \path (residual.west) node[anchor=east, visible on=<3>] (equals) {\Large =};
 
@@ -29,6 +29,8 @@
             \resizebox{1.5cm}{1.25cm}{
 				\begin{tikzpicture}
 					\begin{axis}[
+                        ylabel={\# occurrences},
+                        xlabel={\(\Delta\)z},
                         area style,
                         ymin=0,
                         xmin=-14,

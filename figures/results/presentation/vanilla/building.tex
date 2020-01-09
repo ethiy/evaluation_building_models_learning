@@ -46,12 +46,7 @@
             ymax=100,
             ymin=0,
             xmin=0.5,
-            xmax=3.5,
-            legend style={
-                legend columns=-2,
-                at={(.5,1.05)},
-                anchor=south
-            }
+            xmax=3.5
         ]
             \addplot+[
                 visible on=<1>,
@@ -134,12 +129,7 @@
                 fill=olive!40,
                 draw=olive
             ] table[x=x, y=y, meta index=2] {\BIT};
-            \legend{
-                \footnotesize \strut \texttt{BOS},
-                \footnotesize \strut \texttt{BUS},
-                \footnotesize \strut \texttt{BIB},
-                \footnotesize \strut \texttt{BIT}
-            }
-        \end{axis} 
+        \end{axis}
+        \node at (3.5, 6.1) {\includegraphics[width=4cm]{images/legends/building}};
     \end{tikzpicture}
 \end{document}
