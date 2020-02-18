@@ -13,14 +13,14 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
     \label{sec::experiments::datasets}
     In this section, we present the studied building models.
     Section~\ref{subsec::experiments::datasets::scenes} describes the selected urban scenes as well as the modeling technique which helped produce the studied models.
-    Next, in Section~\ref{subsec::experiments::datasets::stats}, we analyse the distribution of the previously defined errors (\textit{cf.} Chapter~\ref{chap::semantic_evaluation}) over the three urban areas of interest.
+    Next, in Section~\ref{subsec::experiments::datasets::stats}, we analyse the distribution of the previously defined errors (cf. Chapter~\ref{chap::semantic_evaluation}) over the three urban areas of interest.
     
     \subsection{Urban scenes and modeling techniques}
         \label{subsec::experiments::datasets::scenes}        
-        \gls{acr::3d} models from three different cities of France are selected in order to assess the performance of our framework: \textbf{Elancourt}, \textbf{Nantes}, and the XIII\textsuperscript{th} district of Paris (\textbf{Paris-13}) (\textit{cf.} Figure~\ref{fig::france_map}).
-        Figure~\ref{fig::elancourt_ortho} depicts the small city of \textbf{Elancourt} which contains diverse of building types: residential areas with gable and hip roof buildings and large industrial flat roof building based districts (\textit{cf.} Figure~\ref{subfig::elancourt_samples}).
-        \textbf{Nantes}, as shown in Figure~\ref{fig::nantes_ortho}, represents a denser urban setting but with a lower building diversity (\textit{cf.} Figure~\ref{subfig::nantes_samples}).
-        In Figure~\ref{fig::paris-13_ortho}, one can see how \textbf{Paris-13} consists of mostly flat roof high towers which coexist with Haussmann style buildings that typically exhibit highly fragmented roofs (\textit{cf.} Figure~\ref{subfig::paris-13_samples}).
+        \gls{acr::3d} models from three different cities of France are selected in order to assess the performance of our framework: \textbf{Elancourt}, \textbf{Nantes}, and the XIII\textsuperscript{th} district of Paris (\textbf{Paris-13}) (cf. Figure~\ref{fig::france_map}).
+        Figure~\ref{fig::elancourt_ortho} depicts the small city of \textbf{Elancourt} which contains diverse of building types: residential areas with gable and hip roof buildings and large industrial flat roof building based districts (cf. Figure~\ref{subfig::elancourt_samples}).
+        \textbf{Nantes}, as shown in Figure~\ref{fig::nantes_ortho}, represents a denser urban setting but with a lower building diversity (cf. Figure~\ref{subfig::nantes_samples}).
+        In Figure~\ref{fig::paris-13_ortho}, one can see how \textbf{Paris-13} consists of mostly flat roof high towers which coexist with Haussmann style buildings that typically exhibit highly fragmented roofs (cf. Figure~\ref{subfig::paris-13_samples}).
         The \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}) scene contains 2,009 (\textit{resp.} 748 and 478) annotated building models.
         In order to handle these models, \verb!proj.city!\footnote{
             \href{https://github.com/ethiy/proj.city.git}{A library for 3D city model projection.}
@@ -177,7 +177,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
         This allows to switch between data sources and better assess the errors affecting each building.
         Figure~\ref{fig::error_statistics} reports modeling errors statistics over the annotated buildings.\\
 
-        These statistics are first analysed depending on the family errors at the \texttt{finesse} = 2 level (\textit{cf.} Figure~\ref{fig::family_errors}).
+        These statistics are first analysed depending on the family errors at the \texttt{finesse} = 2 level (cf. Figure~\ref{fig::family_errors}).
         Due to the fact that geometrically inconsistent \gls{acr::3d} models were filtered out in a preprocessing (nadir projection) step, \texttt{Unqualifiable} buildings represent a small fraction of the dataset (less than \SI{7.5}{\percent}).
         Actually, this latter corresponds to the, partially or completly, occluded buildings that could not be qualified.
         Moreover, only a small fraction of buildings are \texttt{Valid}:
@@ -229,7 +229,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
                 \underbrace{4}_{\substack{\text{the output dimension}\\\text{of the function } \chi_{\max,\min,\operatorname{mean},\operatorname{med}} }} \times \underbrace{5}_{\substack{\text{the number of the facet}\\\text{graph attributes}}} = 20.
             \end{equation*}
             Regarding height based feature vectors, their dimension depend on the histogram parameters.
-            Since we compute differences between observed and model height at terrain level also (\textit{cf.} Section~\ref{subsec::learned_evaluation::baseline::height}), and because these are virtually unbounded and can differ from one scene to another, the maximum possible discrepancy is limited to \SI{\pm 50}{\m} for all scenes.
+            Since we compute differences between observed and model height at terrain level also (cf. Section~\ref{subsec::learned_evaluation::baseline::height}), and because these are virtually unbounded and can differ from one scene to another, the maximum possible discrepancy is limited to \SI{\pm 50}{\m} for all scenes.
             In order to have the same feature vector dimension for this modality as for the geometric one, the number of bins is fixed manually to \(20\).\\
             For image based features, the cosine similarity between normal vectors, used in Equation~\ref{eq::corr_fac}, is by definition bounded in the interval [-1, 1].
             This interval is consequently divided evenly into \(20\) bins for the histogram computation.
@@ -296,7 +296,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
     \subsection{Classification settings}
         \label{subsec::experiments::setup::classification}
             Feature extractors were defined in the previous subsection.
-            Herein, are given extensive details how the considered classifiers (\textit{cf.} Section~\ref{subsec::learned_evaluation::classification::classifiers}) are applied.
+            Herein, are given extensive details how the considered classifiers (cf. Section~\ref{subsec::learned_evaluation::classification::classifiers}) are applied.
             We also provide the metrics that will help measure the accuracy of predictions.
 
         \subsubsection{Considered labels}
@@ -322,7 +322,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
 
             \paragraph{\acrshort*{acr::svm}}
                 The linear \gls{acr::svm} is not well suited for the type of features that we use, even for baseline features as experiments do not yield any results in time.
-                As a consequence, the latter was left out and we experimented only with the kernel \gls{acr::svm} using the standard \gls{acr::rbf} kernel (\textit{cf.} Equation~\ref{eq::rbf_kernel}) when instances are vectors not graphs.
+                As a consequence, the latter was left out and we experimented only with the kernel \gls{acr::svm} using the standard \gls{acr::rbf} kernel (cf. Equation~\ref{eq::rbf_kernel}) when instances are vectors not graphs.
                 Just as with the \gls{acr::rf} classifier, we conducted a grid search using baseline geometric features only in order to determine both parameters \(C\) and \(\gamma\) by limiting the range between \numrange[range-phrase={ and }, scientific-notation = true]{1e1}{1e-3} for both.
                 All values yielded sensibly the same scores.
                 As a result we set these parameters as follows: \(C = \num[scientific-notation = true]{1e-1}\) to not overpenalize nor underfit during learning and \(\gamma = \num[scientific-notation = true]{1e-3}\) to avoid overfitting.
@@ -507,7 +507,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
 
         In Table~\ref{tab::all_f-scores_ablation_f3_viz}, results are classified depending on the F-score using a color scheme.
         We can see how \texttt{FOS} and \texttt{FIG} are always well detected.
-        This is mainly due to the fact that they are very frequent in all datasets (\textit{cf.} Figure~\ref{fig::error_statistics}).
+        This is mainly due to the fact that they are very frequent in all datasets (cf. Figure~\ref{fig::error_statistics}).
         The same reason explains why \texttt{BOS} is well detected in \textbf{Elancourt}, as well as \texttt{FUS} and \texttt{FIB} are in \textbf{Paris-13}.
         Understandably, rare errors are difficult to detect as shown by \texttt{FIT} on the three zones for instance.
 
@@ -669,7 +669,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
         On the other hand, \texttt{Facet errors} F-scores are proportional to the density of the studied urban scene, minding two exceptions.
         \texttt{FOS} and \texttt{FIT} F-scores are actually stable across the different urban areas suffering only from slight decreases that can be attributed to noise.
         This can be due to the fact that \texttt{FOS} is highly frequent in all urban scenes and so easily predictable that F-scores cannot get any better. 
-        Conversely, \texttt{FIT} are so rare (\textit{cf.} Figure~\ref{subfig::lod2_errors}) their existance is barely predictable.
+        Conversely, \texttt{FIT} are so rare (cf. Figure~\ref{subfig::lod2_errors}) their existance is barely predictable.
 
     \subsection{Feature importance}
         \label{subsec::experiments::baseline_feature_analysis::feature_importance}
@@ -706,11 +706,11 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
         \end{figure}
         
         \gls{acr::rf} classifiers can easily infer feature importances at training time.
-        These were here computed and aggregated by modality in all urban scenes (\textit{cf.} Figure~\ref{fig::feature_importances_rf_bl}).\\
+        These were here computed and aggregated by modality in all urban scenes (cf. Figure~\ref{fig::feature_importances_rf_bl}).\\
 
         At first, we observe how much individual attributes are important before being gathered.
         For geometric features, all attributes are equally important.
-        However, concerning image and height based features, only a few are relevant (\textit{i.e.} they have a higher feature importance ratio).
+        However, concerning image and height based features, only a few are relevant (i.e., they have a higher feature importance ratio).
         Indeed, these few attributes correspond to the highest and lowest values of the histograms.
         As described earlier, image and height features consist of a histogram of distances between the model and the real measured signals:
         vector cosine similarity, for the first, and the \(L_2\) norm for the last.

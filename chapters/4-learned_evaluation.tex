@@ -6,7 +6,7 @@ In the previous chapter (Chapter~\ref{chap::semantic_evaluation}), we developped
 Based on this taxonomy, and depending on the particular needs, specific error labels are extracted and considered during the quality evaluation step.\\
 
 In this chapter, we present the second part of our proposed approach.
-It casts the problem as a supervized classification one.
+It casts the problem as a supervised classification one.
 Issues related to the latter are detailed in Section~\ref{sec::learned_evaluation::classification}.
 Next, Section~\ref{sec::learned_evaluation::baseline} presents in details the baseline of features extracted out of building \gls{acr::3d} models.
 Third and last, advanced features are discussed in Section~\ref{sec::learned_evaluation::richer_features}.
@@ -16,7 +16,7 @@ These are proposed to better model defect predictions.
 
 \section{Quality evaluation as a classification task}
     \label{sec::learned_evaluation::classification}
-    In order to satisfy the \textbf{large-scale} condition imposed at Section~\ref{subsec::introduction::contributions::positioning}, we propose to formulate the problem as a supervized learning one.
+    In order to satisfy the \textbf{large-scale} condition imposed at Section~\ref{subsec::introduction::contributions::positioning}, we propose to formulate the problem as a supervised learning one.
     Errors are considered as labels while features are computed so as to describe the observed buildings.
     Actually, as a first approach, the existence of all errors is predicted at the \textbf{building level}, even for \texttt{Facet Errors} labels\footnote{These errors are, in fact, by definition more local.}.
     Determining which facet is affected by an error is a much more challenging problem than the previous one.
@@ -70,7 +70,7 @@ These are proposed to better model defect predictions.
         \begin{equation*}
             multi\_label(\texttt{Valid}, l_1, l_2, \dots, l_c) \equiv multi\_label(l_1, l_2, \dots, l_c).
         \end{equation*}
-        $binary$ refers to the special case of $multi\_class$ where $c = 2$: \textit{i.e.}
+        $binary$ refers to the special case of $multi\_class$ where $c = 2$: i.e.,
         \begin{equation*}
             binary(l_1, l_2) \equiv multi\_class(l_1, l_2)
         \end{equation*}
@@ -93,7 +93,7 @@ These are proposed to better model defect predictions.
     
     \subsection{Feature extraction}
         \label{subsec::learned_evaluation::classification::feature_extraction}
-        The proposed quality evaluation approach, being formulated as a supervized classification problem, requires extracting feature vectors describing characteristics of the evaluated model.
+        The proposed quality evaluation approach, being formulated as a supervised classification problem, requires extracting feature vectors describing characteristics of the evaluated model.
         This is possible through the use of the intrinsic properties of the building model, as well as comparisons with external data.\\
     
         Intrinsic feature extraction consists in make use of the geometric structure of the \gls{acr::3d} model.
@@ -111,7 +111,7 @@ These are proposed to better model defect predictions.
         This was illustrated in Figure~\ref{fig::fig}, as comparing the projected model to the orthoimage did not yield anything out of place, contrarily to the \gls{acr::dsm} comparison.
         Depth data can take multiple forms: unstructured point clouds, originating for instance from \gls{acr::lidar} sensors, or dense depth maps such as \gls{acr::dsm} for the overhead case.\\
         Optical images can also be employed in this framework.
-        These provide complementary information such as edges (high frequencies, in general) and textures which are suited for inner defect detection as an example (\textit{cf.} Figure~\ref{subfig::fus_2d}).
+        These provide complementary information such as edges (high frequencies, in general) and textures which are suited for inner defect detection as an example (cf. Figure~\ref{subfig::fus_2d}).
         This type of data comes usually in two different shapes: oblique images or orthoimages.
     
     \subsection{Classifier choice}
@@ -134,10 +134,10 @@ These are proposed to better model defect predictions.
             Moreover, only binary classification is inherently handled.
             However, it offers other advantages that are not met by \gls{acr::rf}.
             In fact, \glspl{acr::svm} can be useful when labels are not equally distributed in the training set.
-            This is actually the case of some errors that are rare in our dataset: specifically the inaccurate topology ones (\textit{cf.} Section~\ref{subsec::experiments::datasets::stats}).
-            It also manages to learn efficiently on sets with limited sets, as will prove to be the situation (\textit{cf.} Section~\ref{subsec::experiments::datasets::scenes}). 
+            This is actually the case of some errors that are rare in our dataset: specifically the inaccurate topology ones (cf. Section~\ref{subsec::experiments::datasets::stats}).
+            It also manages to learn efficiently on sets with limited sets, as will prove to be the situation (cf. Section~\ref{subsec::experiments::datasets::scenes}). 
             This type of classifiers naturally encorporates kernels such as the ones presented later in Section~\ref{subsec::learned_evaluation::richer_features::graph}.
-            Finally, it is also preferred when dealing with high dimensional feature vectors like those produced by \glspl{acr::scatnet} (\textit{cf.} Section~\ref{subsec::learned_evaluation::richer_features::image}).
+            Finally, it is also preferred when dealing with high dimensional feature vectors like those produced by \glspl{acr::scatnet} (cf. Section~\ref{subsec::learned_evaluation::richer_features::image}).
 
 \section{Feature baseline}
     \label{sec::learned_evaluation::baseline}
@@ -146,7 +146,7 @@ These are proposed to better model defect predictions.
     We avoid computing and comparing \gls{acr::3d} lines~\parencite{michelin2013quality}, correlation scores~\parencite{boudet2006supervised} or any \gls{acr::sfm} based metric~\parencite{kowdle2011active}.
     In addition of being very costly, these features are methodologically redundant with the \gls{acr::3d} modeling techniques.
     They are, hence, vulnerable to the same defects.
-    Conversely, evaluation metrics used in the \gls{acr::3d} building reconstruction literature (\textit{e.g.}, \gls{acr::rmse}) are too weak for such a complex task.
+    Conversely, evaluation metrics used in the \gls{acr::3d} building reconstruction literature (e.g., \gls{acr::rmse}) are too weak for such a complex task.
     This will be proven later on in Section~\ref{sec::experiments::baseline_feature_analysis}.
 
     In Section~\ref{subsec::learned_evaluation::baseline::geometric}, we describe the used baseline for geometric features.
@@ -157,7 +157,7 @@ These are proposed to better model defect predictions.
         \label{subsec::learned_evaluation::baseline::geometric}
         Given a building model \(\mathsf{M}\), the facet set is denoted by $\mathsf{F_M}$.
         $\forall (f, g) \in \mathsf{F_M} \times \mathsf{F_M} \; f \sim g$ correspond to facets \(f\) and \(g\) being adjacent: 
-        \textit{i.e.}, they share a common edge. As the roof topology graph in~\parencite{verma20063d}, the input building model $\mathsf{M}$ can be seen as a facet (dual) graph:
+        i.e., they share a common edge. As the roof topology graph in~\parencite{verma20063d}, the input building model $\mathsf{M}$ can be seen as a facet (dual) graph:
 
         \begin{equation}
         	\label{eq::model_graph}
@@ -177,7 +177,7 @@ These are proposed to better model defect predictions.
         \end{figure}
 
         The dual graph is illustrated in Figure~\ref{fig::geometric_features}.
-        For each facet $f \in \mathsf{F_M}$, we compute its degree (\textit{i.e.}, number of vertices; $f \mapsto d\left(f\right) \triangleq \left\lvert\left\{v : v\text{ is a vertex of }f\right\}\right\rvert$), its area $f \mapsto \mathscr{A}\left(f\right)$ and its circumference $f \mapsto \mathscr{C}\left(f\right)$.
+        For each facet $f \in \mathsf{F_M}$, we compute its degree (i.e., number of vertices; $f \mapsto d\left(f\right) \triangleq \left\lvert\left\{v : v\text{ is a vertex of }f\right\}\right\rvert$), its area $f \mapsto \mathscr{A}\left(f\right)$ and its circumference $f \mapsto \mathscr{C}\left(f\right)$.
         These are all geometric invariants with respect to $\mathbb{R}^3$ isometries, contrarily to facet centroids $\mathscr{G}\left(f\right)$ and normals $\vec{n}\left(f\right)$.
         This is countersteped by looking, for each graph edge $e=\left\{f, g\right\} \in \mathsf{E_M}$, for the distance between facet centroids $\left\{f, g\right\} \mapsto \left\lVert \mathscr{G}\left(f\right) - \mathscr{G}\left(g\right) \right\rVert$ and the angle formed by their normals $\left\{f, g\right\} \mapsto \arccos\left(\vec{n}\left(f\right) \cdot \vec{n}\left(g\right)\right)$.
         Statistical characteristics are then computed over building model facets using specific functions \(\chi\), like a histogram:        
@@ -239,7 +239,7 @@ These are proposed to better model defect predictions.
         The latter is inferred from its facets plane equations.
         It is rasterized into an grid structure $alt_{\mathsf{M}} \in \mathbb{R}^{w_{\mathsf{M}} \times h_{\mathsf{M}}}$ using the same spatial resolution as $dsm_{\mathsf{M}}$.
         The difference between the two height grids provides a discrepancy map as shown in Figure~\ref{subfig::residuals}).
-        A baseline approach is herein proposed relying on the statistics of pixel values computed using the $\chi$ functions (\textit{cf.} Figure~\ref{fig::height_based_features}).\\
+        A baseline approach is herein proposed relying on the statistics of pixel values computed using the $\chi$ functions (cf. Figure~\ref{fig::height_based_features}).\\
 
         \begin{equation}
             \label{eq::height_based_features}
@@ -274,8 +274,8 @@ These are proposed to better model defect predictions.
         We start by projecting building models in the nadir direction.
         For each facet \(f \in \mathsf{F_M}\), this operation takes into account occlusions and results in:
         \begin{description}
-            \item[A \gls{acr::2d} polygon:] If the facet is not vertical (\textit{i.e.} \(\vec{n}(f) \cdot \vec{z} \neq 0\)) and not completly occluded by other facets;
-            \item[A segment:] If the facet is vertical (\textit{i.e.} \(\vec{n}(f) \cdot \vec{z} = 0\));
+            \item[A \gls{acr::2d} polygon:] If the facet is not vertical (i.e., \(\vec{n}(f) \cdot \vec{z} \neq 0\)) and not completly occluded by other facets;
+            \item[A segment:] If the facet is vertical (i.e., \(\vec{n}(f) \cdot \vec{z} = 0\));
             \item[An empty polygon:] If the facet is completly occluded by other facets.
         \end{description}
         The last two cases are filtered out and the final projection consists in a set of polygons forming a partition of the building footprint denoted:
@@ -366,7 +366,7 @@ These are proposed to better model defect predictions.
         The biggest disadvantage of this basic kernel is its disregard towards the structural information stored in the graph.
         That is why we propose to use the other kernels that are presented in Section~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}.
         None of these kernels takes into account edge attributes.
-        This is actually not an issue as both the edge attributes of the facet graph (\textit{cf.} Equation~\ref{eq::model_graph}) are in fact a function of node attributes: centroid \(f \mapsto \mathscr{G}\left(f\right)\) and normal \(f \mapsto \vec{n}\left(f\right)\).
+        This is actually not an issue as both the edge attributes of the facet graph (cf. Equation~\ref{eq::model_graph}) are in fact a function of node attributes: centroid \(f \mapsto \mathscr{G}\left(f\right)\) and normal \(f \mapsto \vec{n}\left(f\right)\).
         Some of these kernels do not utilize the node attributes either as they take only account of the structure of the graph.\\
 
         Face normals are unit vectors with coefficients in the interval \([0, 1]\), while centroids are free to be roam in \(\mathbb{R}^3\).
@@ -417,12 +417,12 @@ These are proposed to better model defect predictions.
         As a consequence, we choose instead to use \glspl{acr::scatnet} which mimic classical \glspl{acr::cnn} and can yield good image representations in an unlearned manner as shown in Section~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::scatnet}.
 
         \subsubsection{Height based features}
-            Discrepancies between the \gls{acr::3d} model extracted height map and the \gls{acr::dsm} manifest in textures in computed residuals (\textit{cf.} Figure~\ref{subfig::residuals}).
+            Discrepancies between the \gls{acr::3d} model extracted height map and the \gls{acr::dsm} manifest in textures in computed residuals (cf. Figure~\ref{subfig::residuals}).
             As a matter of fact, \glspl{acr::scatnet} can handle very well texture discrimination as proven theoretically by~\textcite{mallat2012group} and experimentally by~\textcite{bruna2013invariant,sifre2013rotation}.
             In addition, theoretically the height data can be fed directly to a \gls{acr::scatnet} without requiring any normalization or preprocessing since, by construction, they can admit any type of \gls{acr::2d} signal\footnote{There are other versions of \glspl{acr::scatnet} taking one dimensional signals~\parencite{anden2014deep} or even graphs~\parencite{eickenberg2018solid}.}.
             This explains why \glspl{acr::scatnet} were chosen as a height based feature extractor.\\
 
-            From a practical standpoint, the residuals computed as in Section~\ref{subsec::learned_evaluation::baseline::height} come as images in different sizes \(w_{\mathsf{M}} \times h_{\mathsf{M}}\) (\textit{cf.} Section~\ref{subsec::learned_evaluation::baseline::image}) depending on the input model.
+            From a practical standpoint, the residuals computed as in Section~\ref{subsec::learned_evaluation::baseline::height} come as images in different sizes \(w_{\mathsf{M}} \times h_{\mathsf{M}}\) (cf. Section~\ref{subsec::learned_evaluation::baseline::image}) depending on the input model.
             Consequently, concatenating \gls{acr::scatnet} coefficients into a single vector is going to result in variable feature vector dimensions.
             One solution is to resize all images to a certain fixed size beforehand.
             However, this solution was quickly ruled out based on few experiments.
@@ -439,7 +439,7 @@ These are proposed to better model defect predictions.
             where:
             \begin{conditions}
                 l & is the scattering output layer;\\
-                p_m & is a valid path at layer \(l\) (\textit{cf.} Equation~\ref{eq::scatter_second}). 
+                p_m & is a valid path at layer \(l\) (cf. Equation~\ref{eq::scatter_second}). 
             \end{conditions}
             
             The resulting coefficients defined in Equation~\ref{eq::reduced_scattering} can be concatenated for all \(n_S\) scattering paths to form a feature vector:
@@ -489,8 +489,8 @@ These are proposed to better model defect predictions.
         \subsubsection{Height based features}
             \glspl{acr::scatnet} seem then to be good choice for image based feature extractors.
             In fact, as shown in Figure~\ref{subfig::bus_2d}, image textures could be also useful for error detection.
-            More importantly, as shown with baseline image based features (\textit{cf.} Section~\ref{subsec::learned_evaluation::baseline::image}), edges are key image attributes for comparing building models to orthoimages.
-            Actually, \glspl{acr::scatnet} are well suited for edge detection as they use Morlet wavelets for convolution operations (\textit{cf.} Section~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::scatnet}).
+            More importantly, as shown with baseline image based features (cf. Section~\ref{subsec::learned_evaluation::baseline::image}), edges are key image attributes for comparing building models to orthoimages.
+            Actually, \glspl{acr::scatnet} are well suited for edge detection as they use Morlet wavelets for convolution operations (cf. Section~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::scatnet}).
             These filters are adapted to edge detection~\parencite{zhang2007radon}, as depicted in Figure~\ref{subfig::morlet_filters}.\\
 
             In order to draw features comparing orthoimages to buildings models, we start first by rasterizing the borders of polygons \(f^q \in \mathsf{F_M}\) of the model into a grid structure mask:
@@ -505,7 +505,7 @@ These are proposed to better model defect predictions.
 
             Two options are possible:
             \begin{description}
-                \item[\texttt{Deletion}:] Pixels \(g\) in the corresponding orthoimage which are part of a polygon border (\textit{i.e.} \(Q_{\mathsf{M}}(g) = 1\)) are made black:
+                \item[\texttt{Deletion}:] Pixels \(g\) in the corresponding orthoimage which are part of a polygon border (i.e., \(Q_{\mathsf{M}}(g) = 1\)) are made black:
                         \begin{equation}
                             \label{eq::deletion_orthoimage}
                             I^{\text{dl}}_{\mathsf{M}} \triangleq I_{\mathsf{M}} \odot \left(\begin{bmatrix}

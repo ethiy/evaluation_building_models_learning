@@ -132,9 +132,9 @@
                 Evolution of the F-score value, for each error, between transferability experiments and the ablation study.
             ]{
                 \label{tab::transferability_comparison}
-                Evolution of the F-score value, for each error, between transferability experiments and the ablation study (\textit{cf.} Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}).
+                Evolution of the F-score value, for each error, between transferability experiments and the ablation study (cf. Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}).
                 \textbf{El.} (\textit{resp.} \textbf{Na.} and \textbf{P13.}) stand for \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
-                Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (\textit{cf.} Table~\ref{tab::all_f-scores_transferability_f3}).
+                Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (cf. Table~\ref{tab::all_f-scores_transferability_f3}).
                 The color indicates the magnitude of change: 
                 \textcolor{LOSS45}{\(\blacksquare\)}: (\SIrange[range-phrase={,  }]{-100}{-45}{\percent}]--
                 \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
@@ -178,13 +178,13 @@
         \subparagraph{Impact of external modalities}
             As we can suspect from looking at the large standard deviations illustrated in Figure~\ref{fig::f_score_transferability_f3}, modalities play an instrumental role in insuring the transferability experiments.
             All modalities that stood out, in terms of the F-score, were mentioned in the corresponding cell in Table~\ref{tab::transferability_comparison}.\\
-            As intended (\textit{cf.} Section~\ref{subsec::learned_evaluation::baseline::image}), image based features are instrumental in transferability for \texttt{FUS}, \texttt{BUS}, \texttt{FIB} and \texttt{BIB}.\\
+            As intended (cf. Section~\ref{subsec::learned_evaluation::baseline::image}), image based features are instrumental in transferability for \texttt{FUS}, \texttt{BUS}, \texttt{FIB} and \texttt{BIB}.\\
             Geometric features, on the other hand, play a lesser role helping mostly with \texttt{BIT} transferability when training on dense urban scenes as well as \texttt{FUS} for the \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13} experiment.
             Actually, \texttt{BIT} is a purely topological error that can be learned with the help of these structural features.
             On the contrary, adding more modalities would only confuse the classifier as also seen in the ablation study in Table~\ref{tab::ablation_f3}.\\
             Height based errors alone are not crucial for transferability, intervening only once in the case of \texttt{FIB} in the \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13} experiment.
-            However, it has a bigger impact when added to image based ones (\textit{cf.} cells with \textbf{All} in Table~\ref{tab::transferability_comparison}).\\
-            All these previous findings further justify why we did not leave out any modality, as they are more frequently critical for transferability than in the ablation study (\textit{cf.} Table~\ref{tab::all_f-scores_ablation_f3}).
+            However, it has a bigger impact when added to image based ones (cf. cells with \textbf{All} in Table~\ref{tab::transferability_comparison}).\\
+            All these previous findings further justify why we did not leave out any modality, as they are more frequently critical for transferability than in the ablation study (cf. Table~\ref{tab::all_f-scores_ablation_f3}).
 
     \subsection{Generalization study}
         \label{subsec::more_experiments::scalability::generalization}
@@ -245,8 +245,8 @@
                 Evolution of the F-score value, for each error and test area, between generalization experiments and the ablation study.
             ]{
                 \label{tab::generalization_comparison}
-                Evolution of the F-score value, for each error and test area, between generalization experiments and the ablation study (\textit{cf.} Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}).
-                Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (\textit{cf.} Table~\ref{tab::all_f-scores_generalization_f3}).
+                Evolution of the F-score value, for each error and test area, between generalization experiments and the ablation study (cf. Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}).
+                Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (cf. Table~\ref{tab::all_f-scores_generalization_f3}).
                 The color indicates the magnitude:
                 \textcolor{LOSS45}{\(\blacksquare\)}: (\SIrange[range-phrase={,  }]{-100}{-45}{\percent}]--
                 \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
@@ -582,7 +582,7 @@
 
     \subsection{\textbf{Paris-13} and \textbf{Nantes} fusion}
         \label{subsec::more_experiments::classifier::dataset}
-        According to the findings of the previous sections (\textit{cf.} Sections~\ref{subsec::more_experiments::scalability::transferability} and~\ref{subsec::more_experiments::finesse::2}), \textbf{Paris-13} and \textbf{Nantes} are similar compared to \textbf{Elancourt}.
+        According to the findings of the previous sections (cf. Sections~\ref{subsec::more_experiments::scalability::transferability} and~\ref{subsec::more_experiments::finesse::2}), \textbf{Paris-13} and \textbf{Nantes} are similar compared to \textbf{Elancourt}.
         Moreover, the latter area contains a lot more instances than the others which is not ideal for comparisons.
         As a consequence, both \textbf{Paris-13} and \textbf{Nantes} were fused in one set denoted from now by \textbf{Na-P13}.
         It contains 1226 buildings compared to 2007 instances of \textbf{Elancourt}.
@@ -625,7 +625,7 @@
 
         Naturally, as \textbf{Nantes} contains more (around 1.56 times more) instances than \textbf{Paris-13}, \textbf{Na-P13} error statistics profile looks a bit more like the one of \textbf{Nantes} than the other area as shown in Figure~\ref{fig::error_statistics}.
         According to Sections~\ref{subsec::more_experiments::scalability::transferability} and~\ref{subsec::more_experiments::finesse::2}, we can expect that \textbf{Na-P13} would be better suited to learn \texttt{Facet errors}, with the exception of \texttt{FIT}, compared to \textbf{Elancourt}, while the latter is also the best alternative for \texttt{Building errors}.
-        Next, the two classifiers, \gls{acr::svm} and \gls{acr::rf}, are trained on both sets \textbf{Elancourt} and \textbf{Na-P13} using always the baseline features (\textit{cf.} Section~\ref{sec::learned_evaluation::baseline}).
+        Next, the two classifiers, \gls{acr::svm} and \gls{acr::rf}, are trained on both sets \textbf{Elancourt} and \textbf{Na-P13} using always the baseline features (cf. Section~\ref{sec::learned_evaluation::baseline}).
 
     \subsubsection{\texorpdfstring{\acrshort*{acr::rf}}{RF} results}
         \label{subsec::more_experiments::classifier::rf}
@@ -694,12 +694,12 @@
             }
         \end{table}
 
-        Regarding \textbf{Na-P13}, one natural prediction is that scores would average out with the same ratios as the frequency of error labels (\textit{cf.} Figure~\ref{fig::error_fused_statistics}).
+        Regarding \textbf{Na-P13}, one natural prediction is that scores would average out with the same ratios as the frequency of error labels (cf. Figure~\ref{fig::error_fused_statistics}).
         By accounting for the random nature of the choice in training instances during the cross validation, this could be argued to be true for \texttt{FOS} or \texttt{FIG} and, in a lesser extent, for \texttt{BUS} too.
         However, it is far from being true for the rest of errors as shown in Table~\ref{tab::all_f-scores_rf_f3}.
         In fact, for the other siw error labels, F-scores, on the fused set, are better than those on both \textbf{Nantes} and \textbf{Paris-13}.
         Notably, some instances of \texttt{BIT} and \texttt{FIT} are now detected, in best cases, at arounf \SI{11}{\percent} and \SI{21}{\percent} respectively.
-        On the contrary, they were not detected at all on the separate areas (\textit{cf.} Table~\ref{tab::ablation_f3}).
+        On the contrary, they were not detected at all on the separate areas (cf. Table~\ref{tab::ablation_f3}).
         This can be explained by the fact that, although having around the same statistical distribution of errors as \textbf{Nantes} and \textbf{Paris-13} in a lesser extent, the fused set contains enough instances to better learn than before.
         It can also be the result of the fact that the two areas complement each other, as better shown in Figure~\ref{tab::transferability_comparison}, with \texttt{BIT}, where training on \textbf{Nantes} and testing on the other and vice versa proved to be better than training and testing on the same zone.\\
         
@@ -738,7 +738,7 @@
         Added to the labels \texttt{BUS} and \texttt{FIB} that were previously improved by the use of image based features as shown in Table~\ref{tab::all_f-scores_ablation_f3}, \texttt{BIT} and \texttt{FIT} F-scores are also greatly impacted on the new fused set.
         In fact, the first better performs when only geometric features are used as previously explained before in Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}.
         For the Second, it was image based features that proved to be better suited.
-        This agrees with the fact that, for the \textbf{Elancourt} \(\rightarrow\) \textbf{Nantes} experiment, image based features were instrumental in better detecting \texttt{FIT} than training on \textbf{Nantes} itself (\textit{cf.} Figure~\ref{tab::transferability_comparison}).
+        This agrees with the fact that, for the \textbf{Elancourt} \(\rightarrow\) \textbf{Nantes} experiment, image based features were instrumental in better detecting \texttt{FIT} than training on \textbf{Nantes} itself (cf. Figure~\ref{tab::transferability_comparison}).
         
     \subsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} results}
         \label{subsec::more_experiments::classifier::svm}
@@ -857,7 +857,7 @@
 
     \subsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} compared to \texorpdfstring{\acrshort*{acr::rf}}{RF}}
         \label{subsec::more_experiments::classifier::svm_rf}
-        In Table~\ref{tab::rf_vs_svm_comparison}, are compared the \gls{acr::svm} F-scores (\textit{cf.} Table~\ref{tab::all_f-scores_svm_f3}) to \gls{acr::rf} ones (\textit{cf.} Table~\ref{tab::all_f-scores_rf_f3}).
+        In Table~\ref{tab::rf_vs_svm_comparison}, are compared the \gls{acr::svm} F-scores (cf. Table~\ref{tab::all_f-scores_svm_f3}) to \gls{acr::rf} ones (cf. Table~\ref{tab::all_f-scores_rf_f3}).
         The same color scheme is used as with the Tables~\ref{tab::transferability_comparison} and~\ref{tab::generalization_comparison}.\\
 
         \begin{table}[htbp]
@@ -878,7 +878,7 @@
             ]{
                 \label{tab::rf_vs_svm_comparison}
                 Evolution of the F-score value, for each error using \gls{acr::svm} compared to \gls{acr::rf} and based on baseline features.
-                Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (\textit{cf.} Table~\ref{tab::all_f-scores_svm_f3}).
+                Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (cf. Table~\ref{tab::all_f-scores_svm_f3}).
                 The color indicates the magnitude:
                 \textcolor{LOSS45}{\(\blacksquare\)}: (\SIrange[range-phrase={,  }]{-100}{-45}{\percent}]--
                 \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
@@ -967,7 +967,7 @@
         \label{subsec::more_experiments::classifier::feature_importance}
         In a linear \gls{acr::svm}, feature importance can be natively computed by looking at the weight vector \(\bm{w}\) as shown by~\textcite{guyon2002gene}.
         This is, unfortunatly, not the case.
-        Instead we operate with Kernel \glspl{acr::svm} where features are fused using \gls{acr::mkl} with weights \(\left(\mu_i\right)_{i=1, 2, 3}\) (\textit{cf.} Equation~\ref{eq::mkl}) that are on the simplex, as discussed in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.
+        Instead we operate with Kernel \glspl{acr::svm} where features are fused using \gls{acr::mkl} with weights \(\left(\mu_i\right)_{i=1, 2, 3}\) (cf. Equation~\ref{eq::mkl}) that are on the simplex, as discussed in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.
         Consequently, when training with the last feature configuration, the resulting weights could be interpreted as feature importance ratios.
         These are vizualized in Figure~\ref{fig::feature_importances_svm_bl}.\\
 
@@ -1001,7 +1001,7 @@
             }
         \end{figure}
 
-        We can see how these ratios stay mostly around \num[fraction-function = \sfrac]{1/3} with more leeway compared to \gls{acr::rf} (\textit{cf.} Figure~\ref{fig::feature_importances_rf_bl}).
+        We can see how these ratios stay mostly around \num[fraction-function = \sfrac]{1/3} with more leeway compared to \gls{acr::rf} (cf. Figure~\ref{fig::feature_importances_rf_bl}).
         This actually confirms how these \gls{acr::mkl} weights could be interpreted as features importances.
         The larger margins to the \num[fraction-function = \sfrac]{1/3} ratio could be explained by the sensibility of the weights to the noise when selecting training instances.
         There is, however, one exception that could be noted between Figures~\ref{fig::feature_importances_svm_bl} and~\ref{fig::feature_importances_rf_bl}.
@@ -1016,7 +1016,7 @@
     \subsection{Summary}
         \label{subsec::more_experiments::classifier::summary}
         To summarize, the aim of this study was to assess the impact of the classifier choice.
-        Based on previous findings (\textit{cf.} Sections~\ref{sec::experiments::baseline_feature_analysis},~\ref{sec::more_experiments::scalability} and~\ref{sec::more_experiments::finesse}), we fused both sets \textbf{Nantes} and \textbf{Paris-13} into one: \textbf{Na-P13}.
+        Based on previous findings (cf. Sections~\ref{sec::experiments::baseline_feature_analysis},~\ref{sec::more_experiments::scalability} and~\ref{sec::more_experiments::finesse}), we fused both sets \textbf{Nantes} and \textbf{Paris-13} into one: \textbf{Na-P13}.
         Consequently, we learned that:
         \begin{itemize}[label=\(\blacktriangleright\)]
             \item Fusing \textbf{Nantes} and \textbf{Paris-13} helps better train the \gls{acr::rf} classifier for previously difficult labels \texttt{FIT} and \texttt{BIT};
@@ -1040,13 +1040,13 @@
         \item We compare both the baseline features and graph kernels for geometric features alone;
         \item We combine both the graph kernels and the \gls{acr::scatnet} derived extractors and compare them to the previous results.
     \end{enumerate}
-    As with the previous section (\textit{cf.} Section~\ref{sec::more_experiments::classifier}), the experiments are conducted on two sets: \textbf{Elancourt} and \textbf{Na-P13}.
+    As with the previous section (cf. Section~\ref{sec::more_experiments::classifier}), the experiments are conducted on two sets: \textbf{Elancourt} and \textbf{Na-P13}.
 
     \subsection{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} to baseline comparison}
         \label{subsec::more_experiments::richer_features::scatnet_baseline}
         We start by the \gls{acr::scatnet} comparisons.
         We run the same experiments, as in Section~\ref{sec::more_experiments::classifier}, where this time height and image based features are replaced by derived ones.
-        There are two options when employing \gls{acr::scatnet} with image based features: \texttt{channel} and \texttt{deletion} (\textit{cf.} Section~\ref{subsec::experiments::setup::feature_configurations}).
+        There are two options when employing \gls{acr::scatnet} with image based features: \texttt{channel} and \texttt{deletion} (cf. Section~\ref{subsec::experiments::setup::feature_configurations}).
         This makes the number of possible feature configurations equal to six.\\
 
         Both the \gls{acr::rf} and \gls{acr::svm} classifiers are used.
@@ -1057,7 +1057,7 @@
             \label{subsubsec::more_experiments::richer_features::scatnet_baseline::rf}
             Results, using the \gls{acr::rf} classifier, on both sets, are reported in Table~\ref{tab::stats_scat_rf_f3}.
             In general, we can see how external modalities seem to play a more important role in detecting errors.
-            This can be confirmed with the larger standard deviations depicted in Figure~\ref{fig::f_score_rf_scat_bl} compared to the baseline features (\textit{cf.} Figure~\ref{fig::f_score_rf_bl}).\\
+            This can be confirmed with the larger standard deviations depicted in Figure~\ref{fig::f_score_rf_scat_bl} compared to the baseline features (cf. Figure~\ref{fig::f_score_rf_bl}).\\
 
             \begin{sidewaystable}[htpb]
                 \footnotesize
@@ -1220,7 +1220,7 @@
                 ]{
                     \label{tab::rf_scat_bl_comparison}
                     Evolution of the F-score value, for each error, with the \gls{acr::rf} classifier, using \gls{acr::scatnet} compared to baseline features.
-                    Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (\textit{cf.} Table~\ref{tab::all_f-scores_scat_rf_f3}).
+                    Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (cf. Table~\ref{tab::all_f-scores_scat_rf_f3}).
                     The color indicates the magnitude:
                     \textcolor{LOSS45}{\(\blacksquare\)}: (\SIrange[range-phrase={,  }]{-100}{-45}{\percent}]--
                     \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
@@ -1237,7 +1237,7 @@
                 }
             \end{table}
 
-            The new results are compared, for each \gls{acr::scatnet} option, error label and set, to the baseline configuration scores (\textit{cf.} Table~\ref{tab::all_f-scores_scat_rf_f3}).
+            The new results are compared, for each \gls{acr::scatnet} option, error label and set, to the baseline configuration scores (cf. Table~\ref{tab::all_f-scores_scat_rf_f3}).
             These are shown in Table~\ref{tab::rf_scat_bl_comparison} with the same color scheme as in previous comparisons.
             On \texttt{Building errors}, \gls{acr::scatnet} with \texttt{deletion} yields better (\textit{resp.} worse and stable) results 3 (\textit{resp.} 3 and 2) times.
             On \texttt{Facet errors}, the same option yields better (\textit{resp.} worse and stable) results 3 (\textit{resp.} 2 and 5) times.
@@ -1322,14 +1322,14 @@
             This is actually not beneficial for learning as height based features were essential to achieve better results.
             This means that the fact that the \texttt{channel} option was better not only because it is on its own better than the alternative, but also because it works better with height based features.\\
 
-            When examnining the \texttt{channel} option (\textit{cf.} Figures~\ref{subfig::feature_importances_scat_chan_rf_building} and~\ref{subfig::feature_importances_scat_chan_rf_facet}) more closely, we see how for both sets the image based modality importance falls in the range \SIrange{5}{10}{\percent} in most cases.
+            When examnining the \texttt{channel} option (cf. Figures~\ref{subfig::feature_importances_scat_chan_rf_building} and~\ref{subfig::feature_importances_scat_chan_rf_facet}) more closely, we see how for both sets the image based modality importance falls in the range \SIrange{5}{10}{\percent} in most cases.
             There are two cases where this is not the case:
             \begin{itemize}[label=\(\blacktriangleright\)]
                 \item \texttt{FOS}, on both sets, with an importance below \SI{1}{\percent}.
                         This is understandable as this error is of topological nature and is better detected with intrinsic features.
                         Indeed, for this error even height based features score less than \SI{1}{\percent} in importance ratio.
                 \item \texttt{FIB}, on \textbf{Na-P13} with a ration around \num[fraction-function = \sfrac]{1/3}.
-                        This can be explained by the fact that this modality was decisive in getting the best F-score possible (\textit{cf.} Table~\ref{tab::rf_scat_bl_comparison}).
+                        This can be explained by the fact that this modality was decisive in getting the best F-score possible (cf. Table~\ref{tab::rf_scat_bl_comparison}).
             \end{itemize}
             On another note, building typology is so important that, even with advanced extrinsic features, baseline geometric features have a very large importance ratio.
 
@@ -1338,7 +1338,7 @@
             We run the same experiments and follow the same layout as in Section~\ref{subsubsec::more_experiments::richer_features::scatnet_baseline::rf}.
             Results are reported in Table~\ref{tab::stats_scat_svm_f3}.
             The mean and standard deviation F-scores are shown in Figure~\ref{fig::f_score_svm_scat}.
-            Just as with the \gls{acr::rf} experiments, external modalities seem to play a more crucial role in error prediction than with baseline features (\textit{cf.} Figure~\ref{fig::f_score_svm_bl}).\\
+            Just as with the \gls{acr::rf} experiments, external modalities seem to play a more crucial role in error prediction than with baseline features (cf. Figure~\ref{fig::f_score_svm_bl}).\\
 
             \begin{sidewaystable}[htpb]
                 \footnotesize
@@ -1501,7 +1501,7 @@
                 ]{
                     \label{tab::svm_scat_bl_comparison}
                     Evolution of the F-score value, for each error, with the \gls{acr::svm} classifier, using \gls{acr::scatnet} compared to baseline features.
-                    Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (\textit{cf.} Table~\ref{tab::all_f-scores_scat_svm_f3}).
+                    Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (cf. Table~\ref{tab::all_f-scores_scat_svm_f3}).
                     The color indicates the magnitude:
                     \textcolor{LOSS45}{\(\blacksquare\)}: (\SIrange[range-phrase={,  }]{-100}{-45}{\percent}]--
                     \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
@@ -1518,7 +1518,7 @@
                 }
             \end{table}
 
-            The scores obtained using \gls{acr::svm} and \gls{acr::scatnet} features are compared to the baseline (\textit{cf.} Table~\ref{tab::all_f-scores_scat_svm_f3}) with the same color scheme as earlier.
+            The scores obtained using \gls{acr::svm} and \gls{acr::scatnet} features are compared to the baseline (cf. Table~\ref{tab::all_f-scores_scat_svm_f3}) with the same color scheme as earlier.
             These comparisons are summarized in Table~\ref{tab::svm_scat_bl_comparison}.
             On \texttt{Building errors}, \gls{acr::scatnet} with \texttt{deletion} yields better (\textit{resp.} worse and stable) results 2 (\textit{resp.} 4 and 2) times.
             On \texttt{Facet errors}, the same option yields better (\textit{resp.} worse and stable) results 4 (\textit{resp.} 6 and 0) times.
@@ -1589,7 +1589,7 @@
             Height based features, on the other hand, have a ratio of importance below \SI{10}{\percent}.
             Actually, in most cases, it is below \SI{4}{\percent}, except for \texttt{BIT}, \texttt{FOS} and \texttt{FIB} on \textbf{Elancourt}.
             This is different from baseline features, where height based features had comparable importance ratios to other modalities (\texttt{cf.} Figure~\ref{fig::feature_importances_svm_bl}).
-            It seems to be contradictory with the fact that \gls{acr::scatnet} derived height features performed overall better than baseline features (\textit{cf.} Tables~\ref{tab::all_f-scores_rf_f3} and~\ref{tab::all_f-scores_svm_f3}).
+            It seems to be contradictory with the fact that \gls{acr::scatnet} derived height features performed overall better than baseline features (cf. Tables~\ref{tab::all_f-scores_rf_f3} and~\ref{tab::all_f-scores_svm_f3}).
             It is, however, consistent with the findings of the scalability analysis in Section~\ref{sec::more_experiments::scalability}, where height based features proved to not be important.
             This further bolsters the fact that the \gls{acr::svm} was not well parameterized for the image based features.\\
 

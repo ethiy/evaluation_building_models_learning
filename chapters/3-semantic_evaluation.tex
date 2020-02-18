@@ -50,7 +50,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
             This helps cover a wide range of possible defects while the basic errors are chosen to be as generalizable as possible.
             Hierarchization and modularity are the main ingredients in our proposed flexible framework.\\
 
-            To implement these properties for the error taxonomy, we rely on two criteria for error compilation: the input building model \gls{acr::lod} and the error semantic precision level, named henceforth \texttt{finesse} (\textit{cf.} Figure~\ref{fig::taxonomy}).
+            To implement these properties for the error taxonomy, we rely on two criteria for error compilation: the input building model \gls{acr::lod} and the error semantic precision level, named henceforth \texttt{finesse} (cf. Figure~\ref{fig::taxonomy}).
             Different degrees of \texttt{finesse} describe, from coarse to fine, the specificity of defects.
             \texttt{Finesse} degrees corresponds to error hierarchy levels.
             The \gls{acr::lod} is used, on the other hand, to differenciate between errors in the same specificity (or \texttt{finesse}) level.
@@ -113,7 +113,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
         \label{subsec::semantic_evaluation::overhead::atomic}
         In the template structure presented in Section~\ref{subsec::semantic_evaluation::general_framework::error_classification}, were left out the \texttt{atomic} error definitions.
         Indeed, since they represent the most specific level, their choice is critical to guaranty both the desired exhaustivity and generalizability.
-        We conducted a thourough inspection of all defects that we detected in our datasets and came up with the following definitions (\textit{cf.} Figures~\ref{fig::taxonomy}).
+        We conducted a thourough inspection of all defects that we detected in our datasets and came up with the following definitions (cf. Figures~\ref{fig::taxonomy}).
         Eventhough these errors were defined based on models of buildings computed out of overhead acquired data at large scales, we think they are exhaustive enough to describe the quality of models in other settings (fa\c{c}ade modeling, manually plotted \gls{acr::3d} models).
 
         \subsubsection{\texttt{Building Errors} family}
@@ -255,7 +255,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 \texttt{\gls{acr::bit}} corresponds to the case where the building footprint suffers from topological defects.
                 Modeled as a \gls{acr::2d} flat surface, the cases that fall into this label are:
                 \begin{description}
-                    \item[Missing inner court:] It corresponds to a missing hole (\textit{cf.} Figure~\ref{subfig::building_hole});
+                    \item[Missing inner court:] It corresponds to a missing hole (cf. Figure~\ref{subfig::building_hole});
                     \item[Inaccurate border shape:] It is due to a wrong primitive fitting: the shape of the footprint can be better described by a different geometrical shape.
                             Figure~\ref{subfig::bit_2d} gives an example where the polygon has a wrong number of sides.
                             Another case is where a circular footprint can be approximated by a polygon.
@@ -573,7 +573,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
 
                 This can be due to various reasons.
                 Most methods rely on the assumption that buildings are piecewise linear~\parencite{nan2017polyfit} or Manhattan-world like~\parencite{li2016manhattan}.
-                This is evidently not always the case (\textit{cf.} Figure~\ref{subfig::fit_2d}).
+                This is evidently not always the case (cf. Figure~\ref{subfig::fit_2d}).
                 Even with the right assumptions, this specific case cannot have been well modeled.
                 If so it would have at least approximated the circular cylindrical structures with a regular polygon cylinder.
                 This is due to the fact that the quality of the data was poor and was unreliable as explained in the \texttt{\gls{acr::fus}} case in Figure~\ref{subfig::fus_2d}.
@@ -736,7 +736,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
         It specifies the appropriate semantic level at which errors will be reported.\\
         The last one is error \textbf{exclusivity}.
         It derives from the established family error hierarchy.
-        If \textbf{exclusivity} is set \textsc{on} errors of a given \gls{acr::lod}-$l$ family are prioritized over ones with higher \glspl{acr::lod}: \textit{i.e.} \gls{acr::lod} > \gls{acr::lod}-$l$.
+        If \textbf{exclusivity} is set \textsc{on} errors of a given \gls{acr::lod}-$l$ family are prioritized over ones with higher \glspl{acr::lod}: i.e., \gls{acr::lod} > \gls{acr::lod}-$l$.
         The latter are simply ignored.
         This would useful in the case where the quality evaluation is used by a correction module, either manually or automatically operated.
         In this case, the latter should prioritize solving low \gls{acr::lod} errors rather than trying to solve more detailed ones.
@@ -745,7 +745,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
 
     \subsection{Evaluation labels}
         Depending on the previously defined parameters, the considered labels that will be used for the evaluation would differ.
-        We will visit herein all the possible cases based on the defined taxonomy for the overhead reconstruction case (\textit{cf.} Figure~\ref{fig::taxonomy}).
+        We will visit herein all the possible cases based on the defined taxonomy for the overhead reconstruction case (cf. Figure~\ref{fig::taxonomy}).
         For this purpose we must first define the function $\operatorname{children}$ that gives the children of a non-leaf node in the taxonomy tree and outputs the same node if it is a leaf:
         \begin{equation}
             \label{eq::children_taxonomy}
