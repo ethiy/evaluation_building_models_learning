@@ -73,7 +73,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                     Results obtained using the SimPLU3D tool developped by~\textcite{brasebin2017stochastic}.
                     Different parameter values (building surface \(s\) and initial height \(Hini\)) result in different urban scenery.
                     Urban planners can assess the projected urban density of future districts for better decision making.
-                    Image taken from the SimPLU3D website\footnotemark.
+                    Image taken from the SimPLU3D website~\parencite{brasebin2014simplu3d}.
                 }
             \end{figure}
             \begin{figure}[htpb]
@@ -117,7 +117,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             Environment preservation is a of utter importance in the forecoming years.
             Urban settlement are one of the largest energy consumers.
             A more efficient energy utilization is necessary to sustain the frantic growth of urban areas.
-            This motivates the need to quantify the energy consumption of urban settlements~\parencite{WATE20153372} or retrofitting costs~\parencite{previtali2014automatic}.
+            This motivates the need to quantify the energy consumption of urban settlements~\parencite{wate20153d} or retrofitting costs~\parencite{previtali2014automatic}.
             \textcite{biljecki2015propagation} also use \gls{acr::3d} models of buildings in order to predict solar irradiation.
             In fact, solar potential estimation can be useful for assessing the benefits of expensive solar panels projects.
             This kind of studies can also be applied in urban planning as the simulations could be undergone for future urban developpements.
@@ -147,10 +147,6 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             \Gls{acr::3d} models play an important role in visual localization~\parencite{biljecki2015applications,piasco2018survey}.\\
             The basic idea is to match an image with a known \gls{acr::3d} model of the city which can be textured or not~\parencite{cham2010estimating,ardeshir2014gis,arth2015instant,christie2016semantics} as shown in Figure~\ref{fig::navigation}.
 
-            % \addtocounter{footnote}{-1}
-            \footnotetext{
-                \href{https://simplu3d.github.io}{SimPLU3D}.
-            }
             \begin{figure}[htpb]
                 \centering
                 \ffigbox[\FBwidth]{
@@ -205,13 +201,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             \gls{acr::3d} models also appeals to various agents in the entertainement industry.
             One of the first examples that comes to mind is the video games community~\parencite{watson2008procedural}.
             In their search for realism, in order to engage the most customers as possible, studios reproduce entire cities as a virtual playing ground for the game story.
-            We can cite the "Spider-Man" virtual New-York city\footnote{
-                \href{https://www.polygon.com/2013/9/25/4702318/under-the-hood-of-infamous-second-son-hyper-real-seattle}{Under the hood of Infamous: Second Son's hyper-real Seattle}.
-            }\footnote{
-                \href{https://www.polygon.com/e3/2018/6/12/17453588/spider-man-ps4-new-york-city-avengers-demo-preview}{How Spider-Man PS4’s New York City compares to the real thing}.
-            } or the realistic facsimile of Seattle in "Infamous Second Son"\footnote{
-                \href{http://www.businessinsider.fr/us/spider-man-ps4-new-york-city-2018-9}{I'm blown away by the virtual New York City of 'Spider-Man' on PlayStation 4 — here's how it compares to the real thing}.
-            } as instances of such use.\\
+            We can cite the "Spider-Man" virtual New-York city~\parencite{gilbert2018i,plante2013how} or the realistic facsimile of Seattle in "Infamous Second Son"~\parencite{mcwhertor2013under} as instances of such use.\\
             Tourism can also benefit from such models.
             In fact, virtual touring has become more attainable with works like~\textcite{koutsoudis20073d}.
             For instance, tourists can use such tools to prepare their trip by familiarizing themselves with the city they are visiting.
@@ -287,11 +277,11 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
 
         \addtocounter{footnote}{-1}
         \footnotetext{
-            \href{http://www.itowns-project.org}{iTowns project.}
+            \href{http://www.itowns-project.org}{iTowns: http://www.itowns-project.org.}
         }
         \addtocounter{footnote}{1}
         \footnotetext{
-            \href{http://recherche.ign.fr/labos/matis/~devaux}{Alexandre Devaux website.}
+            \href{https://umrlastig.github.io/adevaux_homepage/}{Alexandre Devaux website: https://umrlastig.github.io/adevaux_homepage/.}
         }
 
     Precisely, we will raise, herein, the issue of large-scale outdoor city modeling.
@@ -598,7 +588,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
     \subsection{Topological consistency inspection}
         \label{subsec::introduction::building_model_evaluation::topological}
         Extensive work has been accomplished in order to achieve a standardized representation of city \gls{acr::3d} models.
-        This has resulted in the \gls{acr::ogc} CityGML standard\footnote{\href{https://www.opengeospatial.org/standards/citygml}{CityGML}.}.
+        This has resulted in the \gls{acr::ogc} CityGML standard~\parencite{groger2012ogc}.
         However, in practice, it is not always respected, as shown in~\textcite{biljecki2016most}, where up to \SI{89}{\percent} of models were found to be topologically invalid.\\
 
         In consequence, the subject of automatic inspection of the topological consistency of city models has drawn a strong attention in the \gls{acr::gis} community.
@@ -800,7 +790,7 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             \subsubsection{Crowdsourcing evaluating}
             Crowdsourcing~\parencite{kovashka2016crowdsourcing} can be seen as a building modeling method.
             It has become easier with the help of some online tools like SketchUp\footnote{
-                \href{https://www.sketchup.com}{SketchUp website}.
+                \href{https://www.sketchup.com}{SketchUp: https://www.sketchup.com}.
             }, where anyone can model, for instance, their home and share it publically.
             The quality of the models depend on their author.
             An automatic evaluation method can help check that the uploaded models respect the specifications.

@@ -23,7 +23,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
         In Figure~\ref{fig::paris-13_ortho}, one can see how \textbf{Paris-13} consists of mostly flat roof high towers which coexist with Haussmann style buildings that typically exhibit highly fragmented roofs (cf. Figure~\ref{subfig::paris-13_samples}).
         The \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}) scene contains 2,009 (\textit{resp.} 748 and 478) annotated building models.
         In order to handle these models, \verb!proj.city!\footnote{
-            \href{https://github.com/ethiy/proj.city.git}{A library for 3D city model projection.}
+            \href{https://github.com/ethiy/proj.city}{\verb!proj.city!: https://github.com/ethiy/proj.city.git}
         }, a C++ library, was developped making use of the CGAL library~\parencite{fabri2000design}.
         Thanks to this tool, we can project building models in the nadir direction as well as produce their height maps.
         The \gls{acr::dsm} and the orthorectified image spatial resolution is \SI{0.06}{\m} for the first area while it is \SI{0.1}{\m} for the other ones.\\
@@ -172,7 +172,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
 
         Some of the models obtained using the previous datasets were manually annotated manually in order to build training datasets.
         To annotate a building model, the manual operator compares the nadir projection of the model to the corresponding orthoimage and \gls{acr::dsm}.
-        This was possible thanks to the work\footnote{\href{https://github.com/CHUPClem/sGrISner.@git}{GIS Graphical interface for annotation.}} of Clémence Chupin, who was a Master student at \gls{acr::ensg}.
+        This was possible thanks to the work\footnote{\href{https://github.com/CHUPClem/sGrISner}{sGrISner: https://github.com/CHUPClem/sGrISner}} of Clémence Chupin, who was a Master student at \gls{acr::ensg}.
         She develops a pyQT interface in order to ease the task.
         This allows to switch between data sources and better assess the errors affecting each building.
         Figure~\ref{fig::error_statistics} reports modeling errors statistics over the annotated buildings.\\
@@ -327,7 +327,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
                 All values yielded sensibly the same scores.
                 As a result we set these parameters as follows: \(C = \num[scientific-notation = true]{1e-1}\) to not overpenalize nor underfit during learning and \(\gamma = \num[scientific-notation = true]{1e-3}\) to avoid overfitting.
                 Regarding \gls{acr::mkl}, we made use of the already implemented EasyMKL~\parencite{aiolli2015easymkl} approach.
-                It was the only method, to our knowledge that was readily available library in Python\footnote{\href{https://github.com/IvanoLauriola/MKLpy}{MKLpy}}.
+                It was the only method, to our knowledge that was readily available library in Python\footnote{\href{https://github.com/IvanoLauriola/MKLpy}{MKLpy: https://github.com/IvanoLauriola/MKLpy}}.
     
         \subsubsection{Metrics for quantitative assessment}
             The overall accuracy is not interesting due to the highly unbalanced label distribution.
