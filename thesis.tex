@@ -99,7 +99,6 @@
     doi=false
 ]{biblatex}
 \usepackage{xpatch}
-
 \addbibresource{references.bib}
 
 \usepackage[acronym, toc, automake=true]{glossaries}
@@ -108,14 +107,11 @@
 
 \usepackage{hyperref}
 \hypersetup{
-    colorlinks=true,
-    citecolor=Blue,
-    filecolor=black,
-    linkcolor=Blue,
-    urlcolor=blue,
+    colorlinks=false,
+    pdfsubject={},
     pdftitle={Semantic aware quality evaluation of 3D building models},
     pdfauthor={Oussama Ennafii},
-    pdfkeywords={3D urban modeling} {buildings} {quality assessment} {taxonomy} {classification} {error detection} {geometry} {aerial imagery} {Very High Spatial Resolution} {Digital Surface Model},
+    pdfkeywords={3D urban modeling, buildings, quality assessment, taxonomy, classification, error detection, geometry, aerial imagery, Very High Spatial Resolution, Digital Surface Model},
     pdfstartview={FitH},
     unicode=true
 }
@@ -144,17 +140,19 @@
    
     \input{frontmatter/0-cover_page}
     \input{frontmatter/dedication}
-    \leftchapter
     \chapter{\textsc{Abstract}}
         \input{frontmatter/abstract}
     \selectlanguage{french}
     \chapter{\textsc{Résumé}}
         \input{frontmatter/resume}
-    % \chapter{\textsc{Résumé étendu}}
-    %     \input{frontmatter/resume_long}
     \selectlanguage{english}
-    % \chapter{\textsc{Acknowlegements}}
-    %     \input{frontmatter/acknowledgments}
+    \chapter{\textsc{Acknowlegements}}
+        \input{frontmatter/acknowledgments}
+
+    \selectlanguage{french}
+    \chapter{\textsc{Résumé étendu}}
+        \input{frontmatter/resume_long}
+    \selectlanguage{english}
 
     \printglossary[type=\acronymtype]
     \printglossary
@@ -168,7 +166,6 @@
     \mtcaddchapter
 
     \mainmatter
-    \rightchapter
 
     \chapter{\textsc{Introduction}}
         \label{chap::introduction}
