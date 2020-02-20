@@ -18,31 +18,31 @@
         \end{tikzpicture}
     }
 
-	\tikzset{
+    \tikzset{
         face/.style={
             fill=lightgray,
             draw=black,
             very thin,
             line join=round,
             fill opacity=.8
-        },
-        error/.style={line width=2pt}
+        }
     }
     \begin{3dtikzpicture}{60}{60}[scale=1]
         \begin{scope}[canvas is zy plane at x=3]
-            \path[face, dashed] (0,0) -- (2,0) -- (2.5,2.5) -- (2,4) -- (0,4) -- cycle;
+            \path[face] (0,0) -- (2,0) -- (2.75,2.5) -- (2,4) -- (0,4) -- cycle;
 		\end{scope}
         \begin{scope}[canvas is zx plane at y=4]
-          	\path[face, dashed] (0,0) rectangle (2,3);
+          	\path[face] (0,0) rectangle (2,3);
         \end{scope}
-        \path[face] (0,0,2) -- (0,1.75,2.5) -- (3,2.5,2.5) -- (3,0,2) -- cycle;
-        \path[face] (0,4,2)-- (3,4,2) -- (3,2.5,2.5) -- (0,1.75,2.5) -- cycle;
+        \path[face] (0,0,2) -- (0,1.75,2.5) -- (3,0,2) -- cycle;
+        \path[face] (3,0,2) -- (0,1.75,2.5) -- (3,2.5,2.75) -- cycle;
+        \path[face] (0,4,2) -- (3,2.5,2.75) -- (0,1.75,2.5) -- cycle;
+        \path[face] (0,4,2) -- (3,2.5,2.75) -- (3,4,2) -- cycle;
         \begin{scope}[canvas is zy plane at x=0]
           	\path[face,shade] (0,0) -- (2,0) -- (2.5,1.75) -- (2,4) -- (0,4) -- cycle;
         \end{scope}
         \begin{scope}[canvas is zx plane at y=0]
   			\path[face,shade] (0,0) rectangle (2,3);
-        \end{scope}
-        \path[error, red] (0,1.75,2.5) edge  node[midway,below,align=center] {} (3,2.5,2.5);
+		\end{scope}
     \end{3dtikzpicture}
 \end{document}

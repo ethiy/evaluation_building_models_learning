@@ -4,33 +4,12 @@
         outer=1cm,
         bindingoffset=0.5cm,
         top=2cm,
-        bottom=2cm,
+        bottom=1.5cm,
     }
     \begin{center}
         \includestandalone[mode=buildnew, width=\textwidth]{figures/style/cover_logo}
 
-        \vspace*{10mm}
-
-        \begin{minipage}{.5\textwidth}
-            \centering
-            \textsc{LaSTIG\\ \acrfull{acr::ign}}
-        \end{minipage}
-
-        \vfill
-
-        Dissertation submitted in partial fulfillment of the requirements for the degree of Doctor of Philosophy delivered by:
-
-        \vspace*{5mm}
-
-        \begin{Large}
-            \textbf{Université Paris-Est -- MSTIC (ED532)}
-        \end{Large}
-
-        \vspace*{10mm}
-        \begin{large}
-            \textsc{Spetialty: Geographical Information Sciences and technologies}
-        \end{large}
-        \vspace*{10mm}
+        \vspace*{25mm}
 
         \rule{\textwidth}{1.5pt}\\
         \begin{LARGE}
@@ -42,7 +21,7 @@
         \end{Large}
         \rule{\textwidth}{1.5pt}\\
 
-        \vspace*{10mm}
+        \vspace*{15mm}
 
         \begin{large}
             \textbf{Oussama \textsc{Ennafii}}
@@ -50,12 +29,12 @@
 
         \vfill
 
-        Defended \textit{\DTMdisplaydate{2020}{01}{10}{5}} \\
-        at \textit{ISC-PIF, Paris, France}
+        \includestandalone[mode=buildnew, width=\textwidth]{figures/style/cover_image}
 
         \vfill
 
         \rule{.43\textwidth}{1pt} ~~~ {\Large Jury} ~~~ \rule{.43\textwidth}{1pt}\\
+        \vspace*{1em}
         \begin{tabular}{l x{.5\textwidth} r}
             \textbf{Franz \textsc{Rottensteiner}} & \href{https://www.ipi.uni-hannover.de/en/rottensteiner/}{IPI, Leibniz University Hannover} & Reviewer \\
             \textbf{Gilles \textsc{Gesquière}} & \href{https://perso.liris.cnrs.fr/gilles.gesquiere/wiki/doku.php}{LIRIS, University of Lyon} & Reviewer \\
@@ -69,11 +48,98 @@
             \textbf{Florent \textsc{Lafarge}} & \href{https://www-sop.inria.fr/members/Florent.Lafarge/}{Titane, Inria} & Co-advisor \\
             \textbf{Clément \textsc{Mallet}} & \href{http://recherche.ign.fr/labos/matis/~mallet}{LaSTIG, \acrshort{acr::ign}} & Advisor \\
         \end{tabular}
+        \vspace*{1em}
         \rule{\textwidth}{1pt}\\
+
+        \vspace*{10mm}
+
+        \begin{minipage}{.75\textwidth}
+            \centering
+            \small
+            \textsc{LaSTIG\\ \acrfull{acr::ign}}\\
+            73 avenue de Paris, 94165 Saint-Mandé cedex, France
+        \end{minipage}
     \end{center}
 \end{titlepage}
 
-\clearpage
-\thispagestyle{plain}
-\mbox{}
-\clearpage
+\emptypage
+
+\begin{titlepage}
+    \newgeometry{
+        inner=1cm,
+        outer=1cm,
+        bindingoffset=0.5cm,
+        top=2cm,
+        bottom=2cm,
+    }
+    \begin{center}
+        \begin{small}
+            Dissertation submitted in partial fulfillment of the requirements for the degree of Doctor of Philosophy delivered by:
+        \end{small}
+
+        \vspace*{5mm}
+
+        \begin{Large}
+            \textbf{Université Paris-Est -- MSTIC (ED532)}
+        \end{Large}
+
+        \vspace*{10mm}
+        \begin{large}
+            \textsc{Spetialty: Geographical Information Sciences and technologies}
+        \end{large}
+
+        \vspace*{15mm}
+
+        \rule{\textwidth}{1.5pt}\\
+        \begin{LARGE}
+            \textsc{\textbf{Quality evaluation of \texorpdfstring{\acrshort*{acr::3d}}{3D} building models}}\\
+        \end{LARGE}
+        \vspace*{2.5mm}
+        \begin{Large}
+            \textsc{A scalable approach}
+        \end{Large}
+        \rule{\textwidth}{1.5pt}\\
+
+        \vspace*{15mm}
+
+        \begin{large}
+            \textbf{Oussama \textsc{Ennafii}}
+        \end{large}
+
+        \vfill
+
+        Defended \textit{\DTMdisplaydate{2020}{01}{10}{5}} \\
+        at \textit{ISC-PIF, Paris, France}
+
+        \vfill
+
+        \rule{.43\textwidth}{1pt} ~~~ {\Large Jury} ~~~ \rule{.43\textwidth}{1pt}\\
+        \vspace*{1em}
+        \begin{tabular}{l x{.5\textwidth} r}
+            \textbf{Franz \textsc{Rottensteiner}} & \href{https://www.ipi.uni-hannover.de/en/rottensteiner/}{IPI, Leibniz University Hannover} & Reviewer \\
+            \textbf{Gilles \textsc{Gesquière}} & \href{https://perso.liris.cnrs.fr/gilles.gesquiere/wiki/doku.php}{LIRIS, University of Lyon} & Reviewer \\
+             & & \\
+            \textbf{George \textsc{Vosselman}} & \href{https://research.utwente.nl/en/persons/george-vosselman}{University of Twente} & Examiner \\
+            \textbf{Pooran \textsc{Memari}} & \href{http://www.lix.polytechnique.fr/~memari/}{LIX, \'Ecole Polytechnique} & Examiner \\
+             & & \\
+            \textbf{Renaud \textsc{Marlet}} & \href{http://imagine.enpc.fr/~marletr/}{IMAGINE, \'Ecole des Ponts ParisTech} & President \\
+             & & \\
+            \textbf{Arnaud \textsc{Le Bris}} & \href{http://recherche.ign.fr/labos/matis/~Le_Bris}{LaSTIG, \acrshort{acr::ign}} & Supervisor \\
+            \textbf{Florent \textsc{Lafarge}} & \href{https://www-sop.inria.fr/members/Florent.Lafarge/}{Titane, Inria} & Co-advisor \\
+            \textbf{Clément \textsc{Mallet}} & \href{http://recherche.ign.fr/labos/matis/~mallet}{LaSTIG, \acrshort{acr::ign}} & Advisor \\
+        \end{tabular}
+        \vspace*{1em}
+        \rule{\textwidth}{1pt}\\
+
+        \vfill
+
+        \begin{minipage}{.75\textwidth}
+            \centering
+            \small
+            \textsc{LaSTIG\\ \acrfull{acr::ign}}\\
+            73 avenue de Paris, 94165 Saint-Mandé cedex, France
+        \end{minipage}
+    \end{center}
+\end{titlepage}
+
+\emptypage
