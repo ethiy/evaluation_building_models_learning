@@ -142,17 +142,13 @@
     \input{frontmatter/dedication}
     \chapter{\textsc{Abstract}}
         \input{frontmatter/abstract}
-    \selectlanguage{french}
     \chapter{\textsc{Résumé}}
         \input{frontmatter/resume}
-    \selectlanguage{english}
     \chapter{\textsc{Acknowlegements}}
         \input{frontmatter/acknowledgments}
 
-    \selectlanguage{french}
     \chapter{\textsc{Résumé étendu}}
         \input{frontmatter/resume_long}
-    \selectlanguage{english}
 
     \printglossary[type=\acronymtype]
     \printglossary
@@ -204,5 +200,6 @@
     % \printindex
     
     \printbibliography[heading=bibintoc]
-
+    
+    \input{frontmatter/back_cover}
 \end{document}
