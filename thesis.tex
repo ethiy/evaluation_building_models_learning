@@ -6,8 +6,8 @@
 
 \usepackage{lmodern}
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}		
-\usepackage[english, francais]{babel}
+\usepackage[LFE, LAE]{fontenc}		
+\usepackage[english, francais, arabic]{babel}
 \usepackage{csquotes}
 
 \usepackage{siunitx}
@@ -142,8 +142,17 @@
     \input{frontmatter/dedication}
     \chapter{\textsc{Abstract}}
         \input{frontmatter/abstract}
+
+    \selectlanguage{arabic}
+    \chapter{\textsc{ملخص}}
+        \input{frontmatter/molakhass}
+    \selectlanguage{english}
+
+    \selectlanguage{french}
     \chapter{\textsc{Résumé}}
         \input{frontmatter/resume}
+    \selectlanguage{english}
+
     \chapter{\textsc{Acknowlegements}}
         \input{frontmatter/acknowledgments}
 
