@@ -1,13 +1,12 @@
-\pdfobjcompresslevel 0
+% \pdfobjcompresslevel 0
 
 \documentclass[12pt, twoside]{book}
 
 \usepackage[paper=a4paper, top=1.5cm, bottom=2cm, left=2.5cm, right=2.5cm, headheight=15pt]{geometry}
 
 \usepackage{lmodern}
-\usepackage[utf8]{inputenc}
-\usepackage[LFE, LAE]{fontenc}		
-\usepackage[english, francais, arabic]{babel}
+\usepackage{fontspec}
+\usepackage{polyglossia}
 \usepackage{csquotes}
 
 \usepackage{siunitx}
@@ -65,12 +64,10 @@
 \usepackage{stmaryrd}
 
 
-\usepackage{palatino}
-
 \setcounter{secnumdepth}{4}
 
 \setcounter{tocdepth}{2}
-\usepackage{minitoc}
+\usepackage[english, francais, arabic]{minitoc}
 \setcounter{minitocdepth}{2}
 \usepackage{tocbibind}
 
@@ -130,11 +127,17 @@
 \usepackage{style/hacks}
 \usepackage{style/glossaries}
 
+\setmainlanguage{english}
+\setdefaultlanguage{english}
+\newfontfamily\englishfont{Calibri}
+\setotherlanguage{french}
+\newfontfamily\frenchfont{Calibri}
+\setotherlanguage[locale=morocco]{arabic}
+\newfontfamily\arabicfont[Script=Arabic]{Simplified Arabic}
 
 \begin{document}
     \dominitoc
     \doparttoc
-    \selectlanguage{english}
     \frontmatter
     \pagestyle{plain}
    
@@ -142,16 +145,15 @@
     \input{frontmatter/dedication}
     \chapter{\textsc{Abstract}}
         \input{frontmatter/abstract}
-
-    \selectlanguage{arabic}
-    \chapter{\textsc{ملخص}}
-        \input{frontmatter/molakhass}
-    \selectlanguage{english}
-
-    \selectlanguage{french}
-    \chapter{\textsc{Résumé}}
+    % \begin{arabic}
+    %     % \chapter{}
+    %     % \chapter{ملخص}
+    %         \input{frontmatter/molakhass}
+    % \end{arabic}
+    \begin{french}
+        \chapter{\textsc{Résumé}}
         \input{frontmatter/resume}
-    \selectlanguage{english}
+    \end{french}
 
     \chapter{\textsc{Acknowlegements}}
         \input{frontmatter/acknowledgments}
