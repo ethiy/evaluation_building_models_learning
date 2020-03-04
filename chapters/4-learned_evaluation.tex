@@ -8,7 +8,7 @@ Based on this taxonomy, and depending on the particular needs, specific error la
 In this chapter, we present the second part of our proposed approach.
 It casts the problem as a supervised classification one.
 Issues related to the latter are detailed in Section~\ref{sec::learned_evaluation::classification}.
-Next, Section~\ref{sec::learned_evaluation::baseline} presents in details the baseline of features extracted out of building \gls{acr::3d} models.
+Next, Section~\ref{sec::learned_evaluation::baseline} presents in details the baseline of features extracted out of \gls{acr::3d} building models.
 Third and last, advanced features are discussed in Section~\ref{sec::learned_evaluation::richer_features}.
 These are proposed to better model defect predictions.
 
@@ -426,7 +426,7 @@ These are proposed to better model defect predictions.
             Consequently, concatenating \gls{acr::scatnet} coefficients into a single vector is going to result in variable feature vector dimensions.
             One solution is to resize all images to a certain fixed size beforehand.
             However, this solution was quickly ruled out based on few experiments.
-            In fact, aside from the fact that this process either looses valuable structural informations or adds undesired blur, it completly deforms the input signal as the \(\frac{w}{h}\) ratio is not guaranteed to constant for all inputs resulting in squashed or elongated image.
+            In fact, aside from the fact that this process either looses valuable structural information or adds undesired blur, it completly deforms the input signal as the \(\frac{w}{h}\) ratio is not guaranteed to constant for all inputs resulting in squashed or elongated image.
             Moreover, since \glspl{acr::scatnet} yield a great deal of coefficients that can easily surpass the number of training instances which hinders the learning ability of any classifier.
             As a consequence, we propose to add a function to help extract meaningful feature vectors with the same length.\\
 

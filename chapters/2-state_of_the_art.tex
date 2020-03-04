@@ -54,7 +54,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
             Conversly, images offer an alternative but, as a passive sensor, can suffer from issues related to shadows (of buildings or other urban objects) that are detrimental to building delineation~\parencite{adeline2013shadow}.\\
 
             The classification process is not flawless either.
-            Just as with \gls{acr::gis} databases, classification relies on some \textit{a priori} informations that are generally encoded in regularization terms~\parencite{lafarge2008structural,zhu2018large,zeng2018neural}.
+            Just as with \gls{acr::gis} databases, classification relies on some \textit{a priori} information that is generally encoded in regularization terms~\parencite{lafarge2008structural,zhu2018large,zeng2018neural}.
             These are needed to retrieve outlines of buildings efficiently.
             However, they can also fail to represent faithfully the ground truth and results in wrong building footprint extraction.
 
@@ -206,7 +206,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
         \label{subsec::state_of_the_art::quality::reference}
         In order to evaluate models, reference data are utilized for comparison.
         Based on the latter, another way to discriminate among modeling methods is possible.
-        The first class of reference data are high quality ground truth building \gls{acr::3d} models.
+        The first class of reference data are high quality ground truth \gls{acr::3d} building models.
         Remote sensing data is the second alternative that is used for reference.
         Neither of these two choices do influence the type of output the evaluation method produces.
         Hereafter, is explained the difference between the two categories.
@@ -268,7 +268,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
 
         There are only two approaches that are both semantic and rely only on more readily available remote sensing data:~\parencite{boudet2006supervised,michelin2013quality}.
         Both define semantic errors that are predicted with the help of Oblique images and \glspl{acr::dsm}.
-        A classifier learns statistical properties of the building \gls{acr::3d} models using features that are derived from these sensor data.
+        A classifier learns statistical properties of the \gls{acr::3d} building models using features that are derived from these sensor data.
         The learning process further helps scaling the evaluation pipeline to unseen data by predicting errors using the same attributes.\\
 
         Our work relies on the same idea, but goes farther by allowing the possibility to evaluate building models without using any reference data\footnote{With the exception of training data.} and relying on their intrinsic attributes instead.
