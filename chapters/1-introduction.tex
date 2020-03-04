@@ -151,22 +151,22 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                 \centering
                 \ffigbox[\textwidth]{
                     \begin{subfloatrow}[5]
-                        \ffigbox[.25\textwidth]{
+                        \ffigbox[.23\textwidth]{
                             \includegraphics[width=.23\textwidth]{images/introduction/3d_model_applications/pose_estimation/input_image}
                         }{
                             \caption{\label{subfig::input_image} Input image.}
                         }
-                        \ffigbox[.25\textwidth]{
+                        \ffigbox[.23\textwidth]{
                             \includegraphics[width=.23\textwidth]{images/introduction/3d_model_applications/pose_estimation/init_pose}
                         }{
                             \caption{\label{subfig::init_pose} Initial estimation.}
                         }
-                        \ffigbox[.25\textwidth]{
+                        \ffigbox[.23\textwidth]{
                             \includegraphics[width=.23\textwidth]{images/introduction/3d_model_applications/pose_estimation/best_pose}
                         }{
                             \caption{\label{subfig::final_pose} Final estimation.}
                         }
-                        \ffigbox[.25\textwidth]{
+                        \ffigbox[.23\textwidth]{
                             \includegraphics[width=.23\textwidth]{images/introduction/3d_model_applications/pose_estimation/ground_truth}
                         }{
                             \caption{\label{subfig::gt_pose} Ground truth.}
@@ -299,15 +299,6 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             Last comes city furniture, roads, bridges, buildings and terrain, which have a much lower change frequency.
             In this section, we proceed to study how each of these three groups are modeled in \gls{acr::3d}.\\
 
-            \addtocounter{footnote}{-1}
-            \footnotetext{
-                \href{http://www.itowns-project.org}{iTowns: \url{http://www.itowns-project.org}.}
-            }
-            \addtocounter{footnote}{1}
-            \footnotetext{
-                \href{https://umrlastig.github.io/adevaux_homepage/}{Alexandre Devaux website: \url{https://umrlastig.github.io/adevaux_homepage/}.}
-            }
-    
             Besides technical difficulties, there are ethical and legal issues when reconstructing \gls{acr::3d} models of humans and vehicles.
             Indeed, accurate reconstruction involves person indentification.
             This has proven to be an intricate subject, as shown by~\textcite{thornton2010individual,tavani2011ethics}.
@@ -360,6 +351,15 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
             We have seen previously how roads and vegetation could be satisfactorily reconstructed using relatively simple models.
             This is, however, not the case of buildings.
             That is why, out of all urban features, buildings seem to attract the most attention in urban \gls{acr::3d} modeling.
+
+            \addtocounter{footnote}{-1}
+            \footnotetext{
+                \href{http://www.itowns-project.org}{iTowns: \url{http://www.itowns-project.org}.}
+            }
+            \addtocounter{footnote}{1}
+            \footnotetext{
+                \href{https://umrlastig.github.io/adevaux_homepage/}{Alexandre Devaux website: \url{https://umrlastig.github.io/adevaux_homepage/}.}
+            }
 
         \subsubsection{\texorpdfstring{\gls*{acr::3d}}{3D} building modeling}
             Before discussing further on the different types of building models, a definition is provided first.
