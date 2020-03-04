@@ -2,7 +2,7 @@
 
 \vfill
 
-In the previous chapter (Chapter~\ref{chap::semantic_evaluation}), we developped a heirarchical and modular taxonomy of errors for the overhead imagery modeling case.
+In the previous chapter (Chapter~\ref{chap::semantic_evaluation}), we developed a heirarchical and modular taxonomy of errors for the overhead imagery modeling case.
 Based on this taxonomy, and depending on the particular needs, specific error labels are extracted and considered during the quality evaluation step.\\
 
 In this chapter, we present the second part of our proposed approach.
@@ -112,7 +112,7 @@ These are proposed to better model defect predictions.
         Depth data can take multiple forms: unstructured point clouds, originating for instance from \gls{acr::lidar} sensors, or dense depth maps such as \gls{acr::dsm} for the overhead case.\\
         Optical images can also be employed in this framework.
         These provide complementary information such as edges (high frequencies, in general) and textures which are suited for inner defect detection as an example (cf. Figure~\ref{subfig::fus_2d}).
-        This type of data comes usually in two different shapes: oblique images or orthoimages.
+        This type of data comes usually in two different shapes: overhead images or orthoimages.
     
     \subsection{Classifier choice}
         \label{subsec::learned_evaluation::classification::classifiers}
@@ -257,10 +257,10 @@ These are proposed to better model defect predictions.
 
     \subsection{Image based features}
         \label{subsec::learned_evaluation::baseline::image}
-        The framework is general enough to encompass both orthorectified images and oblique ones.
+        The framework is general enough to encompass both orthorectified images and overhead ones.
         For now, we rely only on more accessible orthorectified images, eventhough they can be riddled with artifacts.
         In an ideal scenario, using oriented images is better for edge verification (as already shown in~\parencite{michelin2013quality}) as orthoimages are a byproduct of earlier ones.
-        However, in practice, oblique imagery would give rise to other issues, especially, registration problems.\\
+        However, in practice, overhead imagery would give rise to other issues, especially, registration problems.\\
 
         We aim to benefit from the high frequencies in Very High Spatial Resolution optical images.
         Building edges, like any image edge, correspond to sharp discontinuities in images~\parencite{ortner2007building}.
