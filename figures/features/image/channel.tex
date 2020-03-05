@@ -20,11 +20,12 @@
 		\path (green_channel) + (-.2, -.2) node (red_channel) {\includegraphics[width=3cm]{images/features/scatnet/elancourt-39322_r}};
 		\draw[->, very thick] (image.east) -- (red_channel.west |- green_channel);
 		
-		\path (model |- mask_legend) node[anchor=south, text width=3cm] (image_legend) {\footnotesize \subcaption{\gls{acr::3d} model. \label{subfig::input_c}}};
 
 		\path (green_channel |- model) node (mask) {\includegraphics[width=3cm]{images/features/scatnet/elancourt-39322_mask}};
-        \path (mask.north) node[anchor=south, text width=3cm] (image_legend) {\footnotesize \subcaption{Nadir Projection. \label{subfig::nadir_c}}};
 		\draw[->, very thick] (model.east) -- (mask.west);
+
+		\path (mask.north) node[anchor=south, text width=3cm] (mask_legend) {\footnotesize \subcaption{Nadir Projection. \label{subfig::nadir_c}}};
+        \path (model |- mask_legend.north) node[anchor=north, text width=3cm] (model_legend) {\footnotesize \subcaption{\gls{acr::3d} model. \label{subfig::input_c}}};
 
 		\path (green_channel.east) + (3, 0) node[anchor=west] (green_mask_channel) {};
 		\path (green_mask_channel) + (.3, .3) node (mask_channel) {\includegraphics[width=3cm]{images/features/scatnet/elancourt-39322_mask}};
@@ -33,8 +34,8 @@
 		\path (green_mask_channel) + (-.3, -.3) node (red_channel_channel) {\includegraphics[width=3cm]{images/features/scatnet/elancourt-39322_r}};
         \path (green_mask_channel.south |- red_channel_channel.south) node[anchor=north, text width=3cm] (channel_legend) {\footnotesize \subcaption{Late fusion: \texttt{channel}. \label{subfig::early}}};
 
-        \path (green_channel.south |- channel_legend) node[text width=3cm] (rgb_legend) {\footnotesize \subcaption{RGB channels. \label{subfig::rgb_c}}};
-        \path (image.south |- channel_legend) node[anchor=north, text width=3cm] (image_legend) {\footnotesize \subcaption{Orthoimage. \label{subfig::orthoimage_c}}};
+        \path (green_channel |- channel_legend.south) node[anchor=south, text width=3cm] (rgb_legend) {\footnotesize \subcaption{RGB channels. \label{subfig::rgb_c}}};
+        \path (image |- channel_legend.south) node[anchor=south, text width=3cm] (image_legend) {\footnotesize \subcaption{Orthoimage. \label{subfig::orthoimage_c}}};
 
 		\draw[->, very thick] (green_channel.east) -- (red_channel_channel.west |- green_mask_channel);
 		\draw[very thick] (mask.east) -- ($(mask)!.5!(green_mask_channel |- mask)$) -- ($(green_channel)!.5!(green_mask_channel)$);

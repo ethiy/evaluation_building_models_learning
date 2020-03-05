@@ -570,11 +570,11 @@ These are proposed to better model defect predictions.
                             I^{\text{dl}}_{\mathsf{M}} \triangleq I_{\mathsf{M}} \odot \left(J - Q_{\mathsf{M}}\right)^{\otimes 3},
                         \end{equation}
                         where:
-                        \begin{conditions}
-                            J_{h_{\mathsf{M}}, w_{\mathsf{M}}} = \left(1\right)_{\substack{i \in \llbracket 1, h_\mathsf{M} \rrbracket\\j \in \llbracket 1, w_\mathsf{M} \rrbracket}} & is the matrix of ones of size \(h_{\mathsf{M}} \times w_{\mathsf{M}}\).\\
-                            P^{\otimes 3} = P \otimes P \otimes P & \makecell{is the tensor obtained by stacking in depth three copies of\\the same matrix \(P\);}\\
-                            A \odot B  = \left(A_{ij} \cdot B_{ij} \right)_{ij} & \makecell{denotes the Hadamard/Schur product of any two matri-\\ces \(A\) and \(B\).}
-                        \end{conditions}
+                        \begin{description}
+                            \item[\(J_{h_{\mathsf{M}}, w_{\mathsf{M}}} = \left(1\right)_{\substack{i \in \llbracket 1, h_\mathsf{M} \rrbracket\\j \in \llbracket 1, w_\mathsf{M} \rrbracket}} :\)] is the matrix of ones of size \(h_{\mathsf{M}} \times w_{\mathsf{M}}\);
+                            \item[\(P^{\otimes 3} = P \otimes P \otimes P :\)] is the tensor obtained by stacking in depth three copies of the same matrix \(P\);
+                            \item[\(A \odot B  = \left(A_{ij} \cdot B_{ij} \right)_{ij} :\)] denotes the Hadamard/Schur product of any two matrices \(A\) and \(B\).
+                        \end{description}
                 \item[\texttt{Channel}:] The mask \(Q_{\mathsf{M}}\) is simply added to the orthoimage as a fourth channel, as depicted in Figure~\ref{fig::channel}:
                         \begin{equation}
                             \label{eq::channel_orthoimage}
