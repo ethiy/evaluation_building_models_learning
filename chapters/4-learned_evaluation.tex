@@ -166,17 +166,17 @@ These are proposed to better model defect predictions.
 
         \begin{figure}[htbp]
             \centering
-            \includestandalone[mode=buildnew, width=.75\textwidth]{figures/features/geometric}
+            \includestandalone[mode=buildnew, width=.75\textwidth]{figures/features/geometry/geometric_baseline}
             \caption[
                 Computed geometric attributes represented on the dual graph, for facets \(f\) and \(g\).
             ]{
-                \label{fig::geometric_features}
+                \label{fig::geometric_baseline_features}
                 Computed geometric attributes represented on the dual graph, for facets \(f\) and \(g\).
                 The green vector groups the node (facet) attributes while the blue one shows the edge features.
             }
         \end{figure}
 
-        The dual graph is illustrated in Figure~\ref{fig::geometric_features}.
+        The dual graph is illustrated in Figure~\ref{fig::geometric_baseline_features}.
         For each facet $f \in \mathsf{F_M}$, we compute its degree (i.e., number of vertices; $f \mapsto d\left(f\right) \triangleq \left\lvert\left\{v : v\text{ is a vertex of }f\right\}\right\rvert$), its area $f \mapsto \mathscr{A}\left(f\right)$ and its circumference $f \mapsto \mathscr{C}\left(f\right)$.
         These are all geometric invariants with respect to $\mathbb{R}^3$ isometries, contrarily to facet centroids $\mathscr{G}\left(f\right)$ and normals $\vec{n}\left(f\right)$.
         This is countersteped by looking, for each graph edge $e=\left\{f, g\right\} \in \mathsf{E_M}$, for the distance between facet centroids $\left\{f, g\right\} \mapsto \left\lVert \mathscr{G}\left(f\right) - \mathscr{G}\left(g\right) \right\rVert$ and the angle formed by their normals $\left\{f, g\right\} \mapsto \arccos\left(\vec{n}\left(f\right) \cdot \vec{n}\left(g\right)\right)$.
@@ -205,7 +205,7 @@ These are proposed to better model defect predictions.
         Each building $\mathsf{M}$ can consequently be characterized by a geometric feature vector that accounts for its geometric characteristics:
 
         \begin{equation}
-        	\label{eq::geometric_features}
+        	\label{eq::geometric_baseline_features}
             v_{\text{geometry}}(\mathsf{M}) = \begin{bmatrix}
             	\chi \left(\left(d\left(f\right)\right)_{f \in \mathsf{F_M}}\right)\\
                 \chi \left(\left(\mathscr{A}\left(f\right)\right)_{f \in \mathsf{F_M}}\right)\\
@@ -228,9 +228,9 @@ These are proposed to better model defect predictions.
         
         \begin{figure}[htb]
             \centering
-            \includestandalone[width=\textwidth, mode=buildnew]{figures/features/height_based}
+            \includestandalone[width=\textwidth, mode=buildnew]{figures/features/height/height_baseline}
             \caption{
-                \label{fig::height_based_features}
+                \label{fig::height_baseline_features}
                 Height-based features computed from the \gls{acr::dsm} residuals using histograms.
             }
         \end{figure}
@@ -239,10 +239,10 @@ These are proposed to better model defect predictions.
         The latter is inferred from its facets plane equations.
         It is rasterized into an grid structure $alt_{\mathsf{M}} \in \mathbb{R}^{w_{\mathsf{M}} \times h_{\mathsf{M}}}$ using the same spatial resolution as $dsm_{\mathsf{M}}$.
         The difference between the two height grids provides a discrepancy map as shown in Figure~\ref{subfig::residuals}).
-        A baseline approach is herein proposed relying on the statistics of pixel values computed using the $\chi$ functions (cf. Figure~\ref{fig::height_based_features}).\\
+        A baseline approach is herein proposed relying on the statistics of pixel values computed using the $\chi$ functions (cf. Figure~\ref{fig::height_baseline_features}).\\
 
         \begin{equation}
-            \label{eq::height_based_features}
+            \label{eq::height_baseline_features}
             v_{\text{height}}\left(\mathsf{M}\right) = \chi \left( dsm_{\mathsf{M}} - alt_{\mathsf{M}} \right).
         \end{equation}
 
@@ -250,7 +250,7 @@ These are proposed to better model defect predictions.
         However, since reference data is unavailable, cropping out the terrain height values implies that the building model footrpint is flawless, which is not the case.
         As a consequence, the heigth discrepancies around the building model are also computed in order to provide some information on the footprint shape, and hence detect \texttt{BIT} or \texttt{BIB} errors.\\
 
-        Equation~\ref{eq::height_based_features} summarizes how building height-based features are computed.
+        Equation~\ref{eq::height_baseline_features} summarizes how building height-based features are computed.
         Different from a \gls{acr::rmse}~\parencite{lafarge2012creating,poullis2013framework}, the histogram captures the discrepancy distribution, which is particularly helpful in detecting undersegmentation defects or geometric imprecision.
         However, as for the previous geometric attributes, the grid structure information coming from the model is lost.
         Errors cannot be spatialized and linked to a specific facet.
@@ -269,9 +269,18 @@ These are proposed to better model defect predictions.
         This is due to the fact that the latter are much less invariant to changes in the than the first ones.
         Indeed, classic Computer Vision techniques rely on gradient based features:~\parencite{lowe2004distinctive,dalal2005histograms}.
         This is adequate to our case where models and images are part of large heterogeneous datasets.\\
+
+        \begin{figure}[htb]
+            \centering
+            \includestandalone[width=\textwidth, mode=buildnew]{figures/features/image/nadir_projection}
+            \caption{
+                \label{fig::nadir_projection}
+                Nadir projection of \gls{acr::3d} models to image comparison.
+            }
+        \end{figure}
         
         We apply this to our context by comparing building model edges to local image gradients.
-        We start by projecting building models in the nadir direction.
+        We start by projecting building models in the nadir direction, as shown in Figure~\ref{fig::nadir_projection}.
         For each facet \(f \in \mathsf{F_M}\), this operation takes into account occlusions and results in:
         \begin{description}
             \item[A \gls{acr::2d} polygon:] If the facet is not vertical (i.e., \(\vec{n}(f) \cdot \vec{z} \neq 0\)) and not completly occluded by other facets;
@@ -360,7 +369,7 @@ These are proposed to better model defect predictions.
     \subsection{Graph kernels}
         \label{subsec::learned_evaluation::richer_features::graph}
         In Section~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}, were discussed some kernels that can adequately describe graphs.
-        The geometric baseline features we provided in Section~\ref{subsec::learned_evaluation::baseline::geometric}, more precisely in Equation~\ref{eq::geometric_features}, could actually be seen as a concatenation of the basic feature maps from Equations~\ref{eq::feature_node_graph} and~\ref{eq::feature_edge_graph}.
+        The geometric baseline features we provided in Section~\ref{subsec::learned_evaluation::baseline::geometric}, more precisely in Equation~\ref{eq::geometric_baseline_features}, could actually be seen as a concatenation of the basic feature maps from Equations~\ref{eq::feature_node_graph} and~\ref{eq::feature_edge_graph}.
         This corresponds, in fact, to the basic kernel in Equation~\ref{eq::feature_graph_kernel_sum}.\\
 
         The biggest disadvantage of this basic kernel is its disregard towards the structural information stored in the graph.
