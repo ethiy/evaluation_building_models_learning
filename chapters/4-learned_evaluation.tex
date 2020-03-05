@@ -2,7 +2,7 @@
 
 \vfill
 
-In the previous chapter (Chapter~\ref{chap::semantic_evaluation}), we developed a heirarchical and modular taxonomy of errors for the overhead imagery modeling case.
+In the previous chapter (Chapter~\ref{chap::semantic_evaluation}), we developed a hierarchical and modular taxonomy of errors for the overhead imagery modeling case.
 Based on this taxonomy, and depending on the particular needs, specific error labels are extracted and considered during the quality evaluation step.\\
 
 In this chapter, we present the second part of our proposed approach.
@@ -74,7 +74,7 @@ These are proposed to better model defect predictions.
         \begin{equation*}
             binary(l_1, l_2) \equiv multi\_class(l_1, l_2)
         \end{equation*}
-        Two consecutive classification problems can be concatenated in a heirarchical multi-stage classification:
+        Two consecutive classification problems can be concatenated in a hierarchical multi-stage classification:
         depending on the class that is predicted in the first stage multi-class classifier, a second classification problem predicts the existence of some corresponding labels.
         This denoted by:
         \begin{equation*}
@@ -87,7 +87,7 @@ These are proposed to better model defect predictions.
         For \gls{acr::lod}-2, if the \textbf{exclusivity} is on, it will be a multi-class problem: \texttt{Valid}, \texttt{Building Errors} or \texttt{Facet Errors}.
         If set off, it becomes a multi-label one with the same labels.
         At \textbf{\gls{acr::efin}} = 3 level, if the \textbf{exclusivity} is on, it is a 2-stage classification problem.
-        In the first stage, a multi-class task\footnote{It is binary in the spcial case \gls{acr::elod} = \gls{acr::lod}-1, problem, like in the previous semantic degree.}
+        In the first stage, a multi-class task\footnote{It is binary in the special case \gls{acr::elod} = \gls{acr::lod}-1, problem, like in the previous semantic degree.}
         predicts the error family, after which a second multi-label problem decides between the predicted error family children.
         If the \textbf{exclusivity} is off, it turns into one stage multi-label problem that predicts the existence of each atomic error corresponding to the chosen \gls{acr::elod}.
     
@@ -260,9 +260,9 @@ These are proposed to better model defect predictions.
         The framework is general enough to encompass both orthorectified images and overhead ones.
         For now, we rely only on more accessible orthorectified images, eventhough they can be riddled with artifacts.
         In an ideal scenario, using oriented images is better for edge verification (as already shown in~\parencite{michelin2013quality}) as orthoimages are a byproduct of earlier ones.
-        However, in practice, overhead imagery would give rise to other issues, especially, registration problems.\\
+        However, in practice, overlapping overhead imagery would give rise to other issues, especially, registration problems.\\
 
-        We aim to benefit from the high frequencies in Very High Spatial Resolution optical images.
+        We aim to benefit from the high frequencies in \gls{acr::vhr} optical images.
         Building edges, like any image edge, correspond to sharp discontinuities in images~\parencite{ortner2007building}.
         The latter are detected using gradient filters on images.
         Gradient based features are advantageous compared to any radiometry based ones.
@@ -326,7 +326,7 @@ These are proposed to better model defect predictions.
 
         For each polygon \(f^q \in \mathsf{F_M}^q\), the distributions over all its edges\footnote{The empty polygons are ignored as they have no edges.} \(s \in f^q\)\footnote{Abuse of notation.} are stacked to yield a distribution over the whole projected facet.
         In the case of histograms $\chi^p_{\operatorname{histogram}}$ with the same parameters \(p\) (and thus the same bins), it is equivalent to summing out the previous vectors $\mathsf{D}_{\chi^p_{\operatorname{histogram}}}(s, I_{\mathsf{M}})$.
-        In order to take into account the variability of segment dimensions, this sum is normalized by segment lengths.\\
+        In order to take into account the variability of segment dimensions, this sum is weighted by segment lengths.\\
         \begin{equation}
             \label{eq::corr_fac}
             D_{\chi^p_{\operatorname{histogram}}}\left(f^q, I_{\mathsf{M}}\right) \triangleq \sum_{s \in q\left(f\right)} \left\rVert s \right\lVert \cdot \mathsf{D}_{\chi^p_{\operatorname{histogram}}}(s, I_{\mathsf{M}}).
@@ -335,7 +335,7 @@ These are proposed to better model defect predictions.
         The same can be done over all facets of a building $\mathsf{M}$.
         The weights are added in order to take into account the geometry heterogeneity.
         The gradient to normal comparison is similar to the \gls{acr::3d} data fitting term formulated in~\parencite{li2016manhattan}.
-        Once again, the model structure is partially lost when simply summing histograms over all segments.
+        Once again, the model structure is partially lost when simply summing (weighted by the projected facet area) histograms over all segments.
 
         \begin{equation}
             \label{eq::corr_bul}
