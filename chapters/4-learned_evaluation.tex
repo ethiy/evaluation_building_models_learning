@@ -222,7 +222,7 @@ These are proposed to better model defect predictions.
 
     \subsection{Height based features}
         \label{subsec::learned_evaluation::baseline::height}
-        Regarding this modality, raw depth information is provided, for a building model \(\mathsf{M}\), by a \gls{acr::dsm} as a \gls{acr::2d} height grid that is cropped to fit the building footprint: $dsm \in \mathbb{R}^{w_{\mathsf{M}} \times h_{\mathsf{M}}}$\footnote{\label{note::w_h}\(w_{\mathsf{M}}\) (\textit{resp.} \(h_{\mathsf{M}}\)) is the grid width (\textit{resp.} height) and is determined by the size of the building and the resolution of the \gls{acr::dsm}.}.
+        Regarding this modality, raw depth information is provided, for a building model \(\mathsf{M}\), by a \gls{acr::dsm} as a \gls{acr::2d} height grid that is cropped to fit the building footprint: $dsm \in \mathbb{R}^{h_{\mathsf{M}} \times w_{\mathsf{M}}}$\footnote{\label{note::w_h}\(w_{\mathsf{M}}\) (\textit{resp.} \(h_{\mathsf{M}}\)) is the grid width (\textit{resp.} height) and is determined by the size of the building and the resolution of the \gls{acr::dsm}.}.
         This type of reference data must date back to the same time where the building models where produced.
         Otherwise a lot of defects will result simply from change in the scenery.\\
         
@@ -237,7 +237,7 @@ These are proposed to better model defect predictions.
 
         The \gls{acr::dsm} is compared to the model height~\parencite{bredif20073d,zebedin2008fusion}.
         The latter is inferred from its facets plane equations.
-        It is rasterized into an grid structure $alt_{\mathsf{M}} \in \mathbb{R}^{w_{\mathsf{M}} \times h_{\mathsf{M}}}$ using the same spatial resolution as $dsm_{\mathsf{M}}$.
+        It is rasterized into an grid structure $alt_{\mathsf{M}} \in \mathbb{R}^{h_{\mathsf{M}} \times w_{\mathsf{M}}}$ using the same spatial resolution as $dsm_{\mathsf{M}}$.
         The difference between the two height grids provides a discrepancy map as shown in Figure~\ref{subfig::residuals}).
         A baseline approach is herein proposed relying on the statistics of pixel values computed using the $\chi$ functions (cf. Figure~\ref{fig::height_baseline_features}).\\
 
@@ -299,7 +299,7 @@ These are proposed to better model defect predictions.
             \item[\(q\)] is the function that yields the projection of a facet if it is a polygon or an empty polygon othewise.
         \end{description}
 
-        This projection is compared with a corresponding orthorectified image \(I_{\mathsf{M}} \in \mathbb{R}^{w_{\mathsf{M}} \times h_{\mathsf{M}} \times 3}\) as shown in Figure~\ref{subfig::edges_image_comparison}.
+        This projection is compared with a corresponding orthorectified image \(I_{\mathsf{M}} \in \mathbb{R}^{h_{\mathsf{M}} \times w_{\mathsf{M}} \times 3}\) as shown in Figure~\ref{subfig::edges_image_comparison}.
         For each facet projection, we isolate each edge \(s\) (Figure~\ref{subfig::edge_image_comparison}).
         In an ideal setting, gradients computed at pixels $g \in I_{\mathsf{M}}$ that intersect \(s\) need to be collinear with its normal $\vec{n}(s)$.
         In consequence, applying a statistics functions $\chi$\footnote{
@@ -405,7 +405,7 @@ These are proposed to better model defect predictions.
     In constrast, this section presents features that better exploits structural information of the input models that were missed by the baseline.
     In the previous section, we identifed two types of instances from which features are extacted: graph-like and image-like data.
     Advanced graph based feature extractors are proposed in Section~\ref{subsec::learned_evaluation::richer_features::graph}.
-    For images-like structures, better attributes are also presented in the next Section~\ref{subsec::learned_evaluation::richer_features::image}.
+    For image-like structures, better attributes are also presented in the next Section~\ref{subsec::learned_evaluation::richer_features::image}.
 
     \subsection{Graph kernels}
         \label{subsec::learned_evaluation::richer_features::graph}
@@ -420,7 +420,7 @@ These are proposed to better model defect predictions.
         Some of these kernels do not utilize the node attributes either as they take only account of the structure of the graph.\\
 
         Face normals are unit vectors with coefficients in the interval \([0, 1]\), while centroids are free to be roam in \(\mathbb{R}^3\).
-        From a global standpoint, each one of the face geometric features have a specific dynammic.
+        From a global standpoint, each one of the face geometric features have a specific dynamic.
         As a consequence, taking all these attributes into account by one graph kernel is going to raise some issues.
         One possible solution is to normalize all geometric features, concatenate them and associate the resulting node attribute vectors to one graph.
         We preferred instead to isolate each geometric feature in a specific graph.
@@ -455,11 +455,11 @@ These are proposed to better model defect predictions.
             \underbrace{2}_{\substack{\text{kernels ignoring}\\\text{ node attributes}}} + \underbrace{3}_{\substack{\text{attributed}\\\text{graphs}}} \times \left(\underbrace{2}_{\substack{\text{Multiscale Laplacian \&}\\\text{Propagation}}} + \underbrace{1}_{\text{Graph hopper}} \times \underbrace{2}_{\substack{\text{base}\\\text{kernels}}}\right) = 14
         \end{equation*} graph kernels.
         These are aggregated into one kernel using a linear combination.
-        This is possible thanks to \acrfull{acr::mkl} as explained earlier in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.
+        This is possible thanks to \acrfull{acr::mkl} as explained in Section~\ref{sec::classifiers::svm}.
         Other types of kernels were briefly experimented with, namely the Lov\'asz \(\vartheta\), Graphlet Sampling, Subgraph Matching and Shortest Path kernels.
         However, they did not yield any valuable results and most of the time failed numerically.
         
-    \subsection{\acrshort*{acr::scatnet} feature extractor}
+    \subsection{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} feature extractor}
         \label{subsec::learned_evaluation::richer_features::image}
         \glspl{acr::cnn} have proven to be the standard feature extractors in image classification.
         However, they require a great load of images in order to learn good enough representations.
@@ -472,15 +472,15 @@ These are proposed to better model defect predictions.
             In addition, theoretically the height data can be fed directly to a \gls{acr::scatnet} without requiring any normalization or preprocessing since, by construction, they can admit any type of \gls{acr::2d} signal\footnote{There are other versions of \glspl{acr::scatnet} taking one dimensional signals~\parencite{anden2014deep} or even graphs~\parencite{eickenberg2018solid}.}.
             This explains why \glspl{acr::scatnet} were chosen as a height based feature extractor.\\
 
-            From a practical standpoint, the residuals computed as in Section~\ref{subsec::learned_evaluation::baseline::height} come as images in different sizes \(w_{\mathsf{M}} \times h_{\mathsf{M}}\) (cf. Section~\ref{subsec::learned_evaluation::baseline::image}) depending on the input model.
+            From a practical standpoint, the residuals computed as in Section~\ref{subsec::learned_evaluation::baseline::height} come as images in different sizes \(h_{\mathsf{M}} \times w_{\mathsf{M}}\) (cf. Section~\ref{subsec::learned_evaluation::baseline::image}) depending on the input model.
             Consequently, concatenating \gls{acr::scatnet} coefficients into a single vector is going to result in variable feature vector dimensions.
             One solution is to resize all images to a certain fixed size beforehand.
             However, this solution was quickly ruled out based on few experiments.
-            In fact, aside from the fact that this process either looses valuable structural information or adds undesired blur, it completly deforms the input signal as the \(\frac{w}{h}\) ratio is not guaranteed to constant for all inputs resulting in squashed or elongated image.
+            In fact, aside from the fact that this process either looses valuable structural information or adds undesired blur, it completly deforms the input signal as the \(\frac{w_{\mathsf{M}}}{h_{\mathsf{M}}}\) ratio is not guaranteed to be constant for all inputs resulting in squashed or elongated image.
             Moreover, since \glspl{acr::scatnet} yield a great deal of coefficients that can easily surpass the number of training instances which hinders the learning ability of any classifier.
             As a consequence, we propose to add a function to help extract meaningful feature vectors with the same length.\\
 
-            Suppose we have a function \(\chi: \mathbb{R}^{w_1 \times d_1} \rightarrow \mathbb{R}^d\) such as the ones presented in Equations~\ref{eq::histogram_extractor} and~\ref{eq::max_min_mean_med_extractor} which has the same output dimension no matter the input size \(w_1 \times d_1\).
+            Suppose, for any \((\tilde{h}, \tilde{w}) \in \mathbb{N}^* \times \mathbb{N}^*\),  we have a function \(\chi: \mathbb{R}^{\tilde{h} \times \tilde{w}} \rightarrow \mathbb{R}^d\) such as the ones presented in Equations~\ref{eq::histogram_extractor} and~\ref{eq::max_min_mean_med_extractor} which has the same output dimension \(d\) no matter the input size \(\tilde{h} \times \tilde{w}\).
             It can be applied on the output of each scattering output \(S_l[dsm - alt](\bullet, p)\):
             \begin{equation}
                 \label{eq::reduced_scattering}
@@ -536,7 +536,7 @@ These are proposed to better model defect predictions.
                 \operatorname{std}(l) & computes the standard deviation over the tuple \(l\).
             \end{conditions}
 
-        \subsubsection{Height based features}
+        \subsubsection{Image based features}
             \glspl{acr::scatnet} seem then to be good choice for image based feature extractors.
             In fact, as shown in Figure~\ref{subfig::bus_2d}, image textures could be also useful for error detection.
             More importantly, as shown with baseline image based features (cf. Section~\ref{subsec::learned_evaluation::baseline::image}), edges are key image attributes for comparing building models to orthoimages.
@@ -546,31 +546,36 @@ These are proposed to better model defect predictions.
             In order to draw features comparing orthoimages to buildings models, we start first by rasterizing the borders of polygons \(f^q \in \mathsf{F_M}\) of the model into a grid structure mask:
             \begin{equation}
                 \label{eq::borders_mask}
-                Q_{\mathsf{M}} \triangleq \left(\mathbb{1}_{g_{i,j} \cap \left(\bigcup_{f^q \in \mathsf{F_M}}f^q\right)}\right)_{\substack{i \in \llbracket 1, w_\mathsf{M} \rrbracket\\j \in \llbracket 1, w_\mathsf{M} \rrbracket}},
+                Q_{\mathsf{M}} \triangleq \left(\mathbb{1}_{g_{i,j} \cap \left(\bigcup_{f^q \in \mathsf{F_M}}f^q\right)}\right)_{\substack{i \in \llbracket 1, h_\mathsf{M} \rrbracket\\j \in \llbracket 1, w_\mathsf{M} \rrbracket}},
             \end{equation}
             where:
             \begin{conditions}
                 g_{i,j} & is the rectangle\footnote{It is usually a square as both dimensions are equal.} representing the pixel at row \(i\) and column \(j\).
             \end{conditions}
 
+            \begin{figure}[htb]
+                \centering
+                \includestandalone[width=\textwidth, mode=buildnew]{figures/features/image/deletion}
+                \caption{
+                    \label{fig::deletion}
+                    Illustration of the early fusion scheme denoted \texttt{deletion}.
+                }
+            \end{figure}
+
             Two options are possible:
             \begin{description}
-                \item[\texttt{Deletion}:] Pixels \(g\) in the corresponding orthoimage which are part of a polygon border (i.e., \(Q_{\mathsf{M}}(g) = 1\)) are made black:
+                \item[\texttt{Deletion}:] Pixels \(g\) in the corresponding orthoimage which are part of a polygon border (i.e., \(Q_{\mathsf{M}}(g) = 1\)) are made black, as shown in Figure~\ref{fig::deletion}:
                         \begin{equation}
                             \label{eq::deletion_orthoimage}
-                            I^{\text{dl}}_{\mathsf{M}} \triangleq I_{\mathsf{M}} \odot \left(\begin{bmatrix}
-                                1 & 1 & \dots & 1\\
-                                1 & 1 & \dots & 1\\
-                                \vdots & \vdots & \ddots & 1\\
-                                1 & 1 & \dots & 1\\
-                            \end{bmatrix} - Q_{\mathsf{M}}^{\otimes 3}\right),
+                            I^{\text{dl}}_{\mathsf{M}} \triangleq I_{\mathsf{M}} \odot \left(J - Q_{\mathsf{M}}\right)^{\otimes 3},
                         \end{equation}
                         where:
                         \begin{conditions}
-                            Q_{\mathsf{M}}^{\otimes 3} = Q_{\mathsf{M}} \otimes Q_{\mathsf{M}} \otimes Q_{\mathsf{M}} & is the tensor obtained by stacking in depth thee copies of the same matrix \(Q_{\mathsf{M}}\);\\
-                            A \odot B  = \left(A_{ij} \cdot B_{ij} \right)_{ij} & denotes the Hadamard/Schur product of any two matrices \(A\) and \(B\).
+                            J_{h_{\mathsf{M}}, w_{\mathsf{M}}} = \left(1\right)_{\substack{i \in \llbracket 1, h_\mathsf{M} \rrbracket\\j \in \llbracket 1, w_\mathsf{M} \rrbracket}} & is the matrix of ones of size \(h_{\mathsf{M}} \times w_{\mathsf{M}}\).\\
+                            P^{\otimes 3} = P \otimes P \otimes P & \makecell{is the tensor obtained by stacking in depth three copies of\\the same matrix \(P\);}\\
+                            A \odot B  = \left(A_{ij} \cdot B_{ij} \right)_{ij} & \makecell{denotes the Hadamard/Schur product of any two matri-\\ces \(A\) and \(B\).}
                         \end{conditions}
-                \item[\texttt{Channel}:] The mask \(Q_{\mathsf{M}}\) is simply added to the orthoimage as a fourth channel:
+                \item[\texttt{Channel}:] The mask \(Q_{\mathsf{M}}\) is simply added to the orthoimage as a fourth channel, as depicted in Figure~\ref{fig::channel}:
                         \begin{equation}
                             \label{eq::channel_orthoimage}
                             I^{\text{ch}}_{\mathsf{M}} \triangleq I_{\mathsf{M}} \otimes Q_{\mathsf{M}}.
@@ -578,6 +583,15 @@ These are proposed to better model defect predictions.
             \end{description}
             The first situation corresponds to an early fusion scheme while the second represent a late fusion case.
             Both settings are experimented with and compared later in Section~\ref{subsec::more_experiments::richer_features::scatnet_baseline}.\\
+
+            \begin{figure}[htb]
+                \centering
+                \includestandalone[width=\textwidth, mode=buildnew]{figures/features/image/channel}
+                \caption{
+                    \label{fig::channel}
+                    Illustration of the late fusion scheme denoted \texttt{channel}.
+                }
+            \end{figure}
 
             Now we can apply the \gls{acr::scatnet} on any of the previously defined images.
             We apply then the same post-processing to yield feature vectors with the same dimensions per channel \(d \cdot n_S\):
@@ -631,5 +645,5 @@ These are proposed to better model defect predictions.
                         \end{equation}
             \end{description}
         
-            Eventhough we have used the \(\chi\) function to reduce the dimension, these feature vector still contain a sizable amount of coefficients.
+            Eventhough we have used the \(\chi\) function to reduce the dimension, these feature vector still contains a sizable amount of coefficients.
             This will prove to be difficult to learn on for both of the considered classifiers.

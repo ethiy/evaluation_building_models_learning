@@ -11,6 +11,7 @@
 	\begin{tikzpicture}
 		\begin{axis}[
 			ylabel={\# occurrences},
+			scaled y ticks={base 10:-3},
 			xlabel={Similarity},
 			area style,
 			axis background/.style={fill=white},
@@ -18,7 +19,7 @@
 			xmin=-1,
 			xmax=1
 		]
-			\addplot+[ybar interval,mark=no] plot coordinates {
+			\addplot+[ybar interval, mark=no] plot coordinates {
 				(-1, 0) 
 				(-.9, 0)
 				(-.8, 876)
