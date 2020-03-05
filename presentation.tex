@@ -590,7 +590,7 @@
         \subsection{Is \texorpdfstring{\acrshort*{acr::rmse}}{RMSE} sufficient?}
             \begin{frame}{\texorpdfstring{\acrshort*{acr::rmse}}{RMSE} as a feature}
                 \centering
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/features/height_based_animated_rmse}
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/features/height/rmse_animated}
             \end{frame}
 
             \begin{frame}{\texorpdfstring{\acrshort*{acr::rmse}}{RMSE} results}
@@ -641,7 +641,7 @@
 
             \begin{frame}{Geometric features}
                 \centering
-                \includestandalone[mode=buildnew, width=.68\textwidth]{figures/features/geometric_animated}
+                \includestandalone[mode=buildnew, width=.68\textwidth]{figures/features/geometric/baseline_animated}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                     \item Graph = \only<2->{\textcolor{darkgreen}{nodes(facets)}} \only<3->{ + \textcolor{blue}{edges(adjacency)}.}
                     \item<6-> Features = Statistics on attributes (\num{4 x 5}).
@@ -650,7 +650,7 @@
 
             \begin{frame}{Height based features}
                 \centering
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/features/height_based_animated}
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/features/height/baseline_animated}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                     \item<5-> Features = Histogram bins (20).
                 \end{itemize}
@@ -658,7 +658,7 @@
 
             \begin{frame}{Image based features}
                 \centering
-                \includestandalone[mode=buildnew, height=.7\textheight]{figures/features/image_based_animated}
+                \includestandalone[mode=buildnew, height=.7\textheight]{figures/features/image/baseline_animated}
                 \begin{itemize}[label=$\blacktriangleright$, font=\color{IGNGreen}]
                     \item<6> Features = Histogram bins (20).
                 \end{itemize}
@@ -1122,7 +1122,7 @@
 
             \begin{frame}{Advanced graph features}
                 \raggedleft
-                \includestandalone[mode=buildnew, height=.8\textheight]{figures/features/geometric_kernels_animated}
+                \includestandalone[mode=buildnew, height=.8\textheight]{figures/features/geometric/kernels_animated}
             \end{frame}
     
         \subsection{Image features}
@@ -1178,7 +1178,7 @@
             
             \begin{frame}{Advanced height based features}
                 \centering
-                \includestandalone[mode=buildnew, width=\textwidth]{figures/features/height_based_animated_scatnet}
+                \includestandalone[mode=buildnew, width=\textwidth]{figures/features/height/scatnet_animated}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item<4-> Features = \only<4>{Statistics over coefficients }\only<5>{\num{1085} in length}.
                 \end{itemize}
@@ -1186,7 +1186,7 @@
 
             \begin{frame}{Advanced image based features}
                 \centering
-                \includestandalone[mode=buildnew, width=.9\textwidth]{figures/features/image_based_animated_scatnet}
+                \includestandalone[mode=buildnew, width=.9\textwidth]{figures/features/image/scatnet_animated}
                 \begin{itemize}[label=\(\blacktriangleright\), font=\color{IGNGreen}]
                     \item<8-> Features = \only<8>{Statistics over coefficients }\only<9>{\num{1085} per channel in length}.
                 \end{itemize}

@@ -166,7 +166,7 @@ These are proposed to better model defect predictions.
 
         \begin{figure}[htbp]
             \centering
-            \includestandalone[mode=buildnew, width=.75\textwidth]{figures/features/geometry/geometric_baseline}
+            \includestandalone[mode=buildnew, width=.75\textwidth]{figures/features/geometry/baseline}
             \caption[
                 Computed geometric attributes represented on the dual graph, for facets \(f\) and \(g\).
             ]{
@@ -276,6 +276,8 @@ These are proposed to better model defect predictions.
             \caption{
                 \label{fig::nadir_projection}
                 Nadir projection of \gls{acr::3d} models to image comparison.
+                The input model (cf. Figure~\ref{subfig::input_model}) is projected in the nadir direction as shown in Figure~\ref{subfig::nadir_projection}.
+                It is then superposed on the orthoimage (cf. Figure~\ref{subfig::orthoimage}) and compared to it, as shown in Figure~\ref{subfig::image_model_comparison}.
             }
         \end{figure}
         
@@ -297,10 +299,12 @@ These are proposed to better model defect predictions.
             \item[\(q\)] is the function that yields the projection of a facet if it is a polygon or an empty polygon othewise.
         \end{description}
 
-        This projection is compared with a corresponding orthorectified image \(I_{\mathsf{M}} \in \mathbb{R}^{w_{\mathsf{M}} \times h_{\mathsf{M}} \times 3}\) as shown in Figure~\ref{subfig::model_nadir_projection}.
-        For each facet projection, we isolate an edge \(s\) (Figure~\ref{subfig::segment_gradient_collinearity}).
-        In an ideal setting, gradients computed at pixels $g \in I_{\mathsf{M}}$ that intersect $s$ need to be collinear with its normal $\vec{n}(s)$.
-        In consequence, applying the one of the statistics functions $\chi$ defined in Equations~\ref{eq::max_min_mean_med_extractor} or~\ref{eq::histogram_extractor}, we compute the distribution of the cosine similarity between the local gradient and the normal all along that $s$:
+        This projection is compared with a corresponding orthorectified image \(I_{\mathsf{M}} \in \mathbb{R}^{w_{\mathsf{M}} \times h_{\mathsf{M}} \times 3}\) as shown in Figure~\ref{subfig::edges_image_comparison}.
+        For each facet projection, we isolate each edge \(s\) (Figure~\ref{subfig::edge_image_comparison}).
+        In an ideal setting, gradients computed at pixels $g \in I_{\mathsf{M}}$ that intersect \(s\) need to be collinear with its normal $\vec{n}(s)$.
+        In consequence, applying a statistics functions $\chi$\footnote{
+            For instance, the functions defined in Equations~\ref{eq::max_min_mean_med_extractor} or~\ref{eq::histogram_extractor}.
+        }, we compute a distribution of the cosine similarity between the local gradient and the normal all along each edge \(s\) (cf. Figure~\ref{subfig::edge_histograms}):
         
         \begin{equation}
             \label{eq::corr_seg}
@@ -313,27 +317,32 @@ These are proposed to better model defect predictions.
                     \begin{subfloatrow}[2]
                         \ffigbox[\FBwidth]{
                             \caption{
-                                Model facets (each represented by a specific color) are nadir projected onto the orthoimage.
-                            }\label{subfig::model_nadir_projection}
-                            }			
-                            {
-                                \includegraphics[width=.45\textwidth]{images/features/image/nadir_superposition}
+                                \label{subfig::edge_image_comparison}
+                                Local gradients (in purple), on intersecting pixels (in green), are compared to the edge (in red) normal (in black).
                             }
+                        }{
+                            \includestandalone[mode=buildnew, width=.45\textwidth]{figures/features/image/edge_image_comparison}
+                        }
                         \quad
                         \ffigbox[\FBwidth]{
-                                \caption{Local gradients (in purple), on intersecting pixels (in green), are compared to the edge (in red) normal (in black).}
-                                \label{subfig::segment_gradient_collinearity}
+                            \caption{
+                                \label{subfig::edge_histograms}
+                                Histograms describing the similarity between edges and the orthoimage.
                             }
-                            {\includestandalone[mode=buildnew, width=.45\textwidth]{figures/features/image_based}
+                        }{
+                            \includestandalone[mode=buildnew, width=.45\textwidth]{figures/features/image/edges_histograms}
                         }
                     \end{subfloatrow}
                 }{
-                    \caption{Illustration of how features are derived from optical images.}\label{fig::image_based}
+                    \caption{
+                        \label{fig::edges_image_comparison}
+                        Illustration of how edges from the projected model are compared to the orthoimage.
+                    }
                 }
             \end{center}
         \end{figure}
 
-        For each polygon \(f^q \in \mathsf{F_M}^q\), the distributions over all its edges\footnote{The empty polygons are ignored as they have no edges.} \(s \in f^q\)\footnote{Abuse of notation.} are stacked to yield a distribution over the whole projected facet.
+        For each polygon \(f^q \in \mathsf{F_M}^q\), the distributions over all its edges\footnote{The empty polygons are ignored as they have no edges.} \(s \in f^q\)\footnote{Abuse of notation.} are stacked to yield a distribution over the whole projected facet (cf. Figure~\ref{subfig::facets_histograms}).
         In the case of histograms $\chi^p_{\operatorname{histogram}}$ with the same parameters \(p\) (and thus the same bins), it is equivalent to summing out the previous vectors $\mathsf{D}_{\chi^p_{\operatorname{histogram}}}(s, I_{\mathsf{M}})$.
         In order to take into account the variability of segment dimensions, this sum is weighted by segment lengths.\\
         \begin{equation}
@@ -341,7 +350,7 @@ These are proposed to better model defect predictions.
             D_{\chi^p_{\operatorname{histogram}}}\left(f^q, I_{\mathsf{M}}\right) \triangleq \sum_{s \in q\left(f\right)} \left\rVert s \right\lVert \cdot \mathsf{D}_{\chi^p_{\operatorname{histogram}}}(s, I_{\mathsf{M}}).
         \end{equation}
 
-        The same can be done over all facets of a building $\mathsf{M}$.
+        The same can be done over all facets of a building $\mathsf{M}$ (cf. Figure~\ref{subfig::whole_histogram}).
         The weights are added in order to take into account the geometry heterogeneity.
         The gradient to normal comparison is similar to the \gls{acr::3d} data fitting term formulated in~\parencite{li2016manhattan}.
         Once again, the model structure is partially lost when simply summing (weighted by the projected facet area) histograms over all segments.
@@ -351,7 +360,39 @@ These are proposed to better model defect predictions.
             v_{\text{image}}\left(\mathsf{M}\right) = D_{\chi^p_{\operatorname{histogram}}}\left(\mathsf{M}, I_{\mathsf{M}}\right) \triangleq \sum_{f^q \in \mathsf{F_M}^q} \mathscr{A}\left(f^q\right) \cdot \mathsf{D}_{\chi^p_{\operatorname{histogram}}}(f^q, I_{\mathsf{M}}).
         \end{equation}
         
-        These image-based attributes are helpful for precision error detection.
+        \begin{figure}[htb]
+            \begin{center}
+                \floatbox{figure}{
+                    \begin{subfloatrow}[2]
+                        \ffigbox[\FBwidth]{
+                            \caption{
+                                \label{subfig::facets_histograms}
+                                Depiction of histograms describing the similarity of each of the model's projected facet to the orthoimage.
+                            }
+                        }{
+                            \includestandalone[mode=buildnew, width=.45\textwidth]{figures/features/image/facets_histograms}
+                        }
+                        \quad
+                        \ffigbox[\FBwidth]{
+                            \caption{
+                                \label{subfig::whole_histogram}
+                                Illustration of the final histogram describing the similarity between the model edges and the orthoimage.
+                            }
+                        }{
+                            \includestandalone[mode=buildnew, width=.45\textwidth]{figures/features/image/whole_histogram}
+                        }
+                    \end{subfloatrow}
+                }{
+                    \caption{
+                        \label{fig::image_baseline}
+                        The comparison between a model and the orthoimage is conducted by aggregating the edge similarity histograms (cf. Figure~\ref{subfig::edge_histograms}):
+                        First at facet level, which results in a histogram per each of the projected facets (cf. Figure~\ref{subfig::facets_histograms}), and then at the whole model level, with a final output describing the similarity between the input \gls{acr::3d} model and the orthoimage as shown in Figure~\ref{subfig::whole_histogram}.
+                    }
+                }
+            \end{center}
+        \end{figure}
+
+        These image-based attributes (cf. Figure~\ref{fig::image_baseline}) are helpful for precision error detection.
         As example, facet imprecise borders can be detected as local gradients direction will be expected to differ greatly from the inaccurate edge.
         It can also be instrumental in under-segmentation detection as colors can change considerably from one facet or one building to another inducing an gradient orthogonal to edge normals.
 
