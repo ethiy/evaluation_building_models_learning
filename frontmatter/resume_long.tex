@@ -47,12 +47,36 @@
         On peut citer aussi un troisième verrou à lever: l'évaluation qui est encore réalisé de façon manuelle.
 
     \subsection*{\`Evaluation de modèles de bâtiments}
+        L'évaluation de modèles 3D de bâtiments peut porter sur la vérification de leur cohérence topologique.
+        Un travail considérable a été accompli afin de parvenir à une représentation standardisée des modèles 3D des villes.
+        Cela a abouti à la norme CityGML de l'Open Geospatial Consortium (OGC)~\parencite{groger2012citygml}.
+        Cependant, dans la pratique, elle n'est pas toujours respectée, comme le montre~\parencite{biljecki2016most}, où jusqu'à \SI{89}{\percent} des modèles se sont avérés non valides du point de vue topologique.
+        Cela peut expliquer pourquoi le sujet de l'inspection automatique de la cohérence topologique des modèles de ville a attiré une forte attention dans la communauté des SIG.
+        On peut noter en particulier les travaux présentés dans~\parencite{ledoux2013validation} qui est le premier a explorer pleinement les possibilités topologiques offertes par la norme CityGML.\\
+
+        L'évaluation de modèles 3D de bâtiments peut relever aussi de la comparaison entre la géométrie du modèle 3D et la géométrie réelle du bâtiment.
+        Deux moyens peuvent être utilisés pour juger de la qualité de la représentation géométrique d'un bâtiment.
+        L'évaluation manuelle repose sur l'interaction humaine pour déterminer dans quelle mesure le modèle est proche de la réalité.
+        L'approche automatique s'appuie uniquement sur le modèle et d'autres données externes sans impliquer un opérateur humain dans la boucle.
+        La dernière approche est la plus intéressante, mais aussi la plus difficiles.
+        En effet, même si l'évaluation de la géométrie peut s'apprêter à être automatisé, le point névralgique reste l'aspect sémantique de l'évaluation.
+        Bien que cette évaluation sémantique soit facile à réaliser manuellement, elle resiste encore à l'automatisation.
 
     \subsection*{Contributions}
+        Basée sur la discussion précédente, nous avons adopté une orientation de recherche qui a rarement été prise jusqu'à présent, pour autant que nous le sachions.
+        Notre objectif est d'évaluer la qualité des modèles 3D de bâtiment de manière \textbf{automatique} et à \textbf{grande échelle}.
+
+        \begin{enumerate}
+            \item Une taxonomie hiérarchique et adaptative des erreurs est proposée.
+            \item Une évaluation sans modèles 3D de bâtiment de référence.
+            \item Des vecteurs attributs afin de caractériser les modèles 3D de bâtiment ainsi que de les comparer à des images ou Modèle numérique de surface.
+            \item Une étude de passage à l'échelle pour la chaîne de traitement établie.
+            \item Un ensemble d'outils pour traiter la géométrie des modèles 3D de bâtiment.
+        \end{enumerate}
 
 \section*{Qualification de modèle 3D de bâtiments}
 
-    
+
     \subsection*{\`Etat de l'art}
 
     \subsection*{Une taxonomie d'erreurs de modélisation}
