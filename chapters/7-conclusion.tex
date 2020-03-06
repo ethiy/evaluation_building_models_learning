@@ -32,14 +32,14 @@ Secondly, Section~\ref{sec::conclusion::perspectives} addresses some issues that
     In fact, some predictions scores are not only stable, when training on a different urban scene, they even outperform when learning on the same scene.
     Additionally, we reported how, for a heterogeneous training dataset, the size of the training set have, practically, no effect as test score stay stable for all errors.
     This demonstrates that the proposed framework can be easily scaled with the right choice of training samples with little manually generated data.
-    This exactly answers to the raised problematic, contrarily to the present state-of-the-art literature.
+    This exactly answers to the raised issue, contrarily to the present state-of-the-art literature.
     We believe our framework is robust enough to evaluate unseen areas.
     It represents also a strong basis for subsequent manual or automatic \gls{acr::3d} building model correction.
 
 \section{\textsc{Perspectives}}
     \label{sec::conclusion::perspectives}
     The goal of this work was to introduce an new paradigm of large scale and automated semantic evaluation of building models which was largely understudied in the community.
-    Thanks to a thourough experimental analysis, we have proven the feasibility of our approach which is based on the supervised formulation of the error detection as well as the error taxonomy definition.
+    Thanks to a thorough experimental analysis, we have proven the feasibility of our approach which is based on the supervised formulation of the error detection as well as the error taxonomy definition.
     Yet some questions went unanswered.
     We present hereafter some issues that should be adressed further.\\
 
@@ -48,7 +48,7 @@ Secondly, Section~\ref{sec::conclusion::perspectives} addresses some issues that
     As a consequence, the number of façade modeling methods have proliferated accordingly.
     The relevance of the proposed errors was briefly discussed for this case in Section~\ref{sec::semantic_evaluation::overhead} but is still to be proven experimentally.\\
 
-    This error taxonomy although providing valuable information on the type of defects that can affect the building model.
+    This error taxonomy, although providing valuable information on the type of defects that can affect the building model, is not very thorough.
     It was indeed developed so as to guide human operators correct models through a concise and meaningful description of the failures altering said models.
     However, our approach does not \textbf{quantify the detected errors} to further help the model correction process.
     For instance, if we imagine a model with a planar facet with an imprecisely estimated slope.
@@ -56,14 +56,14 @@ Secondly, Section~\ref{sec::conclusion::perspectives} addresses some issues that
     As a consequence, a possible extension of this work is to associate appropriate metrics to each \texttt{atomic} error which would provide actionable information on the detected error.
     Such metrics have already been studied profusely in the literature as shown in Section~\ref{sec::state_of_the_art::quality}.\\
 
-    Always related to building model correction, error existance was predicted at building level even for \textbf{facet level} defects.
+    Always related to building model correction, error existence was predicted at building level even for \textbf{facet level} defects.
     This is actually not an ideal setting for a postprocessing step as errors are not localized.
     This could be solved by relying on the facet graph structure of the models (cf. Section~\ref{subsec::learned_evaluation::baseline::geometric}) and labeling individual facets.\\
 
     In order to scale the whole building modeling pipeline and linked to automatic quality evaluation, the question of model \textbf{correction automation} steps into light.
-    Indeed, one could imagine how an automatic evaluation of building model yielding semantic localized errors along with specific metrics can be useful for automated model correction.
+    Indeed, one could imagine how an automatic evaluation of a building model yielding semantic localized errors along with specific metrics can be useful for automated model correction.
     In fact, to each error could be associated a set of unitary actions based on the discussion in Section~\ref{sec::semantic_evaluation::overhead}.
-    Hence, the correction step could be designed as an optimization problem which would determine the best combination of actions that can solve the raised issues while making use of the corresponding error metrics as an \textit{a priori}.
+    Hence, the correction step could be designed as an optimization problem which would determine the best combination of actions that can solve the raised issues while making use of the corresponding error metrics as a prior.
     This would be an iterative process depending on a preestablished prioritization of errors.\\
     
     In the experimental study, all models originated from one modeling approach.
@@ -76,4 +76,4 @@ Secondly, Section~\ref{sec::conclusion::perspectives} addresses some issues that
     Manual annotation necessitates a considerable effort especially for expert tasks as ours.
     To alleviate this issue there are two possibilities.
     First, we can develop an \textbf{active learning} approach that can help scale the annotation effort.
-    Secondly, we can \textbf{simulate errors} by altering ground truth models like th ones presented in~\parencite{rottensteiner2012isprs}.
+    Secondly, we can \textbf{simulate errors} by altering ground truth models like the ones presented in~\parencite{rottensteiner2012isprs}.

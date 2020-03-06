@@ -1,0 +1,34 @@
+\documentclass[tikz]{standalone}
+
+\begin{document}
+    \begin{tikzpicture}
+        \shade[left color=white,right color=LOSS45] (-3, 0) rectangle (-2, .25);
+        \draw[LOSS3545, fill=LOSS3545] (-2, 0) rectangle (-1, .25);
+        \draw[LOSS2535, fill=LOSS2535] (-1, 0) rectangle (0, .25);
+        \draw[LOSS1525, fill=LOSS1525] (0, 0) rectangle (1, .25);
+        \draw[LOSS0515, fill=LOSS0515] (1, 0) rectangle (2, .25);
+        \draw[STBL, fill=STBL] (2, 0) rectangle (3, .25);
+        \draw[GAIN0515, fill=GAIN0515] (3, 0) rectangle (4, .25);
+        \draw[GAIN1525, fill=GAIN1525] (4, 0) rectangle (5, .25);
+        \draw[GAIN2535, fill=GAIN2535] (5, 0) rectangle (6, .25);
+        \draw[GAIN3545, fill=GAIN3545] (6, 0) rectangle (7, .25);
+        \shade[left color=GAIN45,right color=white] (7, 0) rectangle (8, .25);
+        \draw[black] (-3, 0) -- (8, 0);
+        \draw[black] (-3, .25) -- (8, .25);
+        \draw[black] (-2, .25) -- (-2, -2pt) node[below, black] {\footnotesize -45\%};
+        \draw[black] (-1, .25) -- (-1, -2pt) node[below, black] {\footnotesize -35\%};
+        \draw[black] (0, .25) -- (0, -2pt) node[below, black] {\footnotesize -25\%};
+        \draw[black] (1, .25) -- (1, -2pt) node[below, black] {\footnotesize -15\%};
+        \draw[black] (2, .25) -- (2, -2pt) node[below, black] {\footnotesize -5\%};
+        \draw[black] (3, .25) -- (3, -2pt) node[below, black] {\footnotesize 5\%};
+        \draw[black] (4, .25) -- (4, -2pt) node[below, black] {\footnotesize 15\%};
+        \draw[black] (5, .25) -- (5, -2pt) node[below, black] {\footnotesize 25\%};
+        \draw[black] (6, .25) -- (6, -2pt) node[below, black] {\footnotesize 35\%};
+        \draw[black] (7, .25) -- (7, -2pt) node[below, black] {\footnotesize 45\%};
+
+        \draw[draw= black, fill=white] (2, -1.15) rectangle (3, -.9);
+        \node[align=center, black] at (2.5, -.75) {\footnotesize NaN};
+
+        \node[align=center, black] at (2.5, 1.75em) {\small \(\bm{\Delta F_{score}}\)(\%)};
+    \end{tikzpicture}
+\end{document}
