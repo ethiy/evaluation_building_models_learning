@@ -1,3 +1,72 @@
 \selectlanguage{french}
-Un chapitre long.
+\minitoc
+
+\vfill
+
+\section*{Introduction}
+
+    L'objectif de cette introduction est de familiariser le lecteur avec les concepts qui sont manipulés dans cette étude et de de motiver la nécessité d'une évaluation sémantique des modèles 3D de bâtiments.\\
+
+    \subsection*{Modélisation 3D de bâtiments}
+        On entend par modèle 3D de bâtiment un produit cartographique qui représente la surface du bâtiment en question.
+        Ce dernier est une généralisation de la réalité dont le but n'est pas de représenter minutieusement tous les détails.
+        Cependant, le modèle ne doit pas être loin, en terme géométrique, de du bâtiment qui nous intéresse.
+        Ainsi, la fidélité géométrique est pondérée par rapport à la généralisation.
+        Le bon compromis est choisi en fonction des besoins de l'utilisateur final.
+
+        La géométrie de la surface du modèle n'est pas suffisante pour décrire les objets urbains~\parencite{biljecki2016improved}, et en particulier les bâtiments.
+        La sémantique fait partie intégrante de leur représentation.
+        Les modèles de ville enregistrent d'autres informations comme la fonction de chaque élément architectural.
+        On nomme ce type d'information la sémantique \textit{explicite}.
+        Cette dernière a un effet significatif sur la géométrie du modèle.
+        En effet, les éléments architecturaux correspondent généralement à une ou plusieurs formes géométriques simples, le plus souvent planes~\parencite{kolbe2005citygml}.
+        En conséquence, une information géométrique dense (c'est-à-dire un maillage 3D dense) n'est pas nécessairement la représentation la plus précise.
+        Cet effet est désigné ici par le terme de sémantique \textit{implicite}.
+        Connaître la fonction d'un objet permet donc de représenter sa géométrie de manière efficace.
+        Ainsi, la sémantique implique une compacité dans la représentation des bâtiments.
+        C'est pourquoi le dernier critère a été utilisé, par exemple, dans en plus de la RMSE, comme mesure d'évaluation dans~\parencite{lafarge2012creating}.
+        Ainsi, distingue-t-on désormais entre un modèle 3D et un maillage 3D de bâtiment.
+        Si ce dernier ne prends en compte que la précision géométrique, l'autre véhicule, en plus, des propriétés sémantiques.
+
+        Ces modèles 3D urbains offre plusieurs applications et sont important pour différents domaines.
+        Une étude plus complète de ces applications a été présentée dans~\parencite{biljecki2015applications}.
+        L'objectif est de persuader le lecteur de la pertinence de la modélisation 3D de bâtiments et de l'importance de l'impact qu'elle peut avoir sur tout le monde.
+        En effet, les modèles urbains en 3D répondent à des besoins divers : administratifs, environnementale, scientifique et sociétale.
+        Nous présentons ici les applications liées à préservation de l'environnement qui seront d'une importance capitale pour les années à venir.
+        Les agglomérations urbaines sont l'un des plus gros consommateurs d'énergie.
+        Une utilisation plus efficace de l'énergie est nécessaire pour soutenir la croissance effrénée des zones urbaines.
+        C'est pourquoi il est nécessaire de quantifier la consommation d'énergie des établissements urbains~\parencite{wate20153d} ou les coûts de modernisation~\parencite{previtali2014automatic}.
+        ~\textcite{biljecki2015propagation} utilisent également des modèles 3D de bâtiments afin de prévoir l'irradiation solaire.
+        En fait, l'estimation du potentiel solaire peut être utile pour évaluer les avantages de projets de panneaux solaires coûteux.
+        Ce type d'études peut également être appliqué à l'urbanisme, car les simulations pourraient être subies pour les futurs développements urbains.\\
+
+        Le sujet de la modélisation 3D des bâtiments a été largement étudié depuis plus de vingt ans.
+        Cependant, il existe encore quelques problèmes non résolus dans ce domaine~\parencite{musialski2013survey,lafarge2015some}.
+        Le premier relève de la donnée acquise qui peut souffrir de divers défauts (bruit d'acquisition, recalage de données, données manquantes, \dots) qui sont répercutés sur le modèle final.
+        La deuxième problématique touche à l'automatisation qui reste encore inatteignable pour le moment.
+        On peut citer aussi un troisième verrou à lever: l'évaluation qui est encore réalisé de façon manuelle.
+
+    \subsection*{\`Evaluation de modèles de bâtiments}
+
+    \subsection*{Contributions}
+
+\section*{Qualification de modèle 3D de bâtiments}
+
+    
+    \subsection*{\`Etat de l'art}
+
+    \subsection*{Une taxonomie d'erreurs de modélisation}
+
+    \subsection*{L'apprentissage au service de la qualification}
+
+\subsection*{Expériences}
+
+    \subsection*{Données}
+
+    \subsection*{Expériences Vanille et passage à l'échelle}
+
+    \subsection*{Attributs avancés}
+
+\section*{Conclusion et perspectives}
+
 \selectlanguage{english}
