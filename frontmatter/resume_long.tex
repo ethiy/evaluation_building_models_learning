@@ -69,20 +69,103 @@
         \begin{enumerate}
             \item Une taxonomie hiérarchique et adaptative des erreurs est proposée.
             \item Une évaluation sans modèles 3D de bâtiment de référence.
-            \item Des vecteurs attributs afin de caractériser les modèles 3D de bâtiment ainsi que de les comparer à des images ou Modèle numérique de surface.
+            \item Des vecteurs attributs afin de caractériser les modèles 3D de bâtiment ainsi que de les comparer à des images ou Modèle numérique de surface (MNS).
             \item Une étude de passage à l'échelle pour la chaîne de traitement établie.
             \item Un ensemble d'outils pour traiter la géométrie des modèles 3D de bâtiment.
         \end{enumerate}
 
 \section*{Qualification de modèle 3D de bâtiments}
 
-
     \subsection*{\`Etat de l'art}
+
+            Différentes méthodes de qualification de modèles 3D urbains ont été proposées.
+            Elles peuvent être classées selon les critères sur lesquelles elles s'appuient: \textbf{indices géométriques de précision} ou \textbf{erreurs sémantiques} (topologiques ou géométriques).
+            Les indices géométriques permettent de quantifier la précision d'une modélisation à partir de la précision de points particuliers (sommets, points d'intersection \dots), des surfaces ou des volumes des modèles 3D en les comparant à des données de références de plus grande précision~\cite{Zeng2014}.
+            Ces indices ne permettent pas de bien décrire les défauts d'une reconstruction et sont, la plupart du temps, trop locaux.
+            Une taxonomie d'erreurs sémantiques est donc préférable.
+            Elle peut reposer sur le paradigme des feux de circulation~\parencite{boudet2006supervised} (Correct, Acceptable, Généralisé et Faux), mais nécessite de définir le niveau de généralisation acceptable pour une reconstruction.
+            La taxonomie peut également adopter le point de vue des méthodes de reconstruction. 
+            Les erreurs sont, alors, discriminées en erreurs d'emprise de bâtiments (contour erroné, bâtiment inexistant, cours intérieure manquante et emprise imprécise), en erreurs de reconstruction intinsèques (sous-segmentation, sur-segmentation, toit inexact, translation en Z) à la méthode et en erreur due à l'occlusion végétale~\cite{Michelin2013}.
+            L'évaluation d'un modèle urbain est donc faite grâce une classification supervisée qui prend comme étiquettes les erreurs ainsi définies.
+            Pour caractériser ces modèles, des attributs peuvent être calculés à partir des images aériennes ou des MNS à très haute résolution spatiale (\SIrange{20}{25}{\cm}), en comparant des segments 3D ou des indices de corrélation de texture, par exemple~\parencite{boudet2006supervised, Michelin2013}.
+            La plupart du temps, la difficulté réside dans le choix de la taxonomie.
+            Il faut éviter qu'elle soit trop générale pour ne pas être surajustée par rapport à une scène ou une méthode de reconstruction donnée.
 
     \subsection*{Une taxonomie d'erreurs de modélisation}
 
-    \subsection*{L'apprentissage au service de la qualification}
+        Pour définir une nouvelle taxonomie générique mais flexible, deux critères dont pris en compte: le Niveau de Détails (LoD) et la \textit{finesse} de l'erreur.
+        La \texttt{finesse} représente le niveau de spécificité des erreurs.
+        Une erreur est dite de \texttt{finesse} maximale si elle correspond à une action unitaire de la part d'un opérateur au moment de sa correction.
+        On définit ainsi ce que l'on appellera une erreur \texttt{atomique}.\\
 
+        Du point de vue opérationnel, les bâtiments ne sont pas tous qualifiables.
+        En effet, quelques bâtiments peuvent être occultés par la végétation ou se trouver au bord de la région traitée.
+        Dans ces cas pathologiques, nous estimons que la qualification n'est pas un problème bien défini.
+        Nous discriminons, ainsi, entre bâtiments \texttt{qualifiables} et bâtiments \texttt{non qualifiables}.
+        Cette classification est considérée de \texttt{finesse} = 0.
+        Au niveau de \texttt{finesse} suivant, les bâtiments sont classés selon quils sont \texttt{valides} ou \texttt{erronés}.
+        Ces derniers sont ensuite divisés selon le Niveau de Détail LoD en familles d'erreurs de \texttt{finesse} = 2.
+        En effet, une famille d'erreurs, nommée \texttt{Erreurs de Bâtiment}, est consacrée aux défauts qui affectent le bâtiment dans son intégralité (niveau LoD-0 \(\cup\) LoD-1).
+        La famille \texttt{Erreurs de Facettes} contient les erreurs qui concernent les facettes --- façades ou toit --- des bâtiments (niveau LoD-2 \(\cup\) LoD-3).
+        Ces familles contiennent chacune des erreurs \texttt{atomiques} de \texttt{finesse} maximale égale à $3$.\\
+
+        Cette catégorisation est indépendante de la méthode de reconstruction ou de la scène à modéliser.
+        L'étiquetage est non redondant: les erreurs \texttt{atomiques} relevées sont indépendantes entre elles et ne représentent que des défauts particuliers, topologiques ou géométriques.
+        Les erreurs topologiques relèvent les erreurs de structure du modèle reconstruit.
+        Les erreurs géométriques mettent en évidence l'imprécision de la reconstruction.
+        Chaque erreur \texttt{atomique} se voit attribuée une note, au moment de l'annotation par l'opérateur, sur une échelle de \numrange{0}{10}, et représente le degré de confiance en la présence du défaut.
+        Cela revient à une discrétisation de la probabilité d'existence de l'erreur.
+        Les erreurs de finesse inférieure héritent des erreurs de leurs filles (i.e. de \texttt{finesse} plus grande).
+        En effet, elles sont aussi sures que les erreurs qu'elles contiennent.
+        Leur note attribuée est donc le maximum des notes des erreurs filles.\\
+
+        Au moment de la qualification, trois paramètres entrent en jeu: un niveau de détail d'évaluation (\textbf{eLoD}), un niveau de \texttt{finesse} d'évaluation (\textbf{e-finesse}) et l'\textbf{exclusivité}.
+        En précisant un \textbf{eLoD} donné, les erreurs de plus grand Niveau de Détail sont ignorées.
+        En fixant une \textbf{e-finesse} donnée, on ne discrimine que selon les erreurs du même ordre de \texttt{finesse}.
+        Le dernier paramètre est l'\textbf{exclusivité} des erreurs.
+        Dans la cas exclusif, nous ne relevons que la famille d'erreurs représentant le plus petit Niveau de Détail: c'est un problème de classification Multi-Classes.
+        Dans le cas contraire, nous rapportons toutes les erreurs (i.e. Un objet peu être affecté par plusieurs erreurs): c'est un problème Multi-\'Etiquettes.\\
+
+        On propose ici les familles d'erreurs suivantes pour le cas de modélisation de bâtiments à partir de données aériennes ou satellitaires:
+
+        \begin{enumerate}[label= (\roman*).]
+            \item \texttt{Erreurs de Bâtiment}:
+            \begin{itemize}
+                \item Sous segmentation: deux bâtiments, ou plus, représentés comme un seul;
+                \item Sur segmentation: un bâtiment est modélisé en deux ou plusieurs bâtiments;
+                \item Topologie incorrecte: imprécise: la topologie de l'emprise du bâtiment est inexacte;
+                \item Frontières imprécises: les frontières de l'emprise du bâtiment sont inexactes;
+                \item Géometrie imprécise: la géometrie du bâtiment est mal estimée;
+            \end{itemize}
+            \item \texttt{Erreurs de Facette}:
+            \begin{itemize}
+                \item Sous segmentation: deux facettes, ou plus, représentées comme une seule;
+                \item Sur segmentation: une facette est modélisée en deux ou plusieurs facettes;
+                \item Topologie incorrecte: imprécise: la topologie de la facette est inexacte;
+                \item Frontières imprécises: les frontières de la facette sont inexactes;
+                \item Géometrie imprécise: la géometrie de la facette est imprécise.
+            \end{itemize}
+        \end{enumerate}
+
+    \subsection*{L'apprentissage au service de la qualification}
+        Afin de satisfaire à les contraintes de \textbf{passage à l'échelle} et \textbf{automatisation}, nous proposons de formuler le problème comme un problème d'apprentissage supervisé.
+        Les erreurs sont considérées comme des étiquettes à prédire.
+        Des attriibuts sont calculées de manière à décrire les bâtiments observés.
+        En réalité, en première approche, l'existence de toutes les erreurs est prédite au niveau du bâtiment, même pour les étiquettes d'\texttt{Erreurs de Facette}.\\
+        
+        Nous proposons des attributs de bâtiments de base qui sont les plus simples possibles.
+        Ils sont de trois types:
+        \begin{description}
+            \item[Les attributs géométriques: ] sont calculés à partir de statistiques (histogramme ou une liste contenant le maximum, le minimum, la moyenne, le médian et/ou l'écart type) de quelques propriétés géométriques des facettes du bâtiments: nombre de sommets, aire de chaque facette, circonférence de chaque surface, angles entre les normales de facettes adjacentes, distance entre les centroïdes des facettes adjacentes et/ou toutes les facettes.
+            \item[Les attributs basés sur la hauteur: ] sont issus d'un histogramme de la différence entre le modèle 3D et un MNS externe à très haute résolution spatiale.
+            \item[Les attributs basés sur l'image: ] sont issus d'un histogramme de la similarité entre les arrêtes du modèle 3D projeté dans la direction nadir et des arrêtes réelles dans l'orthoimage correspondante.
+        \end{description}
+
+        La résolution du MNS et de l'orthoimage doit doit inférieure à l'ordre de grandeur des bâtiments mais aussi plus grande que l'erreur planimétrique du modèle 3D afin de garantir une robustesse au bruit.
+        Différents attributs (\(\text{géométrie}(4\times5) + \text{hauteur}(20) + \text{image}(20) = 60\)) obtenus sont en suite concaténés dans un seul vecteur.
+        Nous appliquons des Forêts Aléatoires --- qui peuvent gérer des descripteurs multimodaux et nombreux --- à 1 000 arbres et de profondeur maximale de 4.
+        La profondeur est limitée à 4 dans le but d'éviter le surapprentissage, contrairement au nombre d'arbres qui est très grand de façon à couvrir tout l'espace d'attributs.
+        Ce classifieur a été adapté, au cas de la classification Multi-\'Etiquettes, en utlisant la stratégie \textit{Un contre Tous}.
 \subsection*{Expériences}
 
     \subsection*{Données}
@@ -92,5 +175,18 @@
     \subsection*{Attributs avancés}
 
 \section*{Conclusion et perspectives}
-
+    Nous avons proposé un nouveau cadre de qualification de modèles 3D de bâtiments.
+    Il repose sur une taxonomie hiérarchisée d'erreurs sémantiques indépendantes des modèles à qualifier.
+    Ce nouveau cadre a été appliqué au cas de la modélisation urbaine aérienne, où les caractéristiques sont extraites d'images aériennes THR et d'un DSM.
+    Un jeu de données entièrement annoté contenant 3 235 modèles de bâtiments reconstruits par voie aérienne avec une grande diversité et provenant de trois zones distinctes a été utilisée pour évaluer notre méthode.
+    Les données de télédétection externes permettent d'extraire des caractéristiques optiques RGB et DSM multimodales.
+    Bien qu'ils soient atténués par rapport aux erreurs sous-représentées, les résultats sont satisfaisant dans les cas bien équilibrés.
+    En outre, avec le bon choix du classificateur ainsi que la configuration des caractéristiques, nous pouvons obtenir de meilleurs résultats que ceux obtenus avec les caractéristiques de base.
+    Plus important encore, nous avons prouvé que la composition de la scène urbaine affecte grandement la détection des erreurs.
+    En fait, les scores de certaines prédictions ne sont pas seulement stables, lorsqu'ils se forment sur une scène urbaine différente, ils sont même plus performants lorsqu'ils apprennent sur le même scène.
+    Nous avons aussi remarquer comment, pour un ensemble de données de formation hétérogènes, la taille de l'ensemble de formation n'a pratiquement aucun effet puisque les résultats des tests restent stables pour toutes les erreurs.
+    Cela démontre que le cadre proposé peut être facilement adapté avec un bonnes choix d'échantillons pour l'entraînement et avec peu de données générées manuellement.
+    Cela répond exactement à la question soulevée, contrairement à la littérature de pointe actuelle.
+    Nous pensons que notre est suffisamment robuste pour évaluer les zones invisibles.
+    Il représente également une base solide pour une correction manuelle ou automatique ultérieure du modèle de construction en 3D.
 \selectlanguage{english}
