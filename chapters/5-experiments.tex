@@ -18,13 +18,13 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
     \subsection{Urban scenes and modeling techniques}
         \label{subsec::experiments::datasets::scenes}        
         \gls{acr::3d} models from three different cities of France are selected in order to assess the performance of our framework: \textbf{Elancourt}, \textbf{Nantes}, and the XIII\textsuperscript{th} district of Paris (\textbf{Paris-13}) (cf. Figure~\ref{fig::france_map}).
-        Figure~\ref{fig::elancourt_ortho} depicts the small city of \textbf{Elancourt} which contains diverse of building types: residential areas with gable and hip roof buildings and districs with large industrial flat roof buildings (cf. Figure~\ref{subfig::elancourt_samples}).
+        Figure~\ref{fig::elancourt_ortho} depicts the small city of \textbf{Elancourt} which contains diverse types of buildings: residential areas with gable and hip roof buildings and districs with large industrial flat roof buildings (cf. Figure~\ref{subfig::elancourt_samples}).
         \textbf{Nantes}, as shown in Figure~\ref{fig::nantes_ortho}, represents a denser urban setting but with a lower building diversity (cf. Figure~\ref{subfig::nantes_samples}).
         In Figure~\ref{fig::paris-13_ortho}, one can see how \textbf{Paris-13} consists of mostly flat roof high towers which coexist with Haussmann style buildings that typically exhibit highly fragmented roofs (cf. Figure~\ref{subfig::paris-13_samples}).
         The \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}) scene contains \num{2009} (\textit{resp.} \num{748} and \num{478}) annotated building models.
         In order to handle these models, \verb!proj.city!\footnote{
             \href{https://github.com/ethiy/proj.city}{\verb!proj.city!: \url{https://github.com/ethiy/proj.city.git}}
-        }, a C++ library, was developed making use of the CGAL library~\parencite{fabri2000design}.
+        }, a \verb!C++! library, was developed making use of the \verb!CGAL! library~\parencite{fabri2000design}.
         Thanks to this tool, we can project building models in the nadir direction as well as produce the corresponding height maps.
         The \gls{acr::dsm} and the orthorectified image spatial resolution is \SI{0.06}{\m} for the first area while it is \SI{0.1}{\m} for the other ones.\\
 
@@ -351,7 +351,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
 
             \paragraph{Graph kernels}
                 In Section~\ref{subsec::learned_evaluation::richer_features::graph}, we have seen how 14 graph kernels are aggregated to describe graphs.
-                We relied, in experiments, on an available Python module called GraKel~\parencite{siglidis2018grakel}.
+                We relied, in experiments, on an available Python module called \verb!GraKel!~\parencite{siglidis2018grakel}.
                 We provide herein the parameters of each kernel type.
                 \begin{description}
                     \item[\(\blacktriangleright\) Random walk] The exponential version fails numerically and was left out.
