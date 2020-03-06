@@ -164,7 +164,7 @@ These are proposed to better model defect predictions.
         	\mathsf{M} \triangleq \left(\mathsf{F_M}, \mathsf{E_M} \triangleq \left\{ \left\{f, g\right\} \subset \mathsf{F_M} : f \sim g \right\} \right).
         \end{equation}
 
-        \begin{figure}[htbp]
+        \begin{figure}[htb]
             \centering
             \includestandalone[mode=buildnew, width=.75\textwidth]{figures/features/geometry/baseline}
             \caption[
@@ -229,9 +229,13 @@ These are proposed to better model defect predictions.
         \begin{figure}[htb]
             \centering
             \includestandalone[width=\textwidth, mode=buildnew]{figures/features/height/height_baseline}
-            \caption{
+            \caption[
+                Illustration of the baseline for height based features.
+            ]{
                 \label{fig::height_baseline_features}
-                Height-based features computed from the \gls{acr::dsm} residuals using histograms.
+                Illustration of the baseline for height based features.
+                First, residuals (cf. Figure~\ref{subfig::residuals}) are computed by substracting the model height maps (cf. Figure~\ref{subfig::height_map}) from the \glspl{acr::dsm} (cf. Figure~\ref{subfig::dsm}).
+                Histograms are then computed out of these residuals and taken as feature vectors as shown in Figure~\ref{subfig::histogram}.
             }
         \end{figure}
 
@@ -250,7 +254,7 @@ These are proposed to better model defect predictions.
         However, since reference data is unavailable, cropping out the terrain height values implies that the building model footrpint is flawless, which is not the case.
         As a consequence, the heigth discrepancies around the building model are also computed in order to provide some information on the footprint shape, and hence detect \texttt{BIT} or \texttt{BIB} errors.\\
 
-        Equation~\ref{eq::height_baseline_features} summarizes how building height-based features are computed.
+        Equation~\ref{eq::height_baseline_features} summarizes how building height based features are computed.
         Different from a \gls{acr::rmse}~\parencite{lafarge2012creating,poullis2013framework}, the histogram captures the discrepancy distribution, which is particularly helpful in detecting undersegmentation defects or geometric imprecision.
         However, as for the previous geometric attributes, the grid structure information coming from the model is lost.
         Errors cannot be spatialized and linked to a specific facet.
@@ -273,7 +277,9 @@ These are proposed to better model defect predictions.
         \begin{figure}[htb]
             \centering
             \includestandalone[width=\textwidth, mode=buildnew]{figures/features/image/nadir_projection}
-            \caption{
+            \caption[
+                Nadir projection of \gls{acr::3d} models to image comparison.
+            ]{
                 \label{fig::nadir_projection}
                 Nadir projection of \gls{acr::3d} models to image comparison.
                 The input model (cf. Figure~\ref{subfig::input_model}) is projected in the nadir direction as shown in Figure~\ref{subfig::nadir_projection}.
@@ -383,8 +389,11 @@ These are proposed to better model defect predictions.
                         }
                     \end{subfloatrow}
                 }{
-                    \caption{
+                    \caption[
+                        Illustration of the baseline for image based features.
+                    ]{
                         \label{fig::image_baseline}
+                        Illustration of the baseline for image based features.
                         The comparison between a model and the orthoimage is conducted by aggregating the edge similarity histograms (cf. Figure~\ref{subfig::edge_histograms}):
                         First at facet level, which results in a histogram per each of the projected facets (cf. Figure~\ref{subfig::facets_histograms}), and then at the whole model level, with a final output describing the similarity between the input \gls{acr::3d} model and the orthoimage as shown in Figure~\ref{subfig::whole_histogram}.
                     }
@@ -392,7 +401,7 @@ These are proposed to better model defect predictions.
             \end{center}
         \end{figure}
 
-        These image-based attributes (cf. Figure~\ref{fig::image_baseline}) are helpful for precision error detection.
+        These image based attributes (cf. Figure~\ref{fig::image_baseline}) are helpful for precision error detection.
         As example, facet imprecise borders can be detected as local gradients direction will be expected to differ greatly from the inaccurate edge.
         It can also be instrumental in under-segmentation detection as colors can change considerably from one facet or one building to another inducing an gradient orthogonal to edge normals.
 
@@ -556,9 +565,12 @@ These are proposed to better model defect predictions.
             \begin{figure}[htb]
                 \centering
                 \includestandalone[width=\textwidth, mode=buildnew]{figures/features/image/deletion}
-                \caption{
+                \caption[
+                    Illustration of the early fusion scheme denoted \texttt{deletion}.
+                ]{
                     \label{fig::deletion}
                     Illustration of the early fusion scheme denoted \texttt{deletion}.
+                    Pixels that intersect the edges of the nadir projection of the model are blackened.
                 }
             \end{figure}
 
@@ -587,9 +599,12 @@ These are proposed to better model defect predictions.
             \begin{figure}[htb]
                 \centering
                 \includestandalone[width=\textwidth, mode=buildnew]{figures/features/image/channel}
-                \caption{
+                \caption[
+                    Illustration of the late fusion scheme denoted \texttt{channel}.
+                ]{
                     \label{fig::channel}
                     Illustration of the late fusion scheme denoted \texttt{channel}.
+                    The mask indicating the pixels that intersect the edges of the nadir projection of the model is added as a fourth channel.
                 }
             \end{figure}
 
