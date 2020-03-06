@@ -4,10 +4,12 @@
 \vfill
 
 \section*{Introduction}
+    \addcontentsline{toc}{section}{Introduction}
 
     L'objectif de cette introduction est de familiariser le lecteur avec les concepts qui sont manipulés dans cette étude et de de motiver la nécessité d'une évaluation sémantique des modèles 3D de bâtiments.\\
 
     \subsection*{Modélisation 3D de bâtiments}
+        \addcontentsline{toc}{subsection}{Modélisation 3D de bâtiments}
         On entend par modèle 3D de bâtiment un produit cartographique qui représente la surface du bâtiment en question.
         Ce dernier est une généralisation de la réalité dont le but n'est pas de représenter minutieusement tous les détails.
         Cependant, le modèle ne doit pas être loin, en terme géométrique, de du bâtiment qui nous intéresse.
@@ -46,7 +48,8 @@
         La deuxième problématique touche à l'automatisation qui reste encore inatteignable pour le moment.
         On peut citer aussi un troisième verrou à lever: l'évaluation qui est encore réalisé de façon manuelle.
 
-    \subsection*{\`Evaluation de modèles de bâtiments}
+    \subsection*{\'Evaluation de modèles de bâtiments}
+        \addcontentsline{toc}{subsection}{\'Evaluation de modèles de bâtiments}
         L'évaluation de modèles 3D de bâtiments peut porter sur la vérification de leur cohérence topologique.
         Un travail considérable a été accompli afin de parvenir à une représentation standardisée des modèles 3D des villes.
         Cela a abouti à la norme CityGML de l'Open Geospatial Consortium (OGC)~\parencite{groger2012citygml}.
@@ -63,6 +66,7 @@
         Bien que cette évaluation sémantique soit facile à réaliser manuellement, elle resiste encore à l'automatisation.
 
     \subsection*{Contributions}
+        \addcontentsline{toc}{subsection}{Contributions}
         Basée sur la discussion précédente, nous avons adopté une orientation de recherche qui a rarement été prise jusqu'à présent, pour autant que nous le sachions.
         Notre objectif est d'évaluer la qualité des modèles 3D de bâtiment de manière \textbf{automatique} et à \textbf{grande échelle}.
 
@@ -75,24 +79,25 @@
         \end{enumerate}
 
 \section*{Qualification de modèle 3D de bâtiments}
+    \addcontentsline{toc}{section}{Qualification de modèle 3D de bâtiments}
 
-    \subsection*{\`Etat de l'art}
-
+    \subsection*{\'Etat de l'art}
+        \addcontentsline{toc}{subsection}{\'Etat de l'art}
             Différentes méthodes de qualification de modèles 3D urbains ont été proposées.
             Elles peuvent être classées selon les critères sur lesquelles elles s'appuient: \textbf{indices géométriques de précision} ou \textbf{erreurs sémantiques} (topologiques ou géométriques).
-            Les indices géométriques permettent de quantifier la précision d'une modélisation à partir de la précision de points particuliers (sommets, points d'intersection \dots), des surfaces ou des volumes des modèles 3D en les comparant à des données de références de plus grande précision~\cite{Zeng2014}.
+            Les indices géométriques permettent de quantifier la précision d'une modélisation à partir de la précision de points particuliers (sommets, points d'intersection \dots), des surfaces ou des volumes des modèles 3D en les comparant à des données de références de plus grande précision~\parencite{zeng2014multicriteria}.
             Ces indices ne permettent pas de bien décrire les défauts d'une reconstruction et sont, la plupart du temps, trop locaux.
             Une taxonomie d'erreurs sémantiques est donc préférable.
             Elle peut reposer sur le paradigme des feux de circulation~\parencite{boudet2006supervised} (Correct, Acceptable, Généralisé et Faux), mais nécessite de définir le niveau de généralisation acceptable pour une reconstruction.
             La taxonomie peut également adopter le point de vue des méthodes de reconstruction. 
-            Les erreurs sont, alors, discriminées en erreurs d'emprise de bâtiments (contour erroné, bâtiment inexistant, cours intérieure manquante et emprise imprécise), en erreurs de reconstruction intinsèques (sous-segmentation, sur-segmentation, toit inexact, translation en Z) à la méthode et en erreur due à l'occlusion végétale~\cite{Michelin2013}.
+            Les erreurs sont, alors, discriminées en erreurs d'emprise de bâtiments (contour erroné, bâtiment inexistant, cours intérieure manquante et emprise imprécise), en erreurs de reconstruction intinsèques (sous-segmentation, sur-segmentation, toit inexact, translation en Z) à la méthode et en erreur due à l'occlusion végétale~\parencite{michelin2013quality}.
             L'évaluation d'un modèle urbain est donc faite grâce une classification supervisée qui prend comme étiquettes les erreurs ainsi définies.
-            Pour caractériser ces modèles, des attributs peuvent être calculés à partir des images aériennes ou des MNS à très haute résolution spatiale (\SIrange{20}{25}{\cm}), en comparant des segments 3D ou des indices de corrélation de texture, par exemple~\parencite{boudet2006supervised, Michelin2013}.
+            Pour caractériser ces modèles, des attributs peuvent être calculés à partir des images aériennes ou des MNS à très haute résolution spatiale (\SIrange{20}{25}{\cm}), en comparant des segments 3D ou des indices de corrélation de texture, par exemple~\parencite{boudet2006supervised, michelin2013quality}.
             La plupart du temps, la difficulté réside dans le choix de la taxonomie.
             Il faut éviter qu'elle soit trop générale pour ne pas être surajustée par rapport à une scène ou une méthode de reconstruction donnée.
 
     \subsection*{Une taxonomie d'erreurs de modélisation}
-
+        \addcontentsline{toc}{subsection}{Une taxonomie d'erreurs de modélisation}
         Pour définir une nouvelle taxonomie générique mais flexible, deux critères dont pris en compte: le Niveau de Détails (LoD) et la \textit{finesse} de l'erreur.
         La \texttt{finesse} représente le niveau de spécificité des erreurs.
         Une erreur est dite de \texttt{finesse} maximale si elle correspond à une action unitaire de la part d'un opérateur au moment de sa correction.
@@ -103,7 +108,7 @@
         Dans ces cas pathologiques, nous estimons que la qualification n'est pas un problème bien défini.
         Nous discriminons, ainsi, entre bâtiments \texttt{qualifiables} et bâtiments \texttt{non qualifiables}.
         Cette classification est considérée de \texttt{finesse} = 0.
-        Au niveau de \texttt{finesse} suivant, les bâtiments sont classés selon quils sont \texttt{valides} ou \texttt{erronés}.
+        Au niveau de \texttt{finesse} suivant, les bâtiments sont classés selon quils sont \texttt{Valides} ou \texttt{Erronés}.
         Ces derniers sont ensuite divisés selon le Niveau de Détail LoD en familles d'erreurs de \texttt{finesse} = 2.
         En effet, une famille d'erreurs, nommée \texttt{Erreurs de Bâtiment}, est consacrée aux défauts qui affectent le bâtiment dans son intégralité (niveau LoD-0 \(\cup\) LoD-1).
         La famille \texttt{Erreurs de Facettes} contient les erreurs qui concernent les facettes --- façades ou toit --- des bâtiments (niveau LoD-2 \(\cup\) LoD-3).
@@ -119,41 +124,42 @@
         En effet, elles sont aussi sures que les erreurs qu'elles contiennent.
         Leur note attribuée est donc le maximum des notes des erreurs filles.\\
 
-        Au moment de la qualification, trois paramètres entrent en jeu: un niveau de détail d'évaluation (\textbf{eLoD}), un niveau de \texttt{finesse} d'évaluation (\textbf{e-finesse}) et l'\textbf{exclusivité}.
+        Au moment de la qualification, trois paramètres entrent en jeu: un niveau de détail d'évaluation (\textbf{eLoD}), un niveau de \texttt{finesse} d'évaluation (\textbf{eFin}) et l'\textbf{exclusivité}.
         En précisant un \textbf{eLoD} donné, les erreurs de plus grand Niveau de Détail sont ignorées.
-        En fixant une \textbf{e-finesse} donnée, on ne discrimine que selon les erreurs du même ordre de \texttt{finesse}.
+        En fixant une \textbf{eFin} donnée, on ne discrimine que selon les erreurs du même ordre de \texttt{finesse}.
         Le dernier paramètre est l'\textbf{exclusivité} des erreurs.
         Dans la cas exclusif, nous ne relevons que la famille d'erreurs représentant le plus petit Niveau de Détail: c'est un problème de classification Multi-Classes.
         Dans le cas contraire, nous rapportons toutes les erreurs (i.e. Un objet peu être affecté par plusieurs erreurs): c'est un problème Multi-\'Etiquettes.\\
 
         On propose ici les familles d'erreurs suivantes pour le cas de modélisation de bâtiments à partir de données aériennes ou satellitaires:
 
-        \begin{enumerate}[label= (\roman*).]
+        \begin{enumerate}
             \item \texttt{Erreurs de Bâtiment}:
             \begin{itemize}
-                \item Sous segmentation: deux bâtiments, ou plus, représentés comme un seul;
-                \item Sur segmentation: un bâtiment est modélisé en deux ou plusieurs bâtiments;
-                \item Topologie incorrecte: imprécise: la topologie de l'emprise du bâtiment est inexacte;
-                \item Frontières imprécises: les frontières de l'emprise du bâtiment sont inexactes;
-                \item Géometrie imprécise: la géometrie du bâtiment est mal estimée;
+                \item Sous segmentation (\texttt{BOS}): deux bâtiments, ou plus, représentés comme un seul;
+                \item Sur segmentation (\texttt{BUS}): un bâtiment est modélisé en deux ou plusieurs bâtiments;
+                \item Frontières imprécises (\texttt{BIB}): les frontières de l'emprise du bâtiment sont inexactes;
+                \item Topologie incorrecte (\texttt{BIT}): imprécise: la topologie de l'emprise du bâtiment est inexacte;
+                \item Géometrie imprécise (\texttt{BIG}): la géometrie du bâtiment est mal estimée;
             \end{itemize}
             \item \texttt{Erreurs de Facette}:
             \begin{itemize}
-                \item Sous segmentation: deux facettes, ou plus, représentées comme une seule;
-                \item Sur segmentation: une facette est modélisée en deux ou plusieurs facettes;
-                \item Topologie incorrecte: imprécise: la topologie de la facette est inexacte;
-                \item Frontières imprécises: les frontières de la facette sont inexactes;
-                \item Géometrie imprécise: la géometrie de la facette est imprécise.
+                \item Sous segmentation (\texttt{FOS}): deux facettes, ou plus, représentées comme une seule;
+                \item Sur segmentation (\texttt{FUS}): une facette est modélisée en deux ou plusieurs facettes;
+                \item Frontières imprécises (\texttt{FIB}): les frontières de la facette sont inexactes;
+                \item Topologie incorrecte (\texttt{FIT}): imprécise: la topologie de la facette est inexacte;
+                \item Géometrie imprécise (\texttt{FIG}): la géometrie de la facette est imprécise.
             \end{itemize}
         \end{enumerate}
 
     \subsection*{L'apprentissage au service de la qualification}
+        \addcontentsline{toc}{subsection}{L'apprentissage au service de la qualification}
         Afin de satisfaire à les contraintes de \textbf{passage à l'échelle} et \textbf{automatisation}, nous proposons de formuler le problème comme un problème d'apprentissage supervisé.
         Les erreurs sont considérées comme des étiquettes à prédire.
         Des attriibuts sont calculées de manière à décrire les bâtiments observés.
         En réalité, en première approche, l'existence de toutes les erreurs est prédite au niveau du bâtiment, même pour les étiquettes d'\texttt{Erreurs de Facette}.\\
         
-        Nous proposons des attributs de bâtiments de base qui sont les plus simples possibles.
+        Nous proposons ainsi des attributs de bases pour les modèles de bâtiments qui sont les plus simples possibles.
         Ils sont de trois types:
         \begin{description}
             \item[Les attributs géométriques: ] sont calculés à partir de statistiques (histogramme ou une liste contenant le maximum, le minimum, la moyenne, le médian et/ou l'écart type) de quelques propriétés géométriques des facettes du bâtiments: nombre de sommets, aire de chaque facette, circonférence de chaque surface, angles entre les normales de facettes adjacentes, distance entre les centroïdes des facettes adjacentes et/ou toutes les facettes.
@@ -163,18 +169,54 @@
 
         La résolution du MNS et de l'orthoimage doit doit inférieure à l'ordre de grandeur des bâtiments mais aussi plus grande que l'erreur planimétrique du modèle 3D afin de garantir une robustesse au bruit.
         Différents attributs (\(\text{géométrie}(4\times5) + \text{hauteur}(20) + \text{image}(20) = 60\)) obtenus sont en suite concaténés dans un seul vecteur.
-        Nous appliquons des Forêts Aléatoires --- qui peuvent gérer des descripteurs multimodaux et nombreux --- à 1 000 arbres et de profondeur maximale de 4.
-        La profondeur est limitée à 4 dans le but d'éviter le surapprentissage, contrairement au nombre d'arbres qui est très grand de façon à couvrir tout l'espace d'attributs.
-        Ce classifieur a été adapté, au cas de la classification Multi-\'Etiquettes, en utlisant la stratégie \textit{Un contre Tous}.
-\subsection*{Expériences}
+\section*{Expérimentation}
+    \addcontentsline{toc}{section}{Expérimentation}
 
     \subsection*{Données}
+        \addcontentsline{toc}{subsection}{Données}
 
-    \subsection*{Expériences Vanille et passage à l'échelle}
+    \subsection*{Expériences Vanille de base}
+        \addcontentsline{toc}{subsection}{Expériences Vanille de base}
+        Nous avons utilisé un classifieur de type Forêt aléatoire sur deux types d'attributs : un simple RMSE ainsi que les attributs de bases.
+        Les Forêts Aléatoires --- qui peuvent gérer des descripteurs multimodaux et nombreux --- sont choisis avec 1 000 arbres de décisions de profondeur maximale de 4.
+        La profondeur est limitée à 4 dans le but d'éviter le surapprentissage, contrairement au nombre d'arbres qui est très grand de façon à couvrir tout l'espace d'attributs.
+        Ce classifieur a été adapté, au cas de la classification Multi-\'Etiquettes, en utlisant la stratégie \textit{Un contre Tous}.\\
+
+        D'après les résultats expérimentaux, au niveau \textbf{eFin} = 3, nous avons a appris que:
+        \begin{itemize}
+            \item La RMSE ne permet pas de prévoir complètement les erreurs définies dans notre taxonomie;
+            \item Les \texttt{Erreurs de Bâtiment} sont mieux détectées sur \textbf{Elancourt} que sur les autres scènes;
+            \item \texttt{FOS} est très bien détectés avec plus de \SI{95}{\percent} de F-score, sur tous les zones d'intérêt;
+            \item \`A l'exception de \texttt{FOS}, plus la zone urbaine est dense, mieux les \texttt{Erreurs de Facettes} sont détectées;
+            \item Les erreurs rares telles que \texttt{BIT} et \texttt{FIT} sont mal détectées sur toutes les zones urbaines;
+            \item Pour la détection des erreurs, les attributs géométriques seules sont, avec une faible marge, aussi bonnes que les autres attributs extrinsèques;
+            \item Le type de bâtiment est donc un bon indicateur pour la détection d'erreurs dans une même zone;
+            \item \texttt{BUS} est la seule erreur pour laquelle les autres modalités sont meilleures avec un écart important;
+            \item Bien que, dans la plupart des cas, elles n'améliorent pas la prédiction des erreurs, les modalités basées sur des données externes sont aussi importantes que les caractéristiques géométriques.
+        \end{itemize}
+
+        Aux niveaux 2 et 1 de l'\textbf{eFin}, nous avons aussi prouvé expérimentalement que:
+        \begin{itemize}
+            \item Les erreurs de facettes sont détectées avec un F-score d'environ \SI{90}{\percent} non affecté par la scènes.
+            \item Comme nous l'avons vu précédemment au niveau 3 de l'\textbf{eFin}, les \texttt{Erreurs de Bâtiment} sont difficiles à entraîner sur \textbf{Nantes} et \textbf{Paris-13}, avec un F-score d'environ \SI{75}{\percent}.
+            \item Nous le confirmons une fois de plus que:
+                \begin{itemize}
+                    \item L'apprentissage des \texttt{Erreurs de Bâtiment} est plus difficile à transférer que les erreurs à facettes;
+                    \item \textbf{Elancourt} est le meilleur choix pour l'apprentissage des \texttt{Erreurs de Bâtiment};
+                    \item \textbf{Nantes} et \textbf{Paris-13} ont une composition similaire.
+                \end{itemize}
+            \item \SI{20}{\percent} est suffisant pour l'apprentissage sur l'ensemble de données mixtes.
+            \item Comme prévu, la distinction entre \texttt{Erroné} et \texttt{Valide} s'est avérée difficile à prédire.
+        \end{itemize}
+
+    \subsection*{Expériences de passage à l'échelle}
+        \addcontentsline{toc}{subsection}{Expériences de passage à l'échelle}
 
     \subsection*{Attributs avancés}
+        \addcontentsline{toc}{subsection}{Attributs avancés}
 
 \section*{Conclusion et perspectives}
+    \addcontentsline{toc}{section}{Conclusion et perspectives}
     Nous avons proposé un nouveau cadre de qualification de modèles 3D de bâtiments.
     Il repose sur une taxonomie hiérarchisée d'erreurs sémantiques indépendantes des modèles à qualifier.
     Ce nouveau cadre a été appliqué au cas de la modélisation urbaine aérienne, où les caractéristiques sont extraites d'images aériennes THR et d'un DSM.
