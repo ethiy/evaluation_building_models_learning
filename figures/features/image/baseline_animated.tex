@@ -3,10 +3,10 @@
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
 
-\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{pgfplots}
 
 \begin{document}
-
 	\begin{tikzpicture}
 		\node[visible on=<1>] (image) {\includegraphics[width=5cm, angle=270]{images/introduction/graphical_abstract/orthoprojection}};
 		\path (image.south) node[anchor=north, visible on=<1>, text width=5cm, align=center] (image_legend) {\scriptsize Nadir projection on orthoimage.};

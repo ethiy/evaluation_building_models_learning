@@ -2,10 +2,10 @@
 
 \vfill
 
-In Chapters~\ref{chap::semantic_evaluation} and~\ref{chap::learned_evaluation}, we proposed a semantic quality evaluation of building \gls{acr::3d} models employing a learning formulation.
+In Chapters~\ref{chap::semantic_evaluation} and~\ref{chap::learned_evaluation}, we proposed a semantic quality evaluation of \gls{acr::3d} building models employing a learning formulation.
 Herein, we put our pipeline to the test.
-First, in Section~\ref{sec::experiments::datasets}, we delineate how the building models, that are used for the study, were obtained.
-Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provides a first experimental outlook of the capacity of our approach to detect errors affecting building \gls{acr::3d} models.
+First, in Section~\ref{sec::experiments::datasets}, we delineate how the building models that are used for the study.
+Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provides a first experimental outlook of the capacity of our approach to detect errors affecting \gls{acr::3d} building models.
 
 \clearpage
 
@@ -18,14 +18,14 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
     \subsection{Urban scenes and modeling techniques}
         \label{subsec::experiments::datasets::scenes}        
         \gls{acr::3d} models from three different cities of France are selected in order to assess the performance of our framework: \textbf{Elancourt}, \textbf{Nantes}, and the XIII\textsuperscript{th} district of Paris (\textbf{Paris-13}) (cf. Figure~\ref{fig::france_map}).
-        Figure~\ref{fig::elancourt_ortho} depicts the small city of \textbf{Elancourt} which contains diverse of building types: residential areas with gable and hip roof buildings and large industrial flat roof building based districts (cf. Figure~\ref{subfig::elancourt_samples}).
+        Figure~\ref{fig::elancourt_ortho} depicts the small city of \textbf{Elancourt} which contains diverse types of buildings: residential areas with gable and hip roof buildings and districs with large industrial flat roof buildings (cf. Figure~\ref{subfig::elancourt_samples}).
         \textbf{Nantes}, as shown in Figure~\ref{fig::nantes_ortho}, represents a denser urban setting but with a lower building diversity (cf. Figure~\ref{subfig::nantes_samples}).
         In Figure~\ref{fig::paris-13_ortho}, one can see how \textbf{Paris-13} consists of mostly flat roof high towers which coexist with Haussmann style buildings that typically exhibit highly fragmented roofs (cf. Figure~\ref{subfig::paris-13_samples}).
-        The \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}) scene contains 2,009 (\textit{resp.} 748 and 478) annotated building models.
+        The \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}) scene contains \num{2009} (\textit{resp.} \num{748} and \num{478}) annotated building models.
         In order to handle these models, \verb!proj.city!\footnote{
-            \href{https://github.com/ethiy/proj.city}{proj.city: \url{https://github.com/ethiy/proj.city.git}}
-        }, a C++ library, was developped making use of the CGAL library~\parencite{fabri2000design}.
-        Thanks to this tool, we can project building models in the nadir direction as well as produce their height maps.
+            \verb!proj.city!: \href{https://github.com/ethiy/proj.city}{\url{https://github.com/ethiy/proj.city}}
+        }, a \verb!C++! library, was developed making use of the \verb!CGAL! library~\parencite{fabri2000design}.
+        Thanks to this tool, we can project building models in the nadir direction as well as produce the corresponding height maps.
         The \gls{acr::dsm} and the orthorectified image spatial resolution is \SI{0.06}{\m} for the first area while it is \SI{0.1}{\m} for the other ones.\\
 
         \begin{figure}[htb]
@@ -92,7 +92,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
                     }{
                         \caption{
                             \label{subfig::nantes_samples}
-                            Nantes exhibits high rising towers (top) along side densely packed fragmented roof buildings (bottom).
+                            Nantes exhibits high rising towers (top) along densely packed fragmented roof buildings (bottom).
                         }
                     }
                     \ffigbox[\FBwidth]{
@@ -112,19 +112,125 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
             }
         \end{figure}
 
-        \gls{acr::3d} models were generated using the algorithm described in~\parencite{durupt2006automatic}, out of existing building footprints and aerial VHR multi-view \glspl{acr::dsm}.
+        Bati3D\textsuperscript{\textregistered} models were used in these experiments (cf. Figure~\ref{fig::method_modeling}).
+        This product is based on the algorithm described in~\parencite{durupt2006automatic}.
+        The latter generates models  out of existing building footprints and aerial \gls{acr::vhr} multi-view \glspl{acr::dsm}.
         The modeling algorithm simulates possible roof structures with facets satisfying some geometric constraints.
         The best configuration is selected using a scoring system on the extrapolated roofs.
         Finally, vertical building fa\c{c}ades connect the optimal roof to the building footprint.
         These models have a \gls{acr::lod}-2 level.
-        This method is adapted to roof types of low complexity and favors symmetrical models that are common in residential areas.
+        This method has been adapted to roof types of low complexity and favors symmetrical models that are common in residential areas.
         It has been selected to ensure a varying error rate for the three areas of interest, especially since models were generated with partly erroneous cadastral maps.
         Consequently, the modeling will fail, allowing to tackle the evaluation of the ensuing models.
-        3,235 buildings in total are considered.
+        \num{3235} buildings in total are considered.
         They were annotated according to the atomic errors list provided by our taxonomy.
+
+        \begin{figure}[htb]
+            \centering
+            \ffigbox[\textwidth]{
+                \begin{subfloatrow}[2]
+                    \centering
+                    \ffigbox[.5\textwidth]{
+                        \includegraphics[width=.35\textwidth]{images/bati3d/plane_detection}
+                    }{
+                        \caption{
+                            \label{subfig::plane_detection}
+                            Plane extraction.
+                        }
+                    }
+                    \ffigbox[.5\textwidth]{
+                        \includegraphics[width=.35\textwidth]{images/bati3d/plane_arrangements}
+                    }{
+                        \caption{
+                            \label{subfig::arrangements}
+                            Plane arrangement building.
+                        }
+                    }
+                \end{subfloatrow}
+                \vskip1em
+                \begin{subfloatrow}[2]
+                    \centering
+                    \ffigbox[.5\textwidth]{
+                        \includegraphics[width=.35\textwidth]{images/bati3d/bati3d}
+                    }{
+                        \caption{
+                            \label{subfig::bati3d}
+                            Estimating the building structure.
+                        }
+                    }
+                    \ffigbox[.5\textwidth]{
+                        \includegraphics[width=.35\textwidth]{images/bati3d/reel}
+                    }{
+                        \caption{
+                            \label{subfig::reel}
+                            The ground truth model.
+                        }
+                    }
+                \end{subfloatrow}
+            }{
+                \caption[
+                    Illustration of how the modeling steps of the approach presented in~\parencite{durupt2006automatic}.
+                ]{
+                    \label{fig::method_modeling}
+                    Illustration of how the modeling steps of the approach presented in~\parencite{durupt2006automatic}.
+                    A first step consists of plane extraction (cf. Figure~\ref{subfig::plane_detection}).
+                    Out the resulting plane arrangements (cf. Figure~\ref{subfig::arrangements}), the most plausible building structure is chosen (cf. Figure~\ref{subfig::bati3d}).
+                    Figure~\ref{subfig::reel} shows the ground truth model.
+                    Images taken from~\parencite{bredif20103d}.
+                }
+            }
+        \end{figure}
 
     \subsection{Error statistics}
         \label{subsec::experiments::datasets::stats}
+        Each one of these scenes contains more than \num{10000} buildings each.
+        Only a small fraction of these building models were annotated in the aim of building a training dataset.
+        To annotate a building model, the manual operator compares the nadir projection of the model to the corresponding orthoimage and \gls{acr::dsm}.
+        This was possible thanks to the work\footnote{\verb!sGrISner!: \href{https://github.com/CHUPClem/sGrISner}{\url{https://github.com/sGrISner/sGrISner}}} of Clémence Chupin, who was a Master student at \gls{acr::ensg}.
+        She helped develop a \verb!pyQT! interface in order to ease the task.
+        This allows to switch between data sources and better assess the errors\footnote{There can be multiple errors per building.} affecting each building.
+        This tool can also be used in the case of active learning where the operator validates or corrects the predictions from a classifier which is connected in the backend.
+        Figure~\ref{fig::annotation_tool} shows how the \verb!sGrISner! interface enables the operator to compare the building model to the orthoimage in order to assign the correct labels.\\
+
+        \begin{figure}[htb]
+            \centering
+            \ffigbox[\textwidth]{
+                \begin{subfloatrow}
+                    \centering
+                    \ffigbox[\textwidth]{
+                        \includegraphics[width=\textwidth]{images/annotations/correction}
+                    }{
+                        \caption{
+                            \label{subfig::correction}
+                            The model is nadir projected and superposed to the orthoimage.
+                            The operator either validates the error list or ammends it (red arrow).
+                        }
+                    }
+                \end{subfloatrow}
+                \vskip1em
+                \begin{subfloatrow}
+                    \centering
+                    \ffigbox[\textwidth]{
+                        \includegraphics[width=\textwidth]{images/annotations/annotation}
+                    }{
+                        \caption{
+                            \label{subfig::annotation}
+                            The operator can ammend the error list from an established taxonomy or add a new error label if need be.
+                            They can also assign confidence scores to each label.
+                        }
+                    }
+                \end{subfloatrow}
+            }{
+                \caption{
+                    \label{fig::annotation_tool}
+                    Screenshots from the used annotation tool.
+                }
+            }
+        \end{figure}
+
+        Based on this annotation step modeling errors statistics were computed and compiled.
+        These are depicted in Figure~\ref{fig::error_statistics}.\\
+
         \begin{figure}[htb]
             \centering
             \ffigbox[\textwidth]{
@@ -134,7 +240,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
                         \includestandalone[mode=buildnew, height=7.5cm]{figures/datasets/families_stats}
                     }{
                         \caption{
-                            \label{fig::family_errors}
+                            \label{subfig::family_errors}
                             Occurence statistics for error families and the \texttt{Unqualified} class computed for each area.
                         }
                     }
@@ -165,21 +271,14 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
                 ]{
                     \label{fig::error_statistics}
                     Detailed error statistics depending on the urban scenes.
-                    The height of bars indicates the frequency of each errors while the number of occurences is displayed over.
+                    The height of bars indicates the frequency of each errors while the number of occurences is displayed above the bars.
                 }
             }
         \end{figure}
-
-        Some of the models obtained using the previous datasets were manually annotated manually in order to build training datasets.
-        To annotate a building model, the manual operator compares the nadir projection of the model to the corresponding orthoimage and \gls{acr::dsm}.
-        This was possible thanks to the work\footnote{\href{https://github.com/CHUPClem/sGrISner}{sGrISner: \url{https://github.com/CHUPClem/sGrISner}}} of Clémence Chupin, who was a Master student at \gls{acr::ensg}.
-        She develops a pyQT interface in order to ease the task.
-        This allows to switch between data sources and better assess the errors affecting each building.
-        Figure~\ref{fig::error_statistics} reports modeling errors statistics over the annotated buildings.\\
-
-        These statistics are first analysed depending on the family errors at the \texttt{finesse} = 2 level (cf. Figure~\ref{fig::family_errors}).
+        
+        These statistics are first analysed depending on the family errors at the \texttt{finesse} = 2 level (cf. Figure~\ref{subfig::family_errors}).
         Due to the fact that geometrically inconsistent \gls{acr::3d} models were filtered out in a preprocessing (nadir projection) step, \texttt{Unqualifiable} buildings represent a small fraction of the dataset (less than \SI{7.5}{\percent}).
-        Actually, this latter corresponds to the, partially or completly, occluded buildings that could not be qualified.
+        Actually, the latter corresponds to the, partially or completly, occluded buildings that could not be qualified.
         Moreover, only a small fraction of buildings are \texttt{Valid}:
         57 (\SI{2.84}{\percent}) in \textbf{Elancourt}, 55 (\SI{7.35}{\percent}) for \textbf{Nantes} and 21 (\SI{4.39}{\percent}) in \textbf{Paris-13}.
         Most buildings are affected by the \texttt{Building Errors} family (over \SI{58.16}{\percent}) and the \texttt{Facet Errors} one (over \SI{75.94}{\percent}).\\
@@ -190,12 +289,12 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
         The same is true for \texttt{FIG} with a frequency from \SIrange{59.8}{80}{\percent}.
         \texttt{FIT}, on the other hand, are very rare in all the areas with ratios a little less than \SI{1.5}{\percent}.
         The rest have a presence ratio within the percentage interval of [10, 30].
-        The errors that are rare are understandably going to negatively impact the learning process.\\
+        The errors that are rare are understandably going to have a negative impact on the learning process.\\
         
         Secondly, we can compare error frequency discrepancies depending on the studied scene.
         \textbf{Elancourt} is different compared to the relatively close sets \textbf{Nantes} and \textbf{Paris-13}, with regards to \texttt{BOS}, \texttt{BUS} and \texttt{BIT}.
         In fact, the last two areas are more densely urbanized than the first one exhibitting the same properties at \gls{acr::lod}-0.
-        \texttt{BIB}, on the other hand, are equally distributed over the different datasets as it depends mostly on the input sensor data resolution independently of building types.\\
+        \texttt{BIB}, on the other hand, are equally distributed over the different datasets as this error type depends mostly on the input sensor data resolution independently of building types.\\
         At the facet level, \texttt{FIT} is also equally occuring across all the scenes different from the rest of \texttt{Facet errors}.
         In fact, \texttt{FOS} occurence ratio is related to the size of facets in urban scenes.
         Actually, the less complex roof structures are, the more big are facets and the more chance they have to be over segmented.
@@ -208,7 +307,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
 
 \section{The experimental set-up}
     \label{sec::experiments::setup}
-    In this section, we give detailed account of how every ingredient of our pipeline is parameterized.
+    In this section, we give a detailed account of how every ingredient of our pipeline is parameterized.
     We first start, in Section~\ref{subsec::experiments::setup::feature_configurations}, by specifying the different feature configurations that are used in the experimental study and how there were implemented.
     Next, in Section~\ref{subsec::experiments::setup::classification}, we discuss in detail how the classification process was conducted.
 
@@ -228,7 +327,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
             \begin{equation*}
                 \underbrace{4}_{\substack{\text{the output dimension}\\\text{of the function } \chi_{\max,\min,\operatorname{mean},\operatorname{med}} }} \times \underbrace{5}_{\substack{\text{the number of the facet}\\\text{graph attributes}}} = 20.
             \end{equation*}
-            Regarding height based feature vectors, their dimension depend on the histogram parameters.
+            Regarding height based feature vectors, their dimension depends on the histogram parameters.
             Since we compute differences between observed and model height at terrain level also (cf. Section~\ref{subsec::learned_evaluation::baseline::height}), and because these are virtually unbounded and can differ from one scene to another, the maximum possible discrepancy is limited to \SI{\pm 50}{\m} for all scenes.
             In order to have the same feature vector dimension for this modality as for the geometric one, the number of bins is fixed manually to \(20\).\\
             For image based features, the cosine similarity between normal vectors, used in Equation~\ref{eq::corr_fac}, is by definition bounded in the interval [-1, 1].
@@ -252,11 +351,11 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
 
             \paragraph{Graph kernels}
                 In Section~\ref{subsec::learned_evaluation::richer_features::graph}, we have seen how 14 graph kernels are aggregated to describe graphs.
-                We relied, in experiments, on an available Python module called GraKel~\parencite{siglidis2018grakel}.
+                We relied, in experiments, on an available Python module called \verb!GraKel!\footnote{\verb!GraKel!: \href{https://github.com/ysig/GraKeL}{\url{https://github.com/ysig/GraKeL}}}~\parencite{siglidis2018grakel}.
                 We provide herein the parameters of each kernel type.
                 \begin{description}
                     \item[\(\blacktriangleright\) Random walk] The exponential version fails numerically and was left out.
-                                After a grid search \(\lambda\) was set to be \num[scientific-notation = true]{1e-3}, for the geometric random walk.
+                                After a grid search \(\lambda\) was set to be \num[scientific-notation = true]{1e-3} for the geometric random walk.
                                 This is actually a very low value as \(\lambda\) has to verify the condition stated in Equation~\ref{eq::condition_geometric_kernel_convergence} for all pairs of graphs in the training dataset.
                                 One case where the largest eigenvalue of the direct product of the adjacency matrix of two graphs in the dataset suffices to considerably lower the maximal value \(\lambda\) can take.
                                 To compute such a kernel it takes approximatly \SI{1.14}{\s\per\building\squared}.
@@ -269,7 +368,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
                     \item[\(\blacktriangleright\) Propagation] The choice of the transition matrix, as explained in Section~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}, is set by default to be the normalized adjacency matrix.
                                 The maximal iteration number \(t_{\max}\) is similar to the height parameter of the Weisfeler-Lehman kernel and is set to 5.
                                 Other parameters regarding the hashing and binning processed are kept at their default values.
-                                Comparing two instances takes around \SI[scientific-notation = true]{0.0812}{\s\per\building\squared}.
+                                Comparing two graph instances takes around \SI[scientific-notation = true]{0.0812}{\s\per\building\squared}.
                     \item[\(\blacktriangleright\) Graph hopper] This kernel takes no other parameter than the choice of base kernels.
                                 Comparisons between takes on average \SI{34.5}{\s\per\building\squared}.
                 \end{description}
@@ -277,7 +376,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
             \paragraph{\gls*{acr::scatnet}}
                 For \glspl{acr::scatnet}, we rely on a modern and vestatile Python module: Kymatio~\parencite{andreux2018kymatio}.
                 The parameterization of the \gls{acr::scatnet} does not depend on the signal content as much as it relates to the size of input images.
-                This is true because the filter banks, which parameterization is the most related to the signal dynamics, were set beforehand.
+                This is true because the filter banks, the parameterization of which is the most related to the signal dynamics, were set beforehand.
                 As a consequence, the same parameters were applied for image and height based features.\\
 
                 The number of possible orientations \(L\) is fixed at its default value 8 as it was the optimal choice corresponding to the already defined Morlet filter banks.
@@ -291,7 +390,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
 
                 The Kymatio implementation of \gls{acr::scatnet} uses GPU to accelerate computations.
                 Using an NVIDIA GeForce GTX 750 Ti graphics card, it takes around \SI{14.06}{\s \per \building} on average to compute a height based features and \SI{20.86}{\s \per \building}.
-                As with previous features onces, once computed they are cached for latter use.
+                As with previous features onces, once computed they are cached for later use.
 
     \subsection{Classification settings}
         \label{subsec::experiments::setup::classification}
@@ -303,9 +402,9 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
             All \textbf{\gls{acr::efin}} levels were tested.
             The input models are generalized to \gls{acr::lod}-2.
             As a consequence, we chose \textbf{\gls{acr::elod}} = \gls{acr::lod}-2.
-            If the \textbf{exclusivity} is \textsc{on}, at \textbf{\gls{acr::efin}} level 3, the second stage classification results depends on the first one.
+            If the \textbf{exclusivity} is \textsc{on}, at \textbf{\gls{acr::efin}} level 3, the second stage classification results depend on the first one.
             After a brief experimental study, the first stage did not yield good enough results in order to test this configuration.
-            In fact, we remind the reader that, at this stage, our goal is, first and foremost, to prove the feasability of the proposed approach.
+            In fact, we remind the reader that, at this stage, our goal is, first and foremost, to prove the feasibility of the proposed approach.
             That is why we limited the experiments to the case where the \textbf{exclusivity} is set to be \textsc{off}.
 
         \subsubsection{Classifiers}
@@ -327,7 +426,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
                 All values yielded sensibly the same scores.
                 As a result we set these parameters as follows: \(C = \num[scientific-notation = true]{1e-1}\) to not overpenalize nor underfit during learning and \(\gamma = \num[scientific-notation = true]{1e-3}\) to avoid overfitting.
                 Regarding \gls{acr::mkl}, we made use of the already implemented EasyMKL~\parencite{aiolli2015easymkl} approach.
-                It was the only method, to our knowledge that was readily available library in Python\footnote{\href{https://github.com/IvanoLauriola/MKLpy}{MKLpy: \url{https://github.com/IvanoLauriola/MKLpy}}}.
+                It was the only method, to our knowledge, that was readily available as a library in Python\footnote{\verb!MKLpy!: \href{https://github.com/IvanoLauriola/MKLpy}{\url{https://github.com/IvanoLauriola/MKLpy}}}.
     
         \subsubsection{Metrics for quantitative assessment}
             The overall accuracy is not interesting due to the highly unbalanced label distribution.
@@ -357,8 +456,8 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
 \section{Baseline feature analysis}
     \label{sec::experiments::baseline_feature_analysis}
     In the previous sections, we have shown how our dataset of building models was assembled and how the urban scene composition influences modeling error statistics.
-    We also specified in details how each bloc of the pipeline was set up.
-    At this stage, our aime is to prove the feasablity of the approach proposed in Chapter~\ref{chap::learned_evaluation}.
+    We also specified in detail how each block of the pipeline was set up.
+    At this stage, our aim is to prove the feasablity of the approach proposed in Chapter~\ref{chap::learned_evaluation}.
     As a consequence, for now, we limit ourselves to using the baseline features.\\
 
     First, in Section~\ref{subsec::experiments::baseline_feature_analysis::rmse}, the \gls{acr::rmse} is proven to be inadequate for detecting errors in our taxonomy.
@@ -367,7 +466,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
 
     \subsection{\texorpdfstring{\acrlong*{acr::rmse}}{RMSE} predictive capacity}
         \label{subsec::experiments::baseline_feature_analysis::rmse}
-        The \gls{acr::rmse} is the standard measure in most of \gls{acr::3d} modeling methods.
+        The \acrfull{acr::rmse} is the standard measure in most of \gls{acr::3d} modeling methods.
         As a consequence, we use it herein as a reference that our baseline is to be compared to.
         We train the classifier on Elancourt with the one dimensional feature vector containing the \gls{acr::rmse}.
         This scene was sufficient enough for our analysis.
@@ -708,7 +807,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
         \gls{acr::rf} classifiers can easily infer feature importances at training time.
         These were here computed and aggregated by modality in all urban scenes (cf. Figure~\ref{fig::feature_importances_rf_bl}).\\
 
-        At first, we observe how much individual attributes are important before being gathered.
+        At first, we observe how important individual attributes are before being gathered.
         For geometric features, all attributes are equally important.
         However, concerning image and height based features, only a few are relevant (i.e., they have a higher feature importance ratio).
         Indeed, these few attributes correspond to the highest and lowest values of the histograms.
@@ -732,7 +831,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
             \item \texttt{FOS} is very well detected with over \SI{95}{\percent} in F-score, over all areas of interest;
             \item Except \texttt{FOS}, the more the urban zone is dense the better \texttt{Facet erros} are detected;
             \item Rare errors such as \texttt{BIT} and \texttt{FIT} (on all urban areas) are poorly detected;
-            \item Geometric features alone is, with a small margin, as good as the other extrinsic based configurations for error detection;
+            \item Geometric features alone are, with a small margin, as good as the other extrinsic based configurations for error detection;
             \item Consequently, the building type is a good indicator for error detection in the same area;
             \item \texttt{BUS} is the only error that the other modalities are better at with a large gap;
             \item Although, in most cases, not improving error prediction, external data based modalities are as important as geometric features.

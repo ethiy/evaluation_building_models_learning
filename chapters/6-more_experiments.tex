@@ -38,7 +38,7 @@
 
     We will see how \texttt{Building errors} depend on the training scene, in contrast to \texttt{Facet errors}.
     The latter will prove to be more transferable and generalizable than the first one.
-    We will also discuss how every modalities play a role in error prediction.
+    We will also discuss how every modality plays a role in error prediction.
     Image-based features will demonstrate to be the most valuable compared to height-based ones.
     Eventually, we will review each \texttt{atomic} error prediction sensitivity provided the training set.
 
@@ -94,14 +94,26 @@
             This is achieved by looking, for a given area $Z_i$ in all couples $(Z_i, Z_j)_{\forall j \neq i}$, at the differences between Tables~\ref{tab::all_f-scores_transferability_f3} and~\ref{tab::all_f-scores_ablation_f3}.
             The goal is to see to which extent the test and training zone are similar.\\
 
+            \begin{figure}[htb]
+                \centering
+                \includestandalone[mode=buildnew, width=.9\textwidth]{figures/results/comparison_bar}
+                \caption[
+                    Color scheme used for F-score comparisons in this study.
+                ]{
+                    \label{fig::comparison_bar}
+                    Color scheme used for F-score comparisons in this study.
+                    When two null F-scores are compared, the cell is colored in white.
+                }
+            \end{figure}
+
             All these comparisons are provided in Table~\ref{tab::transferability_comparison}.
-            A color scheme was devised to encode the amplitude of change.
-            The resemblance between \textbf{Paris-13} and \textbf{Nantes} are stricking.
+            A color scheme was devised to encode the amplitude of change and is illustrated in Figure~\ref{fig::comparison_bar}.
+            The resemblance between \textbf{Paris-13} and \textbf{Nantes} are striking.
             In fact, when training on one of the two zones and testing on \textbf{Elancourt}, out of the nine labels only two are different.
             \texttt{BUS} has a gain between \SIrange[range-phrase={ and }]{5}{15}{\percent} when trained on \textbf{Paris-13} while its F-score records a drop in the range \SIrange{-15}{-5}{\percent} if trained on \textbf{Nantes}.
             \texttt{FUS}, in contrast, looses between \SIrange[range-phrase={ and }]{-45}{-35}{\percent} when trained on \textbf{Paris-13} and \SIrange[range-phrase={ and }]{-35}{-25}{\percent} for \textbf{Nantes}.\\
             Conversely when training on \textbf{Elancourt} and testing on the other two areas, the comparisons are not as identical as before.
-            However, from a general standpoint, we can see how the \texttt{building errors} are always recording losses when testing on both \textbf{Paris-13} and \textbf{Nantes}.
+            However, from a general standpoint, we can see how the \texttt{building errors} are always affected by losses when testing on both \textbf{Paris-13} and \textbf{Nantes}.
             Except for \texttt{FIT}, the inverse situation is obseved for \texttt{Facet errors} where labels are either better detected or stable.
 
         \begin{table}[htbp]
@@ -135,19 +147,7 @@
                 Evolution of the F-score value, for each error, between transferability experiments and the ablation study (cf. Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}).
                 \textbf{El.} (\textit{resp.} \textbf{Na.} and \textbf{P13.}) stand for \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
                 Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (cf. Table~\ref{tab::all_f-scores_transferability_f3}).
-                The color indicates the magnitude of change: 
-                \textcolor{LOSS45}{\(\blacksquare\)}: (\SIrange[range-phrase={,  }]{-100}{-45}{\percent}]--
-                \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
-                \textcolor{LOSS2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                \textcolor{LOSS1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                \textcolor{LOSS0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) --
-                \textcolor{STBL}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-5}{5}{\percent}) --
-                \textcolor{GAIN0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) --
-                \textcolor{GAIN1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{15}{25}{\percent}) --
-                \textcolor{GAIN2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{25}{35}{\percent}) --
-                \textcolor{GAIN3545}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{35}{45}{\percent}) --
-                \textcolor{GAIN45}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{45}{100}{\percent}] --
-                When two null F-scores are compared, the cell is colored in white \(\square\): neither positive nor negative.
+                The used color scheme is presented in figure~\ref{fig::comparison_bar}.
             }
         \end{table}
 
@@ -155,7 +155,7 @@
             Secondly, we investigate how the urban scene composition helps predicting defects in an unseen one.
             This is called the \texttt{projectivity} comparison.
             For a given test scene $Z_j$ in couples $(Z_i, Z_j)_{\forall i \neq j}$, we compare again results from Tables~\ref{tab::all_f-scores_transferability_f3} and~\ref{tab::all_f-scores_ablation_f3}.
-            A gain in performance for a label can be interpreted by the transferability power of its learning process.\\
+            A gain in F-score for a label can be interpreted by the transferability power of its learning process.\\
 
             Comparisons are detailed in Table~\ref{tab::transferability_comparison} with the same color scheme as for \texttt{coherence} comparisons.
             Error family wise, we can summarize these comparisons as follows:
@@ -247,19 +247,7 @@
                 \label{tab::generalization_comparison}
                 Evolution of the F-score value, for each error and test area, between generalization experiments and the ablation study (cf. Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}).
                 Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (cf. Table~\ref{tab::all_f-scores_generalization_f3}).
-                The color indicates the magnitude:
-                \textcolor{LOSS45}{\(\blacksquare\)}: (\SIrange[range-phrase={,  }]{-100}{-45}{\percent}]--
-                \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
-                \textcolor{LOSS2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                \textcolor{LOSS1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                \textcolor{LOSS0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) --
-                \textcolor{STBL}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-5}{5}{\percent}) --
-                \textcolor{GAIN0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) --
-                \textcolor{GAIN1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{15}{25}{\percent}) --
-                \textcolor{GAIN2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{25}{35}{\percent}) --
-                \textcolor{GAIN3545}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{35}{45}{\percent}) --
-                \textcolor{GAIN45}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{45}{100}{\percent}] --
-                When two null F-scores are compared, the cell is colored in white \(\square\): neither positive nor negative.
+                The used color scheme is presented in figure~\ref{fig::comparison_bar}.
             }
         \end{table}
             
@@ -697,7 +685,7 @@
         Regarding \textbf{Na-P13}, one natural prediction is that scores would average out with the same ratios as the frequency of error labels (cf. Figure~\ref{fig::error_fused_statistics}).
         By accounting for the random nature of the choice in training instances during the cross validation, this could be argued to be true for \texttt{FOS} or \texttt{FIG} and, in a lesser extent, for \texttt{BUS} too.
         However, it is far from being true for the rest of errors as shown in Table~\ref{tab::all_f-scores_rf_f3}.
-        In fact, for the other siw error labels, F-scores, on the fused set, are better than those on both \textbf{Nantes} and \textbf{Paris-13}.
+        In fact, for the other six error labels, F-scores, on the fused set, are better than those on both \textbf{Nantes} and \textbf{Paris-13}.
         Notably, some instances of \texttt{BIT} and \texttt{FIT} are now detected, in best cases, at arounf \SI{11}{\percent} and \SI{21}{\percent} respectively.
         On the contrary, they were not detected at all on the separate areas (cf. Table~\ref{tab::ablation_f3}).
         This can be explained by the fact that, although having around the same statistical distribution of errors as \textbf{Nantes} and \textbf{Paris-13} in a lesser extent, the fused set contains enough instances to better learn than before.
@@ -820,7 +808,7 @@
                     Either these feature configurations are actually the best alternatives which is not conflicting with previous findings.
                     Indeed, the extrinsic features were designed in the first place to detect fidelity errors such as \texttt{FIB} while \texttt{FUS} is a topological error that can be suitably detected using intrinsic features only.
                     However, these large margins could be also explained by the fact that the \gls{acr::svm} overfitted in these special cases.
-                    The last reason cannot be ruled out either, as the \(\gamma\) and \(C\) hyper-parameters were not optimized for this features as seen in Section~\ref{subsec::experiments::setup::classification}, due to the high number of possible combinations.
+                    The last reason cannot be ruled out either, as the \(\gamma\) hyper-parameter was not optimized for these features as seen in Section~\ref{subsec::experiments::setup::classification}, due to the high number of possible combinations.
             \end{itemize}
             
         As with the \gls{acr::rf} classifier, mean and standard deviation F-scores are computed and vizualized in Figure~\ref{fig::f_score_svm_bl}.
@@ -879,19 +867,7 @@
                 \label{tab::rf_vs_svm_comparison}
                 Evolution of the F-score value, for each error using \gls{acr::svm} compared to \gls{acr::rf} and based on baseline features.
                 Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (cf. Table~\ref{tab::all_f-scores_svm_f3}).
-                The color indicates the magnitude:
-                \textcolor{LOSS45}{\(\blacksquare\)}: (\SIrange[range-phrase={,  }]{-100}{-45}{\percent}]--
-                \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
-                \textcolor{LOSS2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                \textcolor{LOSS1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                \textcolor{LOSS0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) --
-                \textcolor{STBL}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-5}{5}{\percent}) --
-                \textcolor{GAIN0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) --
-                \textcolor{GAIN1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{15}{25}{\percent}) --
-                \textcolor{GAIN2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{25}{35}{\percent}) --
-                \textcolor{GAIN3545}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{35}{45}{\percent}) --
-                \textcolor{GAIN45}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{45}{100}{\percent}] --
-                When two null F-scores are compared, the cell is colored in white \(\square\): neither positive nor negative.
+                The used color scheme is presented in figure~\ref{fig::comparison_bar}.
             }
         \end{table}
 
@@ -1009,7 +985,7 @@
         This is actually not an issue as it could be explained by the topological nature of the error label.\\
 
         Eventhough geometric features alone yield better results in some cases, the \gls{acr::mkl} cannot ignore the extrinsic features.
-        As in the \gls{acr::rf} case, this may be prove to be helpful for the transferability of learning.
+        As in the \gls{acr::rf} case, this may prove to be helpful for the transferability of learning.
         Consequently, it would be interesting to rerun the same scalanility experiments, as in Section~\ref{sec::more_experiments::scalability}, with an \gls{acr::svm}.
         This was not the case, due to time limitations.
 
@@ -1123,7 +1099,7 @@
             
             In addition, based on the same Figure~\ref{fig::f_score_rf_scat_bl}, we can deduce the best option to be used for \gls{acr::scatnet} image based features.
             In most cases, the best options seems to be almost always \texttt{channel}.
-            This is understandable as this option do not modify the signal, from the get go, and preserves both the image and model informations until the last possible opportunity letting the classifier handle the fusion.
+            This is understandable as this option does not modify the signal, from the get go, and preserves both the image and model information until the last possible opportunity letting the classifier handle the fusion.
             The early fusion conducted when choosing the \texttt{deletion} option deforms the input signal.
             As the \gls{acr::scatnet} convolves filters and applies non linear functions to the input, the classifier cannot separate, in this case, between information that is derived from the image or from the evaluated model.\\
 
@@ -1258,7 +1234,7 @@
             As with previous experiments, we also computed feature importances using the new configurations.
             These are normalized and shown for both sets and options in Figure~\ref{fig::feature_importances_scat_rf}.
             The normalization consists in weighting the importance ratios by the inverse of the corresponding feature vector length.
-            This is conducted in order to put all modalities at an equal footing eventhough they \gls{acr::scatnet} produces a lot of features.\\
+            This is conducted in order to put all modalities at an equal footing eventhough the \gls{acr::scatnet} produces a lot of features.\\
 
             \begin{figure}[htpb]
                 \centering
@@ -1851,19 +1827,7 @@
             ]{
                 \label{tab::gk_svm_comparison}
                 Evolution of the F-score value, for each error using on graph kernels compared to baseline features.
-                The color indicates the magnitude:
-                \textcolor{LOSS45}{\(\blacksquare\)}: (\SIrange[range-phrase={,  }]{-100}{-45}{\percent}]--
-                \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
-                \textcolor{LOSS2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                \textcolor{LOSS1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                \textcolor{LOSS0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) --
-                \textcolor{STBL}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-5}{5}{\percent}) --
-                \textcolor{GAIN0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) --
-                \textcolor{GAIN1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{15}{25}{\percent}) --
-                \textcolor{GAIN2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{25}{35}{\percent}) --
-                \textcolor{GAIN3545}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{35}{45}{\percent}) --
-                \textcolor{GAIN45}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{45}{100}{\percent}] --
-                When two null F-scores are compared, the cell is colored in white \(\square\): neither positive nor negative.
+                The used color scheme is presented in figure~\ref{fig::comparison_bar}.
             }
         \end{table}
 
@@ -1874,7 +1838,7 @@
 
         These discrepancies could be explained by looking at each set composition.
         Actually, \texttt{FIT} is a purely topological error label in nature.
-        This justifies why advanced geometric features which takes into account the structure of the building models, are better in prediction.
+        This justifies why advanced geometric features which take into account the structure of the building models, are better in prediction.
         The same could be said about \texttt{FOS}, which explains why both these labels benefited from the usage of graph kernels.
         However, it was not the case of \texttt{BIT} which is contradictory with the previous explanation.\\
 
@@ -2021,7 +1985,7 @@
 
         Since graph kernels did not prove to always be better than the baseline features, this situation could not be explained by the fact that geometric features with graph kernels were sufficient enough, as in Section~\ref{sec::experiments::baseline_feature_analysis}.
         Indeed, \texttt{FIB} proved to be stable when changing the baseline features for the graph kernels.
-        However, when the latter was put together with \gls{acr::scatnet} features it yielded a worse F-score compared the \textbf{Geom. \(oplus\) S(d)-Im.} configuration.\\
+        However, when the latter was put together with \gls{acr::scatnet} features it yielded a worse F-score compared the \textbf{Geom. \(\oplus\) S(d)-Im.} configuration.\\
 
         Table~\ref{tab::gk_scat_svm_comparison} compiles comparisons, for both options, sets and all labels, between graph kernel and baseline geometric features when used with \gls{acr::scatnet} features.
         We can see how, no matter the chosen option, the set nor the label, follow tightly the evolution of \textbf{K-Geom.}.\\
@@ -2065,19 +2029,7 @@
                 \label{tab::gk_scat_svm_comparison}
                 Evolution of the F-score value, for each error using on graph kernels and \gls{acr::scatnet} compared to when \gls{acr::scatnet} was used with geometric baseline features.
                 Feature sets having a significant impact on the classification results are mentioned in the corresponding cell.
-                The color indicates the magnitude:
-                \textcolor{LOSS45}{\(\blacksquare\)}: (\SIrange[range-phrase={,  }]{-100}{-45}{\percent}]--
-                \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
-                \textcolor{LOSS2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                \textcolor{LOSS1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                \textcolor{LOSS0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) --
-                \textcolor{STBL}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-5}{5}{\percent}) --
-                \textcolor{GAIN0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) --
-                \textcolor{GAIN1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{15}{25}{\percent}) --
-                \textcolor{GAIN2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{25}{35}{\percent}) --
-                \textcolor{GAIN3545}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{35}{45}{\percent}) --
-                \textcolor{GAIN45}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{45}{100}{\percent}] --
-                When two null F-scores are compared, the cell is colored in white \(\square\): neither positive nor negative.
+                The used color scheme is presented in figure~\ref{fig::comparison_bar}.
             }
         \end{table}
 
@@ -2214,7 +2166,7 @@
             \item The \texttt{channel} option was best when used with an \gls{acr::rf}, while \texttt{deletion} worked best with the \gls{acr::svm} classifier;
             \item Using \gls{acr::scatnet} derived features, \gls{acr::svm} proved to be better overall, especially on \textbf{Elancourt}, than using an \gls{acr::rf};
             \item Once again, the \gls{acr::svm} proved to be not well parameterized to take full advantage of the extrinsic features;
-            \item Graph kernels, compared to baseline features, imporve prediction results of labels provided they are frequent enough;
+            \item Graph kernels, compared to baseline features, improve prediction results of labels provided they are frequent enough;
             \item Although being helpful, height based features have, by a large margin, the least importance ratio compared to the other modalities for both classifiers;
             \item Graph kernels, outnumbering the kernels for extrinsic modalities, have reduced the potency of the \gls{acr::scatnet} derived features;
             \item \textbf{Elancourt} the easiest to learn on with a minimum F-score of \SI{72}{\percent} and \SI{85}{\percent} on 7 out of 9 of the error labels;

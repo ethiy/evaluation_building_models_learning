@@ -98,17 +98,16 @@
 \addbibresource{references.bib}
 
 \usepackage[acronym, toc, automake=true]{glossaries}
-\usepackage{imakeidx}
-\makeindex[intoc]
+% \usepackage{imakeidx}
+% \makeindex[intoc]
 
 \usepackage{fontspec}
 \setmainlanguage{english}
-\setdefaultlanguage{english}
 \setotherlanguage{french}
 \setotherlanguage[locale=morocco]{arabic}
-\newfontfamily\arabicfont[Script=Arabic]{Simplified Arabic}
+\newfontfamily\arabicfont[Script=Arabic]{Amiri}
 
-\usepackage{hyperref}
+% \usepackage{hyperref}
 % \hypersetup{
 %     colorlinks=false,
 %     pdfsubject={},
@@ -137,7 +136,7 @@
     \chapter{\textsc{Abstract}}
         \input{frontmatter/abstract}
     \begin{arabic}
-        % \chapter{تجربة}
+        \chapter{تجربة}
             \input{frontmatter/molakhass}
     \end{arabic}
     \begin{french}
@@ -164,41 +163,41 @@
 
     \mainmatter
 
-    \chapter{\textsc{Introduction}}
-        \label{chap::introduction}
-        \input{chapters/1-introduction}
+    % \chapter{\textsc{Introduction}}
+    %     \label{chap::introduction}
+    %     \input{chapters/1-introduction}
     
-    \chapter{\textsc{State-of-the-art}}
-        \label{chap::state_of_the_art}
-        \input{chapters/2-state_of_the_art}
+    % \chapter{\textsc{State-of-the-art}}
+    %     \label{chap::state_of_the_art}
+    %     \input{chapters/2-state_of_the_art}
 
-    \chapter{\textsc{Semantic evaluation of \texorpdfstring{\gls*{acr::3d}}{3D} models}}
-        \label{chap::semantic_evaluation}
-        \input{chapters/3-semantic_evaluation}
+    % \chapter{\textsc{Semantic evaluation of \texorpdfstring{\gls*{acr::3d}}{3D} models}}
+    %     \label{chap::semantic_evaluation}
+    %     \input{chapters/3-semantic_evaluation}
 
-    \chapter{\textsc{A learning approach for quality evaluation}}
-        \label{chap::learned_evaluation}
-        \input{chapters/4-learned_evaluation}
+    % \chapter{\textsc{A learning approach for quality evaluation}}
+    %     \label{chap::learned_evaluation}
+    %     \input{chapters/4-learned_evaluation}
 
-    \chapter{\textsc{Assessing the learned approach}}
-        \label{chap::experiments}
-        \input{chapters/5-experiments}
+    % \chapter{\textsc{Assessing the learned approach}}
+    %     \label{chap::experiments}
+    %     \input{chapters/5-experiments}
 
-    \chapter{\textsc{In-depth experimental evaluation}}
-        \label{chap::more_experiments}
-        \input{chapters/6-more_experiments}
+    % \chapter{\textsc{In-depth experimental evaluation}}
+    %     \label{chap::more_experiments}
+    %     \input{chapters/6-more_experiments}
 
-    \chapter{\textsc{Conclusion}}
-        \label{chap::conclusion}
-        \input{chapters/7-conclusion}
+    % \chapter{\textsc{Conclusion}}
+    %     \label{chap::conclusion}
+    %     \input{chapters/7-conclusion}
 
-    \appendix
-    \chapter{\textsc{List of publications}}
-        \input{chapters/a1-publications}
-    \chapter{\textsc{Further experimental details}}
-        \input{chapters/a2-details}
+    % \appendix
+    % \chapter{\textsc{List of publications}}
+    %     \input{chapters/a1-publications}
+    % \chapter{\textsc{Further experimental details}}
+    %     \input{chapters/a2-details}
 
-    \printindex
+    % \printindex
     
     \printbibliography[heading=bibintoc]
     

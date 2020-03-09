@@ -2,10 +2,10 @@
 
 \vfill
 
-Presented herein is a tour of the different notions necessary for the understanding of the present manuscript.
+In this Chapter, a tour of the different notions necessary for the understanding of the present manuscript is presented.
 It is divided into three sections.
 First, we categorize, in Section~\ref{sec::state_of_the_art::building_modeling}, the \gls{acr::3d} building modeling techniques.
-A global idea of the subject is required to have a good idea of what defects to expect in evaluated building models.
+A global idea of the subject is required to have a good idea of which defects to expect in evaluated building models.
 Secondly, we present a complete state-of-the-art survey on quality evaluation for \gls{acr::3d} building models (cf. Section~\ref{sec::state_of_the_art::quality}).
 In the last Section~\ref{sec::state_of_the_art::mlpr}, are presented the main tools that are used in our proposed approach.
 Indeed, we discuss aspects of supervised classification as well as main feature extraction techniques.
@@ -15,10 +15,10 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
 \section{Automatic \texorpdfstring{\gls*{acr::3d}}{3D} building modeling}
     \label{sec::state_of_the_art::building_modeling}
     In this work, we study the quality evaluation of \textbf{large-scale} urban modeling.
-    Building models, at city scale, cannot be obtained manually.
+    Building models at city scale cannot be obtained manually.
     Automatically acquired building models are, actually, the first target of our study.
     As a consequence, there is a need for a overview of automatic \gls{acr::3d} building modeling.
-    The aim of this section is not to give a thourough survey of all \gls{acr::3d} modeling techniques, but rather explain the main approaches and how they affect the quality of the final product.
+    The aim of this section is not to give a thorough survey of all \gls{acr::3d} modeling techniques, but rather explain the main approaches and how they affect the quality of the final product.
     For a comprehensive study of urban reconstruction methods, we refer the reader to the work of~\textcite{musialski2013survey}.\\
 
     Automatic \gls{acr::3d} building modeling consists mainly on two steps.
@@ -54,9 +54,9 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
             Conversly, images offer an alternative but, as a passive sensor, can suffer from issues related to shadows (of buildings or other urban objects) that are detrimental to building delineation~\parencite{adeline2013shadow}.\\
 
             The classification process is not flawless either.
-            Just as with \gls{acr::gis} databases, classification relies on some \textit{a priori} informations that are generally encoded in regularization terms~\parencite{lafarge2008structural,zhu2018large,zeng2018neural}.
+            Just as with \gls{acr::gis} databases, classification relies on some \textit{a priori} information that is generally encoded in regularization terms~\parencite{lafarge2008structural,zhu2018large,zeng2018neural}.
             These are needed to retrieve outlines of buildings efficiently.
-            However, they can also fail to represent faithfully the ground truth and results in wrong building footprint extraction.
+            However, they can also fail to represent the ground truth faithfully and results in wrong building footprint extraction.
 
     \subsection{Modeling strategies}
         \label{subsec::state_of_the_art::building_modeling::modeling_strategies}
@@ -65,14 +65,14 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
         They can be classified in three categories: Model-driven, Data-driven and mixed approaches.\\
 
         \subparagraph{Model-driven approaches}
-            This type of methods, also called top-down, rely on strong assumptions on the type of buildings to be modeled.
+            This type of methods, also called top-down methods, rely on strong assumptions on the type of buildings to be modeled.
             For example, the Manhattan-world class assumes that buildings are an aggregation of boxes~\parencite{vanegas2010building,ledoux2011topologically,arroyo2015dimension,li2016manhattan}.
             This is actually an instance of grammars utilized in procedural modeling.
             In the latter, a set of predetermined rules are used to determine the best shapes, out of a library, in order to better fit the input data~\parencite{lafarge2008structural,koutsourakis2009single,zhou20102,simon2011random,mathias2011procedural,martinovic2013bayesian,nan2015template,demir2015procedural,zeng2018neural}.
             Top-down approaches are usually used when the input data resolution is not sufficiently accurate to directly retrieve detailed architectural features of the building~\parencite{lafarge2008structural}.
 
         \subparagraph{Data-driven approaches}
-            They can also be called bottom-up.
+            They can also be called bottom-up methods.
             These modeling techniques need very high resolution sensor data in order to retrieve constituing geometric features of the building.
             This is usually achieved using primitive extraction.
             For instance, building surfaces could be viewed as piecewise-planar structures~\parencite{taillandier2004automatic,chauve2010robust,lafarge2012creating,nan2017polyfit}.
@@ -93,10 +93,10 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
             Higher resolution sensors are yielding more and more data with high frequencies that are still not taken into account as most produced models are at most \gls{acr::lod}-2 ones.
             These can pose serious problems in modeling:~\textcite{bredif20073d} proved that undetected superstructures can lead to bad quality models and their reconstruction can help in that regard.
             High buildings can cast shadows on, or occlude, neighbooring ones which results in issues with their surface retrieval.
-            This has not been widely studied~\parencite{lafarge2012creating,bao2013generating}, as buildings are moslty modeled one by one and and most of the time not in challenging\footnote{
+            This has not been widely studied~\parencite{lafarge2012creating,bao2013generating}, as buildings are moslty modeled one by one and and often not in challenging\footnote{
                 Like buildings delimited by narrow streets or ones with complex architectures.
             } areas.
-            All these issues and more induce defects that should be characterized and classified for a better understanding of the field and, subsequently, objectively understand which methods are the most adapted for which areas.
+            All these issues induce defects that should be characterized and classified for a better understanding of the field and, subsequently, objectively understand which methods are the most adapted for which areas.
 
 \section{Quality evaluation of \texorpdfstring{\gls*{acr::3d}}{3D} building models}
     \label{sec::state_of_the_art::quality}
@@ -110,16 +110,16 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
 
     \subsection{Output types}
         \label{subsec::state_of_the_art::quality::output}
-        We distinguish herein quality evaluation methods based on the kind of output they produce.
-        Fidelity metrics is a first instance of output types.
+        We distinguish herein quality evaluation methods depending on the kind of output they produce.
+        Fidelity metrics constitues a first instance of output types.
         The second is semantic labels.
-        In what follows, we explain, in details, these differences between the two method types.
+        In what follows, we explain, in details, the differences between the two types of method.
 
         \subsubsection{Fidelity metrics based methods}
             One way to characterize the quality of a building model is to compute indices or metrics reporting its geometric accuracy.\\
 
             Most metrics provide information on the geometric precision of the model.
-            These are computed for different geometric objects.
+            They are computed for different geometric objects.
             Below, depending on the geometric dimension of the latter, we categorize the geometric fidelity metrics.\\
 
             We start with zero dimensional objects: i.e., points.
@@ -150,7 +150,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
             In fact, after mapping the evaluated and reference models to a sphere, they compare their spherical harmonic~\parencite{brechbuhler1995parametrization} representations.
             Just as with edges, planes can be evaluated using angular measurements, as was proposed by~\textcite{henricsson19973,landes2012quality}.
             Another alternative is to compare reconstructed and reference models based on surface area comparisons.
-            These are mostly based on ratios like completeness and correctness\footnote{In other words, recall and precision respectively.}~\parencite{henricsson19973,schuster2003new,landes2012quality,rottensteiner2014results}.\\
+            These are mostly based on ratios like completeness and correctness\footnote{In other words, recall and precision, respectively.}~\parencite{henricsson19973,schuster2003new,landes2012quality,rottensteiner2014results}.\\
 
             Last, are three dimensional (i.e., volume) evaluation.
             The same detection ratios that were computed for surfaces are again calculated to evaluate volumes this times, as shown by~\textcite{jaynes2003recognition,mohamed2013quality, zeng2014multicriteria,nguatem2017modeling}.
@@ -170,12 +170,12 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
             Hereafter, are described the different types of labels that were proposed in the literature.\\
 
             \textcite{boudet2006supervised} was the first ever work, that we are aware of, which tackles semantic labels as outputs of the evaluation.
-            This approach has four classes which indicate how much valid can the modeling be: ``acceptable'' and ``correct'' portray valid buildings while ``false"``and ``generalized"``are refused.
+            This approach has four classes which indicate how valid the model is: ``acceptable'' and ``correct'' portray valid buildings while ``false'' and ``generalized'' are refused.
             It can be seen as a four grade based score system expressing the confidence in a building model.
             The main limitation of this method is the fact that the proposed labels do not specify what defects a model presents if it is not valid.
             It is, therefore, hard to use for model correction.
             Besides, the acceptable defect definitions depend also on each use case.
-            For instance, a comunications company would be more adament on the accuracy of roof parts, which would affect wave propagation, rather than an insurance company interested in flood damage estimation.
+            For instance, a communications company would be more adament on the accuracy of roof parts, which would affect wave propagation, rather than an insurance company interested in flood damage estimation.
             This means that each use case implies a relabeling that could be potentially different from other one.
             \textcite{durupt2006automatic} used also the same labels to evaluate their reconstruction.\\
             
@@ -206,7 +206,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
         \label{subsec::state_of_the_art::quality::reference}
         In order to evaluate models, reference data are utilized for comparison.
         Based on the latter, another way to discriminate among modeling methods is possible.
-        The first class of reference data are high quality ground truth building \gls{acr::3d} models.
+        The first class of reference data are high quality ground truth \gls{acr::3d} building models.
         Remote sensing data is the second alternative that is used for reference.
         Neither of these two choices do influence the type of output the evaluation method produces.
         Hereafter, is explained the difference between the two categories.
@@ -219,8 +219,8 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
             \textcite{dick2004modelling}, for instance, evaluated their buildings based on manual tape measurements taken on specific architectural features, like windows and columns, with an accuracy of \SI{0.01}{\m} for the first and \SI{0.1}{\m} for the second.
             Complete and scalable measurements of buildings are possible using topographic surveys.
             Using the latter, building models could be reconstructed with precision up to \SI{\pm 0.1}{\m}~\parencite{henricsson19973} or \SI{\pm 0.05}{\m}~\parencite{vogtle2003quality}.\\
-            There is also the possibility of manually modeling the building using oblique images, or stereoplotting.
-            ~\textcite{zebedin2008fusion} uses such a method to produce their reference data from aerial images with an accuracy up to the order of \SI{\pm 0.15}{\m}.
+            There is also the possibility of manually modeling the building using overhead images, or stereoplotting.
+            ~\textcite{zebedin2008fusion} use such a method to produce their reference data from aerial images with an accuracy up to the order of \SI{\pm 0.15}{\m}.
             The same procedure was used also by~\textcite{jaynes2003recognition} producing models with inaccuraccies bounded by \SI[fraction-function = \sfrac]{\pm 1/3}{\m}.
 
         \subsubsection{Remote sensing data}
@@ -228,20 +228,20 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
             The previous choice is hard to scale up to district or city levels.
             In fact, they are more suitable to evaluate few building models: e.g., in order to validate a reconstruction method.
             Conversely, remote sensing data are more accessible and could be used, instead, as reference.
-            In fact, since these are usually fed as input in modeling methods, it is only reasonable to evaluate the produced models in comparison to the intake.
+            In fact, since these are usually fed as input in modeling methods, it is only reasonable to evaluate the produced models in comparison to the input.
             Listed here, are the different types of remote sensing data and how they could be used for building model evaluation.\\
 
             \subparagraph{Aerial images}
-                These could be original oblique images or preprocessed orthoimages.
+                These could be original images or preprocessed orthoimages.
                 The first class of images are the most precise but the other one is more available.
                 Images were used by~\textcite{michelin2013quality} to extract \gls{acr::3d} segments based on plane sweeping techniques.
                 Reference edges are filtered out and are used to evaluate the \gls{acr::3d} model (intersection) edges.
-                Based on these segments,~\textcite{boudet2006supervised} not only evaluates edges but also corners (i.e., edge intersections) and planes.
-                Facets were also evaluated, in~\parencite{boudet2006supervised}, based on correlation functions computed from multiple overlapping oblique images.
+                Based on these segments,~\textcite{boudet2006supervised} not only evaluate edges but also corners (i.e., edge intersections) and planes.
+                Facets were also evaluated, in~\parencite{boudet2006supervised}, based on correlation functions computed from multiple overlapping overhead images.
                 Orthoimages were used also to, for instance, compute \gls{acr::ndvi} scores for vegetation occluded building model discrimination.
 
             \subparagraph{\gls{acr::lidar} point clouds}
-                This type of data have the inherent advantage, compared to images, of natively providing depth information.
+                This type of data have the inherent advantage, compared to images, of directly providing depth information.
                 \textcite{kaartinen2005accuracy} used data that was acquired multiple times with a guaranteed precision up to \SI{0.083}{\m} in planimetry and \SI{0.035}{\m} in height.
                 Out of the latter were chosen reference points that were compared to equivalents in the evaluated building models (check the previous Section).
                 All the points could also be used for comparison by computing metrics such as \gls{acr::rmse}~\parencite{lafarge2012creating,zhu2018large}.
@@ -254,7 +254,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
                 Still, they are considered here since they are used as input by some building modeling pipelines.
                 Just like with \gls{acr::lidar} point clouds, \gls{acr::dsm} is used for building model comparison based on \gls{acr::rmse}~\parencite{zeng2018neural}.
                 \textcite{michelin2013quality}, however, use the same data but differently.
-                In fact, \gls{acr::dsm}, being a result of oblique images, can be used as proxy, to help extracting \gls{acr::3d} geometric features instead of recomputing correlation scores like in~\parencite{boudet2006supervised}.
+                In fact, \gls{acr::dsm}, being a result of overhead images, can be used as proxy, to help extracting \gls{acr::3d} geometric features instead of recomputing correlation scores like in~\parencite{boudet2006supervised}.
                 It can also be valuable for missing court detection by calculating sky viewshed angle scores~\parencite{michelin2013quality}.
 
     \subsection{Novelty of the proposed method}
@@ -267,19 +267,19 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
         Conversely, the need for reasonably available reference data, which is dictated by the \textbf{large-scale} constraint, implies the reliance on remote sensing data based methods (cf. Section~\ref{subsec::state_of_the_art::quality::reference}).\\
 
         There are only two approaches that are both semantic and rely only on more readily available remote sensing data:~\parencite{boudet2006supervised,michelin2013quality}.
-        Both define semantic errors that are predicted with the help of Oblique images and \glspl{acr::dsm}.
-        A classifier learns statistical properties of the building \gls{acr::3d} models using features that are derived from these sensor data.
+        Both define semantic errors that are predicted with the help of overhead images and \glspl{acr::dsm}.
+        A classifier learns statistical properties of the \gls{acr::3d} building models using features that are derived from these sensor data.
         The learning process further helps scaling the evaluation pipeline to unseen data by predicting errors using the same attributes.\\
 
-        Our work relies on the same idea, but goes farther by allowing the possibility to evaluate building models without using any reference data\footnote{With the exception of training data.} and relying on their intrinsic attributes instead.
+        Our work relies on the same idea, but goes further by allowing the possibility to evaluate building models without using any reference data\footnote{With the exception of training data.} and relying on their intrinsic attributes instead.
         It also offers a new taxonomy of errors that is intended to be exhaustive and generalizable.
-        These latter notions are developped in details in Chapter~\ref{chap::semantic_evaluation}, while Chapter~\ref{chap::learned_evaluation} presents how features are chosen to represent building models and the learning process.\\
+        These latter notions are developed in details in Chapter~\ref{chap::semantic_evaluation}, while Chapter~\ref{chap::learned_evaluation} presents how features are chosen to represent building models and the learning process.\\
 
         In fact, we propose a novel hierarchical and modular taxonomy that assembles all possible semantic and geometric errors that can affect the building model.
         Based on this taxonomy, depending on the end user needs, error labels are extracted for the classification.
-        We also developped a baseline of features, intrinsic as well as extrinsic\footnote{If available.}, which describe the evaluated models.
-        Using these features so as to train some regular off-the-shelf classifiers, we proved the feasability of our approach.
-        Finally, we made use of some advanced feature extractors in the aims of improving the prediction scores of the proposed pipeline.
+        We also developed a baseline of features, intrinsic as well as extrinsic\footnote{If available.}, which describe the evaluated models.
+        Using these features so as to train some regular off-the-shelf classifiers, we proved the feasibility of our approach.
+        Finally, we made use of some advanced feature extractors with the aim of improving the prediction scores of the proposed pipeline.
 
 \section{Supervised learning and pattern recognition}
     \label{sec::state_of_the_art::mlpr}
@@ -288,598 +288,6 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
     Section~\ref{subsec::state_of_the_art::mlpr::classifiers} start off with a brief description of the utilized supervised classifiers.
     Secondly, Section~\ref{subsec::state_of_the_art::mlpr::feature_extraction} presents some advanced feature extraction techniques on which our method is based.
 
-    \subsection{Supervised classifiers}
-        \label{subsec::state_of_the_art::mlpr::classifiers}
-        In this subsection, we denote a family of \(n\) observations and their classes by
-        \begin{equation*}
-            \left(O^i, y^i\right)_{i = 1, 2, \dots, n}.
-        \end{equation*}
-        One way of representing an observation \(O\) is to compute a number \(d \in \mathbb{N}^*\) of features (or attributes):
-        \begin{equation*}
-            \forall j = 1, 2, \dots, d \;, x_j \in \mathscr{X}_j
-        \end{equation*}
-        These coefficients are aggregated to form a feature vector 
-        \begin{equation*}
-            \bm{x} \triangleq \left(x_1, x_2, \dots, x_d\right) \in \prod_{i=1}^{d} \mathscr{X}_j
-        \end{equation*}
-        that corresponds to the observation \(O\).
-        Such a mapping \(O \mapsto \bm{x}\) is called a feature map.
-        A special case is when \(\forall j=1, 2, \dots, d\;, \mathscr{X}_j = \mathbb{R}\) and feature vectors are Euclidean ones.
-        \begin{equation*}
-            \forall i = 1, 2, \dots, n \;, \bm{x^i} \in \mathbb{R}^d.
-        \end{equation*}
-        In practice, observations are often confused with fetaure vectors.
-        
-        Classes are modeled by a finite set bijective to the set \(\left\{1, 2, \dots, C\right\}\):
-        \begin{equation*}
-            \forall i = 1, 2, \dots, n \;, y_i \in \left\{1, 2, \dots, C\right\}.        
-        \end{equation*}
-        The goal in supervised classification is to learn, based on the training set \(\left(\bm{x^i}, y^i\right)_{i = 1, 2, \dots, n}\), some statistical characteristics in order to predict the classes of some new observations:\footnote{This family is usually called the test set.}
-        \begin{equation*}
-            \left(\bm{x^i}\right)_{i=n + 1, n + 2, \dots, n + n'}.
-        \end{equation*}
-        This type of problems is said to be multi-class: each instance has one possible class out of a number of possibilities.
-        In the special case of binary classification, only two classes are possible:
-        \begin{equation*}
-            \forall i = 1, 2, \dots, n \;, y^i \in \left\{0, 1\right\}
-        \end{equation*}
-        
-        On another hand, the multi-label classification problem is the case where to each instance corresponds a number $L$ of binary labels:
-        \begin{equation*}
-            \forall i = 1, 2, \dots, n \;, y^i = (y^i_1, y^i_2, \dots, y^i_L) \in \left\{0, 1\right\}^L.
-        \end{equation*}
-        In this case, associating features with each label \(\left(\bm{x^i}, y^i_l\right)_{i = 1, 2, \dots, n}\) can be seen as an independent binary classification problem.
-        This is different from multi-class problems, as for the latter only one class is possible while in the other multiple labels can be detected per instance.\\
-
-        Hereafter, are presented two supervised classifiers: the \gls{acr::svm} algorithm and \glspl{acr::rf}, both of which are used in this work.
-
-        \subsubsection{\acrlong*{acr::svm}}
-            \label{subsubsec::state_of_the_art::mlpr::classifiers::svm}
-            \glspl{acr::svm} are a special type of linear classifiers.
-            The initial classes $\left(y^k\right)_{k=1, 2, \dots, n}$ are transformed into $\left(\tilde{y}^k\right)_{k=1, 2, \dots, n}$ using the map: $y \mapsto \tilde{y} = 2\cdot y - 1$.
-            There are always two possible classes $\left\{1, -1\right\}$.
-            This simple transformation is use so as to simplify the latter equations.
-
-            We remind the reader of the decision function\footnote{A decision function assigns a class to given observation.} of a linear classifier:
-            \begin{equation}
-                \label{eq::linear}
-                \begin{aligned}
-                    \mathbf{D}_{\text{linear}, \bm{w}, b}: \mathbb{R}^d &\rightarrow \left\{-1, 1\right\}\\
-                    \bm{x} &\mapsto 2 \cdot \mathbb{1}_{\bm{w}^\intercal \cdot \bm{x} + b\geq 0} - 1 \quad.
-                \end{aligned}
-            \end{equation}
-            where:
-            \begin{conditions}
-                \bm{w} & is the weight vector;\\
-                b & is the bias.
-            \end{conditions}
-
-            \paragraph{Hard margin}
-                In order to understand the idea behind the \gls{acr::svm} classifier, we start by assuming that the dataset to be classified $\left((\bm{x}^k, y^k)\right)_{k=1, 2, \dots, n}$ is linearly separable.
-                It means that there is at least one hyperplane $(H_0)$ that can separate perfectly the two classes.
-                We can order points of one class based on their distance to the hyperplane $(H_0)$: $\bm{x} \mapsto d(\bm{x}, H_0)$.
-                The closest positive (\textit{resp.} negative) points (i.e., of class $1$ (\textit{resp.}  $-1$)) to $(H_0)$ are called positive (\textit{resp.} negative) support vectors.
-                Support hyperplanes are the hyperplanes that are parallel to the separator and passes through the support vectors.
-                This can be summarized as:
-                \begin{eqnarray}
-                    \left\{\bm{x}^+_s: s = 1, 2, \dots, n_{psp}\right\} &\triangleq \arg\min\left\{d(\bm{x}_k, H_0) : k=1, 2, \dots, n \wedge \tilde{y}^k = 1\right\}\\
-                    \left\{\bm{x}^-_s: s = 1, 2, \dots, n_{nsp}\right\} &\triangleq \arg\min\left\{d(\bm{x}_k, H_0) : k=1, 2, \dots, n \wedge \tilde{y}^k = -1\right\}
-                \end{eqnarray}
-                where:
-                \begin{conditions}
-                    n_{psp} & is the number of positive support vectors.\\
-                    n_{nsp} & is the number of negative support vectors.\\
-                \end{conditions}
-
-                We define:
-                \begin{equation*}
-                    Sol \triangleq \left\{\omega \in \mathbb{R}^d : \omega.\bm{x} + b = 0\right\}.
-                \end{equation*}
-                We verify that:
-                \begin{equation*}
-                    \forall \lambda \in \mathbb{R}^*, \; (\bm{w}, b) \in  Sol \Leftrightarrow (\lambda . \bm{w}, \lambda.b) \in Sol.
-                \end{equation*}
-                In other words, the solution $(\bm{w}^*, b^*)$ is unique up to multiplicative term $\lambda \in \mathbb{R}^*$.
-                In this context, $(\bm{w}, b)$ is chosen so that \(\bm{w}\) points to the positive instances\footnote{The positive instances are inside the positive half-space.} and the support hyperplanes verify:
-                \begin{equation}
-                    \label{eq::support_lines}
-                    \begin{cases}
-                        \forall s = 1, 2, \dots, n_{psp} \quad \bm{w}^\intercal\cdot\bm{x}^+_s + b = 1\\              
-                        \forall s = 1, 2, \dots, n_{nsp} \quad \bm{w}^\intercal\cdot\bm{x}^-_s + b = -1                
-                    \end{cases}
-                \end{equation}
-
-                \begin{figure}
-                    \centering
-                    \includestandalone[mode=buildnew, width=.7\textwidth]{figures/svm/linear_separable}
-                    \caption[
-                        Illustration of the hard-margin \acrshort*{acr::svm}.
-                    ]{
-                        \label{fig::linear_separable} 
-                        Illustration of the hard-margin \gls{acr::svm}.
-                        A hyperplane separator in $\mathbb{R}^2$ corresponds to a line.
-                        In this case, $n_{psp} = n_{nsp} = 1$.
-                        The support lines are plotted in orange.
-                        $M$ is the margin.
-                    }
-                \end{figure}
-
-                Figure~\ref{fig::linear_separable} illustrates these notions.
-                The uncertainty of a point classification is an increasing function of the distance of that point to the separator.
-                In the hard margin case, the given samples are supposed to be certain.
-                Since support vectors are the closest certain points to $(H_0)$, the class of points $\bm{p}$ that verify $\vert\bm{w}^\intercal\cdot\bm{p} + b\vert \geq 1$ is known with probability $1$.
-                Conversely, the points that lay between the support hyperplanes are the most uncertain.
-                The bigger the distance between these two lines the more nuanced the classifier decision is.
-                The main idea behind \glspl{acr::svm} is to maximize this distance.
-                It is called margin and denoted $M$.\\
-
-                In order to compute the margin, we can interpret it as the length of the orthogonal projection of any vector $\bm{v}_{st}$\footnote{$\forall (s, t) \in \left\{1, 2, \dots, n_{nsp}\right\} \times \left\{1, 2, \dots, n_{psp}\right\}$.} going from a negative support vector $\bm{x}^-_s$ to a positive one $\bm{x}^+_t$ on any line carried by $\bm{w}$.
-                Since all support vectors of the same class lay on the same line, the choice of $(s,t)$ is inconsequential.
-                We can hence deduce:
-                \begin{align}
-                    M &= \frac{\bm{w}^\intercal}{\Vert\bm{w}\Vert} \cdot (\bm{x}^+_1 - \bm{x}^-_1) \nonumber \\
-                    M &= \frac{2}{\Vert\bm{w}\Vert}
-                \end{align}
-
-                Maximizing $M$ is actually equivalent to minimizing $\Vert\bm{w}\Vert$.
-                In the purpose of simplifying the resolution of the problem, we drop the square root and minimize instead $\Vert\bm{w}\Vert^2$.
-                The certainty in the given samples is translated by the inequalities:
-                \begin{equation*}
-                    \begin{cases}
-                        \bm{w}^\intercal\cdot\bm{x}^i + b \geq 1 & \forall i \in \left\{1, 2, \dots, n: \tilde{y}^i = 1\right\}\\
-                        \bm{w}^\intercal\cdot\bm{x}^i + b \leq -1 & \forall i \in \left\{1, 2, \dots, n: \tilde{y}^i = -1\right\}
-                    \end{cases}.
-                \end{equation*}
-                These can be summed in one, as follows:
-                \begin{equation}
-                    \label{eq::hard_margin}
-                    \tilde{y}^i.(\bm{w}^\intercal\cdot\bm{x}^i + b) \geq 1 \; \forall i = 1, 2, \dots, n.
-                \end{equation}
-                Thus, the \gls{acr::svm} problem can be formalized as a convex constrained quadratic optimization one:
-                \begin{equation}
-                    \label{eq::hard_svm_primal}
-                    \begin{aligned}
-                        & \min_{\bm{w}}
-                        & & {\Vert \bm{w} \Vert}^2 \\
-                        & \text{s.t.}
-                        & & \tilde{y}^i.(\bm{w}^\intercal\cdot\bm{x}^i + b) \geq 1 \; \forall i = 1, 2, \dots, n
-                    \end{aligned}.
-                \end{equation}
-
-            \paragraph{Soft margin}
-                In the previous case, we assumed that we are always certain about the classes of the given samples.
-                The margin cannot contain any of those points.
-                This explains the name hard margin.
-                We are always guaranteed to have a solution of a hard margin \gls{acr::svm} in the case of linear separability.
-                however, if the last condition is not met, there is no such solution.
-                To alleviate this problem,~\textcite{cortes1995support} allowed some uncertainty in the given samples in order to fit the linear model.\\
-
-                \begin{figure}
-                    \centering
-                    \includestandalone[mode=buildnew, width=.7\textwidth]{figures/svm/non_linear_separable}
-                    \caption[
-                        Illustration of a soft margin \acrshort*{acr::svm}.
-                    ]{
-                        \label{fig::soft_margin} Illustration of a soft margin \gls{acr::svm}.
-                        The orange lines (\textit{resp.} green line) correspond to the support hyperplanes (\textit{resp.} separator).
-                        Dataset points are allowed to be inside the margin and even in the other side of the separator.
-                        It helps fit a natively linear classifier in a non linearly separable case.supervised classification
-                    }
-                \end{figure}
-
-                To put this into mathematical terms, we start by the reminding the constraint of the hard margin problem in Equation~\ref{eq::hard_margin}.
-                Allowing uncertainty for some given point $\bm{x}^i$ comes back to allowing it to be in the wrong side of the support hyperplane: i.e., $\tilde{y}^l.(\bm{w}^\intercal\cdot\bm{x}^l + b) < 1$.
-                In this case, we define: $\xi^i := 1 - \tilde{y}^i.(\bm{w}^\intercal\cdot\bm{x}^i + b) > 0$.
-                Otherwise, $\xi^i := 0$.
-                These defined values are called slack variables.
-                They express how much each point is uncertain.
-                They can be expressed in a compressed form called hinge loss:
-                \begin{equation}
-                    \label{eq::slack_variables}
-                    \xi^i \triangleq \max\left(1 - \tilde{y}^i.(\bm{w}^\intercal\cdot\bm{x}^i + b), 0\right).
-                \end{equation}
-                The soft margin constraint translates now to:
-                \begin{equation}
-                    \label{eq::soft_margin}
-                    \tilde{y}^i.(\bm{w}^\intercal\cdot\bm{x}^i + b) \geq 1 - \xi^i.
-                \end{equation}
-                Four cases are distinguished, for slack variables:
-                \begin{itemize}[label=\(\blacktriangleright\)]
-                    \item \(\xi^i = 0\): the class of the point is certain;
-                    \item \(0 < \xi^i \leq 1\): the point is of the same class but is uncertain: i.e., between the support hyperplane and the separator;
-                    \item \(1 < \xi^i < 2\): the point is of the opposite class and is uncertain: i.e., between the separator and the opposite support hyperplane;
-                    \item \(2 \leq \xi^i\): the point is certainly of the opposite class: i.e., beyond the opposite support hyperplane.
-                \end{itemize}
-                As a consequence, when a dataset is not linearly separable, at least one sample $i_0$ cannot fit in a linear model and $1 < \xi^{i_0}$.
-                All these situations are illustrated in Figure~\ref{fig::soft_margin}.\\
-
-                The idea is to find a configuration where most slack variables are null or near $0$.
-                Sparsity is also required: we prefer having one wrong point rather than a lot of points that are uncertain.
-                For this purpose, these variables would be penalized against using an $L_1$ norm.
-                Since all slack variables are positive, the soft margin \gls{acr::svm} problem becomes:
-                \begin{equation}
-                    \label{eq::soft_svm_primal}
-                    \begin{aligned}
-                        & \min_{\bm{w} \in \mathbb{R}^d}
-                        & & {\Vert \bm{w} \Vert}^2 + C \cdot \sum_{i=1}^n \xi^i \\
-                        & \text{s.t.} & & \tilde{y}^i.(\bm{w}^\intercal\cdot\bm{x}^i + b) \geq 1, \; \forall i = 1, 2, \dots, n\\
-                        & & & \xi^i \geq 0, \; \forall i = 1, 2, \dots, n
-                    \end{aligned}.
-                \end{equation}
-                where:
-                \begin{conditions}
-                    C & is the penalization constant.\\
-                \end{conditions}
-
-                A small $C$ means the slack variables are allowed to get big: the margin is expected to be big.
-                A high $C$ leads to a tight margin as it penalizes any uncertainty.
-                The special case where $C=\infty$ corresponds simply to the hard margin case.
-                Hence, the penalization constant is tuned, using cross-validation for instance, so as to achieve the best generalization power.
-
-                Since the problem stated in Equation~\ref{eq::soft_svm_primal} is a convex optimization problem, solving it is equivalent to solving the dual:
-                \begin{equation}
-                    \label{eq::soft_svm_dual}
-                    \begin{aligned}
-                        & \max_{\alpha_1, \alpha_2, \dots, \alpha_n \in \mathbb{R}_+}
-                        & & \sum_{1\leq i \leq n} \alpha_i - \frac{1}{2}\cdot\sum_{\substack{1\leq l \leq n\\1\leq p \leq n}}\alpha_l\cdot\alpha_p\cdot\tilde{y}^l\cdot\tilde{y}^p\cdot(\bm{x}^l)^\intercal\cdot\bm{x}^p\\
-                        &\text{s.t.} & & \sum_{1 \leq i \leq n}\tilde{y}^i\cdot\alpha_i=0 \\
-                        & & & 0 \leq \alpha_i \leq C \;\forall i = 1, 2, \dots, n
-                        \end{aligned}
-                \end{equation}
-                A fast solution of this problem is possible using the \gls{acr::smo} developped by~\textcite{platt1998sequential}.
-                This will not be detailed herein. 
-
-            \paragraph{Kernel \acrshort*{acr::svm}}
-                Not all classification problems can be solved in a linear manner.
-                Unfortunately, \gls{acr::svm} is inherently linear.
-                However, there is a way to generalize this classifier.\\
-
-                \begin{figure}
-                    \centering
-                    \ffigbox[\FBwidth]{
-                        \begin{subfloatrow}[2]
-                            \ffigbox[\FBwidth]{
-                                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/svm/circles_original}
-                            }{
-                                \caption{
-                                    \label{subfig::original_circles}
-                                    Original representation of the dataset in the feature space.
-                                }
-                            }
-                            \ffigbox[\FBwidth]{
-                                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/svm/circles_polar}
-                            }{
-                                \caption{
-                                    \label{subfig::polar_circles}
-                                    Representation of the dataset using polar coordinates
-                                }
-                            }
-                        \end{subfloatrow}
-                    }{
-                        \caption{
-                            \label{fig::circles_transformation}
-                            Example of a transformation of a dataset that can be linearly separable in the maped space. 
-                        }
-                    }
-                \end{figure}
-
-                The original feature space where the data is represented is not always an ideal\footnote{An ideal space is one where distances between points are meaningful.} one.
-                A solution is to find a transformation $\Phi: \mathbb{R}^d \rightarrow \mathscr{H}$ that maps initial feature vectors into a Hilbert space $(\mathscr{H}, \langle\cdot{,}\cdot\rangle_{\mathscr{H}})$ where distances between instances are meaningful.
-                There is no unique map that satisfy this type of properties.
-                We are particularly intersted in a map which transforms the data into a space where they are hopefully linearly separable~\parencite{boser1992training}.
-                This illustrated in Figure~\ref{fig::circles_transformation}.
-                Using a polar coordinate transformation 
-                \begin{align*}
-                    \Phi: \mathbb{R}^2 &\rightarrow \mathbb{R}^2 \\
-                    \begin{bmatrix}
-                        x \\
-                        y
-                    \end{bmatrix} &\mapsto \begin{bmatrix}
-                        \sqrt{x^2 + y^2} \\
-                        \operatorname{arctan}_2(y, x)
-                    \end{bmatrix},
-                \end{align*}
-                the dataset can be linearly separable.
-                In this particular case, the original probability distribution is known as it was generated manually.
-                Moreover, the map codomain is a vector space of the same dimension as the map domain.
-                This is usually not the case: in practice, the right mapping is difficult to come by\footnote{If it exists at all.} and the codomain is usually of a higher dimension possibly infinite.
-                Finding such a map involves usually heavy computations.
-                However, as we are interested in distances between dataset points, there is an easier way around.
-                Using the ``kernel trick'', one can compute any distance in the target space $\mathscr{H}$ using only the scalar product:
-                \begin{align}
-                    \label{eq::kernel_definition}
-                    k: \mathbb{R}^d \times \mathbb{R}^d &\rightarrow \mathbb{R}\\
-                    (\bm{x}, \bm{y}) &\mapsto \langle\Phi(\bm{x}), \Phi(\bm{y})\rangle_{\mathscr{H}} \nonumber.
-                \end{align}
-                Going back to the dual optimization problem stated in Equation~\ref{eq::soft_svm_dual}, we see that only the scalar product between samples is needed.
-                Assuming the existence of an adequate mapping $\Phi$, and if we substitute each point by its representation in the new space, we can rewrite, so called, kernel \gls{acr::svm}.
-                \begin{equation}
-                    \label{eq::kernel_soft_svm_dual}
-                    \begin{aligned}
-                        & \max_{\alpha_1, \alpha_2, \dots, \alpha_n \in \mathbb{R}_+}
-                        & & \sum_{1 \leq i \leq n} \alpha_i - \frac{1}{2}\cdot\sum_{\substack{1\leq l \geq n\\1\leq p \geq n}}\alpha_l\cdot\alpha_p\cdot\tilde{y}^l\cdot\tilde{y}^p\cdot k(\bm{x}^l, \bm{x}^p)\\
-                        &\text{s.t.} & & \sum_{1 \leq i \leq n}\tilde{y}^i\cdot\alpha_i=0 \\
-                        & & & 0 \leq \alpha_i \leq C \; \forall i = 1, 2, \dots, n
-                        \end{aligned}
-                \end{equation}
-
-                There are more theoretical details for kernels which are not discussed herein.
-                For more details on the subject, one can check the work by~\textcite{aronszajn1950theory,shawe2004kernel,vapnik2013nature}.
-
-                \subparagraph{Usual kernels}
-                    The choice of kernels is not easy.
-                    Practitioners experiment with different kernel types and parameters.
-                    One can engineer a kernel specific for their application.
-                    However, in general, there are some usual kernel that are chosen:
-                    \begin{itemize}
-                        \item the native linear kernel:
-                        \begin{equation}
-                            \label{eq::linear_kernel}
-                            k(\bm{x}, \bm{y}) = \bm{x}^\intercal \cdot \bm{y};
-                        \end{equation}
-                        \item the \gls{acr::rbf} kernel: for some parameter $(\gamma) \in \mathbb{R}$
-                        \begin{equation}
-                            \label{eq::rbf_kernel}
-                            k_{\gamma}(\bm{x}, \bm{y}) = \exp\left(-\gamma \cdot \left\lVert \bm{x} - \bm{y} \right\rVert^2\right);
-                        \end{equation}
-                        \item the polynomial kernel: for some parameters $(c, d) \in \mathbb{R}_+ \times \mathbb{N} \setminus \left\{0\right\} $
-                        \begin{equation}
-                            \label{eq::polynomial_kernel}
-                            k_{\gamma, c}(\bm{x}, \bm{y}) = (\bm{x}^\intercal \cdot \bm{y} + c)^d;
-                        \end{equation}
-                        \item the sigmoid kernel: for some parameters $(\gamma, c) \in \mathbb{R}^2$
-                        \begin{equation}
-                            \label{eq::sigmoid_kernel}
-                            k_{\gamma, c}(\bm{x}, \bm{y}) = \gamma \cdot \tanh(\bm{x}^\intercal \cdot \bm{y} + c).
-                        \end{equation}
-                    \end{itemize}
-                    The choice of kernel parameters in important not only for achieving good classification results but also to avoid overfitting problems.
-
-                \subparagraph{\acrlong*{acr::mkl}}
-                    Some operations over kernels always yield valid kernels.
-                    This is true for instance for summation.
-                    In fact, fixing the number of kernels $K\in \mathbb{N} \setminus \left\{0\right\}$, for basis kernels $k_i \; \forall i = 1, 2, \dots, K$ weithed by $\mu_i \in \mathbb{R}_+\; \forall i = 1, 2, \dots, K$,
-                    \begin{equation}
-                        \label{eq::mkl}
-                        k(\bm{x}, \bm{y}) = \sum_{i=1}^K \mu_i \cdot k_i(\bm{x}, \bm{y})
-                    \end{equation}
-                    is also a valid kernel.
-                    Such kernels proved to be better in practice than using single kernels~\parencite{lanckriet2004statistical}.
-                    To simplify the problem, the solution is chosen in the simplex of the basis kernels: i.e., $ (\mu_1, \mu_2, \dots, \mu_K) \in (\mathbb{R}_+)^K  \; s.t. \sum_{i=1}^K \mu_i = 1$.
-                    Multiple schemes were presented in order to solve the \gls{acr::mkl} \gls{acr::svm} problem~\parencite{rakotomamonjy2008simplemkl,varma2009more,sun2010multiple}.
-                    
-            \paragraph{Properties}
-                Herein are presented properties of the \gls{acr::svm} classifier based on a practical point of view.
-                We start by stating some of its advantages:
-                \begin{itemize}
-                    \item Mathematically guaranteed solution: the convex formulation of the problem implies the existence of a global optimum that can be computed efficiently.
-                    \item The \gls{acr::smo} can be adapted to an online setting~\parencite{bordes2005fast}.
-                    \item The soft margin \gls{acr::svm}, with a right tuning of the slackness parameter $C$, can achieve a good generalization.
-                    \item The \gls{acr::svm} is inherently sparse in the sense that it relies only on a small subset of the data which are support vectors.
-                            This implies that with a right kernel the \gls{acr::svm} can handle imbalanced datasets.
-                \end{itemize}
-                On the other hand it suffers also from some drawbacks, listed hereafter:
-                \begin{itemize}
-                    \item Finding a the right kernel to represent that data is not a simple task.
-                            Even with an expert knowledge, one can easily overfit to the training data.
-                    \item In the same sense, parameter fitting is not straight-forward and time-consuming.
-                            Practically, it is a result of a trial and error or grid search approach.
-                    \item Eventhough it can be adapted to multi-class or multi-output settings, the \gls{acr::svm} is natively designed for binary classification.
-                    \item \gls{acr::svm} does not handle well attributes of different types.
-                            Features vectors are preprocessed, usually normalized, before training.
-                    \item \gls{acr::svm} does not yield probabilities natively.
-                            Although it is possible to compute scores that are in the unit interval, these are difficult to interpret as probabilities.
-                \end{itemize}
-
-        \subsubsection{\acrlong*{acr::rf}}
-            \label{subsubsec::state_of_the_art::mlpr::classifiers::rf}
-            A \gls{acr::rf} is an agregation of decision tree classifiers.
-            First, is explained how the latter works.
-            Afterwards, we describe how the aggregation of basic classifiers can be beneficial for classification, especially in the case of decision trees.
-            We end this Section discussing some \gls{acr::rf} properties.
-
-            \paragraph{Decision tree classifier}
-                \begin{figure}[htbp]
-                    \centering
-                    \includestandalone[mode=buildnew, width=\textwidth]{figures/random_forest/decision_tree}
-                    \caption[
-                        A visualization of a decision tree classifier learned using $I_G$ Gini index over the iris dataset.
-                    ]{
-                        \label{fig::decision_tree_graph}
-                        A visualization of a decision tree classifier learned using $I_G$ Gini index over the iris dataset~\parencite{fisher1936use}.
-                        Three classes are possible.
-                        Each non leaf node states a thresholding condition.
-                        For a leaf, its class is presented instead.
-                        ``dist.''stands for distribution of classes in each node.
-                        The whole decision tree overfits to the data with a \SI{100}{\percent} overall accuracy ratio.
-                        However, when cut at depth 2, the overall accuracy ratio does not drop noticeably (\SI{96}{\percent}).
-                    }
-                \end{figure}
-
-                The decision tree classifier consists in successive conditions.
-                It is easily modeled as a tree graph rooted at $r$.
-                Each non leaf node $b$ in tree takes as input an observation $\bm{x}$ which is fed to logical predicate $P_b$\footnote{$P_b(\bm{x})$ can takle only two values.}: exactly two children are possible per node.
-                These predicates are of a specific form: only one dimension $i_b$ of the data is taken into account.
-                The output is then computed by applying a threshold $t_b$ to $x_{i_b}$.
-                This can be simplified as $P_b(\bm{x}) = \mathbb{1}_{x_{i_b} \geq t_b} $.
-                The chosen child is denoted $d_b(\bm{x}) \leftarrow \operatorname{child}(b, \mathbb{1}_{x_{i_b} \geq t_b})$.
-                Leafs are the terminal nodes of the tree and they do not apply any predicate to their input.
-                Instead, based on the assigned class $c(l) \in \left\{1, 2, \dots, C\right\}$ of the leaf $l$, they predict the label of the input.
-                Each dimension $x_i \in \mathscr{X}_i$ is treated separately.
-                Hence, decision trees can handle heterogenous feature vectors that are no longer restricted to be $\mathbb{R}^d$.
-                The decision function of a decision tree classifier can be written as:
-                \begin{equation}
-                    \label{eq::df_decision_tree}
-                    \begin{aligned}
-                        D_{\text{decision tree}}: \prod_{i=1}^{d}\mathscr{X}_i &\rightarrow \left\{1, 2, \dots, C\right\}\\
-                        \bm{x} &\mapsto c\left(d_{d_{\ddots_{d_r(\bm{x})}}(\bm{x})}\right)
-                    \end{aligned}
-                \end{equation}
-                This representation is complicated and too abstract and is never used.
-                The intuitive representation of decision tree classifiers, shown in Figure~\ref{fig::decision_tree_graph}, is generaly prefered.
-                In Figure~\ref{fig::decision_tree_separator}, we can clearly attribute the fact that the separator is an aggregation of vertical and horiontal segments to the fact that only one dimension is taken into acount at a time.\\
-
-                \begin{figure}[htbp]
-                    \centering
-                    \includegraphics[width=.5\textwidth]{images/related_work/decision_tree_separator}
-                    \caption[
-                        Visualization of a decision tree separator trained over generated data in a two dimensional feature space.
-                    ]{
-                        \label{fig::decision_tree_separator}
-                        Visualization of a decision tree separator trained over generated data in a two dimensional feature space.
-                        The separator is composed exclusively of horizontal and vertical lines.
-                        We can also see how the decision tree overfits by adding narrow splits to accomodate lone points surrounded by others with an opposite class.
-                    }
-                \end{figure}
-
-                Up to now, we assumed the fact that the decision tree is already in place.
-                The training step of this supervised classifier consists in determining its structure and all the thresholds.
-                The goal is to have leafs with no prediction errors.
-                In other words, all obsevations that end up in a leaf must be of the same class: the leaf is called pure.
-                Consequently, to each node that is not pure would be associated a predicate that would hopefully distinguish amongst incoming observations.
-                This is done recursively starting from the root.\\
-
-                The choice of the splitting dimension and the threshold at each node is made in the aim of achieving the most gain in the ``purity'' of child nodes.
-                As a consequence, there is a need of a metric $I$ that can describe the heterogeneity, as the opposite of purity, of a node.
-                These are usually based on a probabilistic interpretation as they compute the fraction of observations $p_c$ that go through a node of class $c \in \left\{1, 2, \dots, C\right\}$.
-                Three examples are provided:
-                \begin{description}
-                    \item[Gini index:]
-                    \begin{equation}
-                        \label{eq::gini}
-                        I_G\left(\left(p_c\right)_{c=1, 2, \dots, C}\right) = \sum_{c=1}^{C} p_c \cdot \sum_{\substack{l=1, 2, \dots, C\\l \neq c}} p_l;
-                    \end{equation}
-                    \item[Entropy:]
-                    \begin{equation}
-                        \label{eq::entropy}
-                        I_H\left(\left(p_c\right)_{c=1, 2, \dots, C}\right) = - \sum_{c=1}^{C} p_c \cdot \log_2(p_c);
-                    \end{equation}
-                    \item[Variance:]
-                    \begin{equation}
-                        \label{eq::variance_index}
-                        I_V\left(\left(x_{d_s}^i\right)_{i\in S}\right) = \frac{1}{2 \cdot \vert S \vert^2} \cdot \sum_{(i,j) \in S\times S} \left(x_{d_s}^i - x_{d_s}^j\right),
-                    \end{equation}
-                    where:
-                    \begin{conditions}
-                        d_s & is the chosen dimension to split over;\\
-                        S & $\subset \left\{1, 2, \dots, n\right\}$ is an set of indices.
-                    \end{conditions}
-                \end{description}
-                Considering $S_b$ the set of indices of inputs going through a node $b$, one can compute the gain of a split at node $b$ as:
-                \begin{equation}
-                    \label{eq::split_gain}
-                    G_b \triangleq I(S_b) - \sum_{c \in \left\{d_b(\bm{x}^i): i \in S_b\right\}} I(S_c)
-                \end{equation}
-                The optimal splitting dimension and threshold are chosen so that they maximizes the gain $G_b$.
-                Details of how this is computed is outside ths scope of this manuscript and is not provided herein.
-                For more information on the subject the reader may refer to the work of~\textcite{breiman1984classification}.\\
-
-                Stopping only when total purity is achieved can yield complicated decision trees that overfit easily.
-                This motivates the use for some early stopping criteria:
-                \begin{itemize}
-                    \item a minimal number of observations going through each node.
-                    \item a minimal purity ratio computed as the ratio of all instances going through the node having the dominant class.
-                    \item a maximal depth of the tree.
-                \end{itemize}
-                To conclude, the class at each leaf is taken as the dominant class of instances entering it.
-
-            \paragraph{Bagging decision trees}
-                \begin{figure}
-                    \centering
-                    \includestandalone[mode=buildnew, height=.4\textheight]{figures/random_forest/ensemble}
-                    \caption[
-                        Illustration of the principle of ensemble methods.
-                    ]{
-                        \label{fig::ensemble} Illustration of the principle of ensemble methods.
-                        For each decision function $\forall l=1,2,3\;D_l$, is represented the set where the each classifier fails $F(D_l) \leftarrow \left\{(\bm{x}, y) \in \prod_{i=1}^{d}\mathscr{X}_i \times \left\{1, 2, \dots, C\right\} : D_l(\bm{x}) \neq y\right\}$.
-                        In the case of unweigthed bagging, the aggregated classifier will fail when more than half of the classifiers fail.
-                        In this case, the set $F(D_{\text{bagging}})$ is the union of intersections of two different $F(D_l)$: $F(D_{\text{bagging}}) = \bigcup_{l\neq p} F(D_l) \cap F(D_p)$.
-                        In this case where classifiers are diverse, the aggregated one fails less frequently than each single one.
-                    }
-                \end{figure}
-
-                \begin{figure}
-                    \centering
-                    \ffigbox[\FBwidth]{
-                        \begin{subfloatrow}[2]
-                            \ffigbox[\FBwidth]{
-                                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/random_forest/circles_dt}
-                            }{
-                                \caption{
-                                    \label{subfig::decision_tree_circles} Decision tree separator
-                                }
-                            }
-                            \ffigbox[\FBwidth]{
-                                \includestandalone[mode=buildnew, width=.45\textwidth]{figures/random_forest/circles_rf}
-                            }{
-                                \caption{
-                                    \label{subfig::rf_circles} \gls{acr::rf} separator (in purple) with constituing decision trees
-                                }
-                            }
-                        \end{subfloatrow}
-                    }{
-                        \caption[
-                            Difference between a single decision tree and an \gls{acr::rf} visualized in feature space for a generated toy data.
-                        ]{
-                            \label{fig::decision_tree_vs_rf}
-                            Difference between a single decision tree and an \gls{acr::rf} visualized in feature space for a generated toy data.
-                            We see how an \gls{acr::rf} aggregates multiple shallow decision trees in order to achieve a good generalization power instead of overfitting to the sampled data.
-                        }
-                    }
-                \end{figure}
-
-                While reducing the complexity of the decision tree can help avoid overfitting problems, one can risk, on the other hand, an underfitting in the classification.
-                In order to find a compromise, an ensemble method can be adopted.
-                The principle of this type of approaches is to multiply different underperforming classifiers and aggregate them together.
-                These classifiers should be taken as diverse as possible in order to cover the whole feature space.
-                The aggregation is achieved through a majority vote and, if the classifiers can provide probabilities, the vote can be weighted by the latter.
-                This is illustrated in Figure~\ref{fig::ensemble}.
-                Formally, the decision function of an unweighted aggregation of classifiers $\left(D_l\right)_{l = 1, 2, \dots, L}$ can be written as:
-                \begin{equation}
-                    \label{eq::decision_function_hard_ensemble}
-                    \begin{aligned}
-                        D_{\text{hard ensemble}, \left(D_l\right)_{l = 1, 2, \dots, L}}: \prod_{i=1}^{d}\mathscr{X}_i &\rightarrow \left\{1, 2, \dots, C\right\}\\
-                        \bm{x} &\mapsto \arg \max_{c = 1, 2, \dots, C}\lvert\left\{l\in\left\{1, 2, \dots, L\right\}: D_l(\bm{x}) = c\right\}\rvert
-                    \end{aligned},
-                \end{equation}
-                while the weighted aggregation using classifier output probabilities $\left(p_l\right)_{l = 1, 2, \dots, L}$ is expressed as:
-                \begin{equation}
-                    \label{eq::decision_function_weighted_ensemble}
-                    \begin{aligned}
-                        D_{\text{weighted ensemble}, \left((D_l, p_l)\right)_{l = 1, 2, \dots, L}}: \prod_{i=1}^{d}\mathscr{X}_i &\rightarrow \left\{1, 2, \dots, C\right\}\\
-                        \bm{x} &\mapsto \arg \max_{c = 1, 2, \dots, C} \sum_{l=1}^{L} p_l\left(D_l(\bm{x}) = c\right) 
-                    \end{aligned}.
-                \end{equation}
-
-                Bagging is an instance of ensemble approach.
-                In order to have different classifiers specializing in a certain pattern, each one is trained on a randomly determined subset of the training data~\parencite{breiman1996bagging}.
-                The idea is that each one of these subsets would exhibit a particular aspect that is crucial for the classification.
-                The aggregation of each classifier knowledge would eventually help generalize at prediction time.\\
-
-                \gls{acr::rf} do not only rely on a simple bagging but also on a second random sampling: this time it is on the feature dimensions.
-                When splitting a node at training time, only a subset of randomly chosen dimensions is considered~\parencite{breiman2001random}.
-                We depict in Figure~\ref{fig::decision_tree_vs_rf} the difference between an \gls{acr::rf} and a single decision tree.
-
-            \paragraph{Properties}
-                \glspl{acr::rf} are often used in practice as they offer some advantages.
-                Hereafter are listed some of these:
-                \begin{itemize}
-                    \item As decision trees deal with each feature independently, they can natively, as well as \glspl{acr::rf}, handle heterogenous data.
-                        It can handle boolean features along with integer or real ones.
-                    \item Since at each time only a subset of features are considered, \glspl{acr::rf} can scale easily under high dimensionality.
-                    \item The ensemble character of \glspl{acr::rf} allows them to adapt to outliers and hence, provided a large enough trainning dataset, can achieve a good generalization power.
-                    \item Prediction relies on simple comparisons and can be computed quickly.
-                    \item They inherently yield probabilities that are consistent.
-                \end{itemize}
-                As seen with \glspl{acr::svm}, \glspl{acr::rf} have also some issues:
-                \begin{itemize}
-                    \item It is not simple to interpret results of \glspl{acr::rf} and connect specific trees to recognizable patterns.
-                    \item They can take up a lot of memory to store all trees.
-                            They can also require a lot of computations to train.
-                    \item They do not allow the possibility of using kernels to represent the data.
-                    \item They do not handle well imbalanced datasets and must be adapted accordingly.
-                \end{itemize}
-                
     \subsection{Feature extraction}
         \label{subsec::state_of_the_art::mlpr::feature_extraction}
             Before feeding observations to classifiers, representative features are extracted.
@@ -890,7 +298,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
             Features are either hand crafted or learned (using deep learning) to fit a specific need.
             Image feature extraction is one such example where attributes are drawn from images in order to describe specific patterns such as edges~\parencite{canny1986computational}, corners~\parencite{harris1988combined} or \gls{acr::sift}~\parencite{lowe2004distinctive}.
             Herein, we present a specific type of feature extractors called \glspl{acr::scatnet}.
-            Images can also be considered as specific type of graphs with a grid structure.
+            Images can also be considered as a specific type of graph with a grid structure.
             In the same sense, features can be extracted from graphs.
             We will describe hence how to describe graphs for classification.
 
@@ -903,7 +311,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
 
             Some properties are always required in order to achieve a good representation $\Phi$ of an image. 
             A scene that is captured from different points of view, while yielding different images, should have close representations.
-            Just as with interset point detection~\parencite{lowe2004distinctive}, the representation of an image should be invariant to scale, translation and rotation~\parencite{mallat2012group,sifre2013rotation,bruna2013invariant}.
+            Just as with intersect point detection~\parencite{lowe2004distinctive}, the representation of an image should be invariant to scale, translation and rotation~\parencite{mallat2012group,sifre2013rotation,bruna2013invariant}.
             Since images illustrate not only rigid objects, a good representation should allow small local deformations in the signal that can be attributed to distortions of non-rigid objects.\\
 
             \paragraph{Mathematical notations}
@@ -1002,20 +410,20 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
                 \end{conditions}
 
             \paragraph{\gls*{acr::scatnet}: a reverse engineered \gls*{acr::cnn}}
-                \glspl{acr::cnn} learn such a representation which verifies these previous conditions stated in Equations~\ref{eq::contractive},~\ref{eq::invariance} and~\ref{eq::stable_deformation}.
+                \glspl{acr::cnn} learn such a representation in the hopes of verifying these previous conditions stated in Equations~\ref{eq::contractive},~\ref{eq::invariance} and~\ref{eq::stable_deformation}.
                 In fact, it is possible by virtue of some basic building blocs.
                 First, since the weights are learned based on a classification objective, images with similar content are supposed to be mapped to the same region.
                 Secondly, pooling layers in \glspl{acr::cnn} provide a solution for invariance to translations and local deformations up to a scale.\\
 
-                \glspl{acr::scatnet} formalizes these ideas using wavelet transforms.
-                Actually, \glspl{acr::scatnet} were originally developped to better understand \glspl{acr::cnn}.
+                \glspl{acr::scatnet} formalize these ideas using wavelet transforms.
+                Actually, \glspl{acr::scatnet} were originally developed to better understand \glspl{acr::cnn}.
                 The idea is to apply linear convolutional operators followed by a non-linearity and some pooling operators.
                 In a \gls{acr::scatnet} the learned filters are replaced by a specific wavelet decomposition, the non-linearity is achieved using the modulus operator and pooling is obtained through a low pass filter.
                 The low-pass filter is critical for the invariance condition, while the lost high frequencies are retrieved using the wavelet convolutions.
                 The non-linearity, just as in \glspl{acr::cnn}, is necessary in order to obtain interesting non-linear final representations.\\
 
                 \subparagraph{Wavelets filter bank}
-                    We need two sets of wavelets: spatial and angular.
+                    We need two sets of wavelets: spatial and angular ones.
                     Spatial wavelet filters are derived based on a mother wavelet $\psi: \mathbb{R}^2 \rightarrow \mathbb{C}$ as follows:
                     \begin{equation}
                         \label{eq::translation_filter_bank}
@@ -1052,7 +460,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
                     These are separable filters that can help speed up the convolution computations as shown in~\textcite{sifre2013rotation}.
                     In practice, $\psi$(\textit{resp.} $\bar\psi$) are taken as two (\textit{resp.} one) dimensional Morlet wavelets (cf. Figure~\ref{subfig::morlet_filters}), while $\phi$ is taken as a Gaussian~\parencite{sifre2013rotation,bruna2013invariant,oyallon2015deep}.
                     A finite number $L$ of orientations are possible for angle indices: $\theta \in \left\{\frac{l\cdot\pi}{L}: l=1,2\dots,L\right\}$.
-                    In Figure~\ref{fig::morlet_vs_learned}, we can see how the designed filter bank is similar to the ones learned by a \gls{acr::cnn}.
+                    In Figure~\ref{fig::morlet_vs_learned}, we can see how the designed filter bank is similar to the one learned by a \gls{acr::cnn}.
                     \begin{figure}
                         \centering
                         \ffigbox{
@@ -1109,7 +517,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
                     \end{equation}
                     An image is a discretization of a two dimensional signal.
                     As a consequence, we can only apply the first transform in Equation~\ref{eq::wavelet_transform_1}.
-                    The result of such a mapping is an example of a signal on which one can apply the second transform from Equation~\ref{eq::wavelet_transform_2}.
+                    The result of such a mapping is an example of a signal to which one can apply the second transform from Equation~\ref{eq::wavelet_transform_2}.
                     For the right choice of wavelets, these operators can be proven to be invertible, contractive and Lipschitz stable to deformations~\parencite{mallat2012group}.\\
 
                     By applying a modulus we get the basic building bloc of \glspl{acr::scatnet} called the wavelet-modulus operator: $x \mapsto \vert x\ostar\psi_{\lambda} \vert$.
@@ -1172,7 +580,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
                         \label{eq::cascade_second}
                         \widetilde{U}_{i_2,\xi_2, \theta_2} \circ U_{i_1, \theta_1}(x)
                     \end{equation}
-                    Once again, an average pooling is applied on the latter:
+                    Once again, an average pooling is applied to the latter:
                     \begin{equation}
                         \label{eq::scatter_second}
                         S_2[x](u, i_1, \theta_1, i_2, \theta_2, \xi_2) \triangleq \widetilde{U}_{i_2,\xi_2, \theta_2} \circ U_{i_1, \bullet} \ostar_{SE(2)} \tilde{\phi}_I(u, \theta_1).
@@ -1208,7 +616,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
                     A scale-space averaging is thus applied to achieve the sought invariance~\parencite{sifre2013rotation}.\\
 
                     In contrast,~\textcite{oyallon2015deep} propose to keep only the translation invariance and let the classifier decide on the relevance of rotation and scale invariance, much like in~\parencite{cohen2016group}.
-                    To do so only a spatial averaging convoluation is applied as $x \mapsto \tilde{x}(\bullet, \omega) \star \phi_I$ which is covariant to rotations.
+                    To do so only a spatial averaging convolution is applied as $x \mapsto \tilde{x}(\bullet, \omega) \star \phi_I$ which is covariant to rotations.
                     Similarly, they drop the scale-space averaging at the end, while the logarithm guaranties the covariance of the signal to scaling effects.
                     The operations are also conducted in a way that renders the shape of the \gls{acr::scatnet}, shown in Figure~\ref{fig::scatnet}, more like that of \gls{acr::cnn}.
 
@@ -1219,7 +627,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
                             Illustration of a \acrshort*{acr::scatnet}.
                         ]{
                             \label{fig::scatnet} Illustration of a \gls{acr::scatnet}.
-                            At each level are computed are computed convolutions with a filter bank followed by a modulus operator.
+                            At each level are computed convolutions with a filter bank followed by a modulus operator.
                             The scattering coefficients are obtained then by a low-pass filter (in blue).
                             In practice, scattering coefficients are only computed for increasing scale paths up to level $2$.
                         }
@@ -1234,7 +642,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
             A valid representation for graphs should then take care of these two issues: incorporate all possible graph sizes and be invariant to graph isomorphisms.
             As accustomed in statistical learning, one way to alleviate these issues is to directly compare graphs using kernels as seen previously in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.\\
             
-            This Section does not aim at presenting a thourough survey of graph kernels.
+            This Section does not aim at presenting a thorough survey of graph kernels.
             The work of~\textcite{ghosh2018journey} categorizes graph kernels depending on the used methodology.
             A different approach is proposed in~\textcite{kriege2019survey}, where graph kernels are studied based on the underlying graphs.\\
 
@@ -1243,7 +651,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
             We will present hereafter some graph kernels which were used in this work, namely, continuously node attributed ones, as well as those devoted only to its structural properties.\\
 
             \paragraph{Basic kernels}
-                Let $G = \left(V, E\right)$ an undirected graph with vertices $v\in V$ and edges $e \in E =\left\{\left\{u, v\right\}: (u, v) \in V\times V\right\}$.
+                Let $G = \left(V, E\right)$ be an undirected graph with vertices $v\in V$ and edges $e \in E =\left\{\left\{u, v\right\}: (u, v) \in V\times V\right\}$.
                 Attributes can be associated to each node $a: V \rightarrow \mathbb{R}^{d_V}$ or edge $b: E \rightarrow \mathbb{R}^{d_E}$.\\
 
                 The most basic graph kernel would correspond to a scalar product of a global hashing vector of all attributes.
@@ -1358,9 +766,9 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
 
                 \subparagraph{Special cases}
                     This defintion actually generalizes a family of graph kernels based on walks on graphs~\parencite{vishwanathan2010graph}.
-                    Setting $p_{\times} \propto 1$ and $q_{\times} \propto 1$ and , two special cases are of interest.
+                    Setting $p_{\times} \propto 1$ and $q_{\times} \propto 1$ and, there are two cases of interest:
                     \begin{itemize}
-                        \item $\forall k\in \mathbb{N} \; \lambda_k = \lambda^k$: this gives rise to a geometric random kernel:
+                        \item Let \(\lambda \in \mathbb{R}^*_+\), we set \(\forall k\in \mathbb{N} \; \lambda_k = \lambda^k\): this gives rise to a geometric random kernel:
                                 \begin{equation}
                                     \label{eq::geometric_random_kernel}
                                     k_{grw}(G, G') = \begin{bmatrix}
@@ -1373,12 +781,12 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
                                     \end{bmatrix}.
                                 \end{equation}
                                 Let \(\lambda_{\times}\) the largest eigenvalue of \(A_{\times}\).
-                                For this kernel to be valid, the following condition must be valid:
+                                For this kernel to be valid, the following condition must hold:
                                 \begin{equation}
                                     \label{eq::condition_geometric_kernel_convergence}
                                     \lambda < \frac{1}{\lambda_{\times}}
                                 \end{equation}
-                        \item $\forall k\in \mathbb{N} \; \lambda_k = \frac{\lambda^k}{k!}$: this yields the so called exponential random kernel:
+                        \item Let \(\lambda \in \mathbb{R}^*_+\), we set \(\forall k\in \mathbb{N} \; \lambda_k = \frac{\lambda^k}{k!}\): this yields the so called exponential random kernel:
                                 \begin{equation}
                                     \label{eq::geometric_random_kernel}
                                     k_{erw}(G, G') = \begin{bmatrix}
@@ -1393,11 +801,12 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
                     \end{itemize}
                     These graph kernels were already defined in~\parencite{gartner2003graph}.\\
 
-                Computationally, these involve heavy computations.
+                Computationally, these kernels involve heavy computations.
                 \textcite{vishwanathan2010graph} proposed efficient numerical algorithms to alleviate this problem.
                 However, these graphs suffer from other issues.
                 First, the kernel does take into account the attributes of graphs if they exist, although it is possible to adapt.
-                Secondly, these kernels suffer from tottering which is the fact that the random walk is mostly consistent of multiple movements between a small subset of vertices in a row.
+                Secondly, these kernels suffer from tottering.
+                The latter being the fact that random walks are mostly consistent of multiple movements between a small subset of vertices in a row.
                 Third, related to the previous point, the random walk would spend much time on central nodes that connect to most other nodes adding to their contribution to the kernel, while peripherial ones that can hold the most distinctive feature of the structure are watered down.
                 It is possible to address these issues as demonstrated by~\textcite{horvath2004cyclic, mahe2004extensions}.
                 However these kernels cannot be guaranteed to be computed in polynomial time~\parencite{vishwanathan2010graph}.
@@ -1406,7 +815,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
                 This is also a kernel which takes advantage only of the structure of graphs.
                 It relies on the definition of Lov\'asz number of a graph $\vartheta(G)$.
                 For each vertex $v \in V$, we can assign a unit vector \(\bm{w}_v \in \left\{u \in \mathbb{R}^d: \left\lVert u \right\rVert = 1 \right\}\).
-                The set of vectors \(W(G) \triangleq \left(\bm{w}_v\right)_{v \in V}\) is said to be an orthonormal representation of a graph $G$ is a set of such vectors if and only if:
+                The set of vectors \(W(G) \triangleq \left(\bm{w}_v\right)_{v \in V}\) is said to be an orthonormal representation of a graph $G$ if and only if:
                 \begin{equation*}
                     \forall \left\{u,v\right\} \notin E \Rightarrow \bm{w}_u^\intercal\cdot \bm{w}_v=0.
                 \end{equation*}
@@ -1603,8 +1012,8 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
                     \label{eq::propagation_kernel}
                     k_p(G, G') = \sum_{t=1}^{t_{\max}} k_s(G_t, G_t').
                 \end{equation}
-                Two points are still to be precised.
-                First, the type of base kernels to use and Secondly, the attribute propagation scheme.\\
+                Two points are still to be discussed.
+                First, the type of base kernels to use, and secondly, the attribute propagation scheme.\\
 
                 \subparagraph{Efficient base kernels through hashing}
                     Knowing the corresponding feature vector extractor $\phi_s(G)$ makes the computation of the simple graph kernel efficient~\parencite{shervashidze2011weisfeiler,neumann2016propagation}.

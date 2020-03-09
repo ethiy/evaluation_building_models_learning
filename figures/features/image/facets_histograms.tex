@@ -1,0 +1,120 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\usepackage{graphicx}
+\usepackage{standalone}
+\usepackage{pgfplots}
+
+\begin{document}
+	\begin{tikzpicture}
+		\node (image) {\includegraphics[width=5cm, angle=270]{images/introduction/graphical_abstract/orthoprojection}};
+
+		\path (image) + (1.56, 0) node (facet_hist_1) {
+			\resizebox{.75cm}{.75cm}{
+				\begin{tikzpicture}background rectangle/.style={fill=white}, show background rectangle
+					\begin{axis}[
+						area style,
+						axis background/.style={fill=white},
+						ymin=0,
+						ytick=\empty,
+						xtick=\empty
+					]
+						\addplot+[ycomb, darkgreen, mark=*, mark options={scale=2, fill=darkgreen}, very thick] plot coordinates {
+							(-8, 3623)
+							(-7, 546)
+							(-6, 159)
+							(-5, 182)
+							(-4, 70)
+						};
+					\end{axis}
+				\end{tikzpicture}
+			}
+		};
+		\path (image) + (.33, -.5) node (facet_hist_2) {
+			\resizebox{.75cm}{.75cm}{
+				\begin{tikzpicture}background rectangle/.style={fill=white}, show background rectangle
+					\begin{axis}[
+						area style,
+						axis background/.style={fill=white},
+						ymin=0,
+						ytick=\empty,
+						xtick=\empty
+					]
+						\addplot+[ycomb, darkgreen, mark=*, mark options={scale=2, fill=darkgreen}, very thick] plot coordinates {
+							(-8, 373)
+							(-7, 546)
+							(-6, 12)
+							(-5, 182)
+							(-4, 2842)
+						};
+					\end{axis}
+				\end{tikzpicture}
+			}
+		};
+		\path (image) + (-.5, .83) node (facet_hist_3) {
+			\resizebox{.75cm}{.75cm}{
+				\begin{tikzpicture}background rectangle/.style={fill=white}, show background rectangle
+					\begin{axis}[
+						area style,
+						axis background/.style={fill=white},
+						ymin=0,
+						ytick=\empty,
+						xtick=\empty
+					]
+						\addplot+[ycomb, darkgreen, mark=*, mark options={scale=2, fill=darkgreen}, very thick] plot coordinates {
+							(-8, 623)
+							(-7, 546)
+							(-6, 1595)
+							(-5, 182)
+							(-4, 4151)
+						};
+					\end{axis}
+				\end{tikzpicture}
+			}
+		};
+		\path (image) + (-1.6, 0.16) node (facet_hist_4) {
+			\resizebox{.75cm}{.75cm}{
+				\begin{tikzpicture}background rectangle/.style={fill=white}, show background rectangle
+					\begin{axis}[
+						area style,
+						axis background/.style={fill=white},
+						ymin=0,
+						ytick=\empty,
+						xtick=\empty
+					]
+						\addplot+[ycomb, darkgreen, mark=*, mark options={scale=2, fill=darkgreen}, very thick] plot coordinates {
+							(-8, 33)
+							(-7, 546)
+							(-6, 1595)
+							(-5, 182)
+							(-4, 41)
+						};
+					\end{axis}
+				\end{tikzpicture}
+			}
+		};
+		\path (image) + (-1.6, 0.16) node (facet_hist_4) {
+			\resizebox{.75cm}{.75cm}{
+				\begin{tikzpicture}background rectangle/.style={fill=white}, show background rectangle
+					\begin{axis}[
+						area style,
+						axis background/.style={fill=white},
+						ymin=0,
+						ytick=\empty,
+						xtick=\empty
+					]
+						\addplot+[ycomb, darkgreen, mark=*, mark options={scale=2, fill=darkgreen}, very thick] plot coordinates {
+							(-8, 33)
+							(-7, 546)
+							(-6, 1595)
+							(-5, 182)
+							(-4, 41)
+						};
+					\end{axis}
+				\end{tikzpicture}
+			}
+		};
+	\end{tikzpicture}
+\end{document}

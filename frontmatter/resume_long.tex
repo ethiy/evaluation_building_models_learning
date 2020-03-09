@@ -1,3 +1,256 @@
-\begin{french}
-    Un chapitre long.
-\end{french}
+\selectlanguage{french}
+\minitoc
+
+\vfill
+
+\section*{Introduction}
+    \addcontentsline{toc}{section}{Introduction}
+
+    L'objectif de cette introduction est de familiariser le lecteur avec les concepts qui sont manipulés dans cette étude et de de motiver la nécessité d'une évaluation sémantique des modèles 3D de bâtiments.\\
+
+    \subsection*{Modélisation 3D de bâtiments}
+        \addcontentsline{toc}{subsection}{Modélisation 3D de bâtiments}
+        On entend par modèle 3D de bâtiment un produit cartographique qui représente la surface du bâtiment en question.
+        Ce dernier est une généralisation de la réalité dont le but n'est pas de représenter minutieusement tous les détails.
+        Cependant, le modèle ne doit pas être loin, en terme géométrique, de du bâtiment qui nous intéresse.
+        Ainsi, la fidélité géométrique est pondérée par rapport à la généralisation.
+        Le bon compromis est choisi en fonction des besoins de l'utilisateur final.
+
+        La géométrie de la surface du modèle n'est pas suffisante pour décrire les objets urbains~\parencite{biljecki2016improved}, et en particulier les bâtiments.
+        La sémantique fait partie intégrante de leur représentation.
+        Les modèles de ville enregistrent d'autres informations comme la fonction de chaque élément architectural.
+        On nomme ce type d'information la sémantique \textit{explicite}.
+        Cette dernière a un effet significatif sur la géométrie du modèle.
+        En effet, les éléments architecturaux correspondent généralement à une ou plusieurs formes géométriques simples, le plus souvent planes~\parencite{kolbe2005citygml}.
+        En conséquence, une information géométrique dense (c'est-à-dire un maillage 3D dense) n'est pas nécessairement la représentation la plus précise.
+        Cet effet est désigné ici par le terme de sémantique \textit{implicite}.
+        Connaître la fonction d'un objet permet donc de représenter sa géométrie de manière efficace.
+        Ainsi, la sémantique implique une compacité dans la représentation des bâtiments.
+        C'est pourquoi le dernier critère a été utilisé, par exemple, dans en plus de la RMSE, comme mesure d'évaluation dans~\parencite{lafarge2012creating}.
+        Ainsi, distingue-t-on désormais entre un modèle 3D et un maillage 3D de bâtiment.
+        Si ce dernier ne prends en compte que la précision géométrique, l'autre véhicule, en plus, des propriétés sémantiques.
+
+        Ces modèles 3D urbains offre plusieurs applications et sont important pour différents domaines.
+        Une étude plus complète de ces applications a été présentée dans~\parencite{biljecki2015applications}.
+        L'objectif est de persuader le lecteur de la pertinence de la modélisation 3D de bâtiments et de l'importance de l'impact qu'elle peut avoir sur tout le monde.
+        En effet, les modèles urbains en 3D répondent à des besoins divers : administratifs, environnementale, scientifique et sociétale.
+        Nous présentons ici les applications liées à préservation de l'environnement qui seront d'une importance capitale pour les années à venir.
+        Les agglomérations urbaines sont l'un des plus gros consommateurs d'énergie.
+        Une utilisation plus efficace de l'énergie est nécessaire pour soutenir la croissance effrénée des zones urbaines.
+        C'est pourquoi il est nécessaire de quantifier la consommation d'énergie des établissements urbains~\parencite{wate20153d} ou les coûts de modernisation~\parencite{previtali2014automatic}.
+        ~\textcite{biljecki2015propagation} utilisent également des modèles 3D de bâtiments afin de prévoir l'irradiation solaire.
+        En fait, l'estimation du potentiel solaire peut être utile pour évaluer les avantages de projets de panneaux solaires coûteux.
+        Ce type d'études peut également être appliqué à l'urbanisme, car les simulations pourraient être subies pour les futurs développements urbains.\\
+
+        Le sujet de la modélisation 3D des bâtiments a été largement étudié depuis plus de vingt ans.
+        Cependant, il existe encore quelques problèmes non résolus dans ce domaine~\parencite{musialski2013survey,lafarge2015some}.
+        Le premier relève de la donnée acquise qui peut souffrir de divers défauts (bruit d'acquisition, recalage de données, données manquantes, \dots) qui sont répercutés sur le modèle final.
+        La deuxième problématique touche à l'automatisation qui reste encore inatteignable pour le moment.
+        On peut citer aussi un troisième verrou à lever: l'évaluation qui est encore réalisé de façon manuelle.
+
+    \subsection*{\'Evaluation de modèles de bâtiments}
+        \addcontentsline{toc}{subsection}{\'Evaluation de modèles de bâtiments}
+        L'évaluation de modèles 3D de bâtiments peut porter sur la vérification de leur cohérence topologique.
+        Un travail considérable a été accompli afin de parvenir à une représentation standardisée des modèles 3D des villes.
+        Cela a abouti à la norme CityGML de l'Open Geospatial Consortium (OGC)~\parencite{groger2012citygml}.
+        Cependant, dans la pratique, elle n'est pas toujours respectée, comme le montre~\parencite{biljecki2016most}, où jusqu'à \SI{89}{\percent} des modèles se sont avérés non valides du point de vue topologique.
+        Cela peut expliquer pourquoi le sujet de l'inspection automatique de la cohérence topologique des modèles de ville a attiré une forte attention dans la communauté des SIG.
+        On peut noter en particulier les travaux présentés dans~\parencite{ledoux2013validation} qui est le premier a explorer pleinement les possibilités topologiques offertes par la norme CityGML.\\
+
+        L'évaluation de modèles 3D de bâtiments peut relever aussi de la comparaison entre la géométrie du modèle 3D et la géométrie réelle du bâtiment.
+        Deux moyens peuvent être utilisés pour juger de la qualité de la représentation géométrique d'un bâtiment.
+        L'évaluation manuelle repose sur l'interaction humaine pour déterminer dans quelle mesure le modèle est proche de la réalité.
+        L'approche automatique s'appuie uniquement sur le modèle et d'autres données externes sans impliquer un opérateur humain dans la boucle.
+        La dernière approche est la plus intéressante, mais aussi la plus difficiles.
+        En effet, même si l'évaluation de la géométrie peut s'apprêter à être automatisé, le point névralgique reste l'aspect sémantique de l'évaluation.
+        Bien que cette évaluation sémantique soit facile à réaliser manuellement, elle resiste encore à l'automatisation.
+
+    \subsection*{Contributions}
+        \addcontentsline{toc}{subsection}{Contributions}
+        Basée sur la discussion précédente, nous avons adopté une orientation de recherche qui a rarement été prise jusqu'à présent, pour autant que nous le sachions.
+        Notre objectif est d'évaluer la qualité des modèles 3D de bâtiment de manière \textbf{automatique} et à \textbf{grande échelle}.
+
+        \begin{enumerate}
+            \item Une taxonomie hiérarchique et adaptative des erreurs est proposée.
+            \item Une évaluation sans modèles 3D de bâtiment de référence.
+            \item Des vecteurs attributs afin de caractériser les modèles 3D de bâtiment ainsi que de les comparer à des images ou Modèle numérique de surface (MNS).
+            \item Une étude de passage à l'échelle pour la chaîne de traitement établie.
+            \item Un ensemble d'outils pour traiter la géométrie des modèles 3D de bâtiment.
+        \end{enumerate}
+
+\section*{Qualification de modèle 3D de bâtiments}
+    \addcontentsline{toc}{section}{Qualification de modèle 3D de bâtiments}
+
+    \subsection*{\'Etat de l'art}
+        \addcontentsline{toc}{subsection}{\'Etat de l'art}
+            Différentes méthodes de qualification de modèles 3D urbains ont été proposées.
+            Elles peuvent être classées selon les critères sur lesquelles elles s'appuient: \textbf{indices géométriques de précision} ou \textbf{erreurs sémantiques} (topologiques ou géométriques).
+            Les indices géométriques permettent de quantifier la précision d'une modélisation à partir de la précision de points particuliers (sommets, points d'intersection \dots), des surfaces ou des volumes des modèles 3D en les comparant à des données de références de plus grande précision~\parencite{zeng2014multicriteria}.
+            Ces indices ne permettent pas de bien décrire les défauts d'une reconstruction et sont, la plupart du temps, trop locaux.
+            Une taxonomie d'erreurs sémantiques est donc préférable.
+            Elle peut reposer sur le paradigme des feux de circulation~\parencite{boudet2006supervised} (Correct, Acceptable, Généralisé et Faux), mais nécessite de définir le niveau de généralisation acceptable pour une reconstruction.
+            La taxonomie peut également adopter le point de vue des méthodes de reconstruction. 
+            Les erreurs sont, alors, discriminées en erreurs d'emprise de bâtiments (contour erroné, bâtiment inexistant, cours intérieure manquante et emprise imprécise), en erreurs de reconstruction intinsèques (sous-segmentation, sur-segmentation, toit inexact, translation en Z) à la méthode et en erreur due à l'occlusion végétale~\parencite{michelin2013quality}.
+            L'évaluation d'un modèle urbain est donc faite grâce une classification supervisée qui prend comme étiquettes les erreurs ainsi définies.
+            Pour caractériser ces modèles, des attributs peuvent être calculés à partir des images aériennes ou des MNS à très haute résolution spatiale (\SIrange{20}{25}{\cm}), en comparant des segments 3D ou des indices de corrélation de texture, par exemple~\parencite{boudet2006supervised, michelin2013quality}.
+            La plupart du temps, la difficulté réside dans le choix de la taxonomie.
+            Il faut éviter qu'elle soit trop générale pour ne pas être surajustée par rapport à une scène ou une méthode de reconstruction donnée.
+
+    \subsection*{Une taxonomie d'erreurs de modélisation}
+        \addcontentsline{toc}{subsection}{Une taxonomie d'erreurs de modélisation}
+        Pour définir une nouvelle taxonomie générique mais flexible, deux critères dont pris en compte: le Niveau de Détails (LoD) et la \textit{finesse} de l'erreur.
+        La \texttt{finesse} représente le niveau de spécificité des erreurs.
+        Une erreur est dite de \texttt{finesse} maximale si elle correspond à une action unitaire de la part d'un opérateur au moment de sa correction.
+        On définit ainsi ce que l'on appellera une erreur \texttt{atomique}.\\
+
+        Du point de vue opérationnel, les bâtiments ne sont pas tous qualifiables.
+        En effet, quelques bâtiments peuvent être occultés par la végétation ou se trouver au bord de la région traitée.
+        Dans ces cas pathologiques, nous estimons que la qualification n'est pas un problème bien défini.
+        Nous discriminons, ainsi, entre bâtiments \texttt{qualifiables} et bâtiments \texttt{non qualifiables}.
+        Cette classification est considérée de \texttt{finesse} = 0.
+        Au niveau de \texttt{finesse} suivant, les bâtiments sont classés selon quils sont \texttt{Valides} ou \texttt{Erronés}.
+        Ces derniers sont ensuite divisés selon le Niveau de Détail LoD en familles d'erreurs de \texttt{finesse} = 2.
+        En effet, une famille d'erreurs, nommée \texttt{Erreurs de Bâtiment}, est consacrée aux défauts qui affectent le bâtiment dans son intégralité (niveau LoD-0 \(\cup\) LoD-1).
+        La famille \texttt{Erreurs de Facette} contient les erreurs qui concernent les facettes --- façades ou toit --- des bâtiments (niveau LoD-2 \(\cup\) LoD-3).
+        Ces familles contiennent chacune des erreurs \texttt{atomiques} de \texttt{finesse} maximale égale à $3$.\\
+
+        Cette catégorisation est indépendante de la méthode de reconstruction ou de la scène à modéliser.
+        L'étiquetage est non redondant: les erreurs \texttt{atomiques} relevées sont indépendantes entre elles et ne représentent que des défauts particuliers, topologiques ou géométriques.
+        Les erreurs topologiques relèvent les erreurs de structure du modèle reconstruit.
+        Les erreurs géométriques mettent en évidence l'imprécision de la reconstruction.
+        Chaque erreur \texttt{atomique} se voit attribuée une note, au moment de l'annotation par l'opérateur, sur une échelle de \numrange{0}{10}, et représente le degré de confiance en la présence du défaut.
+        Cela revient à une discrétisation de la probabilité d'existence de l'erreur.
+        Les erreurs de finesse inférieure héritent des erreurs de leurs filles (i.e. de \texttt{finesse} plus grande).
+        En effet, elles sont aussi sures que les erreurs qu'elles contiennent.
+        Leur note attribuée est donc le maximum des notes des erreurs filles.\\
+
+        Au moment de la qualification, trois paramètres entrent en jeu: un niveau de détail d'évaluation (\textbf{eLoD}), un niveau de \texttt{finesse} d'évaluation (\textbf{eFin}) et l'\textbf{exclusivité}.
+        En précisant un \textbf{eLoD} donné, les erreurs de plus grand Niveau de Détail sont ignorées.
+        En fixant une \textbf{eFin} donnée, on ne discrimine que selon les erreurs du même ordre de \texttt{finesse}.
+        Le dernier paramètre est l'\textbf{exclusivité} des erreurs.
+        Dans la cas exclusif, nous ne relevons que la famille d'erreurs représentant le plus petit Niveau de Détail: c'est un problème de classification Multi-Classes.
+        Dans le cas contraire, nous rapportons toutes les erreurs (i.e. Un objet peu être affecté par plusieurs erreurs): c'est un problème Multi-\'Etiquettes.\\
+
+        On propose ici les familles d'erreurs suivantes pour le cas de modélisation de bâtiments à partir de données aériennes ou satellitaires:
+
+        \begin{enumerate}
+            \item \texttt{Erreurs de Bâtiment}:
+            \begin{itemize}
+                \item Sous segmentation (\texttt{BOS}): deux bâtiments, ou plus, représentés comme un seul;
+                \item Sur segmentation (\texttt{BUS}): un bâtiment est modélisé en deux ou plusieurs bâtiments;
+                \item Frontières imprécises (\texttt{BIB}): les frontières de l'emprise du bâtiment sont inexactes;
+                \item Topologie incorrecte (\texttt{BIT}): imprécise: la topologie de l'emprise du bâtiment est inexacte;
+                \item Géometrie imprécise (\texttt{BIG}): la géometrie du bâtiment est mal estimée;
+            \end{itemize}
+            \item \texttt{Erreurs de Facette}:
+            \begin{itemize}
+                \item Sous segmentation (\texttt{FOS}): deux facettes, ou plus, représentées comme une seule;
+                \item Sur segmentation (\texttt{FUS}): une facette est modélisée en deux ou plusieurs facettes;
+                \item Frontières imprécises (\texttt{FIB}): les frontières de la facette sont inexactes;
+                \item Topologie incorrecte (\texttt{FIT}): imprécise: la topologie de la facette est inexacte;
+                \item Géometrie imprécise (\texttt{FIG}): la géometrie de la facette est imprécise.
+            \end{itemize}
+        \end{enumerate}
+
+    \subsection*{L'apprentissage au service de la qualification}
+        \addcontentsline{toc}{subsection}{L'apprentissage au service de la qualification}
+        Afin de satisfaire à les contraintes de \textbf{passage à l'échelle} et \textbf{automatisation}, nous proposons de formuler le problème comme un problème d'apprentissage supervisé.
+        Les erreurs sont considérées comme des étiquettes à prédire.
+        Des attriibuts sont calculées de manière à décrire les bâtiments observés.
+        En réalité, en première approche, l'existence de toutes les erreurs est prédite au niveau du bâtiment, même pour les étiquettes d'\texttt{Erreurs de Facette}.\\
+        
+        Nous proposons ainsi des attributs de bases pour les modèles de bâtiments qui sont les plus simples possibles.
+        Ils sont de trois types:
+        \begin{description}
+            \item[Les attributs géométriques: ] sont calculés à partir de statistiques (histogramme ou une liste contenant le maximum, le minimum, la moyenne, le médian et/ou l'écart type) de quelques propriétés géométriques des facettes du bâtiments: nombre de sommets, aire de chaque facette, circonférence de chaque surface, angles entre les normales de facettes adjacentes, distance entre les centroïdes des facettes adjacentes et/ou toutes les facettes.
+            \item[Les attributs basés sur la hauteur: ] sont issus d'un histogramme de la différence entre le modèle 3D et un MNS externe à très haute résolution spatiale.
+            \item[Les attributs basés sur l'image: ] sont issus d'un histogramme de la similarité entre les arrêtes du modèle 3D projeté dans la direction nadir et des arrêtes réelles dans l'orthoimage correspondante.
+        \end{description}
+
+        La résolution du MNS et de l'orthoimage doit doit inférieure à l'ordre de grandeur des bâtiments mais aussi plus grande que l'erreur planimétrique du modèle 3D afin de garantir une robustesse au bruit.
+        Différents attributs (\(\text{géométrie}(4\times5) + \text{hauteur}(20) + \text{image}(20) = 60\)) obtenus sont en suite concaténés dans un seul vecteur.
+\section*{Expérimentation}
+    \addcontentsline{toc}{section}{Expérimentation}
+
+    \subsection*{Données}
+        \addcontentsline{toc}{subsection}{Données}
+        Nous avons sélectionné des modèles 3D tirés de trois villes différentes de France afin d'évaluer la performance de notre cadre: \textbf{\'Elancourt}, \textbf{Nantes}, et le XIIIe arrondissement de Paris (\textbf{Paris-13}).
+        La petite ville d'\textbf{\'Elancourt} contient divers types de bâtiments: des zones résidentielles avec des bâtiments et à toit en croupe ainsi que des quartiers avec de grands bâtiments industriels à toit plat.
+        \textbf{Nantes} représente un cadre urbain plus dense mais avec une diversité de bâtiments plus faible.
+        \textbf{Paris-13} se compose principalement de tours à toit plat qui coexistent avec des bâtiments de style haussmannien dont les toits sont généralement très fragmentés.
+        La scène d'\textbf{\'Elancourt} (\textit{resp.} \textbf{Nantes} et \textbf{Paris-13}) contient 2 009 (\textit{resp.} 748 et 478) modèles de bâtiments annotés.
+        Afin de traiter ces modèles, \verb!proj.city!, une bibliothèque \verb!C++!, a été développée en utilisant la bibliothèque \verb!CGAL!~\parencite{fabri2000design}.
+        Grâce à cet outil, nous pouvons projeter des modèles de bâtiments dans la direction du nadir et produire les cartes de hauteur correspondantes.
+        La résolution spatiale du MNS et de l'image orthorectifiée est de 0,06 m pour la première zone, alors qu'elle est de 0,1 m pour les autres.\\
+
+        Les modèles 3D ont été générés à partir d'une base de données d'emprises cadastrales~\parencite{durupt2006automatic}.
+        L'extrapolation de la topologie du toit se fait en simulant les formes de toits plausibles, à partir des images orientées, avant de les confronter à un MNS à \SI{0,06}{\m} de résolution.
+        Les façades du modèle relient la ligne de goutière au sol.
+        On obtient une modélisation 2.5D de la scène à un LoD-2.
+
+    \subsection*{Expériences Vanille de base}
+        \addcontentsline{toc}{subsection}{Expériences Vanille de base}
+        Nous avons utilisé un classifieur de type Forêt aléatoire sur deux types d'attributs : un simple RMSE ainsi que les attributs de bases.
+        Les Forêts Aléatoires --- qui peuvent gérer des descripteurs multimodaux et nombreux --- sont choisis avec 1 000 arbres de décisions de profondeur maximale de 4.
+        La profondeur est limitée à 4 dans le but d'éviter le surapprentissage, contrairement au nombre d'arbres qui est très grand de façon à couvrir tout l'espace d'attributs.
+        Ce classifieur a été adapté, au cas de la classification Multi-\'Etiquettes, en utlisant la stratégie \textit{Un contre Tous}.\\
+
+        D'après les résultats expérimentaux, au niveau \textbf{eFin} = 3, nous avons a appris que la RMSE ne permet pas de prévoir complètement les erreurs définies dans notre taxonomie.
+        En outre, les \texttt{Erreurs de Bâtiment} sont mieux détectées sur \textbf{\'Elancourt} que sur les autres scènes.
+        Concernant \texttt{FOS}, elle est très bien détectée avec plus de \SI{95}{\percent} de F-score, sur tous les zones d'intérêt.
+        \`A l'exception de cette dernière, plus la zone urbaine est dense, mieux les \texttt{Erreurs de Facette} sont détectées.
+        Comme prévu, les erreurs rares telles que \texttt{BIT} et \texttt{FIT} sont mal détectées sur toutes les zones urbaines.
+        Les attributs géométriques seules ont prouvé être suffisants pour la prédiction d'erreur.
+        Par conséquence, le type de bâtiment est donc un bon indicateur pour la détection d'erreurs dans une même zone.
+        Ceci est vrai toujours vrai à une exception près: \texttt{BUS} pour laquelle les autres modalités sont meilleures avec un écart important.
+        Paradoxalement, bien que, dans la plupart des cas, elles n'améliorent pas la prédiction des erreurs, les modalités extrinsèques sont aussi importantes que les caractéristiques géométriques intrinsèques.\\
+
+        Aux niveaux 2 et 1 de l'\textbf{eFin}, nous avons aussi prouvé expérimentalement que les \texttt{Erreurs de Facette} sont détectées avec un F-score d'environ \SI{90}{\percent} non affecté par la scène d'intérêt.
+        Comme nous l'avons vu précédemment au niveau 3 de l'\textbf{eFin}, les \texttt{Erreurs de Bâtiment} sont difficiles à entraîner sur \textbf{Nantes} et \textbf{Paris-13}, avec un F-score d'environ \SI{75}{\percent}.
+        En contre partie, comme prévu, la distinction entre \texttt{Erroné} et \texttt{Valide} s'est avérée difficile à prédire.
+
+    \subsection*{Expériences de passage à l'échelle}
+        \addcontentsline{toc}{subsection}{Expériences de passage à l'échelle}
+        L'objectif ici est de prouver l'extensibilité de l'approche proposée.
+        Nous avons gardé les mêmes configurations expérimentales que dans les expériences dites Vanille.
+        Pour y parvenir, nous avons testé la capacité des classifieurs entraînés sur un ensemble de sources à obtenir des bons scores sur un ensemble cible différent.
+        En fonction de la manière dont l'ensemble source a été choisi, trois types d'expériences ont été examinés : la transférabilité, la généralisation et la représentativité.
+        Elles ont toutes donné des résultats cohérents qui ont contribué à prouver entre autre que \textbf{Nantes} et \textbf{Paris-13} se ressemblent comparés à \textbf{\'Elancourt}.
+        Nous avons aussi vu comment la prédiction de \texttt{FOS} et des \texttt{FIG} est hautement transférable, avec un F-score de plus de \SI{95}{\percent} et que les \texttt{Erreurs de Facette}, en générale, est plus facile à mettre à l'échelle que celle des \texttt{Erreurs de Bâtiment}.
+        D'autre part, les derniers ainsi que \texttt{FIT} sont mieux détectés à \textbf{\'Elancourt} que dans les autres villes.
+        En effet, à l'exception de \texttt{FIT}, les \texttt{Erreurs de Facette} sont mieux détectées sur \textbf{Nantes} ou \textbf{Paris-13}.
+        Les erreurs rares, telles que les \texttt{BIT} et les \texttt{FIT}, sont toujours mal détectées.
+        Concernant la représentativité, \SI{20}{\percent} des échantillons prouvaient être suffisants pour l'apprentissage sur l'ensemble de données mixtes.
+        D'un autre point de vue, les attributs géométriques ne sont pas aussi bonnes que les modalités extrinsèques pour le passage à l'échelle.
+        En effet, ces dernières (en particulier celles basées sur les images) jouent un rôle plus crucial dans la transférabilité et la généralisation.
+
+    \subsection*{Attributs avancés}
+        \addcontentsline{toc}{subsection}{Attributs avancés}
+        Dans cette section, nous avons examiné expérimentalement la valeur ajoutée des fonctions avancées que nous avons proposé.
+        Nous avons pu voir comment dans tous les cas, ScatNet s'est avéré plus utile que les attributs de base pour la prédiction d'erreurs.
+        Ainsi, contrairement à la version de base, les attributs basés sur la hauteur avec ScatNet ont-ils prouvé être crucial pour détecter les étiquettes d'erreur.
+        Bien qu'elles soient utiles, d'un point de vue d'importance d'attributs, ces attributs sont, de loin, les plus faibles.
+        La fusion retardée a prouvé être la meilleure option lorsqu'elle était utilisée avec de Forêts aléatoires, tandis que la fusion précoce fonctionnait mieux avec le classifieur SVM.
+        En utilisant les attributs basés sur ScatNet, le SVM s'est avéré globalement meilleur, en particulier à \textbf{\'Elancourt}, que l'utilisation de Forêts aléatoires.
+        Concernant les noyaux pour graphes, comparés aux attributs de base, ils permettent d'améliorer les résultats de prédiction des étiquettes, à condition que celles-ci soient suffisamment fréquents.
+        \textbf{\'Elancourt} était la zone la plus facile pour l'apprentissage avec un F-score minimum de \SI{73}{\percent} sur tous les cas, ou encore, \SI{85}{\percent} pour 7 des 9 étiquettes d'erreur.
+        Quant à \textbf{Na-P13}, les \texttt{Erreurs de Bâtiment} se encore sont avérées être les plus dures à prédire avec des F-scores qui peuvent désendre jusqu'à \SI{45}{\percent}.
+        
+
+\section*{Conclusion et perspectives}
+    \addcontentsline{toc}{section}{Conclusion et perspectives}
+    Nous avons proposé un nouveau cadre de qualification de modèles 3D de bâtiments.
+    Il repose sur une taxonomie hiérarchisée d'erreurs sémantiques indépendantes des modèles à qualifier.
+    Ce nouveau cadre a été appliqué au cas de la modélisation urbaine aérienne, où les caractéristiques sont extraites d'images aériennes THR et d'un DSM.
+    Un jeu de données entièrement annoté contenant 3 235 modèles de bâtiments reconstruits par voie aérienne avec une grande diversité et provenant de trois zones distinctes a été utilisée pour évaluer notre méthode.
+    Les données de télédétection externes permettent d'extraire des caractéristiques optiques RGB et DSM multimodales.
+    Bien qu'ils soient atténués par rapport aux erreurs sous-représentées, les résultats sont satisfaisant dans les cas bien équilibrés.
+    En outre, avec le bon choix du classifieur ainsi que la configuration des caractéristiques, nous pouvons obtenir de meilleurs résultats que ceux obtenus avec les caractéristiques de base.
+    Plus important encore, nous avons prouvé que la composition de la scène urbaine affecte grandement la détection des erreurs.
+    En fait, les scores de certaines prédictions ne sont pas seulement stables, lorsqu'ils se forment sur une scène urbaine différente, ils sont même plus performants lorsqu'ils apprennent sur le même scène.
+    Nous avons aussi remarquer comment, pour un ensemble de données de formation hétérogènes, la taille de l'ensemble de formation n'a pratiquement aucun effet puisque les résultats des tests restent stables pour toutes les erreurs.
+    Cela démontre que le cadre proposé peut être facilement adapté avec un bonnes choix d'échantillons pour l'entraînement et avec peu de données générées manuellement.
+    Cela répond exactement à la question soulevée, contrairement à la littérature de pointe actuelle.
+    Nous pensons que notre est suffisamment robuste pour évaluer les zones invisibles.
+    Il représente également une base solide pour une correction manuelle ou automatique ultérieure du modèle de construction en 3D.
+\selectlanguage{english}
