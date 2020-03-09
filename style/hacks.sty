@@ -31,7 +31,7 @@
 }
 \makeatother
 
-% insert empty page
+% Insert empty page
 \newcommand{\emptypage}{
     \clearpage
     \thispagestyle{empty}
@@ -39,15 +39,10 @@
     \clearpage
 }
 
-% Bold names in references
-% \renewcommand*{\mkbibnamegiven}[1]{
-%     \ifitemannotation{highlight}{
-%         \textbf{#1}
-%     }{#1}
-% }
+% Comma between name and year
+\renewcommand*{\nameyeardelim}{\addcomma\space}
 
-% \renewcommand*{\mkbibnamefamily}[1]{
-%     \ifitemannotation{highlight}{
-%         \textbf{#1}
-%     }{#1}
-% }
+% Bold names in references
+\renewcommand*{\mkbibnamegiven}[1]{\ifitemannotation{highlight}{\textbf{#1}}{#1}}
+
+\renewcommand*{\mkbibnamefamily}[1]{\ifitemannotation{highlight}{\textbf{#1}}{#1}}
