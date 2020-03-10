@@ -2,10 +2,61 @@
 
 \vfill
 
+The goal of this chapter is to apply the feature configurations presented in Chapter~\ref{chap::better_representation} and analyse the experimental results.
+First, in Section~\ref{sec::advanced_experiments::dataset}, we explain how the dataset is setup for the new experiments.
+Next, in Section~\ref{sec::advanced_experiments::classifier}, both classifiers, \gls{acr::svm} and \gls{acr::rf}, are trained with this new dataset setup using always the baseline features (cf. Section~\ref{sec::learned_evaluation::baseline}).
+Third, in Section~\ref{sec::advanced_experiments::better_features}, we present the results of the new representation for \gls{acr::3d} models and compare them to the baseline results.
+
 \clearpage
 
+\section{Fusing \textbf{Paris-13} and \textbf{Nantes}}
+    \label{sec::advanced_experiments::dataset}
+    According to the findings of the previous sections (cf. Sections~\ref{subsec::experiments::scalability::transferability} and~\ref{subsec::experiments::finesse::2}), \textbf{Paris-13} and \textbf{Nantes} are similar compared to \textbf{Elancourt}.
+    Moreover, the latter area contains a lot more instances than the others which is not ideal for comparisons.
+    As a consequence, both \textbf{Paris-13} and \textbf{Nantes} were fused in one set denoted from now by \textbf{Na-P13}.
+    It contains \num{1226} buildings compared to \num{2007} instances of \textbf{Elancourt}.
+    In Figure~\ref{fig::error_fused_statistics}, we remind the reader of the \textbf{Elancourt} area error distributions which are compared this time to statistics from the fused set \textbf{Na-P13}.\\
+
+    \begin{figure}[htp]
+        \centering
+        \ffigbox[\textwidth]{
+            \begin{subfloatrow}
+                \ffigbox[\textwidth]{
+                    \includestandalone[mode=buildnew, height=8cm]{figures/datasets/fused/lod1_stats}
+                }{
+                    \caption{
+                        \label{subfig::lod1_errors_fused}
+                        Occurence statistics for \texttt{Building errors}.
+                    }
+                }
+            \end{subfloatrow}
+            \vskip2em
+            \begin{subfloatrow}
+                \ffigbox[\textwidth]{
+                    \includestandalone[mode=buildnew, width=.8\textwidth]{figures/datasets/fused/lod2_stats}
+                }{
+                    \caption{
+                        \label{subfig::lod2_errors_fused}
+                        Occurence statistics for \texttt{Facet errors}.
+                    }
+                }
+            \end{subfloatrow}
+        }{
+            \caption[
+                Detailed error statistics depending on the urban scenes.
+            ]{
+                \label{fig::error_fused_statistics}
+                Detailed error statistics depending on the new experimental sets.
+                The height of bars indicates the frequency of each errors while the number of occurences is displayed over.
+            }
+        }
+    \end{figure}
+
+    Naturally, as \textbf{Nantes} contains more (around \num{1.56} times more) instances than \textbf{Paris-13}, \textbf{Na-P13} error statistics profile looks a bit more like the one of \textbf{Nantes} than the other area as shown in Figure~\ref{fig::error_statistics}.
+    According to Sections~\ref{subsec::experiments::scalability::transferability} and~\ref{subsec::experiments::finesse::2}, we can expect that \textbf{Na-P13} would be better suited to learn \texttt{Facet errors}, with the exception of \texttt{FIT}, compared to \textbf{Elancourt}, while the latter is also the best alternative for \texttt{Building errors}.
+
 \section{Classifier choice analysis}
-    \label{sec::more_experiments::classifier}
+    \label{sec::advanced_experiments::classifier}
     The aim of this section is to find out how beneficial the use of \glspl{acr::svm} can be if used instead of \glspl{acr::rf}.
     Two reasons motivate this experimental comparison:
     \begin{enumerate}[label=\roman*)]
@@ -16,55 +67,8 @@
     Next, we compare the results obtained using the \gls{acr::svm} classifier to the ones resulting from the \gls{acr::rf}.
     We end with a comparison of feature importances computed for the two classifiers.
 
-    \subsection{\textbf{Paris-13} and \textbf{Nantes} fusion}
-        \label{subsec::more_experiments::classifier::dataset}
-        According to the findings of the previous sections (cf. Sections~\ref{subsec::more_experiments::scalability::transferability} and~\ref{subsec::more_experiments::finesse::2}), \textbf{Paris-13} and \textbf{Nantes} are similar compared to \textbf{Elancourt}.
-        Moreover, the latter area contains a lot more instances than the others which is not ideal for comparisons.
-        As a consequence, both \textbf{Paris-13} and \textbf{Nantes} were fused in one set denoted from now by \textbf{Na-P13}.
-        It contains 1226 buildings compared to 2007 instances of \textbf{Elancourt}.
-        In Figure~\ref{fig::error_fused_statistics}, we remind the reader of the \textbf{Elancourt} area error distributions which are compared this time to statistics from the fused set \textbf{Na-P13}.\\
-    
-        \begin{figure}[htpb]
-            \centering
-            \ffigbox[\textwidth]{
-                \begin{subfloatrow}
-                    \ffigbox[\textwidth]{
-                        \includestandalone[mode=buildnew, height=8cm]{figures/datasets/fused/lod1_stats}
-                    }{
-                        \caption{
-                            \label{subfig::lod1_errors_fused}
-                            Occurence statistics for \texttt{Building errors}.
-                        }
-                    }
-                \end{subfloatrow}
-                \vskip2em
-                \begin{subfloatrow}
-                    \ffigbox[\textwidth]{
-                        \includestandalone[mode=buildnew, width=\textwidth]{figures/datasets/fused/lod2_stats}
-                    }{
-                        \caption{
-                            \label{subfig::lod2_errors_fused}
-                            Occurence statistics for \texttt{Facet errors}.
-                        }
-                    }
-                \end{subfloatrow}
-            }{
-                \caption[
-                    Detailed error statistics depending on the urban scenes.
-                ]{
-                    \label{fig::error_fused_statistics}
-                    Detailed error statistics depending on the new experimental sets.
-                    The height of bars indicates the frequency of each errors while the number of occurences is displayed over.
-                }
-            }
-        \end{figure}
-
-        Naturally, as \textbf{Nantes} contains more (around 1.56 times more) instances than \textbf{Paris-13}, \textbf{Na-P13} error statistics profile looks a bit more like the one of \textbf{Nantes} than the other area as shown in Figure~\ref{fig::error_statistics}.
-        According to Sections~\ref{subsec::more_experiments::scalability::transferability} and~\ref{subsec::more_experiments::finesse::2}, we can expect that \textbf{Na-P13} would be better suited to learn \texttt{Facet errors}, with the exception of \texttt{FIT}, compared to \textbf{Elancourt}, while the latter is also the best alternative for \texttt{Building errors}.
-        Next, the two classifiers, \gls{acr::svm} and \gls{acr::rf}, are trained on both sets \textbf{Elancourt} and \textbf{Na-P13} using always the baseline features (cf. Section~\ref{sec::learned_evaluation::baseline}).
-
     \subsubsection{\texorpdfstring{\acrshort*{acr::rf}}{RF} results}
-        \label{subsec::more_experiments::classifier::rf}
+        \label{subsec::advanced_experiments::classifier::rf}
         For \textbf{Elancourt} results remain unchanged using the \gls{acr::rf} classifier and are reported along the newer results on \textbf{Na-P13} in Table~\ref{tab::rf_f3}.\\
 
         \begin{table}[htpb]
@@ -177,7 +181,7 @@
         This agrees with the fact that, for the \textbf{Elancourt} \(\rightarrow\) \textbf{Nantes} experiment, image based features were instrumental in better detecting \texttt{FIT} than training on \textbf{Nantes} itself (cf. Figure~\ref{tab::transferability_comparison}).
         
     \subsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} results}
-        \label{subsec::more_experiments::classifier::svm}
+        \label{subsec::advanced_experiments::classifier::svm}
         Now that we discussed the \gls{acr::rf} results on the fused set, we can move on to the \gls{acr::svm} experimental results on both identified urban sets: \textbf{Elancourt} and \textbf{Na-P13}.
         Results are reported in Table~\ref{tab::svm_f3}.\\
 
@@ -292,7 +296,7 @@
         \end{figure}
 
     \subsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} compared to \texorpdfstring{\acrshort*{acr::rf}}{RF}}
-        \label{subsec::more_experiments::classifier::svm_rf}
+        \label{subsec::advanced_experiments::classifier::svm_rf}
         In Table~\ref{tab::rf_vs_svm_comparison}, are compared the \gls{acr::svm} F-scores (cf. Table~\ref{tab::all_f-scores_svm_f3}) to \gls{acr::rf} ones (cf. Table~\ref{tab::all_f-scores_rf_f3}).
         The same color scheme is used as with the Tables~\ref{tab::transferability_comparison} and~\ref{tab::generalization_comparison}.\\
 
@@ -372,14 +376,14 @@
         Most labels perform best with the same kind of feature configurations.
         Most notably, we have previously suspected that using only geometric features resulted in overfitting with an \gls{acr::svm} when training for \texttt{FUS} on both sets.
         Comparing to the \gls{acr::rf}, \textbf{Geom.} was also the best alternative.
-        This leads us to speculate that, contrarily to what was discussed in Section~\ref{subsec::more_experiments::classifier::svm}, \textbf{Geom.} did not lead to overfitting.
+        This leads us to speculate that, contrarily to what was discussed in Section~\ref{subsec::advanced_experiments::classifier::svm}, \textbf{Geom.} did not lead to overfitting.
         It was rather the \gls{acr::svm} that did not learn properly (underfitting) using the other feature configurations.\\
 
         Hereafter, we analyse the cases where \gls{acr::rf} and \gls{acr::svm} did not share the same best performing feature configuration.
         \begin{itemize}[label=\(\blacktriangleright\)]
             \item On \textbf{Elancourt}, for \texttt{BUS}, \texttt{FOS} and \texttt{FIT}, the \gls{acr::rf} performed better with height based features, compared to the \gls{acr::svm} which works better with other feature configurations containing extrinsic features.
                     Moreover, \texttt{BIT} was better detected with intrinsic features only (\textit{resp.} any extrinsic feature based configuration) when trained with an \gls{acr::rf} (\textit{resp.} \gls{acr::svm}).
-                    This does not contradict previous findings in Sections~\ref{sec::experiments::baseline_feature_analysis} and~\ref{sec::more_experiments::scalability}.
+                    This does not contradict previous findings in Sections~\ref{sec::experiments::baseline_feature_analysis} and~\ref{sec::advanced_experiments::scalability}.
             \item On \textbf{Na-P13}, the only labels where the better performing feature configuration changed were \texttt{BUS}, \texttt{FUS}, \texttt{FIB} and \texttt{FIG}.
                     In fact, only geometric features yielded better results using an \gls{acr::svm}, in contrast with the fact that \textbf{All} or \textbf{Im.} were the best alternative with an \gls{acr::rf}.
         \end{itemize}
@@ -388,7 +392,7 @@
         This seems to be a reasonable cause why the \gls{acr::svm} classifier underperforms compared to the \gls{acr::rf} one on \textbf{Na-P13}.
 
     \subsection{Modality contributions comparison}
-        \label{subsec::more_experiments::classifier::feature_importance}
+        \label{subsec::advanced_experiments::classifier::feature_importance}
         In a linear \gls{acr::svm}, feature importance can be natively computed by looking at the weight vector \(\bm{w}\) as shown by~\textcite{guyon2002gene}.
         This is, unfortunatly, not the case.
         Instead we operate with Kernel \glspl{acr::svm} where features are fused using \gls{acr::mkl} with weights \(\left(\mu_i\right)_{i=1, 2, 3}\) (cf. Equation~\ref{eq::mkl}) that are on the simplex, as discussed in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.
@@ -434,13 +438,13 @@
 
         Eventhough geometric features alone yield better results in some cases, the \gls{acr::mkl} cannot ignore the extrinsic features.
         As in the \gls{acr::rf} case, this may prove to be helpful for the transferability of learning.
-        Consequently, it would be interesting to rerun the same scalanility experiments, as in Section~\ref{sec::more_experiments::scalability}, with an \gls{acr::svm}.
+        Consequently, it would be interesting to rerun the same scalanility experiments, as in Section~\ref{sec::advanced_experiments::scalability}, with an \gls{acr::svm}.
         This was not the case, due to time limitations.
 
     \subsection{Summary}
-        \label{subsec::more_experiments::classifier::summary}
+        \label{subsec::advanced_experiments::classifier::summary}
         To summarize, the aim of this study was to assess the impact of the classifier choice.
-        Based on previous findings (cf. Sections~\ref{sec::experiments::baseline_feature_analysis},~\ref{sec::more_experiments::scalability} and~\ref{sec::more_experiments::finesse}), we fused both sets \textbf{Nantes} and \textbf{Paris-13} into one: \textbf{Na-P13}.
+        Based on previous findings (cf. Sections~\ref{sec::experiments::baseline_feature_analysis},~\ref{sec::advanced_experiments::scalability} and~\ref{sec::advanced_experiments::finesse}), we fused both sets \textbf{Nantes} and \textbf{Paris-13} into one: \textbf{Na-P13}.
         Consequently, we learned that:
         \begin{itemize}[label=\(\blacktriangleright\)]
             \item Fusing \textbf{Nantes} and \textbf{Paris-13} helps better train the \gls{acr::rf} classifier for previously difficult labels \texttt{FIT} and \texttt{BIT};
@@ -453,32 +457,31 @@
 
 
 \section{Advanced features contributions}
-    \label{sec::more_experiments::richer_features}
-    Herein, some advanced feature extractors are tried.
-    The goal is to find out if it is possible to achieve better results than the ones obtained with our handcrafted baseline features.
-    As we do not have enough learning instances to leverage deep learning methods, we choose instead to use graph kernels as well as \glspl{acr::scatnet} as shown in Section~\ref{sec::learned_evaluation::richer_features} and~\ref{subsec::experiments::setup::feature_configurations}.\\
+    \label{sec::advanced_experiments::better_features}
+    The goal, herein, is to find out if it is possible to achieve better results than the ones obtained with our handcrafted baseline features.
+    As we do not have enough learning instances to leverage deep learning methods, we choose instead to use graph kernels as well as \glspl{acr::scatnet} as shown in Section~\ref{sec::better_representation::evaluation} and~\ref{subsec::experiments::setup::feature_configurations}.\\
 
     Three possibilities are investigated:
     \begin{enumerate}[label=\roman*)]
-        \item We keep the baseline geometric features and replace the basic image and height based features by the \gls{acr::scatnet} derived extractors, as explained in Section~\ref{subsec::learned_evaluation::richer_features::image};
+        \item We keep the baseline geometric features and replace the basic image and height based features by the \gls{acr::scatnet} derived extractors, as explained in Section~\ref{subsec::better_representation::evaluation::image};
         \item We compare both the baseline features and graph kernels for geometric features alone;
         \item We combine both the graph kernels and the \gls{acr::scatnet} derived extractors and compare them to the previous results.
     \end{enumerate}
-    As with the previous section (cf. Section~\ref{sec::more_experiments::classifier}), the experiments are conducted on two sets: \textbf{Elancourt} and \textbf{Na-P13}.
+    As with the previous section (cf. Section~\ref{sec::advanced_experiments::classifier}), the experiments are conducted on the two sets: \textbf{Elancourt} and \textbf{Na-P13}.
 
     \subsection{\texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} to baseline comparison}
-        \label{subsec::more_experiments::richer_features::scatnet_baseline}
+        \label{subsec::advanced_experiments::better_features::scatnet_baseline}
         We start by the \gls{acr::scatnet} comparisons.
-        We run the same experiments, as in Section~\ref{sec::more_experiments::classifier}, where this time height and image based features are replaced by derived ones.
+        We run the same experiments, as in Section~\ref{sec::advanced_experiments::classifier}, where this time height and image based features are replaced by derived ones.
         There are two options when employing \gls{acr::scatnet} with image based features: \texttt{channel} and \texttt{deletion} (cf. Section~\ref{subsec::experiments::setup::feature_configurations}).
         This makes the number of possible feature configurations equal to six.\\
 
         Both the \gls{acr::rf} and \gls{acr::svm} classifiers are used.
-        Results from both are first compared to the baseline results reported in Section~\ref{sec::more_experiments::classifier}.
+        Results from both are first compared to the baseline results reported in Section~\ref{sec::advanced_experiments::classifier}.
         Afterwhat, we examine the differences between results from both classifiers.
 
         \subsubsection{\texorpdfstring{\acrshort*{acr::rf}}{RF} results}
-            \label{subsubsec::more_experiments::richer_features::scatnet_baseline::rf}
+            \label{subsubsec::advanced_experiments::better_features::scatnet_baseline::rf}
             Results, using the \gls{acr::rf} classifier, on both sets, are reported in Table~\ref{tab::stats_scat_rf_f3}.
             In general, we can see how external modalities seem to play a more important role in detecting errors.
             This can be confirmed with the larger standard deviations depicted in Figure~\ref{fig::f_score_rf_scat_bl} compared to the baseline features (cf. Figure~\ref{fig::f_score_rf_bl}).\\
@@ -758,8 +761,8 @@
             On another note, building typology is so important that, even with advanced extrinsic features, baseline geometric features have a very large importance ratio.
 
         \subsubsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} results}
-            \label{subsubsec::more_experiments::richer_features::scatnet_baseline::svm}
-            We run the same experiments and follow the same layout as in Section~\ref{subsubsec::more_experiments::richer_features::scatnet_baseline::rf}.
+            \label{subsubsec::advanced_experiments::better_features::scatnet_baseline::svm}
+            We run the same experiments and follow the same layout as in Section~\ref{subsubsec::advanced_experiments::better_features::scatnet_baseline::rf}.
             Results are reported in Table~\ref{tab::stats_scat_svm_f3}.
             The mean and standard deviation F-scores are shown in Figure~\ref{fig::f_score_svm_scat}.
             Just as with the \gls{acr::rf} experiments, external modalities seem to play a more crucial role in error prediction than with baseline features (cf. Figure~\ref{fig::f_score_svm_bl}).\\
@@ -881,7 +884,7 @@
 
             On the other hand, regarding the inversion of fusion scheme preference, there are two possible explanations:
             \begin{itemize}[label=\(\blacktriangleright\)]
-                \item The analysis that was presented in Section~\ref{subsubsec::more_experiments::richer_features::scatnet_baseline::rf} is false;
+                \item The analysis that was presented in Section~\ref{subsubsec::advanced_experiments::better_features::scatnet_baseline::rf} is false;
                 \item The issue is rather with the \gls{acr::svm} that was not well parameterized.
             \end{itemize}
             The last reason seems to be more probable as the late fusion schemes induces larger feature vector dimensions ( 1085 more than the other option) which may have caused problems for the \gls{acr::svm}.
@@ -955,7 +958,7 @@
             This confirms once again the results fo earlier experiments where the same modality always proved to be important for predicting \texttt{BUS} on \textbf{Elancourt}.
             Regarding image based features, Table~\ref{tab::svm_scat_bl_comparison} shows that they are, as always, crucial for error detection.
             In the \gls{acr::svm} case, it was with the \texttt{deletion} option compared to \gls{acr::rf}, as discussed earlier in the previous paragraph.
-            This was suspected to be due to the fact \gls{acr::svm} was not well parameterized, as was the case with baseline features in Section~\ref{sec::more_experiments::classifier}.\\
+            This was suspected to be due to the fact \gls{acr::svm} was not well parameterized, as was the case with baseline features in Section~\ref{sec::advanced_experiments::classifier}.\\
 
             Once again, feature importances are computed, using the \gls{acr::mkl} weights, and vizualized in Figure~\ref{fig::feature_importances_scat_svm}.
             There is little difference, this time, between both fusion schemes, eventhough thery produce different results.
@@ -1014,12 +1017,12 @@
             Actually, in most cases, it is below \SI{4}{\percent}, except for \texttt{BIT}, \texttt{FOS} and \texttt{FIB} on \textbf{Elancourt}.
             This is different from baseline features, where height based features had comparable importance ratios to other modalities (\texttt{cf.} Figure~\ref{fig::feature_importances_svm_bl}).
             It seems to be contradictory with the fact that \gls{acr::scatnet} derived height features performed overall better than baseline features (cf. Tables~\ref{tab::all_f-scores_rf_f3} and~\ref{tab::all_f-scores_svm_f3}).
-            It is, however, consistent with the findings of the scalability analysis in Section~\ref{sec::more_experiments::scalability}, where height based features proved to not be important.
+            It is, however, consistent with the findings of the scalability analysis in Section~\ref{sec::advanced_experiments::scalability}, where height based features proved to not be important.
             This further bolsters the fact that the \gls{acr::svm} was not well parameterized for the image based features.\\
 
         \subsubsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} compared to \texorpdfstring{\acrshort*{acr::rf}}{RF}}
-            \label{subsubsec::more_experiments::richer_features::scatnet_baseline::svm_rf}
-            Just as in the Section~\ref{sec::more_experiments::classifier}, we will compare preditction scores resulting from both classifiers.
+            \label{subsubsec::advanced_experiments::better_features::scatnet_baseline::svm_rf}
+            Just as in the Section~\ref{sec::advanced_experiments::classifier}, we will compare preditction scores resulting from both classifiers.
             These are compiled in Table~\ref{tab::scat_rf_vs_svm_comparison}.
 
             \begin{table}[htbp]
@@ -1079,7 +1082,7 @@
             On \textbf{Elancourt}, the \gls{acr::svm} classifier yields better results than the \gls{acr::rf} one, especially with the \texttt{deletion} option.
             On \textbf{Na-P13}, the \gls{acr::svm} classifier is not always better, but \texttt{deletion} remains the best option.
             On both sets, using \gls{acr::scatnet} derived features helped the \gls{acr::svm} score better than \gls{acr::rf} compared to the baseline features.
-            Hereafter, in Table~\ref{tab::best_scat_bl_svm_rf}, based on this comparison, as well as, the ones in Sections~\ref{subsubsec::more_experiments::richer_features::scatnet_baseline::rf} and~\ref{subsubsec::more_experiments::richer_features::scatnet_baseline::svm}, we can deduce the best F-score, feature configuration and classifier, per error label.\\
+            Hereafter, in Table~\ref{tab::best_scat_bl_svm_rf}, based on this comparison, as well as, the ones in Sections~\ref{subsubsec::advanced_experiments::better_features::scatnet_baseline::rf} and~\ref{subsubsec::advanced_experiments::better_features::scatnet_baseline::svm}, we can deduce the best F-score, feature configuration and classifier, per error label.\\
 
             \begin{table}[htpb]
                 \footnotesize
@@ -1139,7 +1142,7 @@
             \end{table}
 
             We can observe that for \textbf{Elancourt} the \gls{acr::svm} classifier yields always the best results, with the exception of \texttt{FOS}.
-            This exception could be explained easily by the fact that \texttt{FOS} is very frequent, as discussed in Section~\ref{subsec::more_experiments::classifier::svm_rf}.
+            This exception could be explained easily by the fact that \texttt{FOS} is very frequent, as discussed in Section~\ref{subsec::advanced_experiments::classifier::svm_rf}.
             Moreover, on this set, most error labels achieve an F-score is over \SI{85}{\percent}, excluding \texttt{BUS} and \texttt{FUS} with at least \SI{70}{\percent}.
             Regarding feature configurations, the \gls{acr::scatnet} derived ones are always the best with two exceptions: \texttt{BOS} and \texttt{FIG}.
             In these two cases, geometric baseline features yield slightly better results than the more advanced \gls{acr::scatnet} based ones.\\
@@ -1152,13 +1155,13 @@
             Added to that the fact that the \gls{acr::svm} classifier was only the best for rare errors.\\
 
             Overall, we can see how \texttt{Building errors} are best learned on \textbf{Elancourt}.
-            This is in accord with what we have seen in Section~\ref{sec::experiments::baseline_feature_analysis},~\ref{sec::more_experiments::scalability} and~\ref{sec::more_experiments::classifier}.
+            This is in accord with what we have seen in Section~\ref{sec::experiments::baseline_feature_analysis},~\ref{sec::advanced_experiments::scalability} and~\ref{sec::advanced_experiments::classifier}.
             On the other hand, for \texttt{Facet errors}, according to the same sections, we would expect \textbf{Na-P13} to be the best alternative.
             However, there is one exception as \texttt{FIB} yield a better F-score on \textbf{Elancourt} than on \textbf{Na-P13}.
             We do not have any explanation to why this happens other than the fact that the \gls{acr::svm} was not better parameterized.
 
     \subsection{Graph kernels to baseline comparison}
-        \label{subsec::more_experiments::richer_features::graph_kernel_baseline}
+        \label{subsec::advanced_experiments::better_features::graph_kernel_baseline}
         Herein, we aim at assessing the added value of graph kernels in error classification, compared to the baseline.
         This means that we have only one feature configuration to experiment with.
         We only use the \gls{acr::svm} which naturally takes kernels into account.
@@ -1311,7 +1314,7 @@
         However, on the rest, we cannot predict how these features will interact with the other modalities.
 
     \subsection{Graph kernels and \texorpdfstring{\acrshort*{acr::scatnet}}{ScatNet} to baseline comparison}
-        \label{subsec::more_experiments::richer_features::graph_kernel_scatnet_baseline}
+        \label{subsec::advanced_experiments::better_features::graph_kernel_scatnet_baseline}
         Now that we have studied the contribution of each of the proposed advanced features, these are combined in order to assess their impact on the prediction results.
         As in the previous subsection, using graph kernels forces us to abandon \glspl{acr::rf} and to experiment only with \glspl{acr::svm}.
         Results are reported in Table~\ref{tab::stats_gk_scat_svm_f3}.\\
@@ -1605,7 +1608,7 @@
 
         \FloatBarrier
     \subsection{Summary}
-        \label{subsec::more_experiments::richer_features::summary}
+        \label{subsec::advanced_experiments::better_features::summary}
         In this section, we experimentally examined the added value of the advanced features that we proposed:
         We have seen how:
         \begin{itemize}[label=\(\blacktriangleright\)]
