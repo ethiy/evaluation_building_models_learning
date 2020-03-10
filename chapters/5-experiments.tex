@@ -4,8 +4,10 @@
 
 In Chapters~\ref{chap::semantic_evaluation} and~\ref{chap::learned_evaluation}, we proposed a semantic quality evaluation of \gls{acr::3d} building models employing a learning formulation.
 Herein, we put our pipeline to the test.
-First, in Section~\ref{sec::experiments::datasets}, we delineate how the building models that are used for the study.
-Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provides a first experimental outlook of the capacity of our approach to detect errors affecting \gls{acr::3d} building models.
+First, in Section~\ref{sec::experiments::datasets}, we delineate how the building models that are used for the study are obtained.
+Second, Section~\ref{sec::experiments::baseline_feature_analysis} provides a first experimental outlook of the capacity of our approach to detect errors affecting \gls{acr::3d} building models.
+Third, in Section~\ref{sec::experiments::scalability}, we study the scalability of the proposed approach under different scenarii.
+Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the experiments at low \textbf{\gls{acr::efin}} levels.
 
 \clearpage
 
@@ -249,7 +251,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
                     }{
                         \caption{
                             \label{subfig::lod1_errors}
-                            Occurence statistics for \texttt{Building errors} depending on the area of study.
+                            Occurence statistics for \texttt{Building errors} depending on the area of  the scalability of the proposed approach under different scenarii..
                         }
                     }
                 \end{subfloatrow}
@@ -305,153 +307,153 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
         \texttt{FIG} does not keep the same dynamic as its frequency keeps stable from \textbf{Elancourt} and \textbf{Nantes} but jumps considerably in \textbf{Paris-13}.
         This may be explained by the fact that the gap in \texttt{FUS} error ratios between \textbf{Paris-13} and \textbf{Nantes} is more important than that of \texttt{FOS} errors, contrarily to the same gaps for the same errors between \textbf{Nantes} and \textbf{Elancourt} which compensate each other.
 
-\section{The experimental set-up}
-    \label{sec::experiments::setup}
-    In this section, we give a detailed account of how every ingredient of our pipeline is parameterized.
-    We first start, in Section~\ref{subsec::experiments::setup::feature_configurations}, by specifying the different feature configurations that are used in the experimental study and how there were implemented.
-    Next, in Section~\ref{subsec::experiments::setup::classification}, we discuss in detail how the classification process was conducted.
+% \section{The experimental set-up}
+%     \label{sec::experiments::setup}
+%     In this section, we give a detailed account of how every ingredient of our pipeline is parameterized.
+%     We first start, in Section~\ref{subsec::experiments::setup::feature_configurations}, by specifying the different feature configurations that are used in the experimental study and how there were implemented.
+%     Next, in Section~\ref{subsec::experiments::setup::classification}, we discuss in detail how the classification process was conducted.
 
-    \subsection{Feature configurations}
-        \label{subsec::experiments::setup::feature_configurations}
-        We present herein the features that were used in experiments.
-        First, we try to prove the efficiency of the proposed learning framework.
-        Hence, we test different configurations using the baseline features.
-        Secondly, more advanced features are fed into the pipeline.
-        Consequently, new possible combinations are discussed.
+%     \subsection{Feature configurations}
+%         \label{subsec::experiments::setup::feature_configurations}
+%         We present herein the features that were used in experiments.
+%         First, we try to prove the efficiency of the proposed learning framework.
+%         Hence, we test different configurations using the baseline features.
+%         Secondly, more advanced features are fed into the pipeline.
+%         Consequently, new possible combinations are discussed.
 
-        \subsubsection{Baseline features}
-            The geometric features are intrinsic and are always available.
-            As a consequence, we tested four feature configurations: ``geometric features'' (\textbf{Geom.}) only, ``geometric and height features''(\textbf{Geom. \(\oplus\) Hei.}), ``geometric and image features''(\textbf{Geom. \(\oplus\) Im.}) as well as ``geometric, height and image features''(\textbf{All}).
-            In order to have a better understanding of how important each modality is, their feature vectors are by design drawn to be of the same size: 20.\\
-            Actually, using the function \(\chi_{\max,\min,\operatorname{mean},\operatorname{med}}\) defined in Equation~\ref{eq::max_min_mean_med_extractor}, the geometric feature vector in Equation~\ref{eq::geometric_features} is of dimension
-            \begin{equation*}
-                \underbrace{4}_{\substack{\text{the output dimension}\\\text{of the function } \chi_{\max,\min,\operatorname{mean},\operatorname{med}} }} \times \underbrace{5}_{\substack{\text{the number of the facet}\\\text{graph attributes}}} = 20.
-            \end{equation*}
-            Regarding height based feature vectors, their dimension depends on the histogram parameters.
-            Since we compute differences between observed and model height at terrain level also (cf. Section~\ref{subsec::learned_evaluation::baseline::height}), and because these are virtually unbounded and can differ from one scene to another, the maximum possible discrepancy is limited to \SI{\pm 50}{\m} for all scenes.
-            In order to have the same feature vector dimension for this modality as for the geometric one, the number of bins is fixed manually to \(20\).\\
-            For image based features, the cosine similarity between normal vectors, used in Equation~\ref{eq::corr_fac}, is by definition bounded in the interval [-1, 1].
-            This interval is consequently divided evenly into \(20\) bins for the histogram computation.
-            The \glspl{acr::dsm} and orthorectified images used to derive height and image features have the same spatial resolution as the reconstruction input data.\\
+%         \subsubsection{Baseline features}
+%             The geometric features are intrinsic and are always available.
+%             As a consequence, we tested four feature configurations: ``geometric features'' (\textbf{Geom.}) only, ``geometric and height features''(\textbf{Geom. \(\oplus\) Hei.}), ``geometric and image features''(\textbf{Geom. \(\oplus\) Im.}) as well as ``geometric, height and image features''(\textbf{All}).
+%             In order to have a better understanding of how important each modality is, their feature vectors are by design drawn to be of the same size: 20.\\
+%             Actually, using the function \(\chi_{\max,\min,\operatorname{mean},\operatorname{med}}\) defined in Equation~\ref{eq::max_min_mean_med_extractor}, the geometric feature vector in Equation~\ref{eq::geometric_features} is of dimension
+%             \begin{equation*}
+%                 \underbrace{4}_{\substack{\text{the output dimension}\\\text{of the function } \chi_{\max,\min,\operatorname{mean},\operatorname{med}} }} \times \underbrace{5}_{\substack{\text{the number of the facet}\\\text{graph attributes}}} = 20.
+%             \end{equation*}
+%             Regarding height based feature vectors, their dimension depends on the histogram parameters.
+%             Since we compute differences between observed and model height at terrain level also (cf. Section~\ref{subsec::learned_evaluation::baseline::height}), and because these are virtually unbounded and can differ from one scene to another, the maximum possible discrepancy is limited to \SI{\pm 50}{\m} for all scenes.
+%             In order to have the same feature vector dimension for this modality as for the geometric one, the number of bins is fixed manually to \num{20}.\\
+%             For image based features, the cosine similarity between normal vectors, used in Equation~\ref{eq::corr_fac}, is by definition bounded in the interval [-1, 1].
+%             This interval is consequently divided evenly into \num{20} bins for the histogram computation.
+%             The \glspl{acr::dsm} and orthorectified images used to derive height and image features have the same spatial resolution as the reconstruction input data.\\
 
-            These features implementation is conducted in Python and is not optimized.
-            Geometric features are computed in average in \SI{0.05}{\s \per \building}, height based ones take in average \SI{1.4}{\s \per \building} and finally image based ones need more than \SI{69}{\s \per \building}.
-            In order to reduce the runtime of each experiment, the last two types of features are cached once computed for a building model and retrieved latter for tests.
+%             These features implementation is conducted in \verb!Python! and is not optimized.
+%             Geometric features are computed in average in \SI{0.05}{\s \per \building}, height based ones take in average \SI{1.4}{\s \per \building} and finally image based ones need more than \SI{69}{\s \per \building}.
+%             In order to reduce the runtime of each experiment, the last two types of features are cached once computed for a building model and retrieved latter for tests.
 
-        \subsubsection{Advanced features}
-            Baseline features are replaced by more advanced ones as shown in Section~\ref{sec::learned_evaluation::richer_features}.
-            These are denoted as follows:
-            \begin{itemize}[label=\(\blacktriangleright\)]
-                \item \textbf{S-Hei.} refers to \gls{acr::scatnet} height based features;
-                \item \textbf{S(d)-Im.} (\textit{resp.} \textbf{S(c)-Im.}) corresponds to \gls{acr::scatnet} image based features with \texttt{deletion} (\textit{resp.} \texttt{channel}) option;
-                \item \textbf{S(d)-All} (\textit{resp.} \textbf{S(c)-All}) \(\equiv\) \textbf{Geom.} + \textbf{S-Hei.} + \textbf{S(d)-Im.} (\textit{resp.} \textbf{S(c)-Im.});
-                \item \textbf{K-S(d)-All} (\textit{resp.} \textbf{K-S(c)-All}) \(\equiv\) \textbf{K-Geom.} + \textbf{S-Hei.} + \textbf{S(d)-Im.} (\textit{resp.} \textbf{S(c)-Im.});
-            \end{itemize}
-            We lay out herein how their parameters were determined.
+%         \subsubsection{Advanced features}
+%             Baseline features are replaced by more advanced ones as shown in Section~\ref{sec::learned_evaluation::richer_features}.
+%             These are denoted as follows:
+%             \begin{itemize}[label=\(\blacktriangleright\)]
+%                 \item \textbf{S-Hei.} refers to \gls{acr::scatnet} height based features;
+%                 \item \textbf{S(d)-Im.} (\textit{resp.} \textbf{S(c)-Im.}) corresponds to \gls{acr::scatnet} image based features with \texttt{deletion} (\textit{resp.} \texttt{channel}) option;
+%                 \item \textbf{S(d)-All} (\textit{resp.} \textbf{S(c)-All}) \(\equiv\) \textbf{Geom.} + \textbf{S-Hei.} + \textbf{S(d)-Im.} (\textit{resp.} \textbf{S(c)-Im.});
+%                 \item \textbf{K-S(d)-All} (\textit{resp.} \textbf{K-S(c)-All}) \(\equiv\) \textbf{K-Geom.} + \textbf{S-Hei.} + \textbf{S(d)-Im.} (\textit{resp.} \textbf{S(c)-Im.});
+%             \end{itemize}
+%             We lay out herein how their parameters were determined.
 
-            \paragraph{Graph kernels}
-                In Section~\ref{subsec::learned_evaluation::richer_features::graph}, we have seen how 14 graph kernels are aggregated to describe graphs.
-                We relied, in experiments, on an available Python module called \verb!GraKel!\footnote{\verb!GraKel!: \href{https://github.com/ysig/GraKeL}{\url{https://github.com/ysig/GraKeL}}}~\parencite{siglidis2018grakel}.
-                We provide herein the parameters of each kernel type.
-                \begin{description}
-                    \item[\(\blacktriangleright\) Random walk] The exponential version fails numerically and was left out.
-                                After a grid search \(\lambda\) was set to be \num[scientific-notation = true]{1e-3} for the geometric random walk.
-                                This is actually a very low value as \(\lambda\) has to verify the condition stated in Equation~\ref{eq::condition_geometric_kernel_convergence} for all pairs of graphs in the training dataset.
-                                One case where the largest eigenvalue of the direct product of the adjacency matrix of two graphs in the dataset suffices to considerably lower the maximal value \(\lambda\) can take.
-                                To compute such a kernel it takes approximatly \SI{1.14}{\s\per\building\squared}.
-                    \item[\(\blacktriangleright\) \gls{acr::svm} \(\vartheta\)] This kernel takes no parameters.
-                                It takes on average \SI[scientific-notation = true]{0.0000201}{\s\per\building\squared} to compute a kernel comparison.
-                    \item[\(\blacktriangleright\) Multiscale Laplacian] Our building models have a varying number of nodes from 4 up to 20 and more facets in some cases.
-                                That is why we choose to keep the same radius size\footnote{The neighboorhoods \(N_l(v)\) are taken as balls around vertex \(v\)~\parencite{kondor2016multiscale}.} and depth level \(L\) set to 3 as in the original paper~\parencite{kondor2016multiscale}.
-                                The same goes for the regularization terms fixed at a value of \num[scientific-notation = true]{1e-2}.
-                                Computing one kernel comparison requires around \SI{10.6}{\s\per\building\squared}.
-                    \item[\(\blacktriangleright\) Propagation] The choice of the transition matrix, as explained in Section~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}, is set by default to be the normalized adjacency matrix.
-                                The maximal iteration number \(t_{\max}\) is similar to the height parameter of the Weisfeler-Lehman kernel and is set to 5.
-                                Other parameters regarding the hashing and binning processed are kept at their default values.
-                                Comparing two graph instances takes around \SI[scientific-notation = true]{0.0812}{\s\per\building\squared}.
-                    \item[\(\blacktriangleright\) Graph hopper] This kernel takes no other parameter than the choice of base kernels.
-                                Comparisons between takes on average \SI{34.5}{\s\per\building\squared}.
-                \end{description}
+%             \paragraph{Graph kernels}
+%                 In Section~\ref{subsec::learned_evaluation::richer_features::graph}, we have seen how 14 graph kernels are aggregated to describe graphs.
+%                 We relied, in experiments, on an available \verb!Python! module called \verb!GraKel!\footnote{\verb!GraKel!: \href{https://github.com/ysig/GraKeL}{\url{https://github.com/ysig/GraKeL}}}~\parencite{siglidis2018grakel}.
+%                 We provide herein the parameters of each kernel type.
+%                 \begin{description}
+%                     \item[\(\blacktriangleright\) Random walk] The exponential version fails numerically and was left out.
+%                                 After a grid search \(\lambda\) was set to be \num[scientific-notation = true]{1e-3} for the geometric random walk.
+%                                 This is actually a very low value as \(\lambda\) has to verify the condition stated in Equation~\ref{eq::condition_geometric_kernel_convergence} for all pairs of graphs in the training dataset.
+%                                 One case where the largest eigenvalue of the direct product of the adjacency matrix of two graphs in the dataset suffices to considerably lower the maximal value \(\lambda\) can take.
+%                                 To compute such a kernel it takes approximatly \SI{1.14}{\s\per\building\squared}.
+%                     \item[\(\blacktriangleright\) \gls{acr::svm} \(\vartheta\)] This kernel takes no parameters.
+%                                 It takes on average \SI[scientific-notation = true]{0.0000201}{\s\per\building\squared} to compute a kernel comparison.
+%                     \item[\(\blacktriangleright\) Multiscale Laplacian] Our building models have a varying number of nodes from 4 up to 20 and more facets in some cases.
+%                                 That is why we choose to keep the same radius size\footnote{The neighboorhoods \(N_l(v)\) are taken as balls around vertex \(v\)~\parencite{kondor2016multiscale}.} and depth level \(L\) set to 3 as in the original paper~\parencite{kondor2016multiscale}.
+%                                 The same goes for the regularization terms fixed at a value of \num[scientific-notation = true]{1e-2}.
+%                                 Computing one kernel comparison requires around \SI{10.6}{\s\per\building\squared}.
+%                     \item[\(\blacktriangleright\) Propagation] The choice of the transition matrix, as explained in Section~\ref{subsubsec::state_of_the_art::mlpr::feature_extraction::graph_classification}, is set by default to be the normalized adjacency matrix.
+%                                 The maximal iteration number \(t_{\max}\) is similar to the height parameter of the Weisfeler-Lehman kernel and is set to 5.
+%                                 Other parameters regarding the hashing and binning processed are kept at their default values.
+%                                 Comparing two graph instances takes around \SI[scientific-notation = true]{0.0812}{\s\per\building\squared}.
+%                     \item[\(\blacktriangleright\) Graph hopper] This kernel takes no other parameter than the choice of base kernels.
+%                                 Comparisons between takes on average \SI{34.5}{\s\per\building\squared}.
+%                 \end{description}
 
-            \paragraph{\gls*{acr::scatnet}}
-                For \glspl{acr::scatnet}, we rely on a modern and vestatile Python module: Kymatio~\parencite{andreux2018kymatio}.
-                The parameterization of the \gls{acr::scatnet} does not depend on the signal content as much as it relates to the size of input images.
-                This is true because the filter banks, the parameterization of which is the most related to the signal dynamics, were set beforehand.
-                As a consequence, the same parameters were applied for image and height based features.\\
+%             \paragraph{\gls*{acr::scatnet}}
+%                 For \glspl{acr::scatnet}, we rely on a modern and vestatile \verb!Python! module: Kymatio~\parencite{andreux2018kymatio}.
+%                 The parameterization of the \gls{acr::scatnet} does not depend on the signal content as much as it relates to the size of input images.
+%                 This is true because the filter banks, the parameterization of which is the most related to the signal dynamics, were set beforehand.
+%                 As a consequence, the same parameters were applied for image and height based features.\\
 
-                The number of possible orientations \(L\) is fixed at its default value 8 as it was the optimal choice corresponding to the already defined Morlet filter banks.
-                \(I\) the scale of the \gls{acr::scatnet} pooling operator was set to 3.
-                This corresponds to models \(\mathsf{M}\) verifying: \(w_{\mathsf{M}} \geq 2^3 = 8\) and \(h_{\mathsf{M}} \geq 8\).
-                In \textbf{Elancourt}, it implies that building models have to be at least larger in length and width than \SI{8 x 0.06}{\m} = \SI{0.48}{\m}, while in \textbf{Paris-13} and \textbf{Nantes} the minimal dimensions of a building are \SI{8 x 0.10}{\m} = \SI{0.80}{\m}.
-                This is reasonable and fails only for some rare cases were the building is obviously over segmented an can be detected as such by simply applying a building model size threshold.\\
-                The maximal number of layers \(m\) is 2.
-                As a consequence, the total number, according to Equation~\ref{eq::scatnet_number_paths} of scattering outputs is \(n_S = 217\).
-                This implies that the length of \gls{acr::scatnet} based features is \(d \times n_S\) = \num{5 x 217} = 1085 per channel.\\
+%                 The number of possible orientations \(L\) is fixed at its default value 8 as it was the optimal choice corresponding to the already defined Morlet filter banks.
+%                 \(I\) the scale of the \gls{acr::scatnet} pooling operator was set to 3.
+%                 This corresponds to models \(\mathsf{M}\) verifying: \(w_{\mathsf{M}} \geq 2^3 = 8\) and \(h_{\mathsf{M}} \geq 8\).
+%                 In \textbf{Elancourt}, it implies that building models have to be at least larger in length and width than \SI{8 x 0.06}{\m} = \SI{0.48}{\m}, while in \textbf{Paris-13} and \textbf{Nantes} the minimal dimensions of a building are \SI{8 x 0.10}{\m} = \SI{0.80}{\m}.
+%                 This is reasonable and fails only for some rare cases were the building is obviously over segmented an can be detected as such by simply applying a building model size threshold.\\
+%                 The maximal number of layers \(m\) is 2.
+%                 As a consequence, the total number, according to Equation~\ref{eq::scatnet_number_paths} of scattering outputs is \(n_S = 217\).
+%                 This implies that the length of \gls{acr::scatnet} based features is \(d \times n_S\) = \num{5 x 217} = 1085 per channel.\\
 
-                The Kymatio implementation of \gls{acr::scatnet} uses GPU to accelerate computations.
-                Using an NVIDIA GeForce GTX 750 Ti graphics card, it takes around \SI{14.06}{\s \per \building} on average to compute a height based features and \SI{20.86}{\s \per \building}.
-                As with previous features onces, once computed they are cached for later use.
+%                 The Kymatio implementation of \gls{acr::scatnet} uses GPU to accelerate computations.
+%                 Using an NVIDIA GeForce GTX 750 Ti graphics card, it takes around \SI{14.06}{\s \per \building} on average to compute a height based features and \SI{20.86}{\s \per \building}.
+%                 As with previous features onces, once computed they are cached for later use.
 
-    \subsection{Classification settings}
-        \label{subsec::experiments::setup::classification}
-            Feature extractors were defined in the previous subsection.
-            Herein, are given extensive details how the considered classifiers (cf. Section~\ref{subsec::learned_evaluation::classification::classifiers}) are applied.
-            We also provide the metrics that will help measure the accuracy of predictions.
+%     \subsection{Classification settings}
+%         \label{subsec::experiments::setup::classification}
+%             Feature extractors were defined in the previous subsection.
+%             Herein, are given extensive details how the considered classifiers (cf. Section~\ref{subsec::learned_evaluation::classification::classifiers}) are applied.
+%             We also provide the metrics that will help measure the accuracy of predictions.
 
-        \subsubsection{Considered labels}
-            All \textbf{\gls{acr::efin}} levels were tested.
-            The input models are generalized to \gls{acr::lod}-2.
-            As a consequence, we chose \textbf{\gls{acr::elod}} = \gls{acr::lod}-2.
-            If the \textbf{exclusivity} is \textsc{on}, at \textbf{\gls{acr::efin}} level 3, the second stage classification results depend on the first one.
-            After a brief experimental study, the first stage did not yield good enough results in order to test this configuration.
-            In fact, we remind the reader that, at this stage, our goal is, first and foremost, to prove the feasibility of the proposed approach.
-            That is why we limited the experiments to the case where the \textbf{exclusivity} is set to be \textsc{off}.
+%         \subsubsection{Considered labels}
+%             All \textbf{\gls{acr::efin}} levels were tested.
+%             The input models are generalized to \gls{acr::lod}-2.
+%             As a consequence, we chose \textbf{\gls{acr::elod}} = \gls{acr::lod}-2.
+%             If the \textbf{exclusivity} is \textsc{on}, at \textbf{\gls{acr::efin}} level 3, the second stage classification results depend on the first one.
+%             After a brief experimental study, the first stage did not yield good enough results in order to test this configuration.
+%             In fact, we remind the reader that, at this stage, our goal is, first and foremost, to prove the feasibility of the proposed approach.
+%             That is why we limited the experiments to the case where the \textbf{exclusivity} is set to be \textsc{off}.
 
-        \subsubsection{Classifiers}
-            As discussed in Section~\ref{subsec::learned_evaluation::classification::classifiers}, two classifier types were considered in the experimental study.
-            As already explained beforehand in Section~\ref{subsec::learned_evaluation::classification::classifiers}, a one-vs-all approach is used to adapt \glspl{acr::rf} to multi-label settings.
-            The same approach was chosen to accommodate \glspl{acr::svm} to both the multi-class and the multi-label possibilities.
-            We relied upon the already available and ubequitous implementation in Python~\parencite{scikit-learn}.
-            Below we detail quantitavely the used parameters.
+%         \subsubsection{Classifiers}
+%             As discussed in Section~\ref{subsec::learned_evaluation::classification::classifiers}, two classifier types were considered in the experimental study.
+%             As already explained beforehand in Section~\ref{subsec::learned_evaluation::classification::classifiers}, a one-vs-all approach is used to adapt \glspl{acr::rf} to multi-label settings.
+%             The same approach was chosen to accommodate \glspl{acr::svm} to both the multi-class and the multi-label possibilities.
+%             We relied upon the already available and ubequitous implementation in \verb!Python!~\parencite{scikit-learn}.
+%             Below we detail quantitavely the used parameters.
             
-            \paragraph{\acrshort*{acr::rf}}
-                A standard grid search involving a smaller set of building models and only baseline geometric features~\parencite{ennafii2018qualificationunannotated} yielded comparable results for the number of trees set in the range \numrange{850}{1000} and a maximum tree depth from \numrange{3}{5}.
-                Given the already immense parameter search space involving all possible feature configurations, feature extraction parameters and label possibilities, the \gls{acr::rf} parameters are set to \num{1000} for the tree number and 4 for the maximum tree depth for all other experiments without performing any grid search.
-                Since this classifier model is easier to parameterize than the other, it will always be used in experiments unless said otherwise.
+%             \paragraph{\acrshort*{acr::rf}}
+%                 A standard grid search involving a smaller set of building models and only baseline geometric features~\parencite{ennafii2018qualificationunannotated} yielded comparable results for the number of trees set in the range \numrange{850}{1000} and a maximum tree depth from \numrange{3}{5}.
+%                 Given the already immense parameter search space involving all possible feature configurations, feature extraction parameters and label possibilities, the \gls{acr::rf} parameters are set to \num{1000} for the tree number and 4 for the maximum tree depth for all other experiments without performing any grid search.
+%                 Since this classifier model is easier to parameterize than the other, it will always be used in experiments unless said otherwise.
 
-            \paragraph{\acrshort*{acr::svm}}
-                The linear \gls{acr::svm} is not well suited for the type of features that we use, even for baseline features as experiments do not yield any results in time.
-                As a consequence, the latter was left out and we experimented only with the kernel \gls{acr::svm} using the standard \gls{acr::rbf} kernel (cf. Equation~\ref{eq::rbf_kernel}) when instances are vectors not graphs.
-                Just as with the \gls{acr::rf} classifier, we conducted a grid search using baseline geometric features only in order to determine both parameters \(C\) and \(\gamma\) by limiting the range between \numrange[range-phrase={ and }, scientific-notation = true]{1e1}{1e-3} for both.
-                All values yielded sensibly the same scores.
-                As a result we set these parameters as follows: \(C = \num[scientific-notation = true]{1e-1}\) to not overpenalize nor underfit during learning and \(\gamma = \num[scientific-notation = true]{1e-3}\) to avoid overfitting.
-                Regarding \gls{acr::mkl}, we made use of the already implemented EasyMKL~\parencite{aiolli2015easymkl} approach.
-                It was the only method, to our knowledge, that was readily available as a library in Python\footnote{\verb!MKLpy!: \href{https://github.com/IvanoLauriola/MKLpy}{\url{https://github.com/IvanoLauriola/MKLpy}}}.
+%             \paragraph{\acrshort*{acr::svm}}
+%                 The linear \gls{acr::svm} is not well suited for the type of features that we use, even for baseline features as experiments do not yield any results in time.
+%                 As a consequence, the latter was left out and we experimented only with the kernel \gls{acr::svm} using the standard \gls{acr::rbf} kernel (cf. Equation~\ref{eq::rbf_kernel}) when instances are vectors not graphs.
+%                 Just as with the \gls{acr::rf} classifier, we conducted a grid search using baseline geometric features only in order to determine both parameters \(C\) and \(\gamma\) by limiting the range between \numrange[range-phrase={ and }, scientific-notation = true]{1e1}{1e-3} for both.
+%                 All values yielded sensibly the same scores.
+%                 As a result we set these parameters as follows: \(C = \num[scientific-notation = true]{1e-1}\) to not overpenalize nor underfit during learning and \(\gamma = \num[scientific-notation = true]{1e-3}\) to avoid overfitting.
+%                 Regarding \gls{acr::mkl}, we made use of the already implemented EasyMKL~\parencite{aiolli2015easymkl} approach.
+%                 It was the only method, to our knowledge, that was readily available as a library in \verb!Python!\footnote{\verb!MKLpy!: \href{https://github.com/IvanoLauriola/MKLpy}{\url{https://github.com/IvanoLauriola/MKLpy}}}.
     
-        \subsubsection{Metrics for quantitative assessment}
-            The overall accuracy is not interesting due to the highly unbalanced label distribution.
-            We prefer reporting recall \(\bm{Rec}\) and precision \(\bm{Prec}\) ratios.
-            As a reminder these metrics are defined as follows:
-            \begin{align}
-                \label{eq::recall_precision}
-                \bm{Rec} &\triangleq \frac{tp}{tp + fp}\\
-                \bm{Prec} &\triangleq \frac{tp}{tp + fn},
-            \end{align}
-            where:
-            \begin{conditions}
-                tp & the number of instances predicted positive that are positive in reality;\\
-                fp & the number of instances predicted positive that are negative in reality;\\
-                fn & the number of instances predicted negative that are positive in reality.
-            \end{conditions}
-            Recall expresses, from a number of samples of a given class, the proportion that was rightfully detected as such.
-            Precision indicates how much samples, amongst the detected ones, were, in truth, part of the studied class~\parencite{powers2011evaluation}.
-            We also summarize these two ratios with their harmonic mean, the F-score:
-            \begin{equation}
-                \label{eq::f_score}
-                \bm{F_{score}} \triangleq \frac{2}{\frac{1}{\bm{Rec}} + \frac{1}{\bm{Prec}}}.
-            \end{equation}
-            Unless said otherwise, all experiments were conducted performing a 10-fold cross validation to avoid overfitting or underfitting issues.
-            Only test results are reported.
+%         \subsubsection{Metrics for quantitative assessment}
+%             The overall accuracy is not interesting due to the highly unbalanced label distribution.
+%             We prefer reporting recall \(\bm{Rec}\) and precision \(\bm{Prec}\) ratios.
+%             As a reminder these metrics are defined as follows:
+%             \begin{align}
+%                 \label{eq::recall_precision}
+%                 \bm{Rec} &\triangleq \frac{tp}{tp + fp}\\
+%                 \bm{Prec} &\triangleq \frac{tp}{tp + fn},
+%             \end{align}
+%             where:
+%             \begin{conditions}
+%                 tp & the number of instances predicted positive that are positive in reality;\\
+%                 fp & the number of instances predicted positive that are negative in reality;\\
+%                 fn & the number of instances predicted negative that are positive in reality.
+%             \end{conditions}
+%             Recall expresses, from a number of samples of a given class, the proportion that was rightfully detected as such.
+%             Precision indicates how much samples, amongst the detected ones, were, in truth, part of the studied class~\parencite{powers2011evaluation}.
+%             We also summarize these two ratios with their harmonic mean, the F-score:
+%             \begin{equation}
+%                 \label{eq::f_score}
+%                 \bm{F_{score}} \triangleq \frac{2}{\frac{1}{\bm{Rec}} + \frac{1}{\bm{Prec}}}.
+%             \end{equation}
+%             Unless said otherwise, all experiments were conducted performing a 10-fold cross validation to avoid overfitting or underfitting issues.
+%             Only test results are reported.
 
 \section{Baseline feature analysis}
     \label{sec::experiments::baseline_feature_analysis}
@@ -461,7 +463,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
     As a consequence, for now, we limit ourselves to using the baseline features.\\
 
     First, in Section~\ref{subsec::experiments::baseline_feature_analysis::rmse}, the \gls{acr::rmse} is proven to be inadequate for detecting errors in our taxonomy.
-    Secondly, prediction results from all possible configurations of baseline features are compared in Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}.
+    Secondly, prediction results from all possible configurations of baseline features are compared in Section~\ref{subsec::experiments::baseline_feature_analysis::vanilla}.
     Third and last, Section~\ref{subsec::experiments::baseline_feature_analysis::feature_importance} concludes the analysis by studying the feature importance, for all training zones.
 
     \subsection{\texorpdfstring{\acrlong*{acr::rmse}}{RMSE} predictive capacity}
@@ -507,9 +509,9 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
         Exactly the inverse happens with the rest of the errors as we obtain a high percentage of false negative.
         We can safely conclude that the \gls{acr::rmse} is not able to detect errors defined in our taxonomy.
 
-    \subsection{Feature ablation study}
-        \label{subsec::experiments::baseline_feature_analysis::ablation}
-        We tested the different feature configurations, at \textbf{\gls{acr::efin}} level 3 and in all urban zones.
+    \subsection{Vanilla experiments}
+        \label{subsec::experiments::baseline_feature_analysis::vanilla}
+        We tested the different feature configurations, at \textbf{\gls{acr::efin}} level 3 and in all urban zones\footnote{We train and test on different folds of the same scene.}.
         Mean precision and recall test results are reported in Table~\ref{tab::ablation_f3}.
 
         \begin{table}[htb]
@@ -817,7 +819,7 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
         This is one intuitive explaination of this observed phenomenon.\\
         
         In a second time, we notice that no modality is more important than the others, contrarily to what was observed in Table~\ref{tab::ablation_f3}.
-        In fact, as shown in Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}, for most \texttt{atomic} errors, test results using geometric features are comparable to those obtained with more modalities.
+        In fact, as shown in Section~\ref{subsec::experiments::baseline_feature_analysis::vanilla}, for most \texttt{atomic} errors, test results using geometric features are comparable to those obtained with more modalities.
         However, during training, all modalities are relevant with importance ratios approximating \num[fraction-function = \sfrac]{1/3} as shown in Figure~\ref{fig::feature_importances_rf_bl}.
         As a consequence, for subsequent experimentations all configurations are taken into consideration.
 
@@ -835,4 +837,550 @@ Second and last, Section~\ref{sec::experiments::baseline_feature_analysis} provi
             \item Consequently, the building type is a good indicator for error detection in the same area;
             \item \texttt{BUS} is the only error that the other modalities are better at with a large gap;
             \item Although, in most cases, not improving error prediction, external data based modalities are as important as geometric features.
+        \end{itemize}
+
+\section{Scalability analysis}
+    \label{sec::experiments::scalability}
+    In the previous section, error detection was proven to depend on the scene composition.
+    This fact motivates studying training the classifier and testing prediction on different scenes.
+    The goal is to prove the resilience of error detection to unseen urban scenes.
+    As the annotation process requires a lot of effort, this trait is crucial to guarantee the scalability of this method under the \textbf{large-scale} constraint.\\
+
+    Different configurations are possible, as depicted in Figure~\ref{fig::scalability_study}.
+    In the first type of experiments, we train on one urban scene and test on another one.
+    The goal is to examine the \texttt{transferability} of the classifier model.
+    Experimental results are reported and analyzed in Section~\ref{subsec::experiments::scalability::transferability}.
+    In a second configuration, the classifier is trained on two scenes and tested on the last one: the objective is to investigate the classifier \texttt{generalization}.
+    The results of such experiments are shown in Section~\ref{subsec::experiments::scalability::generalization}.
+    The last experiment class, whose results are presented in Section~\ref{subsec::experiments::scalability::representativeness}, targets the \texttt{representativeness} of a single 3-area dataset by trying multiple train-test split sizes.\\
+
+    \begin{figure}[htbp]
+        \ffigbox[\FBwidth]{
+            \includestandalone[mode=buildnew, width=.8\textwidth]{figures/scalabitity_graph}
+        }
+        {
+            \caption[
+                A graph representing possible experiments: arrow origins represent training scenes while test ones are depicted as targets.
+            ]{
+                \label{fig::scalability_study}
+                A graph representing possible experiments: arrow origins represent training scenes while test ones are depicted as targets.
+                \(Z_i, i=1,2,3\) represent the urban zones.
+                All these nodes are assembled in one, meaning that all urban scenes were aggregated in on train/test node.
+                The numbers indicate in which section each experiment is analyzed.
+            }
+        }
+    \end{figure}
+
+    \subsection{Transferability study}
+        \label{subsec::experiments::scalability::transferability}
+        In this configuration, we test how transferable the learned classifiers are from one urban scene to another.
+        We train on a zone $Z_i$ and test on another one $Z_j$.
+        We will denote each transferability experiment by the couple $(Z_i, Z_j)$ or by $Z_i \rightarrow Z_j$.
+        Six transferability couples are possible and are tested with all possible feature configurations.
+        Mean and standard deviation of F-scores are plotted, for each label and experiment, in Figure~\ref{fig::f_score_transferability_f3}.
+        For more details, refer to Tables~\ref{tab::transferability_f3} and~\ref{tab::all_f-scores_transferability_f3}, which compiles all precision, recall and F-score test results.\\
+        
+        \thisfloatsetup{subfloatrowsep=none}
+        \begin{figure}[htbp]
+            \ffigbox[\textwidth]{
+                \begin{subfloatrow}
+                    \centering
+                    \ffigbox[\textwidth]{
+                        \includestandalone[mode=buildnew, width=\textwidth]{figures/results/transferability/building}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_transferability_f3_building}
+                            \texttt{Building errors.}
+                        }
+                    }
+                \end{subfloatrow}
+                \vskip2em
+                \begin{subfloatrow}
+                    \ffigbox[\textwidth]{
+                        \includestandalone[mode=buildnew, width=\textwidth]{figures/results/transferability/facet}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_transferability_f3_facet}
+                            \texttt{Facet errors.}
+                        }
+                    }
+                \end{subfloatrow}
+            }{
+                \caption[
+                    Mean F-score and standard deviation for the transferability study.
+                ]{
+                    \label{fig::f_score_transferability_f3}
+                    Mean F-score and standard deviation for the transferability study.
+                    \textbf{El.} (\textit{resp.} \textbf{Na.} and \textbf{P13.}) stand for \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
+                    This is a vizualization of results reported in Table~\ref{tab::f_score_transferability_f3}.
+                }
+            }
+        \end{figure}
+
+        \subparagraph{\texttt{Coherence} study}
+            First, a \texttt{coherence} analysis is performed.
+            We compare the results of the transferability experiments to the ablation results with the same training scene.
+            This is achieved by looking, for a given area $Z_i$ in all couples $(Z_i, Z_j)_{\forall j \neq i}$, at the differences between Tables~\ref{tab::all_f-scores_transferability_f3} and~\ref{tab::all_f-scores_ablation_f3}.
+            The goal is to see to which extent the test and training zone are similar.\\
+
+            \begin{figure}[htb]
+                \centering
+                \includestandalone[mode=buildnew, width=.9\textwidth]{figures/results/comparison_bar}
+                \caption[
+                    Color scheme used for F-score comparisons in this study.
+                ]{
+                    \label{fig::comparison_bar}
+                    Color scheme used for F-score comparisons in this study.
+                    When two null F-scores are compared, the cell is colored in white.
+                }
+            \end{figure}
+
+            All these comparisons are provided in Table~\ref{tab::transferability_comparison}.
+            A color scheme was devised to encode the amplitude of change and is illustrated in Figure~\ref{fig::comparison_bar}.
+            The resemblance between \textbf{Paris-13} and \textbf{Nantes} are striking.
+            In fact, when training on one of the two zones and testing on \textbf{Elancourt}, out of the nine labels only two are different.
+            \texttt{BUS} has a gain between \SIrange[range-phrase={ and }]{5}{15}{\percent} when trained on \textbf{Paris-13} while its F-score records a drop in the range \SIrange{-15}{-5}{\percent} if trained on \textbf{Nantes}.
+            \texttt{FUS}, in contrast, looses between \SIrange[range-phrase={ and }]{-45}{-35}{\percent} when trained on \textbf{Paris-13} and \SIrange[range-phrase={ and }]{-35}{-25}{\percent} for \textbf{Nantes}.\\
+            Conversely when training on \textbf{Elancourt} and testing on the other two areas, the comparisons are not as identical as before.
+            However, from a general standpoint, we can see how the \texttt{building errors} are always affected by losses when testing on both \textbf{Paris-13} and \textbf{Nantes}.
+            Except for \texttt{FIT}, the inverse situation is obseved for \texttt{Facet errors} where labels are either better detected or stable.
+
+        \begin{table}[htbp]
+            \footnotesize 
+            \centering
+            \renewcommand{\arraystretch}{2}
+            \begin{tabular}{| c | c | c c c c |c c c c c|}
+                \hline
+                && \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG}\\
+                \hline
+                \multirow{6}{*}{\rotatebox{90}{\texttt{Coherence}}} & \textbf{El.} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{STBL} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN3545} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{GAIN0515} \\
+                & \textbf{El.} \(\rightarrow\) \textbf{P13} & \cellcolor{LOSS1525} & \cellcolor{LOSS1525} \textbf{Im.} & \cellcolor{LOSS1525} & \cellcolor{LOSS2535} & \cellcolor{STBL} & \cellcolor{GAIN3545} \textbf{Im.} & \cellcolor{GAIN2535} \textbf{Im.} & \cellcolor{LOSS1525} & \cellcolor{GAIN0515} \\
+                & \textbf{Na.} \(\rightarrow\) \textbf{P13} & \cellcolor{LOSS1525} & \cellcolor{LOSS2535} \textbf{Im.} &  & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{GAIN2535} \textbf{Geom.} & \cellcolor{GAIN0515} &  & \cellcolor{GAIN0515} \textbf{Hei.} \\
+                & \textbf{Na.} \(\rightarrow\) \textbf{El.} & \cellcolor{GAIN2535} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS2535} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{GAIN0515} & \cellcolor{LOSS0515} \\
+                & \textbf{P13} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS1525} & \cellcolor{LOSS1525} \textbf{Im.} &  & \cellcolor{GAIN2535} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS2535} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{LOSS1525} \\
+                & \textbf{P13} \(\rightarrow\) \textbf{El.} & \cellcolor{GAIN1525} & \cellcolor{GAIN0515} \textbf{All} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS3545} & \cellcolor{STBL} \textbf{All} &\cellcolor{GAIN0515} & \cellcolor{LOSS0515}\\
+                \specialrule{.2em}{.1em}{.1em}
+                \multirow{6}{*}{\rotatebox{90}{\texttt{Projectivity}}} & \textbf{El.} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS1525} & \cellcolor{LOSS1525} \textbf{All} &  & \cellcolor{LOSS0515} \textbf{All} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{STBL} \\
+                & \textbf{El.} \(\rightarrow\) \textbf{P13} & \cellcolor{STBL} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{LOSS2535} \textbf{Im.} & \cellcolor{LOSS0515} \textbf{Im.} &  & \cellcolor{STBL} \\
+                & \textbf{Na.} \(\rightarrow\) \textbf{P13} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{Im.} &  & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{STBL} &  & \cellcolor{STBL} \textbf{Hei.} \\
+                & \textbf{Na.} \(\rightarrow\) \textbf{El.} & \cellcolor{LOSS0515} & \cellcolor{LOSS1525} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{LOSS0515} & \cellcolor{STBL} \\
+                & \textbf{P13} \(\rightarrow\) \textbf{Na.} & \cellcolor{LOSS0515} & \cellcolor{LOSS2535} \textbf{Im.} &  & \cellcolor{GAIN1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS1525} & \cellcolor{STBL} \textbf{Im.} &  & \cellcolor{STBL} \\
+                & \textbf{P13} \(\rightarrow\) \textbf{El.} & \cellcolor{LOSS0515} & \cellcolor{LOSS1525} \textbf{All} & \cellcolor{GAIN0515} \textbf{Im.} & \cellcolor{LOSS1525} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{GAIN0515} & \cellcolor{GAIN1525} \textbf{All} & \cellcolor{LOSS0515} & \cellcolor{STBL}\\
+                \hline
+            \end{tabular}
+            \renewcommand{\arraystretch}{1}
+            \caption[
+                Evolution of the F-score value, for each error, between transferability experiments and the vanilla experiments.
+            ]{
+                \label{tab::transferability_comparison}
+                Evolution of the F-score value, for each error, between transferability experiments and the vanilla experiments (cf. Section~\ref{subsec::experiments::baseline_feature_analysis::vanilla}).
+                \textbf{El.} (\textit{resp.} \textbf{Na.} and \textbf{P13.}) stand for \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
+                Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (cf. Table~\ref{tab::all_f-scores_transferability_f3}).
+                The used color scheme is presented in figure~\ref{fig::comparison_bar}.
+            }
+        \end{table}
+
+        \subparagraph{\texttt{Projectivity} analysis}
+            Secondly, we investigate how the urban scene composition helps predicting defects in an unseen one.
+            This is called the \texttt{projectivity} comparison.
+            For a given test scene $Z_j$ in couples $(Z_i, Z_j)_{\forall i \neq j}$, we compare again results from Tables~\ref{tab::all_f-scores_transferability_f3} and~\ref{tab::all_f-scores_ablation_f3}.
+            A gain in F-score for a label can be interpreted by the transferability power of its learning process.\\
+
+            Comparisons are detailed in Table~\ref{tab::transferability_comparison} with the same color scheme as for \texttt{coherence} comparisons.
+            Error family wise, we can summarize these comparisons as follows:
+            \begin{description}
+                \item[\texttt{Building errors}:] Out of 20 possible \texttt{projectivity} comparisons, 13 yield negative results.
+                        This proves how hard it is to transfer learning for this error family.
+                \item[\texttt{Facet errors}:] Conversely, only 7 out of 27 \texttt{projectivity} scores are worse compared to training and testing on the same test area.
+                        One notable pattern is the stability of \texttt{FOS} and \texttt{FIB} errors no matter the chosen transferability couple.
+            \end{description}
+
+            When looking at the transferability power of \texttt{Facet errors}, we can see how training on \textbf{Nantes} and testing on \textbf{Paris-13} yields the same scores as when the opposite experiment is conducted.
+            We can also see how \textbf{Elancourt} is best for learning \texttt{FIT} as it transfers well to \textbf{Nantes} while having no effect on \textbf{Paris-13}.
+            In contrast, both comparisons are negative when training of the last two areas.
+            With the exception of this label, training on the latter dense zones proves to be advantageous than learning on \textbf{Elancourt}.\\
+            In terms of \texttt{Building errors}, clear discernible patterns are hard to find.
+            This agrees with the previous conclusion that this error family is not easy to learn.
+            The only exceptions were \texttt{BIT} and \texttt{BUS}.
+            For these two labels, training on \textbf{Elancourt} proved to be slightly better than on the other scenes.
+
+        \subparagraph{Impact of external modalities}
+            As we can suspect from looking at the large standard deviations illustrated in Figure~\ref{fig::f_score_transferability_f3}, modalities play an instrumental role in insuring the transferability experiments.
+            All modalities that stood out, in terms of the F-score, were mentioned in the corresponding cell in Table~\ref{tab::transferability_comparison}.\\
+            As intended (cf. Section~\ref{subsec::learned_evaluation::baseline::image}), image based features are instrumental in transferability for \texttt{FUS}, \texttt{BUS}, \texttt{FIB} and \texttt{BIB}.\\
+            Geometric features, on the other hand, play a lesser role helping mostly with \texttt{BIT} transferability when training on dense urban scenes as well as \texttt{FUS} for the \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13} experiment.
+            Actually, \texttt{BIT} is a purely topological error that can be learned with the help of these structural features.
+            On the contrary, adding more modalities would only confuse the classifier as also seen in the ablation study in Table~\ref{tab::ablation_f3}.\\
+            Height based errors alone are not crucial for transferability, intervening only once in the case of \texttt{FIB} in the \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13} experiment.
+            However, it has a bigger impact when added to image based ones (cf. cells with \textbf{All} in Table~\ref{tab::transferability_comparison}).\\
+            All these previous findings further justify why we did not leave out any modality, as they are more frequently critical for transferability than in the ablation study (cf. Table~\ref{tab::all_f-scores_ablation_f3}).
+
+    \subsection{Generalization study}
+        \label{subsec::experiments::scalability::generalization}
+        We try to find out how omitting one urban zone from the training dataset affects the test results on that same area.
+        Another way to look at it is, from an operational point of view, to find out how much learning on a union of many urban scenes is helpful when testing on an unseen one.
+        Experiments that merge all zones except $Z_i$ ($\underset{\forall j \neq i}{\bigcup} Z_j$) for training and test on $Z_i$ are denoted by the couple $(\underset{\forall j \neq i}{\bigcup} Z_j, Z_i)$ or by $ \underset{\forall j \neq i}{\bigcup} Z_j \rightarrow Z_i$.
+        There are three possibilities: \textbf{Elancourt} $\cup$ \textbf{Nantes} \(\rightarrow\) \textbf{Paris-13}, \mbox{\textbf{Paris-13}}\,$\cup$\,\textbf{Nantes}\,\(\rightarrow\)\,\textbf{Elancourt} and \mbox{\textbf{Paris-13}}\,$\cup$\,\textbf{Elancourt}\,\(\rightarrow\)\,\textbf{Nantes}.
+        The F-score evolution, per experiment and label, is depicted in Figure~\ref{fig::f_score_generalization_f3}.\\
+    
+        \thisfloatsetup{subfloatrowsep=none}
+        \begin{figure}[htbp]
+            \ffigbox[\FBwidth]{
+                \begin{subfloatrow}[2]
+                    \centering
+                    \ffigbox[\FBwidth]{
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/generalization/building}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_generalization_f3_building}
+                            \texttt{Building errors.}
+                        }
+                    }
+                    \ffigbox[\FBwidth]{
+                        \includestandalone[mode=buildnew, height=7.5cm]{figures/results/generalization/facet}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_generalization_f3_facet}
+                            \texttt{Facet errors.}
+                        }
+                    }
+                \end{subfloatrow}
+            }{
+                \caption[
+                    Mean F-score and standard deviation for the generalization study per test zone.
+                ]{
+                    \label{fig::f_score_generalization_f3}
+                    Mean F-score and standard deviation for the generalization study per test zone.
+                    These are also provided in Table~\ref{tab::f_score_generalization_f3}.
+                }
+            }
+        \end{figure}
+
+        \begin{table}[htbp]
+            \footnotesize 
+            \centering
+            \renewcommand{\arraystretch}{2}
+            \begin{tabular}{| c | c c c c |c c c c c|}
+                \hline
+                & \texttt{BOS} & \texttt{BUS} & \texttt{BIB} & \texttt{BIT} & \texttt{FOS} & \texttt{FUS} & \texttt{FIB} & \texttt{FIT} & \texttt{FIG} \\
+                \hline
+                \textbf{Elancourt} & \cellcolor{LOSS3545} \textbf{Im.} & \cellcolor{LOSS3545} \textbf{Im.} & \cellcolor{LOSS2535} & \cellcolor{LOSS1525} \textbf{Hei.} & \cellcolor{STBL} & \cellcolor{GAIN45} & \cellcolor{GAIN2535} \textbf{Im.} & \cellcolor{LOSS1525} & \cellcolor{GAIN0515} \\
+                \textbf{Nantes} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{LOSS1525} \textbf{Im.} &  & \cellcolor{GAIN1525} & \cellcolor{STBL} & \cellcolor{STBL} & \cellcolor{LOSS0515} \textbf{Im.} & & \cellcolor{STBL} \\
+                \textbf{Paris-13} & \cellcolor{LOSS0515} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{GAIN1525} \textbf{Im.} & \cellcolor{GAIN0515} \textbf{Geom.} & \cellcolor{STBL} & \cellcolor{LOSS45} \textbf{Im.} & \cellcolor{STBL} \textbf{Im.} & \cellcolor{GAIN0515} & \cellcolor{LOSS0515} \\
+                \hline
+            \end{tabular}
+            \renewcommand{\arraystretch}{1}
+            \caption[
+                Evolution of the F-score value, for each error and test area, between generalization experiments and the vanilla experiments.
+            ]{
+                \label{tab::generalization_comparison}
+                Evolution of the F-score value, for each error and test area, between generalization experiments and the vanilla experiments (cf. Section~\ref{subsec::experiments::baseline_feature_analysis::vanilla}).
+                Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (cf. Table~\ref{tab::all_f-scores_generalization_f3}).
+                The used color scheme is presented in figure~\ref{fig::comparison_bar}.
+            }
+        \end{table}
+            
+        We compare the F-score ratios of these experiments, shown in Table~\ref{tab::all_f-scores_generalization_f3}, with ones from the ablation study for each test area.
+        These comparisons are compiled in Table~\ref{tab::generalization_comparison}.\\
+    
+        We start by summarizing comparisons with respect to error families:
+        \begin{description}
+            \item[\texttt{Building errors}:] Out of the 11 possibilities, 6 yield worse results.
+                    This is approximatly \SI{10}{\percent} less than the transferability study.
+            \item[\texttt{Facet errors}:] 4 out of 14 comparisons exhibit the same trend.
+                    This is sensibly the same ratio as the transferability comparisons with only a \SI{2}{\percent} jump.
+        \end{description}
+        This confirms again how difficult \texttt{Building errors} are to learn compared to \texttt{Facet errors}.
+        However, this time combining urban scenes yielded better results.
+        We can suspect that this is the consequence of the fact that these studied zones are complementary for learning.\\
+        
+        Similarly to the previous study, image and height modalities play a major role in error detection.
+        Image based features are crucial for \texttt{FIB}, \texttt{FUS}, \texttt{BOS}, \texttt{BIB} and \texttt{BUS} detection (Table~\ref{tab::generalization_comparison}).
+        Height based attributes has always a minor role contributing only once for \texttt{BIT} as well as geometric features.
+        Image based errors proves again how instrumental they are in learning, even for topological errors.\\
+        
+        Based on the generalization study we can deduce the best zones to train each error label on.
+        In fact, if a zone yields the worst scores it means that it contains the hardest instances that are beneficial for training.
+        Conversely, if taken into account in training, it will help the classifier yield better results when testing on other scenes.\\
+
+        For \texttt{Building errors} a clear pattern can be observed compared to the transferability study.
+        \textbf{Elancourt} when left out suffers the most.
+        In fact, as \textbf{Nantes} and \textbf{Paris-13} are very dense, buildings are homogeneous in terms of shape with moslty Haussman style or parallelepiped shaped buildings.
+        On the other hand, \textbf{Elancourt} has more heterogeneous buildings allowing a better learning.
+        However, the differences are not that big between the latter and \textbf{Nantes} as was proved in the \texttt{projectivity} comparisons.
+        \textbf{Nantes} has some interesting observations to learn on, especially for \texttt{BIB}.\\
+
+        Regarding \texttt{Facet errors}, the differences are sharper if we set aside \texttt{FOS} as it is always well learned over all sets.
+        For \texttt{FUS} it is \textbf{Paris-13} that suffers the most when left out.
+        This is understandable as Haussman style buildings are usually under-segmented and hence allow for a better learning than other sets, especially \textbf{Elancourt}.
+        \textbf{Paris-13} is also the better alternative for \texttt{FIG}.
+        Next, we can observe how \texttt{FIB} is better learned on \textbf{Nantes} as it also presents compact buildings with a lot of small facets that can be easily misestimated.
+        However, \texttt{FIT} is the exception as \textbf{Elancourt} offers the better alternative, as it comprises various building types that cannot be easily modeled.
+    
+    \subsection{Representativeness study}
+        \label{subsec::experiments::scalability::representativeness}
+        The objective is to find out, after merging all training samples from all datasets, what is the minimal amount of data that can guaranty stable predictions.
+        Figure~\ref{fig::f_score_representativeness_f3} depicts the F-score as a function of training ratios (between \SIrange[range-phrase={ and }]{20}{70}{\percent}) and \texttt{atomic} errors.\\
+                
+        \thisfloatsetup{subfloatrowsep=none}
+        \begin{figure}[htbp]
+            \ffigbox[\textwidth]{
+                \begin{subfloatrow}[2]
+                    \ffigbox[\FBwidth]{
+                        \includestandalone[mode=buildnew, height=6.5cm]{figures/results/representativeness/building}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_representativeness_f3_building}
+                            \texttt{Building errors.}
+                        }
+                    }
+                    \ffigbox[\FBwidth]{
+                        \includestandalone[mode=buildnew, height=6.5cm]{figures/results/representativeness/facet}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_representativeness_f3_facet}
+                            \texttt{Facet errors.}
+                        }
+                    }
+                \end{subfloatrow}
+            }{
+                \caption{
+                    \label{fig::f_score_representativeness_f3}
+                    Mean F-score and standard deviation for the representativeness experiments depending on the training set size.
+                }
+            }
+        \end{figure}
+            
+        We note the high stability of the F-score.
+        This indicates that having a small heterogeneous dataset is not detrimental to the learning capacity and can sometimes be the most suitable solution.
+        \texttt{BOS}, \texttt{FOS}, and \texttt{FIG} have a standard deviation under \SI{2}{\percent}, as opposed to \texttt{FIB}, \texttt{BIT} and \texttt{FIT}.
+        Indeed, the latter vary greatly with respect to the training size, and even a larger standard deviation according to the feature configurations.\\
+
+        However, when looking at the best feature configurations, the variability of the F-scores towards the training size dwindles.
+        Extrinsic modalities play again a big role in these experiments as shown in Table~\ref{tab::all_f-scores_representativeness_f3}.
+        The issue, in this setting, is the lack of consistency when it comes to which modality is the most important.
+        This may be explained by the fact that training samples do not always contain the same instances.\\
+
+        For each error we can then determine the minimum training size needed to achieve stability.
+        As seen \texttt{BOS}, \texttt{FOS}, and \texttt{FIG} are very stable and a \SI{20}{\percent} training set is sufficient to retieve similar performance to the initial ablation study.
+        For \texttt{BUS} (\textit{resp.} \texttt{FUS}), using the best performing features, \SI{20}{\percent} is also enough to achieve stability in the range \SIrange{48}{52}{\percent} (\textit{resp.} \SIrange{47}{53}{\percent}).
+        \texttt{FIB} can also be stabilized between \SIrange[range-phrase={ and }]{42}{46}{\percent} but requires a \SI{30}{\percent} of instances to train on.
+        However, \texttt{BIT}, \texttt{FIT} and \texttt{BIB} prove to be harder to stabilize with mean F-scores around \SI{16}{\percent}, \SI{9}{\percent} and \SI{19}{\percent} respectively.
+        We can hence observe how, understandably, mixing the training sets produces scores that averages out the ones from the ablation study.
+        On the other hand, more sophisticated features are still required to help predicting the less frequent and more semantic labels.
+
+    \subsection{Summary}
+        \label{subsec::experiments::scalability::summary}
+        The goal of this section was to prove the scalability of the proposed approach.
+        To achieve this, we tested how well classifiers trained on a source set can score on a different target one.
+        Depending on how the source set was chosen, three types of experiments were examined: transferability, generalization and representativeness.
+        They yielded consistent results which helped prove:
+        \begin{itemize}[label=\(\blacktriangleright\)]
+            \item \textbf{Nantes} and \textbf{Paris-13} are similar compared to \textbf{Elancourt};
+            \item \texttt{FOS} and \texttt{FIG} detection is highly transferable with over \SI{95}{\percent} in F-score;
+            \item \texttt{Facet errors} detection is easier to scale than \texttt{Building errors};
+            \item \texttt{Building errors} and \texttt{FIT} are better detected on \textbf{Elancourt} than on the other scenes;
+            \item Except \texttt{FIT}, \texttt{Facet errors} are better detected on either \textbf{Nantes} or \textbf{Paris-13};
+            \item Rare errors such as \texttt{BIT} and \texttt{FIT} (on all urban areas) are poorly detected;
+            \item Geometric features are not as good as extrinsic based configurations for error detection scalability;
+            \item Extrinsic features play a more crucial role in transferability and generalization, especially image based ones;
+            \item Representativeness wise, \SI{20}{\percent} is sufficient in most error labels for learning.
+        \end{itemize}
+
+\section{The impact of \texorpdfstring{\acrshort*{acr::efin}}{eFin}}
+    \label{sec::experiments::finesse}
+    In this section, we reproduce the experimental settings described in Section~\ref{sec::experiments::baseline_feature_analysis} and Section~\ref{sec::experiments::scalability}.
+    First, the \textbf{\gls{acr::efin}} is set to be 2.
+    The goal is to find out how good, transferable and stable are the predictions of modeling error families: \texttt{Building errors} and \texttt{Facet errors}.
+    Afterwhat, \textbf{\gls{acr::efin}} is fixed at level 1.
+    The idea is to observe the predictability of defectuous model compared to \texttt{Valid} ones.
+    
+    \subsection{Error family detection}
+        \label{subsec::experiments::finesse::2}
+        \begin{table}[htbp]
+            \footnotesize
+            \centering
+            \begin{tabular}{|c | c c | c c | c c | c c |}
+                \hline
+                & \multicolumn{8}{c|}{\textbf{Elancourt}}\\
+                \hline
+                & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.8cm}|}{\textbf{All}}\\
+                \cline{2-9}
+                & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                \hline
+                \texttt{Building errors} & \textbf{99.76} & \textbf{85.96} & 99.82 & 85.88 & 99.88 & 85.57 & \textbf{100} & 85.55 \\
+                \hline
+                \texttt{Facet errors} & 91.79 & 89.79 & 92.65 & 89.40 & \textbf{93.21} & \textbf{89.45} & 93.46 & 89.16 \\
+                \hline
+                \hline
+                & \multicolumn{8}{c|}{\textbf{Nantes}}\\
+                \hline
+                & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.8cm}|}{\textbf{All}}\\
+                \cline{2-9}
+                & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                \hline
+                \texttt{Building errors} & 85.98 & 67.27 & 87.59 & 67.79 & 85.75 & 68.32 & \textbf{86.90} & \textbf{69.23} \\
+                \hline
+                \texttt{Facet errors} & 91.20 & 94.01 & 91.37 & 94.36 & 91.20 & 94.35 & \textbf{91.73} & \textbf{94.21}\\
+                \hline
+                \hline
+                & \multicolumn{8}{c|}{\textbf{Paris-13}}\\
+                \hline
+                & \multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{1.8cm}|}{\textbf{All}}\\
+                \cline{2-9}
+                & \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) &  \(\bm{Rec}\) & \(\bm{Prec}\) \\
+                \hline
+                \texttt{Building errors} & 97.36 & 68.76 & 97.36 & 68.76 & 97.36 & 68.76 & 97.36 & 68.76 \\
+                \hline
+                \texttt{Facet errors} & 99.03 & 91.26 & 99.03 & 91.26 & 99.03 & 91.26 & 99.03 & 91.26 \\
+                \hline
+            \end{tabular}
+            \caption[
+                Baseline feature ablation study on the three datasets for the \textbf{\gls{acr::efin}} level 2.
+            ]{
+                \label{tab::ablation_f2}
+                Baseline feature ablation study on the three datasets for the \textbf{\gls{acr::efin}} level 2.
+                Results are expressed in percentage.
+                All four modality configurations are compared across both family errors.
+            }
+        \end{table}
+    
+        \begin{figure}[htbp]
+            \ffigbox[\textwidth]{
+                \begin{subfloatrow}[2]
+                    \ffigbox[0.5\textwidth]{
+                        \centering
+                        \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/finesse_2/ablation}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_ablation_f2}
+                            Test scores for classifiers trained on the same zone.
+                        }
+                    }
+                    \ffigbox[0.5\textwidth]{
+                        \centering
+                        \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/finesse_2/transferability}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_transferability_f2}
+                            Transferability experiments.
+                        }
+                    }
+                \end{subfloatrow}
+                \vskip2em
+                \begin{subfloatrow}
+                    \ffigbox[\FBwidth]{
+                        \centering
+                        \includestandalone[mode=buildnew, width=.45\textwidth]{figures/results/finesse_2/representativeness}
+                    }{
+                        \caption{
+                            \label{subfig::f_score_representativeness_f2}
+                            Representativeness experiments.
+                        }
+                    }
+                \end{subfloatrow}
+            }{
+                \caption{
+                    \label{fig::f_score_f2}
+                    F-score mean and standard deviation for the baseline feature study results per zone for \textbf{\gls{acr::efin}} level 2.
+                }
+            }
+        \end{figure}
+    
+        We start by the ablation study.
+        Table~\ref{tab::ablation_f2} reveals that adding more remote sensing modalities do not dramatically change the prediction results.
+        This is perfectly illustrated, in Figure~\ref{fig::f_score_f2}, by the low variance of F-scores for the three areas of interest.
+        We can explain this by referring to the analysis at the \textbf{\gls{acr::efin}} level 3 in Section~\ref{subsec::experiments::baseline_feature_analysis::vanilla}.
+        Two main reasons could be noticed:
+        \begin{itemize}[label=\(\blacktriangleright\)]
+            \item Out of all \texttt{atomic} errors, only \texttt{BUS}, on all datasets, and both, \texttt{BIT} and \texttt{FIB}, on \textbf{Elancourt}, have been greatly impacted by a change in feature configurations.
+                    Both occur under \SI{25}{\percent}, \SI{5}{\percent} and \SI{12}{\percent} respectively.
+            \item On the other hand, all the other errors are unaffected, especially, \texttt{FOS} and \texttt{FIG} which are prevalent on all datasets.
+        \end{itemize}
+        The last observation added to the fact that these labels are, in a large capacity, easily detected individually\footnote{
+            \texttt{FOS} (\textit{resp.} \texttt{FIG}) achieves more than \SI{90}{\percent} (\textit{resp.} \SI{80}{\percent}) in F-score, as depicted in Figure~\ref{subfig::f_score_ablation_f3_facet}.
+        } helps understanding why the F-score reaches at least \SI{90}{\percent} for the \texttt{Facet errors} family (Figure~\ref{subfig::f_score_ablation_f2}) in constrast with \texttt{Building errors}.
+        Moreover, we can see a smaller discrepancy (below \SI{5}{\percent}) between F-scores on different scenes for \texttt{Facet errors} compared to \texttt{Building errors} with \SI{15}{\percent}.\\
+
+        The transferability study (Figure~\ref{subfig::f_score_transferability_f2}) compares the F-scores with the ablation study provided in Figure~\ref{subfig::f_score_ablation_f2}.
+        Out of all 12 possible \texttt{projectivity} comparisons, only 2 exhibit a decrease in error discrimination.
+        Both happen when training \texttt{Building errors} on \textbf{Nantes} and \textbf{Paris-13} and testing on \textbf{Elancourt} with approximatly \SI{-4}{\percent} and \SI{-3}{\percent} respectively.
+        This confirms the fact that \textbf{Elancourt} was best for training \texttt{Building errors} as established in Section~\ref{subsec::experiments::scalability::generalization}.
+        Same as with the ablation study we can see how the stability in \texttt{FOS} and \texttt{FIG} is reflected by a stability of \texttt{Facet errors}.
+        For this reason, we skip the generalization study, all together, at this section.\\
+
+        The representativeness study conducted for the \textbf{\gls{acr::efin}} level 2 results in the F-scores that are illustrated in Figure~\ref{subfig::f_score_representativeness_f2}.
+        Family detection scores are very stable across all different tested split ratios.
+        Moreover, in contrast to \texttt{atomic} errors results (cf. Figure~\ref{fig::f_score_representativeness_f3}), F-scores do not vary by more than \SI{1}{\percent} in mean and standard deviation.
+        This further proves that at \textbf{\gls{acr::efin}} level 2, error family prediction is evened out independent of different split ratios, as opposed to higher \texttt{finesse} errors.
+        Again, it benefits from the higher heterogeneity of the training set with multiple areas.
+    
+    \subsection{Detection of erroneous models}
+        \label{subsec::experiments::finesse::1}
+        \begin{table}
+            \footnotesize
+            \renewcommand{\arraystretch}{1.5}
+            \begin{tabular}{|c | c c | c c | c c | c c |}
+                \hline
+                & \multicolumn{8}{c|}{\textbf{Elancourt}}\\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                \cline{2-9}
+                & \(\bm{Rec}\) & \texttt{Valid} &  \(\bm{Rec}\) & \texttt{Valid} &  \(\bm{Rec}\) & \texttt{Valid} &  \(\bm{Rec}\) & \texttt{Valid} \\
+                \hline
+                \texttt{Erroneous} & 99.95 & $\frac{1}{57}$ & 99.95 & $\frac{1}{57}$ & 99.95 & $\frac{0}{57}$ & 99.95 & $\frac{1}{57}$ \\
+                \hline
+                \hline
+                & \multicolumn{8}{c|}{\textbf{Nantes}}\\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                \cline{2-9}
+                & \(\bm{Rec}\) & \texttt{Valid} &  \(\bm{Rec}\) & \texttt{Valid} &  \(\bm{Rec}\) & \texttt{Valid} &  \(\bm{Rec}\) & \texttt{Valid} \\
+                \hline
+                \texttt{Erroneous} & 99.84 & $\frac{0}{55}$ & 99.84 & $\frac{0}{55}$ & 100 & $\frac{0}{55}$ & \textbf{100} & $\frac{0}{55}$ \\
+                \hline
+                \hline
+                & \multicolumn{8}{c|}{\textbf{Paris-13}}\\
+                \hline
+                &\multicolumn{2}{c|}{\textbf{Geom.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Hei.}} & \multicolumn{2}{c|}{\textbf{Geom. \(\oplus\) Im.}} & \multicolumn{2}{x{2.4cm}|}{\textbf{All}}\\
+                \cline{2-9}
+                & \(\bm{Rec}\) & \texttt{Valid} &  \(\bm{Rec}\) & \texttt{Valid} &  \(\bm{Rec}\) & \texttt{Valid} &  \(\bm{Rec}\) & \texttt{Valid} \\
+                \hline
+                \texttt{Erroneous} & 99.77 & $\frac{3}{21}$ & 99.77 & $\frac{3}{21}$ & 99.77 & $\frac{3}{21}$ & 99.77 & $\frac{3}{21}$ \\
+                \hline
+            \end{tabular}
+            \renewcommand{\arraystretch}{1}
+            \caption[
+                Test results expressed in percentage for the \textbf{\gls{acr::efin}} = 1 case.
+            ]{
+                \label{tab::ablation_f1}
+                Test results expressed in percentage for the \textbf{\gls{acr::efin}} = 1 case.
+                All four modality configurations, using baseline features, are compared across both family errors.
+            }
+        \end{table}
+        
+        For the level 1 in \textbf{\gls{acr::efin}}, we start with the feature ablation experiments.
+        Since valid samples are very rare in our case, it is expected that it will be very difficult to detect these instances.
+        In consequence, in Table~\ref{tab::ablation_f1}, we choose to report correctly \texttt{Valid} buildings instead of computing the precision score in percentage.\\
+            
+        At this level, even more than the error family semantic degree, feature configurations have virtually no impact on test results: \textbf{Elancourt} was the only exception when image features are added to geometric ones.
+        Furthermore, we confirm expectations as, at most, only 1 out of 57 (\textit{resp.} 0 out of 55 and 3 out of 21) valid instances are detected for \textbf{Elancourt} (\textit{resp.} \textbf{Nantes} and \textbf{Paris-13}).
+        As a consequence, we do not report the rest of previously conducted experiments for this \textbf{\gls{acr::efin}} level.
+        Indeed, There is no interest in comparing prediction transferability, generalization or representativeness if we hardly detect them at all on the same training scene.
+
+    \subsection{Summary}
+        \label{subsec::experiments::finesse::summary}
+        To summarize, we have applied the same study, that was previously conducted at the \texttt{atomic} errors level, at the \textbf{\gls{acr::efin}} levels 2 and 1.
+        We have experimentally proven that:
+        \begin{itemize}[label=\(\blacktriangleright\)]
+            \item \texttt{Facet errors} are detected with around a \SI{90}{\percent} F-score unaffected by the urban scenes.
+            \item As seen previously on \textbf{\gls{acr::efin}} level 3, \texttt{Building errors} are hard to train on \textbf{Nantes} and \textbf{Paris-13}, with an F-score around \SI{75}{\percent};
+            \item We confirm once again that:
+            \begin{itemize}[label=\(\blacktriangleright\)]
+                \item \texttt{Building errors} learning is harder to transfer than \texttt{Facet errors};
+                \item \textbf{Elancourt} is the best choice to learn \texttt{Building errors} on;
+                \item \textbf{Nantes} and \textbf{Paris-13} are similar in composition;
+            \end{itemize}
+            \item \SI{20}{\percent} is sufficient for learning on the mixed dataset;
+            \item As expected, the distinction between \texttt{Erroneous} and \texttt{Valid} proved to be difficult to learn.
         \end{itemize}
