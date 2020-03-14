@@ -347,468 +347,468 @@ Last, Section~\ref{sec::better_representation::implementation} presents the impl
                     }
                 \end{figure}
 
-        \subsection{Kernels for graph classification}
-            \label{subsec::better_representation::literature::graph_classification}
-            Standard machine learning practice usually assumes that the observed instances live in a finite dimensional space.
-            This is not always the case.
-            In fact, graphs can have varying numbers of nodes and edges.
-            Moreover, they can be different while providing the same structural information: we say they are isomorphic.
-            A valid representation for graphs should then take care of these two issues: incorporate all possible graph sizes and be invariant to graph isomorphisms.
-            As accustomed in statistical learning, one way to alleviate these issues is to directly compare graphs using kernels as seen previously in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.\\
+    \subsection{Kernels for graph classification}
+        \label{subsec::better_representation::literature::graph_classification}
+        Standard machine learning practice usually assumes that the observed instances live in a finite dimensional space.
+        This is not always the case.
+        In fact, graphs can have varying numbers of nodes and edges.
+        Moreover, they can be different while providing the same structural information: we say they are isomorphic.
+        A valid representation for graphs should then take care of these two issues: incorporate all possible graph sizes and be invariant to graph isomorphisms.
+        As accustomed in statistical learning, one way to alleviate these issues is to directly compare graphs using kernels as seen previously in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.\\
 
-            This Section does not aim at presenting a thorough survey of graph kernels.
-            The work of~\textcite{ghosh2018journey} categorizes graph kernels depending on the used methodology.
-            A different approach is proposed in~\textcite{kriege2019survey}, where graph kernels are studied based on the underlying graphs.\\
+        This Section does not aim at presenting a thorough survey of graph kernels.
+        The work of~\textcite{ghosh2018journey} categorizes graph kernels depending on the used methodology.
+        A different approach is proposed in~\textcite{kriege2020survey}, where graph kernels are studied based on the underlying graphs.\\
 
-            Apart from the structure of the graph, kernels should also take into account the labels or continuous attributes assigned to a graph.
-            These could be given at node level or edge level.
-            We will present hereafter some graph kernels which were used in this work, namely, continuously node attributed ones, as well as those devoted only to its structural properties.\\
+        Apart from the structure of the graph, kernels should also take into account the labels or continuous attributes assigned to a graph.
+        These could be given at node level or edge level.
+        We will present hereafter some graph kernels which were used in this work, namely, continuously node attributed ones, as well as those devoted only to its structural properties.\\
 
-            \subsubsection{Basic kernels}
-                Let $G = \left(V, E\right)$ be an undirected graph with vertices $v\in V$ and edges $e \in E =\left\{\left\{u, v\right\}: (u, v) \in V\times V\right\}$.
-                Attributes can be associated to each node $a: V \rightarrow \mathbb{R}^{d_V}$ or edge $b: E \rightarrow \mathbb{R}^{d_E}$.\\
+        \subsubsection{Basic kernels}
+            Let $G = \left(V, E\right)$ be an undirected graph with vertices $v\in V$ and edges $e \in E =\left\{\left\{u, v\right\}: (u, v) \in V\times V\right\}$.
+            Attributes can be associated to each node $a: V \rightarrow \mathbb{R}^{d_V}$ or edge $b: E \rightarrow \mathbb{R}^{d_E}$.\\
 
-                The most basic graph kernel would correspond to a scalar product of a global hashing vector of all attributes.
-                This is possible through the use of a histogram function for instance.
-                This type of functions is described in details in Section~\ref{subsec::learned_evaluation::baseline::geometric}.\\
+            The most basic graph kernel would correspond to a scalar product of a global hashing vector of all attributes.
+            This is possible through the use of a histogram function for instance.
+            This type of functions is described in details in Section~\ref{subsec::learned_evaluation::baseline::geometric}.\\
 
-                Let $S\left(\left(a(v)_i\right)_{v\in V}\right): \mathbb{R}^{\vert V\vert} \rightarrow \mathbb{R}^l$ (\textit{resp.} $S\left(\left(b(e)_i\right)_{e\in E}\right): \mathbb{R}^{\vert E\vert} \rightarrow \mathbb{R}^{m}$) be a hashing function that describes the distribution of attributes $i$ of all nodes (\textit{resp.} edges) of graph $G$ as a $\mathbb{R}^{l_i}$ (\textit{resp.} $\mathbb{R}^{m_i}$) vector.
-                We can build a node based feature vector for the graph $G$:
-                \begin{equation}
-                    \label{eq::feature_node_graph}
-                    \Phi_V(G) \triangleq \begin{bmatrix}
-                        S\left(\left(a(v)_1\right)_{v\in V}\right)\\
-                        S\left(\left(a(v)_2\right)_{v\in V}\right)\\
-                        \vdots\\
-                        S\left(\left(a(v)_{d_V}\right)_{v\in V}\right)
-                    \end{bmatrix} \in \mathbb{R}^{d_V \cdot l}
-                \end{equation}
-                and an edge based one:
-                \begin{equation}
-                    \label{eq::feature_edge_graph}
-                    \Phi_E(G) \triangleq \begin{bmatrix}
-                        S\left(\left(b(e)_1\right)_{e \in E}\right)\\
-                        S\left(\left(b(e)_2\right)_{e \in E}\right)\\
-                        \vdots\\
-                        S\left(\left(b(e)_{d_E}\right)_{e \in E}\right)
-                    \end{bmatrix} \in \mathbb{R}^{d_E \cdot m}.
-                \end{equation}
+            Let $S\left(\left(a(v)_i\right)_{v\in V}\right): \mathbb{R}^{\vert V\vert} \rightarrow \mathbb{R}^l$ (\textit{resp.} $S\left(\left(b(e)_i\right)_{e\in E}\right): \mathbb{R}^{\vert E\vert} \rightarrow \mathbb{R}^{m}$) be a hashing function that describes the distribution of attributes $i$ of all nodes (\textit{resp.} edges) of graph $G$ as a $\mathbb{R}^{l_i}$ (\textit{resp.} $\mathbb{R}^{m_i}$) vector.
+            We can build a node based feature vector for the graph $G$:
+            \begin{equation}
+                \label{eq::feature_node_graph}
+                \Phi_V(G) \triangleq \begin{bmatrix}
+                    S\left(\left(a(v)_1\right)_{v\in V}\right)\\
+                    S\left(\left(a(v)_2\right)_{v\in V}\right)\\
+                    \vdots\\
+                    S\left(\left(a(v)_{d_V}\right)_{v\in V}\right)
+                \end{bmatrix} \in \mathbb{R}^{d_V \cdot l}
+            \end{equation}
+            and an edge based one:
+            \begin{equation}
+                \label{eq::feature_edge_graph}
+                \Phi_E(G) \triangleq \begin{bmatrix}
+                    S\left(\left(b(e)_1\right)_{e \in E}\right)\\
+                    S\left(\left(b(e)_2\right)_{e \in E}\right)\\
+                    \vdots\\
+                    S\left(\left(b(e)_{d_E}\right)_{e \in E}\right)
+                \end{bmatrix} \in \mathbb{R}^{d_E \cdot m}.
+            \end{equation}
 
-                Based on a base kernel on vectors $\kappa$ (cf. Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}), we can compute the similarity between two graphs $G = \left(V, E\right)$ and $G' = \left(V', E'\right)$:
+            Based on a base kernel on vectors $\kappa$ (cf. Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}), we can compute the similarity between two graphs $G = \left(V, E\right)$ and $G' = \left(V', E'\right)$:
+            \begin{align}
+                \label{eq::feature_graph_kernel_nodes}
+                k_V(G, G') &\triangleq \kappa(\Phi_V(G), \Phi_V(G'))\\
+                \label{eq::feature_graph_kernel_edges}
+                k_E(G, G') &\triangleq \kappa(\Phi_E(G), \Phi_E(G')).
+            \end{align}
+            Concatenating both feature vectors would amount to a simple addition of these kernels:
+            \begin{equation}
+                \label{eq::feature_graph_kernel_sum}
+                k(G, G') \triangleq k_V(G, G') + k_E(G, G').
+            \end{equation}
+
+            This type of kernels is versatile as it can be applied to node and edge attributes as well as labels (with the right choice of hashing function).
+            However, it does not take into account the structure of the graph.
+            It is mainly used as a baseline for graph feature extraction.
+            The work of~\textcite{shervashidze2011weisfeiler} is an example of kernels that uses the same idea to describe graphs while taking account of their structure.
+
+        \subsubsection{Random walk kernel}
+            In order to define this kernel, we need to define the adjacency matrix $A$ of a graph $G$:
+            \begin{equation}
+                \label{eq::adjacency_matrix}
+                A \triangleq \left(\delta_{\left\{u,v\right\}\in E}\right)_{(u, v) \in V\times V}
+            \end{equation}
+            and the diagonal matrix of node degrees $D\triangleq \operatorname{diag}\left(\sum_{v \in V}A_{uv}\right)_{u \in V}$.
+            We also denote the normalized adjacency matrix as:
+            \begin{equation}
+                \label{eq::normalized_adjacency_matrix}
+                P \triangleq A\cdot D^{-1}
+            \end{equation}
+
+            The latter could be interpreted as a transition probability matrix of a random walk on the graph:
+            $P_{uv}$ is the probability of choosing $u$ as the next node to visit starting from $v$.
+            Similarly, $\left(P^k\right)_{uv}$ expresses the probability of being in node $u$ after $k$ iterations, starting from $v$.
+            A random walk starts with an initial distribution $p$ over the nodes.
+            After $k$ iterations, the distribution is $P^k\cdot p$.
+            At any time, the walk can end with a probability $q_u$ at node $u$.
+            $p$ and $q$ are used to encode prior information of the graph~\parencite{vishwanathan2010graph}.\\
+            
+            \paragraph{Simultaneous random walk}
+                To compare two graphs \(G\) and \(G'\) using random walks, we start by defining the direct product graph $G_{\times} = \left(V_{\times}, E_{\times}\right)$ where:
                 \begin{align}
-                    \label{eq::feature_graph_kernel_nodes}
-                    k_V(G, G') &\triangleq \kappa(\Phi_V(G), \Phi_V(G'))\\
-                    \label{eq::feature_graph_kernel_edges}
-                    k_E(G, G') &\triangleq \kappa(\Phi_E(G), \Phi_E(G')).
+                    \label{eq::direct_product_graph}
+                    V_{\times} &\triangleq V \times V'\\
+                    E_{\times} &\triangleq \left\{\left\{(u, u'), (v, v')\right\}: \left\{u,v\right\} \in E \wedge \left\{u',v'\right\} \in E'\right\}.
                 \end{align}
-                Concatenating both feature vectors would amount to a simple addition of these kernels:
-                \begin{equation}
-                    \label{eq::feature_graph_kernel_sum}
-                    k(G, G') \triangleq k_V(G, G') + k_E(G, G').
-                \end{equation}
+                This is vizualized in Figure~\ref{fig::direct_product_graph}.
+                \begin{figure}[htbp]
+                    \centering
+                    \includegraphics[height=.4\textheight]{images/related_work/direct_product_graphs}
+                    \caption[
+                        Depiction of a direct product of two graphs.
+                    ]{
+                        \label{fig::direct_product_graph}
+                        Depiction of a direct product (bottom) of two graphs (top).
+                        Nodes adjacent in the direct product graph $G_{\times}$ correspond to adjacent nodes in both graphs.
+                        Image taken from~\parencite{vishwanathan2010graph}.
+                    }
+                \end{figure}
 
-                This type of kernels is versatile as it can be applied to node and edge attributes as well as labels (with the right choice of hashing function).
-                However, it does not take into account the structure of the graph.
-                It is mainly used as a baseline for graph feature extraction.
-                The work of~\textcite{shervashidze2011weisfeiler} is an example of kernels that uses the same idea to describe graphs while taking account of their structure.
+                For the direct product graph, we compute adjacency matrices, initial probability distribution and stopping probabilities as follows:
+                \begin{align}
+                    \label{eq::direct_product_graph_walk}
+                    A_{\times} &= A \otimes A'\\
+                    P_{\times} &= P \otimes P'\\
+                    p_{\times} &= p \otimes p'\\
+                    q_{\times} &= q \otimes q'
+                \end{align}
+                where:
+                \begin{conditions}
+                    \otimes & refers to the Kronecker product.
+                \end{conditions}
+                In fact, a random walk on $G_{\times}$ is equivalent to a simultaneous random walk on $G$ and $G'$~\parencite{hammack2011handbook}.\\
 
-            \subsubsection{Random walk kernel}
-                In order to define this kernel, we need to define the adjacency matrix $A$ of a graph $G$:
-                \begin{equation}
-                    \label{eq::adjacency_matrix}
-                    A \triangleq \left(\delta_{\left\{u,v\right\}\in E}\right)_{(u, v) \in V\times V}
-                \end{equation}
-                and the diagonal matrix of node degrees $D\triangleq \operatorname{diag}\left(\sum_{v \in V}A_{uv}\right)_{u \in V}$.
-                We also denote the normalized adjacency matrix as:
-                \begin{equation}
-                    \label{eq::normalized_adjacency_matrix}
-                    P \triangleq A\cdot D^{-1}
-                \end{equation}
-
-                The latter could be interpreted as a transition probability matrix of a random walk on the graph:
-                $P_{uv}$ is the probability of choosing $u$ as the next node to visit starting from $v$.
-                Similarly, $\left(P^k\right)_{uv}$ expresses the probability of being in node $u$ after $k$ iterations, starting from $v$.
-                A random walk starts with an initial distribution $p$ over the nodes.
-                After $k$ iterations, the distribution is $P^k\cdot p$.
-                At any time, the walk can end with a probability $q_u$ at node $u$.
-                $p$ and $q$ are used to encode prior information of the graph~\parencite{vishwanathan2010graph}.\\
-                
-                \paragraph{Simultaneous random walk}
-                    To compare two graphs \(G\) and \(G'\) using random walks, we start by defining the direct product graph $G_{\times} = \left(V_{\times}, E_{\times}\right)$ where:
-                    \begin{align}
-                        \label{eq::direct_product_graph}
-                        V_{\times} &\triangleq V \times V'\\
-                        E_{\times} &\triangleq \left\{\left\{(u, u'), (v, v')\right\}: \left\{u,v\right\} \in E \wedge \left\{u',v'\right\} \in E'\right\}.
-                    \end{align}
-                    This is vizualized in Figure~\ref{fig::direct_product_graph}.
-                    \begin{figure}[htbp]
-                        \centering
-                        \includegraphics[height=.4\textheight]{images/related_work/direct_product_graphs}
-                        \caption[
-                            Depiction of a direct product of two graphs.
-                        ]{
-                            \label{fig::direct_product_graph}
-                            Depiction of a direct product (bottom) of two graphs (top).
-                            Nodes adjacent in the direct product graph $G_{\times}$ correspond to adjacent nodes in both graphs.
-                            Image taken from~\parencite{vishwanathan2010graph}.
-                        }
-                    \end{figure}
-
-                    For the direct product graph, we compute adjacency matrices, initial probability distribution and stopping probabilities as follows:
-                    \begin{align}
-                        \label{eq::direct_product_graph_walk}
-                        A_{\times} &= A \otimes A'\\
-                        P_{\times} &= P \otimes P'\\
-                        p_{\times} &= p \otimes p'\\
-                        q_{\times} &= q \otimes q'
-                    \end{align}
-                    where:
-                    \begin{conditions}
-                        \otimes & refers to the Kronecker product.
-                    \end{conditions}
-                    In fact, a random walk on $G_{\times}$ is equivalent to a simultaneous random walk on $G$ and $G'$~\parencite{hammack2011handbook}.\\
-
-                    A random walk on a graph depends heavily on the its structure.
-                    In consequence, a random walk on the direct product graph can be used as an indicator of the similarity in structure of both graphs $G$ and $G'$.
-                    It is defined as:
-                    \begin{equation}
-                        \label{eq::random_walk_kernel}
-                        k_{rw}(G, G') \triangleq \sum_{k=0}^\infty \lambda_k \cdot q_{\times}^\intercal\cdot P_{\times}\cdot p_{\times}.
-                    \end{equation}
-                    The choice of the series $\left(\lambda_k\right)_{k\in \mathbb{N}}$ is critical, as the kernel defined in Equation~\ref{eq::random_walk_kernel} can diverge.
-                    It is taken to be non-negative in order in ensure the positive semi-definite of the kernel.\\
-
-                \paragraph{Special cases}
-                    This defintion actually generalizes a family of graph kernels based on walks on graphs~\parencite{vishwanathan2010graph}.
-                    Setting $p_{\times} \propto 1$ and $q_{\times} \propto 1$ and, there are two cases of interest:
-                    \begin{itemize}
-                        \item Let \(\lambda \in \mathbb{R}^*_+\), we set \(\forall k\in \mathbb{N} \; \lambda_k = \lambda^k\): this gives rise to a geometric random kernel:
-                                \begin{equation}
-                                    \label{eq::geometric_random_kernel}
-                                    k_{grw}(G, G') = \begin{bmatrix}
-                                        1, 1\dots,1
-                                    \end{bmatrix}\cdot \left(I - \lambda\cdot A_{\times}\right)^{-1}\cdot\begin{bmatrix}
-                                        1\\
-                                        1\\
-                                        \vdots\\
-                                        1
-                                    \end{bmatrix}.
-                                \end{equation}
-                                Let \(\lambda_{\times}\) the largest eigenvalue of \(A_{\times}\).
-                                For this kernel to be valid, the following condition must hold:
-                                \begin{equation}
-                                    \label{eq::condition_geometric_kernel_convergence}
-                                    \lambda < \frac{1}{\lambda_{\times}}
-                                \end{equation}
-                        \item Let \(\lambda \in \mathbb{R}^*_+\), we set \(\forall k\in \mathbb{N} \; \lambda_k = \frac{\lambda^k}{k!}\): this yields the so called exponential random kernel:
-                                \begin{equation}
-                                    \label{eq::geometric_random_kernel}
-                                    k_{erw}(G, G') = \begin{bmatrix}
-                                        1, 1\dots,1
-                                    \end{bmatrix}\cdot \exp\left(\lambda\cdot A_{\times}\right)\cdot\begin{bmatrix}
-                                        1\\
-                                        1\\
-                                        \vdots\\
-                                        1
-                                    \end{bmatrix}.
-                                \end{equation}
-                    \end{itemize}
-                    These graph kernels were already defined in~\parencite{gartner2003graph}.\\
-
-                Computationally, these kernels involve heavy computations.
-                \textcite{vishwanathan2010graph} proposed efficient numerical algorithms to alleviate this problem.
-                However, these graphs suffer from other issues.
-                First, the kernel does take into account the attributes of graphs if they exist, although it is possible to adapt.
-                Secondly, these kernels suffer from tottering.
-                The latter being the fact that random walks are mostly consistent of multiple movements between a small subset of vertices in a row.
-                Third, related to the previous point, the random walk would spend much time on central nodes that connect to most other nodes adding to their contribution to the kernel, while peripherial ones that can hold the most distinctive feature of the structure are watered down.
-                It is possible to address these issues as demonstrated by~\textcite{horvath2004cyclic, mahe2004extensions}.
-                However these kernels cannot be guaranteed to be computed in polynomial time~\parencite{vishwanathan2010graph}.
-
-            \subsubsection{\gls*{acr::svm} $\vartheta$ kernel}
-                This is also a kernel which takes advantage only of the structure of graphs.
-                It relies on the definition of Lov\'asz number of a graph $\vartheta(G)$.
-                For each vertex $v \in V$, we can assign a unit vector \(\bm{w}_v \in \left\{u \in \mathbb{R}^d: \left\lVert u \right\rVert = 1 \right\}\).
-                The set of vectors \(W(G) \triangleq \left(\bm{w}_v\right)_{v \in V}\) is said to be an orthonormal representation of a graph $G$ if and only if:
-                \begin{equation*}
-                    \forall \left\{u,v\right\} \notin E \Rightarrow \bm{w}_u^\intercal\cdot \bm{w}_v=0.
-                \end{equation*}
-
-                \paragraph{Lov\'asz $\vartheta$ kernel}
-                    The Lov\'asz number~\parencite{lovasz1979shannon} is defined as:
-                    \begin{equation}
-                        \label{eq::lovazs_number}
-                        \vartheta(G) \triangleq \min_{\substack{\bm{c} \in \mathbb{R}^d\\W(G)}}\max_{v\in V} \left(\frac{1}{\bm{c}^\intercal\cdot \bm{w}_v}\right)^2
-                    \end{equation}
-                    Which can be interpreted as the smallest cone enclosing a valid orthonormal representation of graph $G$.\\
-                    Equally, we define the Lov\'asz number over a subset of vertices $B \in V$ as follows:
-                    \begin{equation}
-                        \label{eq::lovazs_number_subset}
-                        \vartheta_B(G) \triangleq \min_{\bm{c} \in \mathbb{R}^d}\max_{\bm{w}_v\in W_B^*(G)} \left(\frac{1}{\bm{c}^\intercal\cdot \bm{w}_v}\right)^2
-                    \end{equation}
-                    where:
-                    \begin{conditions}
-                        W^*_B(G) & is the restriction of $W^*(G)$ over the subset $B$;\\
-                        W^*(G) & is the maximizer of the problem in Equation~\ref{eq::lovazs_number}.
-                    \end{conditions}
-
-                    The Lov\'asz kernel~\parencite{johansson2014global} is defined based on a base kernel $\kappa: \mathbb{R} \times \mathbb{R} \rightarrow \mathbb{R}_+$ as:
-                    \begin{equation}
-                        \label{eq::lovazs_number_kernel}
-                        k_{\vartheta}(G, G') \triangleq \sum_{\substack{B\subseteq V\\B'\subseteq V'\\\vert B \vert = \vert B' \vert}} \frac{1}{
-                            \begin{pmatrix}
-                                \vert V \vert\\
-                                \vert B \vert                            
-                            \end{pmatrix} \cdot \begin{pmatrix}
-                                \vert V \vert\\
-                                \vert B' \vert                            
-                            \end{pmatrix}
-                        } \cdot \kappa\left(\vartheta_B(G), \vartheta_{B'}(G')\right)
-                    \end{equation}
-
-                \paragraph{Lov\'asz number approximation}
-                    The Lov\'asz number is, however, hard to compute~\parencite{johansson2014global}.
-                    An approximation is possible using the work of~\textcite{jethava2013lovasz}.
-                    It presents an alternative definition of Lov\'asz number.
-                    We define $$L \triangleq \left\{K \in S_{\vert V \vert}^+: \forall v \in V, K_{vv} = 1 \wedge \forall \left\{u, v\right\}  \notin E, K_{uv} = 0\right\}$$ where $S_{\vert V \vert}^+$ is the set of $\vert V \vert \times \vert V \vert$ positive semi-definite matrices.
-                    We can hence write:
-                    \begin{equation}
-                        \label{eq::lovazs_number_alternative}
-                        \vartheta(G) = \min_{K \in L} \omega(K)
-                    \end{equation}
-                    where:
-                    \begin{equation}
-                        \omega(K) = \max_{\alpha_v > 0, \forall v \in V} 2\cdot \sum_{v\in V} \alpha_v - \sum_{(u, v) \in V\times V} \alpha_u \cdot \alpha_v \cdot K_{uv}
-                    \end{equation}
-                    is dual one-class \gls{acr::svm} (cf. Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}).
-
-                    If $\lambda_m$ is the minimum eigenvalue of the adjacency matrix $A$ (cf. Equation~\ref{eq::adjacency_matrix}), for $\rho\geq-\lambda_m$, the matrix
-                    \begin{equation}
-                        \label{eq::ls_matrix}
-                        K_{LS} \triangleq \frac{1}{\rho} \cdot A + I \in S_{\vert V \vert}^+
-                    \end{equation}
-                    is interesting as $\omega(K_{LS}) = \sum_{v\in V} \alpha_v$~\parencite{jethava2013lovasz}.
-                    It is even more interesting, since for Erdos–R\'enyi random graphs, $\omega(K_{LS})$ is a constant factor approximation to the Lov\'asz number~\parencite{jethava2013lovasz} with high probability.
-
-                    This justifies the definition of the kernel:
-                    \begin{equation}
-                        \label{eq::svm_kernel}
-                        k_{svm}(G, G') \triangleq \sum_{\substack{B\subseteq V\\B'\subseteq V'\\\vert B \vert = \vert B' \vert}} \frac{1}{
-                            \begin{pmatrix}
-                                \vert V \vert\\
-                                \vert B \vert                            
-                            \end{pmatrix} \cdot \begin{pmatrix}
-                                \vert V \vert\\
-                                \vert B' \vert                            
-                            \end{pmatrix}
-                        } \cdot \kappa\left(\sum_{v\in B} \alpha_v, \sum_{v\in B'} \alpha_v\right).
-                    \end{equation}
-                    This is still very prohibitive in terms of computational complexity as one has to sum over all $2^{\vert V \vert}$ (\textit{resp.} $2^{\vert V' \vert}$) subsets of $V$ (\textit{resp.} $V'$).
-                    To avoid this issue, for each graph, only a set \(\mathscr{S}\) (\textit{resp.} \(\mathscr{S}'\)) of few of the subsets of \(G\) (\textit{resp.} \(G'\)) are visited:
-                    \begin{equation}
-                        \label{eq::svm_approximated_kernel}
-                        \hat{k}_{svm}(G, G') \triangleq \sum_{\substack{B\in \mathscr{S}\\B'\in \mathscr{S}'\\\vert B \vert = \vert B' \vert}} \frac{1}{
-                            \begin{pmatrix}
-                                \vert V \vert\\
-                                \vert B \vert                            
-                            \end{pmatrix} \cdot \begin{pmatrix}
-                                \vert V \vert\\
-                                \vert B' \vert                            
-                            \end{pmatrix}
-                        } \cdot \kappa\left(\sum_{v\in B} \alpha_v, \sum_{v\in B'} \alpha_v\right).
-                    \end{equation}
-
-            \subsubsection{Multiscale Laplacian kernel}
-                Related to random walks on graphs, the Laplacian characterizes the structure of graphs, especially its low eigenvalue eigenvectors~\parencite{kondor2016multiscale}.
+                A random walk on a graph depends heavily on the its structure.
+                In consequence, a random walk on the direct product graph can be used as an indicator of the similarity in structure of both graphs $G$ and $G'$.
                 It is defined as:
                 \begin{equation}
-                    \label{eq::laplacian_graph}
-                    \widetilde{L} \triangleq D - A
+                    \label{eq::random_walk_kernel}
+                    k_{rw}(G, G') \triangleq \sum_{k=0}^\infty \lambda_k \cdot q_{\times}^\intercal\cdot P_{\times}\cdot p_{\times}.
                 \end{equation}
+                The choice of the series $\left(\lambda_k\right)_{k\in \mathbb{N}}$ is critical, as the kernel defined in Equation~\ref{eq::random_walk_kernel} can diverge.
+                It is taken to be non-negative in order in ensure the positive semi-definite of the kernel.\\
 
-                \paragraph{Comparing same size Laplacians}
-                    When $\vert V \vert = \vert V' \vert$, we can directly compare the two matrices.
-                    The idea of a Laplacian graph kernel $k_{l}$ is to compare the two matrices by comparing related Gaussian probability distribution.
-                    In fact, using a Gaussian graphical model, based on a graph $G$ and node variance $\frac{1}{\eta}$, for a random variable $\bm{x}$ is equivalent to:
-                    \begin{equation}
-                        \label{eq::guassian_gm}
-                        \bm{x} \sim \mathscr{N}\left(0, \left(L + \eta \cdot I\right)^{-1}\right).
-                    \end{equation}
+            \paragraph{Special cases}
+                This defintion actually generalizes a family of graph kernels based on walks on graphs~\parencite{vishwanathan2010graph}.
+                Setting $p_{\times} \propto 1$ and $q_{\times} \propto 1$ and, there are two cases of interest:
+                \begin{itemize}
+                    \item Let \(\lambda \in \mathbb{R}^*_+\), we set \(\forall k\in \mathbb{N} \; \lambda_k = \lambda^k\): this gives rise to a geometric random kernel:
+                            \begin{equation}
+                                \label{eq::geometric_random_kernel}
+                                k_{grw}(G, G') = \begin{bmatrix}
+                                    1, 1\dots,1
+                                \end{bmatrix}\cdot \left(I - \lambda\cdot A_{\times}\right)^{-1}\cdot\begin{bmatrix}
+                                    1\\
+                                    1\\
+                                    \vdots\\
+                                    1
+                                \end{bmatrix}.
+                            \end{equation}
+                            Let \(\lambda_{\times}\) the largest eigenvalue of \(A_{\times}\).
+                            For this kernel to be valid, the following condition must hold:
+                            \begin{equation}
+                                \label{eq::condition_geometric_kernel_convergence}
+                                \lambda < \frac{1}{\lambda_{\times}}
+                            \end{equation}
+                    \item Let \(\lambda \in \mathbb{R}^*_+\), we set \(\forall k\in \mathbb{N} \; \lambda_k = \frac{\lambda^k}{k!}\): this yields the so called exponential random kernel:
+                            \begin{equation}
+                                \label{eq::geometric_random_kernel}
+                                k_{erw}(G, G') = \begin{bmatrix}
+                                    1, 1\dots,1
+                                \end{bmatrix}\cdot \exp\left(\lambda\cdot A_{\times}\right)\cdot\begin{bmatrix}
+                                    1\\
+                                    1\\
+                                    \vdots\\
+                                    1
+                                \end{bmatrix}.
+                            \end{equation}
+                \end{itemize}
+                These graph kernels were already defined in~\parencite{gartner2003graph}.\\
 
-                    Using a Bhattacharyya kernel on probabilities and a regulizer parameter $\gamma>0$, we define~\parencite{kondor2016multiscale}:
-                    \begin{equation}
-                        \label{eq::laplacian_kernel}
-                        k_{l}(G, G') \triangleq \frac{\left\lvert \left(\frac{1}{2} \cdot \left(L^{-1}+\gamma\cdot I\right)^{-1} + \frac{1}{2} \cdot \left(L^{\prime -1}+\gamma\cdot I\right)^{-1} \right)^{-1} \right\rvert^{\frac{1}{2}}}{\left\lvert L^{-1} + \gamma \cdot I\right\rvert^{\frac{1}{4}}\cdot\left\lvert L^{\prime -1} + \gamma \cdot I\right\rvert^{\frac{1}{4}}}.
-                    \end{equation}
-                    The \(\gamma\) regulizer term is added in so as to avoid numerical issues when the one of the Laplacians has eigenvalues equal or close to zero.
-                    The Laplacian is not invariant to permutations as the graph as described in~\textcite{kondor2016multiscale}.
-                    Moreover, both graphs are required to be of the same size.\\
+            Computationally, these kernels involve heavy computations.
+            \textcite{vishwanathan2010graph} proposed efficient numerical algorithms to alleviate this problem.
+            However, these graphs suffer from other issues.
+            First, the kernel does take into account the attributes of graphs if they exist, although it is possible to adapt.
+            Secondly, these kernels suffer from tottering.
+            The latter being the fact that random walks are mostly consistent of multiple movements between a small subset of vertices in a row.
+            Third, related to the previous point, the random walk would spend much time on central nodes that connect to most other nodes adding to their contribution to the kernel, while peripherial ones that can hold the most distinctive feature of the structure are watered down.
+            It is possible to address these issues as demonstrated by~\textcite{horvath2004cyclic, mahe2004extensions}.
+            However these kernels cannot be guaranteed to be computed in polynomial time~\parencite{vishwanathan2010graph}.
 
-                    This kernel is not well adapted.
-                    To alleviate this issue,~\textcite{kondor2016multiscale} propose to describe the graph nodes by vertex permutation invariant features.
-                    If $U$ (\textit{resp.} $U'$) is a matrix which encodes such a transformation for graph $G$ (\textit{resp.} $G'$), $k_{l}$ is adapted in what is called feature space Laplacian graph kernel:
-                    \begin{equation}
-                        \label{eq::feature_laplacian_kernel}
-                        k_{fl}(G, G') \triangleq \frac{\left\lvert \left(\frac{1}{2} \cdot S^{-1} + \frac{1}{2} \cdot S^{\prime -1} \right)^{-1} \right\rvert^{\frac{1}{2}}}{\left\lvert S\right\rvert^{\frac{1}{4}}\cdot\left\lvert S' \right\rvert^{\frac{1}{4}}}
-                    \end{equation}
-                    where 
-                    \begin{description}
-                        \item[\(S =\)] \(U\cdot L^{-1}\cdot U^\intercal + \gamma \cdot I\);
-                        \item[\(S' =\)] \(U\cdot L^{\prime -1}\cdot U^\intercal + \gamma \cdot I\);
-                        \item[\(L = \)] \(\widetilde{L} + \eta \cdot I\).
-                    \end{description}
+        \subsubsection{\gls*{acr::svm} $\vartheta$ kernel}
+            This is also a kernel which takes advantage only of the structure of graphs.
+            It relies on the definition of Lov\'asz number of a graph $\vartheta(G)$.
+            For each vertex $v \in V$, we can assign a unit vector \(\bm{w}_v \in \left\{u \in \mathbb{R}^d: \left\lVert u \right\rVert = 1 \right\}\).
+            The set of vectors \(W(G) \triangleq \left(\bm{w}_v\right)_{v \in V}\) is said to be an orthonormal representation of a graph $G$ if and only if:
+            \begin{equation*}
+                \forall \left\{u,v\right\} \notin E \Rightarrow \bm{w}_u^\intercal\cdot \bm{w}_v=0.
+            \end{equation*}
 
-                \paragraph{Node attribute aware Laplacian comparison}
-                    Up to now, only the structure of the graph is taken into account.
-                    To that extent, utilizing a base kernel $\kappa$ on node attributes, first is defined the Gram matrix
-                    \begin{equation*}
-                        K=\left(\kappa\left(u, v\right)\right)_{(u,v) \in V \cup V'} \in \mathbb{R}^{\left(\vert V \vert + \vert V' \vert\right) \times \left(\vert V \vert + \vert V' \vert\right)}.
-                    \end{equation*}
-                    Let $\left\{ (\lambda_1, e_1), (\lambda_2, e_2)\dots,(\lambda_p, e_p) \right\}$ be all\footnote{$p \leq \vert V \vert + \vert V' \vert$.} its eigenvalues and their eigenvectors such that $\forall i = 1, 2 \dots, p,\; \lambda_i > 0$.
-                    We also need to define
-                    \begin{equation*}
-                        \widetilde{Q} = \begin{bmatrix}
-                            \sqrt{\lambda_1}\cdot e_1, \sqrt{\lambda_2}\cdot e_2 \dots, \sqrt{\lambda_p}\cdot e_p
-                        \end{bmatrix} \in \mathbb{R}^{p \times p}.
-                    \end{equation*}
-                    For graph \(G\) (\textit{resp.} \(G'\)), the first $\vert V \vert$ (\textit{resp.} the last $\vert V' \vert$) rows of $\widetilde{Q}$ are taken from $Q$ (\textit{resp.} $Q'$).
-                    Both these matrices are needed to define 
-                    \begin{align*}
-                        \bar{S} = Q^\intercal\cdot L ^{-1}\cdot Q + \gamma \cdot I\\
-                        \bar{S}' = Q^{\prime T}\cdot L^{\prime -1}\cdot Q' + \gamma \cdot I.
-                    \end{align*}
-                    The generalized feature space Laplacian graph kernel is hence defined as:
-                    \begin{equation}
-                        \label{eq::generalized_feature_laplacian_kernel}
-                        k^{\kappa}_{gfl}(G, G') \triangleq \frac{\left\lvert \left(\frac{1}{2} \cdot \bar{S}^{-1} + \frac{1}{2} \cdot \bar{S}^{\prime -1} \right)^{-1} \right\rvert^{\frac{1}{2}}}{\left\lvert \bar{S}\right\rvert^{\frac{1}{4}}\cdot\left\lvert \bar{S}' \right\rvert^{\frac{1}{4}}}.
-                    \end{equation}
-
-                \paragraph{Multiscale Laplacian comparison based kernel}
-                    The last kernel restricted to a subgraph can in fact be used as a base kernel for the same type of kernels, but at a larger scale.
-                    In fact, considering a nested sequence of $L$ sets (neighborhoods) containing $v \in V$:
-                    \begin{equation}
-                        \label{eq::centered_nested_subgraphs}
-                        v \in N_1(v) \subseteq N_2(v) \dots \subseteq N_L(v) \subseteq V.
-                    \end{equation}
-                    Let us denote by $G[A]$ the induced subgraph by $A \subseteq V$:
-                    \begin{equation}
-                        \label{eq::induced_subgraph}
-                        G[A] \triangleq (A, \left\{\left\{u, v\right\} \in E: (u, v) \in A \times A \right\}).
-                    \end{equation}
-
-                    The Multiscale Laplacian Subgraph kernels are base kernels:
-                    \begin{align}
-                        \kappa_0(v, v') &\triangleq \kappa(v, v')\\
-                        \forall l = 1, 2\dots,L \quad \kappa_l(v, v') &\triangleq k^{\kappa_{l-1}}_{gfl}\left(G[N_1(v)], G'[N'_1(v)]\right).
-                    \end{align}
-                    Finally, the Multiscale Laplacian Graph kernel is defined using the last base kernel:
-                    \begin{equation}
-                        \label{eq::multiscale_laplacian_kernel}
-                        k_{msl}(G, G') \triangleq k^{\kappa_L}_{gfl}(G, G')
-                    \end{equation}
-                    These kernels could be estimated efficiently by computing once the $\bar{S}$ matrices for all graphs, all multiscale base kernels for all nodes and using a low rank approximation.
-                    More details are available in the original paper~\parencite{kondor2016multiscale}.
-
-            \subsubsection{Propagation kernel}
-                The propagation kernel was proposed by~\parencite{neumann2016propagation} and combines ideas from~\parencite{shervashidze2011weisfeiler} with random walks.
-                It relies on a simple kernel:
+            \paragraph{Lov\'asz $\vartheta$ kernel}
+                The Lov\'asz number~\parencite{lovasz1979shannon} is defined as:
                 \begin{equation}
-                    \label{eq::simple_kernel}
-                    k_s(G, G') \triangleq \sum_{(v, v') \in V\times V'} \kappa(v, v')
+                    \label{eq::lovazs_number}
+                    \vartheta(G) \triangleq \min_{\substack{\bm{c} \in \mathbb{R}^d\\W(G)}}\max_{v\in V} \left(\frac{1}{\bm{c}^\intercal\cdot \bm{w}_v}\right)^2
                 \end{equation}
-                where $\kappa$ is a base kernel on node attributes\footnote{It can accomodate also the case of labeled and partially labeled graphs.}.\\
-
-                In order to take advantage of the structure of the graph, attributes are propagated using a matrix $T$ giving a new graph $G_t$ at each time $t$, where $G_0 = G$.
-                If not given by the user, \(T\) is taken to be the normalized adjacency matrix $P$ (cf. Equation~\ref{eq::normalized_adjacency_matrix}).
-                Once the attributes are propagated, the kernel from Equation~\ref{eq::simple_kernel} is computed for the new graphs.
-                At time $t_{\max}$, we compute the propagation kernel:
+                Which can be interpreted as the smallest cone enclosing a valid orthonormal representation of graph $G$.\\
+                Equally, we define the Lov\'asz number over a subset of vertices $B \in V$ as follows:
                 \begin{equation}
-                    \label{eq::propagation_kernel}
-                    k_p(G, G') = \sum_{t=1}^{t_{\max}} k_s(G_t, G_t').
+                    \label{eq::lovazs_number_subset}
+                    \vartheta_B(G) \triangleq \min_{\bm{c} \in \mathbb{R}^d}\max_{\bm{w}_v\in W_B^*(G)} \left(\frac{1}{\bm{c}^\intercal\cdot \bm{w}_v}\right)^2
                 \end{equation}
-                Two points are still to be discussed.
-                First, the type of base kernels to use, and secondly, the attribute propagation scheme.\\
+                where:
+                \begin{conditions}
+                    W^*_B(G) & is the restriction of $W^*(G)$ over the subset $B$;\\
+                    W^*(G) & is the maximizer of the problem in Equation~\ref{eq::lovazs_number}.
+                \end{conditions}
 
-                \paragraph{Efficient base kernels through hashing}
-                    Knowing the corresponding feature vector extractor $\phi_s(G)$ makes the computation of the simple graph kernel efficient~\parencite{shervashidze2011weisfeiler,neumann2016propagation}.
-                    This is possible provided a base kernel of the form: $\kappa(u, v) = \mathbb{1}_{h(u) = h(v)}$, where $h$ is a hash function defined over nodes.
-                    By binning values $h(u)$ in a graph $G$ and encoding the results in a vector $\phi_s(G) = b_h(G)$, the simple graph kernel can be expressed as:
-                    \begin{equation}
-                        \label{eq::simple_kernel_binning}
-                        k_s(G, G') \triangleq b_h(G)^\intercal\cdot b_h(G').
-                    \end{equation}
-                    The used hash function is the Locality sensitivity hashing~\parencite{neumann2016propagation}.\\
+                The Lov\'asz kernel~\parencite{johansson2014global} is defined based on a base kernel $\kappa: \mathbb{R} \times \mathbb{R} \rightarrow \mathbb{R}_+$ as:
+                \begin{equation}
+                    \label{eq::lovazs_number_kernel}
+                    k_{\vartheta}(G, G') \triangleq \sum_{\substack{B\subseteq V\\B'\subseteq V'\\\vert B \vert = \vert B' \vert}} \frac{1}{
+                        \begin{pmatrix}
+                            \vert V \vert\\
+                            \vert B \vert
+                        \end{pmatrix} \cdot \begin{pmatrix}
+                            \vert V \vert\\
+                            \vert B' \vert
+                        \end{pmatrix}
+                    } \cdot \kappa\left(\vartheta_B(G), \vartheta_{B'}(G')\right)
+                \end{equation}
 
-                \paragraph{Node attribute propagation}
-                    Nodes attributes are not directly hashed.
-                    Instead, the latter are taken, at time $t$ and for node $u$, as samples of mixtures of Gaussian multivariate distributions $q_{t, u}$ using coefficients $W_t$ at each time $t$:
-                    \begin{equation}
-                        \label{eq::attribute_samples}
-                        q_{t, u} \sim \sum_{v \in V} W_{uv}\cdot \mathscr{N}(a(v), \Sigma)
-                    \end{equation}
-                    where:
-                    \begin{conditions}
-                        \Sigma & is the $d_V \times d_V$ covariance matrix based on attributes $\left(a(v)\right)_{v\in V}$.
-                    \end{conditions}
-                    To propagate these distributions at the next iteration, the mixture coefficients are diffused using the already predefined $T$: $W_{t+1} = T\cdot W_t$.
-                    At initialization, $W_0 = I$ and hence $W_t= T^t$.
+            \paragraph{Lov\'asz number approximation}
+                The Lov\'asz number is, however, hard to compute~\parencite{johansson2014global}.
+                An approximation is possible using the work of~\textcite{jethava2013lovasz}.
+                It presents an alternative definition of Lov\'asz number.
+                We define $$L \triangleq \left\{K \in S_{\vert V \vert}^+: \forall v \in V, K_{vv} = 1 \wedge \forall \left\{u, v\right\}  \notin E, K_{uv} = 0\right\}$$ where $S_{\vert V \vert}^+$ is the set of $\vert V \vert \times \vert V \vert$ positive semi-definite matrices.
+                We can hence write:
+                \begin{equation}
+                    \label{eq::lovazs_number_alternative}
+                    \vartheta(G) = \min_{K \in L} \omega(K)
+                \end{equation}
+                where:
+                \begin{equation}
+                    \omega(K) = \max_{\alpha_v > 0, \forall v \in V} 2\cdot \sum_{v\in V} \alpha_v - \sum_{(u, v) \in V\times V} \alpha_u \cdot \alpha_v \cdot K_{uv}
+                \end{equation}
+                is dual one-class \gls{acr::svm} (cf. Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}).
 
-            \subsubsection{Graph hopper kernel}
-                Random walk kernels, just as the basic kernels defined in Equations~\ref{eq::feature_graph_kernel_nodes} and~\ref{eq::feature_graph_kernel_edges} and propagation kernels, are instances of R-convolution kernels~\parencite{haussler1999convolution}: i.e., they can be written as a sum of kernels of substructures of graphs.
-                In the case of the class of kernels defined in Equation~\ref{eq::random_walk_kernel}, it can be decomposed into a sum of kernels on all equal length walks from both graphs \(G\) and \(G'\)~\parencite{vishwanathan2010graph}.
-                In order to deal with issues of these kernels, the shortest path kernel~\parencite{borgwardt2005shortest} proposes to replace walks by shortest paths between pairs of vertices.
-                The graph hopper kernel proposes also to compare pairs of nodes from two graphs in a scalable way~\parencite{feragen2013scalable}.
+                If $\lambda_m$ is the minimum eigenvalue of the adjacency matrix $A$ (cf. Equation~\ref{eq::adjacency_matrix}), for $\rho\geq-\lambda_m$, the matrix
+                \begin{equation}
+                    \label{eq::ls_matrix}
+                    K_{LS} \triangleq \frac{1}{\rho} \cdot A + I \in S_{\vert V \vert}^+
+                \end{equation}
+                is interesting as $\omega(K_{LS}) = \sum_{v\in V} \alpha_v$~\parencite{jethava2013lovasz}.
+                It is even more interesting, since for Erdos–R\'enyi random graphs, $\omega(K_{LS})$ is a constant factor approximation to the Lov\'asz number~\parencite{jethava2013lovasz} with high probability.
 
-                \paragraph{Path kernel}
-                    A path \(\pi\) between two vertices \((v_s,v_e) \in V\times V\) is a sequence of nodes \(\left(\pi_i\right)_{i=1,2\dots,\vert \pi \vert}\) such that:
-                    \begin{equation*}
-                        \begin{cases}
-                            \forall i=1,2\dots,\vert \pi \vert-1,\; \{\pi_i, \pi_{i+1}\} \in E\\
-                            v_s = \pi_1\\
-                            v_e = \pi_{\vert \pi \vert}
-                        \end{cases}
-                    \end{equation*}
-                    The set of all shortest paths between nodes of graph \(G\) (\textit{resp.} \(G'\)) is denoted \(\mathscr{P}\) (\textit{resp.} \(\mathscr{P}'\)).
+                This justifies the definition of the kernel:
+                \begin{equation}
+                    \label{eq::svm_kernel}
+                    k_{svm}(G, G') \triangleq \sum_{\substack{B\subseteq V\\B'\subseteq V'\\\vert B \vert = \vert B' \vert}} \frac{1}{
+                        \begin{pmatrix}
+                            \vert V \vert\\
+                            \vert B \vert                            
+                        \end{pmatrix} \cdot \begin{pmatrix}
+                            \vert V \vert\\
+                            \vert B' \vert                            
+                        \end{pmatrix}
+                    } \cdot \kappa\left(\sum_{v\in B} \alpha_v, \sum_{v\in B'} \alpha_v\right).
+                \end{equation}
+                This is still very prohibitive in terms of computational complexity as one has to sum over all $2^{\vert V \vert}$ (\textit{resp.} $2^{\vert V' \vert}$) subsets of $V$ (\textit{resp.} $V'$).
+                To avoid this issue, for each graph, only a set \(\mathscr{S}\) (\textit{resp.} \(\mathscr{S}'\)) of few of the subsets of \(G\) (\textit{resp.} \(G'\)) are visited:
+                \begin{equation}
+                    \label{eq::svm_approximated_kernel}
+                    \hat{k}_{svm}(G, G') \triangleq \sum_{\substack{B\in \mathscr{S}\\B'\in \mathscr{S}'\\\vert B \vert = \vert B' \vert}} \frac{1}{
+                        \begin{pmatrix}
+                            \vert V \vert\\
+                            \vert B \vert                            
+                        \end{pmatrix} \cdot \begin{pmatrix}
+                            \vert V \vert\\
+                            \vert B' \vert                            
+                        \end{pmatrix}
+                    } \cdot \kappa\left(\sum_{v\in B} \alpha_v, \sum_{v\in B'} \alpha_v\right).
+                \end{equation}
 
-                    Let \(\left(\pi, \pi'\right) \in \mathscr{P} \times \mathscr{P}'\).
-                    To compare both paths, a path kernel is defined:
-                    \begin{equation}
-                        \label{eq::path_kernel}
-                        k_p(\pi, \pi') \triangleq \sum_{i=1}^{\vert \pi \vert} \kappa\left(\pi_i, \pi'_i\right) \cdot \mathbb{1}_{\vert \pi \vert = \vert \pi' \vert}
-                    \end{equation}
-                    where:
-                    \begin{conditions}
-                        \kappa & is a base kernel on node attributes.
-                    \end{conditions}
-                    This kernel compares paths with similar length by hopping along them simultaneously.
+        \subsubsection{Multiscale Laplacian kernel}
+            Related to random walks on graphs, the Laplacian characterizes the structure of graphs, especially its low eigenvalue eigenvectors~\parencite{kondor2016multiscale}.
+            It is defined as:
+            \begin{equation}
+                \label{eq::laplacian_graph}
+                \widetilde{L} \triangleq D - A
+            \end{equation}
 
-                \paragraph{Efficient path based graph kernel}
-                    Based on this path kernel, one can compare two graphs \(G\) and \(G'\) by comparing paths from both:
-                    \begin{equation}
-                        \label{eq::graph_hopper_kernel}
-                        k_{gh}(G, G') \triangleq \sum_{(\pi, \pi') \in \mathscr{P} \times \mathscr{P}'} k_p(\pi, \pi').
-                    \end{equation}
-                    Defining \(w(v, v')\) as the number of times \(v\) and \(v'\) appear at the same coordinate \(i\) of some shortest paths \(\pi\) and \(\pi'\) with the same length \(\vert \pi \vert = \vert \pi' \vert\), this kernel can be computed efficiently as it can be transformed into:
-                    \begin{equation}
-                        \label{eq::graph_hopper_kernel_second}
-                        k_{gh}(G, G') = \sum_{\substack{v \in V\\v' \in V'}} w(v, v')\cdot \kappa(v, v').
-                    \end{equation}
-                    Let \(\delta \triangleq \max_{\pi \in \mathscr{P}} \vert \pi \vert\) the maximal length of shortest paths in \(G\).
-                    Define also the \(\delta \times \delta\) matrix
-                    \begin{equation*}
-                        M_G(v) \triangleq \left(\left\lvert\left\{\pi \in \mathscr{P}: \pi_i = v \wedge \left\lvert\pi\right\rvert = j \right\}\right\rvert\right)_{\substack{i=1,2\dots,\delta\\j=1,2\dots,\delta}}
-                    \end{equation*}
-                    which in row \(i\) and column \(j\) stores how many times does \(v\) appear as the \(i\)\textsuperscript{th} member of paths of length \(j\).
-                    We can see that:
-                    \begin{equation}
-                        \label{eq::w_as_matrix_inner_product}
-                        w(v, v') = \langle M_G(v), M_{G'}(v')\rangle_F
-                    \end{equation}
-                    where:
-                    \begin{conditions}
-                        \langle \bullet, \bullet \rangle_F & is Frobenius inner product on matrices.
-                    \end{conditions}
-                    This quantity can be computed efficiently for each graph with a time complexity two orders of magnitude less than that of basic shortest paths kernel~\parencite{feragen2013scalable}.
+            \paragraph{Comparing same size Laplacians}
+                When $\vert V \vert = \vert V' \vert$, we can directly compare the two matrices.
+                The idea of a Laplacian graph kernel $k_{l}$ is to compare the two matrices by comparing related Gaussian probability distribution.
+                In fact, using a Gaussian graphical model, based on a graph $G$ and node variance $\frac{1}{\eta}$, for a random variable $\bm{x}$ is equivalent to:
+                \begin{equation}
+                    \label{eq::guassian_gm}
+                    \bm{x} \sim \mathscr{N}\left(0, \left(L + \eta \cdot I\right)^{-1}\right).
+                \end{equation}
+
+                Using a Bhattacharyya kernel on probabilities and a regulizer parameter $\gamma>0$, we define~\parencite{kondor2016multiscale}:
+                \begin{equation}
+                    \label{eq::laplacian_kernel}
+                    k_{l}(G, G') \triangleq \frac{\left\lvert \left(\frac{1}{2} \cdot \left(L^{-1}+\gamma\cdot I\right)^{-1} + \frac{1}{2} \cdot \left(L^{\prime -1}+\gamma\cdot I\right)^{-1} \right)^{-1} \right\rvert^{\frac{1}{2}}}{\left\lvert L^{-1} + \gamma \cdot I\right\rvert^{\frac{1}{4}}\cdot\left\lvert L^{\prime -1} + \gamma \cdot I\right\rvert^{\frac{1}{4}}}.
+                \end{equation}
+                The \(\gamma\) regulizer term is added in so as to avoid numerical issues when the one of the Laplacians has eigenvalues equal or close to zero.
+                The Laplacian is not invariant to permutations as the graph as described in~\textcite{kondor2016multiscale}.
+                Moreover, both graphs are required to be of the same size.\\
+
+                This kernel is not well adapted.
+                To alleviate this issue,~\textcite{kondor2016multiscale} propose to describe the graph nodes by vertex permutation invariant features.
+                If $U$ (\textit{resp.} $U'$) is a matrix which encodes such a transformation for graph $G$ (\textit{resp.} $G'$), $k_{l}$ is adapted in what is called feature space Laplacian graph kernel:
+                \begin{equation}
+                    \label{eq::feature_laplacian_kernel}
+                    k_{fl}(G, G') \triangleq \frac{\left\lvert \left(\frac{1}{2} \cdot S^{-1} + \frac{1}{2} \cdot S^{\prime -1} \right)^{-1} \right\rvert^{\frac{1}{2}}}{\left\lvert S\right\rvert^{\frac{1}{4}}\cdot\left\lvert S' \right\rvert^{\frac{1}{4}}}
+                \end{equation}
+                where 
+                \begin{description}
+                    \item[\(S =\)] \(U\cdot L^{-1}\cdot U^\intercal + \gamma \cdot I\);
+                    \item[\(S' =\)] \(U\cdot L^{\prime -1}\cdot U^\intercal + \gamma \cdot I\);
+                    \item[\(L = \)] \(\widetilde{L} + \eta \cdot I\).
+                \end{description}
+
+            \paragraph{Node attribute aware Laplacian comparison}
+                Up to now, only the structure of the graph is taken into account.
+                To that extent, utilizing a base kernel $\kappa$ on node attributes, first is defined the Gram matrix
+                \begin{equation*}
+                    K=\left(\kappa\left(u, v\right)\right)_{(u,v) \in V \cup V'} \in \mathbb{R}^{\left(\vert V \vert + \vert V' \vert\right) \times \left(\vert V \vert + \vert V' \vert\right)}.
+                \end{equation*}
+                Let $\left\{ (\lambda_1, e_1), (\lambda_2, e_2)\dots,(\lambda_p, e_p) \right\}$ be all\footnote{$p \leq \vert V \vert + \vert V' \vert$.} its eigenvalues and their eigenvectors such that $\forall i = 1, 2 \dots, p,\; \lambda_i > 0$.
+                We also need to define
+                \begin{equation*}
+                    \widetilde{Q} = \begin{bmatrix}
+                        \sqrt{\lambda_1}\cdot e_1, \sqrt{\lambda_2}\cdot e_2 \dots, \sqrt{\lambda_p}\cdot e_p
+                    \end{bmatrix} \in \mathbb{R}^{p \times p}.
+                \end{equation*}
+                For graph \(G\) (\textit{resp.} \(G'\)), the first $\vert V \vert$ (\textit{resp.} the last $\vert V' \vert$) rows of $\widetilde{Q}$ are taken from $Q$ (\textit{resp.} $Q'$).
+                Both these matrices are needed to define 
+                \begin{align*}
+                    \bar{S} = Q^\intercal\cdot L ^{-1}\cdot Q + \gamma \cdot I\\
+                    \bar{S}' = Q^{\prime T}\cdot L^{\prime -1}\cdot Q' + \gamma \cdot I.
+                \end{align*}
+                The generalized feature space Laplacian graph kernel is hence defined as:
+                \begin{equation}
+                    \label{eq::generalized_feature_laplacian_kernel}
+                    k^{\kappa}_{gfl}(G, G') \triangleq \frac{\left\lvert \left(\frac{1}{2} \cdot \bar{S}^{-1} + \frac{1}{2} \cdot \bar{S}^{\prime -1} \right)^{-1} \right\rvert^{\frac{1}{2}}}{\left\lvert \bar{S}\right\rvert^{\frac{1}{4}}\cdot\left\lvert \bar{S}' \right\rvert^{\frac{1}{4}}}.
+                \end{equation}
+
+            \paragraph{Multiscale Laplacian comparison based kernel}
+                The last kernel restricted to a subgraph can in fact be used as a base kernel for the same type of kernels, but at a larger scale.
+                In fact, considering a nested sequence of $L$ sets (neighborhoods) containing $v \in V$:
+                \begin{equation}
+                    \label{eq::centered_nested_subgraphs}
+                    v \in N_1(v) \subseteq N_2(v) \dots \subseteq N_L(v) \subseteq V.
+                \end{equation}
+                Let us denote by $G[A]$ the induced subgraph by $A \subseteq V$:
+                \begin{equation}
+                    \label{eq::induced_subgraph}
+                    G[A] \triangleq (A, \left\{\left\{u, v\right\} \in E: (u, v) \in A \times A \right\}).
+                \end{equation}
+                
+                The Multiscale Laplacian Subgraph kernels are base kernels:
+                \begin{align}
+                    \kappa_0(v, v') &\triangleq \kappa(v, v')\\
+                    \forall l = 1, 2\dots,L \quad \kappa_l(v, v') &\triangleq k^{\kappa_{l-1}}_{gfl}\left(G[N_1(v)], G'[N'_1(v)]\right).
+                \end{align}
+                Finally, the Multiscale Laplacian Graph kernel is defined using the last base kernel:
+                \begin{equation}
+                    \label{eq::multiscale_laplacian_kernel}
+                    k_{msl}(G, G') \triangleq k^{\kappa_L}_{gfl}(G, G')
+                \end{equation}
+                These kernels could be estimated efficiently by computing once the $\bar{S}$ matrices for all graphs, all multiscale base kernels for all nodes and using a low rank approximation.
+                More details are available in the original paper~\parencite{kondor2016multiscale}.
+
+        \subsubsection{Propagation kernel}
+            The propagation kernel was proposed by~\parencite{neumann2016propagation} and combines ideas from~\parencite{shervashidze2011weisfeiler} with random walks.
+            It relies on a simple kernel:
+            \begin{equation}
+                \label{eq::simple_kernel}
+                k_s(G, G') \triangleq \sum_{(v, v') \in V\times V'} \kappa(v, v')
+            \end{equation}
+            where $\kappa$ is a base kernel on node attributes\footnote{It can accomodate also the case of labeled and partially labeled graphs.}.\\
+            
+            In order to take advantage of the structure of the graph, attributes are propagated using a matrix $T$ giving a new graph $G_t$ at each time $t$, where $G_0 = G$.
+            If not given by the user, \(T\) is taken to be the normalized adjacency matrix $P$ (cf. Equation~\ref{eq::normalized_adjacency_matrix}).
+            Once the attributes are propagated, the kernel from Equation~\ref{eq::simple_kernel} is computed for the new graphs.
+            At time $t_{\max}$, we compute the propagation kernel:
+            \begin{equation}
+                \label{eq::propagation_kernel}
+                k_p(G, G') = \sum_{t=1}^{t_{\max}} k_s(G_t, G_t').
+            \end{equation}
+            Two points are still to be discussed.
+            First, the type of base kernels to use, and secondly, the attribute propagation scheme.\\
+            
+            \paragraph{Efficient base kernels through hashing}
+            Knowing the corresponding feature vector extractor $\phi_s(G)$ makes the computation of the simple graph kernel efficient~\parencite{shervashidze2011weisfeiler,neumann2016propagation}.
+            This is possible provided a base kernel of the form: $\kappa(u, v) = \mathbb{1}_{h(u) = h(v)}$, where $h$ is a hash function defined over nodes.
+            By binning values $h(u)$ in a graph $G$ and encoding the results in a vector $\phi_s(G) = b_h(G)$, the simple graph kernel can be expressed as:
+            \begin{equation}
+                \label{eq::simple_kernel_binning}
+                k_s(G, G') \triangleq b_h(G)^\intercal\cdot b_h(G').
+            \end{equation}
+            The used hash function is the Locality sensitivity hashing~\parencite{neumann2016propagation}.\\
+            
+            \paragraph{Node attribute propagation}
+            Nodes attributes are not directly hashed.
+            Instead, the latter are taken, at time $t$ and for node $u$, as samples of mixtures of Gaussian multivariate distributions $q_{t, u}$ using coefficients $W_t$ at each time $t$:
+            \begin{equation}
+                \label{eq::attribute_samples}
+                q_{t, u} \sim \sum_{v \in V} W_{uv}\cdot \mathscr{N}(a(v), \Sigma)
+            \end{equation}
+            where:
+            \begin{conditions}
+                \Sigma & is the $d_V \times d_V$ covariance matrix based on attributes $\left(a(v)\right)_{v\in V}$.
+            \end{conditions}
+            To propagate these distributions at the next iteration, the mixture coefficients are diffused using the already predefined $T$: $W_{t+1} = T\cdot W_t$.
+            At initialization, $W_0 = I$ and hence $W_t= T^t$.
+
+        \subsubsection{Graph hopper kernel}
+            Random walk kernels, just as the basic kernels defined in Equations~\ref{eq::feature_graph_kernel_nodes} and~\ref{eq::feature_graph_kernel_edges} and propagation kernels, are instances of R-convolution kernels~\parencite{haussler1999convolution}: i.e., they can be written as a sum of kernels of substructures of graphs.
+            In the case of the class of kernels defined in Equation~\ref{eq::random_walk_kernel}, it can be decomposed into a sum of kernels on all equal length walks from both graphs \(G\) and \(G'\)~\parencite{vishwanathan2010graph}.
+            In order to deal with issues of these kernels, the shortest path kernel~\parencite{borgwardt2005shortest} proposes to replace walks by shortest paths between pairs of vertices.
+            The graph hopper kernel proposes also to compare pairs of nodes from two graphs in a scalable way~\parencite{feragen2013scalable}.
+            
+            \paragraph{Path kernel}
+            A path \(\pi\) between two vertices \((v_s,v_e) \in V\times V\) is a sequence of nodes \(\left(\pi_i\right)_{i=1,2\dots,\vert \pi \vert}\) such that:
+            \begin{equation*}
+                \begin{cases}
+                    \forall i=1,2\dots,\vert \pi \vert-1,\; \{\pi_i, \pi_{i+1}\} \in E\\
+                    v_s = \pi_1\\
+                    v_e = \pi_{\vert \pi \vert}
+                \end{cases}
+            \end{equation*}
+            The set of all shortest paths between nodes of graph \(G\) (\textit{resp.} \(G'\)) is denoted \(\mathscr{P}\) (\textit{resp.} \(\mathscr{P}'\)).
+            
+            Let \(\left(\pi, \pi'\right) \in \mathscr{P} \times \mathscr{P}'\).
+            To compare both paths, a path kernel is defined:
+            \begin{equation}
+                \label{eq::path_kernel}
+                k_p(\pi, \pi') \triangleq \sum_{i=1}^{\vert \pi \vert} \kappa\left(\pi_i, \pi'_i\right) \cdot \mathbb{1}_{\vert \pi \vert = \vert \pi' \vert}
+            \end{equation}
+            where:
+            \begin{conditions}
+                \kappa & is a base kernel on node attributes.
+            \end{conditions}
+            This kernel compares paths with similar length by hopping along them simultaneously.
+            
+            \paragraph{Efficient path based graph kernel}
+            Based on this path kernel, one can compare two graphs \(G\) and \(G'\) by comparing paths from both:
+            \begin{equation}
+                \label{eq::graph_hopper_kernel}
+                k_{gh}(G, G') \triangleq \sum_{(\pi, \pi') \in \mathscr{P} \times \mathscr{P}'} k_p(\pi, \pi').
+            \end{equation}
+            Defining \(w(v, v')\) as the number of times \(v\) and \(v'\) appear at the same coordinate \(i\) of some shortest paths \(\pi\) and \(\pi'\) with the same length \(\vert \pi \vert = \vert \pi' \vert\), this kernel can be computed efficiently as it can be transformed into:
+            \begin{equation}
+                \label{eq::graph_hopper_kernel_second}
+                k_{gh}(G, G') = \sum_{\substack{v \in V\\v' \in V'}} w(v, v')\cdot \kappa(v, v').
+            \end{equation}
+            Let \(\delta \triangleq \max_{\pi \in \mathscr{P}} \vert \pi \vert\) the maximal length of shortest paths in \(G\).
+            Define also the \(\delta \times \delta\) matrix
+            \begin{equation*}
+                M_G(v) \triangleq \left(\left\lvert\left\{\pi \in \mathscr{P}: \pi_i = v \wedge \left\lvert\pi\right\rvert = j \right\}\right\rvert\right)_{\substack{i=1,2\dots,\delta\\j=1,2\dots,\delta}}
+            \end{equation*}
+            which in row \(i\) and column \(j\) stores how many times does \(v\) appear as the \(i\)\textsuperscript{th} member of paths of length \(j\).
+            We can see that:
+            \begin{equation}
+                \label{eq::w_as_matrix_inner_product}
+                w(v, v') = \langle M_G(v), M_{G'}(v')\rangle_F
+            \end{equation}
+            where:
+            \begin{conditions}
+                \langle \bullet, \bullet \rangle_F & is Frobenius inner product on matrices.
+            \end{conditions}
+            This quantity can be computed efficiently for each graph with a time complexity two orders of magnitude less than that of basic shortest paths kernel~\parencite{feragen2013scalable}.
 
 \section{Evaluation using \texorpdfstring{\acrshort{acr::scatnet}}{ScatNet} and graph kernels}
     \label{sec::better_representation::evaluation}
