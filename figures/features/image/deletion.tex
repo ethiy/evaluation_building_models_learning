@@ -11,28 +11,28 @@
 
 \begin{document}
 	\begin{tikzpicture}
-		\node (image) {\includegraphics[width=3cm]{images/features/scatnet/elancourt-39322}};
+		\node (image) {\includegraphics[width=2cm]{images/features/image/elancourt-39322}};
 
-		\path (image.north east) + (0, 1) node[anchor=south east] (model) {\includestandalone[mode=buildnew, width=3cm]{figures/graphical_abstract/building_model}};
+		\path (image.north east) + (0, 1) node[anchor=south east] (model) {\includestandalone[mode=buildnew, width=2cm]{figures/building_model}};
 
-		\path (image.east) + (2.7, .2) node[anchor=west] (blue_channel) {\includegraphics[width=3cm]{images/features/scatnet/elancourt-39322_b}};
-		\path (blue_channel) + (-.2, -.2) node (green_channel) {\includegraphics[width=3cm]{images/features/scatnet/elancourt-39322_g}};
-		\path (green_channel) + (-.2, -.2) node (red_channel) {\includegraphics[width=3cm]{images/features/scatnet/elancourt-39322_r}};
+		\path (image.east) + (2.7, .2) node[anchor=west] (blue_channel) {\includegraphics[width=2cm]{images/features/image/elancourt-39322_b}};
+		\path (blue_channel) + (-.2, -.2) node (green_channel) {\includegraphics[width=2cm]{images/features/image/elancourt-39322_g}};
+		\path (green_channel) + (-.2, -.2) node (red_channel) {\includegraphics[width=2cm]{images/features/image/elancourt-39322_r}};
 		\draw[->, very thick] (image.east) -- (red_channel.west |- green_channel);
 
-		\path (green_channel |- model) node (mask) {\includegraphics[width=3cm]{images/features/scatnet/elancourt-39322_mask}};
+		\path (green_channel |- model) node (mask) {\includegraphics[width=2cm]{images/features/image/elancourt-39322_mask}};
 		\draw[->, very thick] (model.east) -- (mask.west);
 
-        \path (mask.north) node[anchor=south, text width=3cm] (mask_legend) {\footnotesize \subcaption{Nadir Projection. \label{subfig::nadir_d}}};
-        \path (model |- mask_legend.north) node[anchor=north, text width=3cm] (model_legend) {\footnotesize \subcaption{\gls{acr::3d} model. \label{subfig::input_d}}};
+        \path (mask.north) node[anchor=south, text width=2cm] (mask_legend) {\footnotesize \subcaption{Nadir Projection. \label{subfig::nadir_d}}};
+        \path (model |- mask_legend.north) node[anchor=north, text width=2cm] (model_legend) {\footnotesize \subcaption{\gls{acr::3d} model. \label{subfig::input_d}}};
 
-		\path (blue_channel.east) + (3, 0) node[anchor=west] (blue_mask_channel) {\includegraphics[width=3cm]{images/features/scatnet/elancourt-39322_b_mask}};
-		\path (green_channel.east) + (3, 0) node[anchor=west] (green_mask_channel) {\includegraphics[width=3cm]{images/features/scatnet/elancourt-39322_g_mask}};
-        \path (red_channel.east) + (3, 0) node[anchor=west] (red_mask_channel) {\includegraphics[width=3cm]{images/features/scatnet/elancourt-39322_r_mask}};
-        \path (green_mask_channel.south |-red_mask_channel.south) node[anchor=north, text width=3cm] (deletion_legend) {\footnotesize \subcaption{Early fusion: \texttt{deletion}. \label{subfig::early}}};
+		\path (blue_channel.east) + (3, 0) node[anchor=west] (blue_mask_channel) {\includegraphics[width=2cm]{images/features/image/elancourt-39322_b_mask}};
+		\path (green_channel.east) + (3, 0) node[anchor=west] (green_mask_channel) {\includegraphics[width=2cm]{images/features/image/elancourt-39322_g_mask}};
+        \path (red_channel.east) + (3, 0) node[anchor=west] (red_mask_channel) {\includegraphics[width=2cm]{images/features/image/elancourt-39322_r_mask}};
+        \path (green_mask_channel.south |-red_mask_channel.south) node[anchor=north, text width=2cm] (deletion_legend) {\footnotesize \subcaption{Early fusion: \texttt{deletion}. \label{subfig::early}}};
 
-        \path (green_channel |- deletion_legend.south) node[anchor=south, text width=3cm] (rgb_legend) {\footnotesize \subcaption{RGB channels. \label{subfig::rgb_d}}};
-        \path (image |- deletion_legend.south) node[anchor=south, text width=3cm] (image_legend) {\footnotesize \subcaption{Orthoimage. \label{subfig::orthoimage_d}}};
+        \path (green_channel |- deletion_legend.north) node[anchor=north, text width=2cm] (rgb_legend) {\footnotesize \subcaption{RGB channels. \label{subfig::rgb_d}}};
+        \path (image |- deletion_legend.north) node[anchor=north, text width=2cm] (image_legend) {\footnotesize \subcaption{Orthoimage. \label{subfig::orthoimage_d}}};
 
 		\draw[->, very thick] (green_channel.east) -- (red_mask_channel.west |- green_mask_channel);
 		\draw[very thick] (mask.east) -- ($(mask)!.5!(green_mask_channel |- mask)$) -- ($(green_channel)!.5!(green_mask_channel)$);
