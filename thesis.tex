@@ -142,13 +142,6 @@
     \chapter{\textsc{Acknowlegements}}
         \input{frontmatter/acknowledgments}
 
-    \chapter{\textsc{Résumé étendu}}
-        \input{frontmatter/resume_long}
-
-    \printglossary[type=\acronymtype]
-    \printglossary
-
-    \mtcaddchapter
     \tableofcontents
     \mtcaddchapter
     \listoffigures
@@ -156,7 +149,17 @@
     \listoftables
     \mtcaddchapter
 
+    \printglossary[type=\acronymtype]
+    \printglossary
+
     \mainmatter
+
+    \selectlanguage{french}
+    \chapter*{\textsc{Résumé étendu}}
+        \addcontentsline{toc}{chapter}{Résumé étendu}
+        \adjustmtc[2]
+        \input{frontmatter/resume_long}
+    \selectlanguage{english}
 
     \chapter{\textsc{Introduction}}
         \label{chap::introduction}
