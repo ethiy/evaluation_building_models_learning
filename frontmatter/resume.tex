@@ -2,17 +2,17 @@ La génération automatique de modèles de construction 3D à partir de données
 Une littérature abondante couvre les deux dernières décennies et plusieurs solutions logicielles sont maintenant disponibles.
 Cependant, les zones urbaines sont des environnements très complexes.
 Inévitablement, les producteurs de données doivent encore évaluer visuellement, à l'échelle de villes, l'exactitude de ces modèles et détecter les erreurs fréquentes de reconstruction.
-Un tel processus fait appel à des experts et prend beaucoup de temps, soit environ \SI[per-mode=repeated-symbol]{2}{\hour\per\km\squared\per\expert}.
+Un tel processus fait appel à des experts et prend beaucoup de temps, soit environ \SI[per-mode=repeated-symbol, locale=FR]{2}{\hour\per\km\squared\per\expert}.
 Cette thèse propose une approche d'évaluation automatique de la qualité des modèles de bâtiments 3D.
 Les erreurs potentielles sont compilées dans une nouvelle taxonomie hiérarchique et modulaire.
 Cela permet, pour la première fois, de séparer erreurs de fidélité et de modélisation, quelque soit le niveau de détail des bâtiments modélisés.
 La qualité des modèles est estimée à l'aide des propriétés géométriques des bâtiments et, lorsqu'elles sont disponibles, d'images géospatiales à très haute résolution et des modèles numériques de surface.
 Une base de référence de caractéristiques \textit{ad hoc} génériques est utilisée en entrée d'un classificateur par Random Forests ou par Séparateurs à Vaste Marge.
-Des attributs plus riches, s'appuyant sur des noyaux de graphes ainsi que sur des réseaux de type Scattering ont été proposées pour mieux prendre en compte la structure dans la donnée 3D.
+Des attributs plus riches, s'appuyant sur des noyaux de graphes ainsi que sur des réseaux de type Scattering ont été proposés pour mieux prendre en compte la structure dans la donnée 3D.
 Les cas multi-classes et multi-étiquettes sont étudiés séparément: de par l'interdépendance entre les classes d'erreurs, il est possible de détecter toutes les erreurs en même temps tout en prédisant au niveau sémantique le plus simple des bâtiments corrects et erronés.
 Le cadre proposé dans cette thèse a été testé sur trois zones urbaines distinctes en France avec plus de 3 000 bâtiments étiquetés manuellement.
-Des valeurs de F-score élevées sont atteintes pour les erreurs les plus fréquentes (\SIrange[range-phrase={ -- }]{80}{99}{\percent}).
+Des valeurs de F-score élevées sont atteintes pour les erreurs les plus fréquentes (\SIrange[range-phrase={ -- }, locale=FR]{80}{99}{\percent}).
 Pour une problématique de passage à l’échelle, l'impact de la composition de la zone urbaine sur la prédiction des erreurs a également été étudié, en termes de (i) transférabilité, de (ii) généralisation et de (iii) représentativité des classificateurs.
 Cette étude montre la nécessité de disposer de données de télédétection multimodale et de mélanger des échantillons d'entraînement provenant de différentes villes pour assurer une stabilité des taux de détection, même avec des tailles d'ensembles d'entraînement très limitées.\\
 
-\textbf{Mots-Clés.}~\ ~Modélisation 3D de ville, Bâtiments, Jeu de données, Qualification, Taxonomie d'erreurs, détection d'erreurs, Imagerie aérienne, Très Haute Résolution, MNS, Géométrie, Apprentissage statistique, Classification multi-label.
+\textbf{Mots-Clés.}~\ ~Modélisation 3D de ville, Bâtiments, Jeu de données, Qualification, Taxonomie d'erreurs, détection d'erreurs, Imagerie aérienne, Très Haute Résolution, Modèle Numérique de Surface, Géométrie, Apprentissage statistique, Classification multi-label.
