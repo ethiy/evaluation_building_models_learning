@@ -451,7 +451,7 @@ Third and last, implementation details regarding the baseline features are discu
             As discussed in Section~\ref{subsec::learned_evaluation::classification::classifiers}, two classifier types were considered in the experimental study.
             As already explained beforehand in Section~\ref{subsec::learned_evaluation::classification::classifiers}, a one-vs-all approach is used to adapt \glspl{acr::rf} to multi-label settings.
             For now, we use only a \gls{acr::rf} classifier with baseline features to conduct the first sets of experiments since it was the easiest to parameterize.
-            We relied upon the already available and ubequitous implementation in \verb!Python!~\parencite{scikit-learn}.\\
+            We relied upon \verb!scikit-learn! the already available and ubequitous implementation in \verb!Python!~\parencite{scikit-learn}.\\
             
             A standard grid search involving a smaller set of building models and only baseline geometric features~\parencite{ennafii2018qualificationunannotated} yielded comparable results for the number of trees set in the range \numrange{850}{1000} and a maximum tree depth from \numrange{3}{5}.
             Given the already immense parameter search space involving all possible feature configurations, feature extraction parameters and label possibilities, the \gls{acr::rf} parameters are set to \num{1000} for the tree number and 4 for the maximum tree depth for all other experiments without performing any grid search.
