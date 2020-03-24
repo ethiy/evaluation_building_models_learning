@@ -119,7 +119,7 @@ Third and last, implementation details regarding the baseline features are discu
         Both were discussed in details in Section~\ref{sec::state_of_the_art::mlpr}.
         Hereafter, we explain how each one is used in this setting.\\
 
-        \subsubsection{\acrlong*{acr::rf}}
+        \subsubsection{\acrlong*{acr::rf}.}
             \gls{acr::rf} classifiers is a natural choice in our case.
             As seen in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::rf}, this type of classifiers can manage a large number of features with different dynamics and coming from multiple modalities.
             In fact, the computed features could be geometric, image based or height based.
@@ -127,7 +127,7 @@ Third and last, implementation details regarding the baseline features are discu
             Relying on their bagging property, a high number of trees is required to cover most of the feature space, while a limited tree depth is needed to avoid overfitting during training.
             While the multi-class case is natively taken into account by the \gls{acr::rf} classifier, the multi-label one requires adopting a one-vs-all approach so as to address each label separately.
 
-        \subsubsection{\acrshort*{acr::svm}}
+        \subsubsection{\acrshort*{acr::svm}.}
             \glspl{acr::svm} do not manage well enough heterogeneity in feature vectors.
             Moreover, only binary classification is inherently handled.
             However, it offers other advantages that are not met by \gls{acr::rf}.
@@ -438,7 +438,7 @@ Third and last, implementation details regarding the baseline features are discu
         Feature extractors being dicussed above, we give now extensive details how the considered classifiers (cf. Section~\ref{subsec::learned_evaluation::classification::classifiers}) are applied.
         We also provide the metrics that will help measure the accuracy of predictions.
 
-        \subsubsection{Considered labels}
+        \subsubsection{Considered labels.}
             All \textbf{\gls{acr::efin}} levels were tested.
             The input models are generalized to \gls{acr::lod}-2.
             As a consequence, we chose \textbf{\gls{acr::elod}} = \gls{acr::lod}-2.
@@ -447,7 +447,7 @@ Third and last, implementation details regarding the baseline features are discu
             In fact, we remind the reader that, at this stage, our goal is, first and foremost, to prove the feasibility of the proposed approach.
             That is why we limited the experiments to the case where the \textbf{exclusivity} is set to be \textsc{off}.
 
-        \subsubsection{Classifiers}
+        \subsubsection{Classifiers.}
             As discussed in Section~\ref{subsec::learned_evaluation::classification::classifiers}, two classifier types were considered in the experimental study.
             As already explained beforehand in Section~\ref{subsec::learned_evaluation::classification::classifiers}, a one-vs-all approach is used to adapt \glspl{acr::rf} to multi-label settings.
             For now, we use only a \gls{acr::rf} classifier with baseline features to conduct the first sets of experiments since it was the easiest to parameterize.
@@ -456,7 +456,7 @@ Third and last, implementation details regarding the baseline features are discu
             A standard grid search involving a smaller set of building models and only baseline geometric features~\parencite{ennafii2018qualificationunannotated} yielded comparable results for the number of trees set in the range \numrange{850}{1000} and a maximum tree depth from \numrange{3}{5}.
             Given the already immense parameter search space involving all possible feature configurations, feature extraction parameters and label possibilities, the \gls{acr::rf} parameters are set to \num{1000} for the tree number and 4 for the maximum tree depth for all other experiments without performing any grid search.
     
-        \subsubsection{Metrics for quantitative assessment}
+        \subsubsection{Metrics for quantitative assessment.}
             The overall accuracy is not interesting due to the highly unbalanced label distribution.
             We prefer reporting recall \(\bm{Rec}\) and precision \(\bm{Prec}\) ratios.
             As a reminder these metrics are defined as follows:

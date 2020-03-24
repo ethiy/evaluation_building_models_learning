@@ -26,7 +26,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
         These are directly linked to the \textbf{large-scale} aspect of the evaluation approach.
         These are implemented in the error categorization based on two principles: hierarchization and modularity.
 
-        \subsubsection{The generalizability \textit{vs.} exhaustivity compromise}
+        \subsubsection{The generalizability \textit{vs.} exhaustivity compromise.}
             In Section~\ref{subsec::introduction::contributions::positioning}, we have seen how the \textbf{large-scale} constraint on the quality evaluation approach entails the method's robustness to changes in the urban scene as well as to the pipeline behind the evaluated model.
             The first condition implies the proposed error categorization capacity to be generalizable: the ability to describe defects of building models unhindered by the specificities of one scene or another.
             The second conveys the exhaustivity of the evaluation: the power to take into account all possible errors that a building model can be affected by, free of any consideration of its origin.\\
@@ -43,7 +43,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
             However, this has the disadvantage of not covering all the instances specific one input method or another.
             A compromise has to be reached in the definition of errors between generalizability and exhaustivity.
         
-        \subsubsection{General structure}
+        \subsubsection{General structure.}
             We introduce a hierarchical structure to categorize errors in order to mitigate the last point.
             The higher in the ladder the error is, the more generalizability (and less exhaustivity) is achieved.
             At the same hierarchical level, to avoid having to exhaustively list all possible errors, the identified defects are described modularly based on some predefined independent errors.
@@ -116,10 +116,10 @@ After discussing some properties of the chosen error defnitions, we explain, in 
         We conducted a thorough inspection of all defects that we detected in our datasets and came up with the following definitions (cf. Figures~\ref{fig::taxonomy}).
         Eventhough these errors were defined based on models of buildings computed out of overhead acquired data at large scales, we think they are exhaustive enough to describe the quality of models in other settings (fa\c{c}ade modeling, manually plotted \gls{acr::3d} models).
 
-        \subsubsection{\texttt{Building Errors} family}
+        \subsubsection{\texttt{Building Errors} family.}
             Herein are presented the \texttt{atomic} errors regarding the \gls{acr::lod}-0 and \gls{acr::lod}-1 aspects.
 
-            \paragraph{\texttt{\acrlong*{acr::bus}}}
+            \paragraph{\texttt{\acrlong*{acr::bus}}.}
                 \texttt{\gls{acr::bus}} corresponds to the case where two or more buildings are modeled as one.
                 In Figure~\ref{fig::bus}, two distinct buildings were identified as one building, eventhough they can be visually distinguished.\\
 
@@ -171,7 +171,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 The first case is the most error inducing one as it relies on extrinsic large-scale remote sensing data that are devoid of semantics.
                 The second one is expected to be more close to the reality, but can be unsuitable if the footprints are outdated or too generalized, as discussed in Section~\ref{subsec::state_of_the_art::building_modeling::building_extraction}.
 
-            \paragraph{\texttt{\acrlong*{acr::bos}}}
+            \paragraph{\texttt{\acrlong*{acr::bos}}.}
                 \texttt{\gls{acr::bos}} corresponds to the case where one building is subdivided into two or more.
                 This is the opposite of the previous situation.
                 Figure~\ref{fig::bos_2d} shows a single building that, when modeled, was subdivided into three parts.\\
@@ -196,7 +196,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 In fact, there is no combination of geometric characteristic that can help separate buildings, such as convexity or compactness.
                 This issue is expected to weight negatively on the predictive capacity of the proposed evaluation approach as will be further studied in Section~\ref{sec::experiments::scalability}.
 
-            \paragraph{\texttt{\acrlong*{acr::bib}}}
+            \paragraph{\texttt{\acrlong*{acr::bib}}.}
                 \texttt{\gls{acr::bib}} corresponds to the case where at least one building footprint border is incorrectly located.
                 A sample is shown in Figure~\ref{fig::bib}.\\
 
@@ -251,7 +251,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 }~\parencite{durupt2006automatic,xiong2014graph}.
                 Outside the scope this study, one can try also to estimate the imprecision so as to correct the reconstruction.
 
-            \paragraph{\texttt{\acrlong*{acr::bit}}}
+            \paragraph{\texttt{\acrlong*{acr::bit}}.}
                 \texttt{\gls{acr::bit}} corresponds to the case where the building footprint suffers from topological defects.
                 Modeled as a \gls{acr::2d} flat surface, the cases that fall into this label are:
                 \begin{description}
@@ -307,7 +307,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 The main difference between both of them states in the fact that \texttt{\gls{acr::bib}} is geometric in nature while \texttt{\gls{acr::bit}} is topological.
                 Both errors are independent and can overlap.
 
-            \paragraph{\texttt{\acrlong*{acr::big}}}
+            \paragraph{\texttt{\acrlong*{acr::big}}.}
                 \texttt{\gls{acr::big}} corresponds to the case of inaccurate building geometric estimation.
 
                 \begin{figure}[htbp]
@@ -346,10 +346,10 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 In case of evaluating at higher than \gls{acr::lod}-2, this error is not reported as it becomes redundant with errors delineated below.
                 In fact, if a geometric error is detected at the facet level then it will naturally impact negatively on the geometry of the model as a whole.
             
-        \subsubsection{\texttt{Facet Errors} family}
+        \subsubsection{\texttt{Facet Errors} family.}
             In this Section, \gls{acr::lod}-2 and \gls{acr::lod}-3 corresponding \texttt{atomic} errors are presented.
 
-            \paragraph{\texttt{\acrlong*{acr::fus}}}
+            \paragraph{\texttt{\acrlong*{acr::fus}}.}
                 \texttt{\gls{acr::fus}} corresponds to the case where one facet is subdivided into two or more facets.
                 This is the same kind of error as \texttt{\gls{acr::bus}} but at the facet level.\\
 
@@ -411,7 +411,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 \textcite{lafarge2008structural} fits the best type of roof models to alleviate issues caused by high levels of noise like when working with Satellite based \glspl{acr::dsm}.
                 In some cases, there may be no remedy for the issue, as the used grammar is not exhaustive enough, a \gls{acr::3d} line goes undetected or even a human operator intervention is unable to dispel the ambiguity.
 
-            \paragraph{\texttt{\acrlong*{acr::fos}}}
+            \paragraph{\texttt{\acrlong*{acr::fos}}.}
                 \texttt{\gls{acr::fos}} corresponds to the case where two or more facets are modeled as one, as illustrated in Figure~\ref{fig::fos}.
                 This is to \texttt{\gls{acr::bos}} what \texttt{\gls{acr::fus}} is to \texttt{\gls{acr::bus}}.\\
 
@@ -472,7 +472,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 Grammar based methods can equally come to rescue.
                 As an example,~\textcite{bredif20073d} uses a set parameteric models in order to model superstructures and better fit \gls{acr::lod}-2 roof facets.
 
-            \paragraph{\texttt{\acrlong*{acr::fib}}}
+            \paragraph{\texttt{\acrlong*{acr::fib}}.}
                 \texttt{\gls{acr::fib}} corresponds to the case where at least one facet border is incorrectly located.
                 As an example, Figure~\ref{subfig::fib_2d} shows that the central edge that links the two main roof sides does not correspond to the one on the image position.
                 This is a purely geometrical error similarly to \texttt{\gls{acr::bib}}.\\
@@ -525,7 +525,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 Just as with oversegmentation, one way to make line retrieval more accurate is to rely on redundancy by extracting them from different modalities.
                 An alternative is to rely on symmetries~\parencite{verma20063d} to automatically correct surface intersections.
 
-            \paragraph{\texttt{\acrlong*{acr::fit}}}
+            \paragraph{\texttt{\acrlong*{acr::fit}}.}
                 \texttt{\gls{acr::fit}} corresponds to the case where the facet suffers from topological defects such as wrong primitive fitting (for example, a dome approximated by planar polygons).
                 In Figure~\ref{fig::fit}, we can observe how two cylindrical towers were reconstructed as a rectangular parallelepiped.\\
 
@@ -584,7 +584,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 One can try to overcome this issue once again, like with the undersegmentation problem, thanks to line detections to reveal convoluted structures when relying on plane extraction only.
                 Usually, this problem can be efficiently solved relying mainly on human operators.
 
-            \paragraph{\texttt{\acrlong*{acr::fig}}}
+            \paragraph{\texttt{\acrlong*{acr::fig}}.}
                 \texttt{\gls{acr::fig}} corresponds to the case of inaccurate facet geometric estimation.
                 In mathematical terms, this means that the surface primitive parameters are misestimated.
                 In Figure~\ref{subfig::fig_3d}, the planar surface slope was miscalculated as flat while it was of \textit{ca.} \SI{25}{\degree}.\\
@@ -643,7 +643,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
         Herein, we explore the properties of the ensuing taxonomy of errors.
         In addition, we also discuss the relation between this taxonomy and the ones existing in the litterature.
 
-        \subsubsection{Error taxonomy properties}
+        \subsubsection{Error taxonomy properties.}
             The similarity of the \texttt{Building Errors} and \texttt{Facet Errors} is striking.
             Indeed, this is what was intended.
             The idea came after observing that segmentation issues can occur both at building and facet errors.
@@ -697,7 +697,7 @@ After discussing some properties of the chosen error defnitions, we explain, in 
             These discussed properties does not only help the generalizability and exhaustivity in the overhead case, but can also be applied to terrestrial based fa\c{c}ade modeling.
             In fact, the same \texttt{atomic} errors can describe perfectly the possible errors that can affect facets on a fa\c{c}ade, owing always to the effect of \textit{implicit} semantics on building models.
         
-        \subsubsection{Related taxonomies}
+        \subsubsection{Related taxonomies.}
             This Section discusses the semantic error defnitions in the state-of-the-art.
             As mentioned in Section~\ref{subsec::state_of_the_art::quality::output::semantic},~\textcite{rottensteiner2012isprs} proposed two semantic errors ``over segmentation'' and ``under segmentation''.
             These, however, relate only to facets.

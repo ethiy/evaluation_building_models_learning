@@ -32,9 +32,9 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
         There are actually two ways to approach this problem.
         The first relies on retrieving building footprints out of a \gls{acr::gis} database, such as cadastral ones~\parencite{taillandier2004automatic,durupt2006automatic,horna2007building,ledoux2011topologically,biljecki2017generating,biljecki2019raise}.
         In constrast, the second approach type extracts building outlines directly from the input sensor data~\parencite{poullis2009automatic,lafarge2012creating,nguatem2017modeling,zhu2018large}.
-        Both approaches suffer from some shortcomings.\\
+        Both approaches suffer from some shortcomings.
 
-        \subparagraph{\gls{acr::gis} databases}
+        \paragraph{\gls{acr::gis} databases.}
             The first type of approaches relies on the fact that the \gls{acr::gis} database is acquired at the same time as the sensor data.
             Otherwise, there will be no guaranty that the modeled scene has not changed in the meantime.
             For instance, a building can be removed --- as a whole or partially --- between the two data acquisitions.
@@ -46,7 +46,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
             The specified generalization level can also play a role as small features could be smoothed away.
             A part from this type of issues, the provided building outlines could be erroneous simply due to a faulty, wether manual or automatic, process.\\
         
-        \subparagraph{Classification}
+        \paragraph{Classification.}
             The second family of building extraction techniques is based on the classification of input sensor data.
             As a consequence, the final building delineation quality depends mostly on the input data.
             Contrarily to the first case, there is no redundancy that can help filter out noise in the data.
@@ -64,14 +64,14 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
         Several strategies are conducted.
         They can be classified in three categories: Model-driven, Data-driven and mixed approaches.\\
 
-        \subparagraph{Model-driven approaches}
+        \paragraph{Model-driven approaches.}
             This type of methods, also called top-down methods, rely on strong assumptions on the type of buildings to be modeled.
             For example, the Manhattan-world class assumes that buildings are an aggregation of boxes~\parencite{vanegas2010building,ledoux2011topologically,arroyo2015dimension,li2016manhattan}.
             This is actually an instance of grammars utilized in procedural modeling.
             In the latter, a set of predetermined rules are used to determine the best shapes, out of a library, in order to better fit the input data~\parencite{lafarge2008structural,koutsourakis2009single,zhou20102,simon2011random,mathias2011procedural,martinovic2013bayesian,nan2015template,demir2015procedural,zeng2018neural}.
             Top-down approaches are usually used when the input data resolution is not sufficiently accurate to directly retrieve detailed architectural features of the building~\parencite{lafarge2008structural}.
 
-        \subparagraph{Data-driven approaches}
+        \paragraph{Data-driven approaches.}
             They can also be called bottom-up methods.
             These modeling techniques need very high resolution sensor data in order to retrieve constituing geometric features of the building.
             This is usually achieved using primitive extraction.
@@ -81,14 +81,14 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
             A second step consists in aggregating the extracted geometric features into a single surface.
             This is usually implemented either through a greedy approach~\parencite{taillandier2004automatic} or a global optimization method~\parencite{poullis2013framework,verdie2015lod,zhu2018large,holzmann2018semantically}.
 
-        \subparagraph{Mixed approaches}
+        \paragraph{Mixed approaches.}
             The first type of methods fails to scale for multiple urban scenes as it is contigent on having a comprehensive enough grammar, which is almost never the case.
             On the other hand, the second kind of methods knows other drawbacks as it mainly tends to oversegment facets in order to stay close to the measured data.
             One way to alleviate these issues is to mix the two approaches.
             \textcite{werner2002new}, for instance, fits predetermined shapes (wedges and rectangles) to already extracted edges and planes.
             However, these usually rely on greedy approaches that do not scale well.\\
 
-        \subparagraph{Limitations of current modeling methods}
+        \paragraph{Limitations of current modeling methods.}
             There are still some limitations that these automatic approaches did not adress.
             Higher resolution sensors are yielding more and more data with high frequencies that are still not taken into account as most produced models are at most \gls{acr::lod}-2 ones.
             These can pose serious problems in modeling:~\textcite{bredif20073d} proved that undetected superstructures can lead to bad quality models and their reconstruction can help in that regard.
@@ -115,7 +115,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
         The second is semantic labels.
         In what follows, we explain, in details, the differences between the two types of method.
 
-        \subsubsection{Fidelity metrics based methods}
+        \subsubsection{Fidelity metrics based methods.}
             One way to characterize the quality of a building model is to compute indices or metrics reporting its geometric accuracy.\\
 
             Most metrics provide information on the geometric precision of the model.
@@ -161,7 +161,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
             As a consequence, it was used as an index to evaluate reconstructions\footnote{It is sometimes called by its antonym: complexity.}: the more a model was compact the better it was.
             This is reflected, for instance, in the work of~\textcite{lafarge2012creating,duan_eccv16,zhang2017deep,zeng2018neural,zhu2018large}, where this metric is never used alone but always alongside geometric ones.
 
-        \subsubsection{Semantic-based methods}
+        \subsubsection{Semantic-based methods.}
             \label{subsec::state_of_the_art::quality::output::semantic}
             In a drive to provide a quantitative assessment of building models, the previously defined metrics fail to convey specific and localized information about a predetermined building model.
             These indices are usually used to give a general idea of the quality of models produced by some modeling method.
@@ -211,7 +211,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
         Neither of these two choices do influence the type of output the evaluation method produces.
         Hereafter, is explained the difference between the two categories.
 
-        \subsubsection{High resolution ground truth}
+        \subsubsection{High resolution ground truth.}
             Ground truth building models are mainly acquired manually.
             Herein, are listed the different ground truth measurement techniques, in descending order of accuracy.\\
 
@@ -223,7 +223,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
             ~\textcite{zebedin2008fusion} use such a method to produce their reference data from aerial images with an accuracy up to the order of \SI{\pm 0.15}{\m}.
             The same procedure was used also by~\textcite{jaynes2003recognition} producing models with inaccuraccies bounded by \SI[fraction-function = \sfrac]{\pm 1/3}{\m}.
 
-        \subsubsection{Remote sensing data}
+        \subsubsection{Remote sensing data.}
             Reference ground truth models are not readily available at large quantities~\parencite{schuster2003new}.
             The previous choice is hard to scale up to district or city levels.
             In fact, they are more suitable to evaluate few building models: e.g., in order to validate a reconstruction method.
@@ -231,7 +231,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
             In fact, since these are usually fed as input in modeling methods, it is only reasonable to evaluate the produced models in comparison to the input.
             Listed here, are the different types of remote sensing data and how they could be used for building model evaluation.\\
 
-            \subparagraph{Aerial images}
+            \paragraph{Aerial images.}
                 These could be original images or preprocessed orthoimages.
                 The first class of images are the most precise but the other one is more available.
                 Images were used by~\textcite{michelin2013quality} to extract \gls{acr::3d} segments based on plane sweeping techniques.
@@ -240,7 +240,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
                 Facets were also evaluated, in~\parencite{boudet2006supervised}, based on correlation functions computed from multiple overlapping overhead images.
                 Orthoimages were used also to, for instance, compute \gls{acr::ndvi} scores for vegetation occluded building model discrimination.
 
-            \subparagraph{\gls{acr::lidar} point clouds}
+            \paragraph{\gls{acr::lidar} point clouds.}
                 This type of data have the inherent advantage, compared to images, of directly providing depth information.
                 \textcite{kaartinen2005accuracy} used data that was acquired multiple times with a guaranteed precision up to \SI{0.083}{\m} in planimetry and \SI{0.035}{\m} in height.
                 Out of the latter were chosen reference points that were compared to equivalents in the evaluated building models (check the previous Section).
@@ -249,7 +249,7 @@ Indeed, we discuss aspects of supervised classification as well as main feature 
                 One other issue arises when using data from multiple sources where it has to be coregistred in the same reference system.
                 This is taken into account by~\textcite{akca2010quality}, before addressing the completeness of building models.
             
-            \subparagraph{Height maps}
+            \paragraph{Height maps.}
                 These are not sensor data as they are a byproduct of earlier data types.
                 Still, they are considered here since they are used as input by some building modeling pipelines.
                 Just like with \gls{acr::lidar} point clouds, \gls{acr::dsm} is used for building model comparison based on \gls{acr::rmse}~\parencite{zeng2018neural}.

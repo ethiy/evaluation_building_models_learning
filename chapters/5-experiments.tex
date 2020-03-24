@@ -769,7 +769,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
             }
         \end{figure}
 
-        \subparagraph{\texttt{Coherence} study}
+        \subparagraph{\texttt{Coherence} study.}
             First, a \texttt{coherence} analysis is performed.
             We compare the results of the transferability experiments to the ablation results with the same training scene.
             This is achieved by looking, for a given area $Z_i$ in all couples $(Z_i, Z_j)_{\forall j \neq i}$, at the differences between Tables~\ref{tab::all_f-scores_transferability_f3} and~\ref{tab::all_f-scores_ablation_f3}.
@@ -832,7 +832,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
             }
         \end{table}
 
-        \subparagraph{\texttt{Projectivity} analysis}
+        \subparagraph{\texttt{Projectivity} analysis.}
             Secondly, we investigate how the urban scene composition helps predicting defects in an unseen one.
             This is called the \texttt{projectivity} comparison.
             For a given test scene $Z_j$ in couples $(Z_i, Z_j)_{\forall i \neq j}$, we compare again results from Tables~\ref{tab::all_f-scores_transferability_f3} and~\ref{tab::all_f-scores_ablation_f3}.
@@ -856,7 +856,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
             The only exceptions were \texttt{BIT} and \texttt{BUS}.
             For these two labels, training on \textbf{Elancourt} proved to be slightly better than on the other scenes.
 
-        \subparagraph{Impact of external modalities}
+        \subparagraph{Impact of external modalities.}
             As we can suspect from looking at the large standard deviations illustrated in Figure~\ref{fig::f_score_transferability_f3}, modalities play an instrumental role in insuring the transferability experiments.
             All modalities that stood out, in terms of the F-score, were mentioned in the corresponding cell in Table~\ref{tab::transferability_comparison}.\\
             As intended (cf. Section~\ref{subsec::learned_evaluation::baseline::image}), image based features are instrumental in transferability for \texttt{FUS}, \texttt{BUS}, \texttt{FIB} and \texttt{BIB}.\\
