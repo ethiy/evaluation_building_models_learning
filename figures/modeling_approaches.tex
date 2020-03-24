@@ -11,24 +11,24 @@
             single arrow,
             right color=red,
             single arrow,
-            minimum height=11cm,
+            minimum height=9cm,
             shading angle=90+270,
             rotate=270
         ] {};
-        \path (generality_arrow.south) + (0, -5.5) node[anchor=north] (generality) {\textcolor{red}{Generality}};
+        \path (generality_arrow.south) + (0, -4.5) node[anchor=north] (generality) {\textcolor{red}{Generality}};
         \path (generality_arrow) + (1, 0) node (compactness_arrow) [
             draw=black,
             left color=white,
             single arrow,
             right color=blue,
             single arrow,
-            minimum height=11cm,
+            minimum height=9cm,
             shading angle=90+90,
             rotate=90
         ] {};
-        \path (compactness_arrow.north) + (0, 5.5) node[anchor=south] (generality) {\textcolor{blue}{Compaction}};
+        \path (compactness_arrow.north) + (0, 4.5) node[anchor=south] (generality) {\textcolor{blue}{Compaction}};
 
-        \path (generality_arrow) + (-10, 5) node (manhattan) {\large Manhattan world};
+        \path (generality_arrow) + (-10, 4) node (manhattan) {\large Manhattan world};
         \path (manhattan.south west) node[anchor=north west, text width=7cm] (manhattan_cite) {\small \parencite{vanegas2010building,li2016manhattan}};
         \path (manhattan_cite.east) + (2, 0) node[anchor=west] (manhattan_image) {
             \includegraphics[width=2cm]{images/introduction/modeling_approaches/boxfitting_li}
