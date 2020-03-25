@@ -79,6 +79,18 @@
 \counterwithout{footnote}{chapter}
 
 \usepackage[
+    title={Colophon},
+    titlestyle=scshape,
+    titlesize=30pt,
+    titlealign=r,
+    aftertitle=5em,
+    parstyle=itshape,
+    noclrdblpg,
+    parsize=11pt,
+    parlead=15pt
+]{colophon}
+
+\usepackage[
     backend=biber,
     style=authoryear,
     dashed=false,
@@ -131,6 +143,7 @@
     \pagestyle{plain}
    
     \input{frontmatter/0-cover_page}
+    \input{frontmatter/colophon}
     \input{frontmatter/dedication}
     \chapter{\textsc{Abstract}}
         \input{frontmatter/abstract}
