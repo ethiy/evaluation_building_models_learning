@@ -145,78 +145,78 @@
     \input{frontmatter/0-cover_page}
     \input{frontmatter/colophon}
     \input{frontmatter/dedication}
-    \chapter{\textsc{Abstract}}
+    \chapter{Abstract}
+        \adjustmtc
         \input{frontmatter/abstract}
     \selectlanguage{french}
-    \chapter{\textsc{Résumé}}
+    \chapter{Résumé}
+        \adjustmtc
         \input{frontmatter/resume}
     \selectlanguage{english}
 
-    \chapter{\textsc{Acknowlegements}}
-        \input{frontmatter/acknowledgments}
-
     \tableofcontents
-    \mtcaddchapter
     \listoffigures
-    \mtcaddchapter
     \listoftables
-    \mtcaddchapter
 
-    \printglossary[type=\acronymtype]
-    \printglossary
+    \chapter{Acknowlegements}
+        \adjustmtc
+        \input{frontmatter/acknowledgments}
 
     \mainmatter
 
     \selectlanguage{french}
     \chapter*{\textsc{Résumé étendu}}
         \addcontentsline{toc}{chapter}{Résumé étendu}
-        \adjustmtc[2]
+        \adjustmtc
         \input{frontmatter/resume_long}
     \selectlanguage{english}
 
-    \chapter{\textsc{Introduction}}
+    \chapter{Introduction}
         \label{chap::introduction}
         \input{chapters/1-introduction}
     
-    \chapter{\textsc{State-of-the-art}}
+    \chapter{State-of-the-art}
         \label{chap::state_of_the_art}
         \input{chapters/2-state_of_the_art}
 
-    \chapter{\textsc{Semantic evaluation of \texorpdfstring{\gls*{acr::3d}}{3D} models}}
+    \chapter{Semantic evaluation of \texorpdfstring{\gls*{acr::3d}}{3D} models}
         \label{chap::semantic_evaluation}
         \input{chapters/3-semantic_evaluation}
 
-    \chapter{\textsc{A learning approach for quality evaluation}}
+    \chapter{A learning approach for quality evaluation}
         \label{chap::learned_evaluation}
         \input{chapters/4-learned_evaluation}
 
-    \chapter{\textsc{Assessing the learned approach}}
+    \chapter{Assessing the learned approach}
         \label{chap::experiments}
         \input{chapters/5-experiments}
 
-    \chapter{\textsc{Computing a better representation}}
+    \chapter{Computing a better representation}
         \label{chap::better_representation}
         \input{chapters/6-better_representation}
 
-    \chapter{\textsc{Assessing the advanced features}}
+    \chapter{Assessing the advanced features}
         \label{chap::advanced_experiments}
         \input{chapters/7-advanced_experiments}
 
-    \chapter{\textsc{Conclusion}}
+    \chapter{Conclusion}
         \label{chap::conclusion}
         \input{chapters/8-conclusion}
 
     \appendix
-    \chapter{\textsc{List of publications}}
+    \chapter{List of publications}
         \input{chapters/a1-publications}
-    \chapter{\textsc{Supervised classifiers}}
+    \chapter{Supervised classifiers}
         \input{chapters/a2-classifiers}
-    \chapter{\textsc{Further experimental details}}
+    \chapter{Further experimental details}
         \input{chapters/a3-details}
+    
 
-    % \printindex
+    \printglossary[type=\acronymtype]
+    \printglossary
     
     \printbibliography[heading=bibintoc]
-    
+    \printindex
+
     \input{frontmatter/back_cover}
 \end{document}
