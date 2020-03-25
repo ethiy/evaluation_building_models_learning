@@ -1,0 +1,79 @@
+\pdfobjcompresslevel 0
+
+\documentclass[12pt, twoside]{book}
+
+\usepackage[paper=a4paper, top=1.5cm, bottom=2cm, left=2.5cm, right=2.5cm, headheight=15pt]{geometry}
+
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english, french, arabic]{babel}
+\usepackage{csquotes}
+
+\usepackage{siunitx}
+
+% \usepackage[
+%     backend=biber,
+%     style=authoryear,
+%     dashed=false,
+%     sorting=nty,
+%     maxbibnames=5,
+%     minbibnames=5,
+%     maxcitenames=1,
+%     mincitenames=1,
+%     uniquelist=false,
+%     uniquename=false,
+%     hyperref=true,
+%     backref=true,
+%     backrefstyle=all+,
+%     isbn=false,
+%     url=false,
+%     doi=false
+% ]{biblatex}
+% \usepackage{xpatch}
+% \addbibresource{references.bib}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=false,
+    pdfsubject={3D building models},
+    pdftitle={Quality evaluation of 3D building models: a scalable approach},
+    pdfauthor={Oussama Ennafii},
+    pdfkeywords={3D urban modeling, buildings, quality assessment, taxonomy, classification, error detection, geometry, aerial imagery, Very High Spatial Resolution, Digital Surface Model},
+    pdfstartview={FitH},
+    unicode=true
+}
+
+\begin{document}
+    \selectlanguage{english}
+    \frontmatter
+    \pagestyle{plain}
+   
+    \input{frontmatter/dedication}
+    \selectlanguage{french}
+    \chapter{Résumé}
+        \input{frontmatter/resume}
+    \selectlanguage{english}
+
+    \selectlanguage{arabic}
+    \chapter{ملخص}
+        \input{frontmatter/molakhass}
+    \selectlanguage{english}
+
+    \tableofcontents
+    \listoffigures
+    \listoftables
+
+    \chapter{Acknowlegements}
+        \input{frontmatter/acknowledgments}
+
+    \mainmatter
+
+    % \selectlanguage{french}
+    % \chapter*{\textsc{Résumé étendu}}
+    %     \addcontentsline{toc}{chapter}{Résumé étendu}
+    %     \input{frontmatter/resume_long}
+    % \selectlanguage{english}
+
+        
+\end{document}
