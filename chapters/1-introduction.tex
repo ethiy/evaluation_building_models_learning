@@ -867,7 +867,6 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
         \item Chapter~\ref{chap::state_of_the_art} provides a global overview on state-of-the-art techniques in fields related to our main subject.
                 In fact, in order to have a general idea on the \gls{acr::3d} building modeling domain, we provide a summary and a broad categorization of techniques that can be found in the litterature.
                 We also provide a detailed account of all quality evaluation methods that are used by the community.
-                Afterwhat, we present a global view of methods from the litterature on supervised classification as well as feature extraction which were instrumental in our approach.
         \item In Chapter~\ref{chap::semantic_evaluation}, we introduce the first leg of our approach.
                 It consists in defining a general layout of a \textbf{large-scale} adaptive error taxonomy.
                 Applied to the overhead setting, and based on observations of automatically modeled buildings, we implement this layout by defining semantic errors to populate the taxonomy.
@@ -877,11 +876,14 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
         \item This proposed approach is then tested on multiple urban scenes as shown in Chapter~\ref{chap::experiments}.
                 The latter provides in depth details about the origin of the evaluated building models as well as the used algorithms.
                 The different baseline features are tested on all urban areas yielding mitigated results which depend on the combination of defined errors and urban scenes.
-        \item Chapter~\ref{chap::more_experiments} compiles results from multiple experiments that further tests the pipeline.
                 To satisfy the already stated \textbf{large-scale} need (cf. Section~\ref{subsec::introduction::contributions::positioning}), a scalability analysis is drawn based on various experiments involving the presented urban zones.
                 Next, the framework is tested at a lower specificity level (cf. Section~\ref{sec::semantic_evaluation::general_framework}).
-                The choice of classifiers is also discussed based on exhaustive experiments.
-                Finally, a thorough testing of advanced features, which take into account the structural information that was missed by the baseline, yielded results that were profusely analysed.
+        \item Chapter~\ref{chap::better_representation} presents a new set of feature extrators for a better evaluation of \gls{acr::3d} building models.
+                This involves using graph kernels for intrinsic features and \gls{acr::scatnet} for extrinsic ones.
+                We explain, in this chapter, how they are integrated in the proposed workflow.
+        \item In Chapter~\ref{chap::advanced_experiments}, the previously mentionned \gls{acr::3d} building model representation is assessed experimentally.
+                First, the choice of classifiers is also discussed based on exhaustive experiments.
+                Afterwhat, results of a thorough testing of the proposed advanced features, which take into account the structural information that was missed by the baseline, are reported and profusely analysed.
         \item The final Chapter~\ref{chap::conclusion} concludes the thesis by presenting a summary of the proposed approach as well as experimental results to support it.
                 Final thoughts on underdiscussed perspectives of research are also adressed.
     \end{itemize}
