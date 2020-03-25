@@ -25,7 +25,7 @@ Third and last, implementation details regarding the baseline features are discu
     The learned approach is usually used to take care of highly semantic tasks, such as ours, that are otherwise hard to process using engineered metrics.\\
     Provided an initial manual annotation effort, the prediction phase is fully automatic, as will be proved by experimental results in Chapter~\ref{chap::experiments}.
     In order for this approach to be scalable, and hence verify the second constraint in Section~\ref{subsec::introduction::contributions::positioning} ``\textbf{automation}'', prediction results should be stable enough independently of the urban scene.
-    This is fully studied in Chapter~\ref{chap::more_experiments}.\\
+    This is fully studied in Chapter~\ref{chap::experiments}.\\
 
     Two aspects should be discussed to in order to apply this approach to the building \gls{acr::3d} model quality evaluation.
     First, as seen in Section~\ref{sec::semantic_evaluation::label_extraction}, the parametric nature of the taxonomy leads to a varying set of labels.
@@ -116,12 +116,12 @@ Third and last, implementation details regarding the baseline features are discu
         \label{subsec::learned_evaluation::classification::classifiers}
         The choice of classifiers shoud take into consideration the highly modular nature of the framework with multimodal features involving many parameters.
         Two classifiers where chosen in this study: \gls{acr::rf} and \gls{acr::svm}.
-        Both were discussed in details in Section~\ref{sec::state_of_the_art::mlpr}.
+        Both were discussed in details in Chapter~\ref{chap::classifiers}.
         Hereafter, we explain how each one is used in this setting.
 
         \subsubsection{\acrlong*{acr::rf}.}
             \gls{acr::rf} classifiers is a natural choice in our case.
-            As seen in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::rf}, this type of classifiers can manage a large number of features with different dynamics and coming from multiple modalities.
+            As seen in Section~\ref{sec::classifiers::rf}, this type of classifiers can manage a large number of features with different dynamics and coming from multiple modalities.
             In fact, the computed features could be geometric, image based or height based.
             Each one of these modalities can also be heterogeneous in terms of extracted value types, as will be discussed later in Section~\ref{sec::learned_evaluation::baseline}.
             Relying on their bagging property, a high number of trees is required to cover most of the feature space, while a limited tree depth is needed to avoid overfitting during training.
@@ -303,7 +303,7 @@ Third and last, implementation details regarding the baseline features are discu
             \item[\(q\)] is the function that yields the projection of a facet if it is a polygon or an empty polygon othewise.
         \end{description}
 
-        This projection is compared with a corresponding orthorectified image \(I_{\mathsf{M}} \in \mathbb{R}^{h_{\mathsf{M}} \times w_{\mathsf{M}} \times 3}\) as shown in Figure~\ref{subfig::edges_image_comparison}.
+        This projection is compared with a corresponding orthorectified image \(I_{\mathsf{M}} \in \mathbb{R}^{h_{\mathsf{M}} \times w_{\mathsf{M}} \times 3}\) as shown in Figure~\ref{subfig::image_model_comparison}.
         For each facet projection, we isolate each edge \(s\) (Figure~\ref{subfig::edge_image_comparison}).
         In an ideal setting, gradients computed at pixels $g \in I_{\mathsf{M}}$ that intersect \(s\) need to be collinear with its normal $\vec{n}(s)$.
         In consequence, applying a statistics functions $\chi$\footnote{
@@ -419,7 +419,7 @@ Third and last, implementation details regarding the baseline features are discu
         As a consequence, we tested four feature configurations: ``geometric features'' (\textbf{Geom.}) only, ``geometric and height features''(\textbf{Geom. \(\oplus\) Hei.}), ``geometric and image features''(\textbf{Geom. \(\oplus\) Im.}) as well as ``geometric, height and image features''(\textbf{All}).
         In order to have a better understanding of how important each modality is, their feature vectors are by design drawn to be of the same size: 20.\\
 
-        Actually, using the function \(\chi_{\max,\min,\operatorname{mean},\operatorname{med}}\) defined in Equation~\ref{eq::max_min_mean_med_extractor}, the geometric feature vector in Equation~\ref{eq::geometric_features} is of dimension
+        Actually, using the function \(\chi_{\max,\min,\operatorname{mean},\operatorname{med}}\) defined in Equation~\ref{eq::max_min_mean_med_extractor}, the geometric feature vector in Equation~\ref{eq::geometric_baseline_features} is of dimension
         \begin{equation*}
             \underbrace{4}_{\substack{\text{the output dimension}\\\text{of the function } \chi_{\max,\min,\operatorname{mean},\operatorname{med}} }} \times \underbrace{5}_{\substack{\text{the number of the facet}\\\text{graph attributes}}} = 20.
         \end{equation*}

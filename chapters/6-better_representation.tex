@@ -354,7 +354,7 @@ Last, Section~\ref{sec::better_representation::implementation} presents the impl
         In fact, graphs can have varying numbers of nodes and edges.
         Moreover, they can be different while providing the same structural information: we say they are isomorphic.
         A valid representation for graphs should then take care of these two issues: incorporate all possible graph sizes and be invariant to graph isomorphisms.
-        As accustomed in statistical learning, one way to alleviate these issues is to directly compare graphs using kernels as seen previously in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.\\
+        As accustomed in statistical learning, one way to alleviate these issues is to directly compare graphs using kernels as seen in Section~\ref{sec::classifiers::svm}.\\
 
         This Section does not aim at presenting a thorough survey of graph kernels.
         The work of~\textcite{ghosh2018journey} categorizes graph kernels depending on the used methodology.
@@ -394,7 +394,7 @@ Last, Section~\ref{sec::better_representation::implementation} presents the impl
                 \end{bmatrix} \in \mathbb{R}^{d_E \cdot m}.
             \end{equation}
 
-            Based on a base kernel on vectors $\kappa$ (cf. Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}), we can compute the similarity between two graphs $G = \left(V, E\right)$ and $G' = \left(V', E'\right)$:
+            Based on a base kernel on vectors $\kappa$ (cf. Section~\ref{sec::classifiers::svm}), we can compute the similarity between two graphs $G = \left(V, E\right)$ and $G' = \left(V', E'\right)$:
             \begin{align}
                 \label{eq::feature_graph_kernel_nodes}
                 k_V(G, G') &\triangleq \kappa(\Phi_V(G), \Phi_V(G'))\\
@@ -580,7 +580,7 @@ Last, Section~\ref{sec::better_representation::implementation} presents the impl
                 \begin{equation}
                     \omega(K) = \max_{\alpha_v > 0, \forall v \in V} 2\cdot \sum_{v\in V} \alpha_v - \sum_{(u, v) \in V\times V} \alpha_u \cdot \alpha_v \cdot K_{uv}
                 \end{equation}
-                is dual one-class \gls{acr::svm} (cf. Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}).
+                is dual one-class \gls{acr::svm} (cf. Section~\ref{sec::classifiers::svm}).
 
                 If $\lambda_m$ is the minimum eigenvalue of the adjacency matrix $A$ (cf. Equation~\ref{eq::adjacency_matrix}), for $\rho\geq-\lambda_m$, the matrix
                 \begin{equation}
@@ -1074,7 +1074,7 @@ Last, Section~\ref{sec::better_representation::implementation} presents the impl
     Secondly, in Section~\ref{subsec::learned_evaluation::implementation::classification}, we present the classification process.
 
     \subsection{Feature configurations}
-        \label{sec::better_representation::implementation::features}
+        \label{subsec::better_representation::implementation::features}
         Baseline features are replaced by more advanced ones as shown in Section~\ref{sec::better_representation::evaluation}.
         These are denoted as follows:
         \begin{itemize}[label=\(\blacktriangleright\)]
@@ -1130,7 +1130,7 @@ Last, Section~\ref{sec::better_representation::implementation} presents the impl
             As with previous features onces, once computed they are cached for later use.
 
     \subsection{Classification settings}
-        \label{sec::better_representation::implementation::classification}
+        \label{subsec::better_representation::implementation::classification}
         Compared to the setup described in Section~\ref{sec::learned_evaluation::implementation}, there are some major differences that we report herein.
 
         First, considering the conclusions of Section~\ref{sec::experiments::finesse}, it is not interesting to experiment with the new feature extractors at \textbf{\gls{acr::efin}} levels 1 and 2.

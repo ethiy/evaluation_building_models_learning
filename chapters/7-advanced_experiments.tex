@@ -176,7 +176,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
         Obviously, everything remains unchanged for \textbf{Elancourt}.
         However, we see how the standard deviations on the fused set seem to be greater than what observed previously in Figure~\ref{fig::f_score_ablation_f3}.
         Added to the labels \texttt{BUS} and \texttt{FIB} that were previously improved by the use of image based features as shown in Table~\ref{tab::all_f-scores_ablation_f3}, \texttt{BIT} and \texttt{FIT} F-scores are also greatly impacted on the new fused set.
-        In fact, the first better performs when only geometric features are used as previously explained before in Section~\ref{subsec::experiments::baseline_feature_analysis::ablation}.
+        In fact, the first better performs when only geometric features are used as previously explained before in Section~\ref{subsec::experiments::baseline_feature_analysis::vanilla}.
         For the Second, it was image based features that proved to be better suited.
         This agrees with the fact that, for the \textbf{Elancourt} \(\rightarrow\) \textbf{Nantes} experiment, image based features were instrumental in better detecting \texttt{FIT} than training on \textbf{Nantes} itself (cf. Figure~\ref{tab::transferability_comparison}).
         
@@ -260,7 +260,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
                     Either these feature configurations are actually the best alternatives which is not conflicting with previous findings.
                     Indeed, the extrinsic features were designed in the first place to detect fidelity errors such as \texttt{FIB} while \texttt{FUS} is a topological error that can be suitably detected using intrinsic features only.
                     However, these large margins could be also explained by the fact that the \gls{acr::svm} overfitted in these special cases.
-                    The last reason cannot be ruled out either, as the \(\gamma\) hyper-parameter was not optimized for these features as seen in Section~\ref{subsec::experiments::setup::classification}, due to the high number of possible combinations.
+                    The last reason cannot be ruled out either, as the \(\gamma\) hyper-parameter was not optimized for these features as seen in Section~\ref{subsec::better_representation::implementation::classification}, due to the high number of possible combinations.
             \end{itemize}
             
         As with the \gls{acr::rf} classifier, mean and standard deviation F-scores are computed and vizualized in Figure~\ref{fig::f_score_svm_bl}.
@@ -383,19 +383,19 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
         \begin{itemize}[label=\(\blacktriangleright\)]
             \item On \textbf{Elancourt}, for \texttt{BUS}, \texttt{FOS} and \texttt{FIT}, the \gls{acr::rf} performed better with height based features, compared to the \gls{acr::svm} which works better with other feature configurations containing extrinsic features.
                     Moreover, \texttt{BIT} was better detected with intrinsic features only (\textit{resp.} any extrinsic feature based configuration) when trained with an \gls{acr::rf} (\textit{resp.} \gls{acr::svm}).
-                    This does not contradict previous findings in Sections~\ref{sec::experiments::baseline_feature_analysis} and~\ref{sec::advanced_experiments::scalability}.
+                    This does not contradict previous findings in Sections~\ref{subsec::experiments::baseline_feature_analysis::vanilla} and~\ref{sec::experiments::scalability}.
             \item On \textbf{Na-P13}, the only labels where the better performing feature configuration changed were \texttt{BUS}, \texttt{FUS}, \texttt{FIB} and \texttt{FIG}.
                     In fact, only geometric features yielded better results using an \gls{acr::svm}, in contrast with the fact that \textbf{All} or \textbf{Im.} were the best alternative with an \gls{acr::rf}.
         \end{itemize}
-        This reinforces the idea that the \gls{acr::svm} was actually not adequately parameterized for the extrinsic features as was announced in Section~\ref{subsec::experiments::setup::classification}.
-        In fact, as discussed earlier in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}, \glspl{acr::svm} are very hard to parameterize compared to \glspl{acr::rf}.
+        This reinforces the idea that the \gls{acr::svm} was actually not adequately parameterized for the extrinsic features as was announced in Section~\ref{subsec::better_representation::implementation::classification}.
+        In fact, as discussed earlier in Section~\ref{sec::classifiers::svm}, \glspl{acr::svm} are very hard to parameterize compared to \glspl{acr::rf}.
         This seems to be a reasonable cause why the \gls{acr::svm} classifier underperforms compared to the \gls{acr::rf} one on \textbf{Na-P13}.
 
     \subsection{Modality contributions comparison}
         \label{subsec::advanced_experiments::classifier::feature_importance}
         In a linear \gls{acr::svm}, feature importance can be natively computed by looking at the weight vector \(\bm{w}\) as shown by~\textcite{guyon2002gene}.
         This is, unfortunatly, not the case.
-        Instead we operate with Kernel \glspl{acr::svm} where features are fused using \gls{acr::mkl} with weights \(\left(\mu_i\right)_{i=1, 2, 3}\) (cf. Equation~\ref{eq::mkl}) that are on the simplex, as discussed in Section~\ref{subsubsec::state_of_the_art::mlpr::classifiers::svm}.
+        Instead we operate with Kernel \glspl{acr::svm} where features are fused using \gls{acr::mkl} with weights \(\left(\mu_i\right)_{i=1, 2, 3}\) (cf. Equation~\ref{eq::mkl}) that are on the simplex, as discussed in Section~\ref{sec::classifiers::svm}.
         Consequently, when training with the last feature configuration, the resulting weights could be interpreted as feature importance ratios.
         These are vizualized in Figure~\ref{fig::feature_importances_svm_bl}.\\
 
@@ -438,13 +438,13 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
 
         Eventhough geometric features alone yield better results in some cases, the \gls{acr::mkl} cannot ignore the extrinsic features.
         As in the \gls{acr::rf} case, this may prove to be helpful for the transferability of learning.
-        Consequently, it would be interesting to rerun the same scalanility experiments, as in Section~\ref{sec::advanced_experiments::scalability}, with an \gls{acr::svm}.
+        Consequently, it would be interesting to rerun the same scalability experiments, as in Section~\ref{sec::experiments::scalability}, with an \gls{acr::svm}.
         This was not the case, due to time limitations.
 
     \subsection{Summary}
         \label{subsec::advanced_experiments::classifier::summary}
         To summarize, the aim of this study was to assess the impact of the classifier choice.
-        Based on previous findings (cf. Sections~\ref{sec::experiments::baseline_feature_analysis},~\ref{sec::advanced_experiments::scalability} and~\ref{sec::advanced_experiments::finesse}), we fused both sets \textbf{Nantes} and \textbf{Paris-13} into one: \textbf{Na-P13}.
+        Based on previous findings (cf. Sections~\ref{sec::experiments::baseline_feature_analysis},~\ref{sec::experiments::scalability} and~\ref{sec::experiments::finesse}), we fused both sets \textbf{Nantes} and \textbf{Paris-13} into one: \textbf{Na-P13}.
         Consequently, we learned that:
         \begin{itemize}[label=\(\blacktriangleright\)]
             \item Fusing \textbf{Nantes} and \textbf{Paris-13} helps better train the \gls{acr::rf} classifier for previously difficult labels \texttt{FIT} and \texttt{BIT};
@@ -459,7 +459,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
 \section{Advanced features contributions}
     \label{sec::advanced_experiments::better_features}
     The goal, herein, is to find out if it is possible to achieve better results than the ones obtained with our handcrafted baseline features.
-    As we do not have enough learning instances to leverage deep learning methods, we choose instead to use graph kernels as well as \glspl{acr::scatnet} as shown in Section~\ref{sec::better_representation::evaluation} and~\ref{subsec::experiments::setup::feature_configurations}.\\
+    As we do not have enough learning instances to leverage deep learning methods, we choose instead to use graph kernels as well as \glspl{acr::scatnet} as shown in Section~\ref{sec::better_representation::evaluation} and~\ref{subsec::better_representation::implementation::features}.\\
 
     Three possibilities are investigated:
     \begin{enumerate}[label=\roman*)]
@@ -473,7 +473,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
         \label{subsec::advanced_experiments::better_features::scatnet_baseline}
         We start by the \gls{acr::scatnet} comparisons.
         We run the same experiments, as in Section~\ref{sec::advanced_experiments::classifier}, where this time height and image based features are replaced by derived ones.
-        There are two options when employing \gls{acr::scatnet} with image based features: \texttt{channel} and \texttt{deletion} (cf. Section~\ref{subsec::experiments::setup::feature_configurations}).
+        There are two options when employing \gls{acr::scatnet} with image based features: \texttt{channel} and \texttt{deletion} (cf. Section~\ref{subsec::better_representation::implementation::features}).
         This makes the number of possible feature configurations equal to six.\\
 
         Both the \gls{acr::rf} and \gls{acr::svm} classifiers are used.
@@ -1017,7 +1017,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
             Actually, in most cases, it is below \SI{4}{\percent}, except for \texttt{BIT}, \texttt{FOS} and \texttt{FIB} on \textbf{Elancourt}.
             This is different from baseline features, where height based features had comparable importance ratios to other modalities (\texttt{cf.} Figure~\ref{fig::feature_importances_svm_bl}).
             It seems to be contradictory with the fact that \gls{acr::scatnet} derived height features performed overall better than baseline features (cf. Tables~\ref{tab::all_f-scores_rf_f3} and~\ref{tab::all_f-scores_svm_f3}).
-            It is, however, consistent with the findings of the scalability analysis in Section~\ref{sec::advanced_experiments::scalability}, where height based features proved to not be important.
+            It is, however, consistent with the findings of the scalability analysis in Section~\ref{sec::experiments::scalability}, where height based features proved to not be important.
             This further bolsters the fact that the \gls{acr::svm} was not well parameterized for the image based features.\\
 
         \subsubsection{\texorpdfstring{\acrshort*{acr::svm}}{SVM} compared to \texorpdfstring{\acrshort*{acr::rf}}{RF}.}
@@ -1155,7 +1155,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
             Added to that the fact that the \gls{acr::svm} classifier was only the best for rare errors.\\
 
             Overall, we can see how \texttt{Building errors} are best learned on \textbf{Elancourt}.
-            This is in accord with what we have seen in Section~\ref{sec::experiments::baseline_feature_analysis},~\ref{sec::advanced_experiments::scalability} and~\ref{sec::advanced_experiments::classifier}.
+            This is in accord with what we have seen in Section~\ref{subsec::experiments::baseline_feature_analysis::vanilla},~\ref{sec::experiments::scalability} and~\ref{sec::advanced_experiments::classifier}.
             On the other hand, for \texttt{Facet errors}, according to the same sections, we would expect \textbf{Na-P13} to be the best alternative.
             However, there is one exception as \texttt{FIB} yield a better F-score on \textbf{Elancourt} than on \textbf{Na-P13}.
             We do not have any explanation to why this happens other than the fact that the \gls{acr::svm} was not better parameterized.
