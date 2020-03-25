@@ -1,37 +1,114 @@
-\pdfobjcompresslevel 0
-
 \documentclass[12pt, twoside]{book}
 
 \usepackage[paper=a4paper, top=1.5cm, bottom=2cm, left=2.5cm, right=2.5cm, headheight=15pt]{geometry}
 
 \usepackage{lmodern}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[english, french, arabic]{babel}
-\usepackage{csquotes}
+\usepackage{polyglossia}
 
 \usepackage{siunitx}
 
-% \usepackage[
-%     backend=biber,
-%     style=authoryear,
-%     dashed=false,
-%     sorting=nty,
-%     maxbibnames=5,
-%     minbibnames=5,
-%     maxcitenames=1,
-%     mincitenames=1,
-%     uniquelist=false,
-%     uniquename=false,
-%     hyperref=true,
-%     backref=true,
-%     backrefstyle=all+,
-%     isbn=false,
-%     url=false,
-%     doi=false
-% ]{biblatex}
-% \usepackage{xpatch}
-% \addbibresource{references.bib}
+\usepackage[dvipsnames, table]{xcolor}
+\definecolor{darkgreen}{RGB}{0, 155, 85}
+
+\definecolor{LOSS45}{RGB}{130,8,8}
+\definecolor{LOSS3545}{RGB}{183,10,10}
+\definecolor{LOSS2535}{RGB}{255,0,0}
+\definecolor{LOSS1525}{RGB}{255,122,12}
+\definecolor{LOSS0515}{RGB}{255,181,12}
+\definecolor{STBL}{RGB}{215,215,215}
+\definecolor{GAIN0515}{RGB}{58,255,12}
+\definecolor{GAIN1525}{RGB}{58,178,12}
+\definecolor{GAIN2535}{RGB}{56,136,17}
+\definecolor{GAIN3545}{RGB}{50,119,16}
+\definecolor{GAIN45}{RGB}{48,83,56}
+
+
+\usepackage{graphicx}
+\usepackage{floatrow}
+\usepackage[labelsep=colon]{caption}
+\usepackage{subcaption}
+\renewcommand{\thesubfigure}{\alph{subfigure}}
+\captionsetup[subfigure]{subrefformat=parens, labelformat=parens, labelsep=space}
+\usepackage{rotating}
+\usepackage[section]{placeins}
+
+\usepackage{enumitem}
+
+
+\usepackage{standalone}
+
+\usepackage{multirow}
+
+\usepackage{array}
+\newcolumntype{x}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\usepackage{booktabs}
+\usepackage{makecell}
+
+\usepackage{tikz}
+\usetikzlibrary{calc, 3d, shadows, decorations, shapes.arrows, fadings}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{forest}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{bbold}
+\usepackage{stmaryrd}
+
+
+% \usepackage{palatino}
+
+\setcounter{tocdepth}{2}
+\usepackage{minitoc}
+\setcounter{minitocdepth}{2}
+\usepackage{tocbibind}
+
+\usepackage[explicit]{titlesec}
+\usepackage{bookmark}
+
+\usepackage{chngcntr}
+\counterwithout{footnote}{chapter}
+
+\usepackage[
+    title={Colophon},
+    titlestyle=scshape,
+    titlesize=30pt,
+    titlealign=r,
+    aftertitle=5em,
+    parstyle=itshape,
+    noclrdblpg,
+    parsize=11pt,
+    parlead=15pt
+]{colophon}
+
+\usepackage[
+    backend=biber,
+    style=authoryear,
+    dashed=false,
+    sorting=nty,
+    maxbibnames=5,
+    minbibnames=5,
+    maxcitenames=1,
+    mincitenames=1,
+    uniquelist=false,
+    uniquename=false,
+    hyperref=true,
+    backref=true,
+    backrefstyle=all+,
+    isbn=false,
+    url=false,
+    doi=false
+]{biblatex}
+\usepackage{xpatch}
+\addbibresource{references.bib}
+
+\usepackage[acronym, toc, automake=true, nohypertypes={acronym}]{glossaries}
+\usepackage{imakeidx}
+\makeindex[intoc]
 
 \usepackage{hyperref}
 \hypersetup{
@@ -43,6 +120,17 @@
     pdfstartview={FitH},
     unicode=true
 }
+
+\usepackage[useregional]{datetime2}
+
+\usepackage{style/glossaries}
+
+\usepackage{csquotes}
+\usepackage{fontspec}
+\setmainlanguage{english}
+\setotherlanguage{french}
+\setotherlanguage[locale=morocco]{arabic}
+\newfontfamily\arabicfont[Script=Arabic]{Amiri}
 
 \begin{document}
     \selectlanguage{english}
@@ -69,11 +157,11 @@
 
     \mainmatter
 
-    % \selectlanguage{french}
-    % \chapter*{\textsc{Résumé étendu}}
-    %     \addcontentsline{toc}{chapter}{Résumé étendu}
-    %     \input{frontmatter/resume_long}
-    % \selectlanguage{english}
+    \selectlanguage{french}
+    \chapter*{\textsc{Résumé étendu}}
+        \addcontentsline{toc}{chapter}{Résumé étendu}
+        \input{frontmatter/resume_long}
+    \selectlanguage{english}
 
         
 \end{document}
