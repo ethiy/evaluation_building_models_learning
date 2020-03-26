@@ -4,16 +4,6 @@
     \@mainmattertrue\cleardoublepage\renewcommand\thepage{\arabic{page}}}
 \makeatother
 
-% Left/Right chapter
-\makeatletter
-\newcommand{\leftchapter}{
-    \@openrightfalse
-}
-\newcommand{\rightchapter}{
-    \@openrighttrue
-}
-\makeatother
-
 % Solves titlepage numbering bug
 \makeatletter
 \patchcmd{\ttlh@hang}{\parindent\z@}{\parindent\z@\leavevmode}{}{}
