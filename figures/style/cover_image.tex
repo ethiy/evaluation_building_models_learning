@@ -12,19 +12,19 @@
 \begin{document}
     \begin{tikzpicture}
     	\node (fos) {
-            \includestandalone[mode=buildnew, height=1.5cm]{figures/errors/facet/fos}
+            \includestandalone[mode=buildmissing, height=1.5cm]{figures/errors/facet/fos}
         };
         \path (fos.west) node[anchor=east] (fib) {
-            \includestandalone[mode=buildnew, height=1.5cm]{figures/errors/facet/fib}
+            \includestandalone[mode=buildmissing, height=1.5cm]{figures/errors/facet/fib}
         };
         \path (fib.west) node[anchor=east] (bos) {
-            \includestandalone[mode=buildnew, height=1.5cm]{figures/errors/building/bos}
+            \includestandalone[mode=buildmissing, height=1.5cm]{figures/errors/building/bos}
         };
         \path (fos.east) node[anchor=west] (fig) {
-            \includestandalone[mode=buildnew, height=1.5cm]{figures/errors/facet/fig}
+            \includestandalone[mode=buildmissing, height=1.5cm]{figures/errors/facet/fig}
         };
         \path (fig.east) node[anchor=west] (bos) {
-            \includestandalone[mode=buildnew, height=1.5cm]{figures/errors/facet/fus}
+            \includestandalone[mode=buildmissing, height=1.5cm]{figures/errors/facet/fus}
         };
     \end{tikzpicture}
 \end{document}

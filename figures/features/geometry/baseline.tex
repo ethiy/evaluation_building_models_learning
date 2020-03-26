@@ -12,14 +12,14 @@
 \usepackage{pgfplots}
 
 \usepackage{tikz}
-\usetikzlibrary{shapes, arrows, shadows, calc, decorations}
+\usetikzlibrary{3d, shapes, arrows, shadows, calc, decorations}
 
 \usepackage{mathrsfs, amsmath}
 
 
 \begin{document}
     \begin{tikzpicture}
-    	\node (facet_graph) {\includestandalone[mode=buildnew, height=4cm]{figures/graphical_abstract/building_graph}};
+    	\node (facet_graph) {\includestandalone[mode=buildmissing, height=4cm]{figures/graphical_abstract/building_graph}};
         \path (facet_graph) + (-.2, -1) node (f) {\small $f$};
         \path (facet_graph) + (2, -.8) node (g) {\small $g$};
         

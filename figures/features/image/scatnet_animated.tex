@@ -13,7 +13,7 @@
 	\begin{tikzpicture}
 		\node[visible on=<-3>] (image) {\includegraphics[width=2cm]{images/features/scatnet/elancourt-39322}};
 
-		\path (image.north east) + (0, 1) node[visible on=<-3>, anchor=south east] (model) {\includestandalone[mode=buildnew, width=2cm]{figures/graphical_abstract/building_model}};
+		\path (image.north east) + (0, 1) node[visible on=<-3>, anchor=south east] (model) {\includestandalone[mode=buildmissing, width=2cm]{figures/graphical_abstract/building_model}};
 
 		\path (image.east) + (2.2, .2) node[visible on=<2-3>, anchor=west] (blue_channel) {\includegraphics[width=2cm]{images/features/scatnet/elancourt-39322_b}};
 		\path (blue_channel) + (-.2, -.2) node[visible on=<2-3>] (green_channel) {\includegraphics[width=2cm]{images/features/scatnet/elancourt-39322_g}};
@@ -42,7 +42,7 @@
 		\path (image) node[visible on=<5-6>] (image) {\includegraphics[width=2cm]{images/features/scatnet/elancourt-39322}};
 
 
-		\path (model) node[visible on=<5-6>] (model) {\includestandalone[mode=buildnew, width=2cm]{figures/graphical_abstract/building_model}};
+		\path (model) node[visible on=<5-6>] (model) {\includestandalone[mode=buildmissing, width=2cm]{figures/graphical_abstract/building_model}};
 
 		\path (blue_channel) node[visible on=<5-6>] (blue_channel) {\includegraphics[width=2cm]{images/features/scatnet/elancourt-39322_b}};
 		\path (green_channel) node[visible on=<5-6>] (green_channel) {\includegraphics[width=2cm]{images/features/scatnet/elancourt-39322_g}};

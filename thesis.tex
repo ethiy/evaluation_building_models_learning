@@ -1,16 +1,13 @@
-\pdfobjcompresslevel 0
-
 \documentclass[12pt, twoside]{book}
 
 \usepackage[paper=a4paper, top=1.5cm, bottom=2cm, left=2.5cm, right=2.5cm, headheight=15pt]{geometry}
 
 \usepackage{lmodern}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[english, french]{babel}
-\usepackage{csquotes}
+\usepackage{polyglossia}
 
 \usepackage{siunitx}
+
+\usepackage{fancyvrb}
 
 \usepackage[dvipsnames, table]{xcolor}
 \definecolor{darkgreen}{RGB}{0, 155, 85}
@@ -65,8 +62,6 @@
 \usepackage{stmaryrd}
 
 
-\usepackage{palatino}
-
 \setcounter{tocdepth}{2}
 \usepackage{minitoc}
 \setcounter{minitocdepth}{2}
@@ -90,6 +85,22 @@
     parlead=15pt
 ]{colophon}
 
+
+\usepackage[acronym, toc, automake=true, nohypertypes={acronym}]{glossaries}
+\usepackage{imakeidx}
+\makeindex[intoc]
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=false,
+    pdfsubject={3D building models},
+    pdftitle={Quality evaluation of 3D building models: a scalable approach},
+    pdfauthor={Oussama Ennafii},
+    pdfkeywords={3D urban modeling, buildings, quality assessment, taxonomy, classification, error detection, geometry, aerial imagery, Very High Spatial Resolution, Digital Surface Model},
+    pdfstartview={FitH},
+    unicode=true
+}
+
 \usepackage[
     backend=biber,
     style=authoryear,
@@ -111,31 +122,21 @@
 \usepackage{xpatch}
 \addbibresource{references.bib}
 
-\usepackage[acronym, toc, automake=true, nohypertypes={acronym}]{glossaries}
-\usepackage{imakeidx}
-\makeindex[intoc]
-
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=false,
-    pdfsubject={3D building models},
-    pdftitle={Quality evaluation of 3D building models: a scalable approach},
-    pdfauthor={Oussama Ennafii},
-    pdfkeywords={3D urban modeling, buildings, quality assessment, taxonomy, classification, error detection, geometry, aerial imagery, Very High Spatial Resolution, Digital Surface Model},
-    pdfstartview={FitH},
-    unicode=true
-}
-
-
 \usepackage[useregional]{datetime2}
-
 
 \usepackage{style/environments}
 \usepackage{style/hacks}
 \usepackage{style/glossaries}
 
+\usepackage{csquotes}
+\usepackage{fontspec}
+\setmainlanguage{english}
+\setotherlanguage{french}
+\setotherlanguage[locale=morocco]{arabic}
+\newfontfamily\arabicfont[Script=Arabic]{Amiri}
 
 \begin{document}
+    \VerbatimFootnotes
     \dominitoc
     \doparttoc
     \selectlanguage{english}
@@ -148,6 +149,13 @@
     \chapter{Abstract}
         \adjustmtc
         \input{frontmatter/abstract}
+
+    \selectlanguage{arabic}
+    \chapter{ملخص}
+        \adjustmtc
+        \input{frontmatter/molakhass}
+    \selectlanguage{english}
+
     \selectlanguage{french}
     \chapter{Résumé}
         \adjustmtc
@@ -167,7 +175,6 @@
     \selectlanguage{french}
     \chapter*{Résumé étendu}
         \addcontentsline{toc}{chapter}{Résumé étendu}
-        \adjustmtc
         \input{frontmatter/resume_long}
     \selectlanguage{english}
 
@@ -213,7 +220,6 @@
     \chapter{Further experimental details}
         \label{chap::details}
         \input{chapters/a3-details}
-    
 
     \printglossary[type=\acronymtype]
     \printglossary
