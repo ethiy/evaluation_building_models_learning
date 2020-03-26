@@ -7,12 +7,13 @@
 
 \usepackage{pgfplots}
 
-\usepackage{tikz}
 \usetikzlibrary{calc, 3d}
+
+\usepackage{amsmath}
 
 \begin{document}
     \begin{tikzpicture}
-    	\node (residual) at (0,0) {
+    	\node (residual) {
             \includegraphics[height=1cm, angle=270]{images/introduction/graphical_abstract/residual}
         };
         \path (residual.south) node[anchor=north] (residual_legend) {\tiny (c) Height-based};

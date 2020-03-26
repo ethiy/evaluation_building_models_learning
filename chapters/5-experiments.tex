@@ -464,100 +464,6 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
         The same reason explains why \texttt{BOS} is well detected in \textbf{Elancourt}, as well as \texttt{FUS} and \texttt{FIB} are in \textbf{Paris-13}.
         Understandably, rare errors are difficult to detect as shown by \texttt{FIT} on the three zones for instance.
 
-        \begin{table}[htb]
-            \footnotesize
-            \centering
-            \renewcommand{\arraystretch}{1.5}
-            \begin{center}
-                \begin{tabular}{| c | x{1.5cm} x{1.5cm} x{1.5cm} x{1.5cm} |}
-                    \hline
-                    & \multicolumn{4}{c|}{\textbf{Elancourt}}\\
-                    \hline
-                    &\textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All}\\
-                    \hline
-                    \texttt{BOS} & \cellcolor{GAIN2535} & \cellcolor{GAIN2535} & \cellcolor{GAIN2535} & \cellcolor{GAIN2535} \\
-                    \hline
-                    \texttt{BUS} & \cellcolor{LOSS0515} & \cellcolor{LOSS0515} & \cellcolor{LOSS0515} & \cellcolor{LOSS0515} \\
-                    \hline
-                    \texttt{BIB} & \cellcolor{LOSS2535} & \cellcolor{LOSS2535} & \cellcolor{LOSS2535} & \cellcolor{LOSS2535} \\
-                    \hline
-                    \texttt{BIT} & \cellcolor{LOSS2535} & \cellcolor{LOSS2535} & \cellcolor{LOSS2535} & \cellcolor{LOSS2535} \\
-                    \specialrule{.2em}{.1em}{.1em}
-                    \texttt{FOS} & \cellcolor{GAIN45} & \cellcolor{GAIN45} & \cellcolor{GAIN45} & \cellcolor{GAIN45} \\
-                    \hline
-                    \texttt{FUS} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} \\
-                    \hline
-                    \texttt{FIB} & \cellcolor{LOSS2535} & \cellcolor{LOSS3545} & \cellcolor{LOSS2535} & \cellcolor{LOSS3545} \\
-                    \hline
-                    \texttt{FIT} & \cellcolor{LOSS3545} & \cellcolor{LOSS2535} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} \\
-                    \hline
-                    \texttt{FIG} & \cellcolor{GAIN2535} & \cellcolor{GAIN2535} & \cellcolor{GAIN2535} & \cellcolor{GAIN2535} \\
-                    \hline
-                    \hline
-                    & \multicolumn{4}{c|}{\textbf{Nantes}}\\
-                    \hline
-                    &\textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All}\\
-                    \hline
-                    \texttt{BOS} & \cellcolor{LOSS0515} & \cellcolor{LOSS0515} & \cellcolor{LOSS0515} & \cellcolor{LOSS2535} \\
-                    \hline
-                    \texttt{BUS} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} & \cellcolor{LOSS2535} & \cellcolor{LOSS2535} \\
-                    \hline
-                    \texttt{BIB} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} \\
-                    \hline
-                    \texttt{BIT} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} \\
-                    \specialrule{.2em}{.1em}{.1em}
-                    \texttt{FOS} & \cellcolor{GAIN45} & \cellcolor{GAIN45} & \cellcolor{GAIN45} & \cellcolor{GAIN45} \\
-                    \hline
-                    \texttt{FUS} & \cellcolor{LOSS2535} & \cellcolor{LOSS2535} & \cellcolor{LOSS2535} & \cellcolor{LOSS2535} \\
-                    \hline
-                    \texttt{FIB} & \cellcolor{LOSS0515} & \cellcolor{LOSS0515} & \cellcolor{LOSS0515} & \cellcolor{LOSS0515} \\
-                    \hline
-                    \texttt{FIT} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} \\
-                    \hline
-                    \texttt{FIG} & \cellcolor{GAIN2535} & \cellcolor{GAIN2535} & \cellcolor{GAIN2535} & \cellcolor{GAIN2535} \\
-                    \hline
-                    \hline
-                    & \multicolumn{4}{c|}{\textbf{Paris-13}}\\
-                    \hline
-                    &\textbf{Geom.} & \textbf{Geom. \(\oplus\) Hei.} & \textbf{Geom. \(\oplus\) Im.} & \textbf{All}\\
-                    \hline
-                    \texttt{BOS} & \cellcolor{LOSS0515} & \cellcolor{GAIN1525} & \cellcolor{GAIN1525} & \cellcolor{GAIN1525} \\
-                    \hline
-                    \texttt{BUS} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} & \cellcolor{LOSS2535} & \cellcolor{LOSS3545} \\
-                    \hline
-                    \texttt{BIB} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} \\
-                    \hline
-                    \texttt{BIT} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} \\
-                    \specialrule{.2em}{.1em}{.1em}
-                    \texttt{FOS} & \cellcolor{GAIN45} & \cellcolor{GAIN45} & \cellcolor{GAIN45} & \cellcolor{GAIN45} \\
-                    \hline
-                    \texttt{FUS} & \cellcolor{GAIN2535} & \cellcolor{GAIN2535} & \cellcolor{GAIN2535} & \cellcolor{GAIN2535} \\
-                    \hline
-                    \texttt{FIB} & \cellcolor{GAIN1525} & \cellcolor{GAIN1525} & \cellcolor{GAIN1525} & \cellcolor{GAIN1525} \\
-                    \hline
-                    \texttt{FIT} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} & \cellcolor{LOSS3545} \\
-                    \hline
-                    \texttt{FIG} & \cellcolor{GAIN45} & \cellcolor{GAIN45} & \cellcolor{GAIN45} & \cellcolor{GAIN45} \\
-                    \hline
-                \end{tabular}
-            \end{center}
-            \renewcommand{\arraystretch}{1}
-            \caption[
-                F-scores vizualization for ablation results at \textbf{\gls{acr::efin}} level 3 with baseline features.
-            ]{
-                \label{tab::all_f-scores_ablation_f3_viz}
-                F-scores vizualization for ablation results at \textbf{\gls{acr::efin}} level 3 with baseline features.
-                These are deduced from Table~\ref{tab::all_f-scores_ablation_f3}.
-                The color indicates the how well detected a label is: 
-                \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{0}{15}{\percent})--
-                \textcolor{LOSS2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{15}{45}{\percent}) --
-                \textcolor{LOSS0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{45}{55}{\percent}) --
-                \textcolor{GAIN1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{55}{70}{\percent})--
-                \textcolor{GAIN2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{70}{85}{\percent})--
-                \textcolor{GAIN45}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{85}{100}{\percent}].
-            }
-        \end{table}
-
         \begin{figure}[htb]
             \centering
             \ffigbox[\FBwidth]{
@@ -738,7 +644,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
                 \begin{subfloatrow}
                     \centering
                     \ffigbox[\textwidth]{
-                        \includestandalone[mode=buildmissing, width=\textwidth]{figures/results/transferability/building}
+                        \includestandalone[mode=buildmissing, width=.8\textwidth]{figures/results/transferability/building}
                     }{
                         \caption{
                             \label{subfig::f_score_transferability_f3_building}
@@ -749,7 +655,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
                 \vskip2em
                 \begin{subfloatrow}
                     \ffigbox[\textwidth]{
-                        \includestandalone[mode=buildmissing, width=\textwidth]{figures/results/transferability/facet}
+                        \includestandalone[mode=buildmissing, width=.8\textwidth]{figures/results/transferability/facet}
                     }{
                         \caption{
                             \label{subfig::f_score_transferability_f3_facet}
