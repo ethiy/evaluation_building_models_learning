@@ -159,11 +159,13 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 \begin{figure}[htb]
                     \centering
                     \ffigbox[.75\textwidth]{
-                        \includegraphics[width=.4\textwidth]{images/errors/building/under_segmentation}
+                        \includegraphics[width=6cm]{images/errors/building/under_segmentation}
                     }{
-                        \caption{
+                        \caption[
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage showing a \texttt{\acrshort*{acr::bus}} error.
+                        ]{
                             \label{fig::bus_2d}
-                            Nadir projection of an erroneous building superposed on the corresponding orthoimage.
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage showing a \texttt{\gls{acr::bus}} error.
                             We can recognize, based on the color differences of roof tiles, the existance of two buildings instead of one.
                         }
                     }
@@ -184,9 +186,12 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                     \ffigbox[.75\textwidth]{
                         \includegraphics[width=.5\textwidth]{images/errors/building/over_segmentation}
                     }{
-                        \caption{
+                        \caption[
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage showing a \texttt{\acrshort*{acr::bos}} error.
+                        ]{
                             \label{fig::bos_2d}
-                            This a nadir projection of a single building that was modeled into three different ones depicted here in three different colors.
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage showing a \texttt{\acrshort*{acr::bos}} error.
+                            We can see how a single building that was modeled into three different ones depicted here in three different colors.
                         }
                     }
                 \end{figure}
@@ -238,8 +243,11 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                     \ffigbox[.75\textwidth]{
                         \includegraphics[width=.5\textwidth]{images/errors/building/border}
                     }{
-                        \caption{
+                        \caption[
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage showing a \texttt{\acrshort*{acr::bib}} error.
+                        ]{
                             \label{fig::bib_2d}
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage showing a \texttt{\acrshort*{acr::bib}} error.
                             In red is the reconstructed model border that is misestimated, as can be checked in the orthoimage.
                             We can distinguish in green the actual edge using a Nadir projection.
                         }
@@ -301,9 +309,12 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                     \ffigbox[.75\textwidth]{
                         \includegraphics[width=.5\textwidth]{images/errors/building/topology}
                     }{
-                        \caption{
+                        \caption[
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage showing a \texttt{\acrshort*{acr::bit}} error.
+                        ]{
                             \label{fig::bit_2d}
-                            The nadir projection comparison with the corresponding orthoimage gives away (in green) the correct footprint shape compared to the one that was reconstructed (in red).
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage showing a \texttt{\acrshort*{acr::bit}} error.
+                            We can identify (in green) the correct footprint shape compared to the one that was reconstructed (in red).
                         }
                     }
                 \end{figure}
@@ -393,11 +404,13 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 \begin{figure}[htb]
                     \centering
                     \ffigbox[.75\textwidth]{
-                        \includegraphics[width=.5\textwidth, angle=270]{images/errors/facet/under_segmentation}
+                        \includegraphics[width=6cm, angle=270]{images/errors/facet/under_segmentation}
                     }{
-                        \caption{
+                        \caption[
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage showing a \texttt{\acrshort*{acr::fus}} error.
+                        ]{
                             \label{fig::fus_2d}
-                            Nadir projection of an erroneous building superposed on the corresponding orthoimage.
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage showing a \texttt{\acrshort*{acr::fus}} error.
                             It shows a case where a higher neighboring building part can drive a misestimation of both facet planes which end up confused in one flat roof.
                             The line segment highlighted in green gives away the fact that the roof was undersegmented.
                         }
@@ -458,8 +471,11 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                     \ffigbox[.75\textwidth]{
                         \includegraphics[height=.5\textwidth, angle=270]{images/errors/facet/over_segmentation}
                     }{
-                        \caption{
+                        \caption[
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage showing a \texttt{\acrshort*{acr::fos}} error.
+                        ]{
                             \label{fig::fos_2d}
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage showing a \texttt{\acrshort*{acr::fos}} error.
                             A slim chimney in the below corner of the ridge results in a defect ladden \gls{acr::dsm} which translates into an oversegmentation.
                             The erroneous edges are colored in red.
                             One can check using the orthoimage that these are not real.
@@ -521,9 +537,12 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                     \ffigbox[.75\textwidth]{
                         \includegraphics[width=.5\textwidth]{images/errors/facet/border}
                     }{
-                        \caption{
+                        \caption[
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage showing a \texttt{\acrshort*{acr::fib}} error.
+                        ]{
                             \label{fig::fib_2d}
-                            The nadir projection of the model on the orthoimage provides the real location (in green) of the edge.
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage showing a \texttt{\acrshort*{acr::fib}} error.
+                            The real location of the edge is shown in green.
                         }
                     }
                 \end{figure}
@@ -574,9 +593,12 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                     \ffigbox[.75\textwidth]{
                         \includegraphics[width=.5\textwidth]{images/errors/facet/topology}
                     }{
-                        \caption{
+                        \caption[
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage showing a \texttt{\acrshort*{acr::fit}} error.
+                        ]{
                             \label{fig::fit_2d}
-                            The nadir projection reveals the true form (in green) of the towers that were completly misrepresented (in red).
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage showing a \texttt{\acrshort*{acr::fit}} error.
+                            The true form (in green) of the towers that is completly misrepresented (in red).
                         }
                     }
                 \end{figure}
@@ -630,10 +652,13 @@ After discussing some properties of the chosen error defnitions, we explain, in 
                 \begin{figure}[hbt]
                     \centering
                     \ffigbox[.75\textwidth]{
-                        \includegraphics[width=.5\textwidth]{images/errors/facet/geometry}
+                        \includegraphics[width=6cm]{images/errors/facet/geometry}
                     }{
-                        \caption{
+                        \caption[
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage showing a \texttt{\acrshort*{acr::fig}} error.
+                        ]{
                             \label{subfig::fig_2d}
+                            Nadir projection of an erroneous building superposed on the corresponding orthoimage showing a \texttt{\acrshort*{acr::fig}} error.
                             This kind of error is impossible is vizualize on the orthoimage.
                             Projected on the \gls{acr::dsm}, we can reveal the sloped character of the face.
                         }

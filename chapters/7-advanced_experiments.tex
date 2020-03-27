@@ -301,7 +301,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
         The same color scheme is used as with the Tables~\ref{tab::transferability_comparison} and~\ref{tab::generalization_comparison}.\\
 
         \begin{table}[htb]
-            \footnotesize 
+            \scriptsize
             \centering
             \renewcommand{\arraystretch}{2}
             \begin{tabular}{| c | x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} |x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} |}
@@ -648,19 +648,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
                     \label{tab::rf_scat_bl_comparison}
                     Evolution of the F-score value, for each error, with the \gls{acr::rf} classifier, using \gls{acr::scatnet} compared to baseline features.
                     Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (cf. Table~\ref{tab::all_f-scores_scat_rf_f3}).
-                    The color indicates the magnitude:
-                    \textcolor{LOSS45}{\(\blacksquare\)}: (\SIrange[range-phrase={,  }]{-100}{-45}{\percent}]--
-                    \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
-                    \textcolor{LOSS2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                    \textcolor{LOSS1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                    \textcolor{LOSS0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) --
-                    \textcolor{STBL}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-5}{5}{\percent}) --
-                    \textcolor{GAIN0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) --
-                    \textcolor{GAIN1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{15}{25}{\percent}) --
-                    \textcolor{GAIN2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{25}{35}{\percent}) --
-                    \textcolor{GAIN3545}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{35}{45}{\percent}) --
-                    \textcolor{GAIN45}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{45}{100}{\percent}] --
-                    When two null F-scores are compared, the cell is colored in white \(\square\): neither positive nor negative.
+                    The used color scheme is presented in figure~\ref{fig::comparison_bar}.
                 }
             \end{table}
 
@@ -929,19 +917,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
                     \label{tab::svm_scat_bl_comparison}
                     Evolution of the F-score value, for each error, with the \gls{acr::svm} classifier, using \gls{acr::scatnet} compared to baseline features.
                     Feature sets having a significant impact on the classification results are mentioned in the corresponding cell (cf. Table~\ref{tab::all_f-scores_scat_svm_f3}).
-                    The color indicates the magnitude:
-                    \textcolor{LOSS45}{\(\blacksquare\)}: (\SIrange[range-phrase={,  }]{-100}{-45}{\percent}]--
-                    \textcolor{LOSS3545}{\(\blacksquare\)}: [\SIrange[range-phrase={,  }]{-45}{-35}{\percent})--
-                    \textcolor{LOSS2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                    \textcolor{LOSS1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-35}{-25}{\percent}) --
-                    \textcolor{LOSS0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-15}{-5}{\percent}) --
-                    \textcolor{STBL}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{-5}{5}{\percent}) --
-                    \textcolor{GAIN0515}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{5}{15}{\percent}) --
-                    \textcolor{GAIN1525}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{15}{25}{\percent}) --
-                    \textcolor{GAIN2535}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{25}{35}{\percent}) --
-                    \textcolor{GAIN3545}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{35}{45}{\percent}) --
-                    \textcolor{GAIN45}{\(\blacksquare\)}: [\SIrange[range-phrase={, }]{45}{100}{\percent}] --
-                    When two null F-scores are compared, the cell is colored in white \(\square\): neither positive nor negative.
+                    The used color scheme is presented in figure~\ref{fig::comparison_bar}.
                 }
             \end{table}
 
@@ -1232,7 +1208,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
             \centering
             \ffigbox[\textwidth]{
                 \begin{subfloatrow}[2]
-                    \ffigbox[\textwidth]{
+                    \ffigbox[.48\textwidth]{
                         \includestandalone[mode=buildmissing, height=6.5cm]{figures/results/gk_vs_bl/building}
                     }{
                         \caption{
@@ -1240,7 +1216,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
                             \texttt{Building errors.}
                         }
                     }
-                    \ffigbox[\textwidth]{
+                    \ffigbox[.48\textwidth]{
                         \includestandalone[mode=buildmissing, height=6.5cm]{figures/results/gk_vs_bl/facet}
                     }{
                         \caption{
@@ -1261,7 +1237,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
         These are summarized in Table~\ref{tab::gk_svm_comparison}.\\
 
         \begin{table}[htb]
-            \footnotesize 
+            \scriptsize
             \centering
             \renewcommand{\arraystretch}{2}
             \begin{tabular}{| c | x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} |x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} x{1.1cm} |}
@@ -1442,7 +1418,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
         We can see how, no matter the chosen option, the set nor the label, follow tightly the evolution of \textbf{K-Geom.}.\\
 
         \begin{table}[htb]
-            \footnotesize 
+            \scriptsize
             \centering
             \renewcommand{\arraystretch}{2}
             \begin{subtable}{\textwidth}

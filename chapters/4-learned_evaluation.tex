@@ -303,7 +303,7 @@ Third and last, implementation details regarding the baseline features are discu
             \item[\(q\)] is the function that yields the projection of a facet if it is a polygon or an empty polygon othewise.
         \end{description}
 
-        This projection is compared with a corresponding orthorectified image \(I_{\mathsf{M}} \in \mathbb{R}^{h_{\mathsf{M}} \times w_{\mathsf{M}} \times 3}\) as shown in Figure~\ref{subfig::image_model_comparison}.
+        This projection is compared with a corresponding orthorectified image \(I_{\mathsf{M}} \in \mathbb{R}^{h_{\mathsf{M}} \times w_{\mathsf{M}} \times 3}\).
         For each facet projection, we isolate each edge \(s\) (Figure~\ref{subfig::edge_image_comparison}).
         In an ideal setting, gradients computed at pixels $g \in I_{\mathsf{M}}$ that intersect \(s\) need to be collinear with its normal $\vec{n}(s)$.
         In consequence, applying a statistics functions $\chi$\footnote{

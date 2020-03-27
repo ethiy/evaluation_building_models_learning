@@ -37,10 +37,10 @@
 		\draw[->, very thick] (green_channel.east) -- (red_channel_channel.west |- green_mask_channel);
 		\draw[very thick] (mask.east) -- ($(mask)!.5!(green_mask_channel |- mask)$) -- ($(green_channel)!.5!(green_mask_channel)$);
 
-        \path (model.north) node[anchor=south, text width=4cm] (model_legend) {\acrshort{acr::3d} model.};
-		\path (mask.north) node[anchor=south, text width=4cm] (mask_legend) {Nadir Projection.};
-        \path (image |- red_channel_channel.south) node[anchor=north, text width=4cm] (image_legend) {Orthoimage.};
-        \path (green_channel |- red_channel_channel.south) node[anchor=north, text width=4cm] (rgb_legend) {RGB channels.};
-        \path (green_mask_channel.south |- red_channel_channel.south) node[anchor=north, text width=4cm] (channel_legend) {Late fusion: \texttt{channel}.};
+        \path (model.north) node[anchor=south, text width=3cm, align=center] (model_legend) {(a) \acrshort{acr::3d} model.};
+		\path (mask.north) node[anchor=south, text width=3cm, align=center] (mask_legend) {(b) Nadir Projection.};
+        \path (image |- red_channel_channel.south) node[anchor=north, text width=3cm, align=center] (image_legend) {(c) Orthoimage.};
+        \path (green_channel |- red_channel_channel.south) node[anchor=north, text width=3cm, align=center] (rgb_legend) {(d) RGB channels.};
+        \path (green_mask_channel.south |- red_channel_channel.south) node[anchor=north, text width=3cm, align=center] (channel_legend) {(e) Late fusion: \texttt{channel}.};
 	\end{tikzpicture}
 \end{document}
