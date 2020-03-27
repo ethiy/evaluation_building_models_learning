@@ -439,30 +439,42 @@ We conclude by stating our contributions (cf. Section~\ref{sec::introduction::co
                     \ffigbox{
                        \begin{subfloatrow}
                         \centering
-                            \ffigbox[\textwidth]{
-                                \includestandalone[mode=buildmissing, width=.7\textwidth]{figures/model_vs_mesh/mesh_model}
-                            }{
-                                \caption{3D mesh of a building surface ($\approx$ \num{10000} triangles).}
-                            }
-                       \end{subfloatrow}
-                       \begin{subfloatrow}
-                        \centering
-                            \ffigbox[\textwidth]{
-                                \includestandalone[mode=buildmissing, width=.7\textwidth]{figures/model_vs_mesh/ground_truth_model}
+                    \ffigbox[\textwidth]{
+                       \begin{subfloatrow}[3]
+                            \centering
+                            \ffigbox[.31\textwidth]{
+                                \includegraphics[width=.27\textwidth]{images/introduction/mesh_model/point_cloud_5000}
                             }{
                                 \caption{
-                                    Building 3D polyhedral model ($\approx$ 800 facets).
+                                    \gls{acr::3d} point cloud sampled from the surface of a building (\num{5000} points).
+                                }
+                            }
+                            \quad
+                            \ffigbox[.31\textwidth]{
+                                \includegraphics[width=.27\textwidth]{images/introduction/mesh_model/poisson_mesh}
+                            }{
+                                \caption{
+                                    \gls{acr::3d} mesh of a building surface (\num{28876} triangles).
+                                }
+                            }
+                            \quad
+                            \ffigbox[.31\textwidth]{
+                                \includegraphics[width=.27\textwidth]{images/introduction/mesh_model/model}
+                            }{
+                                \caption{
+                                    \gls{acr::3d} model of a building (\num{50} faces).
                                 }
                             }
                        \end{subfloatrow}
                     }{
                         \caption[
-                            Example of the difference between a \acrshort*{acr::3d} mesh compared to a \acrshort*{acr::3d} model.
+                            Difference between a \acrshort*{acr::3d} point cloud, mesh and model of a building..
                         ]{
                             \label{fig::3dmodel_vs_3dmesh}
-                            Example of the difference between a \gls{acr::3d} mesh compared to a \gls{acr::3d} model.
-                            The first describes only the geometry, while the second is rich in semantics:
-                            for each architectural feature corresponds a single geometric primitive.
+                            Difference between a \gls{acr::3d} point cloud, mesh and model of a building.
+                            The point cloud (with \num{5000} points) does not provide any topological informations about the surface of the building.
+                            A \gls{acr::3d} model is a special case of \gls{acr::3d} meshes which describes the surface of the object in a compact way.
+                            The \gls{acr::3d} mesh is poor in \textit{implicit} semantics compared to the \gls{acr::3d} model, for which each architectural feature corresponds to a single geometric primitive.
                         }
                     }
                 \end{center}
