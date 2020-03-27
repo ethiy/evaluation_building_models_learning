@@ -9,7 +9,7 @@
 
 \usetikzlibrary{calc, 3d}
 
-\usepackage{amsmath}
+\usepackage{amssymb}
 
 \begin{document}
     \begin{tikzpicture}
@@ -33,10 +33,10 @@
 
 		\path (orthoprojection_legend.east |- ortho_projection) + (1,0) node[anchor=west] (errors) {\includestandalone[mode=buildmissing, height=1cm]{figures/graphical_abstract/building_errors}};
         \path (errors |- residual_legend) node (errors_legend) {\tiny (e) Erroneous building};
-        \path (errors_legend.east |- errors.north) node[align=left, anchor=south east] (errors_list) {\tiny {\color{blue}\(\blacksquare\) Modeling error}};
+        \path (errors_legend.east |- errors.north) node[align=left, anchor=south east] (errors_list) {\tiny {\color{green}\(\blacksquare\) Modeling error}};
         \path (errors_list.north east) node[align=left, anchor=east] (errors_list) {\tiny {\color{red}\(\blacksquare\) Fidelity error}};
         
-        \path[draw, ->, line width=1pt, rounded corners=10pt, green] (model_legend.east |- model) -- (facet_graph.west);
-        \path[draw, ->, line width=1pt, rounded corners=10pt, green] (orthoprojection_legend.east |- ortho_projection) -- (errors);
+        \path[draw, ->, line width=1pt, rounded corners=10pt, blue] (model_legend.east |- model) -- (facet_graph.west);
+        \path[draw, ->, line width=1pt, rounded corners=10pt, blue] (orthoprojection_legend.east |- ortho_projection) -- (errors);
     \end{tikzpicture}
 \end{document}
