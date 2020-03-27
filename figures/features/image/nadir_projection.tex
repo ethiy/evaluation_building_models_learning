@@ -8,20 +8,24 @@
 
 \usetikzlibrary{3d, calc}
 
+\usepackage{glossaries}
+\newacronym{acr::3d}{3D}{three dimensional}
+
+
 \begin{document}
 	\begin{tikzpicture}
         \node (image) {\includegraphics[width=3cm]{images/features/scatnet/elancourt-39322}};
-        \path (image.south) node[anchor=north, text width=3cm] (image_legend) {\footnotesize \subcaption{Orthoimage \label{subfig::orthoimage}}};
+        \path (image.south) node[anchor=north, text width=3cm] (image_legend) {(c) Orthoimage};
         \path (image.north east) + (0, 1) node[anchor=south east] (model) {\includestandalone[mode=buildmissing, width=3cm]{figures/graphical_abstract/building_model}};
         
-        \path (model.east) + (3, 0) node[anchor=west] (mask) {\includegraphics[width=3cm]{images/features/scatnet/elancourt-39322_mask}};
+        \path (model.east) + (2, 0) node[anchor=west] (mask) {\includegraphics[width=3cm]{images/features/scatnet/elancourt-39322_mask}};
         \draw[->, very thick] (model.east) -- (mask.west);
  
-        \path (mask.north) node[anchor=south, text width=3cm] (mask_legend) {\footnotesize \subcaption{Nadir Projection \label{subfig::nadir_projection}}};
-        \path (model |- mask_legend) node[text width=3cm] (model_legend) {\footnotesize \subcaption{\gls{acr::3d} model \label{subfig::input_model}}};
+        \path (mask.north) node[anchor=south, text width=3cm] (mask_legend) {(b) Nadir Projection};
+        \path (model |- mask_legend) node[text width=3cm] (model_legend) {(a) \acrshort{acr::3d} model};
 
-        \path (mask.east |- image) + (4, 0) node[anchor=west] (nadir_projection) {\includegraphics[width=3cm]{images/features/scatnet/elancourt-39322_nadir-proj}};
-        \path (nadir_projection.south) node[anchor=north, text width=3cm] (nadir_projection_legend) {\footnotesize \subcaption{Model to image comparison \label{subfig::image_model_comparison}}};
+        \path (mask.east |- image) + (3, 0) node[anchor=west] (nadir_projection) {\includegraphics[width=3cm]{images/features/scatnet/elancourt-39322_nadir-proj}};
+        \path (nadir_projection.south) node[anchor=north, text width=3cm] (nadir_projection_legend) {(d) Model to image comparison};
         \draw[->, very thick] (image.east) -- (nadir_projection.west);
         \draw[very thick] (mask.east) -- ($(mask)!.5!(nadir_projection |- mask)$) -- ($(mask |- image)!.5!(nadir_projection)$) node {};
 	\end{tikzpicture}

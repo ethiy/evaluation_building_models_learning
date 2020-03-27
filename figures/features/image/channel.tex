@@ -9,6 +9,10 @@
 
 \usepackage{standalone}
 
+\usepackage{glossaries}
+\newacronym{acr::3d}{3D}{three dimensional}
+
+
 \begin{document}
 	\begin{tikzpicture}
 		\node (image) {\includegraphics[width=3cm]{images/features/scatnet/elancourt-39322}};
@@ -33,10 +37,10 @@
 		\draw[->, very thick] (green_channel.east) -- (red_channel_channel.west |- green_mask_channel);
 		\draw[very thick] (mask.east) -- ($(mask)!.5!(green_mask_channel |- mask)$) -- ($(green_channel)!.5!(green_mask_channel)$);
 
-        \path (model.north) node[anchor=south, text width=4cm] (model_legend) {\footnotesize \subcaption{\gls{acr::3d} model. \label{subfig::input_c}}};
-		\path (mask.north) node[anchor=south, text width=4cm] (mask_legend) {\footnotesize \subcaption{Nadir Projection. \label{subfig::nadir_c}}};
-        \path (image |- red_channel_channel.south) node[anchor=north, text width=4cm] (image_legend) {\footnotesize \subcaption{Orthoimage. \label{subfig::orthoimage_c}}};
-        \path (green_channel |- red_channel_channel.south) node[anchor=north, text width=4cm] (rgb_legend) {\footnotesize \subcaption{RGB channels. \label{subfig::rgb_c}}};
-        \path (green_mask_channel.south |- red_channel_channel.south) node[anchor=north, text width=4cm] (channel_legend) {\footnotesize \subcaption{Late fusion: \texttt{channel}. \label{subfig::late}}};
+        \path (model.north) node[anchor=south, text width=4cm] (model_legend) {\acrshort{acr::3d} model.};
+		\path (mask.north) node[anchor=south, text width=4cm] (mask_legend) {Nadir Projection.};
+        \path (image |- red_channel_channel.south) node[anchor=north, text width=4cm] (image_legend) {Orthoimage.};
+        \path (green_channel |- red_channel_channel.south) node[anchor=north, text width=4cm] (rgb_legend) {RGB channels.};
+        \path (green_mask_channel.south |- red_channel_channel.south) node[anchor=north, text width=4cm] (channel_legend) {Late fusion: \texttt{channel}.};
 	\end{tikzpicture}
 \end{document}
