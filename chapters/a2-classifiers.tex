@@ -264,9 +264,9 @@ Third and last, \glspl{acr::rf} are presented in Section~\ref{sec::classifiers::
 
         \begin{figure}
             \centering
-            \ffigbox[\FBwidth]{
+            \ffigbox[\textwidth]{
                 \begin{subfloatrow}[2]
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[\textwidth]{
                         \includestandalone[mode=buildmissing, width=.45\textwidth]{figures/svm/circles_original}
                     }{
                         \caption{
@@ -274,7 +274,7 @@ Third and last, \glspl{acr::rf} are presented in Section~\ref{sec::classifiers::
                             Original representation of the dataset in the feature space.
                         }
                     }
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[\textwidth]{
                         \includestandalone[mode=buildmissing, width=.45\textwidth]{figures/svm/circles_polar}
                     }{
                         \caption{
@@ -407,7 +407,7 @@ Third and last, \glspl{acr::rf} are presented in Section~\ref{sec::classifiers::
     We end this Section discussing some \gls{acr::rf} properties.
 
     \subsection{Decision tree classifier}
-        \begin{figure}[htbp]
+        \begin{figure}[htb]
             \centering
             \includestandalone[mode=buildmissing, width=\textwidth]{figures/random_forest/decision_tree}
             \caption[
@@ -447,7 +447,7 @@ Third and last, \glspl{acr::rf} are presented in Section~\ref{sec::classifiers::
         The intuitive representation of decision tree classifiers, shown in Figure~\ref{fig::decision_tree_graph}, is generaly prefered.
         In Figure~\ref{fig::decision_tree_separator}, we can clearly attribute the fact that the separator is an aggregation of vertical and horiontal segments to the fact that only one dimension is taken into acount at a time.\\
 
-        \begin{figure}[htbp]
+        \begin{figure}[htb]
             \centering
             \includegraphics[width=.5\textwidth]{images/related_work/decision_tree_separator}
             \caption[
@@ -528,16 +528,16 @@ Third and last, \glspl{acr::rf} are presented in Section~\ref{sec::classifiers::
 
         \begin{figure}
             \centering
-            \ffigbox[\FBwidth]{
+            \ffigbox[\textwidth]{
                 \begin{subfloatrow}[2]
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[\textwidth]{
                         \includestandalone[mode=buildmissing, width=.45\textwidth]{figures/random_forest/circles_dt}
                     }{
                         \caption{
                             \label{subfig::decision_tree_circles} Decision tree separator
                         }
                     }
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[\textwidth]{
                         \includestandalone[mode=buildmissing, width=.45\textwidth]{figures/random_forest/circles_rf}
                     }{
                         \caption{

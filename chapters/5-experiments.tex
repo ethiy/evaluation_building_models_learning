@@ -46,7 +46,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
         \end{figure}
 
         \begin{figure}[htb]
-            \ffigbox[\FBwidth]{
+            \ffigbox[\textwidth]{
                 \includegraphics[width=\textwidth]{images/datasets/elancourt_global}
             }{
                 \caption{
@@ -57,7 +57,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
         \end{figure}
 
         \begin{figure}[htb]
-            \ffigbox[\FBwidth]{
+            \ffigbox[\textwidth]{
                 \includegraphics[width=\textwidth]{images/datasets/nantes_global}
             }{
                 \caption{
@@ -68,7 +68,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
         \end{figure}
 
         \begin{figure}[htb]
-            \ffigbox[\FBwidth]{
+            \ffigbox[\textwidth]{
                 \includegraphics[width=\textwidth]{images/datasets/paris-13_global}
             }{
                 \caption{
@@ -81,7 +81,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
         \begin{figure}[htb]
             \ffigbox[\textwidth]{
                 \begin{subfloatrow}[3]
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[.31\textwidth]{
                         \includegraphics[width=.3\textwidth]{images/datasets/elancourt_samples}
                     }{
                         \caption{
@@ -89,7 +89,8 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
                             Elancourt contains flat roof buildings (top) as well as gable roof ones (bottom).
                         }
                     }
-                    \ffigbox[\FBwidth]{
+                    \qquad
+                    \ffigbox[.31\textwidth]{
                         \includegraphics[width=.3\textwidth]{images/datasets/nantes_samples}
                     }{
                         \caption{
@@ -97,7 +98,8 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
                             Nantes exhibits high rising towers (top) along densely packed fragmented roof buildings (bottom).
                         }
                     }
-                    \ffigbox[\FBwidth]{
+                    \qquad
+                    \ffigbox[.31\textwidth]{
                         \includegraphics[width=.3\textwidth]{images/datasets/paris-13_samples}
                     }{
                         \caption{
@@ -133,23 +135,25 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
                 \begin{subfloatrow}[3]
                     \centering
                     \ffigbox[.31\textwidth]{
-                        \includegraphics[width=.28\textwidth]{images/bati3d/plane_detection}
+                        \includegraphics[width=.3\textwidth]{images/bati3d/plane_detection}
                     }{
                         \caption{
                             \label{subfig::plane_detection}
                             Plane extraction.
                         }
                     }
+                    \qquad
                     \ffigbox[.31\textwidth]{
-                        \includegraphics[width=.28\textwidth]{images/bati3d/plane_arrangements}
+                        \includegraphics[width=.3\textwidth]{images/bati3d/plane_arrangements}
                     }{
                         \caption{
                             \label{subfig::arrangements}
                             Plane arrangement building.
                         }
                     }
+                    \qquad
                     \ffigbox[.31\textwidth]{
-                        \includegraphics[width=.28\textwidth]{images/bati3d/bati3d}
+                        \includegraphics[width=.3\textwidth]{images/bati3d/bati3d}
                     }{
                         \caption{
                             \label{subfig::bati3d}
@@ -246,6 +250,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
                             Occurence statistics for error families and the \texttt{Unqualified} class computed for each area.
                         }
                     }
+                    \qquad
                     \ffigbox[.48\textwidth]{
                         \includestandalone[mode=buildmissing, height=7cm]{figures/datasets/lod1_stats}
                     }{
@@ -458,17 +463,16 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
             }
         \end{table}
 
-        In Table~\ref{tab::all_f-scores_ablation_f3_viz}, results are classified depending on the F-score using a color scheme.
-        We can see how \texttt{FOS} and \texttt{FIG} are always well detected.
+        In Table~\ref{tab::all_f-scores_ablation_f3}, we can see how \texttt{FOS} and \texttt{FIG} are always well detected.
         This is mainly due to the fact that they are very frequent in all datasets (cf. Figure~\ref{fig::error_statistics}).
         The same reason explains why \texttt{BOS} is well detected in \textbf{Elancourt}, as well as \texttt{FUS} and \texttt{FIB} are in \textbf{Paris-13}.
         Understandably, rare errors are difficult to detect as shown by \texttt{FIT} on the three zones for instance.
 
         \begin{figure}[htb]
             \centering
-            \ffigbox[\FBwidth]{
+            \ffigbox[\textwidth]{
                 \begin{subfloatrow}[2]
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[.48\textwidth]{
                         \includestandalone[mode=buildmissing, height=7.5cm]{figures/results/ablation/building}
                     }{
                         \caption{
@@ -476,7 +480,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
                             \texttt{Building errors.}
                         }
                     }
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[.48\textwidth]{
                         \includestandalone[mode=buildmissing, height=7.5cm]{figures/results/ablation/facet}
                     }{
                         \caption{
@@ -504,7 +508,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
         In fact, on \textbf{Elancourt}, height and image based features both contribute to an increase of around \SI{6}{\percent} in F-score.
         This can be explained by the fact that a lot of under-segmented building models have different heights which reflects easily on height based features.
         Similar behaviour occurs for \textbf{Nantes} and \textbf{Paris-13} with image based features driving at least a \SI{20}{\percent} jump in F-score.
-        In fact, buildings could be identified by their roof texture or color, as depicted in Figure~\ref{subfig::bus_2d}.
+        In fact, buildings could be identified by their roof texture or color, as depicted in Figure~\ref{fig::bus_2d}.
         As a consequence, image based features are instrumental in detecting the discrepancy between two under-segmented buildings, especially in dense uniform settings.
         The second and less important example is \texttt{FIB} on \textbf{Nantes} where image based features adds around \SI{10}{\percent} in F-score as designed in Section~\ref{subsec::learned_evaluation::baseline::image}.
         Last comes the case of \texttt{BIT}, on \textbf{Elancourt}, which performs at least \SI{6}{\percent} worse when adding more modalities.
@@ -534,9 +538,9 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
         \label{subsec::experiments::baseline_feature_analysis::feature_importance}
         \begin{figure}[htb]
             \centering
-            \ffigbox[\FBwidth]{
+            \ffigbox[\textwidth]{
                 \begin{subfloatrow}
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[.48\textwidth]{
                         \includestandalone[mode=buildmissing, height=.23\textheight]{figures/results/ablation/feature_importance/building}
                     }{
                         \caption{
@@ -544,7 +548,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
                             \texttt{Building errors.}
                         }
                     }
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[.48\textwidth]{
                         \includestandalone[mode=buildmissing, height=.23\textheight]{figures/results/ablation/feature_importance/facet}
                     }{
                         \caption{
@@ -612,8 +616,8 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
     The results of such experiments are shown in Section~\ref{subsec::experiments::scalability::generalization}.
     The last experiment class, whose results are presented in Section~\ref{subsec::experiments::scalability::representativeness}, targets the \texttt{representativeness} of a single 3-area dataset by trying multiple train-test split sizes.\\
 
-    \begin{figure}[htbp]
-        \ffigbox[\FBwidth]{
+    \begin{figure}[htb]
+        \ffigbox[\textwidth]{
             \includestandalone[mode=buildmissing, width=.8\textwidth]{figures/scalabitity_graph}
         }
         {
@@ -639,7 +643,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
         For more details, refer to Tables~\ref{tab::transferability_f3} and~\ref{tab::all_f-scores_transferability_f3}, which compiles all precision, recall and F-score test results.\\
         
         \thisfloatsetup{subfloatrowsep=none}
-        \begin{figure}[htbp]
+        \begin{figure}[htb]
             \ffigbox[\textwidth]{
                 \begin{subfloatrow}
                     \centering
@@ -703,7 +707,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
             However, from a general standpoint, we can see how the \texttt{building errors} are always affected by losses when testing on both \textbf{Paris-13} and \textbf{Nantes}.
             Except for \texttt{FIT}, the inverse situation is obseved for \texttt{Facet errors} where labels are either better detected or stable.
 
-        \begin{table}[htbp]
+        \begin{table}[htb]
             \footnotesize 
             \centering
             \renewcommand{\arraystretch}{2}
@@ -782,11 +786,11 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
         The F-score evolution, per experiment and label, is depicted in Figure~\ref{fig::f_score_generalization_f3}.\\
     
         \thisfloatsetup{subfloatrowsep=none}
-        \begin{figure}[htbp]
-            \ffigbox[\FBwidth]{
+        \begin{figure}[htb]
+            \ffigbox[\textwidth]{
                 \begin{subfloatrow}[2]
                     \centering
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[.48\textwidth]{
                         \includestandalone[mode=buildmissing, height=7.5cm]{figures/results/generalization/building}
                     }{
                         \caption{
@@ -794,7 +798,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
                             \texttt{Building errors.}
                         }
                     }
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[.48\textwidth]{
                         \includestandalone[mode=buildmissing, height=7.5cm]{figures/results/generalization/facet}
                     }{
                         \caption{
@@ -814,7 +818,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
             }
         \end{figure}
 
-        \begin{table}[htbp]
+        \begin{table}[htb]
             \footnotesize 
             \centering
             \renewcommand{\arraystretch}{2}
@@ -881,10 +885,10 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
         Figure~\ref{fig::f_score_representativeness_f3} depicts the F-score as a function of training ratios (between \SIrange[range-phrase={ and }]{20}{70}{\percent}) and \texttt{atomic} errors.\\
                 
         \thisfloatsetup{subfloatrowsep=none}
-        \begin{figure}[htbp]
+        \begin{figure}[htb]
             \ffigbox[\textwidth]{
                 \begin{subfloatrow}[2]
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[.48\textwidth]{
                         \includestandalone[mode=buildmissing, height=6.5cm]{figures/results/representativeness/building}
                     }{
                         \caption{
@@ -892,7 +896,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
                             \texttt{Building errors.}
                         }
                     }
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[.48\textwidth]{
                         \includestandalone[mode=buildmissing, height=6.5cm]{figures/results/representativeness/facet}
                     }{
                         \caption{
@@ -955,7 +959,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
     
     \subsection{Error family detection}
         \label{subsec::experiments::finesse::2}
-        \begin{table}[htbp]
+        \begin{table}[htb]
             \footnotesize
             \centering
             \begin{tabular}{|c | c c | c c | c c | c c |}
@@ -1003,10 +1007,10 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
             }
         \end{table}
     
-        \begin{figure}[htbp]
+        \begin{figure}[htb]
             \ffigbox[\textwidth]{
                 \begin{subfloatrow}[2]
-                    \ffigbox[0.5\textwidth]{
+                    \ffigbox[.48\textwidth]{
                         \centering
                         \includestandalone[mode=buildmissing, width=.45\textwidth]{figures/results/finesse_2/ablation}
                     }{
@@ -1015,7 +1019,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
                             Test scores for classifiers trained on the same zone.
                         }
                     }
-                    \ffigbox[0.5\textwidth]{
+                    \ffigbox[.48\textwidth]{
                         \centering
                         \includestandalone[mode=buildmissing, width=.45\textwidth]{figures/results/finesse_2/transferability}
                     }{
@@ -1027,7 +1031,7 @@ Finally, in Section~\ref{sec::experiments::finesse}, we analyse results of the e
                 \end{subfloatrow}
                 \vskip2em
                 \begin{subfloatrow}
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[\textwidth]{
                         \centering
                         \includestandalone[mode=buildmissing, width=.45\textwidth]{figures/results/finesse_2/representativeness}
                     }{

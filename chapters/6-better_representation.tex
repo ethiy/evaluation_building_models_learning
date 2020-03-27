@@ -178,7 +178,7 @@ Last, Section~\ref{sec::better_representation::implementation} presents the impl
                 \begin{figure}
                     \centering
                     \ffigbox{
-                        \ffigbox[\FBwidth]{
+                        \ffigbox[\textwidth]{
                             \includegraphics[width=\textwidth]{images/related_work/morlet_wavelets}
                         }{
                             \caption[
@@ -190,7 +190,7 @@ Last, Section~\ref{sec::better_representation::implementation} presents the impl
                                 Image taken from~\parencite{sifre2013rotation}.
                             }
                         }
-                        \ffigbox[\FBwidth]{
+                        \ffigbox[\textwidth]{
                             \begin{tabular}{@{}c@{}}
                                 \includegraphics[width=.5\textwidth]{images/related_work/first_layer_cnn}\\
                                 \includegraphics[width=.75\textwidth]{images/related_work/second_layer_cnn}
@@ -334,7 +334,7 @@ Last, Section~\ref{sec::better_representation::implementation} presents the impl
                 Similarly, they drop the scale-space averaging at the end, while the logarithm guaranties the covariance of the signal to scaling effects.
                 The operations are also conducted in a way that renders the shape of the \gls{acr::scatnet}, shown in Figure~\ref{fig::scatnet}, more like that of \gls{acr::cnn}.
 
-                \begin{figure}[htbp]
+                \begin{figure}[htb]
                     \centering
                     \includestandalone[mode=buildmissing, width=\textwidth]{figures/scattering_network}
                     \caption[
@@ -441,7 +441,7 @@ Last, Section~\ref{sec::better_representation::implementation} presents the impl
                     E_{\times} &\triangleq \left\{\left\{(u, u'), (v, v')\right\}: \left\{u,v\right\} \in E \wedge \left\{u',v'\right\} \in E'\right\}.
                 \end{align}
                 This is vizualized in Figure~\ref{fig::direct_product_graph}.
-                \begin{figure}[htbp]
+                \begin{figure}[htb]
                     \centering
                     \includegraphics[height=.4\textheight]{images/related_work/direct_product_graphs}
                     \caption[
@@ -951,7 +951,7 @@ Last, Section~\ref{sec::better_representation::implementation} presents the impl
 
         \subsubsection{Image based features.}
             \glspl{acr::scatnet} seem then to be good choice for image based feature extractors.
-            In fact, as shown in Figure~\ref{subfig::bus_2d}, image textures could be also useful for error detection.
+            In fact, as shown in Figure~\ref{fig::bus_2d}, image textures could be also useful for error detection.
             More importantly, as shown with baseline image based features (cf. Section~\ref{subsec::learned_evaluation::baseline::image}), edges are key image attributes for comparing building models to orthoimages.
             Actually, \glspl{acr::scatnet} are well suited for edge detection as they use Morlet wavelets for convolution operations (cf. Section~\ref{subsec::better_representation::literature::scatnet}).
             These filters are adapted to edge detection~\parencite{zhang2007radon}, as depicted in Figure~\ref{subfig::morlet_filters}.\\
@@ -968,7 +968,7 @@ Last, Section~\ref{sec::better_representation::implementation} presents the impl
 
             \begin{figure}[htb]
                 \centering
-                \includestandalone[width=\textwidth, mode=tex]{figures/features/image/deletion}
+                \includestandalone[width=\textwidth, mode=buildmissing]{figures/features/image/deletion}
                 \caption[
                     Illustration of the early fusion scheme denoted \texttt{deletion}.
                 ]{
@@ -1002,7 +1002,7 @@ Last, Section~\ref{sec::better_representation::implementation} presents the impl
 
             \begin{figure}[htb]
                 \centering
-                \includestandalone[width=\textwidth, mode=tex]{figures/features/image/channel}
+                \includestandalone[width=\textwidth, mode=buildmissing]{figures/features/image/channel}
                 \caption[
                     Illustration of the late fusion scheme denoted \texttt{channel}.
                 ]{

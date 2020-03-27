@@ -40,7 +40,7 @@ Third and last, implementation details regarding the baseline features are discu
         The nature of the different classification problems are presented in Table~\ref{tab::classification_problems} depending on the three evaluation parameters defined in Section~\ref{sec::semantic_evaluation::label_extraction}.
         As a reminder, these are: the \textbf{\gls{acr::efin}}, the \textbf{\gls{acr::elod}} and the \textbf{exclusivity}.\\
 
-        \begin{table}[htbp]
+        \begin{table}[htb]
             \small
             \begin{tabular}{c c c x{11cm}}
                 \toprule
@@ -109,7 +109,7 @@ Third and last, implementation details regarding the baseline features are discu
         This was illustrated in Figure~\ref{fig::fig}, as comparing the projected model to the orthoimage did not yield anything out of place, contrarily to the \gls{acr::dsm} comparison.
         Depth data can take multiple forms: unstructured point clouds, originating for instance from \gls{acr::lidar} sensors, or dense depth maps such as \gls{acr::dsm} for the overhead case.\\
         Optical images can also be employed in this framework.
-        These provide complementary information such as edges (high frequencies, in general) and textures which are suited for inner defect detection as an example (cf. Figure~\ref{subfig::fus_2d}).
+        These provide complementary information such as edges (high frequencies, in general) and textures which are suited for inner defect detection as an example (cf. Figure~\ref{fig::fus_2d}).
         This type of data comes usually in two different shapes: overhead images or orthoimages.
     
     \subsection{Classifier choice}
@@ -274,14 +274,14 @@ Third and last, implementation details regarding the baseline features are discu
 
         \begin{figure}[htb]
             \centering
-            \includestandalone[width=\textwidth, mode=tex]{figures/features/image/nadir_projection}
+            \includestandalone[width=\textwidth, mode=buildmissing]{figures/features/image/nadir_projection}
             \caption[
                 Nadir projection of \gls{acr::3d} models to image comparison.
             ]{
                 \label{fig::nadir_projection}
                 Nadir projection of \gls{acr::3d} models to image comparison.
-                The input model (cf. Figure~\ref{subfig::input_model}) is projected in the nadir direction as shown in Figure~\ref{subfig::nadir_projection}.
-                It is then superposed on the orthoimage (cf. Figure~\ref{subfig::orthoimage}) and compared to it, as shown in Figure~\ref{subfig::image_model_comparison}.
+                The input model is projected in the nadir direction.
+                It is then superposed on the orthoimage and compared to it.
             }
         \end{figure}
         
@@ -319,7 +319,7 @@ Third and last, implementation details regarding the baseline features are discu
             \begin{center}
                 \floatbox{figure}{
                     \begin{subfloatrow}[2]
-                        \ffigbox[\FBwidth]{
+                        \ffigbox[.48\textwidth]{
                             \caption{
                                 \label{subfig::edge_image_comparison}
                                 Local gradients (in purple), on intersecting pixels (in green), are compared to the edge (in red) normal (in black).
@@ -327,8 +327,8 @@ Third and last, implementation details regarding the baseline features are discu
                         }{
                             \includestandalone[mode=buildmissing, width=.45\textwidth]{figures/features/image/edge_image_comparison}
                         }
-                        \quad
-                        \ffigbox[\FBwidth]{
+                        \qquad
+                        \ffigbox[.48\textwidth]{
                             \caption{
                                 \label{subfig::edge_histograms}
                                 Histograms describing the similarity between edges and the orthoimage.
@@ -368,7 +368,7 @@ Third and last, implementation details regarding the baseline features are discu
             \begin{center}
                 \floatbox{figure}{
                     \begin{subfloatrow}[2]
-                        \ffigbox[\FBwidth]{
+                        \ffigbox[.48\textwidth]{
                             \caption{
                                 \label{subfig::facets_histograms}
                                 Depiction of histograms describing the similarity of each of the model's projected facet to the orthoimage.
@@ -376,8 +376,8 @@ Third and last, implementation details regarding the baseline features are discu
                         }{
                             \includestandalone[mode=buildmissing, width=.45\textwidth]{figures/features/image/facets_histograms}
                         }
-                        \quad
-                        \ffigbox[\FBwidth]{
+                        \qquad
+                        \ffigbox[.48\textwidth]{
                             \caption{
                                 \label{subfig::whole_histogram}
                                 Illustration of the final histogram describing the similarity between the model edges and the orthoimage.

@@ -145,9 +145,9 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
         
         \begin{figure}[htpb]
             \centering
-            \ffigbox[\FBwidth]{
+            \ffigbox[\textwidth]{
                 \begin{subfloatrow}[2]
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[.48\textwidth]{
                         \includestandalone[mode=buildmissing, height=6.5cm]{figures/results/svm_rf/rf/building}
                     }{
                         \caption{
@@ -155,7 +155,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
                             \texttt{Building errors.}
                         }
                     }
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[.48\textwidth]{
                         \includestandalone[mode=buildmissing, height=6.5cm]{figures/results/svm_rf/rf/facet}
                     }{
                         \caption{
@@ -268,9 +268,9 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
 
         \begin{figure}[htpb]
             \centering
-            \ffigbox[\FBwidth]{
+            \ffigbox[\textwidth]{
                 \begin{subfloatrow}[2]
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[.48\textwidth]{
                         \includestandalone[mode=buildmissing, height=6.5cm]{figures/results/svm_rf/svm/building}
                     }{
                         \caption{
@@ -278,7 +278,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
                             \texttt{Building errors.}
                         }
                     }
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[.48\textwidth]{
                         \includestandalone[mode=buildmissing, height=6.5cm]{figures/results/svm_rf/svm/facet}
                     }{
                         \caption{
@@ -300,7 +300,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
         In Table~\ref{tab::rf_vs_svm_comparison}, are compared the \gls{acr::svm} F-scores (cf. Table~\ref{tab::all_f-scores_svm_f3}) to \gls{acr::rf} ones (cf. Table~\ref{tab::all_f-scores_rf_f3}).
         The same color scheme is used as with the Tables~\ref{tab::transferability_comparison} and~\ref{tab::generalization_comparison}.\\
 
-        \begin{table}[htbp]
+        \begin{table}[htb]
             \footnotesize 
             \centering
             \renewcommand{\arraystretch}{2}
@@ -332,7 +332,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
         } (with more than \SI{50}{\percent}), it is expected that they would underperform with the use of \glspl{acr::svm}.
         Although this is true for \texttt{FOS}, on both sets, it is not the case for the other error labels.\\
 
-        \begin{table}[htbp]
+        \begin{table}[htb]
             \footnotesize
             \centering
             \renewcommand{\arraystretch}{2}
@@ -401,9 +401,9 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
 
         \begin{figure}[htpb]
             \centering
-            \ffigbox[\FBwidth]{
+            \ffigbox[\textwidth]{
                 \begin{subfloatrow}[2]
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[\textwidth]{
                         \includestandalone[mode=buildmissing, height=.23\textheight]{figures/results/svm_rf/feature_importance/building}
                     }{
                         \caption{
@@ -411,7 +411,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
                             \texttt{Building errors.}
                         }
                     }
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[\textwidth]{
                         \includestandalone[mode=buildmissing, height=.23\textheight]{figures/results/svm_rf/feature_importance/facet}
                     }{
                         \caption{
@@ -577,7 +577,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
                     \end{subfloatrow}
                     \vskip1em
                     \begin{subfloatrow}[2]
-                        \ffigbox[.5\textwidth]{
+                        \ffigbox[.48\textwidth]{
                             \includestandalone[mode=buildmissing, height=6.5cm]{figures/results/scat_vs_bl/rf/channel/building}
                         }{
                             \caption{
@@ -585,7 +585,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
                                 \texttt{Building errors} (with \texttt{channel}).
                             }
                         }
-                        \ffigbox[.5\textwidth]{
+                        \ffigbox[.48\textwidth]{
                             \includestandalone[mode=buildmissing, height=6.5cm]{figures/results/scat_vs_bl/rf/channel/facet}
                         }{
                             \caption{
@@ -609,7 +609,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
             On the contrary, the Second, and more important, case is where the margin is large which was the case of \texttt{FIT} on \textbf{Elancourt} where \textbf{Geom. \(\oplus\) S(d)-Im.} had at least \SI{9}{\percent} more in F-score than the other configurations.
             At this point we do not have any explication to why this is the case.\\
 
-            \begin{table}[htbp]
+            \begin{table}[htb]
                 \footnotesize 
                 \centering
                 \renewcommand{\arraystretch}{2}
@@ -857,7 +857,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
                     \end{subfloatrow}
                     \vskip1em
                     \begin{subfloatrow}[2]
-                        \ffigbox[.5\textwidth]{
+                        \ffigbox[.48\textwidth]{
                             \includestandalone[mode=buildmissing, height=6.5cm]{figures/results/scat_vs_bl/svm/channel/building}
                         }{
                             \caption{
@@ -865,7 +865,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
                                 \texttt{Building errors} (with \texttt{channel}).
                             }
                         }
-                        \ffigbox[.5\textwidth]{
+                        \ffigbox[.48\textwidth]{
                             \includestandalone[mode=buildmissing, height=6.5cm]{figures/results/scat_vs_bl/svm/channel/facet}
                         }{
                             \caption{
@@ -890,7 +890,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
             The last reason seems to be more probable as the late fusion schemes induces larger feature vector dimensions ( 1085 more than the other option) which may have caused problems for the \gls{acr::svm}.
             In addition, this is consistent with the large drop in the performances of the \gls{acr::svm} classifier when baseline external features are added, as shown in Table~\ref{tab::svm_f3}.\\
 
-            \begin{table}[htbp]
+            \begin{table}[htb]
                 \footnotesize 
                 \centering
                 \renewcommand{\arraystretch}{2}
@@ -1025,7 +1025,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
             Just as in the Section~\ref{sec::advanced_experiments::classifier}, we will compare preditction scores resulting from both classifiers.
             These are compiled in Table~\ref{tab::scat_rf_vs_svm_comparison}.
 
-            \begin{table}[htbp]
+            \begin{table}[htb]
                 \footnotesize 
                 \centering
                 \renewcommand{\arraystretch}{2}
@@ -1230,9 +1230,9 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
         \end{table}
         \begin{figure}[htpb]
             \centering
-            \ffigbox[\FBwidth]{
+            \ffigbox[\textwidth]{
                 \begin{subfloatrow}[2]
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[\textwidth]{
                         \includestandalone[mode=buildmissing, height=6.5cm]{figures/results/gk_vs_bl/building}
                     }{
                         \caption{
@@ -1240,7 +1240,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
                             \texttt{Building errors.}
                         }
                     }
-                    \ffigbox[\FBwidth]{
+                    \ffigbox[\textwidth]{
                         \includestandalone[mode=buildmissing, height=6.5cm]{figures/results/gk_vs_bl/facet}
                     }{
                         \caption{
@@ -1260,7 +1260,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
         As in the previous subsection, we draw comparisons between the graph kernel and baseline results.
         These are summarized in Table~\ref{tab::gk_svm_comparison}.\\
 
-        \begin{table}[htbp]
+        \begin{table}[htb]
             \footnotesize 
             \centering
             \renewcommand{\arraystretch}{2}
@@ -1408,7 +1408,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
                 \end{subfloatrow}
                 \vskip1em
                 \begin{subfloatrow}[2]
-                    \ffigbox[.5\textwidth]{
+                    \ffigbox[.48\textwidth]{
                         \includestandalone[mode=buildmissing, height=6.5cm]{figures/results/gk-scat_vs_bl/channel/building}
                     }{
                         \caption{
@@ -1416,7 +1416,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
                             \texttt{Building errors (with \texttt{channel}).}
                         }
                     }
-                    \ffigbox[.5\textwidth]{
+                    \ffigbox[.48\textwidth]{
                         \includestandalone[mode=buildmissing, height=6.5cm]{figures/results/gk-scat_vs_bl/channel/facet}
                     }{
                         \caption{
@@ -1441,7 +1441,7 @@ Third, in Section~\ref{sec::advanced_experiments::better_features}, we present t
         Table~\ref{tab::gk_scat_svm_comparison} compiles comparisons, for both options, sets and all labels, between graph kernel and baseline geometric features when used with \gls{acr::scatnet} features.
         We can see how, no matter the chosen option, the set nor the label, follow tightly the evolution of \textbf{K-Geom.}.\\
 
-        \begin{table}[htbp]
+        \begin{table}[htb]
             \footnotesize 
             \centering
             \renewcommand{\arraystretch}{2}
