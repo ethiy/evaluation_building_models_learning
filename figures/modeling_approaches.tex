@@ -20,7 +20,7 @@
     url=false,
     doi=false
 ]{biblatex}
-\addbibresource{references.bib}
+\addbibresource{../references.bib}
 
 \begin{document}
     \begin{tikzpicture}
@@ -50,22 +50,22 @@
         \path (generality_arrow) + (-8, 4) node (manhattan) {\large Manhattan world};
         \path (manhattan.south west) node[anchor=north west, text width=7cm] (manhattan_cite) {\small \parencite{vanegas2010building,li2016manhattan}};
         \path (manhattan_cite.east) + (0, 1em) node[anchor=west] (manhattan_image) {
-            \includegraphics[width=2cm]{images/introduction/modeling_approaches/boxfitting_li}
+            \includegraphics[width=2cm]{../images/introduction/modeling_approaches/boxfitting_li}
         };
         \path (manhattan_cite.south west) + (0, -3em) node[anchor=north west] (piecewise) {\large Piecewise-planar structures};
         \path (piecewise.south west) node[anchor=north west, text width=7cm] (piecewise_cite) {\small \parencite{lafarge2012creating,nan2017polyfit}};
         \path (piecewise_cite.east) + (0, 1em) node[anchor=west] (piecewise_image) {
-            \includegraphics[width=2cm]{images/introduction/modeling_approaches/polyfit_iccv}
+            \includegraphics[width=2cm]{../images/introduction/modeling_approaches/polyfit_iccv}
         };
         \path (piecewise_cite.south west) + (0, -3em) node[anchor=north west] (grammar) {\large Grammar based};
         \path (grammar.south west) node[anchor=north west, text width=7cm] (grammar_cite) {\small \parencite{nan2015template,zeng2018neural}};
         \path (grammar_cite.east) + (0, 1em) node[anchor=west] (grammar_image) {
-            \includegraphics[width=2cm]{images/introduction/modeling_approaches/grammar}
+            \includegraphics[width=2cm]{../images/introduction/modeling_approaches/grammar}
         };
         \path (grammar_cite.south west) + (0, -3em) node[anchor=north west] (simplification) {\large Mesh simplification};
         \path (simplification.south west) node[anchor=north west, text width=7cm] (simplification_cite) {\small \parencite{zhou20102,verdie2015lod}};
         \path (simplification_cite.east) + (0, 1em) node[anchor=west] (simplification_image) {
-            \includegraphics[width=2cm]{images/introduction/modeling_approaches/dual_zhou}
+            \includegraphics[width=2cm]{../images/introduction/modeling_approaches/dual_zhou}
         };
     \end{tikzpicture}
 \end{document}
