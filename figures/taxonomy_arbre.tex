@@ -1,0 +1,111 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{trees, decorations.pathreplacing}
+
+\usepackage[acronyms]{glossaries}
+
+% Semantic Errors
+\newacronym{acr::bus}{BUS}{Sous Segmentation de Bâtiment}
+\newacronym{acr::bos}{BOS}{Sur Segmentation de Bâtiment}
+\newacronym{acr::bib}{BIB}{Frontières Imprécises de Bâtiment}
+\newacronym{acr::bit}{BIT}{Topologie Incorrecte de Bâtiment}
+\newacronym{acr::big}{BIG}{Géométrie Imprécise de Bâtiment}
+
+\newacronym{acr::fus}{FUS}{Sous Segmentation de Facettes}
+\newacronym{acr::fos}{FOS}{Sur Segmentation de Facettes}
+\newacronym{acr::fib}{FIB}{Frontières Imprécises de Facettes}
+\newacronym{acr::fit}{FIT}{Topologie Incorrecte de Facettes}
+\newacronym{acr::fig}{FIG}{Géométrie Imprécise de Facettes}
+
+% Evaluation parameters
+\newacronym{acr::lod}{LoD}{Level of Detail}
+\newacronym{acr::efin}{eFin}{evaluation Finesse}
+
+\makeglossaries
+
+\begin{document}
+
+    \tikzstyle{level 1}=[level distance=2cm, sibling distance=3.5cm]
+    \tikzstyle{level 2}=[level distance=3.5cm, sibling distance=3.5cm]
+    \tikzstyle{level 3}=[level distance=3.25cm, sibling distance=4cm]
+    \tikzstyle{level 4}=[level distance=2.5cm, sibling distance=.75cm]
+    
+    \tikzstyle{bag} = [text width=4em, text centered]
+    \tikzstyle{end} = [circle, minimum width=3pt, fill, inner sep=0pt]
+    
+    \begin{tikzpicture}[grow=right]
+        \node[bag] (input) {\textsc{Entrée}}
+            child {
+                node[end, label=right:{\parbox[c]{12em}{\textsc{Non\\qualifiable}}}] (unqualifiable) {}
+            }
+            child {
+                node[bag] (qualifiable) {Qualifiable}
+                    child {
+                        node[bag]{Erroné}
+                            child {
+                                node[bag] (building_errors) {Erreurs de Bâtiment}
+                                child {
+                                    node[end, label=right:\texttt{\acrlong*{acr::big}}] (b_under) {}
+                                }
+                                child {
+                                    node[end, label=right:\texttt{\acrlong*{acr::bit}}] {}
+                                }
+                                child {
+                                    node[end, label=right:\texttt{\acrlong*{acr::bib}}] {}
+                                }
+                                child {
+                                    node[end, label=right:\texttt{\acrlong*{acr::bos}}] {}
+                                }
+                                child {
+                                    node[end, label=right:\texttt{\acrlong*{acr::bus}}] {}
+                                }
+                                edge from parent
+                            }
+                            child {
+                                node[bag] (facet_errors) {Erreurs de Facette}
+                                child {
+                                    node[end, label=right:\texttt{\acrlong*{acr::fig}}] {}
+                                }
+                                child {
+                                    node[end, label=right:\texttt{\acrlong*{acr::fit}}] {}
+                                }
+                                child {
+                                    node[end, label=right:\texttt{\acrlong*{acr::fib}}] {}
+                                }
+                                child {
+                                    node[end, label=right:\texttt{\acrlong*{acr::fos}}] {}
+                                }
+                                child {
+                                    node[end, label=right:\texttt{\acrlong*{acr::fus}}] {}
+                                }
+                                edge from parent
+                            }
+                            edge from parent
+                        }
+                    child {
+                        node[end, label=right:\textsc{Valide}] (valid) {}
+                    }
+                edge from parent
+            };
+            
+        \path (qualifiable |- valid.north) + (-1,1) node (qualifiability_max) {$\texttt{finesse}=0$};
+        \path (valid.north) + (-1,1) node (correctness_max) {$\texttt{finesse}=1$};
+        \path (facet_errors |- valid.north) + (-1.25,1) node (families_max) {$\texttt{finesse}=2$};
+        \path (b_under |- valid.north) + (-.75,1) node (atomic_max) {$\texttt{finesse}=3$};
+        \path (families_max |- input) node (lod_max) {};
+        \path (b_under |- input) + (9,0) node (lod_min) {};
+        
+        \draw[dashed, orange, ultra thick] (qualifiability_max |- b_under.south) + (0,-.5) -- (qualifiability_max);
+        \draw[dashed, green, ultra thick] (correctness_max |- b_under.south) + (0,-.5) -- (correctness_max);
+        \draw[dashed, purple, ultra thick] (families_max |- b_under.south) + (0,-.5) -- (families_max);
+        \draw[dashed, blue, ultra thick] (atomic_max |- b_under.south) + (0,-.5) -- (atomic_max);
+        
+        \draw[dash dot, ultra thick] (lod_max)  -- (lod_min) node[below, pos=.9] {\footnotesize \acrshort*{acr::lod}-0 $\cup$ \acrshort*{acr::lod}-1} node [above, pos=.9] {\footnotesize \acrshort*{acr::lod}-2 $\cup$ \acrshort*{acr::lod}-3};
+
+        \path (families_max |- b_under.south) + (0,-1) node (startbraces) {};
+        \path (lod_min |- b_under.south) + (0,-1) node (endbraces) {};
+        \draw[decorate, decoration={brace, amplitude=5pt}] (b_under.south) + (-1,-1) -- (startbraces) node[midway, yshift=-2em, align=center]{Famille d'erreurs:\\\textbf{exclusivité} possible};
+        \draw[decorate, decoration={brace, amplitude=5pt,mirror}] (b_under.south) + (-1,-1) -- (endbraces) node[midway, yshift=-2em, align=center]{Erreurs \texttt{atomiques} errors:\\pas d'\textbf{exclusivité}};
+    \end{tikzpicture}
+\end{document}
