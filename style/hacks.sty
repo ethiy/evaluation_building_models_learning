@@ -32,10 +32,16 @@
 % Comma between name and year
 \renewcommand*{\nameyeardelim}{\addcomma\space}
 
-% Small caps in french
-\AtEveryCite{\restorecommand\mkbibnamefamily}
-
 % Bold names in references
-\renewcommand*{\mkbibnamegiven}[1]{\ifitemannotation{highlight}{\textbf{#1}}{#1}}
+\renewcommand*{\mkbibnamegiven}[1]{%
+  \ifitemannotation{highlight}
+    {\mkbibbold{#1}}
+    {#1}}
 
-\renewcommand*{\mkbibnamefamily}[1]{\ifitemannotation{highlight}{\textbf{#1}}{#1}}
+\renewcommand*{\mkbibnamefamily}[1]{%
+  \ifitemannotation{highlight}
+    {\mkbibbold{#1}}
+    {#1}}
+
+% Small caps in french
+\DefineBibliographyExtras{french}{\restorecommand\mkbibnamefamily}
