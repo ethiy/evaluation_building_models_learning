@@ -153,7 +153,7 @@ Ce résumé étendu est achevé par une conclusion et une liste de perspectives 
         En fixant une \textbf{eFin} donnée, on ne discrimine que selon les erreurs du même ordre de \texttt{finesse}.
         Le dernier paramètre est l'\textbf{exclusivité} des erreurs.
         Dans la cas exclusif, nous ne relevons que la famille d'erreurs représentant le plus petit Niveau de Détail: c'est un problème de classification Multi-Classes.
-        Dans le cas contraire, nous rapportons toutes les erreurs (i.e. Un objet peu être affecté par plusieurs erreurs): c'est un problème Multi-\'Etiquettes.\\
+        Dans le cas contraire, nous rapportons toutes les erreurs (i.e. un objet peu être affecté par plusieurs erreurs): c'est un problème Multi-\'Etiquettes.\\
 
         On propose ici les familles d'erreurs suivantes pour le cas de modélisation de bâtiments à partir de données aériennes ou satellitaires:
 
@@ -163,8 +163,8 @@ Ce résumé étendu est achevé par une conclusion et une liste de perspectives 
                 \item Sous segmentation (\texttt{BOS}): deux bâtiments, ou plus, représentés comme un seul;
                 \item Sur segmentation (\texttt{BUS}): un bâtiment est modélisé en deux ou plusieurs bâtiments;
                 \item Frontières imprécises (\texttt{BIB}): les frontières de l'emprise du bâtiment sont inexactes;
-                \item Topologie incorrecte (\texttt{BIT}): imprécise: la topologie de l'emprise du bâtiment est inexacte;
-                \item Géometrie imprécise (\texttt{BIG}): la géometrie du bâtiment est mal estimée;
+                \item Topologie incorrecte (\texttt{BIT}): la topologie de l'emprise du bâtiment est inexacte;
+                \item Géometrie imprécise (\texttt{BIG}): la géometrie 3D du bâtiment est mal estimée;
             \end{itemize}
             \item \texttt{Erreurs de Facette}:
             \begin{itemize}
@@ -172,62 +172,62 @@ Ce résumé étendu est achevé par une conclusion et une liste de perspectives 
                 \item Sur segmentation (\texttt{FUS}): une facette est modélisée en deux ou plusieurs facettes;
                 \item Frontières imprécises (\texttt{FIB}): les frontières de la facette sont inexactes;
                 \item Topologie incorrecte (\texttt{FIT}): imprécise: la topologie de la facette est inexacte;
-                \item Géometrie imprécise (\texttt{FIG}): la géometrie de la facette est imprécise.
+                \item Géometrie imprécise (\texttt{FIG}): la géometrie 3D de la facette est imprécise.
             \end{itemize}
         \end{enumerate}
 
     \subsection*{L'apprentissage au service de la qualification}
         \addcontentsline{toc}{subsection}{L'apprentissage au service de la qualification}
-        Afin de satisfaire à les contraintes de \textbf{passage à l'échelle} et \textbf{automatisation}, nous proposons de formuler le problème comme un problème d'apprentissage supervisé.
+        Afin de satisfaire les contraintes de \textbf{passage à l'échelle} et d'\textbf{automatisation}, nous proposons de formuler le problème comme un problème d'apprentissage supervisé.
         Les erreurs sont considérées comme des étiquettes à prédire.
-        Des attriibuts sont calculées de manière à décrire les bâtiments observés.
+        Des attributs sont calculés de manière à décrire les bâtiments observés.
         En réalité, en première approche, l'existence de toutes les erreurs est prédite au niveau du bâtiment, même pour les étiquettes d'\texttt{Erreurs de Facette}.\\
         
-        Nous proposons ainsi des attributs de bases pour les modèles de bâtiments qui sont les plus simples possibles.
+        Nous proposons ainsi des attributs de base pour les modèles de bâtiments qui restent les plus simples possibles.
         Ils sont de trois types:
         \begin{description}
-            \item[Les attributs géométriques: ] sont calculés à partir de statistiques (histogramme ou une liste contenant le maximum, le minimum, la moyenne, le médian et/ou l'écart type) de quelques propriétés géométriques des facettes du bâtiments: nombre de sommets, aire de chaque facette, circonférence de chaque surface, angles entre les normales de facettes adjacentes, distance entre les centroïdes des facettes adjacentes et/ou toutes les facettes.
-            \item[Les attributs basés sur la hauteur: ] sont issus d'un histogramme de la différence entre le modèle 3D et un MNS externe à très haute résolution spatiale.
-            \item[Les attributs basés sur l'image: ] sont issus d'un histogramme de la similarité entre les arrêtes du modèle 3D projeté dans la direction nadir et des arrêtes réelles dans l'orthoimage correspondante.
+            \item[Les attributs géométriques: ] ils sont calculés à partir de statistiques (histogramme ou liste contenant le maximum, le minimum, la moyenne, le médian et/ou l'écart type) de quelques propriétés géométriques des facettes du bâtiments: nombre de sommets, aire de chaque facette, circonférence de chaque surface, angles entre les normales de facettes adjacentes, distance entre les centroïdes des facettes adjacentes et/ou toutes les facettes.
+            \item[Les attributs basés sur la hauteur: ] ils sont issus d'un histogramme de la différence entre le modèle 3D et un MNS externe à très haute résolution spatiale.
+            \item[Les attributs basés sur l'image: ] ils sont issus d'un histogramme de la similarité entre les arêtes du modèle 3D projeté dans la direction nadir et des arêtes réelles dans l'orthoimage correspondante.
         \end{description}
 
-        La résolution du MNS et de l'orthoimage doit doit inférieure à l'ordre de grandeur des bâtiments mais aussi plus grande que l'erreur planimétrique du modèle 3D afin de garantir une robustesse au bruit.
+        La résolution du MNS et de l'orthoimage doit être inférieure à l'ordre de grandeur des bâtiments mais aussi plus grande que l'erreur planimétrique du modèle 3D afin de garantir une robustesse au bruit.
         Différents attributs (\(\text{géométrie}(4\times5) + \text{hauteur}(20) + \text{image}(20) = 60\)) obtenus sont en suite concaténés dans un seul vecteur.
 \section*{Expérimentations}
     \addcontentsline{toc}{section}{Expérimentations}
 
     \subsection*{Données}
         \addcontentsline{toc}{subsection}{Données}
-        Nous avons sélectionné des modèles 3D tirés de trois villes différentes de France afin d'évaluer la performance de notre cadre: \textbf{\'Elancourt}, \textbf{Nantes}, et le XIIIe arrondissement de Paris (\textbf{Paris-13}).
-        La petite ville d'\textbf{\'Elancourt} contient divers types de bâtiments: des zones résidentielles avec des bâtiments et à toit en croupe ainsi que des quartiers avec de grands bâtiments industriels à toit plat.
+        Nous avons sélectionné des modèles 3D tirés de trois villes française différentes afin d'évaluer la performance de notre protocole: \textbf{\'Elancourt}, \textbf{Nantes}, et le XIIIe arrondissement de Paris (\textbf{Paris-13}).
+        La petite ville d'\textbf{\'Elancourt} contient divers types de bâtiments: des zones résidentielles avec des bâtiments à toit en croupe ainsi que des quartiers avec de grands bâtiments industriels à toit plat.
         \textbf{Nantes} représente un cadre urbain plus dense mais avec une diversité de bâtiments plus faible.
         \textbf{Paris-13} se compose principalement de tours à toit plat qui coexistent avec des bâtiments de style haussmannien dont les toits sont généralement très fragmentés.
         La scène d'\textbf{\'Elancourt} (\textit{resp.} \textbf{Nantes} et \textbf{Paris-13}) contient \num[locale=FR]{2009} (\textit{resp.} \num[locale=FR]{748} et \num[locale=FR]{478}) modèles de bâtiments annotés.
-        Afin de traiter ces modèles, \verb!proj.city!, une bibliothèque \verb!C++!, a été développée en utilisant la bibliothèque \verb!CGAL!~\parencite{fabri2000design}.
+        Afin de traiter ces modèles, \verb!proj.city!, une bibliothèque \verb!C++!, a été développée en s'appuyant sur la bibliothèque \verb!CGAL!~\parencite{fabri2000design}.
         Grâce à cet outil, nous pouvons projeter des modèles de bâtiments dans la direction du nadir et produire les cartes de hauteur correspondantes.
         La résolution spatiale du MNS et de l'image orthorectifiée est de \SI[locale=FR]{0.06}{\m} pour la première zone, alors qu'elle est de \SI[locale=FR]{0.1}{\m} pour les autres.\\
 
-        Les modèles 3D ont été générés à partir d'une base de données d'emprises cadastrales~\parencite{durupt2006automatic}.
-        L'extrapolation de la topologie du toit se fait en simulant les formes de toits plausibles, à partir des images orientées, avant de les confronter à un MNS à \SI[locale=FR]{0,06}{\m} de résolution.
+        Les modèles 3D ont été générés à partir d'une base de données d'emprises cadastrales par la méthode de~\parencite{durupt2006automatic}.
+        L'extrapolation de la topologie du toit se fait en simulant les formes de toits plausibles, à partir des images orientées, avant de les confronter à un MNS à \SI[locale=FR]{0.06}{\m} (\textit{resp.} \SI[locale=FR]{0.1}{\m}) de résolution sur \textbf{\'Elancourt} (\textit{resp.} \textbf{Nantes} et \textbf{Paris-13}).
         Les façades du modèle relient la ligne de goutière au sol.
         On obtient une modélisation 2.5D de la scène à un LoD-2.
 
     \subsection*{Expériences Socles de base}
         \addcontentsline{toc}{subsection}{Expériences Socles de base}
         Nous avons utilisé un classifieur de type Forêt aléatoire sur deux types d'attributs : un simple EQM ainsi que les attributs de bases.
-        Les Forêts Aléatoires --- qui peuvent gérer des descripteurs multimodaux et nombreux --- sont choisis avec \num[locale=FR]{1000} arbres de décisions de profondeur maximale de \num[locale=FR]{4}.
-        La profondeur est limitée à 4 dans le but d'éviter le surapprentissage, contrairement au nombre d'arbres qui est très grand de façon à couvrir tout l'espace d'attributs.
+        Les Forêts Aléatoires --- qui peuvent gérer des descripteurs multimodaux et nombreux --- sont choisis avec \num[locale=FR]{1000} arbres de décisions de profondeur maximale égale à \num[locale=FR]{4}.
+        La profondeur est ainsi limitée dans le but d'éviter le surapprentissage, contrairement au nombre d'arbres qui est très grand de façon à couvrir tout l'espace d'attributs.
         Ce classifieur a été adapté, au cas de la classification Multi-\'Etiquettes, en utlisant la stratégie \textit{Un contre Tous}.\\
 
-        D'après les résultats expérimentaux, au niveau \textbf{eFin} = 3, nous avons a appris que la EQM ne permet pas de prévoir complètement les erreurs définies dans notre taxonomie.
+        D'après les résultats expérimentaux, au niveau \textbf{eFin} = 3, nous avons appris que l'EQM ne permet pas de prévoir complètement les erreurs définies dans notre taxonomie.
         En outre, les \texttt{Erreurs de Bâtiment} sont mieux détectées sur \textbf{\'Elancourt} que sur les autres scènes.
-        Concernant \texttt{FOS}, elle est très bien détectée avec plus de \SI[locale=FR]{95}{\percent} de F-score, sur tous les zones d'intérêt.
+        Concernant l'erreur \texttt{FOS}, elle est très bien détectée avec plus de \SI[locale=FR]{95}{\percent} de F-score, sur toutes les zones d'intérêt.
         \`A l'exception de cette dernière, plus la zone urbaine est dense, mieux les \texttt{Erreurs de Facette} sont détectées.
         Comme prévu, les erreurs rares telles que \texttt{BIT} et \texttt{FIT} sont mal détectées sur toutes les zones urbaines.
         Les attributs géométriques seules ont prouvé être suffisants pour la prédiction d'erreur.
-        Par conséquence, le type de bâtiment est donc un bon indicateur pour la détection d'erreurs dans une même zone.
-        Ceci est vrai toujours vrai à une exception près: \texttt{BUS} pour laquelle les autres modalités sont meilleures avec un écart important.
-        Paradoxalement, bien que, dans la plupart des cas, elles n'améliorent pas la prédiction des erreurs, les modalités extrinsèques sont aussi importantes que les caractéristiques géométriques intrinsèques.\\
+        Par conséquent, le type de bâtiment est donc un bon indicateur pour la détection d'erreurs dans une même zone.
+        Ceci est toujours vrai à une exception près: \texttt{BUS} pour laquelle les autres modalités sont significativement meilleures.
+        Paradoxalement, bien que, dans la plupart des cas, elles n'améliorent pas la prédiction des erreurs, les modalités extrinsèques sont aussi importantes que les caractéristiques géométriques intrinsèques, d'après les importances d'attributs fournis par les forêts aléatoires.\\
 
         Aux niveaux 2 et 1 de l'\textbf{eFin}, nous avons aussi prouvé expérimentalement que les \texttt{Erreurs de Facette} sont détectées avec un F-score d'environ \SI[locale=FR]{90}{\percent} non affecté par la scène d'intérêt.
         Comme nous l'avons vu précédemment au niveau 3 de l'\textbf{eFin}, les \texttt{Erreurs de Bâtiment} sont difficiles à entraîner sur \textbf{Nantes} et \textbf{Paris-13}, avec un F-score d'environ \SI[locale=FR]{75}{\percent}.
@@ -240,42 +240,42 @@ Ce résumé étendu est achevé par une conclusion et une liste de perspectives 
         Pour y parvenir, nous avons testé la capacité des classifieurs entraînés sur un ensemble de sources à obtenir des bons scores sur un ensemble cible différent.
         En fonction de la manière dont l'ensemble source a été choisi, trois types d'expériences ont été examinés : la transférabilité, la généralisation et la représentativité.
         Elles ont toutes donné des résultats cohérents qui ont contribué à prouver entre autre que \textbf{Nantes} et \textbf{Paris-13} se ressemblent comparés à \textbf{\'Elancourt}.
-        Nous avons aussi vu comment la prédiction de \texttt{FOS} et des \texttt{FIG} est hautement transférable, avec un F-score de plus de \SI[locale=FR]{95}{\percent} et que les \texttt{Erreurs de Facette}, en générale, est plus facile à mettre à l'échelle que celle des \texttt{Erreurs de Bâtiment}.
-        D'autre part, les derniers ainsi que \texttt{FIT} sont mieux détectés à \textbf{\'Elancourt} que dans les autres villes.
+        Nous avons aussi vu comment la prédiction de \texttt{FOS} et des \texttt{FIG} est hautement transférable, avec un F-score de plus de \SI[locale=FR]{95}{\percent} et que les \texttt{Erreurs de Facette}, en général, sont plus faciles à passer à l'échelle que celle des \texttt{Erreurs de Bâtiment}.
+        D'autre part, ces dernières ainsi que \texttt{FIT} sont mieux détectées à \textbf{\'Elancourt} que dans les autres villes.
         En effet, à l'exception de \texttt{FIT}, les \texttt{Erreurs de Facette} sont mieux détectées sur \textbf{Nantes} ou \textbf{Paris-13}.
         Les erreurs rares, telles que les \texttt{BIT} et les \texttt{FIT}, sont toujours mal détectées.
         Concernant la représentativité, \SI[locale=FR]{20}{\percent} des échantillons prouvaient être suffisants pour l'apprentissage sur l'ensemble de données mixtes.
-        D'un autre point de vue, les attributs géométriques ne sont pas aussi bons que les modalités extrinsèques pour le passage à l'échelle.
+        D'un autre point de vue, les attributs géométriques ne sont pas aussi bon que les modalités extrinsèques pour le passage à l'échelle.
         En effet, ces dernières (en particulier celles fondées sur les images) jouent un rôle plus crucial dans la transférabilité et la généralisation.
 
     \subsection*{Attributs avancés}
         \addcontentsline{toc}{subsection}{Attributs avancés}
-        Dans cette section, nous avons examiné expérimentalement la valeur ajoutée des fonctions avancées que nous avons proposé.
-        Nous avons pu voir comment dans tous les cas, ScatNet s'est avéré plus utile que les attributs de base pour la prédiction d'erreurs.
+        Dans cette section, nous avons examiné expérimentalement la valeur ajoutée d'attributs plus élaborés que nous avons proposé.
+        Nous avons pu voir comment dans tous les cas, ScatNet~\parencite{mallat2012group,sifre2013rotation,oyallon2015deep} s'est avéré plus utile que les attributs de base pour la prédiction d'erreurs.
         Ainsi, contrairement à la version de base, les attributs basés sur la hauteur avec ScatNet ont-ils prouvé être crucial pour détecter les étiquettes d'erreur.
-        Bien qu'elles soient utiles, d'un point de vue d'importance d'attributs, ces attributs sont, de loin, les plus faibles.
+        Bien qu'ils soient utiles, d'un point de vue d'importance d'attributs, ces attributs sont, de loin, les plus faibles.
         La fusion retardée a prouvé être la meilleure option lorsqu'elle était utilisée avec de Forêts aléatoires, tandis que la fusion précoce fonctionnait mieux avec le classifieur SVM.
-        En utilisant les attributs basés sur ScatNet, le SVM s'est avéré globalement meilleur, en particulier à \textbf{\'Elancourt}, que l'utilisation de Forêts aléatoires.
-        Concernant les noyaux pour graphes, comparés aux attributs de base, ils permettent d'améliorer les résultats de prédiction des étiquettes, à condition que celles-ci soient suffisamment fréquents.
+        En utilisant les attributs basés sur ScatNet, le SVM s'est avéré globalement meilleur que les Forêts aléatoires, en particulier sur \textbf{\'Elancourt}.
+        Concernant les noyaux pour graphes, comparés aux attributs de base, ils permettent d'améliorer les résultats de prédiction des étiquettes, à condition que celles-ci soient suffisamment fréquent.
         \textbf{\'Elancourt} était la zone la plus facile pour l'apprentissage avec un F-score minimum de \SI[locale=FR]{73}{\percent} sur tous les cas, ou encore, \SI[locale=FR]{85}{\percent} pour 7 des 9 étiquettes d'erreur.
-        Quant à \textbf{Na-P13}, les \texttt{Erreurs de Bâtiment} se encore sont avérées être les plus dures à prédire avec des F-scores qui peuvent désendre jusqu'à \SI[locale=FR]{45}{\percent}.
+        Quant à \textbf{Na-P13} (fusion de \textbf{Nantes} et \textbf{Paris-13}), les \texttt{Erreurs de Bâtiment} se sont encore avérées être les plus difficiles à prédire avec des F-scores qui peuvent descendre jusqu'à \SI[locale=FR]{45}{\percent}.
         
 
 \section*{Conclusion et perspectives}
     \addcontentsline{toc}{section}{Conclusion et perspectives}
-    Nous avons proposé un nouveau cadre de qualification de modèles 3D de bâtiments.
-    Il repose sur une taxonomie hiérarchisée d'erreurs sémantiques indépendantes des modèles à qualifier.
-    Ce nouveau cadre a été appliqué au cas de la modélisation urbaine aérienne, où les caractéristiques sont extraites d'images aériennes THR et d'un DSM.
-    Un jeu de données entièrement annoté contenant 3 235 modèles de bâtiments reconstruits par voie aérienne avec une grande diversité et provenant de trois zones distinctes a été utilisée pour évaluer notre méthode.
-    Les données de télédétection externes permettent d'extraire des caractéristiques optiques RGB et DSM multimodales.
+    Nous avons proposé une nouvelle méthode de qualification de modèles 3D de bâtiments.
+    Il repose sur une taxonomie hiérarchisée d'erreurs sémantiques indépendantes des modèles\footnote{Indifférence à leur scéne d'origine et la méthode de modélisation.} à qualifier.
+    Ce nouveau cadre a été appliqué au cas de la modélisation urbaine aérienne, où les caractéristiques sont extraites d'images aériennes THR et d'un MNS.
+    Un jeu de données entièrement annoté contenant 3 235 modèles de bâtiments reconstruits par voie aérienne avec une grande diversité et provenant de trois zones distinctes a été utilisé pour évaluer notre méthode.
+    Les données de télédétection externes permettent d'extraire des caractéristiques optiques RVB et MNS multimodales.
     Bien qu'ils soient atténués par rapport aux erreurs sous-représentées, les résultats sont satisfaisants dans les cas bien équilibrés.
-    En outre, avec le bon choix du classifieur ainsi que la configuration des caractéristiques, nous pouvons obtenir de meilleurs résultats que ceux obtenus avec les caractéristiques de base.
+    En outre, avec le bon choix du classifieur ainsi que la configuration de caractéristiques avancés, nous pouvons obtenir de meilleurs résultats que ceux obtenus avec les caractéristiques de base.
     Plus important encore, nous avons prouvé que la composition de la scène urbaine affecte grandement la détection des erreurs.
     En fait, les scores de certaines prédictions ne sont pas seulement stables, lorsqu'ils se forment sur une scène urbaine différente, ils sont même plus performants lorsqu'ils apprennent sur la même scène.
-    Nous avons aussi remarqué comment, pour un ensemble de données de formation hétérogènes, la taille de l'ensemble de formation n'a pratiquement aucun effet puisque les résultats des tests restent stables pour toutes les erreurs.
+    Nous avons aussi remarqué comment, pour un ensemble de données de composition hétérogènes, la taille de l'ensemble de formation n'a pratiquement aucun effet puisque les résultats des tests restent stables pour toutes les erreurs.
     Cela démontre que le cadre proposé peut être facilement adapté avec un bon choix d'échantillons pour l'entraînement et avec peu de données générées manuellement.
-    Cela répond exactement à la question soulevée, contrairement à la littérature de pointe actuelle.
-    Nous pensons que notre est suffisamment robuste pour évaluer les zones invisibles.
-    Il représente également une base solide pour une correction manuelle ou automatique ultérieure du modèle de construction en 3D.
+    Cela répond exactement à la question soulevée, contrairement à la littérature actuelle.
+    Nous pensons que notre approche est suffisamment robuste pour évaluer les zones invisibles.
+    Il représente également une base solide pour une correction interactive ou automatique ultérieure du modèle de construction en 3D.
 
 \mtcselectlanguage{english}
