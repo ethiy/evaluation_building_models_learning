@@ -22,6 +22,7 @@ It shows the necessity of multi-modal remote sensing data and mixing training sa
 **Keywords.** 3D urban modeling, Buildings, Dataset, Quality assessment, Error taxonomy, Error detection, Aerial imagery, Very High Resolution, Digital Surface Model, Geometry, Statistical learning, Multi-label classification.
 
 
+<div dir="rtl">
 اصّناعة ديال انّمادج تولاتية لبعاد ديال لبنايات بطريقة تلقاءيّة ولّات معمول بيها هاد ليّام.
 كاين فهاد عشرين عام الّخرّة عدد كافي من لمراجع لّي اتّطرقات لهاد لموضوع، زيد عليها عدد ديال لبارامج.
 لموشكيلة أنّاهو لمجالات لحضريّة منوّعة بزّاف، اشّي الّي تيخلّي أنّا، بطريقة ولّا اخرة، أين موقاربة تقدر تغلط.
@@ -39,6 +40,8 @@ It shows the necessity of multi-modal remote sensing data and mixing training sa
 تأكدنا تاني فهاد اتّجاريب أنّا اتّفراز الّي تانتعلموه فمنطقة ايقدر ايتطبق لمنطقات أوخرى بسيفتو قابل إيتحوّل أو إيتعمّم أو إيتدرّج.
 
 **الكلمات الرئيسية.**  انّمدجة تولاتيّة لبعاد ديال لمناطق لحضريّة، مجموعة دلموعطايات، اتّحقّق ديال لجودة، اتّصنيف ديال لأغلاط، لقشيع دلأغلاط، اتّصاور اسّماويّة، اتّصاور ارّقميّة ديال اصّطح، لهندسة، اتّعلّوم بلإيحصاء، اتّصنيف متعدّد.
+
+</div>
 
 
 La génération automatique de modèles de construction 3D à partir de données géospatiales est maintenant une procédure standard.
